@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 3 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 7">
+<link rel="alternate" type="application/json" href="editions/2026-10-03.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 7</span> &nbsp;·&nbsp; sábado 3 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/Lightricks/LTX-2.5" style="color:inherit;text-decoration:none" rel="noopener">LTX-2.5: Lightricks abre el video generativo con audio</a></h2><p class="lead">Lightricks está encendiendo Hugging Face con LTX-2.5, su modelo abierto de generación de video que hoy domina las tendencias con más de 6.000 &#x27;likes&#x27; y cerca de 1,6 millones de descargas. La novedad no es solo el video: el modelo maneja un abanico amplio de tareas, desde imagen-a-video y texto-a-video hasta generación de audio y secuencias con audio sincronizado, todo en un solo archivo de difusión. Eso lo convierte en una de las piezas más completas del ecosistema de video generativo abierto: una sola descarga cubre prototipado, animación de imágenes y creación de escenas sonoras. El código y los pesos son públicos (licencia de la comunidad Lightricks, no Apache), y el movimiento se apoya en la familia LTX, que ya es una referencia en inferencia rápida de video en GPUs de consumo. Para quien hace self-hosting, es una opción seria para producir video localmente sin salir a la nube.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">Lightricks/LTX-2.5 (Hugging Face)</a><span class="chip">video</span><span class="chip">generación</span><span class="chip">Lightricks</span><span class="chip">audio</span><span class="chip">self-hosting</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/Qwen/Qwen-Image-2.1" rel="noopener">Qwen-Image 2.1 acelera el ecosistema local con la versión turbo de Viggle</a></h4><p>El modelo de generación de imágenes de Qwen sigue generando variantes comunitarias: Viggle publica una versión &#x27;turbo&#x27; destilada de Qwen-Image 2.1, optimizada para pocos pasos de inferencia y compatible con ComfyUI, además de GGUF para cuantizarla. Mientras tanto, la variante &#x27;uncensored&#x27; de abenzers acumula más de 1,3 millones de descargas, señal de la demanda por modelos de imagen que corran en local sin restricciones de plataforma. La familia Qwen-Image se está consolidando como el punto de partida de facto para generación de imágenes auto-hospedada.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Qwen/Qwen-Image-2.1" rel="noopener">Qwen/Qwen-Image-2.1</a><a class="chip link" href="https://huggingface.co/Viggle/Qwen-Image-2.1-viggle-turbo" rel="noopener">Viggle turbo (distilada)</a><a class="chip link" href="https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF" rel="noopener">Qwen-Image-2.1 GGUF</a><span class="chip">modelos</span><span class="chip">generación-de-imágenes</span><span class="chip">Qwen</span><span class="chip">ComfyUI</span><span class="chip">GGUF</span></div></article><article class="note"><h4><a href="https://huggingface.co/nvidia/Nemotron-3-Diarization" rel="noopener">Nemotron-3 Diarization: diarización de hablantes de NVIDIA en abierto</a></h4><p>NVIDIA publica Nemotron-3 Diarization en Hugging Face, basado en su arquitectura streaming Sortformer: asigna quién habló cuándo en una grabación, con detección de actividad de voz incluida, y hasta en formato GGUF para inferencia ligera. Es el paso que faltaba para montar un pipeline completo de transcripción de reuniones en local: diarización, reconocimiento de voz y resumen, sin enviar audio a la nube. Ya suma más de 44.000 descargas.</p><div class="chips"><a class="chip link" href="https://huggingface.co/nvidia/Nemotron-3-Diarization" rel="noopener">nvidia/Nemotron-3-Diarization</a><span class="chip">modelos</span><span class="chip">audio</span><span class="chip">diarización</span><span class="chip">NVIDIA</span><span class="chip">self-hosting</span></div></article><article class="note"><h4><a href="https://huggingface.co/TaichuAI/ZDTaichu5.0-9B" rel="noopener">ZDTaichu 5.0: visión y agentes en un modelo compacto de 9B</a></h4><p>TaichuAI libera ZDTaichu 5.0-9B, un modelo de visión-lenguaje de 9B orientado a razonamiento espacial, comprensión de video y uso como agente, bilingüe en inglés y chino. Los modelos compactos multimodales son el nicho donde el self-hosting más compite: caben en una sola GPU de consumo y permiten pipelines de agentes con visión sin servicios externos. Lleva código propio, así que conviene revisar los requisitos de ejecución antes de descargarlo.</p><div class="chips"><a class="chip link" href="https://huggingface.co/TaichuAI/ZDTaichu5.0-9B" rel="noopener">TaichuAI/ZDTaichu5.0-9B</a><span class="chip">modelos</span><span class="chip">multimodal</span><span class="chip">agentes</span><span class="chip">9B</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/IuCC123/CLIProxyAPI-Rust" rel="noopener">CLIProxyAPI-Rust: tus suscripciones como una API única</a></h4><p>IuCC123/CLIProxyAPI-Rust empaqueta las suscripciones de Claude, ChatGPT y Gemini en un único binario Rust que expone endpoints compatibles con OpenAI, Anthropic y Gemini, con WebSockets y un panel de administración incluido. Es una herramienta de la categoría de &#x27;gateways&#x27;: un punto único desde el que tus aplicaciones consumen varios modelos. El patrón de la semana —CLIProxyAPI, LTZY-API, Tuskira— es claro: la capa que enrutiza y unifica accesos a modelos es tan importante como los propios modelos. Úsalo bajo tu responsabilidad: envía tráfico a servicios de terceros con una API no oficial.</p><div class="chips"><a class="chip link" href="https://github.com/IuCC123/CLIProxyAPI-Rust" rel="noopener">IuCC123/CLIProxyAPI-Rust</a><a class="chip link" href="https://github.com/LTZY-ACU/LTZY-API" rel="noopener">LTZY-API (gateway self-hosted)</a><span class="chip">agentes</span><span class="chip">gateway</span><span class="chip">Rust</span><span class="chip">API</span></div></article><article class="note"><h4><a href="https://github.com/zzzz7788990213-ops/EvoVLM" rel="noopener">EvoVLM: programas de inferencia evolutivos para VLMs</a></h4><p>zzzz7788990213-ops/EvoVLM aplica búsqueda evolutiva guiada por LLM para generar programas de inferencia de visión-lenguaje más precisos y eficientes, en lugar de encadenados fijos. La idea es tratar el pipeline de inferencia como un espacio de búsqueda: proponer, evaluar y mutar flujos hasta encontrar el que rinde mejor para cada tarea. Es una línea de investigación aplicada que empieza a destacar en GitHub y que, si madura, podría automatizar la optimización de pipelines multimodales.</p><div class="chips"><a class="chip link" href="https://github.com/zzzz7788990213-ops/EvoVLM" rel="noopener">zzzz7788990213-ops/EvoVLM</a><span class="chip">agentes</span><span class="chip">VLM</span><span class="chip">búsqueda-evolutiva</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/nuglifeleoji/Sentry" rel="noopener">Sentry: aprender a recuperarse de fallos en tiempo de test</a></h4><p>nuglifeleoji/Sentry aborda un problema muy práctico de los agentes: qué hacer cuando el agente se equivoca en el momento de la ejecución. La propuesta entrena al agente para detectar y recuperarse de sus propios fallos en tiempo de test, en vez de depender solo de un mejor entrenamiento inicial. Es la versión &#x27;a prueba de errores&#x27; del post-entrenamiento de agentes: la robustez se mide en cuánto se recupera un agente de una mala racha, no solo en cuántas tareas resuelve de entrada.</p><div class="chips"><a class="chip link" href="https://github.com/nuglifeleoji/Sentry" rel="noopener">nuglifeleoji/Sentry</a><span class="chip">agentes</span><span class="chip">robustez</span><span class="chip">test-time</span><span class="chip">GitHub</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2609.36585" rel="noopener">Los transformers dejan de pensar demasiado pronto (y un LoRA minúsculo lo arregla)</a></h4><p>El paper con más &#x27;upvotes&#x27; del día (&#x27;Transformers Stop Thinking Too Early, and a Tiny LoRA Fixes It&#x27;) muestra que los transformers preentrenados apenas usan su profundidad para seguir referencias en contexto: 13 modelos base solo siguen fiablemente 1,4–3,6 líneas. Un LoRA de rango 8 entrenado en una capa temprana extiende ese seguimiento de forma notable. Es un resultado elegante y barato de reproducir: un adaptador diminuto que corrige un sesgo de comportamiento de los modelos grandes. Interesante para quien entrena o fine-tunea localmente.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.36585" rel="noopener">arXiv:2609.36585</a><a class="chip link" href="https://huggingface.co/papers/2609.36585" rel="noopener">Hugging Face papers</a><span class="chip">papers</span><span class="chip">LoRA</span><span class="chip">razonamiento</span><span class="chip">fine-tuning</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2609.32993" rel="noopener">X-Tree: tokenizar experiencia reutilizable para agentes</a></h4><p>X-Tree propone que los agentes multi-paso no se entrenen sobre flujos planos de acciones, sino sobre la jerarquía de sub-procedimientos que se repiten entre tareas —la misma jerarquía con la que los humanos planifican reutilizando rutinas. El trabajo tokeniza esa experiencia reutilizable para que el agente generalice mejor entre tareas. Con 18 &#x27;upvotes&#x27;, es una de las líneas más prometedoras para agentes que deben hacer muchas cosas distintas con la misma base de conocimiento.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.32993" rel="noopener">arXiv:2609.32993</a><a class="chip link" href="https://huggingface.co/papers/2609.32993" rel="noopener">Hugging Face papers</a><span class="chip">papers</span><span class="chip">agentes</span><span class="chip">generalización</span><span class="chip">SFT</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.00812" rel="noopener">Encuesta: post-entrenamiento y alineación de modelos de video</a></h4><p>&#x27;Video Generation Models: A Survey of Post-Training and Alignment&#x27; (23 &#x27;upvotes&#x27;) hace inventario de cómo se afinan los modelos de video después del preentrenamiento: DPO, preferecias humanas, control de movimiento y coherencia temporal. Es el mapa de referencia justo en el momento en que modelos abiertos como LTX-2.5 ponen el video generativo al alcance de cualquiera. Útil para entender qué se puede mejorar de un modelo de video abierto y por qué unos clips coheren y otros no.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.00812" rel="noopener">arXiv:2610.00812</a><a class="chip link" href="https://huggingface.co/papers/2610.00812" rel="noopener">Hugging Face papers</a><span class="chip">papers</span><span class="chip">video</span><span class="chip">alineación</span><span class="chip">survey</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/open-tts-leaderboard" rel="noopener">Open TTS Leaderboard: evaluación escalable de TTS multilingüe</a></h4><p>Hugging Face publica el Open TTS Leaderboard, un marco de evaluación escalable para text-to-speech y clonación de voz en múltiples idiomas. El TTS abierto ha mejorado muchísimo (Piper, Coqui, CosyVoice…), pero medirlo comparando audios a mano no escala: este leaderboard intenta poner cifras serias sobre la mesa. Es la referencia que faltaba para elegir modelo de voz en pipelines auto-hospedados sin depender de benchmarks propietarios.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/open-tts-leaderboard" rel="noopener">Open TTS Leaderboard</a><span class="chip">comunidad</span><span class="chip">TTS</span><span class="chip">evaluación</span><span class="chip">Hugging-Face</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">MiMo-V2.6-RL-oss: datos RL de Xiaomi abiertos</a></h4><p>Xiaomi publica MiMo-V2.6-RL-oss, su dataset de refuerzo para RL con documentos e imágenes bajo licencia Apache 2.0. Abrir los datos de RL (no solo los pesos) es cada vez más la norma: permite reproducir y auditar la etapa de refuerzo de un modelo, y reutilizarla en tus propios fine-tunings. Con casi 58.000 descargas, la comunidad ya lo está usando. Es de esos datasets que alimentan el ciclo completo: preentrenar, afinar y reforzar en local.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">XiaomiMiMo/MiMo-V2.6-RL-oss</a><span class="chip">datasets</span><span class="chip">RL</span><span class="chip">Xiaomi</span><span class="chip">Apache-2.0</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/ServiceNow-AI/autosynthdata" rel="noopener">AutoSynthData: generar datos de entrenamiento para agentes de empresa</a></h4><p>ServiceNow AI publica AutoSynthData, un enfoque para generar datos de entrenamiento sintéticos para agentes de empresa. El problema que ataca es real: los agentes empresariales necesitan miles de ejemplos de flujos específicos y recopilarlos a mano no escala. La generación sintética, bien filtrada, es la alternativa —y el post detalla cómo evitar los sesgos que los datos sintéticos introducen. Un buen punto de partida para quien construye agentes sobre flujos internos.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/ServiceNow-AI/autosynthdata" rel="noopener">AutoSynthData (HF blog)</a><span class="chip">comunidad</span><span class="chip">datos-sintéticos</span><span class="chip">agentes</span><span class="chip">ServiceNow</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>

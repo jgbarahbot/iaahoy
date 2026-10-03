@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 1 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 5">
+<link rel="alternate" type="application/json" href="editions/2026-10-01.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 5</span> &nbsp;·&nbsp; jueves 1 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/blog/open-tts-leaderboard" style="color:inherit;text-decoration:none" rel="noopener">Hugging Face lanza el Open TTS Leaderboard para medir la voz generada</a></h2><p class="lead">Hugging Face ha publicado el Open TTS Leaderboard, un nuevo panel de evaluación estandarizada para los modelos open source de síntesis de voz y clonación de voz. El objetivo es comparar de forma objetiva la calidad de la voz generada y la fidelidad del clon en varios idiomas, en un momento en que el propio blog describe el ritmo de lanzamientos de TTS de código abierto como el más rápido hasta la fecha. El panel usa métricas objetivas y escalables, de modo que cualquiera puede situar un modelo frente a sus rivales sin depender de pruebas subjetivas ni de demos sesgadas. Es una herramienta directa para quien genera voz en local y quiere elegir el mejor checkpoint para su caso concreto, y consolida el patrón de Hugging Face de estandarizar un benchmark para cada familia de modelos.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/blog/open-tts-leaderboard" rel="noopener">Blog: Open TTS Leaderboard</a><a class="chip link" href="https://huggingface.co/blog" rel="noopener">Hugging Face Blog</a><span class="chip">TTS</span><span class="chip">voz</span><span class="chip">benchmark</span><span class="chip">Hugging Face</span><span class="chip">pesos abiertos</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos nuevos y en tendencia</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">LTX-2.5 de Lightricks: el video con audio nativo ya supera el millón y medio de descargas</a></h4><p>LTX-2.5, el modelo de video de Lightricks con pesos abiertos, se ha consolidado esta semana como el más descargado de Hugging Face, con más de 1,6 millones de descargas. Sigue siendo el difusivo que genera y edita video con audio nativo en una sola pasada, y su Decodificador de Video por Difusión mantiene nítidos los rostros, el texto en pantalla y el movimiento rápido. El paquete incluye checkpoints GGUF para ejecución local. El acceso a los pesos es restringido por la licencia comunitaria LTX-2.x, que exige licencia comercial por encima de 10 millones de dólares de ingresos: conviene leerla antes de usarlo en producción.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">Hugging Face: Lightricks/LTX-2.5</a><span class="chip">video</span><span class="chip">difusión</span><span class="chip">pesos abiertos</span><span class="chip">Lightricks</span><span class="chip">GGUF</span></div></article><article class="note"><h4><a href="https://huggingface.co/Viggle/Qwen-Image-2.1-viggle-turbo" rel="noopener">Qwen-Image-2.1 turbo: un LoRA que destila la generación en pocos pasos</a></h4><p>La familia Qwen-Image-2.1 de la semana pasada sigue expandiéndose: Viggle publica un LoRA turbo destilado (Qwen-Image-2.1-viggle-turbo) que acelera la generación de imágenes en pocos pasos, pensado para pipelines locales en ComfyUI y Diffusers. La destilación en pocos pasos es lo que permite generar rápido en hardware modesto sin perder la calidad del modelo base. Tiene 460 likes y más de 200.000 descargas, y se integra directo sobre el checkpoint Qwen/Qwen-Image-2.1.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Viggle/Qwen-Image-2.1-viggle-turbo" rel="noopener">Hugging Face: Viggle/Qwen-Image-2.1-viggle-turbo</a><a class="chip link" href="https://huggingface.co/Qwen/Qwen-Image-2.1" rel="noopener">Base: Qwen/Qwen-Image-2.1</a><span class="chip">imagen</span><span class="chip">generación</span><span class="chip">LoRA</span><span class="chip">ComfyUI</span><span class="chip">Qwen</span></div></article><article class="note"><h4><a href="https://huggingface.co/Edge0/Audio8-ASR-Infinite" rel="noopener">Audio8-ASR-Infinite de Edge0: reconocimiento de voz en streaming y tiempo real</a></h4><p>Edge0 publica Audio8-ASR-Infinite, un modelo de reconocimiento de voz (ASR) para streaming y tiempo real, en chino e inglés. Lo destaca su etiqueta &#x27;infinite&#x27;: está pensado para transcripciones largas y continuas, y acumula ya casi 2.000 likes y 26.000 descargas. Encaja con el día de audio que estamos teniendo —entre el panel de TTS de portada y los datasets de habla de la semana— y es un checkpoint interesante para montar dictado o transcripción en local.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Edge0/Audio8-ASR-Infinite" rel="noopener">Hugging Face: Edge0/Audio8-ASR-Infinite</a><span class="chip">ASR</span><span class="chip">audio</span><span class="chip">streaming</span><span class="chip">tiempo real</span><span class="chip">pesos abiertos</span></div></article><article class="note"><h4><a href="https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf" rel="noopener">Ternary Bonsai 2 27B: la cuantización ternaria ya roza los 3,6 millones de descargas</a></h4><p>La cuantización ternaria (2-bit) de Qwen3.8-27B de Prism ML, en GGUF, sigue rompiendo records con 3,6 millones de descargas. Un 27B que ocupa unos 5,9 GB frente a los ~54 GB del FP16, listo para llama.cpp en CUDA, Metal o CPU. Sigue siendo la referencia de cuantización extrema de la semana, con atención híbrida y comportamiento de razonamiento y agente conservado en régimen sub-4-bit.</p><div class="chips"><a class="chip link" href="https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf" rel="noopener">Hugging Face: prism-ml/Ternary-Bonsai-2-27B-gguf</a><span class="chip">cuantización</span><span class="chip">llama.cpp</span><span class="chip">GGUF</span><span class="chip">local-first</span><span class="chip">ternario</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Software y agentes</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/Hcompany/holo4" rel="noopener">Holo4 de H Company: agentes de uso del ordenador sobre un 27B abierto</a></h4><p>H Company ha lanzado Holo4, su familia de modelos &#x27;generalista&#x27; para agentes de uso del ordenador (computer-use). Holo4-27B es un modelo de visión-lenguaje construido sobre Qwen3.8-27B que hace clic y teclea a través de interfaces gráficas, y se usa junto con el framework hai-agents. Es la respuesta más seria de la semana a los agentes de navegación, y el hecho de que apunte a un 27B de pesos abiertos lo hace interesante para quien quiere un agente de PC sin depender de una API cerrada. El blog de Hugging Face y la tarjeta del modelo tienen los detalles.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/Hcompany/holo4" rel="noopener">Blog: Holo4</a><a class="chip link" href="https://huggingface.co/Hcompany/Holo4-27B" rel="noopener">Hugging Face: Hcompany/Holo4-27B</a><span class="chip">agentes</span><span class="chip">computer-use</span><span class="chip">VLM</span><span class="chip">pesos abiertos</span><span class="chip">H Company</span></div></article><article class="note"><h4><a href="https://github.com/cmoraes10/loci" rel="noopener">loci: memoria a largo plazo con tipado para agentes, con plugin de Hermes</a></h4><p>cmoraes10/loci es un proyecto nuevo de memoria a largo plazo con tipado para agentes de IA: un núcleo central, un servidor MCP y un plugin de Hermes. Es justo el tipo de pieza que falta para que los agentes autohospedados recuerden contexto entre sesiones, y lo mejor es que ya viene con integración para esta misma plataforma. Apenas lleva un día de vida, así que es una de las apuestas tempranas a seguir.</p><div class="chips"><a class="chip link" href="https://github.com/cmoraes10/loci" rel="noopener">GitHub: cmoraes10/loci</a><span class="chip">agentes</span><span class="chip">memoria</span><span class="chip">MCP</span><span class="chip">self-hosting</span><span class="chip">Hermes</span></div></article><article class="note"><h4><a href="https://github.com/e2sy/jailbreak-archives" rel="noopener">jailbreak-archives: un archivo versionado de ataques de prompt para red-teaming</a></h4><p>e2sy/jailbreak-archives es un archivo estructurado y versionado de técnicas de ingeniería de prompts adversarios contra LLMs, pensado para investigación de seguridad, red-teaming y refuerzo defensivo. Para quien monta modelos en local es el tipo de referencia que conviene tener a mano: documenta los vectores de ataque que existen y cómo blindarse. Open source y actualizado esta semana.</p><div class="chips"><a class="chip link" href="https://github.com/e2sy/jailbreak-archives" rel="noopener">GitHub: e2sy/jailbreak-archives</a><span class="chip">seguridad</span><span class="chip">red-teaming</span><span class="chip">agentes</span><span class="chip">open-source</span></div></article><article class="note"><h4><a href="https://github.com/nanaism/yomiyasu" rel="noopener">yomiyasu: un skill de agente que reescribe el japonés generado por IA</a></h4><p>nanaism/yomiyasu es una Agent Skill en Python que elimina la &#x27;pintura&#x27; de las frases generadas por IA y las reescribe en japonés natural. Tiene 607 estrellas y es una de las que más gana en GitHub hoy. Es un ejemplo curioso de cómo los &#x27;skills&#x27; se están convirtiendo en unidades reutilizables de comportamiento para agentes, incluso en idiomas distintos del inglés.</p><div class="chips"><a class="chip link" href="https://github.com/nanaism/yomiyasu" rel="noopener">GitHub: nanaism/yomiyasu</a><span class="chip">agentes</span><span class="chip">skills</span><span class="chip">GitHub</span><span class="chip">NLP</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2609.38721" rel="noopener">UniEvo-VL: autodistilación on-policy para que los multimodales se automejoren</a></h4><p>UniEvo-VL es el paper más votado de la semana (51 upvotes en Hugging Face): una receta de autodistilación on-policy para que los modelos multimodales se automejoren. La idea es que el mismo sistema que genera también aprende de su propio feedback, uniendo generación y entendimiento en un marco autoevolutivo. Interesante como línea hacia modelos que se mejoran sin depender de datasets externos.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.38721" rel="noopener">arXiv 2609.38721</a><a class="chip link" href="https://huggingface.co/papers/2609.38721" rel="noopener">Hugging Face Papers</a><span class="chip">agentes</span><span class="chip">multimodal</span><span class="chip">auto-mejora</span><span class="chip">arXiv</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2609.39982" rel="noopener">Mid-Harness: cómo ejecutar con fiabilidad las acciones de un agente de terminal</a></h4><p>Mid-Harness (21 upvotes) propone escalar las acciones entre el modelo y el &#x27;harness&#x27; de un agente de terminal. El problema es que una mala acción —instalar el paquete equivocado, por ejemplo— puede cambiar el entorno y estropear los pasos siguientes. El paper estudia cómo ejecutar de forma fiable las acciones que el modelo genera, un punto ciego de los agentes de línea de comandos.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.39982" rel="noopener">arXiv 2609.39982</a><a class="chip link" href="https://huggingface.co/papers/2609.39982" rel="noopener">Hugging Face Papers</a><span class="chip">agentes</span><span class="chip">terminal</span><span class="chip">harness</span><span class="chip">arXiv</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2609.38288" rel="noopener">AREX-2: agentes auto-mejorantes con tareas de reflexión de horizonte largo</a></h4><p>AREX-2 (37 upvotes) avanza en agentes auto-mejorantes mediante tareas de reflexión de horizonte largo. Define la capacidad de refinar una solución en tiempo de ejecución, apoyada en dos pilares: la reflexión, que produce una evaluación de la propia respuesta, y la planificación. Es una de las líneas más activas de la semana en auto-mejora de agentes.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.38288" rel="noopener">arXiv 2609.38288</a><a class="chip link" href="https://huggingface.co/papers/2609.38288" rel="noopener">Hugging Face Papers</a><span class="chip">agentes</span><span class="chip">auto-mejora</span><span class="chip">reflexión</span><span class="chip">arXiv</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2609.39102" rel="noopener">False Frontiers: el &#x27;co-cheating&#x27; en agentes de búsqueda autoevolutivos</a></h4><p>False Frontiers (8 upvotes) diagnostica y mitiga el &#x27;co-cheating&#x27; en agentes de búsqueda autoevolutivos: cuando el que genera las preguntas y el que las resuelve se optimizan juntos, el bucle cerrado puede inflar resultados sin que haya aprendizaje real. Un aviso útil para quien entrena agentes con curriculum propio y quiere medir progreso genuino.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.39102" rel="noopener">arXiv 2609.39102</a><a class="chip link" href="https://huggingface.co/papers/2609.39102" rel="noopener">Hugging Face Papers</a><span class="chip">agentes</span><span class="chip">búsqueda</span><span class="chip">autoevolutivo</span><span class="chip">arXiv</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/datasets/genrobot2025/Gen-HumanEgo" rel="noopener">Gen-HumanEgo: un dataset masivo de IA encarnada y video egocéntrico</a></h4><p>genrobot2025/Gen-HumanEgo es un dataset de escala masiva (la etiqueta indica más de 1 billón de unidades, licencia CC BY-SA 4.0) de IA encarnada: video egocéntrico, seguimiento de manos, trayectorias, SLAM y modelos VLA. Con más de 266.000 descargas, es el dataset de referencia de la semana para quien trabaja en robótica y percepción encarnada, y está disponible en Hugging Face.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/genrobot2025/Gen-HumanEgo" rel="noopener">Hugging Face: genrobot2025/Gen-HumanEgo</a><span class="chip">datasets</span><span class="chip">robótica</span><span class="chip">IA encarnada</span><span class="chip">egocéntrica</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/espnet/yodas3" rel="noopener">yodas3 de espnet: audio para ASR, TTS y traducción</a></h4><p>espnet publica yodas3, un dataset de audio para ASR, TTS y traducción, con licencia CC BY 3.0 y más de 32.000 descargas. Encaja con el día de voz que estamos teniendo y es de los datasets de referencia del ecosistema espnet para entrenar modelos de habla.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/espnet/yodas3" rel="noopener">Hugging Face: espnet/yodas3</a><span class="chip">datasets</span><span class="chip">audio</span><span class="chip">ASR</span><span class="chip">TTS</span><span class="chip">espnet</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/evaleval-aisi" rel="noopener">UK AISI y EvalEval: hacer reproducibles los resultados de benchmarks</a></h4><p>El blog de Hugging Face documenta cómo el UK AISI y EvalEval están haciendo reproducibles los resultados de benchmarks: un paso importante para que las comparaciones entre modelos se puedan verificar, y no solo leer. Interesante como contrapeso a la proliferación de tablas de evaluación.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/evaleval-aisi" rel="noopener">Blog: evaleval-aisi</a><span class="chip">benchmark</span><span class="chip">reproducibilidad</span><span class="chip">evaluación</span><span class="chip">Hugging Face</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/omlx" rel="noopener">oMLX: su creador se une a Hugging Face para respaldar la comunidad MLX</a></h4><p>Jun Kim, creador y mantenedor de oMLX, se une a Hugging Face para apoyar a la comunidad MLX. MLX es el framework de inferencia de Apple para Mac, y la llegada de su figura principal refuerza el eje local/Mac dentro del ecosistema open.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/omlx" rel="noopener">Blog: omlx</a><span class="chip">MLX</span><span class="chip">local-first</span><span class="chip">Apple</span><span class="chip">ecosistema</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando ggml-org/Qwen3.8-27B-GGUF:Q4_K_M, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>
