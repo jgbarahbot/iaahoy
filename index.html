@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 10 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 14">
+<link rel="alternate" type="application/json" href="editions/2026-10-10.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 14</span> &nbsp;·&nbsp; sábado 10 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/Cloudflare/clef" style="color:inherit;text-decoration:none" rel="noopener">Cloudflare abre Clef, su familia de modelos de decisión multimodales de pesos abiertos, y una plataforma de afinado con refuerzo</a></h2><p class="lead">Cloudflare ha publicado Clef, una familia de modelos de decisión (decision models) de pesos abiertos que lee texto, imágenes, audio y vídeo y responde con salidas estructuradas y tipadas, pensados para tareas donde hay que tomar una decisión verificable más que generar prosa. La arquitectura parte de versiones congeladas y post-entrenadas de Qwen3.8-27B (Clef) y de Qwen3.5-9B (Clef-flash), a las que se añade una cabeza de enrutamiento entrenada junto con adaptadores de bajo rango, lo que permite mantener el modelo de base intacto y cargar la lógica de decisión encima. Los modelos corren en Workers AI de Cloudflare o en local desde Hugging Face, y el equipo los ha acompañado con una nueva plataforma de afinado por refuerzo para afinar modelos de decisión sobre casos propios. En Hugging Face, Clef acumula casi 2.000 me gusta y más de 12.000 descargas en unos días. Es una apuesta muy concreta por el self-hosting de modelos de decisión: pesos abiertos, esquema de salida tipado y una vía de afinado por refuerzo, aunque las bases de datos de entrenamiento no son públicas.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/Cloudflare/clef" rel="noopener">Hugging Face (Cloudflare/clef)</a><a class="chip link" href="https://huggingface.co/Cloudflare/clef-flash" rel="noopener">Hugging Face (Cloudflare/clef-flash)</a><a class="chip link" href="https://blog.cloudflare.com/clef-decision-models/" rel="noopener">Blog de Cloudflare (Clef decision models)</a><span class="chip">Cloudflare</span><span class="chip">modelos de decisión</span><span class="chip">multimodal</span><span class="chip">pesos abiertos</span><span class="chip">refuerzo</span><span class="chip">self-hosting</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/Qwen/Qwen3.8-27B" rel="noopener">Qwen3.8-27B, el denso multimodal de pesos abiertos que ya mueve millones de descargas</a></h4><p>Qwen3.8-27B sigue encabezando la tendencia de modelos abiertos en Hugging Face: unos 17.400 me gusta y más de 6,7 millones de descargas. Es un modelo denso de 27.000 millones de parámetros, nativamente multimodal (texto e imagen), bajo licencia Apache 2.0, con una versión FP8 oficial y contexto largo, y se publicó en agosto con sus pesos ya disponibles en Hugging Face y ModelScope. Su relevancia esta semana no es solo el modelo en sí, sino que es la base sobre la que Cloudflare ha post-entrenado Clef, uno de los casos de uso abiertos más llamativos de las últimas semanas. Para quien busca un modelo local de pesos abiertos que combine razonamiento, visión y licencia permisiva, es de las opciones más descargadas del momento.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Qwen/Qwen3.8-27B" rel="noopener">Hugging Face (Qwen/Qwen3.8-27B)</a><a class="chip link" href="https://modelscope.cn/models/Qwen/Qwen3.8-27B" rel="noopener">ModelScope (Qwen/Qwen3.8-27B)</a><span class="chip">Qwen</span><span class="chip">pesos abiertos</span><span class="chip">multimodal</span><span class="chip">Apache 2.0</span><span class="chip">local</span></div></article><article class="note"><h4><a href="https://huggingface.co/convaiinnovations/laya" rel="noopener">laya, un modelo de decisión calibrado con refuerzo para enrutado y guardrails</a></h4><p>convaiinnovations publica laya, un modelo de pesos abiertos para clasificación y enrutado basado en decisiones calibradas, entrenado con un método de refuerzo (RLCD) orientado a que la confianza que reporta sea fiable. Está pensado para tareas de puntuación, enrutado entre modelos, guardrails y moderación, donde importa tanto la decisión como saber de cuánta confianza estamos hablando. En Hugging Face supera los 5.400 me gusta y más de 41.000 descargas. Encaja directamente en la misma corriente que Clef: modelos pequeños y abiertos para decidir, no para escribir, con una confianza medible que luego un orquestador puede usar.</p><div class="chips"><a class="chip link" href="https://huggingface.co/convaiinnovations/laya" rel="noopener">Hugging Face (convaiinnovations/laya)</a><span class="chip">modelos de decisión</span><span class="chip">refuerzo</span><span class="chip">enrutado</span><span class="chip">guardrails</span><span class="chip">pesos abiertos</span></div></article><article class="note"><h4><a href="https://huggingface.co/LiquidAI/d1-3B" rel="noopener">d1-3B, el modelo de decisión multimodal de LiquidAI para el edge</a></h4><p>LiquidAI ha publicado d1-3B, un modelo de decisión multimodal de 3.000 millones de parámetros sobre su arquitectura LFM2, pensado para correr en el edge y en dispositivos. Lee texto e imagen y está afinado para tareas de decisión y clasificación con calibración, no para generar texto largo. En Hugging Face ya suma unos 240 me gusta y más de 7.300 descargas, y el blog de LiquidAI lo presenta como parte de su familia abierta de modelos de decisión para el edge. Es una pieza concreta para quien quiere un modelo pequeño, multimodal y abierto que corra en local y tome decisiones sobre lo que ve.</p><div class="chips"><a class="chip link" href="https://huggingface.co/LiquidAI/d1-3B" rel="noopener">Hugging Face (LiquidAI/d1-3B)</a><a class="chip link" href="https://huggingface.co/blog/LiquidAI/open-d1" rel="noopener">Blog de LiquidAI (open d1)</a><span class="chip">LiquidAI</span><span class="chip">edge</span><span class="chip">multimodal</span><span class="chip">modelos de decisión</span><span class="chip">pesos abiertos</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/1314521gjy/cyber-on-strata" rel="noopener">cyber-on-strata, un MoE de 35B corriendo en una GPU de 8 GB</a></h4><p>1314521gjy publica cyber-on-strata, un fork del motor de inferencia Strata que permite correr el MoE Cyber-Tiel-Coder-35B-A3B (35.000 millones de parámetros totales con 3.000 millones activos) en una tarjeta con solo 8 GB de VRAM. El truco es el enrutado de expertos en streaming: los pesos de los expertos se suben a la GPU bajo demanda y los que no caben se computan en el pool de CPU. En una RTX 4080S el autor reporta 57-63 tokens por segundo con el modo de 8 GB y más de 130 con todo residente. Es un ejemplo muy práctico de cómo los MoE abren la puerta a modelos grandes en hardware modesto, y de la ingeniería que hace falta para que el enrutado de expertos no sea el cuello de botella.</p><div class="chips"><a class="chip link" href="https://github.com/1314521gjy/cyber-on-strata" rel="noopener">GitHub (1314521gjy/cyber-on-strata)</a><span class="chip">MoE</span><span class="chip">inferencia</span><span class="chip">edge</span><span class="chip">self-hosting</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/Agency-Games/tokendraw" rel="noopener">tokendraw, estimar la energía y las emisiones de los agentes de código</a></h4><p>Agency-Games publica tokendraw, una herramienta en Rust para estimar el consumo de energía y las emisiones asociadas al uso de agentes de código basados en LLM. La idea es cuantificar el coste medioambiental real de las sesiones de agentes, no solo el coste en tokens o en dinero. En una época en la que los agentes de código se ejecutan horas y horas, medir cuánta energía queman y cuánto emiten es una pieza de gobernanza que casi nadie hace. Es una herramienta pequeña pero alineada con la corriente de hacer el coste (no solo el rendimiento) visible en los sistemas de IA.</p><div class="chips"><a class="chip link" href="https://github.com/Agency-Games/tokendraw" rel="noopener">GitHub (Agency-Games/tokendraw)</a><span class="chip">agentes</span><span class="chip">sostenibilidad</span><span class="chip">código</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/exitCodeNihil/qafas-sandbox" rel="noopener">qafas-sandbox, un sandbox seguro para agentes de código con varias capas</a></h4><p>exitCodeNihil publica qafas-sandbox, un sandbox de ejecución rápido y seguro para agentes de código basados en LLM, con varios niveles de aislamiento (nativo, máquina virtual y Firecracker), detección de intentos de fuga y trazas de lo que ejecuta el agente. El problema que ataca es real: dejar que un agente LLM corra código en tu máquina sin una capa de aislamiento seria es un riesgo directo. Un sandbox con varias capas y con detección de fugas es la infraestructura mínima para desplegar agentes de código con confianza. Es una pieza muy práctica para quien quiere que sus agentes ejecuten código sin poner la máquina en riesgo.</p><div class="chips"><a class="chip link" href="https://github.com/exitCodeNihil/qafas-sandbox" rel="noopener">GitHub (exitCodeNihil/qafas-sandbox)</a><span class="chip">agentes</span><span class="chip">sandbox</span><span class="chip">seguridad</span><span class="chip">código</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/torinriley/alpaca" rel="noopener">alpaca, un motor de inferencia LLM nativo en Swift para Apple Silicon</a></h4><p>torinriley publica alpaca, un motor de inferencia de LLMs escrito de forma nativa en Swift para Apple Silicon. La apuesta es ofrecer una vía de inferencia local en los Macs sin depender de los runtimes generalistas (llama.cpp, MLX…) y con una capa nativa del ecosistema de Apple. En Hugging Face y GitHub es un proyecto joven, pero encaja en la corriente de llevar la inferencia local a la plataforma donde la gente ya tiene hardware potente y silencioso. Es una pieza interesante para quien corre modelos en un Mac y quiere algo pensado para el hardware, no un genérico multiplataforma.</p><div class="chips"><a class="chip link" href="https://github.com/torinriley/alpaca" rel="noopener">GitHub (torinriley/alpaca)</a><span class="chip">inferencia</span><span class="chip">Apple Silicon</span><span class="chip">Swift</span><span class="chip">local</span><span class="chip">GitHub</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2609.33987" rel="noopener">Opera, un marco de crítica verbal para agentes de código de largo horizonte</a></h4><p>Opera (arXiv 2609.33987) aborda un problema concreto de los agentes de código de largo horizonte: cómo corregirles a tiempo sin que la corrección sea inútil o incluso perjudicial. La crítica habitual evalúa trayectorias y genera feedback genérico, pero si el feedback se equivoca sobre el trabajo en curso o no ataca la causa de fondo, el agente se desvía. Opera propone un marco de crítica verbal que apunta al problema subyacente y no solo al síntoma. Es una línea muy práctica para quien despliega agentes de código en tareas largas: saber cuándo y cómo corregirlos importa tanto como el propio agente.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.33987" rel="noopener">arXiv (2609.33987)</a><a class="chip link" href="https://huggingface.co/papers/2609.33987" rel="noopener">Hugging Face (paper)</a><span class="chip">agentes</span><span class="chip">código</span><span class="chip">crítica</span><span class="chip">evaluación</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.11169" rel="noopener">Skill Constellations, trazando la cadena de suministro de los skills de agentes</a></h4><p>Skill Constellations (arXiv 2610.11169) estudia los skills de agentes de código —los SKILL.md con instrucciones y scripts que agentes como Claude Code o Codex ejecutan con los permisos del usuario— como una cadena de suministro de software. Los desarrolladores comparten skills copiándolos entre repositorios, lo que los convierte en un punto de riesgo de la cadena de suministro: una instrucción o un script malicioso puede propagarse con el mismo mecanismo con el que se comparten las buenas prácticas. El trabajo traza cómo se propagan esos skills por GitHub. Es una línea de seguridad muy oportuna, justo cuando los skills se convierten en la unidad estándar de extensión de los agentes.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.11169" rel="noopener">arXiv (2610.11169)</a><a class="chip link" href="https://huggingface.co/papers/2610.11169" rel="noopener">Hugging Face (paper)</a><span class="chip">agentes</span><span class="chip">skills</span><span class="chip">cadena de suministro</span><span class="chip">seguridad</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.11216" rel="noopener">The Lattice of Transition Laws, uniendo difusión y autoregresión</a></h4><p>The Lattice of Transition Laws (arXiv 2610.11216) parte de que la difusión y la autoregresión (AR) se han visto tradicionalmente como dos categorías separadas de modelos generativos —la difusión para campos continuos, la AR para tokens discretos— y busca combinar sus ventajas. El trabajo propone un marco que unifica las leyes de transición de ambos paradigmas, lo que podría abrir la puerta a modelos generativos que hereden lo mejor de cada uno. Es una pieza teórica con potencial práctico: si la unificación es sólida, podría explicar por qué ciertos modelos híbridos funcionan y cómo diseñar mejores.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.11216" rel="noopener">arXiv (2610.11216)</a><a class="chip link" href="https://huggingface.co/papers/2610.11216" rel="noopener">Hugging Face (paper)</a><span class="chip">generación</span><span class="chip">difusión</span><span class="chip">autoregresión</span><span class="chip">teoría</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">MiMo-V2.6-RL-oss, el dataset de refuerzo abierto de Xiaomi</a></h4><p>Xiaomi publica MiMo-V2.6-RL-oss, un dataset abierto bajo Apache 2.0 con los datos de refuerzo usados para afinar su familia MiMo-V2.6: documentos, imágenes y texto en formato parquet, listo para descargar y reutilizar. En Hugging Face ya supera los 890 me gusta y más de 100.000 descargas, una cifra notable para un dataset de refuerzo. Es una apuesta transparente: en vez de solo publicar el modelo, se publica también la materia prima del post-entrenamiento, algo que no es habitual. Para quien hace post-entrenamiento por refuerzo en local, es una fuente de datos de calidad y licencia permisiva que antes no estaba disponible.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">Hugging Face (XiaomiMiMo/MiMo-V2.6-RL-oss)</a><span class="chip">datasets</span><span class="chip">refuerzo</span><span class="chip">Xiaomi</span><span class="chip">Apache 2.0</span><span class="chip">self-hosting</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/docling-project/DeskForge-1M" rel="noopener">DeskForge-1M, un dataset de 1M de muestras para agents de uso de ordenador</a></h4><p>docling-project publica DeskForge-1M, un dataset de más de un millón de muestras para el grounding en interfaces gráficas y el uso de ordenador por agentes: incluye detección de objetos, parsing de pantallas y gui grounding, bajo licencia MIT y asociado al paper arXiv 2610.02320. Es una de las piezas de datos más útiles de la semana para el computer-use, un dominio que hasta ahora dependía de datasets pequeños o cerrados. Para quien entrena o evalúa agentes que navegan por interfaces, tener un millón de muestras abiertas de GUI es una base de trabajo que antes no existía.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/docling-project/DeskForge-1M" rel="noopener">Hugging Face (docling-project/DeskForge-1M)</a><a class="chip link" href="https://arxiv.org/abs/2610.02320" rel="noopener">arXiv (2610.02320)</a><span class="chip">datasets</span><span class="chip">computer-use</span><span class="chip">GUI</span><span class="chip">agents</span><span class="chip">MIT</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>

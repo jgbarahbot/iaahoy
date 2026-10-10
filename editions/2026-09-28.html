@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 28 de septiembre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 2">
+<link rel="alternate" type="application/json" href="editions/2026-09-28.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 2</span> &nbsp;·&nbsp; Lunes 28 de septiembre de 2026 &nbsp;·&nbsp; Publicado desde GitHub Pages · 08:30 CEST</span><nav><a href="2026-09-27">← Anterior</a><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada · Visión-lingüaje</p><h2><a href="https://huggingface.co/blog/LiquidAI/lfm2-5-vl-dspark" style="color:inherit;text-decoration:none" rel="noopener">Liquid AI acelera sus modelos de visión-lingüaje con LFM2.5-VL-DSpark</a></h2><p class="lead">Liquid AI publica LFM2.5-VL-DSpark: una variante de su modelo de visión-lingüaje optimizada para servir en GPUs de gama media con una velocidad notablemente superior y un menor consumo de memoria. El blog trae benchmarks medidos sobre NVIDIA H100.</p><div class="fbody"><p class="dropcap">Liquid AI saca al mercado LFM2.5-VL-DSpark, una variante de su familia LFM2.5-VL diseñada específicamente para inferencia. El blog de Hugging Face detalla los números: frente a la variante original, la nueva entrega una velocidad de inferencia 2,66 veces mayor sobre NVIDIA H100, con un consumo de memoria aproximadamente un 8,9 % menor. El modelo mantiene la misma capacidad de visión-lingüaje pero con un tamaño de unos 280 M de parámetros, pensado para que corra en GPUs de gama media y hardware de consumo.</p><p>Para quien sirve modelos de visión en local o en un clúster modesto, la receta de optimización de Liquid AI (arquitectura, cuantización y serving) es un buen punto de partida para replicar en la propia familia. El blog incluye el detalle de los benchmarks y el código para probar la variante.</p></div><div class="chips"><a class="chip link" href="https://huggingface.co/blog/LiquidAI/lfm2-5-vl-dspark" rel="noopener">Blog HF (Liquid AI)</a><span class="chip">visión-lingüaje</span><span class="chip">inference</span><span class="chip">Liquid AI</span><span class="chip">benchmark</span><span class="chip src">vía Hugging Face (Liquid AI)</span></div></div>
+<div class="paper"><div class="main"><section class="block" id="modelos"><div class="sec-head"><span class="icon">🧠</span><h3>Modelos nuevos y fine-tunes</h3><span class="rule"></span></div><p class="sec-blurb">Lo que suena en pesos abiertos: nuevas arquitecturas, variantes y fine-tunes que ya se pueden descargar.</p><article class="note"><h4><a href="https://huggingface.co/Qwen/Qwen-Image-2.1" rel="noopener">Qwen-Image-2.1: la familia de imagen abierta con variante GGUF y ComfyUI</a></h4><p class="spec">text-to-image · 2.500+ likes · ~4 M descargas en variantes</p><p>Qwen-Image-2.1 sigue en tendencia en Hugging Face con la tarjeta original y dos variantes destacadas: una GGUF no censurada (abenzerps/Qwen-Image-2.1-Uncensored-GGUF) con más de 960.000 descargas, y una de Comfy-Org (Comfy-Org/Qwen-Image-2.1) con casi 4 millones de descargas, orientada a pipelines de generación de imagen con ComfyUI.</p><p>Es la familia a vigilar si te interesa la generación de imagen en local: la variante GGUF baja la barrera de entrada a hardware modesto y la de Comfy-Org está pensada para quien ya usa el workflow de ComfyUI.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Qwen/Qwen-Image-2.1" rel="noopener">Tarjeta HF</a><a class="chip link" href="https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF" rel="noopener">GGUF (no censurada)</a><a class="chip link" href="https://huggingface.co/Comfy-Org/Qwen-Image-2.1" rel="noopener">Comfy-Org</a><span class="chip">Qwen</span><span class="chip">text-to-image</span><span class="chip">GGUF</span><span class="chip">ComfyUI</span><span class="chip src">vía Hugging Face</span></div></article><article class="note"><h4><a href="https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf" rel="noopener">Ternary-Bonsai-2: 27B ternario a 2 bits en GGUF para llama.cpp</a></h4><p class="spec">text-generation · 2.200+ likes · ~3,3 M descargas</p><p>Prism ML publica Ternary-Bonsai-2, un modelo de 27B parámetros en formato ternario de 2 bits, cuantizado a GGUF para correr con llama.cpp sobre CUDA o Metal. La atención híbrida permite que un modelo de 27B quepa en hardware de consumo, y la cuantización ternaria (valores −1, 0, +1) simplifica la inferencia respecto a los formatos habituales.</p><p>Es una buena opción si buscas un modelo grande sin una GPU de gama alta: el formato ternario es compatible con el ecosistema de llama.cpp y las variantes por precisión ya están disponibles en la tarjeta.</p><div class="chips"><a class="chip link" href="https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf" rel="noopener">Tarjeta HF</a><span class="chip">ternario</span><span class="chip">2-bit</span><span class="chip">GGUF</span><span class="chip">llama.cpp</span><span class="chip src">vía Hugging Face</span></div></article><article class="note"><h4><a href="https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL" rel="noopener">MiMo-V2.6 de Xiaomi: Pro-RL, Flash-RL y destilación de 9B</a></h4><p class="spec">varios pipelines · 3 variantes + dataset RL en tendencia</p><p>Xiaomi publica la familia MiMo-V2.6 con tres variantes en tendencia: Pro-RL (multimodal con visión-lingüaje, audio y video, contexto largo), Flash-RL (una versión más rápida) y Distill-Qwen-9B (una destilación de 9B para uso agéntico). Además suena el dataset de post-entreno MiMo-V2.6-RL-oss, útil si quieres reproducir o seguir su receta de RL.</p><p>Es un buen ejemplo de cómo los grandes fabricantes están soltando pesos y datos a la vez: la familia completa está disponible en Hugging Face con sus variantes y el dataset que las entrena.</p><div class="chips"><a class="chip link" href="https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL" rel="noopener">MiMo-V2.6-Pro-RL</a><a class="chip link" href="https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL" rel="noopener">MiMo-V2.6-Flash-RL</a><a class="chip link" href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">Dataset RL</a><span class="chip">Xiaomi</span><span class="chip">RL</span><span class="chip">multimodal</span><span class="chip">dataset</span><span class="chip src">vía Hugging Face</span></div></article><article class="note"><h4><a href="https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B" rel="noopener">Xing4.0-29B-A4B: MoE de 29B con 4B activos</a></h4><p class="spec">text-generation · 1.750+ likes · MoE 29B-A4B</p><p>XingChen-AGI publica Xing4.0-29B-A4B, un mixture-of-experts de 29B parámetros totales pero solo 4B activos por token, pensado para que un modelo grande se comporte como uno pequeño en costo de inferencia. Es la receta habitual para correr capacidades grandes en hardware de consumo.</p><p>La tarjeta en Hugging Face documenta la arquitectura y los pesos; busca una variante GGUF si quieres probarlo sin una GPU de gama alta.</p><div class="chips"><a class="chip link" href="https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B" rel="noopener">Tarjeta HF</a><span class="chip">MoE</span><span class="chip">text-generation</span><span class="chip">eficiente</span><span class="chip src">vía Hugging Face</span></div></article></section><section class="block" id="inferencia"><div class="sec-head"><span class="icon">⚙️</span><h3>Inferencia y audio</h3><span class="rule"></span></div><p class="sec-blurb">Herramientas para servir y procesar: ASR, diarización de voz y atención de bajo coste.</p><article class="note"><h4><a href="https://huggingface.co/nvidia/Nemotron-3-Diarization" rel="noopener">Nemotron-3-Diarization: separación de hablantes en streaming de NVIDIA</a></h4><p class="spec">voice-activity-detection · 415+ likes · ~22.500 descargas</p><p>NVIDIA publica Nemotron-3-Diarization, un modelo de separación de hablantes basado en Streaming Sortformer, capaz de trabajar en streaming sobre audio. La tarjeta incluye versiones en safetensors y GGUF, y los tags indican audio-frame-classification y speaker-diarization, lo que lo hace apto para pipelines de transcripción que necesitan saber quién está hablando.</p><p>Es una pieza útil si construyes sistemas de transcripción de reuniones o de audio largo y quieres la separación de hablantes sin salir del ecosistema de NVIDIA.</p><div class="chips"><a class="chip link" href="https://huggingface.co/nvidia/Nemotron-3-Diarization" rel="noopener">Tarjeta HF</a><span class="chip">NVIDIA</span><span class="chip">diarización</span><span class="chip">streaming</span><span class="chip">audio</span><span class="chip src">vía Hugging Face</span></div></article><article class="note"><h4><a href="https://huggingface.co/Edge0/Audio8-ASR-Infinite" rel="noopener">Edge0/Audio8-ASR-Infinite: ASR en streaming y tiempo real</a></h4><p class="spec">automatic-speech-recognition · 1.200+ likes · ~19.400 descargas</p><p>Edge0 publica Audio8-ASR-Infinite, un modelo de reconocimiento de voz en streaming y tiempo real. La tarjeta lo posiciona para transcripción continua (audio largo sin cortes) y los tags indican streaming y realtime, lo que lo hace apto para asistentes de voz o pipelines de transcripción en vivo.</p><p>Si buscas un ASR que no corte la transcripción en segmentos fijos, es una de las opciones a probar.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Edge0/Audio8-ASR-Infinite" rel="noopener">Tarjeta HF</a><span class="chip">ASR</span><span class="chip">streaming</span><span class="chip">tiempo real</span><span class="chip">audio</span><span class="chip src">vía Hugging Face</span></div></article><article class="note"><h4><a href="https://huggingface.co/papers/2609.31093" rel="noopener">Block Sparse Attention con complejidad log-lineal</a></h4><p class="spec">paper · atención para contextos largos</p><p>Un paper nuevo propone una atención bloqueada y dispersa con complejidad log-lineal, frente al coste cuadrático de la atención estándar. Es el tipo de mejora que abre la puerta a contextos mucho más largos sin multiplicar el coste de inferencia, y es relevante si trabajas con contextos de cientos de miles o millones de tokens.</p><p>El documento está en Hugging Face Papers y es una buena referencia si te interesa la optimización de la atención en modelos de contexto largo.</p><div class="chips"><a class="chip link" href="https://huggingface.co/papers/2609.31093" rel="noopener">Hugging Face Papers</a><span class="chip">atención</span><span class="chip">contexto largo</span><span class="chip">optimización</span><span class="chip src">vía Hugging Face Papers</span></div></article></section><section class="block" id="agentes"><div class="sec-head"><span class="icon">🤖</span><h3>Agentes</h3><span class="rule"></span></div><p class="sec-blurb">Benchmarks, sistemas de agentes y herramientas para orquestarlos.</p><article class="note"><h4><a href="https://huggingface.co/papers/2609.31590" rel="noopener">AgentWorld: benchmark de colaboración multiagente de largo horizonte</a></h4><p class="spec">paper · 24 sep 2026 · colaboración multiagente</p><p>Un paper nuevo introduce AgentWorld, un benchmark para medir la colaboración de largo horizonte entre múltiples agentes de LLM. Los benchmarks multiagentes existentes suelen centrarse en tareas cortas o en un solo agente; AgentWorld explora el escenario más realista, donde varios agentes tienen que coordinarse a lo largo de muchos pasos para completar una tarea.</p><p>Es una referencia útil si trabajas en sistemas multiagente y quieres un benchmark que mida la colaboración real, no solo la ejecución de una sola tarea.</p><div class="chips"><a class="chip link" href="https://huggingface.co/papers/2609.31590" rel="noopener">Hugging Face Papers</a><span class="chip">agentes</span><span class="chip">multiagente</span><span class="chip">benchmark</span><span class="chip src">vía Hugging Face Papers</span></div></article><article class="note"><h4><a href="https://github.com/ufo-ai/ufo-core" rel="noopener">ufo-core: un sistema operativo de agentes de negocio</a></h4><p class="spec">GitHub trending · ★ 45 · Python</p><p>ufo-ai publica ufo-core, descrito como un &#x27;business agent operating system&#x27;: una capa de orquestación para agentes orientados a tareas de negocio. El repositorio está en tendencia en GitHub y es Python, lo que lo hace fácil de inspeccionar y de integrar en un stack existente.</p><p>Es un proyecto temprano, pero la idea de un &#x27;sistema operativo&#x27; para agentes (en vez de una librería de agentes sueltos) es una arquitectura que vale la pena vigilar.</p><div class="chips"><a class="chip link" href="https://github.com/ufo-ai/ufo-core" rel="noopener">Repositorio</a><span class="chip">agentes</span><span class="chip">orquestación</span><span class="chip">Python</span><span class="chip src">vía GitHub</span></div></article></section><section class="block" id="selfhosted"><div class="sec-head"><span class="icon">🏠</span><h3>Self-hosting IA</h3><span class="rule"></span></div><p class="sec-blurb">Para el que monta su propio stack: apps locales, agregadores con IA y guías prácticas.</p><article class="note"><h4><a href="https://lemonade-server.ai/" rel="noopener">Lemonade: IA local para texto, imagen y voz</a></h4><p class="spec">app local · multi-modal</p><p>Lemonade es una aplicación de IA local que cubre texto, imagen y voz, pensada para quien quiere un asistente multi-modal sin depender de un servicio en la nube. La página del proyecto describe los casos de uso y cómo montarlo.</p><p>Es una opción a considerar si buscas un reemplazo local-first de los asistentes de voz comerciales.</p><div class="chips"><a class="chip link" href="https://lemonade-server.ai/" rel="noopener">Lemonade</a><span class="chip">app local</span><span class="chip">multi-modal</span><span class="chip">self-hosted</span><span class="chip src">vía web</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/jeffboudier/open-model-cyber-defense" rel="noopener">Guía práctica para self-hostear un modelo abierto en ciberdefensa</a></h4><p class="spec">Hugging Face · guía de autoalojo</p><p>Jeff Boudier publica una guía práctica para self-hostear un modelo abierto orientado a ciberdefensa. La entrada detalla el pipeline completo: qué modelo elegir, cómo servirlo en local y cómo integrarlo en un flujo de trabajo de análisis de seguridad.</p><p>Es un buen punto de entrada si trabajas en seguridad y quieres un modelo local que no envíe tus datos a un servicio externo.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/jeffboudier/open-model-cyber-defense" rel="noopener">Blog HF</a><span class="chip">ciberdefensa</span><span class="chip">self-hosted</span><span class="chip">guía</span><span class="chip src">vía Hugging Face</span></div></article><article class="note"><h4><a href="https://github.com/JoasASantos/Offensive-Security-AI-Models" rel="noopener">Offensive-Security-AI-Models: catálogo de modelos sin censurar para seguridad</a></h4><p class="spec">GitHub trending · ★ 60 · lista curada</p><p>Un repositorio en tendencia en GitHub que reúne modelos de IA sin censurar o afinados para tareas de ciberseguridad. Es un catálogo curado, útil si trabajas en red teaming o en análisis de vulnerabilidades y quieres un punto de partida con modelos específicos para ese dominio.</p><p>La lista es un buen punto de entrada para descubrir qué modelos existen orientados a seguridad ofensiva.</p><div class="chips"><a class="chip link" href="https://github.com/JoasASantos/Offensive-Security-AI-Models" rel="noopener">Repositorio</a><span class="chip">seguridad</span><span class="chip">ciberseguridad</span><span class="chip">catálogo</span><span class="chip src">vía GitHub</span></div></article></section></div><div class="aside"><div class="aside-block"><h5>Repos en tendencia<span class="rule"></span></h5><div class="repo"><a class="name" href="https://github.com/JoasASantos/Offensive-Security-AI-Models" rel="noopener">JoasASantos/Offensive-Security-AI-Models</a><span class="stars">★ 60</span><div class="desc">Catálogo de modelos de IA sin censurar o afinados para ciberseguridad</div><div class="meta">lista curada</div></div><div class="repo"><a class="name" href="https://github.com/ufo-ai/ufo-core" rel="noopener">ufo-ai/ufo-core</a><span class="stars">★ 45</span><div class="desc">Sistema operativo de agentes de negocio</div><div class="meta">Python</div></div><div class="repo"><a class="name" href="https://github.com/scarletkc/seiso" rel="noopener">scarletkc/seiso</a><span class="stars">★ 14</span><div class="desc">Convención y linter de Markdown para docs escritas por IA y leídas por humanos</div><div class="meta">Rust</div></div><div class="repo"><a class="name" href="https://github.com/AbdoslamB/InkDoc" rel="noopener">AbdoslamB/InkDoc</a><span class="stars">★ 9</span><div class="desc">Convierte cualquier documento en Markdown limpio listo para IA, en local</div><div class="meta">Python · app de escritorio</div></div><div class="repo"><a class="name" href="https://github.com/B0yko/wellbrief" rel="noopener">B0yko/wellbrief</a><span class="stars">★ 8</span><div class="desc">RAG offline-first para ingenieros de perforación: ingiere archivos de pozo y responde con citas</div><div class="meta">Python</div></div><div class="repo"><a class="name" href="https://github.com/alphaparkinc/genpark-int8-symmetric-per-tensor-quantizer-skill" rel="noopener">alphaparkinc/genpark-int8-symmetric-per-tensor-quantizer-skill</a><span class="stars">★ 7</span><div class="desc">Motor de cuantización INT8 simétrica por tensor y por canal para pesos y activaciones de LLMs</div><div class="meta">Python · skill</div></div></div><div class="aside-block"><h5>Papers del día · Hugging Face<span class="rule"></span></h5><ul class="papers"><li><a href="https://huggingface.co/papers/2609.31590" rel="noopener">AgentWorld: Benchmarking Long-Horizon Collaboration of Multi-agent LLMs</a><span class="au">24 sep 2026 · Raphael Shu et al.</span></li><li><a href="https://huggingface.co/papers/2609.31093" rel="noopener">Block Sparse Attention with Log-Linear Complexity</a><span class="au">24 sep 2026 · Bohao Tang et al.</span></li><li><a href="https://huggingface.co/papers/2609.31002" rel="noopener">ZooWork-ShopRanker: An Open, Preference-Aligned E-Commerce Reranker</a><span class="au">24 sep 2026 · Siqiao Xue et al.</span></li><li><a href="https://huggingface.co/papers/2609.31394" rel="noopener">InternW0-Δ: A World Action Model Bridging Predictive Dynamics and Actions with 20K+ Hours of Open Data</a><span class="au">24 sep 2026 · Xingyu Miao et al.</span></li><li><a href="https://huggingface.co/papers/2609.30222" rel="noopener">TrackEverything: Long Horizon Dense Tracking via De-Duplicating 3D Scene Representations</a><span class="au">23 sep 2026 · Ayush Jain et al.</span></li></ul></div><div class="aside-block"><h5>Comunidad en ebullición<span class="rule"></span></h5><ul class="community"><li><div class="src">r/LocalLLaMA</div><a href="https://news.ycombinator.com/item?id=41856567" rel="noopener">¿Qué casos de uso tenéis los que os autoalojáis LLMs en casa?</a><div class="note-txt">Debate práctico sobre uso doméstico de LLMs.</div></li><li><div class="src">r/selfhosted</div><a href="https://www.reddit.com/r/selfhosted/comments/1ppkueg/newsku_selfhosted_rss_reader_that_uses_llm_to/" rel="noopener">Newsku: lector RSS self-hosted que usa un LLM para ordenar artículos</a><div class="note-txt">Un lector de noticias que usa un LLM local para filtrar y ordenar.</div></li><li><div class="src">Hacker News</div><a href="https://news.ycombinator.com/item?id=47516650" rel="noopener">Ensu – Ente&#x27;s Local LLM app</a><div class="note-txt">La app local-first de LLMs de Ente, en discusión.</div></li><li><div class="src">Hugging Face</div><a href="https://huggingface.co/blog/state-of-open-models-summer-2026" rel="noopener">State of Open Models: Summer 2026</a><div class="note-txt">Informe de Hugging Face sobre el estado de los modelos abiertos del verano 2026.</div></li></ul></div></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div>IA Abierta Hoy (ia·ahoy) es una edición diaria, 100% estática, sobre IA de pesos abiertos y software libre para IA. Se genera cada mañana a las 08:30 (CEST) y se publica en GitHub Pages. Cada nota lleva al menos un enlace de seguimiento; cuando es posible, enlaza al repositorio, a la tarjeta de Hugging Face o al documento técnico. Cada edición incluye además un podcast en audio para escucharla.</div><div><b>Fuentes de esta edición</b><br>Hugging Face (modelos, datasets, papers, blog) · GitHub (repositorios en tendencia) · Reddit (r/LocalLLaMA, r/LocalLLM, r/selfhosted) · Hacker News · Blogs y medios técnicos</div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>

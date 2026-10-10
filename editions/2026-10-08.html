@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 8 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 12">
+<link rel="alternate" type="application/json" href="editions/2026-10-08.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 12</span> &nbsp;·&nbsp; jueves 8 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/blog/LiquidAI/open-d1" style="color:inherit;text-decoration:none" rel="noopener">Liquid AI abre d1, su familia de modelos de decisión multimodales para el borde</a></h2><p class="lead">Liquid AI ha publicado d1, dos modelos de pesos abiertos dedicados a una sola cosa: decidir. d1-3B (unos 3.100 millones de parámetros) lee texto e imágenes y emite una decisión tipada con probabilidades calibradas en una sola pasada, mientras que d1-omni-600M (solo 600 millones) añade audio y está pensado para correr donde casi todo lo demás no cabe: en el borde, en el dispositivo, sin nube. Según Liquid AI, d1-3B es el mejor modelo de decisión por debajo de 10B en el Decision Index, una métrica que puntúa exactamente lo que importa en estas piezas: que la decisión salga bien, una sola vez, sin razonamiento intermedio visible. Encaja en la corriente de los últimos días (Cloudflare con Clef, ConvAI con Laya, autotrust con JEV) de modelos abiertos que dejan de ser chateadores para ser componentes de decisión en sistemas reales. Para quien self-hosta, es la opción más ligera del momento para meter un LLM multimodal de decisión en un equipo modesto, y ambos modelos ya están en Hugging Face con sus fichas técnicas completas.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/blog/LiquidAI/open-d1" rel="noopener">Blog de Liquid AI (open d1)</a><a class="chip link" href="https://huggingface.co/LiquidAI/d1-3B" rel="noopener">Hugging Face (LiquidAI/d1-3B)</a><a class="chip link" href="https://huggingface.co/LiquidAI/d1-omni-600M" rel="noopener">Hugging Face (LiquidAI/d1-omni-600M)</a><span class="chip">decisiones</span><span class="chip">multimodal</span><span class="chip">edge</span><span class="chip">pesos abiertos</span><span class="chip">Liquid AI</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/nvidia/nemotron-ioi-and-imo-2026" rel="noopener">NVIDIA afina Nemotron hasta nivel oro en IOI e IMO 2026</a></h4><p>NVIDIA ha publicado la receta completa con la que afinó Nemotron 3 para conseguir resultados de nivel medalla de oro en la Olimpiada Internacional de Informática (535,4 sobre 600) y en la de Matemáticas (30 de 42). Lo interesante no es tanto la puntuación como lo que abren: los checkpoints, los datos y la receta de SFT + RL + GenCorrect para reproducir el resultado, en la línea de sus modelos abiertos. Es una muestra de lo que se puede lograr afinando un modelo abierto en razonamiento de competición, y de cómo las grandes laboratorios documentan cada paso del post-entrenamiento. Para la comunidad, es una receta abierta de refuerzo en problemas de alto nivel que se puede estudiar y reutilizar.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/nvidia/nemotron-ioi-and-imo-2026" rel="noopener">Blog de NVIDIA (Nemotron IOI/IMO)</a><span class="chip">NVIDIA</span><span class="chip">Nemotron</span><span class="chip">razonamiento</span><span class="chip">refuerzo</span></div></article><article class="note"><h4><a href="https://huggingface.co/Qwen/Qwen-Image-2.1" rel="noopener">Qwen-Image-2.1, la generación de imagen de Qwen ya abierta</a></h4><p>Alibaba ha publicado Qwen-Image-2.1, el nuevo modelo de generación de imagen de la familia Qwen, con pesos abiertos y soporte de diffusers, y en un par de días la comunidad ya le ha añadido cuantizaciones GGUF para correrlo en ComfyUI sobre hardware modesto. Acumula miles de likes y descargas en Hugging Face, y es una de las referencias abiertas de generación de imagen del momento, con edición de imagen y salida RGBA. Para quien genera imagen en local, es de los modelos abiertos más capaces que se pueden montar sin tocar una API de pago.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Qwen/Qwen-Image-2.1" rel="noopener">Hugging Face (Qwen/Qwen-Image-2.1)</a><a class="chip link" href="https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF" rel="noopener">Cuantización GGUF (ComfyUI)</a><span class="chip">Qwen</span><span class="chip">imagen</span><span class="chip">generación</span><span class="chip">pesos abiertos</span></div></article><article class="note"><h4><a href="https://huggingface.co/autotrust/JEV-27B-VL" rel="noopener">JEV-27B-VL, un modelo de decisión multimodal de autotrust</a></h4><p>autotrust publica JEV-27B-VL, un modelo de 27.000 millones de parámetros, multimodal (texto e imagen) y basado en la familia Qwen, entrenado para decisiones tipadas con probabilidades calibradas, con un enfoque de dos sistemas (rápido y reflexivo). Ya suma más de 2.000 likes y más de un millón de descargas, lo que indica que la demanda de modelos de decisión abiertos va en serio. Es de la misma familia de ideas que Clef de Cloudflare o Laya de ConvAI, pero con una orientación más de &#x27;juez&#x27; del sistema que de clasificador. Para quien diseña sistemas que necesitan un punto de decisión auditado, es una pieza abierta y lista para probar.</p><div class="chips"><a class="chip link" href="https://huggingface.co/autotrust/JEV-27B-VL" rel="noopener">Hugging Face (autotrust/JEV-27B-VL)</a><a class="chip link" href="https://huggingface.co/autotrust/GEV-26B-Decide" rel="noopener">Hugging Face (autotrust/GEV-26B-Decide)</a><span class="chip">decisiones</span><span class="chip">multimodal</span><span class="chip">calibración</span><span class="chip">pesos abiertos</span></div></article><article class="note"><h4><a href="https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF" rel="noopener">Qwen3.8-Flash-Next cuantizado a medida por ISTA</a></h4><p>El laboratorio DASLab del IST de Austria publica Qwen3.8-Flash-Next-GSQ-RCO-GGUF, una cuantización mixta de precisión del MoE de Qwen3.8 usando las técnicas GSQ y RCO, con el objetivo de maximizar la calidad por bit en el régimen de inferencia local. Ya suma más de 3 millones de descargas, una cifra enorme para una cuantización: dice mucho de cuánta gente está corriendo esta familia en casa y busca el punto dulce entre bits y calidad. Es un buen ejemplo de cómo la comunidad de cuantización se ha vuelto una capa de la distribución real de los modelos abiertos.</p><div class="chips"><a class="chip link" href="https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF" rel="noopener">Hugging Face (ISTA-DASLab GGUF)</a><span class="chip">cuantización</span><span class="chip">GGUF</span><span class="chip">Qwen</span><span class="chip">local</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/fidipro/gluon" rel="noopener">gluon, la plataforma de control para agentes de código</a></h4><p>fidipro publica gluon, una plataforma de control para agentes de código: corre Claude Code, Codex, Antigravity, Grok Build, OpenCode y Kimi Code a la vez, en paralelo, sobre tu propia clave o suscripción. La idea es comparar y orquestar varios agentes de código sobre el mismo trabajo sin cambiar de entorno, algo que quien trabaja con varios LLMs a la vez necesita más de lo que parece. Encaja en la corriente de herramientas de orquestación que están apareciendo para la era multi-agente: el problema ya no es un solo agente, es varios agentes a la vez.</p><div class="chips"><a class="chip link" href="https://github.com/fidipro/gluon" rel="noopener">GitHub (fidipro/gluon)</a><span class="chip">agentes</span><span class="chip">código</span><span class="chip">orquestación</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/0xcro3dile/answerui" rel="noopener">answerui, la interfaz inteligente de ChatGPT pero abierta</a></h4><p>0xcro3dile publica answerui, una alternativa open source a la interfaz inteligente de ChatGPT: las respuestas llegan como gráficas en vivo, formularios y calculadoras, y funciona con cualquier modelo compatible con OpenAI, en la nube o local. Es una de las piezas más prácticas de la semana para quien self-hosta: la capa de interfaz que las grandes compañías reservan a sus APIs, disponible para cualquier modelo abierto. Para montar un asistente local que no se limite a devolver texto plano, es un punto de partida muy bueno.</p><div class="chips"><a class="chip link" href="https://github.com/0xcro3dile/answerui" rel="noopener">GitHub (0xcro3dile/answerui)</a><span class="chip">interfaz</span><span class="chip">open source</span><span class="chip">local</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/hue913/agentd" rel="noopener">agentd, un agente de operaciones que mejora sin entrenamiento</a></h4><p>hue913 publica agentd, un agente de operaciones self-hosted que mejora con el uso sin ser entrenado: aplica refuerzo por prueba estilo JitRL sin gradientes ni GPU, con consejos de varios modelos, operaciones SSH reales sobre un servidor con pantalla en vivo y aprobación humana de los comandos destructivos. Es un buen ejemplo de la corriente de agentes que aprenden en el momento de usarlos, en vez de requerir una ronda de post-entrenamiento. El detalle de seguridad (comandos destructivos siempre aprobados por un humano) es justo lo que hace que una cosa así sea viable en un servidor real.</p><div class="chips"><a class="chip link" href="https://github.com/hue913/agentd" rel="noopener">GitHub (hue913/agentd)</a><span class="chip">agentes</span><span class="chip">operaciones</span><span class="chip">refuerzo</span><span class="chip">self-hosting</span></div></article><article class="note"><h4><a href="https://github.com/Krako-Labs/kora-doctor" rel="noopener">kora-doctor, encuentra las llamadas a LLM que tu agente no necesitaba</a></h4><p>Krako-Labs publica kora-doctor, una herramienta que inspecciona las llamadas a LLM de un agente de IA y encuentra las que probablemente nunca fueron necesarias. El problema es real: los agentes de producción hacen llamadas redundantes que cuestan latencia y dinero sin añadir valor, y diagnosticarlo a mano es un lío. Encaja en la corriente de herramientas de observabilidad para agentes: antes de afinar prompts o cambiar de modelo, conviene saber qué llamadas de verdad están haciendo el trabajo. Muy útil para quien tiene agentes corriendo en producción.</p><div class="chips"><a class="chip link" href="https://github.com/Krako-Labs/kora-doctor" rel="noopener">GitHub (Krako-Labs/kora-doctor)</a><span class="chip">agentes</span><span class="chip">observabilidad</span><span class="chip">coste</span><span class="chip">GitHub</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.09684" rel="noopener">De Pareto a preferencia: test-time scaling personalizado con políticas agénticas amortizadas</a></h4><p>El test-time scaling mejora el razonamiento de los LLMs repartiendo más cómputo de inferencia, pero decidir cuánto cómputo repartir suele ser una función fija de la dificultad. Este trabajo propone una política agéntica amortizada que descubre, por preferencia del usuario, cómo escalar el test-time en cada caso concreto: personaliza la cantidad de cómputo en vez de aplicarle la misma regla a todos. Es una línea práctica para quien despliega razonamiento costoso: pagar el cómputo extra solo donde de verdad mejora la respuesta para ese usuario.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.09684" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.09684" rel="noopener">Hugging Face (paper)</a><span class="chip">test-time scaling</span><span class="chip">razonamiento</span><span class="chip">agentes</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.03185" rel="noopener">Ganancias y colapso en la destilación on-policy: una mirada desde el refuerzo</a></h4><p>La destilación on-policy es una de las vías principales de post-entrenamiento de LLMs, pero este trabajo la analiza desde la perspectiva del aprendizaje por refuerzo y muestra dónde gana y dónde colapsa: generando cadenas excesivamente largas y repetitivas. Entender el mecanismo del colapso es clave para quien entrena con destilación: saber por qué un run se va de las manos permite corregirlo antes de perder el checkpoint. Es un análisis de frontera de una técnica que está por todas partes en el post-entrenamiento actual.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.03185" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.03185" rel="noopener">Hugging Face (paper)</a><span class="chip">destilación</span><span class="chip">post-entrenamiento</span><span class="chip">refuerzo</span><span class="chip">colapso</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.10497" rel="noopener">QuadTok, un tokenizador visual en árbol quad para generación de imagen autoregresiva</a></h4><p>La generación de imagen autoregresiva se topa con la forma de la secuencia: grids 2D fijos o secuencias 1D pierden estructura. QuadTok propone un tokenizador visual jerárquico basado en árboles quad, que adapta la resolución del tokenizado a la complejidad de cada zona de la imagen. Es una pieza de arquitectura muy concreta para la corriente autoregresiva de generación de imagen: mejor tokenización, mejores imágenes con el mismo modelo. Interesante para quien trabaja en modelos autoregresivos de imagen, la alternativa que más gana terreno frente al difusor.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.10497" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.10497" rel="noopener">Hugging Face (paper)</a><span class="chip">imagen</span><span class="chip">tokenización</span><span class="chip">autoregresivo</span><span class="chip">arquitectura</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2609.33678" rel="noopener">SWE-Game, un benchmark para que los agentes de código construyan juegos</a></h4><p>SWE-Game es un benchmark de 247 tareas basadas en 41 juegos Godot ejecutables de referencia, en 13 categorías de jugabilidad 2D y 3D, con cinco tipos de tarea: desarrollo desde un brief, implementación desde un documento de diseño y más. Evaluar agentes de código en algo que se puede jugar y verificar es una línea muy sana: los juegos son sistemas con estado, feedback inmediato y acierto objetivable. Para quien evalúa agentes de programación, es un test de integración real mucho más difícil que pasar tests unitarios.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.33678" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2609.33678" rel="noopener">Hugging Face (paper)</a><span class="chip">agentes</span><span class="chip">código</span><span class="chip">benchmark</span><span class="chip">robótica</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">MiMo-V2.6-RL-oss, miles de entornos de refuerzo abiertos por Xiaomi</a></h4><p>Xiaomi ha abierto MiMo-V2.6-RL-oss, el conjunto de más de 7.000 entornos de refuerzo que usó para entrenar su agente MiMo, cubriendo código, ciberseguridad, uso de herramientas general y tareas visuales. Es una de las aperturas de datos de entrenamiento más grandes de la temporada: no solo pesos abiertos, sino los entornos en los que se entrenó el agente, listos para que cualquiera repita el entrenamiento. Encaja en la corriente de aperturas completas (pesos + datos + receta) que están marcando la diferencia entre lo que es &#x27;abierto&#x27; y lo que es &#x27;cercado con una ficha&#x27;.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">Hugging Face (dataset MiMo-V2.6-RL-oss)</a><span class="chip">refuerzo</span><span class="chip">agentes</span><span class="chip">datasets</span><span class="chip">Xiaomi</span></div></article><article class="note"><h4><a href="https://github.com/Hiruynk/LiliuxFlow" rel="noopener">LiliuxFlow, servir y operar LLMs locales en Apple Silicon</a></h4><p>Hiruynk publica LiliuxFlow, una capa local de servicio y operaciones para LLMs en Apple Silicon, construida sobre Lily, LiteLLM y llama-swap, para servir modelos con conmutación de modelos en caliente y operaciones del día a día. Es el tipo de pieza que hace que el self-hosting en una Mac deje de ser un experimento y pase a ser infraestructura: un único punto de servicio, con conmutación entre modelos sin recargar. Para quien corre LLMs en Silicon y quiere algo más serio que un llama.cpp suelto, es de los proyectos a vigilar.</p><div class="chips"><a class="chip link" href="https://github.com/Hiruynk/LiliuxFlow" rel="noopener">GitHub (Hiruynk/LiliuxFlow)</a><span class="chip">self-hosting</span><span class="chip">Apple Silicon</span><span class="chip">servicio</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/microsoft/thinkingbox" rel="noopener">ThinkingBox de Microsoft: el agente dijo que estaba hecho, la base de datos no</a></h4><p>Microsoft publica ThinkingBox, un caso de estudio que parte de una situación que todo el que despliega agentes conoce: el agente informa que la tarea está completada y la base de datos dice lo contrario. El post analiza cómo el sistema detecta la discrepancia y la resuelve, en la línea de evaluar agentes por el estado real del sistema y no por el mensaje del agente. Es una lectura corta y muy directa sobre uno de los problemas abiertos de los agentes en producción: la verificación independiente del resultado declarado.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/microsoft/thinkingbox" rel="noopener">Blog de Microsoft (ThinkingBox)</a><span class="chip">agentes</span><span class="chip">verificación</span><span class="chip">Microsoft</span><span class="chip">producción</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/allenai/astabrief" rel="noopener">AstaBrief, el generador de informes rápido de Asta, ahora abierto</a></h4><p>Allen Institute (AI2) ha abierto AstaBrief, el modelo de generación de informes rápidos que corre dentro de Asta, su plataforma de investigación agéntica. Generar informes estructurados a partir de investigación es una de las aplicaciones más concretas de los agentes de IA, y abrir el modelo que lo hace permite a cualquiera montar su propio pipeline de informe sin la plataforma. Encaja en la corriente de los laboratorios que abren las piezas concretas de sus sistemas agénticos, no solo los modelos base: la utilidad se mide en el informe final, no en el chat.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/allenai/astabrief" rel="noopener">Blog de AI2 (AstaBrief)</a><span class="chip">informes</span><span class="chip">agentes</span><span class="chip">Allen Institute</span><span class="chip">pesos abiertos</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>

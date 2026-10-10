@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 7 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 11">
+<link rel="alternate" type="application/json" href="editions/2026-10-07.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 11</span> &nbsp;·&nbsp; miércoles 7 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/Cloudflare/clef" style="color:inherit;text-decoration:none" rel="noopener">Cloudflare abre Clef, su familia de modelos de pesos abiertos para decisiones</a></h2><p class="lead">Cloudflare ha publicado Clef, una familia de modelos de pesos abiertos pensados para decidir: a partir de un estado y de un esquema de preguntas tipadas, el modelo emite la decisión, y lo lee tanto si el estado llega como texto o JSON como si incluye imágenes. Se trata de un modelo multimodal de unos 27.000 millones de parámetros (basado en la familia Qwen) que Cloudflare entrena y abre para que cualquiera lo use en local, con una visión nueva y una variante más ligera y rápida, clef-flash, para quien no pueda con el tamaño completo. La idea no es la chat: es meter un LLM en el punto exacto donde un sistema tiene que tomar una decisión y justificarla, que es justo donde la mayoría de los modelos generalistas se quedan cortos. En Hugging Face ya acumula más de un millar de likes y cuantizaciones de la comunidad para correrlo en casa. Para quien self-hosta, es una pieza muy atractiva: un modelo de decisión abierto, multimodal y con una versión rápida que cabe en hardware modesto.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/Cloudflare/clef" rel="noopener">Hugging Face (Cloudflare/clef)</a><a class="chip link" href="https://huggingface.co/Cloudflare/clef-flash" rel="noopener">Hugging Face (Cloudflare/clef-flash)</a><a class="chip link" href="https://huggingface.co/collections/Cloudflare/clef" rel="noopener">Colección Clef (Hugging Face)</a><span class="chip">pesos abiertos</span><span class="chip">decisiones</span><span class="chip">multimodal</span><span class="chip">Cloudflare</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/Aleph-Alpha/Kolibri-1" rel="noopener">Kolibri-1, el modelo soberano europeo de Aleph Alpha</a></h4><p>Aleph Alpha ha publicado Kolibri-1, un modelo MoE de 78.000 millones de parámetros con unos 3.460 millones activos por token, pesos abiertos bajo Apache 2.0 y contexto de un millón de tokens. Está entrenado desde cero y orientado a entornos críticos (soberano, pensado para alemán e inglés), y se presenta en la frontera de Pareto entre coste y calidad. El requisito mínimo de hardware no es exiguo (una H200 o dos A100/H100), pero es una señal clara de lo que llegan de la corriente de modelos abiertos europeos con vocación de producción. Para quien quiere un MoE grande y abierto sin depender de un proveedor de API, es de los que hay que vigilar.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Aleph-Alpha/Kolibri-1" rel="noopener">Hugging Face</a><a class="chip link" href="https://aleph-alpha.com/en/kolibri/" rel="noopener">Aleph Alpha (Kolibri)</a><span class="chip">MoE</span><span class="chip">pesos abiertos</span><span class="chip">Apache 2.0</span><span class="chip">Europa</span></div></article><article class="note"><h4><a href="https://huggingface.co/google/embeddinggemma-2" rel="noopener">EmbeddingGemma 2, embeddings multimodales abiertos para el dispositivo</a></h4><p>Google DeepMind ha abierto EmbeddingGemma 2, un modelo ligero y multimodal de embeddings que mapea texto (incluido código), imágenes, vídeo y audio en el mismo espacio dimensional, de modo que las representaciones de distintas modalidades se pueden comparar directamente. Es el modelo abierto más capaz para embeddings multimodales sobre el dispositivo, pensado para correr en local y sin nube. Ya está disponible en Hugging Face y en Ollama. Para quien construye sistemas de búsqueda o RAG multimodal y no quiere mandar datos a un servicio externo, es una de las piezas abiertas más prácticas del momento.</p><div class="chips"><a class="chip link" href="https://huggingface.co/google/embeddinggemma-2" rel="noopener">Hugging Face</a><a class="chip link" href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/" rel="noopener">Blog de Google</a><span class="chip">embeddings</span><span class="chip">multimodal</span><span class="chip">on-device</span><span class="chip">Google</span></div></article><article class="note"><h4><a href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">LTX-2.5, generación de vídeo y audio abierta de Lightricks</a></h4><p>Lightricks ha publicado LTX-2.5, un modelo de pesos abiertos de generación de vídeo y audio sincronizados, con continuidad de escenas multishot nativa y una técnica de renderizado que mete más cómputo en las escenas complejas. Es uno de los modelos abiertos más completos de vídeo del momento, con miles de likes en Hugging Face y workflows en ComfyUI y en fal. La corriente es clara: llevar la generación de vídeo de vuelta al hardware propio, en vez de depender de una API de pago. Para quien hace prototipos de vídeo en local o quiere una generación sin nube, es de las referencias abiertas que están moviendo el terreno.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">Hugging Face</a><a class="chip link" href="https://ltx.io/" rel="noopener">LTX (Lightricks)</a><span class="chip">vídeo</span><span class="chip">audio</span><span class="chip">generación</span><span class="chip">open-weight</span></div></article><article class="note"><h4><a href="https://huggingface.co/Qwen/Qwen3.8-27B" rel="noopener">Qwen3.8-27B, el 27B de pesos abiertos que arrasa en tendencias</a></h4><p>Qwen3.8-27B, el modelo de 27.000 millones de parámetros de la generación Qwen3.8, sigue siendo de los más descargados y mejor puntuados de Hugging Face, con decenas de miles de likes. Está abierto bajo licencia Apache 2.0, con un contexto de unos 262.000 tokens, y es de los modelos que más se montan en entornos locales por su relación entre tamaño, calidad y coste. Ya hay cuantizaciones GGUF de la comunidad para correrlo en una sola GPU decente. Es un punto de partida muy sólido para quien quiere un LLM grande y abierto sin complicaciones de licencias ni de API.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Qwen/Qwen3.8-27B" rel="noopener">Hugging Face</a><span class="chip">Qwen</span><span class="chip">pesos abiertos</span><span class="chip">Apache 2.0</span><span class="chip">local</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/tiiuae/falcon-emirati" rel="noopener">Falcon-Emirati: un LLM que aprende el dialecto, la cultura y el matiz</a></h4><p>El Technology Innovation Institute (TII) de Emiratos publica Falcon-Emirati, un trabajo sobre cómo un LLM aprende no solo el dialecto emiratí sino también la cultura y el matiz que van con él. Es una muestra muy representativa de la carrera por modelos soberanos en el mundo árabe: en vez de un modelo genérico, un LLM afinado para un registro cultural concreto. La entrada del blog de Hugging Face detalla la decisión de abrirlo y los resultados. Para quien trabaja en modelos multilingües o en IA para el mundo árabe, es un punto de referencia actual sobre lo que puede llegar a capturar un LLM de un registro dialectal completo.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/tiiuae/falcon-emirati" rel="noopener">Blog de Hugging Face (TII)</a><span class="chip">multilingüe</span><span class="chip">dialecto</span><span class="chip">soberano</span><span class="chip">TII</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.07753" rel="noopener">From Evidence to Action: por qué fallan los agentes que usan herramientas</a></h4><p>Este trabajo estudia dónde se rompe la cadena de &#x27;evidencia a acción&#x27; en los agentes que usan herramientas: que el resultado sea correcto no garantiza que la acción estuviera respaldada por la evidencia establecida antes de ejecutarla. Los autores mapean los puntos de fallo cuando el agente cambia el estado externo. Es una línea muy práctica para quien despliega agentes con efectos reales: no basta con que acaben la tarea, hay que verificar que cada acción partió de una base verificada. Complementa bien el debate reciente sobre evaluar agentes por el estado del sistema, no por la confidencia del mensaje.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.07753" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.07753" rel="noopener">Hugging Face (paper)</a><span class="chip">agentes</span><span class="chip">herramientas</span><span class="chip">evaluación</span><span class="chip">fiabilidad</span></div></article><article class="note"><h4><a href="https://github.com/mmlong818/open-academic-paper-gen" rel="noopener">open-academic-paper-gen: del tema a un borrador de paper con citas reales</a></h4><p>mmlong818 publica open-academic-paper-gen, un pipeline multi-agente que convierte un tema de investigación en un borrador de paper anclado en literatura real, con detección de alucinación de citas y comprobación de que cada afirmación tiene soporte. Es una pieza muy de la actualidad: en un ecosistema inundado de texto generado, separar lo que está respaldado de lo que el modelo inventa es una necesidad real. Encaja en la corriente de agentes de investigación que verifican sus propias fuentes en vez de confiar en su propia pluma.</p><div class="chips"><a class="chip link" href="https://github.com/mmlong818/open-academic-paper-gen" rel="noopener">GitHub</a><span class="chip">agentes</span><span class="chip">investigación</span><span class="chip">citas</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/randzero/llm-gateway" rel="noopener">llm-gateway: enrutado compatible con el estado para inferencia local</a></h4><p>randzero publica llm-gateway, un gateway agnóstico de motor y consciente del estado para inferencia de LLMs: un router compatible con OpenAI/Anthropic, con un plugin opcional de vLLM y una capa de estado extensible para enrutado consciente del KV-cache y de la latencia. La idea es dirigir cada petición al nodo que mejor la atienda según su estado, no al primero de la cola. Encaja en la corriente de self-hosting serio: orquestar varios workers locales de forma inteligente sin una SaaS de inferencia entre medio.</p><div class="chips"><a class="chip link" href="https://github.com/randzero/llm-gateway" rel="noopener">GitHub</a><span class="chip">self-hosting</span><span class="chip">gateway</span><span class="chip">vLLM</span><span class="chip">ruteo</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.08430" rel="noopener">NeMo-DCR: refit delta-comprimido para RL agéntico a escala de billones de parámetros</a></h4><p>El aprendizaje por refuerzo agéntico separa el entrenamiento del rollout, así que cada actualización de la política tiene que llegar a los clusters de rollout antes del siguiente lote. Transferir un checkpoint completo de 1 billón de parámetros para esa sincronización tarda 87,5 minutos. Este trabajo propone NeMo-DCR, un refit delta-comprimido y bit-exacto para que la sincronización de pesos no sea el cuello de botella. Es infraestructura pura para RL agéntico a escala: quien entrena agentes enormes sabe que la comunicación de pesos, no el cómputo, es donde se pierde el tiempo.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.08430" rel="noopener">arXiv</a><span class="chip">refuerzo</span><span class="chip">RL</span><span class="chip">escala</span><span class="chip">NVIDIA</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.05842" rel="noopener">HLA: atención lineal híbrida con mezcla dinámica por trozos</a></h4><p>La atención lineal permite decodificación eficiente de contexto largo comprimiendo el historial en estados recurrentes, pero esa comprimsión dificulta el acceso selectivo a información dispersa y lejana. Este trabajo propone HLA, una atención lineal híbrida que mezcla dinámicamente por trozos (chunk-wise) para recuperar ese acceso selectivo. Es una línea de eficiencia para contexto largo muy concreta: mantener el coste bajo de la atención lineal sin perder la capacidad de saltar a la información que importa. Interesante para quien necesita ventana larga sin un coste de atención cuadrático.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.05842" rel="noopener">arXiv</a><span class="chip">atención</span><span class="chip">contexto largo</span><span class="chip">eficiencia</span><span class="chip">arquitectura</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2609.37334" rel="noopener">Taming VLAs: compensación propia y pruebas de estrés para robots</a></h4><p>Las políticas vision-lenguaje-acción (VLA) suelen fallar cuando el movimiento ejecutado por el robot se desvía de la acción comandada, por el desgaste mecánico o cambios de carga. Este trabajo propone auto-compensación y pruebas de estrés para domar a los VLAs bajo errores de ejecución reales. Es un paso práctico hacia robots que se recuperan de sus propios errores en vez de colapsar: no basta que la política sea buena en simulación, hay que estresarla con la mecánica real. Clave para quien lleva VLAs a hardware físico.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.37334" rel="noopener">arXiv</a><span class="chip">robótica</span><span class="chip">VLA</span><span class="chip">robustez</span><span class="chip">control</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.05954" rel="noopener">MEND: refuerzo para modelos de flujo con emparejamiento de velocidad</a></h4><p>El post-entrenamiento por recompensa de modelos de flujo o re-pondera las muestras propias bajo una penalización KL o retro-propaga la recompensa moviendo cada muestra sin comprobar que el movimiento vale la pena. MEND propone un refuerzo para modelos de flujo vía emparejamiento de velocidad proximal (proximal velocity matching), para que la actualización por recompensa sea más estable. Es un trabajo de la frontera del entrenamiento de generadores por flujo: mejorar la calidad por recompensa sin romper lo que el modelo ya sabía generar.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.05954" rel="noopener">arXiv</a><span class="chip">flujo</span><span class="chip">generación</span><span class="chip">refuerzo</span><span class="chip">entrenamiento</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/DcisionIO/dcision" rel="noopener">decision: la capa de decisión con confianza antes de que el agente actúe</a></h4><p>DcisionIO publica decision, la capa de decisión para la IA: decisiones tipadas con un nivel de confianza antes de que el agente ejecute. Viene con plantillas, Decision Schemas y ejemplos de API en cURL, Node y Python. La idea es que la toma de decisión deje de estar enterrada en el prompt y pase a ser un objeto explícito y auditable. Encaja en la corriente de agentes con garantías: saber qué va a decidir el sistema y con qué confianza, antes de que toque el mundo real.</p><div class="chips"><a class="chip link" href="https://github.com/DcisionIO/dcision" rel="noopener">GitHub</a><span class="chip">decisiones</span><span class="chip">agentes</span><span class="chip">auditoría</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/DByte308/MI50" rel="noopener">MI50: afinar inferencia local en hardware AMD antiguo</a></h4><p>DByte308 publica MI50, un diario de afinación de inferencia de LLMs local sobre una GPU MI50 (gfx906), comparando ROCm frente a Vulkan, MoE, decodificación especulativa (MTP/DFlash/EAGLE3), cuantización y los límites reales del hardware. Es exactamente el tipo de conocimiento que falta a quien corre modelos en hardware no estándar: no solo el &#x27;cómo&#x27;, sino el &#x27;qué cabe y dónde se topa&#x27; en una GPU concreta. Muy útil para la comunidad de self-hosting en AMD y para quien quiere exprimir hardware antiguo.</p><div class="chips"><a class="chip link" href="https://github.com/DByte308/MI50" rel="noopener">GitHub</a><span class="chip">self-hosting</span><span class="chip">AMD</span><span class="chip">ROCm</span><span class="chip">inferencia</span></div></article><article class="note"><h4><a href="https://github.com/lkhfrgc/scholar-llm-wiki" rel="noopener">scholar-llm-wiki: papers y notas en un wiki de Obsidian interconectado</a></h4><p>lkhfrgc publica scholar-llm-wiki, un kit de base de conocimiento para investigación y revisión de literatura: agentes de IA compilan papers, libros y notas en un wiki de Obsidian estructurado y densamente interconectado, construido sobre el enfoque de llm-wiki de Karpathy, con skills de ingestión, consulta y limpieza y un vocabulario de etiquetas controlado. Es una aplicación muy práctica de LLMs abiertos a la investigación: una biblioteca personal que se escribe y mantiene sola, en formato abierto y local. Ideal para quien hace revisión de literatura y quiere un segundo cerebro autoorganizado.</p><div class="chips"><a class="chip link" href="https://github.com/lkhfrgc/scholar-llm-wiki" rel="noopener">GitHub</a><span class="chip">investigación</span><span class="chip">Obsidian</span><span class="chip">agentes</span><span class="chip">conocimiento</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>
