@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 2 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 6">
+<link rel="alternate" type="application/json" href="editions/2026-10-02.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 6</span> &nbsp;·&nbsp; viernes 2 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/blog/allenai/olmocore3" style="color:inherit;text-decoration:none" rel="noopener">Olmo-core 3: la infraestructura de entrenamiento abierta para modelos MoE gigantes</a></h2><p class="lead">Allen AI (Ai2) acaba de publicar Olmo-core 3, una actualización importante de su infraestructura de entrenamiento de código abierto para modelos mixture-of-experts (MoE). El objetivo es escalar el entrenamiento de MoE hasta el rango de billones de parámetros manteniendo la eficiencia computacional, sin cerrar el proceso en una caja negra propietaria. Es uno de los sistemas centrales detrás del próximo gran salto de la familia Olmo, y lo abre a laboratorios universitarios, investigadores independientes y la comunidad. Publicar infraestructura de entrenamiento (no solo pesos finales) es un movimiento poco común: permite a cualquiera reproducir, auditar y construir sobre cómo se entrena un modelo grande. La noticia llega en un momento en que el debate sobre qué significa realmente &#x27;IA abierta&#x27; pasa tanto por el pipeline de entrenamiento como por los pesos. Sigue el anuncio oficial en el blog de Ai2 y en Hugging Face.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/blog/allenai/olmocore3" rel="noopener">Blog Ai2: Introducing Olmo-core 3</a><a class="chip link" href="https://allenai.org/blog/olmocore3" rel="noopener">Blog oficial de Allen AI</a><span class="chip">MoE</span><span class="chip">entrenamiento</span><span class="chip">infraestructura</span><span class="chip">abierta</span><span class="chip">Allen-AI</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/Cloudflare/clef" rel="noopener">Cloudflare Clef: un modelo de decisión multimodal de 27B con salida estructurada</a></h4><p>Cloudflare publica Clef y Clef-flash, modelos de decisión de 27B que devuelven probabilidades sobre opciones tipadas en lugar de prosa libre. La idea es que el siguiente paso de un agente no sea texto que parsear, sino una salida estructurada con la que trabajar directamente. Los pesos están abiertos y también se hospedan en Workers AI. Es una apuesta interesante por reducir el &#x27;ruido&#x27; de la salida natural en flujos de agentes.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Cloudflare/clef" rel="noopener">Cloudflare/clef (Hugging Face)</a><a class="chip link" href="https://developers.cloudflare.com/workers-ai/models/" rel="noopener">Workers AI: Clef</a><span class="chip">modelos</span><span class="chip">decision-models</span><span class="chip">salida-estructurada</span><span class="chip">agentes</span><span class="chip">Cloudflare</span></div></article><article class="note"><h4><a href="https://huggingface.co/Qwen/Qwen-Image-2.1" rel="noopener">Qwen-Image 2.1 llega a Hugging Face</a></h4><p>El modelo de generación de imágenes Qwen-Image 2.1 aterriza en Hugging Face y ya genera variantes de la comunidad, como GGUF para inferencia local y forks optimizados. Es una señal de madurez: la familia Qwen-Image se integra en el ecosistema de self-hosting con cuantizaciones y aceleraciones de terceros. Ideal para quien quiere generar imágenes sin salir de su propia máquina.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Qwen/Qwen-Image-2.1" rel="noopener">Qwen/Qwen-Image-2.1</a><a class="chip link" href="https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF" rel="noopener">Qwen-Image-2.1 GGUF</a><span class="chip">modelos</span><span class="chip">generación-de-imágenes</span><span class="chip">Qwen</span><span class="chip">self-hosting</span></div></article><article class="note"><h4><a href="https://huggingface.co/nvidia/Nemotron-3-Diarization" rel="noopener">Nemotron-3 Diarization: quién habló cuándo, en abierto</a></h4><p>NVIDIA pone en Hugging Face Nemotron-3 Diarization, un modelo de diarización de hablantes: asigna quién dijo qué en una grabación. Es una pieza clave para cualquier pipeline de transcripción automática de reuniones o podcasts que quieres correr en local. La diarización es uno de los pasos más difíciles de reproducir sin servicios en la nube.</p><div class="chips"><a class="chip link" href="https://huggingface.co/nvidia/Nemotron-3-Diarization" rel="noopener">nvidia/Nemotron-3-Diarization</a><span class="chip">modelos</span><span class="chip">audio</span><span class="chip">diarización</span><span class="chip">NVIDIA</span><span class="chip">self-hosting</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/transformers-llama-cpp-quants" rel="noopener">Transformers ya ejecuta cuantizaciones llama.cpp</a></h4><p>Hugging Face anuncia que la librería Transformers ya puede ejecutar cuantizaciones de llama.cpp directamente. Esto acerca el rendimiento de inferencia optimizada de llama.cpp al ecosistema Python estándar, con una sola línea de instalación desde git. Para quien self-hostea, es una forma de obtener pesos cuantizados sin cambiar de librería ni de pipeline.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/transformers-llama-cpp-quants" rel="noopener">Transformers now runs llama.cpp quants</a><span class="chip">software</span><span class="chip">inferencia</span><span class="chip">cuantización</span><span class="chip">Transformers</span><span class="chip">llama.cpp</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/Hcompany/holo4" rel="noopener">Holo4: agentes de uso generalista de la pantalla</a></h4><p>H Company presenta Holo4, una línea de agentes &#x27;computer-use&#x27; de uso generalista: modelos capaces de operar interfaces de usuario de forma más amplia. El computer-use es uno de los frentes donde la IA abierta aún compite con soluciones cerradas, y cada modelo abierto publicado acorta esa distancia. Vale la pena seguir cómo se evalúa su fiabilidad real en tareas de escritorio.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/Hcompany/holo4" rel="noopener">Holo4 (Hugging Face blog)</a><span class="chip">agentes</span><span class="chip">computer-use</span><span class="chip">software</span><span class="chip">generalista</span></div></article><article class="note"><h4><a href="https://github.com/facebookresearch/swe-sweep" rel="noopener">swe-sweep y el gateway de agentes de Facebook Research</a></h4><p>En GitHub destaca facebookresearch/swe-sweep, orientado a automatizar flujos de ingeniería de software con agentes, junto a gateways de orquestación como Tuskira/ai-agent-gateway. El patrón de la semana es claro: la capa que conecta y coordina agentes (el &#x27;glue&#x27;) está recibiendo tanto atención como los propios modelos. Para equipos que quieren orquestar varios agentes, estas herramientas son el punto de partida natural.</p><div class="chips"><a class="chip link" href="https://github.com/facebookresearch/swe-sweep" rel="noopener">facebookresearch/swe-sweep</a><a class="chip link" href="https://github.com/Tuskira/ai-agent-gateway" rel="noopener">Tuskira/ai-agent-gateway</a><span class="chip">agentes</span><span class="chip">orquestación</span><span class="chip">GitHub</span><span class="chip">swe</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2609.32259" rel="noopener">Transferencia de KV cache sin prefill entre familias de modelos</a></h4><p>El paper &#x27;Prefill-Free Cross-Family KV Cache Transfer for Heterogeneous Multi-Agent LLMs&#x27; propone transferir el KV cache entre modelos de familias distintas sin re-calcular el prefill. En sistemas multi-agente que combinan modelos heterogéneos, esto puede ahorrar latencia y cómputo considerable. Es una de esas piezas de infraestructura de inferencia que, de madurar, cambia la economía de ejecutar flujos de varios modelos a la vez.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.32259" rel="noopener">arXiv:2609.32259</a><a class="chip link" href="https://huggingface.co/papers/2609.32259" rel="noopener">Hugging Face papers</a><span class="chip">papers</span><span class="chip">inferencia</span><span class="chip">KV-cache</span><span class="chip">multi-agente</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.00544" rel="noopener">Memorizon: world models más allá de la ventana de contexto</a></h4><p>&#x27;Memorizon: Training World Models Beyond Their Context Window&#x27; aborda un problema central: que los world models de streaming rendericen un lugar de forma consistente en visitas repetidas. La dificultad es supervisar esas visitas directamente, porque requieren muestras que capturan ambas y a menudo abarcan minutos. El trabajo propone un mecanismo de memoria para que el modelo recuerde estados pasados y cierre los &#x27;loops&#x27; de forma coherente. Interesante para simulaciones y agentes que navegan entornos persistentes.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.00544" rel="noopener">arXiv:2610.00544</a><a class="chip link" href="https://huggingface.co/papers/2610.00544" rel="noopener">Hugging Face papers</a><span class="chip">papers</span><span class="chip">world-models</span><span class="chip">memoria</span><span class="chip">contexto</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.00574" rel="noopener">Make Sparse Rewards Count: agregación de recompensas densa</a></h4><p>&#x27;Make Sparse Rewards Count: Density-Aware Reward Aggregation for Multi-Reward RL&#x27; se centra en el entrenamiento con refuerzo de múltiples recompensas simultáneas en LLMs. El problema es que las recompensas son escaras y, con varias a la vez, el modelo se queda corto de señal. La propuesta pondera la agregación según la densidad de cada recompensa para que ninguna se pierda. Es relevante para quien entrena modelos con varios objetivos de comportamiento a la vez.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.00574" rel="noopener">arXiv:2610.00574</a><a class="chip link" href="https://huggingface.co/papers/2610.00574" rel="noopener">Hugging Face papers</a><span class="chip">papers</span><span class="chip">RL</span><span class="chip">recompensas</span><span class="chip">entrenamiento</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/omlx" rel="noopener">Jun Kim, creador de oMLX, se une a Hugging Face</a></h4><p>Hugging Face anuncia que Jun Kim, creador y mantenedor de oMLX, se une al equipo para apoyar a la comunidad MLX. MLX está ganando terreno en inferencia local en Apple Silicon, y el refuerzo de su mantenimiento en un proyecto de referencia como HF es buena señal. Para la comunidad de self-hosting en Mac, esto suele traducirse en mejor soporte y más modelos compatibles.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/omlx" rel="noopener">Jun Kim joins Hugging Face (oMLX)</a><span class="chip">comunidad</span><span class="chip">MLX</span><span class="chip">Hugging-Face</span><span class="chip">self-hosting</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/secemp9/arxiv-complete" rel="noopener">arxiv-complete: todo arXiv en un dataset</a></h4><p>El dataset &#x27;arxiv-complete&#x27; de secemp9 reúne el corpus completo de arXiv en un formato listo para usar. Es el tipo de recurso que alimenta RAG, entrenamiento local y auditorías de datos a escala. Tener todo arXiv disponible de una sola pieza simplifica montar pipelines de recuperación sobre el estado de la investigación.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/secemp9/arxiv-complete" rel="noopener">secemp9/arxiv-complete</a><span class="chip">datasets</span><span class="chip">arxiv</span><span class="chip">RAG</span><span class="chip">auto-hospedado</span></div></article><article class="note"><h4><a href="https://github.com/grregis/MuckScraper" rel="noopener">MuckScraper: agregador de noticias auto-hospedado con LLM</a></h4><p>grregis/MuckScraper es un agregador de noticias que puedes self-hostear, con un toque de LLM para filtrar y sesgar hacia fuentes de tu interés. Encaja con la tendencia de la comunidad de montar su propio feed de noticias sin depender de un servicio en la nube. Es un buen punto de partida para quien quiere un resumen diario local de fuentes RSS.</p><div class="chips"><a class="chip link" href="https://github.com/grregis/MuckScraper" rel="noopener">grregis/MuckScraper</a><span class="chip">self-hosting</span><span class="chip">RSS</span><span class="chip">GitHub</span><span class="chip">LLM</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 9 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 13">
+<link rel="alternate" type="application/json" href="editions/2026-10-09.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 13</span> &nbsp;·&nbsp; viernes 9 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/Lightricks/LTX-2.5" style="color:inherit;text-decoration:none" rel="noopener">Lightricks abre LTX-2.5, su nuevo modelo de pesos abiertos para generar vídeo y audio</a></h2><p class="lead">Lightricks ha publicado LTX-2.5, la nueva versión de su familia LTX, un modelo de pesos abiertos de generación de vídeo y audio pensado para flujos de trabajo de producción reales. Trae varias piezas nuevas: generación multishot nativa (mantiene una escena coherente a través de varios planos), una técnica llamada Diffusion Fidelity Rendering que invierte más cómputo donde la escena lo necesita, un decodificador de vídeo por difusión nuevo y un codificador de texto propio basado en Gemma 4 de 12.000 millones de parámetros, además de un potenciador de prompts. En Hugging Face acumula casi 7.000 me gusta y más de 1,6 millones de descargas, lo que dice mucho de la demanda de modelos de vídeo abiertos que se pueden correr y afinar en local. El equipo mantiene el repositorio abierto con los modelos de 2B y 13B y su entrenador para afinar. Para quien trabaja con vídeo generativo en local, es de las opciones abiertas más serias del momento, con pesos, código y una comunidad enorme alrededor.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">Hugging Face (Lightricks/LTX-2.5)</a><a class="chip link" href="https://github.com/Lightricks/ltx-video" rel="noopener">GitHub (Lightricks/ltx-video)</a><a class="chip link" href="https://ltx.io/" rel="noopener">LTX (ltx.io)</a><span class="chip">vídeo</span><span class="chip">generación</span><span class="chip">pesos abiertos</span><span class="chip">Lightricks</span><span class="chip">difusión</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/google/embeddinggemma-2" rel="noopener">Google abre EmbeddingGemma 2, el modelo de embeddings multimodal</a></h4><p>Google DeepMind ha publicado EmbeddingGemma 2, un modelo de embeddings multimodal de pesos abiertos que mapea texto (incluido código), imágenes, vídeo y audio en un mismo espacio vectorial. Es la evolución de la familia Gemma hacia las representaciones: en vez de generar respuesta, produce un vector que luego puedes usar para buscar, agrupar o filtrar contenido multimodal. Se puede correr con vLLM o Hugging Face y tiene versiones optimizadas para el dispositivo vía LiteRT, lo que lo pone al alcance de quien hace búsqueda semántica o retrieval en local. Acumula más de 1.200 me gusta en Hugging Face en unos días, una señal clara de la demanda de modelos de embeddings abiertos y multimodales.</p><div class="chips"><a class="chip link" href="https://huggingface.co/google/embeddinggemma-2" rel="noopener">Hugging Face (google/embeddinggemma-2)</a><a class="chip link" href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/" rel="noopener">Blog de Google (EmbeddingGemma 2)</a><span class="chip">embeddings</span><span class="chip">multimodal</span><span class="chip">Gemma</span><span class="chip">pesos abiertos</span><span class="chip">Google</span></div></article><article class="note"><h4><a href="https://huggingface.co/Aleph-Alpha/Kolibri-1" rel="noopener">Aleph Alpha abre Kolibri-1, su MoE germano-anglés de 78B</a></h4><p>Aleph Alpha ha publicado Kolibri-1, un modelo de pesos abiertos con arquitectura mixture-of-experts de 78.000 millones de parámetros totales y solo unos 3.500 millones activos por paso, con licencia Apache 2.0 y contexto de hasta 1 millón de tokens. Está centrado en alemán e inglés, con razonamiento explícito, y llega con una clara intención de soberanía: es un modelo europeo, de pesos abiertos, que se puede desplegar en la nube o en infraestructura propia. Encaja en la corriente de MoE abiertos que priorizan el coste por inferencia (pocos parámetros activos) sin perder capacidad, y es de las apuestas abiertas más relevantes de las últimas semanas para el mundo germanófono.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Aleph-Alpha/Kolibri-1" rel="noopener">Hugging Face (Aleph-Alpha/Kolibri-1)</a><a class="chip link" href="https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/" rel="noopener">Blog de Aleph Alpha (Kolibri)</a><span class="chip">MoE</span><span class="chip">Aleph Alpha</span><span class="chip">razonamiento</span><span class="chip">pesos abiertos</span><span class="chip">soberanía</span></div></article><article class="note"><h4><a href="https://huggingface.co/Venastine-Research/Xing4.0-29B-A4B-GGUF" rel="noopener">Xing4.0-29B-A4B, un MoE de 29B ya cuantizado a GGUF para correr en local</a></h4><p>Venastine Research publica Xing4.0-29B-A4B-GGUF, una cuantización GGUF del MoE Xing 4.0: unos 29.000 millones de parámetros totales con apenas 4.000 millones activos, pensada para que el modelo entre en hardware local sin perder la eficiencia de la arquitectura de expertos. Ya suma más de 670 me gusta y decenas de miles de descargas, una cifra normal para una cuantización y buena señal de la demanda de MoE abiertos listos para usar. Es el tipo de pieza que hace que los modelos de expertos dejen de ser solo para centros de datos y pasen a correr en una máquina modesta, con la relación parámetros totales/activos que define el coste real de cada generación.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Venastine-Research/Xing4.0-29B-A4B-GGUF" rel="noopener">Hugging Face (Xing4.0-29B-A4B-GGUF)</a><span class="chip">MoE</span><span class="chip">GGUF</span><span class="chip">cuantización</span><span class="chip">local</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/kutukam/autonomous-pentest-agent" rel="noopener">autonomous-pentest-agent, un sistema multiagente de pentesting autónomo</a></h4><p>kutukam publica autonomous-pentest-agent, un sistema de pruebas de penetración autónomo basado en varios agentes de IA, con backend en Go y una interfaz en Next.js, bajo licencia AGPL-3.0. La idea es encadenar varios agentes LLM para explorar y atacar una superficie de red de forma autónoma, algo que hasta ahora era puramente manual o muy guiado. Encaja en la corriente de agentes que empiezan a operar en ciberseguridad, un dominio donde el feedback es directo y verificable. Es un proyecto abierto para quien quiere ver cómo se estructura un multiagente de ofensiva real, y una muestra de hacia dónde va la automatización de las pruebas de seguridad.</p><div class="chips"><a class="chip link" href="https://github.com/kutukam/autonomous-pentest-agent" rel="noopener">GitHub (kutukam/autonomous-pentest-agent)</a><span class="chip">agentes</span><span class="chip">ciberseguridad</span><span class="chip">multiagente</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/basecompute/superfluid" rel="noopener">superfluid, un demonio de servicio para LLMs locales a lo largo de runtimes y máquinas</a></h4><p>basecompute publica superfluid, un solo demonio de servicio para la inferencia local de LLMs que funciona a lo largo de distintos runtimes y de distintas máquinas. El problema que ataca es el fragmentado: cada runtime de inferencia (llama.cpp, vLLM, SGLang…) tiene su API, su forma de servir y su forma de hacer cola, y unificar eso es una de las fricciones clásicas del self-hosting. Una capa única de servicio que se pone por encima de varios runtimes y varios equipos es exactamente la infraestructura que hace que el despliegue local pase de experimento a servicio. Muy útil para quien tiene varios modelos y varios ordenadores y quiere un solo punto de entrada.</p><div class="chips"><a class="chip link" href="https://github.com/basecompute/superfluid" rel="noopener">GitHub (basecompute/superfluid)</a><span class="chip">servicio</span><span class="chip">self-hosting</span><span class="chip">inferencia</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/rochitl72/tokenlift" rel="noopener">tokenlift, decodificación especulativa sin pérdidas para LLMs del índico</a></h4><p>rochitl72 publica tokenlift, una implementación de decodificación especulativa a nivel de palabra, sin pérdida de calidad, para LLMs en idiomas del índico (tamil e hindi, con byte-BPE). La decodificación especulativa acelera la generación dejando que un modelo pequeño proponga tokens y el grande los verifique, y hacerla a nivel de palabra en vez de token la hace más eficiente cuando la lengua tiene muchos tokens por palabra. El detalle clave es que la salida es idéntica a la del modelo original: más velocidad, cero degradación. Es una pieza concreta para quien corre modelos del índico en un portátil y quiere que respondan más rápido.</p><div class="chips"><a class="chip link" href="https://github.com/rochitl72/tokenlift" rel="noopener">GitHub (rochitl72/tokenlift)</a><span class="chip">inferencia</span><span class="chip">decodificación especulativa</span><span class="chip">multilingüe</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/codalexic/tapediff" rel="noopener">tapediff, pruebas de snapshot para tráfico de agentes de IA</a></h4><p>codalexic publica tapediff, una herramienta de pruebas de snapshot para agentes de IA: graba, reproduce y hace el diff del tráfico de llamadas a LLM de un agente. Es el equivalente, para agentes, del testing de snapshot que ya usamos con código: si cambias el prompt, el modelo o el entorno, el tráfico de llamadas cambia y tapediff te muestra exactamente qué cambió. Es una línea muy sana para quien despliega agentes: en vez de mirar resultados, se mira la secuencia de llamadas, y cualquier regresión queda registrada. Una pieza práctica para dar fiabilidad a agentes que de otro modo son difíciles de probar.</p><div class="chips"><a class="chip link" href="https://github.com/codalexic/tapediff" rel="noopener">GitHub (codalexic/tapediff)</a><span class="chip">agentes</span><span class="chip">tests</span><span class="chip">observabilidad</span><span class="chip">GitHub</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2605.22949" rel="noopener">MARGIN, calibración de confianza en tiempo de ejecución para multiagentes</a></h4><p>Cuando un coordinador compara las respuestas de varios modelos de base distintos, la confianza que cada modelo se auto-reporta no significa lo mismo según quién la emite ni según la carga de trabajo. MARGIN (Multi-Agent Runtime Grading via Incremental Normalisation) propone una calibración de confianza en tiempo de ejecución que aprende, por modelo, cómo normalizar esas autovaloraciones para que el coordinador pueda compararlas de verdad. Es una pieza muy concreta para sistemas multiagente: el problema no es que un modelo diga algo, sino saber a cuántos modelos confiarle el resultado cuando cada uno habla con su propio acento de confianza.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2605.22949" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2605.22949" rel="noopener">Hugging Face (paper)</a><span class="chip">multiagente</span><span class="chip">confianza</span><span class="chip">calibración</span><span class="chip">coordinación</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.09639" rel="noopener">La destilación on-policy enseña nuevas habilidades, pero no nuevos conocimientos</a></h4><p>La destilación on-policy refuerza el razonamiento de los modelos de lenguaje, pero este trabajo separa dos cosas que suelen confundirse: si el estudiante aprende conocimiento factual nuevo o solo compone mejor lo que ya sabía. Usando un entorno sintético controlado, los autores muestran que la destilación on-policy transfiere habilidad composicional (saber combinar el conocimiento existente para razonar en varias pasos) pero no inyecta conocimiento factual nuevo. Es una distinción importante para quien post-entrena con destilación: saber que estás enseñando a razonar, no a saber, cambia cómo se interpreta el resultado.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.09639" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.09639" rel="noopener">Hugging Face (paper)</a><span class="chip">destilación</span><span class="chip">razonamiento</span><span class="chip">post-entrenamiento</span></div></article><article class="note"><h4><a href="https://huggingface.co/papers/2610.12360" rel="noopener">Preciso pero no humilde: evaluar la humildad epistémica de los agentes ante el conflicto de conocimiento</a></h4><p>Cuando la evidencia recuperada contradice las creencias previas de un agente, ¿corrige su respuesta, reconoce la incertidumbre o se aferra a una conclusión errónea? Este trabajo propone un marco para evaluar la humildad epistémica de los agentes de LLM, con dimensiones de comportamiento tipo identificar-resolver-escalar. El problema es real y poco medido: los agentes que fallan en producción suelen ser los que se muestran seguros cuando deberían mostrar duda. Evaluar cuándo un agente reconoce que no sabe, y cuándo sabe delegar, es una línea de evaluación más útil que medir solo si pasa la tarea.</p><div class="chips"><a class="chip link" href="https://huggingface.co/papers/2610.12360" rel="noopener">Hugging Face (paper)</a><span class="chip">agentes</span><span class="chip">evaluación</span><span class="chip">incertidumbre</span><span class="chip">humildad epistémica</span></div></article><article class="note"><h4><a href="https://huggingface.co/papers/2610.12452" rel="noopener">BrickBench, un benchmark para que los agentes diseñen sets de LEGO construíbles</a></h4><p>BrickBench es un benchmark para el diseño agéntico de sets de LEGO condicionado por texto: dado un prompt, el agente debe producir un montaje que no solo cumpla criterios semánticos y de diseño, sino que sea físicamente construíble. Evaluar agentes en algo con restricciones físicas reales es una línea más dura que generar texto o código: aquí hay que respetar la mecánica de encaje de las piezas. Es un test de integración real para agentes de diseño, con acierto verificable por construcción y no solo por parecer bien.</p><div class="chips"><a class="chip link" href="https://huggingface.co/papers/2610.12452" rel="noopener">Hugging Face (paper)</a><span class="chip">agentes</span><span class="chip">benchmark</span><span class="chip">diseño</span><span class="chip">evaluación</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://falconllm.tii.ae/" rel="noopener">TII abre Falcon ASR, un modelo de transcripción de 1,6B para el árabe</a></h4><p>El Technology Innovation Institute (TII) ha publicado Falcon ASR, un modelo de reconocimiento automático de voz de unos 1.600 millones de parámetros centrado en el árabe: soporta el árabe emiratí y el árabe estándar, y además anota cuándo se pronuncia cada palabra dentro del audio. Ese detalle de marcas temporales por palabra lo hace directamente útil para subtitulado preciso, búsqueda por voz en audio y dictado. Es una apuesta de soberanía lingüística muy concreta: un modelo de voz abierto para una de las lenguas donde la oferta de ASR abierto todavía es escasa. Para quien trabaja con contenido en árabe, es una pieza local y abierta que antes no existía.</p><div class="chips"><a class="chip link" href="https://falconllm.tii.ae/" rel="noopener">Falcon (falconllm.tii.ae)</a><span class="chip">voz</span><span class="chip">ASR</span><span class="chip">árabe</span><span class="chip">TII</span><span class="chip">pesos abiertos</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/open-tts-leaderboard" rel="noopener">Open TTS Leaderboard, evaluación a escala de TTS multilingüe y clonación de voz</a></h4><p>Hugging Face publica Open TTS Leaderboard, un marco de evaluación a escala para la síntesis de voz multilingüe y la clonación de voz. El problema que resuelve es comparar modelos de TTS de forma seria: hay cientos de modelos abiertos de voz, pero medir cuál suena mejor, en qué lengua y con qué fidelidad de clonación no era simple. Un leaderboard abierto y reproducible es justo lo que faltaba para dejar de elegir modelo de voz a ciegas. Es una pieza de infraestructura de evaluación que beneficia a toda la comunidad de TTS local y abierto.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/open-tts-leaderboard" rel="noopener">Blog de Hugging Face (Open TTS Leaderboard)</a><span class="chip">TTS</span><span class="chip">voz</span><span class="chip">evaluación</span><span class="chip">Hugging Face</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/secemp9/arxiv-complete" rel="noopener">arxiv-complete, un dataset con el corpus completo de arXiv</a></h4><p>secemp9 publica arxiv-complete, un dataset en Hugging Face con el corpus completo de arXiv, listo para descargar y usar. Ya suma más de 640 me gusta y más de 160.000 descargas, una cifra que dice mucho de cuánta gente necesita el corpus íntegro de la preimpresión científica para entrenar, buscar o indexar. Tenerlo empaquetado en un dataset estándar elimina la fricción de montar el crawler propio y de lidiar con la estructura de arXiv. Es de las aperturas de datos más prácticas de la semana para quien trabaja con literatura científica y modelos de lenguaje.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/secemp9/arxiv-complete" rel="noopener">Hugging Face (dataset arxiv-complete)</a><span class="chip">datasets</span><span class="chip">arXiv</span><span class="chip">literatura</span><span class="chip">self-hosting</span></div></article><article class="note"><h4><a href="https://github.com/grregis/MuckScraper" rel="noopener">MuckScraper, un agregador de noticias self-hosted con sesgo medido por LLM</a></h4><p>grregis publica MuckScraper, un agregador de noticias self-hosted que además usa un LLM para medir el sesgo de cada fuente y de cada artículo. La idea es montar tu propio feed de noticias sin pasar por un agregador cerrado, y además ver el sesgo de lo que te llega, algo que los agregadores comerciales rara vez te dicen. Encaja en la corriente de herramientas locales para el consumo de información: el feed, la selección y la evaluación de fuentes, todo en tu propia infraestructura. Es una pieza muy alineada con el espíritu de self-hosting que atraviesa el periódico.</p><div class="chips"><a class="chip link" href="https://github.com/grregis/MuckScraper" rel="noopener">GitHub (grregis/MuckScraper)</a><span class="chip">self-hosting</span><span class="chip">noticias</span><span class="chip">sesgo</span><span class="chip">GitHub</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>

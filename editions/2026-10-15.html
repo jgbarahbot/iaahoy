@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 15 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 19">
+<link rel="alternate" type="application/json" href="editions/2026-10-15.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 19</span> &nbsp;·&nbsp; jueves 15 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/LiquidAI/LFM2.5-24B-A2B" style="color:inherit;text-decoration:none" rel="noopener">LiquidAI estrena LFM2.5-24B-A2B: un MoE de 24B con solo 2B activos para agentes locales y privados</a></h2><p class="lead">LiquidAI ha publicado LFM2.5-24B-A2B, el modelo más grande de su familia LFM: un MoE de 24 parámetros totales con solo 2B activos por token, diseñado para agentes rápidos y privados que corren en el dispositivo. Al activar una pequeña fracción de los pesos por token, la inferencia es mucho más barata que en un denso de tamaño equivalente, mientras el modelo entero aporta el conocimiento. LiquidAI lo empuja como el modelo para agentes on-device: chat, uso de herramientas y razonamiento sin mandar nada a la nube, con pesos abiertos bajo licencia Apache 2.0 y en inglés, árabe y chino. Se complementa con su rama de «decision models» para el edge (d1) y refuerza la corriente de MoEs ligeros pensados para correr en laptops, móviles y SBCs.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/LiquidAI/LFM2.5-24B-A2B" rel="noopener">Hugging Face</a><a class="chip link" href="https://huggingface.co/blog/LiquidAI/lfm25-24b-a2b" rel="noopener">Blog de LiquidAI</a><span class="chip">open-weights</span><span class="chip">moe</span><span class="chip">on-device</span><span class="chip">agents</span><span class="chip">apache-2.0</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/allenai/hiro-acev2" rel="noopener">HiRO-ACEv2: el AI2 emula clima extremo global a 3 km por una fracción del coste</a></h4><p>El Allen Institute for AI ha publicado HiRO-ACEv2, un emulador climático que simula la atmósfera mundial a 100 km de resolución de forma autoregresiva y luego la desciende a 3 km con un nuevo modelo de downscaling (HiROv2). El resultado: simulaciones de eventos meteorológicos extremos a alta resolución con un coste unos 300 veces menor que las simulaciones numéricas clásicas, algo clave para estudiar huracanes e inundaciones sin supercomputadoras. El sistema se documenta en un paper y es de código abierto en el ecosistema de AI2.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/allenai/hiro-acev2" rel="noopener">Blog del AI2</a><a class="chip link" href="https://arxiv.org/abs/2610.17693" rel="noopener">arXiv</a><span class="chip">climate</span><span class="chip">scientific-ml</span><span class="chip">open-source</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://huggingface.co/autotrust/JEV-35B" rel="noopener">JEV-35B: un decision model abierto para decisiones tipadas y calibradas</a></h4><p>autotrust/JEV-35B es un modelo de decisión de 35B basado en Qwen3.5-MoE que se une a la corriente de «decision models»: no genera texto libre, devuelve decisiones tipadas con probabilidades calibradas sobre un esquema de opciones. Es compatible con los esquemas Jev y SystemOne, la misma familia que el Clef de Cloudflare y el d1 de LiquidAI, y apunta a decisiones automatizadas repetibles y auditables en producción.</p><div class="chips"><a class="chip link" href="https://huggingface.co/autotrust/JEV-35B" rel="noopener">Hugging Face</a><span class="chip">decision-models</span><span class="chip">open-weights</span><span class="chip">calibration</span><span class="chip">moe</span></div></article><article class="note"><h4><a href="https://huggingface.co/fishaudio/drama-3" rel="noopener">drama-3 de Fish Audio: TTS multilingüe de varios hablantes y emoción</a></h4><p>Fish Audio ha publicado drama-3, un modelo de text-to-speech con varios hablantes, edición de audio y generación de voz con emoción, en chino, inglés, japonés, coreano y español. Está en la familia fish_omni y se orienta a producción de contenido hablado (audiolibros, doblaje, podcasts) con control sobre quiénes hablan y cómo lo dicen. Una pieza más en la oferta de TTS de pesos abiertos.</p><div class="chips"><a class="chip link" href="https://huggingface.co/fishaudio/drama-3" rel="noopener">Hugging Face</a><span class="chip">tts</span><span class="chip">multilingual</span><span class="chip">multi-speaker</span><span class="chip">open-weights</span></div></article><article class="note"><h4><a href="https://huggingface.co/ConwayResearch/Underdog-Saluki-27B-1.0" rel="noopener">Underdog-Saluki-27B: un Qwen3.8-27B a 2 bits para agentes con tool-calling</a></h4><p>ConwayResearch ha publicado Underdog-Saluki-27B-1.0, un cuantizado a 2 bits (GSQ-RCO-GGUF) de Qwen3.8-27B optimizado para llamados de herramientas y agentes, ya con más de 300.000 descargas. Corre en llama.cpp en hardware modesto, lo que lo convierte en una vía práctica para montar agentes con razonamiento y tool-calling en equipos locales sin GPU de gama alta.</p><div class="chips"><a class="chip link" href="https://huggingface.co/ConwayResearch/Underdog-Saluki-27B-1.0" rel="noopener">Hugging Face</a><span class="chip">gguf</span><span class="chip">llama.cpp</span><span class="chip">agents</span><span class="chip">quantization</span><span class="chip">local-llm</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/mmm1712/Local_AI_esp32" rel="noopener">Local_AI_esp32: un modelo entrenado desde cero que corre en un ESP32-S3</a></h4><p>mmm1712/Local_AI_esp32 lleva el límite de «local» hasta el extremo: un lenguaje model entrenado desde cero y corriendo de forma totalmente offline en un ESP32-S3 con pantalla táctil e interfaz de chat. No es un LLM grande, pero demuestra que la inferencia local ya llega a la electrónica embarcada, con cero nube y cero coste de suscripción.</p><div class="chips"><a class="chip link" href="https://github.com/mmm1712/Local_AI_esp32" rel="noopener">GitHub</a><span class="chip">edge</span><span class="chip">embedded</span><span class="chip">local-llm</span><span class="chip">open-source</span></div></article><article class="note"><h4><a href="https://github.com/happyme531/open_rknpu2_lm_infer" rel="noopener">open_rknpu2_lm_infer: inferencia de LLMs en el NPU del RK3588, todo abierto</a></h4><p>happyme531/open_rknpu2_lm_infer es un motor de inferencia de LLMs de código completamente abierto para el NPU del RK3588, el SoC de los SBCs de Rockchip. Es una de las pocas opciones reales de correr modelos locales en el acelerador dedicado de estas placas, en lugar de exprimir la CPU, y está escrito en Rust.</p><div class="chips"><a class="chip link" href="https://github.com/happyme531/open_rknpu2_lm_infer" rel="noopener">GitHub</a><span class="chip">inference</span><span class="chip">edge</span><span class="chip">npu</span><span class="chip">open-source</span><span class="chip">rust</span></div></article><article class="note"><h4><a href="https://github.com/xn0kkx/Omnicrab" rel="noopener">Omnicrab: un TUI para orquestar tus cuentas de IA y modelos locales</a></h4><p>Omnicrab (xn0kkx) es una interfaz de terminal para chatear, comparar y orquestar muchas cuentas de IA y modelos locales a la vez, con almacenamiento cifrado en PostgreSQL. Pensado para quien maneja varios proveedores (APIs, Ollama, llama.cpp) y quiere un panel único, privado y local para elegir qué modelo responde a cada cosa.</p><div class="chips"><a class="chip link" href="https://github.com/xn0kkx/Omnicrab" rel="noopener">GitHub</a><span class="chip">local-llm</span><span class="chip">tui</span><span class="chip">self-hosting</span><span class="chip">orchestration</span></div></article><article class="note"><h4><a href="https://github.com/Hxnng/Agentic-Soft-Token" rel="noopener">Agentic-Soft-Token: compresión de contexto dentro del modelo, sin reentrenar</a></h4><p>Agentic-Soft-Token (ASTC) propone una compresión de contexto «training-free» para agentes de largo horizonte: se comprime la memoria del agente dentro del propio modelo, en vez de sumar capas o reentrenar. Es una alternativa práctica al problema de los contextos que crecen sin límite en sesiones largas de agentes.</p><div class="chips"><a class="chip link" href="https://github.com/Hxnng/Agentic-Soft-Token" rel="noopener">GitHub</a><span class="chip">agents</span><span class="chip">context-compression</span><span class="chip">long-horizon</span><span class="chip">training-free</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.20399" rel="noopener">Cortex: consolidar el contexto en memoria paramétrica</a></h4><p>Cortex aborda una limitación clásica: lo que un LLM aprende de su contexto se pierde cuando el contexto se retira. Inspirándose en la consolidación de la memoria biológica, formula la «Memory Consolidation» como el proceso de internalizar en los parámetros del modelo las ganancias que provienen del contexto, preservando al mismo tiempo el conocimiento previo. El paper fue uno de los más votados del día en Hugging Face Papers.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.20399" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.20399" rel="noopener">Hugging Face Papers</a><span class="chip">memory</span><span class="chip">context</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.14096" rel="noopener">SWEeper-Bench: ¿pueden los agentes encontrar bugs en software interactivo?</a></h4><p>SWEeper-Bench introduce un benchmark para medir si los agentes de código pueden descubrir bugs en software interactivo generado al vuelo. El problema: muchos fallos solo se manifiestan tras interacciones de varios pasos, y hoy el usuario es el que los descubre. El benchmark evalúa la capacidad del agente de encontrarlos él mismo, un paso más en la madurez de los agentes que construyen software.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.14096" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.14096" rel="noopener">Hugging Face Papers</a><span class="chip">agents</span><span class="chip">benchmark</span><span class="chip">testing</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.19560" rel="noopener">τ-Emotion-Bench: la fragilidad de los agentes ante emociones reales de usuario</a></h4><p>τ-Emotion-Bench (publicado ayer) muestra que los agentes de LLMs no solo fallan por errores de uso de herramientas, sino por interacciones ineficaces con usuarios reales. Los benchmarks actuales asumen usuarios cooperativos y estables; este introduce emociones del mundo real en tareas largas de tool-calling y expone la fragilidad de los agentes cuando el usuario se frustra, cambia de opinión o se equivoca.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.19560" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.19560" rel="noopener">Hugging Face Papers</a><span class="chip">agents</span><span class="chip">benchmark</span><span class="chip">evaluations</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.15725" rel="noopener">SkillMarker: marcar la propiedad de las skills de agentes</a></h4><p>SkillMarker propone un método de marca de agua basado en KGW (knowledge graph watermarking) para verificar la propiedad de las «skills» de los agentes: procedimientos operativos y conocimiento de dominio empaquetados como activos reutilizables. Al distribuirse en texto plano, son vulnerables a la copia; el paper propone un mecanismo práctico de verificación de propiedad para ese tipo de conocimiento.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.15725" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.15725" rel="noopener">Hugging Face Papers</a><span class="chip">agents</span><span class="chip">watermarking</span><span class="chip">ip</span><span class="chip">research</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/SakanaAI/AutoIllustrate" rel="noopener">AutoIllustrate de Sakana AI: figuras editables para papers, generadas por agentes</a></h4><p>AutoIllustrate (SakanaAI) convierte la sección de métodos de un paper en figuras editables de draw.io listas para publicar, usando agentes de LLMs. Es una herramienta práctica para quien escribe artículos y quiere diagramas limpios y editables sin dibujarlos a mano, y un buen ejemplo de agentes aplicados al flujo de trabajo académico.</p><div class="chips"><a class="chip link" href="https://github.com/SakanaAI/AutoIllustrate" rel="noopener">GitHub</a><span class="chip">agents</span><span class="chip">research</span><span class="chip">visualization</span><span class="chip">open-source</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">MiMo-V2.6-RL-oss: Xiaomi abre sus datos de RL del modelo MiMo</a></h4><p>Xiaomi MiMo ha publicado MiMo-V2.6-RL-oss, un conjunto de datos de refuerzo (parquet, Apache 2.0) con documentos, imágenes y texto usados en el entrenamiento RL de MiMo V2.6. Abrir los datos de RL no es habitual: es material valioso para quien entrena o investiga en RL con modelos abiertos, y llega con más de 139.000 descargas.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">Hugging Face</a><span class="chip">datasets</span><span class="chip">reinforcement-learning</span><span class="chip">open-source</span><span class="chip">xiaomi</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/datasocial/tiktok-5.6B-videos" rel="noopener">tiktok-5.6B-videos: medio billón de vídeos de TikTok como dataset</a></h4><p>datasocial/tiktok-5.6B-videos publica 5.600 millones de vídeos de TikTok en Parquet (licencia CC-BY-NC 4.0), entre uno y diez billones de registros, con metadatos y texto. Es uno de los datasets de vídeo más grandes del momento, útil para investigación de vídeo y recomendación, con la salvedad de la licencia no comercial.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/datasocial/tiktok-5.6B-videos" rel="noopener">Hugging Face</a><span class="chip">datasets</span><span class="chip">video</span><span class="chip">research</span><span class="chip">cc-by-nc</span></div></article><article class="note"><h4><a href="https://github.com/vempx/Yet-Another-Translator" rel="noopener">Yet-Another-Translator: traduce tu Discord con un LLM local</a></h4><p>Yet-Another-Translator (vempx) es un bot de Discord que traduce mensajes automáticamente usando un LLM local: puede traducir por mensaje, todo el canal, o antes de enviar, con contexto y glosarios editables. Es una de las formas más sencillas de probar traducción privada en un grupo, sin pasar por servicios en la nube.</p><div class="chips"><a class="chip link" href="https://github.com/vempx/Yet-Another-Translator" rel="noopener">GitHub</a><span class="chip">local-llm</span><span class="chip">translation</span><span class="chip">self-hosting</span><span class="chip">discord</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>
