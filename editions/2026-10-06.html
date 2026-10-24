@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 6 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 10">
+<link rel="alternate" type="application/json" href="editions/2026-10-06.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 10</span> &nbsp;·&nbsp; martes 6 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/blog/allenai/astabrief" style="color:inherit;text-decoration:none" rel="noopener">Ai2 abre AstaBrief, el modelo de generación de informes citados de la plataforma Asta</a></h2><p class="lead">Allen Institute for AI (Ai2) ha abierto AstaBrief, el modelo que genera informes dentro de su plataforma Asta. Se trata de un modelo de unos 8.000 millones de parámetros, abierto y descargable, pensado para un problema concreto y muy útil: a partir de una pregunta de investigación y de los fragmentos de los papers recuperados, escribe el informe completo con sus citas en una sola pasada. Es de esos modelos pequeños pero especializados que encajan perfecto en flujos de trabajo reales de investigación, donde un LLM generalista es lento o impreciso para citar fuentes. Ai2 lo acompaña con una entrada en el blog de Hugging Face explicando la decisión de abrirlo y los resultados. Para quien self-hosta, un 8B especializado en reportes citados es una pieza muy atractiva: cabe en una sola GPU decente y resuelve una tarea concreta sin depender de una API de análisis de literatura.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/blog/allenai/astabrief" rel="noopener">Blog de Hugging Face (Ai2)</a><a class="chip link" href="https://huggingface.co/allenai" rel="noopener">Hugging Face (perfil allenai)</a><span class="chip">modelo abierto</span><span class="chip">informes</span><span class="chip">investigación</span><span class="chip">Ai2</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B" rel="noopener">Xing4.0-29B-A4B, el MoE agéntico que corre en una sola GPU</a></h4><p>China Telecom AI (la serie Xing, antes TeleChat) ha publicado Xing4.0-29B-A4B, un modelo de pesos abiertos de arquitectura MoE con vocación agéntica. De sus 29.000 millones de parámetros totales solo unos 4.000 millones se activan por token, lo que le permite correr en una sola GPU manteniendo una capacidad razonable para agentes. En Hugging Face ya hay cuantizaciones GGUF de la comunidad para usarlo local. Es una muestra de lo que está llegando del este: MoE ligeros en parámetros activos, abiertos y orientados a agentes, que compiten directo por el hardware de sobremesa.</p><div class="chips"><a class="chip link" href="https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B" rel="noopener">Hugging Face (ficha)</a><a class="chip link" href="https://huggingface.co/Venastine-Research/Xing4.0-29B-A4B-GGUF" rel="noopener">GGUF (comunidad)</a><span class="chip">MoE</span><span class="chip">pesos abiertos</span><span class="chip">agentes</span><span class="chip">single-GPU</span></div></article><article class="note"><h4><a href="https://huggingface.co/convaiinnovations/laya" rel="noopener">Laya: clasificación multilingüe &#x27;System 1&#x27; en CPU</a></h4><p>Convai Innovations ha publicado Laya, un modelo de decisión que hace clasificación multilingüe en CPU con un solo paso de inferencia (single forward pass). Es un &#x27;System 1&#x27;: responde de forma inmediata, sin generar texto, sobre una base ModernBERT de unos 421 millones de parámetros y con licencia Apache 2.0. La idea es que las decisiones simples y repetitivas no necesiten un LLM grande: un cabezal de decisión rápido y barato, compatible con el formato Jev. Es de las piezas que encajan en pipelines donde el coste por inferencia y la latencia mandan, sin GPUs.</p><div class="chips"><a class="chip link" href="https://huggingface.co/convaiinnovations/laya" rel="noopener">Hugging Face</a><a class="chip link" href="https://github.com/receptron/laya" rel="noopener">GitHub (run Laya)</a><span class="chip">clasificación</span><span class="chip">CPU</span><span class="chip">Apache 2.0</span><span class="chip">eficiencia</span></div></article><article class="note"><h4><a href="https://huggingface.co/FermionResearch/Phonon-2" rel="noopener">Phonon-2, el ASR abierto más preciso por debajo de 900 MB</a></h4><p>Fermion Research ha publicado Phonon-2, un modelo abierto de reconocimiento de voz (ASR) que se presenta como el más preciso en inglés por debajo de 900 MB de tamaño. En los siete conjuntos en inglés del Open ASR Leaderboard promedia un 5,21% de error. Su tamaño lo hace ideal para correr en local o en hardware modesto, y ya hay cuantizaciones y versiones ONNX/CoreML de la comunidad. Para quien quiere una transcripción local sin subir audio a la nube, es de los candidatos más pequeños y con mejor ratio calidad/peso.</p><div class="chips"><a class="chip link" href="https://huggingface.co/FermionResearch/Phonon-2" rel="noopener">Hugging Face</a><span class="chip">ASR</span><span class="chip">audio</span><span class="chip">local</span><span class="chip">eficiencia</span></div></article><article class="note"><h4><a href="https://huggingface.co/Qwen/Qwen-Image-2.1" rel="noopener">Qwen-Image-2.1, generación de imágenes abierta</a></h4><p>La familia de generación de imágenes Qwen-Image de Qwen sigue en tendencia, y Qwen-Image-2.1 acumula miles de likes en Hugging Face. Es un modelo abierto de generación de imágenes que la comunidad ya está cuantizando a GGUF para usarlo en local, sin depender de una API de pago. Encaja en la corriente de llevar la generación de imágenes de vuelta al hardware propio: se descarga, se cuantiza y se ejecuta en casa. Para quien hace prototipos de imagen o necesita una generación sin nube, es de las referencias abiertas a vigilar.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Qwen/Qwen-Image-2.1" rel="noopener">Hugging Face</a><span class="chip">imágenes</span><span class="chip">generación</span><span class="chip">Qwen</span><span class="chip">open-weight</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/microsoft/thinkingbox" rel="noopener">ThinkingBox: &#x27;el agente dijo que estaba hecho. La base de datos, que no&#x27;</a></h4><p>Microsoft y Hugging Face publican ThinkingBox, un enfoque para evaluar agentes empresariales sobre el estado real de la base de datos, no sobre la confidencia con la que el agente dice que ha terminado. El argumento central es que un agente &#x27;confiado&#x27; puede afirmar que una tarea está hecha cuando el estado del sistema no lo respalda: hay que comprobar el estado, no el mensaje. Se acompaña del conjunto de datos ThinkingBox-Bench en Hugging Face. Es una pieza muy útil para quien despliega agentes en producción y quiere garantías reales, no solo buenas intenciones del modelo.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/microsoft/thinkingbox" rel="noopener">Blog (Microsoft/HF)</a><a class="chip link" href="https://huggingface.co/datasets/microsoft/ThinkingBox-Bench" rel="noopener">ThinkingBox-Bench</a><span class="chip">agentes</span><span class="chip">evaluación</span><span class="chip">Microsoft</span><span class="chip">Hugging Face</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/ServiceNow-AI/autosynthdata" rel="noopener">AutoSynthData: genera datos de entrenamiento a partir de los fallos</a></h4><p>ServiceNow CoreAI publica AutoSynthData, un pipeline que convierte los huecos de capacidad de un agente empresarial en datos de entrenamiento sintéticos. La idea es detectar dónde falla un modelo objetivo y usar un modelo más fuerte como maestro para generar tareas sintéticas que ataquen justo esos fallos. Es una línea muy práctica de mejora continua de agentes: en vez de esperar a datos reales, se sintetizan los casos difíciles. Interesante para quien entrena agentes de empresa y quiere cerrar brechas específicas de forma dirigida.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/ServiceNow-AI/autosynthdata" rel="noopener">Blog de Hugging Face</a><span class="chip">agentes</span><span class="chip">datos sintéticos</span><span class="chip">fine-tuning</span><span class="chip">enterprise</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/rl-environments" rel="noopener">Bienvenidos los entornos RL al hub de Hugging Face</a></h4><p>Hugging Face incorpora los entornos de refuerzo (RL environments) como repos de datos con un filtro propio en el hub. Un entorno RL es, en la práctica, un repo de datos que aparece bajo el filtro de RL Environments, y el botón &#x27;Use this dataset&#x27; lo convierte en un punto de partida directo para entrenar o evaluar agentes. Es un paso más para que entornos de agente y RL estén al alcance de la mano, descargables y reutilizables, igual que cualquier otro dataset del hub.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/rl-environments" rel="noopener">Blog de Hugging Face</a><span class="chip">refuerzo</span><span class="chip">entornos</span><span class="chip">Hugging Face</span><span class="chip">agentes</span></div></article><article class="note"><h4><a href="https://github.com/jhisse/spoor" rel="noopener">spoor: observabilidad de agentes LLM, en local</a></h4><p>jhisse publica spoor, una herramienta de observabilidad LLM first-local: un único binario y un archivo SQLite para inspeccionar trazas de agentes, consumo de tokens, latencia y costes estimados. La idea es tener telemetría de los agentes sin mandarla a una SaaS, todo en el propio sistema. Encaja en la corriente de autohospedado: ver qué hace tu agente, cuánto cuesta y dónde se enreda, sin depender de un servicio externo de monitoring.</p><div class="chips"><a class="chip link" href="https://github.com/jhisse/spoor" rel="noopener">GitHub</a><span class="chip">observabilidad</span><span class="chip">self-hosting</span><span class="chip">agentes</span><span class="chip">local-first</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.02191" rel="noopener">El primitivo que falta: diagnosticar y reparar el razonamiento matemático</a></h4><p>Este trabajo se pregunta si los LLM tienen de verdad una comprensión matemática estructural detrás de sus soluciones, o solo imitan la superficie. Los autores diagnostican un &#x27;primitivo&#x27; que falta en el razonamiento matemático y proponen cómo repararlo. Es una línea de investigación que va más allá de los benchmarks de matemáticas: intenta entender qué falta por dentro para que los modelos razonen con rigor, no solo suenen bien.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.02191" rel="noopener">arXiv</a><span class="chip">razonamiento</span><span class="chip">matemáticas</span><span class="chip">evaluación</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.03872" rel="noopener">Entrenar inteligencia numérica con autodiagnóstico y descubrimiento de habilidades</a></h4><p>Generar código científico no es lo mismo que mejorar los algoritmos que hay detrás. Este paper trabaja sobre solvers numéricos: el feedback de ejecución puede mostrar un mal rendimiento, pero rara vez revela por qué. Los autores proponen autodiagnóstico y descubrimiento de habilidades para que los agentes mejoren los algoritmos numéricos, no solo escriban el código. Es un paso para agentes que realmente optimizan métodos numéricos, algo clave en simulaciones y computación científica.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.03872" rel="noopener">arXiv</a><span class="chip">agentes</span><span class="chip">números</span><span class="chip">ciencia</span><span class="chip">optimización</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.04137" rel="noopener">Dynamic Harness Search: montar el sistema multi-agente a medida de la consulta</a></h4><p>El &#x27;harness&#x27; de un agente (roles, instrucciones, herramientas y estructura de comunicación) es el que resuelve la tarea, y el harness correcto depende de la consulta concreta. Este paper propone buscar dinámicamente el mejor harness por consulta mediante predicción, en vez de usar siempre el mismo diseño fijo. Es una línea prometedora para sistemas multi-agente que se reconfiguran sobre la marcha según lo que se les pide.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.04137" rel="noopener">arXiv</a><span class="chip">multi-agente</span><span class="chip">harness</span><span class="chip">diseño</span><span class="chip">optimización</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.02999" rel="noopener">OmniConfess: hacer confesar al token para reducir alucinaciones</a></h4><p>Los modelos omni-modales (texto, imagen, audio, vídeo) alucinan cuando la generación se apoya en la evidencia equivocada. OmniConfess extrae &#x27;confesiones&#x27; de los tokens para revelar qué evidencia está sustentando la salida, y así mitigar la alucinación en modelos omni-modales. Es un enfoque de inferencia que no solo reduce alucinaciones, sino que explica de dónde sale el error. Útil para quien trabaja con modelos multimodales grandes y quiere control sobre su fiabilidad.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.02999" rel="noopener">arXiv</a><span class="chip">alucinación</span><span class="chip">multimodal</span><span class="chip">omni</span><span class="chip">interpretabilidad</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/THUROI0787/absent-author" rel="noopener">absent-author: detectar papers escritos por IA sin autor detrás</a></h4><p>THUROI0787 publica absent-author, con el lema &#x27;la investigación y la escritura se pueden automatizar; la autoría, no&#x27;. Ofrece una lista de evidencia más habilidades de agentes para detectar papers generados por IA que ningún humano respalda. Es una pieza muy de la actualidad: en un ecosistema inundado de texto generado, ayudar a distinguir lo que tiene autor humano detrás es una necesidad real. Encaja en la preocupación por la integridad de la investigación.</p><div class="chips"><a class="chip link" href="https://github.com/THUROI0787/absent-author" rel="noopener">GitHub</a><span class="chip">integridad</span><span class="chip">IA generativa</span><span class="chip">comunidad</span><span class="chip">agentes</span></div></article><article class="note"><h4><a href="https://github.com/MaximeRivest/sciencemadereadable" rel="noopener">sciencemadereadable: papers reescritos en lenguaje llano con modelos abiertos</a></h4><p>MaximeRivest publica sciencemadereadable: papers de investigación reales reescritos en palabras simples por pequeños modelos abiertos que entrenó. Va en vivo en sciencemadereadable.com. La idea es acercar la investigación a quien no es especialista, usando modelos pequeños y abiertos en vez de LLMs cerrados. Es un ejemplo bonito de aplicación práctica de pesos abiertos a la divulgación científica.</p><div class="chips"><a class="chip link" href="https://github.com/MaximeRivest/sciencemadereadable" rel="noopener">GitHub</a><span class="chip">divulgación</span><span class="chip">modelos abiertos</span><span class="chip">ciencia</span><span class="chip">comunidad</span></div></article><article class="note"><h4><a href="https://github.com/lucapgt/edgedecision" rel="noopener">edgedecision: control por voz local para Home Assistant en una Raspberry Pi 5</a></h4><p>lucapgt publica edgedecision: control de Home Assistant por voz, todo en local sobre una Raspberry Pi 5. Combina reconocimiento de voz por streaming (EdgeSTT) con un pequeño motor de decisión no generativo (EdgeDecision), y soporta nueve idiomas. Es el ejemplo perfecto de la IA de agentes empujada al edge: un asistente por voz sin nube, en hardware casero y barato. Ideal para quien quiere automatizar la casa sin que las órdenes salgan a Internet.</p><div class="chips"><a class="chip link" href="https://github.com/lucapgt/edgedecision" rel="noopener">GitHub</a><span class="chip">edge</span><span class="chip">Home Assistant</span><span class="chip">voz</span><span class="chip">self-hosting</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 20 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 23">
+<link rel="alternate" type="application/json" href="editions/2026-10-20.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 23</span> &nbsp;·&nbsp; martes 20 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/blog/hf-torchneuron" style="color:inherit;text-decoration:none" rel="noopener">TorchNeuron: AWS y Hugging Face convierten Trainium en un dispositivo PyTorch más, sin reescribir tu código</a></h2><p class="lead">Amazon y Hugging Face han anunciado *TorchNeuron*, un backend de PyTorch abierto para las chips *Trainium* de AWS: Transformers, Diffusers, Accelerate, PEFT y TRL ahora corren sobre Trainium como lo harían sobre CUDA, y el cambio para una pila existente es de una sola línea. La noticia cae en el momento exacto en que el ecosistema de modelos abiertos deja de ser solo &#x27;modelos en la nube&#x27; y pasa a ser &#x27;el mismo código, en cualquier acelerador&#x27;: un *fine-tune* o un pipeline de difusión escrito para NVIDIA se despliega a Trainium sin reescrituras ni APIs propias. El blog de PyTorch lo presenta como el fin del &#x27;idioma por hardware&#x27; en el entrenamiento, y la comunidad ya lo lee como una jugada de Amazon contra la ventaja de software de NVIDIA. Para quien autohospeda, es la primera vez que una nube no-NVIDIA se integra en la pila estándar sin una capa de traducción a medida: el coste por hora de Trainium, con el mismo flujo de *Hugging Face*, empieza a importar de verdad.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/blog/hf-torchneuron" rel="noopener">Blog de Hugging Face</a><a class="chip link" href="https://pytorch.org/blog/introducing-torchneuron-native-pytorch-backend-for-aws-trainium/" rel="noopener">Blog de PyTorch</a><span class="chip">trainium</span><span class="chip">aws</span><span class="chip">pytorch</span><span class="chip">torchneuron</span><span class="chip">open-source</span><span class="chip">hugging-face</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.26863" rel="noopener">Halcyon: generación de imagen texto-a-imagen entrenada desde cero, sin preentrenamiento de lenguaje</a></h4><p>Chandrasegaran, Wu y colaboradores (arXiv 2610.26863) atacan una suposición básica de la generación de imagen: que hace falta un *language model* preentrenado a escala de internet para condicionar por texto. Su familia *Halcyon* son modelos autoregresivos multimodales de fusión temprana, entrenados de cero sobre *GPIC*, 100 millones de pares imagen-texto: Halcyon-0.52B se acerca a *LlamaGen-XL*/8 (gFD 63.3 frente a 48.0) con 18,2× menos cómputa de preentrenamiento, y Halcyon-1.6B supera a *JiT-T2I-XXL*/8++ (35.3 frente a 41.0 gFD) con 275× menos. El experimento controlado que vale la semana: el preentrenado solo en texto NO mejora la generación de imagen. Una receta barata y abierta para quien quiere su propio generador de imágenes sin pagar un *LM* gigante.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.26863" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.26863" rel="noopener">Hugging Face Papers</a><span class="chip">text-to-image</span><span class="chip">research</span><span class="chip">autoregressive</span><span class="chip">gpic</span><span class="chip">gfd</span></div></article><article class="note"><h4><a href="https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base" rel="noopener">MOSS-Image de OpenMOSS: un generador de imágenes open-weight con SOTA en renderizado de texto (Apache 2.0)</a></h4><p>OpenMOSS publica MOSS-Image (informe técnico arXiv 2610.23374) en dos pesos: *Base* y *SFT*, ambos Apache 2.0 y con pipeline propio en *Diffusers*. Lo que lo distingue entre la oleada de generadores: el renderizado de texto dentro de la imagen, donde el informe reporta una cobertura media de texto del 96,3 % en *LLTB*, el mejor resultado entre los modelos open-weight, con resultados fuertes también en composiciones complejas. Es el tipo de modelo que hace útil la generación local de material gráfico: pósters, UI, infografías, sin que las letras salgan como jeroglíficos. Integrado en *ComfyUI* desde el día uno, según sus propias plantillas.</p><div class="chips"><a class="chip link" href="https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base" rel="noopener">Hugging Face (Base)</a><a class="chip link" href="https://arxiv.org/abs/2610.23374" rel="noopener">arXiv</a><span class="chip">text-to-image</span><span class="chip">open-weights</span><span class="chip">apache-2.0</span><span class="chip">moss-image</span><span class="chip">text-rendering</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">Xiaomi abre MiMo-V2.6-RL-oss: entornos y datos de RL de su MoE de 309B, Apache 2.0</a></h4><p>Xiaomi amplía lo que abrió en septiembre con MiMo-V2.6-Flash (MIT): *MiMo-V2.6-RL-oss* es su conjunto de entornos y datos de refuerzo (Apache 2.0) para la familia MiMo, con 976 likes y ya casi 200.000 descargas en Hugging Face. Lo que importa: es el registro de cómo se entrenó por RL un MoE de 309B totales / 15B activos, con el material reproducible para quien quiera repetir o auditar el proceso — y *NVIDIA-NeMo* ya lo lista para *fine-tuning* completo de parámetros. En la misma línea, la semana la completan los entornos de matemáticas de *FineEnvs* (*openai-math*, Apache 2.0, para agentes de código con RL).</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">Hugging Face (dataset)</a><a class="chip link" href="https://huggingface.co/datasets/FineEnvs/openai-math" rel="noopener">FineEnvs/openai-math</a><span class="chip">xiaomi</span><span class="chip">mimo</span><span class="chip">reinforcement-learning</span><span class="chip">apache-2.0</span><span class="chip">rl-environments</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/MemTensor/MemT-1.0" rel="noopener">MemT-1.0 de MemTensor: la memoria como capacidad nativa del modelo, no como biblioteca externa</a></h4><p>MemTensor publica MemT-1.0 (trending en GitHub, paper arXiv 2610.26825): un modelo fundacional &#x27;memory-native&#x27; que internaliza la memoria dentro del cómputo del modelo en vez de apoyarse en bases vectoriales externas. Sobre *Metis*, usa *Gated DeltaNet-2* con una actualización de memoria estable por token dentro de cada turno, y *Mixture-of-Storage* para escalar la capacidad; el entrenamiento va en dos fases (preentrenado continuo + post-entrenado) con 34B de tokens. Es el intento más serio visto hasta ahora de responder a la pregunta que la comunidad de agentes lleva meses debatiendo: ¿la memoria debería ser un *tool call* o parte del modelo?</p><div class="chips"><a class="chip link" href="https://github.com/MemTensor/MemT-1.0" rel="noopener">GitHub</a><a class="chip link" href="https://arxiv.org/abs/2610.26825" rel="noopener">arXiv</a><span class="chip">agents</span><span class="chip">memory</span><span class="chip">gated-deltanet</span><span class="chip">foundation-model</span><span class="chip">trending</span></div></article><article class="note"><h4><a href="https://github.com/C4rohan/Lampline" rel="noopener">Lampline: agentes de voz autohospedados que importan tus agentes de *Dialogflow CX*</a></h4><p>C4rohan/Lampline (130 estrellas, nuevo y ya trending) es una plataforma de agentes de voz que se autohospeda: importas tus agentes de *Dialogflow CX* y de CX Agent Studio, los construyes y pruebas sobre tu propio hardware, y atiendes llamadas reales por teléfono o SIP a través de *jambonz*. Soporta 20 proveedores de modelos, así que los *flows* corporativos que hoy viven en la nube de Google pueden volver al servidor propio. Es el ejemplo de la semana de la migración inversa: software de nube maduro, con salida self-hosted.</p><div class="chips"><a class="chip link" href="https://github.com/C4rohan/Lampline" rel="noopener">GitHub</a><span class="chip">voice-agents</span><span class="chip">self-hosting</span><span class="chip">sip</span><span class="chip">dialogflow</span><span class="chip">trending</span></div></article><article class="note"><h4><a href="https://github.com/AntoGA/agents-contract" rel="noopener">agents-contract: un contrato AGENTS.md para tus agentes de código, con linter sin dependencias</a></h4><p>AntoGA/agents-contract formaliza lo que la comunidad de agentes de código empezó a hacer a mano: un *AGENTS.md* como contrato explícito (reglas, límites, definiciones de done) más un linter de cero dependencias y un hook de *SessionStart* que lo aplica a *Claude Code*, Codex, Cursor y Copilot. Pequeño en estrellas (40), grande en idea: convertir la &#x27;personalidad&#x27; del agente en un artefacto verificable, no en un prompt que se degrada. Para quien ya orquesta varios agentes, es el paso del &#x27;pásale esto&#x27; al &#x27;cumple esta&#x27;.</p><div class="chips"><a class="chip link" href="https://github.com/AntoGA/agents-contract" rel="noopener">GitHub</a><span class="chip">agents</span><span class="chip">agents-md</span><span class="chip">linter</span><span class="chip">coding-agents</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.17724" rel="noopener">Sauron: verificación agéntica &#x27;evidence-first&#x27; que no se traga el informe de éxito del propio agente</a></h4><p>Sanayei y colaboradores (arXiv 2610.17724) describen Sauron, un verificador agéntico para tareas de agentes a largo plazo: en vez de puntuar contra un *rubric* a ciegas, investiga a la vez el estado del entorno y la traza de ejecución, y solo acepta una afirmación tras validarla contra su fuente. Lo crítico: cuando los juicios del *judge* se usan como recompensas de RL, un verificador que olvida evidencia o acepta claims sin base refuerza comportamientos indeseados; las consultas acotadas y la investigación conjunta de criterios relacionados reducen el coste de contexto. Un ladrillo más para la verificación de agentes que la industria necesita antes de confiarles dinero.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.17724" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.17724" rel="noopener">Hugging Face Papers</a><span class="chip">verification</span><span class="chip">agents</span><span class="chip">rl</span><span class="chip">evaluation</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.24611" rel="noopener">HSPR: recuperar la puntuación de un benchmark de agentes sin correr todo el benchmark</a></h4><p>Chen y colaboradores (arXiv 2610.24611) atacan el coste de evaluar agentes de software sobre un benchmark completo: *HSPR* (*Hierarchical Score Posterior Recovery*) combina factores de respuesta ajustados desde tareas fuente con tasas de éxito de grupo inciertas, y actualiza los posteriores con los resultados observados del agente objetivo; la selección de la siguiente tarea se guía por la reducción esperada de la varianza del score completo. Traducción práctica: puedes comparar agentes corriendo una fracción del benchmark y seguir obteniendo un score defendible, no solo un ranking.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.24611" rel="noopener">arXiv</a><span class="chip">evaluation</span><span class="chip">benchmarks</span><span class="chip">agents</span><span class="chip">posterior-inference</span><span class="chip">research</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/Mohit-jpg-dot/AirDrop-LLM" rel="noopener">AirDrop-LLM: inferencia pipeline-parallel multi-nodo, con tu propia pila de hardware de sobra</a></h4><p>Mohit-jpg-dot/AirDrop-LLM (Rust) es un broker de inferencia LLM *offline* y sin dependencias que hace *pipeline-parallel* multi-nodo agrupando hardware heterogéneo de consumo —Apple *Metal* + NVIDIA *CUDA*— sobre una red *hotspot* local ad hoc, con una API gateway compatible con OpenAI integrada. El espíritu: en vez de una GPU de 30.000 dólares, dos portátiles y un Mac con un *hotspot* WiFi. No es rápido, pero es la infraestructura de &#x27;lo que tengo por casa&#x27; llevada al extremo, y en la semana del *TorchNeuron* de la portada el mensaje es el mismo: la barrera de entrada sigue bajando.</p><div class="chips"><a class="chip link" href="https://github.com/Mohit-jpg-dot/AirDrop-LLM" rel="noopener">GitHub</a><span class="chip">inference</span><span class="chip">multi-node</span><span class="chip">rust</span><span class="chip">self-hosting</span><span class="chip">pipeline-parallel</span></div></article><article class="note"><h4><a href="https://github.com/AndreSzymanski15/ai-jailbreaks" rel="noopener">ai-jailbreaks: 35 *jailbreaks* listos para pegar, para 25+ LLMs de frontera y open-weight</a></h4><p>AndreSzymanski15/ai-jailbreaks (424 estrellas, ya trending) reúne 35 *jailbreak* prompts listos para pegar contra más de 25 LLMs de frontera y open-weight: system prompts, *persona locks*, especificaciones *AGENTS.md* e incluso *Modelfiles* para Ollama. Está construido explícitamente para investigación de seguridad y *red-teaming*: si vas a auditarte un modelo antes de autohospedarlo, es el punto de partida de la semana. El dato incómodo que lleva implícito: con la facilidad de los pesos abiertos, el *red-team* también es autohospedable.</p><div class="chips"><a class="chip link" href="https://github.com/AndreSzymanski15/ai-jailbreaks" rel="noopener">GitHub</a><span class="chip">security</span><span class="chip">red-team</span><span class="chip">jailbreaks</span><span class="chip">trending</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.23986" rel="noopener">BlenderWorld (Qwen): benchmark de agentes visuales para creación 3D desde referencias del mundo real</a></h4><p>Fang, Wang, Yu y otros (arXiv 2610.23986, dataset MIT de Qwen en Hugging Face) publican *BlenderWorld*: agentes multimodales que crean y editan modelos 3D en *Blender* a partir de referencias del mundo real, y la necesidad de inferir la forma de objetos a partir de fotografías. Es el tipo de *benchmark* que mide lo que los *MLLM* prometen en demos y rara vez soportan: manipulación de software creativo real, no imágenes planas. Con el *SFT* de MOSS-Image y la oleada de modelos visuales, la escena 3D se está convirtiendo en el nuevo campo de batalla de la visión abierta.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.23986" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/datasets/Qwen/BlenderWorld" rel="noopener">Hugging Face (dataset)</a><span class="chip">3d</span><span class="chip">visual-agents</span><span class="chip">benchmark</span><span class="chip">blender</span><span class="chip">qwen</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>

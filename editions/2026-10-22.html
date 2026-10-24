@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 22 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 25">
+<link rel="alternate" type="application/json" href="editions/2026-10-22.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 25</span> &nbsp;·&nbsp; jueves 22 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/blog/ibm-granite/granite-speech-5" style="color:inherit;text-decoration:none" rel="noopener">Granite Speech 5.0: IBM abre tres modelos de voz Apache 2.0 que cubren el *stack* completo — transcripción, traducción y atribución de hablantes</a></h2><p class="lead">IBM estrena tres modelos de su familia *Granite Speech* y los publica todos bajo *Apache 2.0*: el nuevo *granite-speech-5.0-2b* (sucesor del 4.1 2B con la misma base), una revisión del *turboctc* de 470M para el *edge*, y un *4.1-2b-plus* con mejor atribución de hablantes. El modelo estrella transcribe y traduce entre inglés, francés, alemán, español, portugués y japonés, con traducción además al italiano y al chino, y se entrena con 390.000 horas de audio público más datos sintéticos; el blog de IBM lo coloca como segundo entre los *ASR* de pesos abiertos en *WER* medio en inglés (5,06 %). Los nuevos *features* son el tipo que un *self-hoster* agradece: *language-ID* por *prompt*, listas de hasta 2.000 términos para sesgar la transcripción hacia nombres y acrónimos, y puntuación y mayúsculas bajo demanda. El *470M turboctc* ahora es multilingüe y nativo en puntuación, y el *2B Plus* aporta *speaker attribution* y *timestamps* para grabaciones multivocales. Corren en *Transformers*, *vLLM*, *llama.cpp* y *mlx-audio* para *Apple Silicon*: un *stack* local completo, de la transcripción al «quién dijo qué», sin *API* propietaria.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/blog/ibm-granite/granite-speech-5" rel="noopener">Blog de Hugging Face (Granite Speech 5.0)</a><a class="chip link" href="https://huggingface.co/ibm-granite/granite-speech-5.0-2b" rel="noopener">Hugging Face (granite-speech-5.0-2b)</a><a class="chip link" href="https://www.ibm.com/granite/docs/models/speech" rel="noopener">Docs de IBM Granite Speech</a><span class="chip">ibm</span><span class="chip">granite-speech</span><span class="chip">asr</span><span class="chip">speech</span><span class="chip">translation</span><span class="chip">speaker-attribution</span><span class="chip">apache-2.0</span><span class="chip">self-hosting</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017" rel="noopener">DeepSeek-V4.1-Flash-1017: el *refresh* de MIT que domina el *trending* del día, con 1M de contexto y multimodalidad</a></h4><p>*deepseek-ai/DeepSeek-V4.1-Flash-1017* es el *refresh* del *Flash* de *DeepSeek* (la familia se estrenó el 10 de octubre con *API* nativa multimodal) y es hoy el modelo más descargado del *trending* de *Hugging Face* (~2.217 likes, ~39 horas tras el *release*). Trae mejoras medibles en razonamiento, *coding* y capacidades agénticas, *input* multimodal (texto e imagen), contexto de 1M de tokens y la licencia *MIT* que la familia ya llevaba. Para quien autohospeda, es el modelo «listo para *vLLM*» del día: el *refresh* que la comunidad comenta en *r/huggingface* por sus *benchmarks* de *coding* y agentes, y que encaja con el *Qwen3.8-Flash-Next* cuantizado en FP4 de *NVIDIA* que también está en el *trending*.</p><div class="chips"><a class="chip link" href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017" rel="noopener">Hugging Face (DeepSeek-V4.1-Flash-1017)</a><a class="chip link" href="https://api-docs.deepseek.com/news/news260910/" rel="noopener">DeepSeek News (V4.1-Flash)</a><span class="chip">deepseek</span><span class="chip">v4.1-flash</span><span class="chip">mit</span><span class="chip">1m-context</span><span class="chip">multimodal</span><span class="chip">open-weights</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/Dharma-AI/vocabx-vocabulary-specialization" rel="noopener">VocabX: especializar el *vocabulario* de un *SLM* reduce el coste de inferencia un 77 % en un caso real</a></h4><p>Un *team article* de *Dharma-AI* (16 upvotes, 21 de octubre) avanza el paper *VocabX*: los modelos de dominio *fine-tuneados* sobre *Qwen3-4B* y *Gemma* heredan un *vocabulario* de 151.669 entradas pensado para todos los dominios, y eso se paga dos veces — el texto que el *grader* escribe se fragmenta en demasiados tokens, y en cada token generado el modelo puntúa *tokens* que casi nunca salen. *VocabX* reconstruye el *vocabulario* «a coste de token», no a frecuencia: en su *grader* de ensayos en portugués sobre *Qwen3-4B* cortó el coste de inferencia medido un 77 % sin tocar el modelo base ni la receta de entrenamiento. La lección para quien autohospeda: el *tokenizer* del modelo de tarea estrecha es uno de los mayores palancas de coste, y se fija antes de cualquier paso de entrenamiento.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/Dharma-AI/vocabx-vocabulary-specialization" rel="noopener">Blog de Hugging Face (VocabX)</a><span class="chip">vocabx</span><span class="chip">slm</span><span class="chip">tokenizer</span><span class="chip">inference-cost</span><span class="chip">qwen3-4b</span><span class="chip">fine-tuning</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.20538" rel="noopener">PrismaCoder: inteligencia de código multimodal abierta, con síntesis de *rubrics* descompuestas (arXiv 2610.20538)</a></h4><p>Sun, Gong, Liu y Chen (arXiv 2610.20538, en el *daily papers* de *Hugging Face*) presentan *PrismaCoder*, que ataca la «inteligencia de código multimodal»: la capacidad de conectar el mundo simbólico de los programas con el visual de su ejecución (pantallas, gráficos, *output* con texto). Su aprieta específica es la *decomposed rubric synthesis* — síntesis de *rubrics* de evaluación descompuestas por dimensión, en lugar de un *score* global — para empujar los límites de la capacidad en el dominio de código. Es el ladrillo del día para quien evalúa *coding agents* y modelos de visión-lenguaje: cómo se construye la señal de calidad que luego entrena (o filtra) a los modelos abiertos de código multimodal.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.20538" rel="noopener">arXiv (PrismaCoder)</a><a class="chip link" href="https://huggingface.co/papers/2610.20538" rel="noopener">Hugging Face Papers</a><span class="chip">prismacoder</span><span class="chip">code</span><span class="chip">multimodal</span><span class="chip">rubrics</span><span class="chip">evaluation</span><span class="chip">research</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/jwuthri-cloud/SelfJev" rel="noopener">SelfJev: un modelo de decisión self-hosted (selfjev-4b) con *API* *Jev*-compatible, *SDK* Python y *fine-tuning*</a></h4><p>*jwuthri-cloud/SelfJev* es un modelo de decisión autohospedado — *selfjev-4b* — expuesto con una *API* *Jev*-compatible, *SDK* Python, *server* y recetas de *fine-tuning* y *RLCD* (*Reinforcement Learning from Critic Decisions*). En la semana de los *graders* como el *Qwen3-4B* del *VocabX* de la sección de Modelos, este es el punto de llegada: en vez de llamar a un *LLM* de frontera para decisiones estructuradas, corre un modelo pequeño, tuyo, con una *API* estable y una pila de *training* propia. El *trending* de *GitHub* lo destaca como la alternativa *self-hosted* a los *endpoints* cerrados para el nicho de decisiones.</p><div class="chips"><a class="chip link" href="https://github.com/jwuthri-cloud/SelfJev" rel="noopener">GitHub (SelfJev)</a><span class="chip">selfjev</span><span class="chip">decision-model</span><span class="chip">self-hosting</span><span class="chip">open-source</span><span class="chip">sdk</span><span class="chip">fine-tuning</span></div></article><article class="note"><h4><a href="https://github.com/liulx25xx/DoubleTakeBench" rel="noopener">DoubleTakeBench: 525 preguntas de juicio *evidence-based* para evaluar modelos «*System 1*» y *LLMs* (GitHub)</a></h4><p>*liulx25xx/DoubleTakeBench* extrae 525 preguntas de juicio *evidence-based* de las trayectorias de *coding agents* y las usa para evaluar modelos «*System 1*» y *LLMs*: preguntas donde el juicio correcto exige leer la evidencia, no responder por patrón. Es el tipo de *benchmark* que la comunidad de agentes necesita cuando pasa del «responde la trivia» al «juicio bajo evidencia», y su origen — trayectorias reales de agentes de código — lo hace directamente aplicable a la evaluación de la pila agéntica. En un día con un *PrismaCoder* de *rubrics* descompuestas, es el *counterpoint* empírico de la semana: cómo evalúas lo que el agente cree que vio.</p><div class="chips"><a class="chip link" href="https://github.com/liulx25xx/DoubleTakeBench" rel="noopener">GitHub (DoubleTakeBench)</a><span class="chip">benchmark</span><span class="chip">doubletakebench</span><span class="chip">agents</span><span class="chip">evaluation</span><span class="chip">system-1</span><span class="chip">coding-agents</span></div></article><article class="note"><h4><a href="https://github.com/nuedynamics/ha-llm-agent" rel="noopener">ha-llm-agent: un panel de chat y agente *Assist* para *Home Assistant* con *LLMs* locales</a></h4><p>*nuedynamics/ha-llm-agent* añade a *Home Assistant* un panel de chat y un agente *Assist* que controla dispositivos, construye automatizaciones, escenas y *dashboards*, y acepta *Anthropic*, *OpenAI* y *OpenRouter* entre proveedores — o sea, también el *endpoint* de un *vLLM* o *llama.cpp* local. Es el ejemplo de la semana del «agente con manos en tu casa»: no un *chat* lateral, un agente que cambia el estado de tu instalación y lo documenta en el *dashboard*. Para la comunidad *self-hosted* que ya corre un *LLM* en el *rack*, es el *use case* del día: el *home automation* como primer cliente del *endpoint* local.</p><div class="chips"><a class="chip link" href="https://github.com/nuedynamics/ha-llm-agent" rel="noopener">GitHub (ha-llm-agent)</a><span class="chip">home-assistant</span><span class="chip">agents</span><span class="chip">self-hosting</span><span class="chip">home-automation</span><span class="chip">openai-compatible</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.29545" rel="noopener">PACE: codificación cíclica y alineada por canal de estados recurrentes de 4 bits (arXiv 2610.29545)</a></h4><p>Haller, Laitenberger y Akbik (TU Dresden, arXiv 2610.29545, 20 de octubre) atacan el *estado recurrente* de los *LMs* de *linear attention*, que guardan todo el contexto en una matriz de tamaño fijo que el sistema de inferencia replica por cabeza de *batch*. *PACE* — *Periodic and Channel-Aligned Encoding of Four-Bit Recurrent States* — codifica ese estado en 4 bits con alineación de canal y periodicidad, para que el *KV* recurrente (y su *bottleneck* de memoria y *bandwidth*) deje de ser el techo de la *long-context* en los arquitecturas *SSM*/*linear attention*. Es el ladrillo del día para quien sigue la ola de modelos *linear attention*: cómo hacer que el *estado* que lo define sea barato de mover.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.29545" rel="noopener">arXiv (PACE)</a><span class="chip">pace</span><span class="chip">linear-attention</span><span class="chip">state-space</span><span class="chip">4-bit</span><span class="chip">kv-cache</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.28763" rel="noopener">¿Pueden los agentes frontera «subir colinas científicas» en el *wild*? *ML for Science* como prueba (arXiv 2610.28763)</a></h4><p>Zhong, Li, Carlini y Jagielski (arXiv 2610.28763, 19 de octubre) toman a los *frontier coding agents* —cada vez vendidos como «investigadores automatizados de punta a punta»— y los llevan al *ML for Science*, el examen duro: tareas donde el progreso es incremental, la validación es empírica, y el *reward* no es un *test* unitario que pasa o falla. Su pregunta: ¿suben las colinas científicas *en el wild*, o el *benchmark* de laboratorio no se traduce? Es el *counterpoint* del día a la ola de «*agentes que hacen *research*» y el más cercano a la pregunta que la comunidad de autohospedaje se hace: ¿de qué sirve el *agent* si no escala a la tarea real?</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.28763" rel="noopener">arXiv (Automating ML for Science)</a><a class="chip link" href="https://huggingface.co/papers/2610.28763" rel="noopener">Hugging Face Papers</a><span class="chip">agents</span><span class="chip">ml-for-science</span><span class="chip">automation</span><span class="chip">research</span><span class="chip">evaluation</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/fortil/slotstream-spark" rel="noopener">slotstream-spark: *Qwen3.8-Flash-Next* en un *DGX Spark*, con los *routed experts* en *NVMe*</a></h4><p>*fortil/slotstream-spark* es la receta de la semana del *self-hosting* del *MoE* grande en hardware de consumo: corre *Qwen3.8-Flash-Next* (el *MoE* híbrido de ~125B con 512 *experts*) sobre el *DGX Spark*, *streaming* los *routed experts* desde *NVMe* vía *slotstream* — el mismo *trick* que ya dio ~10 % de mejora en *SSD-streaming* en *Qwen 3.8 Flash* (ver el *post* de *r/Qwen_AI* de septiembre). Es el ejemplo concreto del «el *MoE* que no cabe en la *VRAM* cabe en el *SSD*»: un 125B en un *Spark*, con la pila completa pública. En la semana de *Specter* (offloading especulativo de *MoE*) y *VocabX* (coste de *tokens*), este es el *use case* que lo ancla al *workstation* doméstico.</p><div class="chips"><a class="chip link" href="https://github.com/fortil/slotstream-spark" rel="noopener">GitHub (slotstream-spark)</a><span class="chip">dgx-spark</span><span class="chip">moe</span><span class="chip">nvme</span><span class="chip">slotstream</span><span class="chip">self-hosting</span><span class="chip">qwen3.8-flash-next</span></div></article><article class="note"><h4><a href="https://github.com/truvv8/jarvis-jetson" rel="noopener">jarvis-jetson: un asistente de voz para la mesa de electrónica en *Jetson Orin Nano Super*, con *LLM* local y visión</a></h4><p>*truvv8/jarvis-jetson* es un asistente de voz para la «mesa de electrónica» en un *Jetson Orin Nano Super*: *LLM* local con visión, un holograma 3D controlado por mano, y *voice-to-print* — dictas, y la placa lo imprime. Es el *use case* del día de la *edge-AI* fuera del *rack*: un *agent* con *hands* y *eyes* en un SBC de 10 W, corriendo todo local. En el contexto de la semana — *Granite Speech* en la portada, *PrismaCoder* en Modelos, *ML for Science* en Papers — es el punto donde toda esa ola converge en un *device* de bolsillo.</p><div class="chips"><a class="chip link" href="https://github.com/truvv8/jarvis-jetson" rel="noopener">GitHub (jarvis-jetson)</a><span class="chip">jetson</span><span class="chip">edge</span><span class="chip">voice</span><span class="chip">hologram</span><span class="chip">self-hosting</span><span class="chip">embedded</span></div></article><article class="note"><h4><a href="https://huggingface.co/nvidia/Qwen3.8-Flash-Next-FP4-Local" rel="noopener">NVIDIA *Qwen3.8-Flash-Next-FP4-Local*: el *MoE* híbrido en FP4, listo para *container* local</a></h4><p>*nvidia/Qwen3.8-Flash-Next-FP4-Local* (~294 likes, 2 días en *trending*) es la cuantización *FP4* de *Qwen3.8-Flash-Next* que *NVIDIA* publica en *Hugging Face*, con los *containers* oficiales para correrla local. Encaja con el *slotstream-spark* de la sección de *Comunidad* y con la semana de *TorchTPU*/*TorchNeuron*: el *MoE* que no cabe en *VRAM* de un solo *GPU* tiene ahora una receta *FP4* *first-party* de *NVIDIA* que baja el requisito de memoria y deja el *streaming* de *experts* en *NVMe* como la otra mitad. Para quien autohospeda un 125B, es la pieza que faltaba de la semana.</p><div class="chips"><a class="chip link" href="https://huggingface.co/nvidia/Qwen3.8-Flash-Next-FP4-Local" rel="noopener">Hugging Face (Qwen3.8-Flash-Next-FP4-Local)</a><span class="chip">nvidia</span><span class="chip">qwen3.8-flash-next</span><span class="chip">fp4</span><span class="chip">quantization</span><span class="chip">moe</span><span class="chip">self-hosting</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 11 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 15">
+<link rel="alternate" type="application/json" href="editions/2026-10-11.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 15</span> &nbsp;·&nbsp; domingo 11 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/Lightricks/LTX-2.5" style="color:inherit;text-decoration:none" rel="noopener">LTX-2.5, el modelo de vídeo y audio de pesos abiertos de Lightricks que genera mundo, no solo clips</a></h2><p class="lead">Lightricks ha publicado LTX-2.5, el último de su familia LTX de modelos generativos de pesos abiertos, y es de los lanzamientos de vídeo más relevantes de las últimas semanas. No se limita a generar clips: es un modelo de mundo (world model) que opera sobre vídeo y audio a la vez, y soporta text-to-video, image-to-video, video-to-video, audio-to-video y sus combinaciones, con una única difusión de archivo sencillo que lo hace práctico de descargar y de correr. El equipo lo posiciona como la vía abierta que se acerca más a la simulación de escenas complejas y de varias tomas (multishot), con una técnica de renderizado por difusión que inyecta más cómputo en las escenas difíciles. En Hugging Face acumula más de 7.200 me gusta y más de 1,7 millones de descargas, una cifra enorme para un modelo de vídeo. Para quien trabaja con generación de vídeo y audio en local o en el edge, LTX-2.5 es la referencia abierta de momento: pesos completos, multimodalidad vídeo-audio y una familia que va de fundación a simulación de mundo.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">Hugging Face (Lightricks/LTX-2.5)</a><a class="chip link" href="https://ltx.io/" rel="noopener">LTX (ltx.io)</a><a class="chip link" href="https://fal.ai/ltx-2.5" rel="noopener">fal.ai (LTX-2.5)</a><span class="chip">Lightricks</span><span class="chip">LTX</span><span class="chip">video</span><span class="chip">audio</span><span class="chip">world model</span><span class="chip">pesos abiertos</span><span class="chip">generación</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/google/embeddinggemma-2" rel="noopener">EmbeddingGemma-2, los embeddings multimodales de Google para buscar de todo tipo</a></h4><p>Google publica EmbeddingGemma-2, una familia de modelos de pesos abiertos para extracción de características (feature-extraction) pensados para generar embeddings de texto, imagen, audio y vídeo, no solo de texto. Están entrenados con sentence-transformers y safetensors, y encajan directamente en los flujos de búsqueda semántica, recuperación (RAG) y clasificación donde antes hacían falta varios modelos especializados por modalidad. En Hugging Face ya suma más de 1.500 me gusta y más de 45.000 descargas, una tracción rápida para un modelo de embeddings. Es una pieza práctica para quien quiere un único modelo de pesos abiertos que embeba multimodal y sirva como base de un sistema de recuperación en local o self-hosted.</p><div class="chips"><a class="chip link" href="https://huggingface.co/google/embeddinggemma-2" rel="noopener">Hugging Face (google/embeddinggemma-2)</a><span class="chip">Google</span><span class="chip">embeddings</span><span class="chip">multimodal</span><span class="chip">retrieval</span><span class="chip">pesos abiertos</span></div></article><article class="note"><h4><a href="https://huggingface.co/Aleph-Alpha/Kolibri-1" rel="noopener">Kolibri-1, el MoE de razonamiento de Aleph Alpha en pesos abiertos</a></h4><p>Aleph Alpha publica Kolibri-1, un modelo de pesos abiertos con arquitectura MoE (mixture of experts) orientado al razonamiento y a conversación, disponible para servir con vLLM. Aleph Alpha es una de las pocas empresas europeas de IA de primer nivel, así que ver sus pesos abiertos y con referencias a dos papers (arXiv 2512.11614 y 2601.17858) es relevante para la comunidad: es una señal de que los laboratorios grandes también abren, no solo los de Silicon Valley. En Hugging Face supera los 870 me gusta y más de 10.000 descargas. Para quien busca un MoE de razonamiento con pesos abiertos y una base de documentación académica detrás, Kolibri-1 es una opción nueva que conviene probar.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Aleph-Alpha/Kolibri-1" rel="noopener">Hugging Face (Aleph-Alpha/Kolibri-1)</a><a class="chip link" href="https://arxiv.org/abs/2512.11614" rel="noopener">arXiv (2512.11614)</a><span class="chip">Aleph Alpha</span><span class="chip">MoE</span><span class="chip">razonamiento</span><span class="chip">vLLM</span><span class="chip">pesos abiertos</span></div></article><article class="note"><h4><a href="https://huggingface.co/canberkkkkkk/ema-lightning" rel="noopener">ema-lightning, un TTS turco de flow matching listo para correr en local</a></h4><p>canberkkkkkk publica ema-lightning, un modelo de pesos abiertos para text-to-speech en turco basado en flow matching (arXiv 2405.14867 de referencia), bajo licencia Apache 2.0. Es una opción concreta para quien necesita TTS en un idioma que no es el inglés ni el español, y lo quiere correr en local sin depender de un servicio. En Hugging Face ya suma más de 340 me gusta y más de 15.000 descargas. Encaja en la corriente de modelos de voz abiertos por idioma, y es una pieza útil para proyectos de auto-hospedaje que necesitan voz natural en turco.</p><div class="chips"><a class="chip link" href="https://huggingface.co/canberkkkkkk/ema-lightning" rel="noopener">Hugging Face (canberkkkkkk/ema-lightning)</a><span class="chip">TTS</span><span class="chip">flow matching</span><span class="chip">turco</span><span class="chip">local</span><span class="chip">pesos abiertos</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/DarkHater01/slopbench" rel="noopener">slopbench, medir cuánta basura de código escriben los agentes LLM</a></h4><p>DarkHater01 publica slopbench, un benchmark en JavaScript que mide cuánto código desperdiciado (slop) generan los agentes LLM: cinco tareas, en sandbox, con instantáneas semanales y referencias disputables. La idea es cuantificar no solo si el agente resuelve la tarea, sino cuánto ruido, redundancia y código muerto deja en el camino, que es un coste real al mantener el código. Es una métrica práctica para quien despliega agentes de código en producción: un agente que resuelve pero ensucia puede ser más caro a largo plazo que uno que resuelve con precisión. El proyecto es joven pero apunta a un problema que casi nadie mide.</p><div class="chips"><a class="chip link" href="https://github.com/DarkHater01/slopbench" rel="noopener">GitHub (DarkHater01/slopbench)</a><span class="chip">agentes</span><span class="chip">benchmark</span><span class="chip">código</span><span class="chip">evaluación</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/Ar-Kareem/SwaT" rel="noopener">SwaT, agentes que se comunican sin texto vía transferencia de KV-cache</a></h4><p>Ar-Kareem publica SwaT, un framework en Python que permite a agentes LLM comunicarse sin texto: hace transferencia de KV-cache entre modelos de familias distintas, prefill-free, usando estados latentes en vez de texto. La motivación es clara: que dos modelos se pasen información por texto es lento, pierde contexto y cuesta tokens; pasarles el estado latente directamente es más barato y más fiel. Es una investigación aplicada con potencial real para orquestación de agentes donde varios modelos cooperan. Es un proyecto nuevo, pero la idea de hablar en KV-cache en vez de en tokens es una de las líneas más prometedoras de la infraestructura de agentes.</p><div class="chips"><a class="chip link" href="https://github.com/Ar-Kareem/SwaT" rel="noopener">GitHub (Ar-Kareem/SwaT)</a><span class="chip">agentes</span><span class="chip">KV-cache</span><span class="chip">inferencia</span><span class="chip">orquestación</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/joydle/Arf" rel="noopener">Arf, un motor de inferencia LLM escrito desde cero en Rust para Apple Silicon</a></h4><p>joydle publica Arf, un motor de inferencia de LLMs escrito desde cero en Rust, específicamente para Apple silicon, sin ningún framework de machine learning. La apuesta es ofrecer una vía de inferencia local nativa en los Macs, sin la capa de abstracción de un runtime generalista, y con el control fino que da escribirlo en Rust. Encaja en la corriente de llevar la inferencia local a la plataforma de Apple, donde hay hardware unificado y silencioso. Es un proyecto temprano, pero para quien corre modelos en un Mac y quiere algo pensado para el hardware y no un genérico multiplataforma, es una alternativa que seguir.</p><div class="chips"><a class="chip link" href="https://github.com/joydle/Arf" rel="noopener">GitHub (joydle/Arf)</a><span class="chip">inferencia</span><span class="chip">Rust</span><span class="chip">Apple Silicon</span><span class="chip">local</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://github.com/headbouyJB/slotpin" rel="noopener">slotpin, un proxy con awareness de caché para servidores LLM locales</a></h4><p>headbouyJB publica slotpin, un proxy con slot-pinning y awareness de caché para servidores LLM locales como llama.cpp y Gufo, con panel de control. El problema que ataca es la eficiencia: cuando varias peticiones compiten por el KV-cache de un servidor local, la fragmentación y el eviction degradan la latencia; un proxy que fije slots y sea consciente de la caché reduce ese coste. Encaja en la infraestructura de auto-hospedaje de inferencia, justo por debajo del propio servidor. Es una pieza útil para quien sirve varios modelos en local y quiere que la caché de prefijos no se desperdicie.</p><div class="chips"><a class="chip link" href="https://github.com/headbouyJB/slotpin" rel="noopener">GitHub (headbouyJB/slotpin)</a><span class="chip">inferencia</span><span class="chip">proxy</span><span class="chip">KV-cache</span><span class="chip">llama.cpp</span><span class="chip">self-hosting</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2609.35855" rel="noopener">Mara Chain, tratar el fallo como escalón para la auto-evolución de sistemas de IA</a></h4><p>Mara Chain (arXiv 2609.35855) parte de que optimizar sistemas de IA desplegados es cada vez más editar prompts, skills, harnesses y código en vez de pesos de modelo, y que los enfoques habituales optimizan esos artefactos con procedimientos de proponer-evaluar-seleccionar. El trabajo reencuadra el fallo como una oportunidad: en vez de descartar las candidaturas que fallan, las usa como escalón para que el sistema se auto-evolucione. Es una línea de investigación muy alineada con la práctica actual de agentes, donde el artefacto que se optimiza es el prompt y el harness, no el modelo. Para quien opera sistemas de IA en producción, la idea de extraer señal del fallo en vez de solo penalizarlo es directamente aplicable.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.35855" rel="noopener">arXiv (2609.35855)</a><a class="chip link" href="https://huggingface.co/papers/2609.35855" rel="noopener">Hugging Face (paper)</a><span class="chip">auto-evolución</span><span class="chip">optimización</span><span class="chip">agentes</span><span class="chip">investigación</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2606.03335" rel="noopener">Hebero, un framework GPU-paralelo para RL multi-tarea heterogénea en robots</a></h4><p>Hebero (arXiv 2606.03335) introduce un framework de simulación GPU-paralela para aprendizaje por refuerzo multi-tarea y heterogéneo en robots. La simulación GPU-paralela ya aporta interacción abundante, pero los benchmarks existentes rara vez combinan esa escala con tareas de manipulación heterogéneas y una evaluación multi-tarea de refuerzo estandarizada. El trabajo aporta ese benchmark y el framework de evaluación. Es una pieza de infraestructura de investigación para quien entrena políticas de manipulación robótica y quiere comparar métodos en un escenario común y a escala. Es de los pocos benchmarks que unen simulación a gran escala con heterogeneidad real de tareas.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2606.03335" rel="noopener">arXiv (2606.03335)</a><a class="chip link" href="https://huggingface.co/papers/2606.03335" rel="noopener">Hugging Face (paper)</a><span class="chip">robótica</span><span class="chip">refuerzo</span><span class="chip">simulación</span><span class="chip">benchmark</span><span class="chip">GPU</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.11975" rel="noopener">Fisica de cables con sesgo de atención física, para simuladores aprendidos estables</a></h4><p>Predicting Cable Dynamics with Physical Attention Bias (arXiv 2610.11975) ataca un fallo concreto de los simuladores aprendidos de objetos lineales deformables (DLO) como cables: tienen que predecir el movimiento de cables con los que no se entrenaron y mantenerse estables en rollouts largos, y la mayor parte del error ocurre donde el cable toca a sí mismo o al suelo. El trabajo introduce un sesgo de atención física para guiar la predicción en esos puntos de contacto. Es una investigación aplicada con un problema muy concreto y medible, de los que luego se traducen en simuladores de robotica y manipulación más fiables.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.11975" rel="noopener">arXiv (2610.11975)</a><a class="chip link" href="https://huggingface.co/papers/2610.11975" rel="noopener">Hugging Face (paper)</a><span class="chip">simulación</span><span class="chip">robótica</span><span class="chip">atención</span><span class="chip">DLO</span><span class="chip">investigación</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/tiiuae/falcon-asr" rel="noopener">Falcon ASR, el reconocimiento de voz de TII UAE en pesos abiertos</a></h4><p>TII UAE presenta Falcon ASR en su blog de Hugging Face, un modelo de reconocimiento de voz automática (automatic speech recognition) de pesos abiertos que se suma a su familia Falcon. Es una pieza directa para quien quiere transcribir voz en local sin depender de un servicio externo, y encaja en la corriente de modelos de voz abiertos de calidad de laboratorio. Para el self-hosting de pipelines de voz, tener un ASR de pesos abiertos de un laboratorio serio es una base para construir transcripción en privado. Es una de las piezas de voz abierta más relevantes de esta semana.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/tiiuae/falcon-asr" rel="noopener">Blog de Hugging Face (Falcon ASR)</a><span class="chip">ASR</span><span class="chip">TII UAE</span><span class="chip">Falcon</span><span class="chip">voz</span><span class="chip">pesos abiertos</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/nvidia/nemotron-ioi-and-imo-2026" rel="noopener">Nemotron afinado para IOI y IMO, dos resultados de nivel oro con una sola familia</a></h4><p>NVIDIA publica en su blog de Hugging Face cómo afinar Nemotron para los concursos informáticos (IOI) y matemáticos (IMO) de 2026, logrando dos resultados de nivel oro con una única familia de modelos. La relevancia no es solo el resultado, sino la metodología: demostrar que una misma familia abierta de modelos de pesos abiertos puede afinarse a dos dominios de razonamiento distinto con el mismo punto de partida. Para quien hace post-entrenamiento sobre modelos abiertos, es un caso de estudio concreto y reproducible de afinado competitivo. Encaja en la corriente de los modelos abiertos como base para razonamiento de alto nivel.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/nvidia/nemotron-ioi-and-imo-2026" rel="noopener">Blog de Hugging Face (Nemotron IOI/IMO)</a><span class="chip">NVIDIA</span><span class="chip">Nemotron</span><span class="chip">post-entrenamiento</span><span class="chip">razonamiento</span><span class="chip">pesos abiertos</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/Hcompany/holo4" rel="noopener">Holo4, la pieza que da soporte a agentes de uso de ordenador generalistas</a></h4><p>Hcompany publica Holo4 en su blog de Hugging Face, presentado como la pieza de base que da soporte a agentes de uso de ordenador (computer-use) generalistas. El computer-use —agentes que navegan y operan interfaces por cuenta de un usuario— es uno de los dominios de agentes que más crece, y tiene una dependencia directa de la calidad del modelo de base que percibe y actúa sobre la pantalla. Para quien construye o evalúa agentes de uso de ordenador, es una referencia concreta del stack de infraestructura que los sostiene. Es una pieza de la que sale la capacidad real de los agentes generalistas de pantalla.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/Hcompany/holo4" rel="noopener">Blog de Hugging Face (Holo4)</a><span class="chip">computer-use</span><span class="chip">agentes</span><span class="chip">Hcompany</span><span class="chip">infraestructura</span></div></article><article class="note"><h4><a href="https://huggingface.co/Cactus-Compute/whistle" rel="noopener">whistle, reconocimiento de voz en el dispositivo vía WebAssembly</a></h4><p>Cactus-Compute publica whistle, un modelo de reconocimiento de voz (ASR) de pesos abiertos pensado para el edge y el on-device, con cuantización y despliegue vía WebAssembly, soportando inglés, alemán y francés. La apuesta es llevar la transcripción de voz al dispositivo y al navegador, sin enviar audio a la nube, que es justo la preocupación de privacidad que el self-hosting de IA resuelve. En Hugging Face ya supera los 310 me gusta y más de 12.000 descargas. Para quien quiere transcripción local en el navegador o en un dispositivo con poco cómputo, whistle es una opción concreta de pesos abiertos.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Cactus-Compute/whistle" rel="noopener">Hugging Face (Cactus-Compute/whistle)</a><span class="chip">ASR</span><span class="chip">edge</span><span class="chip">on-device</span><span class="chip">WebAssembly</span><span class="chip">pesos abiertos</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>

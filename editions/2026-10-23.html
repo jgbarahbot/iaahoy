@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 23 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 26">
+<link rel="alternate" type="application/json" href="editions/2026-10-23.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 26</span> &nbsp;·&nbsp; viernes 23 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/blog/allenai/olmoearth-v1-3" style="color:inherit;text-decoration:none" rel="noopener">OlmoEarth v1.3: Ai2 libera embeddings de satélite *SOTA* y, junto a los *weights*, los *embeddings* precomputados de *todos* los píxeles de 10 metros del planeta</a></h2><p class="lead">El Allen Institute for AI (*Ai2*) estrena *OlmoEarth v1.3*, su modelo de *embeddings* de satélite de la misma familia de fundación *OLMo* — ahora con un *state-of-the-art* en *remote sensing* — y hace el salto de «pesos que tienes que correr» a «resultado que ya está calculado»: publica además un *dataset* con los *embeddings* precomputados, anuales, para cada píxel de 10 metros de la superficie terrestre, más un *Embeddings Explorer* en el navegador donde cualquiera puede poner el modelo a trabajar sin *GPU*. Para el *self-hoster* la doble cara de la noticia: puedes bajar *OlmoEarth-v1_3-Base* de *Hugging Face* y generar tus propios *embeddings* de imagen, o bien cazar directamente el *corpus* precomputado para tareas de *change detection*, clasificación de ecosistemas o *search* geoespacial a escala global sin coste de inferencia. Es el ejemplo de la semana del «el *foundation model* geoespacial abierto que no solo te da el modelo, te da la respuesta del planeta entero».</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/blog/allenai/olmoearth-v1-3" rel="noopener">Blog de Hugging Face (OlmoEarth v1.3)</a><a class="chip link" href="https://huggingface.co/allenai/OlmoEarth-v1_3-Base" rel="noopener">Hugging Face (OlmoEarth-v1_3-Base)</a><a class="chip link" href="https://allenai.org/blog/olmoearth-v1-3" rel="noopener">Blog de Ai2 (OlmoEarth v1.3)</a><span class="chip">ai2</span><span class="chip">olmoearth</span><span class="chip">satellite</span><span class="chip">remote-sensing</span><span class="chip">embeddings</span><span class="chip">open-weights</span><span class="chip">geospatial</span><span class="chip">self-hosting</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B" rel="noopener">*Muse-Spark-Open*: *Meta* libera un *MoE* abierto de 816B/42B activos, *multimodal*, con 1M de contexto, enfocado a *coding* y agentes</a></h4><p>*meta-models/Muse-Spark-Open-816B-A42B* es el *open-weights* del día: un *mixture-of-experts* de 816B parámetros totales (42B activos) y 1M de tokens de contexto, nativamente *multimodal* y construido para *coding* y trabajo agéntico, publicado por *Meta* como «el *open-weight* más capaz de su *stack* en EE. UU.». Va en la portada del *trending* de *Hugging Face* y el *blog* de *research.meta.ai* lo enmarca como la opción *self-hosted* de la familia *Muse*: *weights* abiertos con recetas *BF16* y *NVFP4*, el tipo de *MoE* grande que encaja con las recetas de *NVMe*-streaming de *experts* que venimos viendo en la comunidad. Para el *self-hoster*, es el *frontier*-class *open model* de la semana: el *MoE* que no cabe en una *GPU* y sí en una receta distribuida.</p><div class="chips"><a class="chip link" href="https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B" rel="noopener">Hugging Face (Muse-Spark-Open-816B-A42B)</a><a class="chip link" href="https://research.meta.ai/blog/muse-spark-open" rel="noopener">Meta Research (Muse Spark Open)</a><span class="chip">meta</span><span class="chip">muse-spark</span><span class="chip">moe</span><span class="chip">open-weights</span><span class="chip">1m-context</span><span class="chip">multimodal</span><span class="chip">coding</span><span class="chip">agents</span><span class="chip">nvfp4</span></div></article><article class="note"><h4><a href="https://huggingface.co/black-forest-labs/flux-3-image-klein" rel="noopener">*FLUX 3 Image Klein*: *Black Forest Labs* libera el *open-weights* de *FLUX 3* — 5.6B de *imagen* con edición y hasta 10 referencias</a></h4><p>*black-forest-labs/flux-3-image-klein* es la variante *open-weights* de la familia *FLUX 3*: un modelo de *text-to-image* y *image editing* de 5.6B parámetros que comparte los aprendizajes que *BFL* ha ido acumulando a lo largo de *FLUX 3* a través de *imagen*, *vídeo* y *audio* — *imagen* aporta el detalle espacial, *vídeo* el *motion* — y que compone *imágenes* desde cero o las edita usando hasta 10 imágenes de referencia (o *layout boxes*) como guía. Sale como *diffusion-single-file* (listo para *ComfyUI*) y en un *pipeline* de *diffusers*, con un *space* de *Hugging Face* para probarlo directamente. Para el *self-hoster* de generación de *imagen*, es la pieza abierta de la familia *FLUX 3* del día: *weights* que puedes *fine-tune*ar y correr en tu propio hardware.</p><div class="chips"><a class="chip link" href="https://huggingface.co/black-forest-labs/flux-3-image-klein" rel="noopener">Hugging Face (flux-3-image-klein)</a><a class="chip link" href="https://bfl.ai/blog/flux-3-image-klein" rel="noopener">Blog de BFL (FLUX 3 Image Klein)</a><span class="chip">black-forest-labs</span><span class="chip">flux-3</span><span class="chip">image-generation</span><span class="chip">image-editing</span><span class="chip">open-weights</span><span class="chip">comfyui</span><span class="chip">diffusers</span></div></article><article class="note"><h4><a href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">*LTX-2.5*: *Lightricks* libera su *foundation model* de *audio-vídeo* de 22B con *weights* abiertos</a></h4><p>*Lightricks/LTX-2.5* es el *foundation model* *open-weights* del día para *vídeo* con *audio*: un modelo de 22B parámetros que cubre *text-to-video*, *image-to-video*, *video-to-video* y las variantes con *audio* (*audio-to-video*, *text-to-audio*, etc.), y que genera escenas *multishot* en un solo paso, edita *footage* real y exporta *EXR* de calidad cinematográfica. *Lightricks* lo define como un «*world model*» *open-weights* que puedes *fine-tune*ar y correr en tu hardware. Es el *anchor* de la semana en el espacio *video+audio* de *Hugging Face*: el *foundation model* abierto al que apuntan los que buscan generación de *vídeo* con sonido nativo, en lugar de los *pipelines* que pegan *TTS* y *TTS*-driven *lip-sync* encima.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">Hugging Face (LTX-2.5)</a><a class="chip link" href="https://ltx.io/model/ltx-2-5" rel="noopener">LTX (LTX-2.5)</a><span class="chip">lightricks</span><span class="chip">ltx-2.5</span><span class="chip">video</span><span class="chip">audio</span><span class="chip">open-weights</span><span class="chip">world-model</span><span class="chip">diffusion</span></div></article><article class="note"><h4><a href="https://huggingface.co/fishaudio/drama-3" rel="noopener">*Drama 3* (*Fish Audio*): *TTS* multi-hablante «dirigible» — un *MoE* de 35B/3B con *voice direction* en lenguaje natural, con receta *vLLM-Omni*</a></h4><p>*fishaudio/drama-3* es la nueva generación de *TTS* de *Fish Audio* construida para *voice direction* y *content creation*: además del *script*, describes en lenguaje natural cómo debe interpretarse cada línea (emoción, ritmo, sonidos y pausas), y soporta *multi-hablante*, *voice cloning* y control natural. Es un *MoE* de 35B parámetros totales (3B activos) con *tags* de hablante y eventos *inline*, y llega con una receta en *vLLM-Omni* para servirlo. Es el *counterpoint* interesante del día frente al *Granite Speech* de la portada de ayer: no un *ASR*, sino un *TTS* «dirigido», con una receta de *inference* abierta. Para quien genera *audio* con *LLMs* locales, es la pieza *open* del *stack* de voz del día.</p><div class="chips"><a class="chip link" href="https://huggingface.co/fishaudio/drama-3" rel="noopener">Hugging Face (drama-3)</a><a class="chip link" href="https://docs.fish.audio/features/text-to-speech/drama-3" rel="noopener">Docs de Fish Audio (Drama 3)</a><a class="chip link" href="https://recipes.vllm.ai/fishaudio/drama-3" rel="noopener">vLLM Recipes (drama-3)</a><span class="chip">fish-audio</span><span class="chip">drama-3</span><span class="chip">tts</span><span class="chip">multi-speaker</span><span class="chip">voice-cloning</span><span class="chip">moe</span><span class="chip">vllm-omni</span><span class="chip">open-weights</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/microsoft/thinkingbox-training" rel="noopener">*ThinkingBox-Training* (*Microsoft*/*Hugging Face*): convertir la *grading* de *base de datos* en *rewards* de *RL* para *post-train*ar agentes</a></h4><p>*Microsoft* y *Hugging Face* publican *Turning Database Grading into RL Rewards* (blog de *Hugging Face*, 22 de octubre): la idea es tomar *ThinkingBox* — el *benchmark* que evalúa a un agente por el *estado* de la *base de datos* que deja, no por las frases que genera — y usar esas comprobaciones ejecutables de *estado final* como *rewards* de *reinforcement learning* para *post-train*ar agentes. El punto de partida es duro: un estudio citado en la semana halló que los agentes «fallan al completar la tarea» en una abultada mayoría de casos, y que lo que el agente *dice* que hizo no siempre coincide con lo que *realmente* dejó hecho. La lección práctica del *team article* es la del día: entrenar con *checks* de *base de datos* como *reward* hizo al agente mucho más consistente completando *tasks* multi-paso, y es una receta reproducible para quien *post-trains* sus propios agentes.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/microsoft/thinkingbox-training" rel="noopener">Blog de Hugging Face (ThinkingBox-Training)</a><a class="chip link" href="https://commandline.microsoft.com/thinkingbox-bench-agent-benchmarking/" rel="noopener">Microsoft (ThinkingBox bench)</a><span class="chip">microsoft</span><span class="chip">hugging-face</span><span class="chip">thinkingbox</span><span class="chip">rl</span><span class="chip">agents</span><span class="chip">evaluation</span><span class="chip">post-training</span><span class="chip">rewards</span></div></article><article class="note"><h4><a href="https://github.com/iofold/stablehand" rel="noopener">*stablehand*: un *runtime* de agentes autohospedado — corre cualquier *harness* en *sandboxes* aislados, con *HITL*, *budgets* y *streaming* *UI*</a></h4><p>*iofold/stablehand* es un *runtime* de agentes *self-hosted*: corre cualquier *harness* (cualquier *coding agent* que tengas) dentro de *sandboxes* aislados, y añade la pila operativa que falta en el *home-lab* — *streaming UI*, *human-in-the-loop* (*HITL*), *budgets* y *durable events*. Es el ejemplo concreto de la semana del «el *sandbox* como primer cliente del *endpoint* local»: en vez de lanzar el agente *bare* en tu máquina, lo aíslas, le pones tope de gasto y un canal para que un humano intervenga cuando toca. Para la comunidad *self-hosted* que ya tiene un *LLM* en el *rack*, es la capa de contención del día: seguridad y *control* sin salir de tu propio hardware.</p><div class="chips"><a class="chip link" href="https://github.com/iofold/stablehand" rel="noopener">GitHub (stablehand)</a><span class="chip">stablehand</span><span class="chip">iofold</span><span class="chip">agents</span><span class="chip">self-hosting</span><span class="chip">sandbox</span><span class="chip">hitl</span><span class="chip">runtime</span><span class="chip">open-source</span></div></article><article class="note"><h4><a href="https://github.com/Yonagi043/vestigium" rel="noopener">*vestigium*: un *MCP server* que deja a los agentes *leer* *PDFs* largos «por dirección» y *citar* la página</a></h4><p>*Yonagi043/vestigium* resuelve un dolor muy concreto de los *coding agents* y asistentes de *research*: «cada respuesta deja una traza de vuelta a su página». Es un *MCP server* que permite a un agente *leer* *PDFs* largos por *dirección* (ir a la página *N*, extraer ese *chunk*) y *citar* la página exacta de donde viene cada afirmación. En la semana del *RAG* y la *citas verificables* — con *Jev-RAG-Claim-Verification-130K* y *FDE-Gym* en el *trending* de *datasets* — este es el ladrillo *open* que cierra el *loop* entre *leer* y *citar*: el agente no «responde de memoria», apunta a la página. Para quien monta *RAG* local con *MCP*, es la pieza de *grounding* de la semana.</p><div class="chips"><a class="chip link" href="https://github.com/Yonagi043/vestigium" rel="noopener">GitHub (vestigium)</a><span class="chip">vestigium</span><span class="chip">mcp</span><span class="chip">pdf</span><span class="chip">citations</span><span class="chip">rag</span><span class="chip">agents</span><span class="chip">self-hosting</span><span class="chip">open-source</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.26233" rel="noopener">*Heartbeat Thinking*: razonamiento y ejecución de *tools* especulativos mientras el agente *escucha*, en agentes de *voz* en *realtime* (arXiv 2610.26233)</a></h4><p>Zhang, Fu, Tong, Zheng y col. (arXiv 2610.26233, 18 de octubre) parten de un problema muy concreto de los agentes de *voz*: el usuario tiene que *esperar* tras *terminar* de *hablar*, aunque la información *actionable* ya llegó antes. Los enfoques *speculativos* *empezar* a trabajar *durante* el *speech*, pero la generación acotada por *chunks* o «*interruption* al actualizar» puede *romper* cuando el hablante se *corta*. *Heartbeat Thinking* propone *razonar* y ejecutar *tools* de forma *speculativa* «mientras *escucha*» — un *heartbeat* de trabajo *speculativo* que no se *bloquea* esperando el fin del *turno*. Es el paper del día para quien trabaja con *voice agents* y la *latencia* del *turno* de *user* como *bottleneck*: el *trick* es *empezar* antes de que el *speech* *termine*.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.26233" rel="noopener">arXiv (Heartbeat Thinking)</a><a class="chip link" href="https://huggingface.co/papers/2610.26233" rel="noopener">Hugging Face Papers</a><span class="chip">heartbeat-thinking</span><span class="chip">voice-agents</span><span class="chip">speculative</span><span class="chip">realtime</span><span class="chip">latency</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.19705" rel="noopener">*RouteWeaver*: tejer *selección de modo* y *ejecución* en un *routing* unificado de *LLMs* (arXiv 2610.19705)</a></h4><p>Wang, Zhang, Liu, Feng y col. (arXiv 2610.19705, 18 de octubre) atacan el *LLM routing* — *elegir* dinámicamente y *coordinar* *LLMs* *heterogéneos* entre *tareas* *diversas* — porque los enfoques *actuales* están *cristalizados* en un *paradigma* de *ejecución* *predefinido* (*single-round*, *multi-round* o *agentic*), y eso no *encaja* con todas las *tareas*. *RouteWeaver* *une* la *selección* del *modo* y la *ejecución* en un *router* *unificado*, en vez de *fijar* el *paradigma* por *adelante*. Es el *ladrillo* del día para quien *orquesta* varios *LLMs* (el *MoE* de *Muse-Spark* de *Modelos* o la receta *NVFP4* de *NVIDIA* son el *substrato*): cómo *ruteas* la *tarea* al *modelo* y al *modo* *correcto* en *un* *paso*.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.19705" rel="noopener">arXiv (RouteWeaver)</a><a class="chip link" href="https://huggingface.co/papers/2610.19705" rel="noopener">Hugging Face Papers</a><span class="chip">routeweaver</span><span class="chip">llm-routing</span><span class="chip">orchestration</span><span class="chip">agentic</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.29677" rel="noopener">*Toward Recursive Self-Improvement in Physical AI*: RSI en el mundo físico (arXiv 2610.29677)</a></h4><p>Luo, Bai, Xu, Li y col. (arXiv 2610.29677, 20 de octubre) extienden la idea de *recursive self-improvement* — un sistema que no solo *mejora* su *comportamiento* sino también el *proceso* por el que se *mejora* — del *mundo* *digital* (agentes que *re-escríben* su *código* y *validan* cada *versión* con *tests* *ejecutables*) al *mundo* *físico*. La pregunta del paper: ¿cómo *validas* la *auto-mejora* cuando el *estado* a *verificar* no es una *salida* de *código* sino un *robot* *actuando* en el *mundo*? Es el *counterpoint* del día a la ola de «*agentes que *mejoran* a *agentes*» y el más cercano a la pregunta de *Physical AI* que la comunidad se *hace*: ¿de qué *sirve* el *auto-mejoramiento* si no *escala* a la *tarea* *física* *real*?</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.29677" rel="noopener">arXiv (Recursive Self-Improvement in Physical AI)</a><a class="chip link" href="https://huggingface.co/papers/2610.29677" rel="noopener">Hugging Face Papers</a><span class="chip">recursive-self-improvement</span><span class="chip">physical-ai</span><span class="chip">agents</span><span class="chip">research</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/ibm-granite/granite-timeseries-ensemble-r1" rel="noopener">*granite-timeseries-ensemble-r1*: *IBM* libera un *ensemble* de *foundation models* de *series de tiempo* *Apache 2.0* para *forecasting* local</a></h4><p>*ibm-granite/granite-timeseries-ensemble-r1* es la pieza del día en el *stack* de *forecasting* autohospedado: un *ensemble* probabilístico de *foundation models* de *series de tiempo* de la familia *Granite* — acompañado del *team article* de *IBM Research* sobre *ensemble forecasting* — bajo *Apache 2.0*, evaluado contra *GiftEval*. El *ensemble* combina varios miembros (*tspulse-r1*, *ttm-r2/r3*, *patchtst*, etc.) para mejorar la calidad del pronóstico sin *re-train*ar de cero. Para quien monta *forecasting* en el *rack* — demanda, precio, consumo — es la receta *open* de la semana: un *ensemble* de *foundation models* de *series de tiempo* *Apache 2.0* que corre local y se evalúa contra un *benchmark* público.</p><div class="chips"><a class="chip link" href="https://huggingface.co/ibm-granite/granite-timeseries-ensemble-r1" rel="noopener">Hugging Face (granite-timeseries-ensemble-r1)</a><a class="chip link" href="https://huggingface.co/blog/ibm-research/granite-timeseries-ensemble-r1" rel="noopener">Blog de Hugging Face (ensemble forecasting)</a><span class="chip">ibm</span><span class="chip">granite</span><span class="chip">time-series</span><span class="chip">ensemble</span><span class="chip">forecasting</span><span class="chip">apache-2.0</span><span class="chip">self-hosting</span></div></article><article class="note"><h4><a href="https://huggingface.co/google/embeddinggemma-2" rel="noopener">*embeddinggemma-2* (*Google*): *embeddings* *multimodales* abiertos — *texto*, *imagen*, *audio* y *vídeo* en un solo modelo</a></h4><p>*google/embeddinggemma-2* es el *open-weights* del día para *embeddings* *multimodales*: un modelo de *feature extraction*/*sentence-transformers* que embebe *texto*, *imagen*, *audio* y *vídeo* en un espacio común, listo para *retrieval* y *RAG* *multimodal*. Con ~2.850 *likes* en *Hugging Face*, es la pieza *open* del *stack* de *embeddings* del día: en lugar de un *embedding* solo de *texto*, un modelo unificado que sirve todos los modos y corre local. Para quien monta *RAG* con imágenes o *audio* en su propio hardware, es el *encoder* *open* que faltaba de la semana.</p><div class="chips"><a class="chip link" href="https://huggingface.co/google/embeddinggemma-2" rel="noopener">Hugging Face (embeddinggemma-2)</a><span class="chip">google</span><span class="chip">embeddinggemma-2</span><span class="chip">embeddings</span><span class="chip">multimodal</span><span class="chip">rag</span><span class="chip">retrieval</span><span class="chip">open-weights</span><span class="chip">self-hosting</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">*MiMo-V2.6-RL-oss* (*Xiaomi*): *dataset* *open* de *RL* para *LLMs* — *documents* e *imagen* a *parquet*</a></h4><p>*XiaomiMiMo/MiMo-V2.6-RL-oss* es el *dataset* del día en la semana del *ThinkingBox-Training* (sección de Agentes): datos abiertos de *reinforcement learning* de la familia *MiMo* de *Xiaomi*, a *parquet* con modalidad de *documents* e *imagen* (y *texto*), del orden de un millón de ejemplos y *Apache 2.0*. Es la pieza *open* que cierra el *loop* de *post-training* del día: el *benchmark* *ThinkingBox* aporta el *reward* y este *dataset* el material *open* para el *RL*. Para quien *post-trains* *LLMs* locales, es el *dataset* de *RL* *open* que complementa la receta de *rewards* por *base de datos* de *Microsoft*.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">Hugging Face (MiMo-V2.6-RL-oss)</a><span class="chip">xiaomi</span><span class="chip">mimo</span><span class="chip">rl</span><span class="chip">dataset</span><span class="chip">post-training</span><span class="chip">open-data</span><span class="chip">apache-2.0</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>

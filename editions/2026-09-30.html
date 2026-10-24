@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 30 de septiembre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 4">
+<link rel="alternate" type="application/json" href="editions/2026-09-30.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 4</span> &nbsp;·&nbsp; martes 30 de septiembre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/Qwen/Qwen-Image-2.1" style="color:inherit;text-decoration:none" rel="noopener">Qwen-Image-2.1: 7B de pesos abiertos para generar y editar imágenes</a></h2><p class="lead">Alibaba ha publicado Qwen-Image-2.1, el nuevo modelo unificado de generación y edición de imágenes de la familia Qwen, con pesos abiertos y licencia Qwen. La componente visual de generación pesa solo 7B parámetros sobre 32 capas de DiT Single-Stream, con atención de granularidad mixta y reutilización de KV cache por prefijo para equilibrar calidad, eficiencia y versatilidad. Aporta salida RGBA con canal alfa, lo que facilita el recorte de fondos y la composición directa, y se apoya en un modelo de texto de 8B para entender prompts complejos. El repositorio acumula más de 64.000 descargas en Hugging Face, hay una cuantización GGUF de la comunidad (abenzerps) con 1,15M de descargas y un demo interactivo en Spaces para probarlo sin montar nada. Es una de las opciones locales más serias que hay hoy para pipelines de imagen con open weights.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/Qwen/Qwen-Image-2.1" rel="noopener">Hugging Face: Qwen/Qwen-Image-2.1</a><a class="chip link" href="https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF" rel="noopener">GGUF de la comunidad (abenzerps)</a><a class="chip link" href="https://huggingface.co/spaces/Qwen/Qwen-Image-2.1" rel="noopener">Demo en Spaces</a><span class="chip">imagen</span><span class="chip">generación</span><span class="chip">Qwen</span><span class="chip">pesos abiertos</span><span class="chip">diffusers</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos nuevos y en tendencia</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">LTX-2.5 de Lightricks: video con audio nativo y 1,5M de descargas</a></h4><p>LTX-2.5, el modelo de video de Lightricks con pesos abiertos, lidera las tendencias de Hugging Face con más de 1,5 millones de descargas. Es un modelo difusivo de 22B parámetros que genera y edita video con audio nativo, y su nuevo Decodificador de Video por Difusión mantiene nítidos rostros, texto en pantalla y movimiento rápido. El paquete incluye checkpoints GGUF para ejecución local y un benchmark propio. El acceso a los pesos es restringido bajo la licencia comunitaria LTX-2.x, que exige licencia comercial a quien supere 10 millones de dólares de ingresos.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">Hugging Face: Lightricks/LTX-2.5</a><a class="chip link" href="https://huggingface.co/Lightricks/LTX-2.5-Diffusers" rel="noopener">Paquete Diffusers</a><span class="chip">video</span><span class="chip">difusión</span><span class="chip">pesos abiertos</span><span class="chip">Lightricks</span><span class="chip">GGUF</span></div></article><article class="note"><h4><a href="https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf" rel="noopener">Bonsai 2 27B en ternario: un 27B que cabe en 5,9 GB</a></h4><p>Prism ML publica en GGUF la cuantización ternaria (2-bit) de Qwen3.8-27B, con licencia Apache 2.0 y lista para llama.cpp en CUDA, Metal o CPU. El modelo ocupa unos 5,9 GB frente a los ~54 GB del FP16, conservando el 98,2% de la inteligencia del original según sus 14 benchmarks, y mantiene el comportamiento de razonamiento y agente incluso en régimen sub-4-bit. La referencia de cuantización extrema que la comunidad está probando esta semana, con 3,5M de descargas ya.</p><div class="chips"><a class="chip link" href="https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf" rel="noopener">Hugging Face: prism-ml/Ternary-Bonsai-2-27B-gguf</a><a class="chip link" href="https://github.com/PrismML-Eng/Bonsai-demo" rel="noopener">Whitepaper y demo (GitHub)</a><span class="chip">cuantización</span><span class="chip">llama.cpp</span><span class="chip">GGUF</span><span class="chip">local-first</span></div></article><article class="note"><h4><a href="https://huggingface.co/Qwen/Qwen3.8-27B" rel="noopener">Qwen3.8-27B: 7M de descargas y el modelo de la semana</a></h4><p>Qwen3.8-27B, el multimodal de texto e imagen de la familia Qwen, es el modelo más descargado de Hugging Face esta semana con más de 7 millones de descargas y 16.500 likes. Sirve de base a media tendencia local —incluida la cuantización ternaria de Bonsai que aparece antes en esta edición— y es también el motor que genera esta misma edición del periódico. Un caso raro y simpático: la portada se escribe con el modelo que cubre.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Qwen/Qwen3.8-27B" rel="noopener">Hugging Face: Qwen/Qwen3.8-27B</a><span class="chip">Qwen</span><span class="chip">multimodal</span><span class="chip">trending</span><span class="chip">pesos abiertos</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Software y agentes</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/feder-cr/dots" rel="noopener">dots: un agente de IA con su propio navegador, open source</a></h4><p>feder-cr/dots es el repositorio que más estrellas está ganando en GitHub esta semana: un agente de IA con su propio navegador, que no depende de un proveedor de browser-as-a-service y corre íntegramente en tu hardware. Está escrito en Python, con 403 estrellas y actualizado ayer. Un ejemplo directo de cómo los agentes de navegación se están des-privatizando y volviendo autohospedables.</p><div class="chips"><a class="chip link" href="https://github.com/feder-cr/dots" rel="noopener">GitHub: feder-cr/dots</a><span class="chip">agentes</span><span class="chip">self-hosting</span><span class="chip">browser</span><span class="chip">open-source</span></div></article><article class="note"><h4><a href="https://github.com/B0yko/local-enough" rel="noopener">local-enough: ¿cabe esta tarea de IA en tu hardware?</a></h4><p>B0yko/local-enough es una herramienta nueva para medir si una tarea concreta de IA (clasificación, extracción, resumen) puede correr en tu propio hardware: compara precisión contra un umbral y coste de inferencia local. Es el tipo de script que falta en el mundo self-hosted: en vez de preguntar &#x27;¿cuántos GB necesita el modelo?&#x27;, preguntas &#x27;¿mi caso de uso cabe en lo que tengo?&#x27;.</p><div class="chips"><a class="chip link" href="https://github.com/B0yko/local-enough" rel="noopener">GitHub: B0yko/local-enough</a><span class="chip">self-hosting</span><span class="chip">llamada</span><span class="chip">hardware modesto</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/transformers-llama-cpp-quants" rel="noopener">Transformers ya ejecuta cuantizados de llama.cpp</a></h4><p>El blog de Hugging Face documenta la ejecución de cuantizados de llama.cpp dentro de Transformers: GGUF y variantes de bajo bit directamente en la librería de modelos, sin saltar de framework. Reduce la fricción de pasar un checkpoint cuantizado a inferencia y abre la puerta a servir modelos de precisión reducida en los mismos pipelines de siempre.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/transformers-llama-cpp-quants" rel="noopener">Blog: transformers-llama-cpp-quants</a><span class="chip">Transformers</span><span class="chip">cuantización</span><span class="chip">GGUF</span><span class="chip">librería</span></div></article><article class="note"><h4><a href="https://github.com/th3nolo/semgate" rel="noopener">semgate: puerta de permisos para agentes de código</a></h4><p>th3nolo/semgate es un permission gate para agentes de código (Claude Code, Codex, OpenCode, Gemini CLI): decide qué acciones puede tomar el agente y cuáles requieren aprobación humana. Un matón de seguridad útil para quien deja a los agentes de programación sueltos en repositorios propios.</p><div class="chips"><a class="chip link" href="https://github.com/th3nolo/semgate" rel="noopener">GitHub: th3nolo/semgate</a><span class="chip">agentes</span><span class="chip">seguridad</span><span class="chip">código</span><span class="chip">GitHub</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2609.32607" rel="noopener">VoxMem: ¿recuerda tu asistente de voz quién te dijo algo?</a></h4><p>El paper de hoy mide la memoria multimodal de los grandes modelos de audio: 3.196 instancias de evaluación sobre 34.743 sesiones habladas (177 horas), cruzando cuatro tipos de evidencia acústica (semántica del habla, identidad del hablante, cues paralingüísticos y sonido ambiental) con cuatro operaciones de memoria (extracción, razonamiento entre sesiones, seguimiento temporal y rechazo a responder). El resultado: los asistentes de voz recuerdan qué se dijo, pero rara vez quién lo dijo. Un benchmark honesto sobre el punto débil de los asistentes de voz de largo horizonte, con 42 upvotes en Hugging Face.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.32607" rel="noopener">arXiv 2609.32607</a><a class="chip link" href="https://huggingface.co/papers/2609.32607" rel="noopener">Hugging Face Papers</a><span class="chip">audio</span><span class="chip">memoria</span><span class="chip">benchmark</span><span class="chip">LALM</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2609.31847" rel="noopener">Omni-IO Skills: agentes omni-nativos con skills reutilizables</a></h4><p>Yanlin Li y colegas proponen Omni-IO Skills: un marco para que agentes de propósito general reutilicen &#x27;skills&#x27; aprendidas a lo largo de tareas de horizonte largo, en vez de replanear cada vez desde cero. El paper se centra en cómo estructurar esas skills para que sean portables entre dominios y cómo evaluarlas. 14 upvotes y una línea de trabajo interesante para quien monta agentes que acumulan experiencia.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.31847" rel="noopener">arXiv 2609.31847</a><a class="chip link" href="https://huggingface.co/papers/2609.31847" rel="noopener">Hugging Face Papers</a><span class="chip">agentes</span><span class="chip">skills</span><span class="chip">aprendizaje</span><span class="chip">arXiv</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2609.37923" rel="noopener">EpiCon: agentes que aprenden de forma colectiva</a></h4><p>EpiCon propone un mecanismo de aprendizaje colectivo entre agentes mediante memoria multimodal co-evolutiva: en vez de que cada agente aprenda solo de sus propias ejecuciones, la memoria se comparte y evoluciona entre ellos. Interesante como paso hacia flotas de agentes que se mejoran mutuamente sin reentrenar el modelo base.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.37923" rel="noopener">arXiv 2609.37923</a><a class="chip link" href="https://huggingface.co/papers/2609.37923" rel="noopener">Hugging Face Papers</a><span class="chip">agentes</span><span class="chip">memoria</span><span class="chip">multimodal</span><span class="chip">arXiv</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2609.37686" rel="noopener">EngiWorld: qué pueden hacer los agentes en entornos de ingeniería real</a></h4><p>Un paper nuevo mide lo que los agentes de frontera realmente entregan en entornos de ingeniería profesional: no tareas genéricas de computer-use, sino flujos de trabajo concretos de ingeniería. El objetivo es un benchmark más honesto que los que se publican para agentes &#x27;generalistas&#x27;. 15 upvotes y una línea útil para quien evalúa agentes en producción.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2609.37686" rel="noopener">arXiv 2609.37686</a><a class="chip link" href="https://huggingface.co/papers/2609.37686" rel="noopener">Hugging Face Papers</a><span class="chip">agentes</span><span class="chip">benchmark</span><span class="chip">ingeniería</span><span class="chip">arXiv</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://life-of-utkarsh.medium.com/pushing-the-limits-running-local-llms-and-a-24-7-personal-news-curator-on-4gb-of-ram-c55f9498bf3c" rel="noopener">4 GB de RAM y un curador de noticias 24/7</a></h4><p>Un artículo de la comunidad documenta un setup completo: LLMs locales y un curador de noticias personal 24/7 corriendo en un Raspberry Pi 4 de 4 GB. Cuantización agresiva, swap inteligente y modelos pequeños bien elegidos. La prueba de que el self-hosting ya no exige un equipo dedicado, y una receta concreta para quien quiere montar un asistente personal con lo mínimo.</p><div class="chips"><a class="chip link" href="https://life-of-utkarsh.medium.com/pushing-the-limits-running-local-llms-and-a-24-7-personal-news-curator-on-4gb-of-ram-c55f9498bf3c" rel="noopener">Artículo (Medium)</a><span class="chip">local-first</span><span class="chip">cuantización</span><span class="chip">hardware modesto</span><span class="chip">comunidad</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/tokenizers-v1" rel="noopener">Tokenizers v1: encode, decode y escalado, medidos</a></h4><p>La versión 1 de tokenizers, el motor de tokenización de Hugging Face, llega con cifras de encode/decode y un estudio de escalado a varios hilos. Para quien sirve muchos tokens al día, la diferencia entre versiones se nota en latencia de preprocesado, que suele ser la parte invisible de la inferencia.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/tokenizers-v1" rel="noopener">Blog: tokenizers-v1</a><span class="chip">tokenizers</span><span class="chip">rendimiento</span><span class="chip">Hugging Face</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/nvidia/kumo-tabular" rel="noopener">NVIDIA KUMO: kernels GPU para ML tabular a escala</a></h4><p>NVIDIA publica KUMO Tabular, una librería de kernels GPU para entrenar y servir modelos sobre datos tabulares, el tipo de datos que todavía domina los sistemas de negocio. El blog de Hugging Face incluye un how-to para correrla localmente. Interesante como ejemplo de cómo la infraestructura de kernels para LLMs se está reutilizando para ML tabular clásico.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/nvidia/kumo-tabular" rel="noopener">Blog: how-to-use-nvidia-kumo-tabular</a><span class="chip">tabular</span><span class="chip">kernels</span><span class="chip">GPU</span><span class="chip">NVIDIA</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando ggml-org/Qwen3.8-27B-GGUF:Q4_K_M, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA Abierta Hoy (ia·ahoy) — 18 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, kernels, agentes y self-hosting. Edición nº 22">
+<link rel="alternate" type="application/json" href="editions/2026-10-18.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La prensa de la IA abierta</span><span>Edición en línea · 100% estática</span></div><h1>ia<span class="amp">·</span>ahoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, kernels, agentes y fine-tunes: lo que suena, lo que estrena y lo que empieza a importarte.</p><div class="dateline"><span><span class="ed">Edición nº 22</span> &nbsp;·&nbsp; domingo 18 de octubre de 2026 &nbsp;·&nbsp; </span><nav><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<div class="podcast-cta"><strong>🎧 Si prefieres escuchar en lugar de leer…</strong><p>La edición de hoy en audio. Dale al play: un resumen pensado para oírse, con la voz de la casa.</p><audio controls preload="none" src="../podcast.mp3"></audio><p class="podcast-note"><span class="short">IA*A*Hoy</span> en corto — solo está disponible la edición de <span class="today">hoy</span>: el audio anterior no se conserva.</p></div>
+<main class="wrap">
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017" style="color:inherit;text-decoration:none" rel="noopener">DeepSeek libera DeepSeek-V4.1-Flash-1017: multimodal, bajo licencia MIT, y la promesa del &#x27;wish-driven programming&#x27;</a></h2><p class="lead">DeepSeek ha publicado DeepSeek-V4.1-Flash-1017 (el 17 de octubre), la versión más reciente de su familia Flash: un modelo *image-text-to-text* liberado bajo licencia MIT, con mejoras de benchmark, tareas completadas más rápido y salidas más cortas que la versión anterior — lo que DeepSeek describe como una mejora de Pareto. El lanzamiento llega acompañado del concepto de &#x27;wish-driven programming&#x27;: describir en lenguaje natural lo que se quiere y dejar que el modelo programe y ejecute. Ya es el modelo más descargado y votado del *trending* de *Hugging Face* (más de 1.000 likes en sus primeras horas), lo que en la comunidad de pesos abiertos se lee como el relevo natural de la versión Flash anterior. Con el MIT, cualquier persona o empresa puede usarlo, modificarlo y servirlo sin condiciones: para quienes autohospedan, la noticia de la semana.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017" rel="noopener">Hugging Face</a><a class="chip link" href="https://api-docs.deepseek.com/news/news261017/" rel="noopener">Noticia oficial (api-docs.deepseek.com)</a><a class="chip link" href="https://x.com/deepseek_ai/status/2111375640717033777" rel="noopener">Anuncio en X</a><span class="chip">deepseek</span><span class="chip">open-weights</span><span class="chip">mit</span><span class="chip">multimodal</span><span class="chip">agentic</span><span class="chip">1017</span></div></div>
+<div class="paper"><div class="main"><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/nvidia/scaling-indic-pretraining" rel="noopener">NVIDIA y AI4Bharat: Nemotron-pretraining-Indic-v1, 2,8 billones de tokens indios con pipeline de datos abierto</a></h4><p>NVIDIA y AI4Bharat publican Nemotron-pretraining-Indic-v1, un corpus de preentrenamiento de 2,8 billones (2.8 T) de tokens para las lenguas del sur de Asia, y —lo más importante para la comunidad— el pipeline abierto de generación de datos con el que se produjo: un proceso transparente que va de documentos fuente en inglés a textos en lenguas indicas. Es un caso de referencia de cómo se hace un corpus de preentrenamiento serio y reproducible, y abre la puerta a fine-tunings y auditorías sobre cómo se construyen los datos. Ya está disponible en *Hugging Face* junto a la línea Nemotron.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/nvidia/scaling-indic-pretraining" rel="noopener">Blog (Hugging Face)</a><a class="chip link" href="https://huggingface.co/nvidia/datasets" rel="noopener">Datasets de NVIDIA</a><span class="chip">open-data</span><span class="chip">pretraining</span><span class="chip">nvidia</span><span class="chip">ai4bharat</span><span class="chip">indic-languages</span></div></article><article class="note"><h4><a href="https://huggingface.co/baidu/Unlimited-OCR" rel="noopener">Unlimited-OCR de Baidu: un VLM de OCR multilingüe bajo MIT, con 1,5 millones de descargas</a></h4><p>Baidu libera Unlimited-OCR, un modelo de visión-lenguaje (VLM) para OCR multilingüe, bajo licencia MIT y con código propio (*custom code*). Con casi 4.800 likes y más de 1,5 millones de descargas, ya es uno de los modelos de OCR abiertos más descargados, y viene con su propio *paper* (arXiv 2606.23050). Para quien trabaja con documentos, escaneos o capturas en varios idiomas, es el punto de entrada de la semana a un OCR que se corre en local.</p><div class="chips"><a class="chip link" href="https://huggingface.co/baidu/Unlimited-OCR" rel="noopener">Hugging Face</a><a class="chip link" href="https://arxiv.org/abs/2606.23050" rel="noopener">arXiv</a><span class="chip">ocr</span><span class="chip">vision-language</span><span class="chip">multilingual</span><span class="chip">mit</span><span class="chip">baidu</span></div></article><article class="note"><h4><a href="https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B" rel="noopener">MiniCPM-V 4.7 (35B-A3B y 1B) de OpenBMB: el MoE multimodal on-device, Apache 2.0</a></h4><p>OpenBMB actualiza la familia MiniCPM-V a la 4.7, con dos tamaños: un MoE de 35B totales con 3B activos y una versión de 1B, ambos multimodales y bajo Apache 2.0, orientados explícitamente a equipos *on-device*. La idea de siempre de la línea: un modelo de visión-lenguaje que cabe en móviles y edge, con calidad suficiente para asistentes locales, documentación y visión. Un candidato serio para quien quiere un ojo local sin nube.</p><div class="chips"><a class="chip link" href="https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B" rel="noopener">Modelo 35B-A3B</a><a class="chip link" href="https://huggingface.co/openbmb/MiniCPM-V-4.7-1B" rel="noopener">Modelo 1B</a><span class="chip">multimodal</span><span class="chip">moe</span><span class="chip">on-device</span><span class="chip">apache-2.0</span><span class="chip">openbmb</span></div></article><article class="note"><h4><a href="https://huggingface.co/jialinyyzz/humanizer" rel="noopener">humanizer de jialinyyzz: un fine-tune de Gemma 4-12B que &#x27;des-robotiza&#x27; el texto (Apache 2.0, GGUF)</a></h4><p>jialinyyzz/humanizer es un fine-tune de *Gemma* 4-12B, en GGUF y Apache 2.0, especializado en reescribir texto para que suene menos generado: parafraseo, transferencia de estilo y depuración de los tics típicos de los modelos (más de 1.900 likes). Es el tipo de modelo pequeño y barato que encaja perfecto en una tubería de contenido autohospedada: antes de publicar, el texto pasa por el &#x27;humanizador&#x27; local.</p><div class="chips"><a class="chip link" href="https://huggingface.co/jialinyyzz/humanizer" rel="noopener">Hugging Face</a><span class="chip">fine-tuning</span><span class="chip">gemma-4</span><span class="chip">gguf</span><span class="chip">style-transfer</span><span class="chip">local-llm</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/lucataco/DeepSeek-V4.1-Flash-2x-DGX-Spark" rel="noopener">DeepSeek-V4.1-Flash-1017 en dos DGX Spark: TensorFold TP2, scripts y resultados de lucataco</a></h4><p>Poniendo los pies en la tierra del modelo de la portada: lucataco/DeepSeek-V4.1-Flash-2x-DGX-Spark documenta DeepSeek-V4.1-Flash-1017 corriendo en dos NVIDIA DGX Spark (GB10) con TensorFold y paralelismo tensorial 2, incluyendo la corrección del *chat template* y medidas de velocidad y calidad. Es el tipo de repositorio que la comunidad busca el primer día de un lanzamiento: cómo se sirve en hardware que la gente puede tener, no solo en un clúster.</p><div class="chips"><a class="chip link" href="https://github.com/lucataco/DeepSeek-V4.1-Flash-2x-DGX-Spark" rel="noopener">GitHub</a><span class="chip">deepseek</span><span class="chip">dgx-spark</span><span class="chip">inference</span><span class="chip">tensor-fold</span><span class="chip">trending</span></div></article><article class="note"><h4><a href="https://github.com/SRKRZ23/vramkit" rel="noopener">vramkit: compresión de VRAM para inferencia, con KV-cache int8 &#x27;casi sin pérdida&#x27; por canal</a></h4><p>SRKRZ23/vramkit ataca el coste de memoria de la inferencia por dos frentes: un codificador de pesos sin pérdidas que reduce un 33 % frente a la cuantización a 4 bits (y supera a *zstd* en pesos reales de Qwen), y una compresión de la caché KV que se integra en PyTorch. El hallazgo central: cuantizar las *keys* del KV por canal (no por token) da un int8 casi sin pérdida, con +0,1 % de perplejidad real y el doble de cabida. Funciona en ROCm, CUDA, MPS y CPU.</p><div class="chips"><a class="chip link" href="https://github.com/SRKRZ23/vramkit" rel="noopener">GitHub</a><span class="chip">inference</span><span class="chip">vram</span><span class="chip">kv-cache</span><span class="chip">quantization</span><span class="chip">pytorch</span></div></article><article class="note"><h4><a href="https://github.com/slmndrmz1134/konsey-cli" rel="noopener">konsey-cli: un &#x27;consejo&#x27; de varios modelos de LLM sobre los agentes que ya pagas</a></h4><p>slmndrmz1134/konsey-cli monta un consejo (en el estilo del *llm-council* de Karpathy) sobre los agentes CLI que ya tienes: Codex, Antigravity, OpenCode, *Claude Code*. En Python estándar, listo para Windows, y con un skill para *Claude Code*. La idea: en vez de confiar en un solo modelo, que varios opinen y se contrasten entre sí —una forma barata de reducir el sesgo de un único LLM en decisiones importantes.</p><div class="chips"><a class="chip link" href="https://github.com/slmndrmz1134/konsey-cli" rel="noopener">GitHub</a><span class="chip">agents</span><span class="chip">llm-council</span><span class="chip">cli</span><span class="chip">multi-model</span></div></article><article class="note"><h4><a href="https://github.com/emrehangorgec/awesome-llm-on-anything" rel="noopener">awesome-llm-on-anything: LLMs locales en hardware que no debería poder con ellos</a></h4><p>emrehangorgec/awesome-llm-on-anything es una lista curada (ya en tendencia de GitHub) de modelos de lenguaje corriendo localmente sobre hardware &#x27;que no debería poder&#x27;: consolas, SBCs, portátiles antiguos, hardware embebido. Es el tipo de recurso que captura el espíritu del ecosistema de pesos abiertos: cada día, el modelo cabe en más cosas.</p><div class="chips"><a class="chip link" href="https://github.com/emrehangorgec/awesome-llm-on-anything" rel="noopener">GitHub</a><span class="chip">awesome</span><span class="chip">local-llm</span><span class="chip">edge</span><span class="chip">curated</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.20461" rel="noopener">semCER: un carácter de error no es igual que otro (OCR pesado por severidad)</a></h4><p>Nguyen y Zang muestran que la tasa de error de caracteres (CER), la métrica estándar de OCR, trata un simple *typo* y un nombre equivocado igual de mal. Introducen *semCER*, que mantiene la alineación y el denominador del CER pero carga cada edición según su severidad semántica. Publicar la semana de la llegada de Unlimited-OCR de Baidu, encaja perfecto: se necesitan métricas que midan el daño real, no solo la distancia edit.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.20461" rel="noopener">arXiv</a><span class="chip">ocr</span><span class="chip">evaluation</span><span class="chip">metrics</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.19247" rel="noopener">Copy-Paste Language Models: mejorar el copia-y-pega en contexto con modelado explícito</a></h4><p>Godey y Artzi desmontan la intuición de que los transformers copian bien de su propio contexto: muestran que la capacidad de *copy-paste* de los LLMs se puede mejorar con un modelado explícito del copiado, y proponen CPLMs (*Copy-Paste Language Models*). Relevante para tareas donde el modelo debe replicar fragmentos exactos —extractos, código, tablas— y para entender un fallo silencioso que los benchmarks rara vez miden.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.19247" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.19247" rel="noopener">Hugging Face Papers</a><span class="chip">architecture</span><span class="chip">copy-paste</span><span class="chip">transformers</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.17697" rel="noopener">LeanPRM: supervisión de proceso anclada en Lean para verificar pruebas matemáticas paso a paso</a></h4><p>LeanPRM aborda el cuello de botella de verificar las pruebas matemáticas largas que los sistemas de IA ya saben escribir: un verificador aprendido que comprueba el paso a paso, entrenado sin etiquetar la corrección de cada paso a mano, anclando la supervisión al verificador formal Lean. Es la vía para que las pruebas generadas dejen de depender de un auditor humano o de un *checker* lento.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.17697" rel="noopener">arXiv</a><span class="chip">math</span><span class="chip">process-supervision</span><span class="chip">lean</span><span class="chip">proofs</span><span class="chip">research</span></div></article></section><section class="block" id=""><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/justxor/deepseek-local-guide-ru" rel="noopener">deepseek-local-guide-ru: la guía completa (en ruso) para correr DeepSeek en local</a></h4><p>En tendencia de GitHub, justxor/deepseek-local-guide-ru es la guía completa en ruso para instalar y correr DeepSeek en local (V4 y R1) en PC, Mac y servidor: Ollama, *llama.cpp*, LM Studio, *vLLM*, *Open WebUI*, API, RAG, agentes, fine-tuning y las mejores trucos. Un buen recordatorio de que el ecosistema de pesos abiertos no es solo en inglés: la documentación comunitaria se está globalizando rápido, y con la V4.1 de hoy el repos tiene nuevo oxígeno.</p><div class="chips"><a class="chip link" href="https://github.com/justxor/deepseek-local-guide-ru" rel="noopener">GitHub</a><span class="chip">deepseek</span><span class="chip">self-hosting</span><span class="chip">guide</span><span class="chip">community</span><span class="chip">russian</span></div></article><article class="note"><h4><a href="https://github.com/qfc50785/llm-inference-hosting" rel="noopener">llm-inference-hosting: cómo dimensionar tu servidor para el modelo, y no pagar por GPUs ociosas</a></h4><p>qfc50785/llm-inference-hosting es una guía práctica (nueva en tendencia) sobre hosting de inferencia: cómo dimensionar un servidor para el modelo concreto, comparar costes reales y no pagar por GPUs que duermen. Para quien da el salto de la tarjeta de sobremesa al servidor propio, es el tipo de hoja de ruta que evita el error clásico: comprar potencia que el modelo nunca va a llenar.</p><div class="chips"><a class="chip link" href="https://github.com/qfc50785/llm-inference-hosting" rel="noopener">GitHub</a><span class="chip">self-hosting</span><span class="chip">inference</span><span class="chip">sizing</span><span class="chip">costs</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/LightwheelAI/EgoDemo" rel="noopener">EgoDemo de LightwheelAI: video egocéntrico público con trazabilidad, para IA encarnada</a></h4><p>LightwheelAI/EgoDemo publica un conjunto de datos de vídeo egocéntrico (demostraciones humanas) con énfasis en la trazabilidad (*provenance*) de cada toma. Para la IA encarnada —robótica, asistentes con visión en primera persona—, datos de demo en primera persona con procedencia clara es lo que falta para entrenar y auditar; un paso más en la infraestructura de datos abiertos más allá del texto.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/LightwheelAI/EgoDemo" rel="noopener">Hugging Face</a><span class="chip">datasets</span><span class="chip">egocentric-video</span><span class="chip">embodied-ai</span><span class="chip">provenance</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><h6>El colofón</h6><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license"><a class="cc-badge" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener" title="Creative Commons Atribución-CompartirIgual 4.0 Internacional"><span class="cc-circ">CC</span><span class="cc-circ letter"><b>BY</b></span><span class="cc-circ squared"><span>SA</span></span></a><a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a></div></div></footer>
+</body></html>
