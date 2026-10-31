@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA·A·Hoy — 29 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, software libre para IA y mucho más. Edición nº 33">
+<link rel="alternate" type="application/json" href="editions/2026-10-29.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+  /* long unbreakable tokens (repo slugs, URLs) must wrap, never force
+     horizontal scroll on narrow screens (user report 2026-10-25) */
+  overflow-wrap:anywhere;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;min-width:0}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+.dateline nav .sep{color:var(--rule);margin-right:14px}
+
+/* ---------- Podcast block (the daily audio) ----------
+   Lives INSIDE .wrap (the page container): the old version sat between the
+   masthead and the container and bled to the left edge (user report
+   2026-10-25). The label is the show name itself, on the line above the
+   player, per the same report. */
+.podcast-cta{
+  margin:16px 0 6px;padding:14px 18px 16px;
+  background:var(--paper-2);
+  border:1px solid var(--rule);border-left:4px solid var(--accent);
+  border-radius:2px;
+}
+.podcast-cta .podcast-label{margin:0 0 10px;font-size:15.5px;color:var(--ink);font-style:italic}
+.podcast-cta .podcast-label b{font-style:normal;color:var(--accent);letter-spacing:.01em}
+.podcast-cta audio{width:100%;display:block}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+/* Lead illustration (moss-image-news-illustration): between the summary and
+   the first body paragraph. MUST never force horizontal scroll on narrow
+   screens (user rule 2026-10-25): max-width:100% on the <img> is the guard,
+   width:auto keeps its natural aspect, height:auto avoids distortion. */
+.lead-illo{margin:14px 0 6px}
+.lead-illo img{
+  display:block;width:auto;max-width:100%;height:auto;
+  margin:0 auto;border:1px solid var(--rule);border-radius:2px;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+.lead-illo figcaption{
+  font-family:var(--sans);font-size:12px;color:var(--ink-soft);
+  text-align:center;margin-top:6px;letter-spacing:.02em;
+}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+  min-width:0;word-break:break-word;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+/* Two-pass recap: the single summary paragraph that opens each note. */
+.note .resumen{font-style:italic;color:var(--ink);margin:0 0 10px}
+/* Foreign (still-English) terms marked with *asterisks* in the source.
+   Not italic (the recap already uses italics) — stand out by weight + color. */
+em{font-style:normal;font-weight:600;color:var(--accent-2)}
+.note .resumen em,.featured .lead em{color:var(--ink)}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-width:0}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);
+  max-width:100%;overflow-wrap:anywhere;word-break:break-word;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Small-screen tuning (phones ≤ 480px) ----------
+   The layout is fluid (clamp() + single column below 860px); this block
+   only trims fixed sizes that would feel heavy on a phone (user report
+   2026-10-25: not adapted to mobile). */
+@media(max-width:480px){
+  body{font-size:16px}
+  .wrap{padding:0 14px}
+  .masthead h1{font-size:clamp(34px,11vw,44px)}
+  .dateline{flex-direction:column;align-items:flex-start;gap:4px}
+  .featured .fbody{font-size:16px}
+  .featured .lead{font-size:17px}
+  .note{padding:12px 13px}
+  .note p,.note .resumen{font-size:15px}
+  .dropcap::first-letter{font-size:46px;padding:2px 6px 0 0}
+  .colophon{padding:16px 0 36px}
+}
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* ---------- Archive list (editions/index.html) ----------
+   Each row: the clickable "Edición nº N · <date>" (accent), then the portada
+   headline as plain context below it (user rule 2026-10-25 — the filename
+   never appears). */
+.editions-list{list-style:none;margin:0;padding:0}
+.editions-list li{padding:12px 0;border-bottom:1px dotted var(--rule)}
+.editions-list li:last-child{border-bottom:0}
+.editions-list a{color:var(--accent);font-weight:700;text-decoration:none;font-size:16px;letter-spacing:.01em}
+.editions-list a:hover{color:var(--accent-2)}
+.editions-list .lead-ctx{display:block;color:var(--ink-soft);font-size:14.5px;font-style:italic;margin-top:3px}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La IA abierta resumida por una IA abierta</span><span>Edición en línea</span></div><h1>IA<span class="amp">·</span>A<span class="amp">·</span>Hoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, software libre para IA y mucho más: resumen para quienes estamos obsesionados con estos temas.</p><div class="dateline"><span class="ed">Edición nº 33</span> &nbsp;·&nbsp; jueves 29 de octubre de 2026<nav><a href="#modelos">Modelos</a><a href="#agentes-libres">Agentes libres</a><a href="#software-libre-para-ia">Software libre para IA</a><a href="#papers-e-investigacion">Papers e investigación</a><a href="#comunidad-y-self-hosting">Comunidad y self-hosting</a><span class="sep">|</span><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<main class="wrap">
+<div class="podcast-cta"><p class="podcast-label">🎧 <b>IA·A·Hoy Hablada</b>: un resumen pensado para oírse.</p><audio controls preload="none" src="../podcast.mp3"></audio></div>
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017" style="color:inherit;text-decoration:none" rel="noopener"><em>DeepSeek-V4.1-Flash</em>: pesos abiertos, un millón de tokens de contexto y la primera oleada de cuantizaciones <em>GGUF</em> para usarlo en local</a></h2><p class="lead"><em>DeepSeek</em> ha publicado <em>DeepSeek-V4.1-Flash-1017</em>, la actualización de su familia <em>V4.1-Flash</em>, con pesos abiertos bajo licencia <em>MIT</em>. Es un modelo de expertos mixtos (MoE) con un millón de tokens de contexto, y la guía de despliegue local de <em>Unsloth</em> lo describe como el modelo abierto más fuerte hasta la fecha en codificación y en tareas agénticas. Apenas unos días después, la comunidad ya ha respondido con cuantizaciones independientes en formato <em>GGUF</em>: la de <em>ISTA-DASLab</em> (esquema GSQ-RCO de precisión mixta) acumula más de un millón y trescientos mil descargas, y existe también una variante <em>abliterated</em> para <em>llama.cpp</em>. Para quien autoaloja, esto significa que un modelo de primer nivel puede correr en hardware propio, sin tocar la API del proveedor.</p><div class="fbody"><p class="dropcap"><em>DeepSeek</em> ha actualizado su familia Flash con <em>DeepSeek-V4.1-Flash-1017</em>, publicado el 17 de octubre y distribuido con pesos abiertos bajo la licencia <em>MIT</em>. No es un modelo cerrado que solo se sirve por API: los pesos completos están disponibles en <em>Hugging Face</em>, y la ficha del modelo incluye variantes de 8 bits y <em>FP8</em> listas para autoalojar, además de la etiqueta de compatibilidad con los principales frameworks de inferencia. Se trata de un modelo de expertos mixtos (MoE) que admite como entrada imágenes y texto, lo que lo coloca en la categoría de modelos multimodales ligeros.</p><p>El rasgo que más llama la atención es el contexto: un millón de tokens. Eso permite meter en una sola llamada documentos enteros, repositorios o conversaciones largas sin recortes, algo que hasta ahora estaba en el terreno de modelos mucho más grandes. La guía de despliegue local de <em>Unsloth</em> lo presenta como el modelo abierto más fuerte hasta la fecha en codificación y en tareas agénticas, y otros analistas, como <em>Artificial Analysis</em>, le dedican fichas de comparación. Según el análisis de <em>DataStudios</em>, <em>DeepSeek</em> mantiene el precio de su API prácticamente sin cambios respecto a la versión anterior, lo que sugiere que la mejora viene por la calidad y el contexto, no por subir la tarifa.</p><p>Aquí está la parte que más interesa a quien autoaloja: la comunidad no ha esperado. En pocos días han aparecido cuantizaciones independientes en formato <em>GGUF</em>. La más descargada es la de <em>ISTA-DASLab</em>, que usa el esquema GSQ-RCO de precisión mixta y ya supera el millón y trescientos mil descargas; también existe una variante <em>abliterated</em>, con cuantización <em>imatrix</em> y <em>engram</em>, orientada a <em>llama.cpp</em> y pensada para correr en local sin restricciones. En la práctica, un modelo de esta categoría puede vivir en una máquina propia, en un <em>llama.cpp</em> o en un motor <em>vLLM</em>, sin depender del endpoint del fabricante. Para la comunidad de modelos abiertos, un lanzamiento de esta magnitud que desde el primer día genera un ecosistema de cuantizaciones es una buena señal: cuanto más gente lo comprime, lo afina y lo ejecuta en su propio hardware, más útil se vuelve para todos.</p><p>La combinación de licencia <em>MIT</em>, un millón de tokens de contexto y disponibilidad inmediata en formatos listos para <em>GGUF</em> hace de <em>DeepSeek-V4.1-Flash</em> el modelo abierto más «autoalojable» de la semana. Para quien mantiene un servidor en casa o en una <em>VPS</em>, es la oportunidad de probar un modelo de primer nivel sin costo de API; y para quien quiere ver hasta dónde llega la cuantización, el material de <em>ISTA-DASLab</em> y de <em>orcarouter</em> es el punto de partida.</p></div><div class="chips"><a class="chip link" href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017" rel="noopener">Ficha en Hugging Face</a><a class="chip link" href="https://huggingface.co/ISTA-DASLab/DeepSeek-V4.1-Flash-1017-GSQ-RCO-GGUF" rel="noopener">Cuantización GGUF de ISTA-DASLab</a><a class="chip link" href="https://unsloth.ai/docs/models/deepseek-v4.1-flash" rel="noopener">Guía de despliegue local (Unsloth)</a><span class="chip">deepseek</span><span class="chip">pesos_abiertos</span><span class="chip">gguf</span><span class="chip">autoalojamiento</span><span class="chip">moe</span><span class="chip">contexto_largo</span></div></div>
+<div class="paper"><div class="main"><section class="block" id="modelos"><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener"><em>LTX-2.5</em> de <em>Lightricks</em>: video, audio y simulación de mundo en un modelo abierto</a></h4><p class="resumen"><em>Lightricks</em> publica <em>LTX-2.5</em>, su modelo fundacional abierto para generación de video, audio y simulación de mundo. Destaca por repartir el cómputo de renderizado según la complejidad de cada escena (asignación dinámica de fotogramas clave más difusión por píxeles), una nueva decodificadora de video por difusión y un codificador de texto <em>Gemma 4 12B</em> propio. Con más de nueve mil «me gusta» y más de dos millones y medio de descargas en <em>Hugging Face</em>, es el modelo con más tracción de la semana.</p><p><em>Lightricks</em> ha actualizado su familia <em>LTX</em> con <em>LTX-2.5</em>, un modelo fundacional abierto para generación de video, audio y, más ampliamente, para simulación de mundo. La novedad técnica es el reparto de cómputo por complejidad de escena: combina una asignación dinámica de fotogramas clave con una difusión por píxeles, de modo que se dedica más cálculo a las zonas que cambian y menos a las estáticas. El resultado, según el propio <em>Lightricks</em>, es una calidad de píxel que se sostiene fotograma a fotograma, incluso en resoluciones altas.</p><p>El modelo añade además generación mult tiro nativa, una nueva decodificadora de video por difusión, un codificador de texto propio basado en <em>Gemma 4 12B</em> y un amplificador de prompt que expande la instrucción de entrada. En <em>Hugging Face</em> es, con diferencia, el modelo con más descargas de la semana (más de dos millones y medio) y también de los más votados (más de nueve mil «me gusta»), lo que lo sitúa como la referencia abierta actual en video generativo.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">Ficha en Hugging Face</a><a class="chip link" href="https://ltx.io/model/ltx-2-5" rel="noopener">Página del modelo (ltx.io)</a><span class="chip">ltx</span><span class="chip">video</span><span class="chip">audio</span><span class="chip">difusion</span><span class="chip">lightricks</span></div></article><article class="note"><h4><a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B" rel="noopener"><em>Nemotron 3.5 Transcribe</em> de <em>NVIDIA</em>: transcripción, traducción y diarización en un solo modelo abierto de 30B</a></h4><p class="resumen"><em>NVIDIA</em> presenta <em>Nemotron 3.5 Transcribe</em>, un modelo de lenguaje con audio (SALM, de «speech-augmented language model») de 30B parámetros en total y unos 4B activos, con una arquitectura híbrida <em>Mamba</em>–<em>Transformer</em> y expertos mixtos (MoE). Integra transcripción en más de 40 idiomas, traducción del habla, transcripción contextual y comprensión de audio en un único checkpoint. <em>NVIDIA</em> lo describe como un modelo abierto que «se puede promptear y adaptar», y el blog de <em>Hugging Face</em> (28 de octubre) lo sitúa junto a <em>Granary v2</em>.</p><p><em>NVIDIA</em> ha publicado <em>Nemotron 3.5 Transcribe</em>, un modelo de lenguaje con audio (SALM, de «speech-augmented language model») pensado para transcripción inteligente. Es un modelo de 30B parámetros en total y unos 4B activos, con una arquitectura híbrida que combina <em>Mamba</em> y <em>Transformer</em> en un esquema de expertos mixtos (MoE). A diferencia de un reconocedor clásico, se puede promptear: acepta contexto e instrucciones para adaptar la transcripción al dominio, traducir el habla a otro idioma, atribuir hablantes (diarización) y comprender el audio, todo en un único checkpoint. <em>NVIDIA</em> lo presenta como un modelo de pesos abiertos con transcripción en más de 40 idiomas.</p><p>La publicación llega junto a una entrada del blog de <em>Hugging Face</em> del 28 de octubre («NVIDIA Nemotron 3.5 Transcribe and Granary v2») y a un artículo de la investigación de <em>NVIDIA</em> que detalla el enfoque SALM. Para quien autoaloja, lo interesante es que agrupa en un solo modelo tareas que antes exigían varios componentes —transcripción, traducción, diarización y comprensión—, en un tamaño (30B-A4B) que puede correr en hardware propio.</p><div class="chips"><a class="chip link" href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B" rel="noopener">Ficha en Hugging Face</a><a class="chip link" href="https://research.nvidia.com/labs/nemotron/NVIDIA-Nemotron-3.5-Transcribe/" rel="noopener">Página de investigación de NVIDIA</a><span class="chip">nemotron</span><span class="chip">nvidia</span><span class="chip">asr</span><span class="chip">traduccion</span><span class="chip">diarizacion</span><span class="chip">salm</span></div></article><article class="note"><h4><a href="https://huggingface.co/baidu/Unlimited-OCR-2" rel="noopener"><em>Unlimited-OCR-2</em> de <em>Baidu</em>: un modelo abierto y multilingüe para extraer texto de cualquier documento</a></h4><p class="resumen"><em>Baidu</em> actualiza <em>Unlimited-OCR-2</em>, su modelo de visión-lenguaje para OCR (reconocimiento óptico de caracteres) multilingüe, con licencia <em>MIT</em>. Está pensado para extraer y estructurar texto de documentos, imágenes y escaneos, y encaja en la tendencia de modelos abiertos para pipelines de OCR.</p><p><em>Baidu</em> ha publicado <em>Unlimited-OCR-2</em>, la segunda versión de su modelo de OCR multilingüe, con licencia <em>MIT</em>. Es un modelo de visión-lenguaje (con entrada de imagen y salida de texto) especializado en extraer texto de documentos, escaneos e imágenes, y viene acompañado de un informe técnico en <em>arXiv</em> que describe el enfoque. La licencia <em>MIT</em> y la disponibilidad en <em>Hugging Face</em> lo hacen fácil de integrar en un pipeline propio.</p><p>El OCR es un eslabón clave para alimentar a un LLM con documentos escaneados, y un modelo abierto y multilingüe de esta clase permite montar ese paso en local, sin enviar las páginas a un servicio externo. <em>Unlimited-OCR-2</em> se suma así a la ola de modelos abiertos para la extracción de texto que ha aparecido en los últimos meses.</p><div class="chips"><a class="chip link" href="https://huggingface.co/baidu/Unlimited-OCR-2" rel="noopener">Ficha en Hugging Face</a><a class="chip link" href="https://arxiv.org/abs/2606.23050" rel="noopener">Informe técnico (arXiv)</a><span class="chip">baidu</span><span class="chip">ocr</span><span class="chip">vision_lenguaje</span><span class="chip">multilingue</span></div></article></section><section class="block" id="agentes-libres"><div class="sec-head"><span class="icon"></span><h3>Agentes libres</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/jmanico/grim-prompter" rel="noopener"><em>grim-prompter</em>: modelado de amenazas para agentes de codificación, con trazas de evidencia</a></h4><p class="resumen">El repo <em>jmanico/grim-prompter</em> (89 estrellas, <em>MIT</em>) permite apuntar un agente de codificación (<em>Claude Code</em>, <em>Codex</em> u otro) a un repositorio y obtener un modelo de amenazas trazado por evidencia. Cubre 36 arquitecturas y 29 métodos, y está pensado para auditar la superficie de ataque que introduce un agente que tiene acceso al código.</p><p>Con la proliferación de agentes de codificación que leen y modifican repositorios, surge la necesidad de auditar qué riesgos introducen. <em>grim-prompter</em> (de <em>jmanico</em>) es un repo libre, bajo <em>MIT</em>, que toma un repositorio como entrada y, mediante un agente (por ejemplo <em>Claude Code</em> o <em>Codex</em>), genera un modelo de amenazas trazado por evidencia: cada hallazgo apunta a la parte del código o del flujo que lo respalda. El proyecto documenta 36 arquitecturas y 29 métodos de modelado.</p><p>Es un ejemplo de cómo la seguridad empieza a especializarse en la superficie de ataque de los propios agentes: no solo se protege el código, sino el proceso por el que un agente con acceso a él lo genera y modifica. Para equipos que ya usan agentes de codificación en producción, es una herramienta para hacer visible ese riesgo.</p><div class="chips"><a class="chip link" href="https://github.com/jmanico/grim-prompter" rel="noopener">GitHub</a><span class="chip">seguridad</span><span class="chip">agentes</span><span class="chip">modelado_de_amenazas</span></div></article><article class="note"><h4><a href="https://github.com/farena-ai/sara" rel="noopener"><em>Sara</em>: una compañera de IA autoalojada que además es una compañera de código real</a></h4><p class="resumen">El repo <em>farena-ai/sara</em> (<em>MIT</em>) propone una «compañera de IA» que se aloja en tu propio servidor: elige su personalidad, recuerda, planifica, lee tus documentos, y construye y prueba software en un sandbox, usando cualquier modelo (local o en la nube). Es un ejemplo de agente personal autoalojable.</p><p><em>farena-ai</em> publica <em>sara</em>, una compañera de IA autoalojada, bajo <em>MIT</em>. La idea es un agente personal que vives en tu propio servidor: eliges su personalidad, y además de chatear, recuerda, planifica, lee tus documentos, y construye y prueba software en un sandbox. Soporta cualquier modelo, local o en la nube, y destaca por no depender de un proveedor concreto.</p><p><em>Sara</em> encaja en la corriente de agentes personales que se autoalojan: en lugar de un chatbot genérico, es un «colega» con memoria y capacidad de actuar sobre tu entorno, que puedes mantener bajo tu control. Es un buen ejemplo del patrón de agente + sandbox + memoria persistente que está ganando terreno.</p><div class="chips"><a class="chip link" href="https://github.com/farena-ai/sara" rel="noopener">GitHub</a><span class="chip">agentes</span><span class="chip">autoalojamiento</span><span class="chip">sandbox</span><span class="chip">companera_de_ia</span></div></article><article class="note"><h4><a href="https://github.com/shoaibphysics/tiny-agent-training" rel="noopener"><em>tiny-agent-training</em>: post-entrenamiento mínimo de LLMs (SFT, <em>GRPO</em> y agentes con herramientas) en un juego diminuto</a></h4><p class="resumen">El repo <em>shoaibphysics/tiny-agent-training</em> reduce el post-entrenamiento de un LLM a lo mínimo: ajuste fino supervisado (SFT, de «supervised fine-tuning»), <em>GRPO</em> y agentes que usan herramientas, todo dentro de un pequeño juego numérico. Sirve como banco de pruebas para entender el proceso sin infraestructura pesada.</p><p><em>shoaibphysics</em> sube <em>tiny-agent-training</em>, un proyecto para hacer post-entrenamiento de un LLM «en diminuto»: aplica ajuste fino supervisado (SFT, de «supervised fine-tuning»), <em>GRPO</em> (un método de refuerzo por grupos) y agentes que usan herramientas, el todo dentro de un pequeño juego numérico. La idea es poder recorrer el ciclo completo —preparar datos, ajustar, entrenar con refuerzo, evaluar agentes— sin necesidad de un clúster.</p><p>Es el tipo de proyecto que ayuda a entender, a escala, qué hace cada paso del post-entrenamiento de un agente moderno, y es un punto de partida para quien quiere experimentar con <em>GRPO</em> y agentes con herramientas antes de escalar.</p><div class="chips"><a class="chip link" href="https://github.com/shoaibphysics/tiny-agent-training" rel="noopener">GitHub</a><span class="chip">post_entrenamiento</span><span class="chip">sft</span><span class="chip">grpo</span><span class="chip">agentes</span></div></article></section><section class="block" id="software-libre-para-ia"><div class="sec-head"><span class="icon"></span><h3>Software libre para IA</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/nsbradley88/talus-public" rel="noopener"><em>talus-public</em>: un motor de inferencia LLM en Rust afinado para AMD Strix Halo</a></h4><p class="resumen">El repo <em>nsbradley88/talus-public</em> es un motor de inferencia de LLMs en Rust, un fork de <em>Strata</em> con kernels <em>HIP</em> derivados de <em>ggml</em>/<em>llama.cpp</em>, afinado para la GPU <em>gfx1151</em> de AMD Strix Halo. Permite correr cinco modelos a la vez en una sola máquina de 128 GB.</p><p><em>nsbradley88</em> publica <em>talus-public</em>, un motor de inferencia de LLMs escrito en Rust y afinado para el hardware AMD Strix Halo (GPU <em>gfx1151</em>). Es un fork de <em>Strata</em> que incorpora kernels <em>HIP</em> derivados de <em>ggml</em> y <em>llama.cpp</em>, es decir, reutiliza el trabajo de inferencia de <em>llama.cpp</em> pero adaptado a las GPU AMD. La promesa es práctica: correr cinco modelos a la vez en una sola máquina de 128 GB de RAM.</p><p>Es un ejemplo de cómo la inferencia local se está especializando por hardware: en lugar de un motor genérico, uno afinado para una GPU concreta. Para quien tiene un equipo con Strix Halo, es una vía para exprimir más modelos sin hardware dedicado.</p><div class="chips"><a class="chip link" href="https://github.com/nsbradley88/talus-public" rel="noopener">GitHub</a><span class="chip">inferencia</span><span class="chip">rust</span><span class="chip">amd</span><span class="chip">llama_cpp</span></div></article><article class="note"><h4><a href="https://github.com/chalk-ai/chalk-router-oss" rel="noopener"><em>chalk-router</em>: un enrutador de LLMs, «extremadamente rápido y enfocado», ahora en su versión open source</a></h4><p class="resumen">El repo <em>chalk-ai/chalk-router-oss</em> es la versión de código abierto de <em>chalk-router</em>, un enrutador de LLMs «extremadamente rápido y enfocado». Un enrutador decide, en cada petición, qué modelo o backend debe atenderla, y esta versión libre permite montar ese componente bajo tu control.</p><p><em>chalk-ai</em> libera <em>chalk-router-oss</em>, la variante de código abierto de su enrutador <em>chalk-router</em>. Un enrutador de LLMs es el componente que, ante cada petición, decide qué modelo o backend la debe atender (por costo, latencia, capacidad, etc.). La propuesta de <em>chalk</em> es un enrutador «extremadamente rápido y enfocado», y al publicarlo en abierto permite a quien autoaloja montar esa capa de decisión sin depender de un servicio cerrado.</p><p>Los enrutadores se han convertido en una pieza habitual cuando se orquestan varios modelos: permiten balancear costo y calidad, hacer <em>failover</em> y dirigir las peticiones al recurso adecuado. Tener uno rápido y libre es un buen complemento para quien ya gestiona varios LLMs.</p><div class="chips"><a class="chip link" href="https://github.com/chalk-ai/chalk-router-oss" rel="noopener">GitHub</a><span class="chip">inferencia</span><span class="chip">enrutador</span><span class="chip">orquestacion</span></div></article><article class="note"><h4><a href="https://github.com/atharvaphadnis-ai/NeuroStudio" rel="noopener"><em>NeuroStudio</em>: un estudio de desarrollo de IA autoalojado para entrenar, afinar, evaluar y desplegar modelos localmente</a></h4><p class="resumen">El repo <em>atharvaphadnis-ai/NeuroStudio</em> es un estudio de desarrollo de IA autoalojado y de código abierto, escrito en Go y sobre motores de ML modulares. Ofrece gestión visual de datasets, entrenamiento en tiempo real y despliegue, pensado para llevar el ciclo completo de un modelo en tu propio servidor.</p><p><em>atharvaphadnis-ai</em> publica <em>NeuroStudio</em>, un estudio de desarrollo de IA autoalojado y de código abierto. Está construido en Go y sobre motores de ML modulares, y ofrece gestión visual de datasets, entrenamiento en tiempo real y despliegue, con la intención de que el ciclo completo (entrenar, afinar, evaluar, desplegar) pueda vivir en tu propio servidor.</p><p>Es una de varias herramientas que intentan empaquetar el flujo de trabajo de desarrollo de modelos en un producto autoalojable, con la idea de no depender de una plataforma en la nube. Para equipos que quieren el control de todo el ciclo, este tipo de «estudio» local empieza a ser una alternativa seria.</p><div class="chips"><a class="chip link" href="https://github.com/atharvaphadnis-ai/NeuroStudio" rel="noopener">GitHub</a><span class="chip">entrenamiento</span><span class="chip">autoalojamiento</span><span class="chip">mlops</span><span class="chip">go</span></div></article></section><section class="block" id="papers-e-investigacion"><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.35201" rel="noopener">DTCA: asignación de crédito de tokens por denoising para refuerzo en modelos de lenguaje por difusión</a></h4><p class="resumen">El paper <em>DTCA</em> (<em>arXiv</em>, 256 votos) propone una asignación de crédito por denoising para aplicar aprendizaje por refuerzo (RL) a modelos de lenguaje por difusión (DLM). Estos modelos generan texto por desruido iterativo, y <em>DTCA</em> mejora cómo se asigna la recompensa a los tokens durante el refuerzo, para afinar el razonamiento.</p><p>Los modelos de lenguaje por difusión (DLM, de «diffusion language models») generan texto mediante desruido iterativo, lo que permite modelar contexto bidireccional y refinar tokens en paralelo. El trabajo <em>DTCA</em> (el más votado del día, con 256 votos) se centra en aplicar aprendizaje por refuerzo (RL) a estos modelos, y propone una «asignación de crédito de tokens por denoising»: una forma de repartir la recompensa entre los tokens durante el proceso de refuerzo, para que la señal de aprendizaje sea más precisa.</p><p>La motivación es que el RL en DLMs ha mejorado el razonamiento, pero la asignación de crédito a cada token sigue siendo un problema abierto. <em>DTCA</em> aborda justo ese punto, y es relevante porque los modelos por difusión son una de las arquitecturas alternativas al auto-regresivo clásico que están ganando interés.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.35201" rel="noopener">arXiv</a><span class="chip">difusion</span><span class="chip">refuerzo</span><span class="chip">modelos_lenguaje</span><span class="chip">razonamiento</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.32749" rel="noopener">Extracción eficiente del hablante objetivo en audio-visual en streaming para escenas acústicas reales</a></h4><p class="resumen">El paper (142 votos) aborda la extracción del hablante objetivo en audio-visual en streaming (AVTSE, de «streaming audio-visual target speaker extraction»), clave para aplicaciones sensibles a la latencia. Señala dos huecos de los sistemas causales actuales y critica que los benchmarks fjen el número de hablantes a dos.</p><p>La extracción del hablante objetivo en audio-visual en streaming (AVTSE, de «streaming audio-visual target speaker extraction») es necesaria en aplicaciones sensibles a la latencia: aislar la voz de un hablante concreto en una escena con varios. El trabajo señala que los sistemas causales actuales tienen dos huecos acoplados, y que, además, los benchmarks estándar fijan el número de hablantes a dos, ignorando escenas más densas.</p><p>Es un trabajo de «sistema real»: busca que la extracción del hablante funcione en escenas acústicas del mundo real, en streaming, no solo en condiciones de laboratorio. Encaja en la línea de modelos abiertos de audio, como <em>Nemotron 3.5 Transcribe</em>, que integran diarización y extracción del hablante.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.32749" rel="noopener">arXiv</a><span class="chip">audio</span><span class="chip">hablante_objetivo</span><span class="chip">streaming</span><span class="chip">diarizacion</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.35684" rel="noopener">OmniShowcase: video generativo omnidireccional y consistente del sujeto a partir de imágenes multivista</a></h4><p class="resumen">El paper (24 votos) aborda la generación de video de un sujeto concreto a partir de unas pocas imágenes de referencia, el problema de que la cámara muestre superficies no visibles en la entrada. <em>OmniShowcase</em> propone una aproximación omnidireccional que mantiene la consistencia del sujeto desde todos los ángulos.</p><p>Generar el video de un sujeto concreto (un objeto, una persona) a partir de unas pocas imágenes de referencia sigue siendo difícil cuando la cámara revela superficies que no eran visibles en la entrada. Los métodos tempranos de «sujeto-a-video» (S2V) se condicional sobre una sola imagen de referencia y se degradan. <em>OmniShowcase</em> aborda esto con una aproximación omnidireccional: usa imágenes multivista para mantener la consistencia del sujeto desde todos los ángulos.</p><p>Es un avance para el video generativo «con sujeto», donde lo que se quiere es que un objeto o personaje concreto se mantenga coherente mientras la cámara gira. Se conecta con modelos como <em>LTX-2.5</em> que apuestan por la consistencia en la generación de video.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.35684" rel="noopener">arXiv</a><span class="chip">video</span><span class="chip">generacion</span><span class="chip">consistencia</span><span class="chip">multivista</span></div></article></section><section class="block" id="comunidad-y-self-hosting"><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://www.reddit.com/r/LocalLLaMA/comments/1rianwb/running_qwen35_27b_dense_with_170k_context_at/" rel="noopener">En <em>r/LocalLLaMA</em>: <em>Qwen3.5</em> 27B denso con 170k de contexto y más de 100 tokens por segundo en decodificación</a></h4><p class="resumen">Un hilo de <em>r/LocalLLaMA</em> documenta cómo un usuario corre <em>Qwen3.5 27B</em> (denso) con 170 mil tokens de contexto y una decodificación superior a 100 tokens por segundo. Es el tipo de resultado que muestra hasta dónde llega el autoalojamiento hoy en hardware de consumo.</p><p>En <em>r/LocalLLaMA</em> un usuario cuenta cómo está corriendo <em>Qwen3.5 27B</em> en su configuración: el modelo denso (no MoE) con una ventana de 170 mil tokens de contexto y una velocidad de decodificación superior a 100 tokens por segundo. Es un resultado notable, porque combina un contexto muy largo con una velocidad alta, algo que antes parecía antagónico.</p><p>Hilos así son el termómetro de la comunidad: muestran que, con las cuantizaciones y los motores de inferencia actuales, un modelo de 27B puede ser usable en local con un contexto que antes estaba fuera de alcance. Es la prueba de que el self-hosting de modelos medianos-grandes sigue mejorando.</p><div class="chips"><a class="chip link" href="https://www.reddit.com/r/LocalLLaMA/comments/1rianwb/running_qwen35_27b_dense_with_170k_context_at/" rel="noopener">Hilo en r/LocalLLaMA</a><span class="chip">self_hosting</span><span class="chip">r_localllama</span><span class="chip">qwen</span><span class="chip">contexto_largo</span></div></article><article class="note"><h4><a href="https://www.reddit.com/r/LocalLLM/comments/1w0tp5s/newsgator_a_selfhosted_news_aggregator_that/" rel="noopener">Autoalojar tu propio agregador de noticias con LLMs locales</a></h4><p class="resumen">Varios hilos y repos (<em>NewsGator</em> en <em>r/LocalLLM</em>, <em>MuckScraper-v2</em> en GitHub) muestran cómo montar un agregador de noticias autoalojado con LLMs locales. La idea: feeds RSS + un LLM en local que resume y filtra, con presupuesto cero y sin enviar tus feeds a la nube.</p><p>En <em>r/LocalLLM</em> aparece <em>NewsGator</em>, un agregador de noticias autoalojado, y en GitHub <em>starkSV/MuckScraper-v2</em> hace lo propio. La idea es la misma: tomar feeds RSS y pasarlos por un LLM local que resuma, filtre y organice, de modo que tu «briefing» de noticias se genere en tu propio servidor, con presupuesto cero y sin enviar el contenido a un servicio externo.</p><p>Es un uso muy concreto del autoalojamiento: en lugar de un modelo genérico, un pipeline de RSS + LLM local para tu flujo de información. Encaja en la corriente de herramientas que combinan self-hosting con IA para tareas cotidianas, y es de las más fáciles de montar (un par de repos y un LLM).</p><div class="chips"><a class="chip link" href="https://www.reddit.com/r/LocalLLM/comments/1w0tp5s/newsgator_a_selfhosted_news_aggregator_that/" rel="noopener">Hilo NewsGator (r/LocalLLM)</a><a class="chip link" href="https://github.com/starkSV/MuckScraper-v2" rel="noopener">MuckScraper-v2 (GitHub)</a><span class="chip">self_hosting</span><span class="chip">rss</span><span class="chip">noticias</span><span class="chip">llm_local</span></div></article><article class="note"><h4><a href="https://www.xda-developers.com/building-local-llm-news-brief-taught-problem-apps/" rel="noopener">Montar un briefing de noticias local me enseñó que mi problema no eran las apps</a></h4><p class="resumen">Un artículo de <em>XDA</em> cuenta la experiencia de construir un briefing de noticias con un LLM local, y concluye que el problema real no eran las aplicaciones, sino el flujo y la integración. Es un relato útil de lo que pasa cuando intentas montar un pipeline de IA en local de verdad.</p><p>En <em>XDA Developers</em> un desarrollador cuenta cómo intentó montar un briefing de noticias con un LLM local, y qué aprendió en el proceso. Su conclusión: el problema real no eran las apps que probó, sino el flujo completo (cómo llegan los datos, cómo se procesan, cómo se entregan). Es el tipo de aprendizaje que aparece cuando sales de la demo y montas algo que de verdad usas.</p><p>Es un recordatorio de que el autoalojamiento no es solo «correr un modelo»: la integración, el flujo de datos y la confiabilidad son a menudo donde está el trabajo real. Para quien está empezando a montar pipelines de IA en local, es un caso de estudio honesto.</p><div class="chips"><a class="chip link" href="https://www.xda-developers.com/building-local-llm-news-brief-taught-problem-apps/" rel="noopener">Artículo en XDA Developers</a><span class="chip">self_hosting</span><span class="chip">experiencia</span><span class="chip">pipeline</span><span class="chip">noticias</span></div></article></section></div><div class="aside"><div class="aside-block"><h5>Repos en tendencia<span class="rule"></span></h5><div class="repo"><a class="name" href="https://github.com/aa1143/NamiGPT" rel="noopener">aa1143/NamiGPT</a><span class="stars">★ 120</span><div class="desc">Tutorial desde cero: escribe *GPT-2* a mano en PyTorch y entiende cómo funciona un LLM</div><div class="meta">Python</div></div><div class="repo"><a class="name" href="https://github.com/jmanico/grim-prompter" rel="noopener">jmanico/grim-prompter</a><span class="stars">★ 89</span><div class="desc">Modelado de amenazas para agentes de codificación, con trazas de evidencia (36 arquitecturas, *MIT*)</div><div class="meta">MIT</div></div><div class="repo"><a class="name" href="https://github.com/nsbradley88/talus-public" rel="noopener">nsbradley88/talus-public</a><span class="stars">★ 21</span><div class="desc">Motor de inferencia de LLMs en Rust afinado para AMD Strix Halo (cinco modelos en 128 GB)</div><div class="meta">Rust</div></div><div class="repo"><a class="name" href="https://github.com/KevinChu1110/driftnet" rel="noopener">KevinChu1110/driftnet</a><span class="stars">★ 19</span><div class="desc">Una «red de deriva» para tus feeds: atrapa herramientas, repos y artículos que comparten tus chats, en local, con *MCP* para agentes</div><div class="meta">local</div></div><div class="repo"><a class="name" href="https://github.com/chalk-ai/chalk-router-oss" rel="noopener">chalk-ai/chalk-router-oss</a><span class="stars">★ 18</span><div class="desc">Enrutador de LLMs, «extremadamente rápido y enfocado», en su versión open source</div><div class="meta">open source</div></div></div><div class="aside-block"><h5>Papers del día · Hugging Face<span class="rule"></span></h5><ul class="papers"><li><a href="https://arxiv.org/abs/2610.35201" rel="noopener">DTCA: Denoising Token Credit Assignment for Reinforcement Learning in Diffusion Language Models</a><span class="au">256 upvotes</span></li><li><a href="https://arxiv.org/abs/2610.32749" rel="noopener">Efficient Streaming Audio-Visual Target Speaker Extraction for Real-World Acoustic Scenes</a><span class="au">142 upvotes</span></li><li><a href="https://arxiv.org/abs/2610.35684" rel="noopener">OmniShowcase: Omnidirectional Subject-Consistent Video Generation from Multi-View Images</a><span class="au">24 upvotes</span></li><li><a href="https://arxiv.org/abs/2610.31670" rel="noopener">Sensorimotor Alignment: A Platonic Proxy for Embodied Policy Success</a><span class="au">8 upvotes</span></li><li><a href="https://arxiv.org/abs/2610.37230" rel="noopener">TAO: Tool-Aware Joint Scheduling for LLM-Based Agentic Serving</a><span class="au">2 upvotes</span></li></ul></div><div class="aside-block"><h5>Comunidad en ebullición<span class="rule"></span></h5><ul class="community"><li><div class="src">r/LocalLLaMA</div><a href="https://www.reddit.com/r/LocalLLaMA/comments/1rianwb/running_qwen35_27b_dense_with_170k_context_at/" rel="noopener">Qwen3.5 27B denso con 170k de contexto y 100+ tokens/s</a><div class="note-txt">Autoalojamiento de un modelo denso con contexto muy largo y alta velocidad</div></li><li><div class="src">r/LocalLLM</div><a href="https://www.reddit.com/r/LocalLLM/comments/1w0tp5s/newsgator_a_selfhosted_news_aggregator_that/" rel="noopener">NewsGator, un agregador de noticias autoalojado</a><div class="note-txt">RSS + LLM local para tu briefing, sin nube</div></li><li><div class="src">r/LocalLLaMA</div><a href="https://www.reddit.com/r/LocalLLaMA/comments/1whiz3y/whats_the_next_local_model_you_are_excited_about/" rel="noopener">¿Cuál es el siguiente modelo local que te ilusiona?</a><div class="note-txt">Hilo de la comunidad sobre los próximos modelos abiertos</div></li><li><div class="src">r/LocalLLaMA</div><a href="https://www.reddit.com/r/LocalLLaMA/comments/1x3wp8c/i_made_an_opensource_ai_leaderboard_that_shows/" rel="noopener">Un leaderboard open source de los mejores modelos</a><div class="note-txt">Un usuario monta un ranking abierto de modelos locales</div></li></ul></div></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li><li>el skill moss-image-news-illustration (<a href="https://github.com/jgbarahbot/moss-image-news-illustration" rel="noopener">https://github.com/jgbarahbot/moss-image-news-illustration</a>) — la ilustración de la portada</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license">Licencia: <a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a> (CC-BY-SA)</div></div></footer>
+</body></html>

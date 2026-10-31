@@ -1,0 +1,234 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IA·A·Hoy — Archivo</title><style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+  /* long unbreakable tokens (repo slugs, URLs) must wrap, never force
+     horizontal scroll on narrow screens (user report 2026-10-25) */
+  overflow-wrap:anywhere;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;min-width:0}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+.dateline nav .sep{color:var(--rule);margin-right:14px}
+
+/* ---------- Podcast block (the daily audio) ----------
+   Lives INSIDE .wrap (the page container): the old version sat between the
+   masthead and the container and bled to the left edge (user report
+   2026-10-25). The label is the show name itself, on the line above the
+   player, per the same report. */
+.podcast-cta{
+  margin:16px 0 6px;padding:14px 18px 16px;
+  background:var(--paper-2);
+  border:1px solid var(--rule);border-left:4px solid var(--accent);
+  border-radius:2px;
+}
+.podcast-cta .podcast-label{margin:0 0 10px;font-size:15.5px;color:var(--ink);font-style:italic}
+.podcast-cta .podcast-label b{font-style:normal;color:var(--accent);letter-spacing:.01em}
+.podcast-cta audio{width:100%;display:block}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+/* Lead illustration (moss-image-news-illustration): between the summary and
+   the first body paragraph. MUST never force horizontal scroll on narrow
+   screens (user rule 2026-10-25): max-width:100% on the <img> is the guard,
+   width:auto keeps its natural aspect, height:auto avoids distortion. */
+.lead-illo{margin:14px 0 6px}
+.lead-illo img{
+  display:block;width:auto;max-width:100%;height:auto;
+  margin:0 auto;border:1px solid var(--rule);border-radius:2px;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+.lead-illo figcaption{
+  font-family:var(--sans);font-size:12px;color:var(--ink-soft);
+  text-align:center;margin-top:6px;letter-spacing:.02em;
+}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+  min-width:0;word-break:break-word;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+/* Two-pass recap: the single summary paragraph that opens each note. */
+.note .resumen{font-style:italic;color:var(--ink);margin:0 0 10px}
+/* Foreign (still-English) terms marked with *asterisks* in the source.
+   Not italic (the recap already uses italics) — stand out by weight + color. */
+em{font-style:normal;font-weight:600;color:var(--accent-2)}
+.note .resumen em,.featured .lead em{color:var(--ink)}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-width:0}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);
+  max-width:100%;overflow-wrap:anywhere;word-break:break-word;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Small-screen tuning (phones ≤ 480px) ----------
+   The layout is fluid (clamp() + single column below 860px); this block
+   only trims fixed sizes that would feel heavy on a phone (user report
+   2026-10-25: not adapted to mobile). */
+@media(max-width:480px){
+  body{font-size:16px}
+  .wrap{padding:0 14px}
+  .masthead h1{font-size:clamp(34px,11vw,44px)}
+  .dateline{flex-direction:column;align-items:flex-start;gap:4px}
+  .featured .fbody{font-size:16px}
+  .featured .lead{font-size:17px}
+  .note{padding:12px 13px}
+  .note p,.note .resumen{font-size:15px}
+  .dropcap::first-letter{font-size:46px;padding:2px 6px 0 0}
+  .colophon{padding:16px 0 36px}
+}
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* ---------- Archive list (editions/index.html) ----------
+   Each row: the clickable "Edición nº N · <date>" (accent), then the portada
+   headline as plain context below it (user rule 2026-10-25 — the filename
+   never appears). */
+.editions-list{list-style:none;margin:0;padding:0}
+.editions-list li{padding:12px 0;border-bottom:1px dotted var(--rule)}
+.editions-list li:last-child{border-bottom:0}
+.editions-list a{color:var(--accent);font-weight:700;text-decoration:none;font-size:16px;letter-spacing:.01em}
+.editions-list a:hover{color:var(--accent-2)}
+.editions-list .lead-ctx{display:block;color:var(--ink-soft);font-size:14.5px;font-style:italic;margin-top:3px}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body><header class="masthead"><div class="wrap"><div class="topline"><span>La IA abierta resumida por una IA abierta</span><span>Edición en línea</span></div><h1>IA<span class="amp">·</span>A<span class="amp">·</span>Hoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, software libre para IA y mucho más: resumen para quienes estamos obsesionados con estos temas.</p><div class="dateline"><span class="ed">Archivo</span> &nbsp;·&nbsp; todas las ediciones<nav><a href="../editions/index.html">Archivo</a></nav></div></div></header><main class="wrap"><div class="paper"><div class="main"><section class="block"><div class="sec-head"><span class="icon">🗂️</span><h3>Archivo de ediciones</h3><span class="rule"></span></div><p class="sec-blurb">Cada día a las 08:30 (CEST) sale una nueva. Las antiguas quedan como enlace permanente.</p><ul class="editions-list"><li><a href="2026-10-31.html">Edición nº 34 · sábado 31 de octubre de 2026</a><span class="lead-ctx">Mistral abre los pesos de *Le Chonk*, su modelo de un billón de parámetros entrenado en Europa</span></li><li><a href="2026-10-29.html">Edición nº 33 · jueves 29 de octubre de 2026</a><span class="lead-ctx">*DeepSeek-V4.1-Flash*: pesos abiertos, un millón de tokens de contexto y la primera oleada de cuantizaciones *GGUF* para usarlo en local</span></li><li><a href="2026-10-28.html">Edición nº 32 · miércoles 28 de octubre de 2026</a><span class="lead-ctx">*Flint*: la primera máquina de *Recursive* aterriza en *Hugging Face* — 39,8B de *MoE*, solo 2,5B activos, y licencia *Apache 2.0*</span></li><li><a href="2026-10-27.html">Edición nº 31 · martes 27 de octubre de 2026</a><span class="lead-ctx">La *automejora recursiva* toma forma: una encuesta, un agente que optimiza sus propias *skills*, y un juego de cartas que un sistema de *agentes LLM* construyó desde cero</span></li><li><a href="2026-10-26.html">Edición nº 30 · lunes 26 de octubre de 2026</a><span class="lead-ctx">*Nanbeige4.3-33B*: el agente de 33B que la familia de *Kanzhun* quiere que sea el maestro de sus futuros modelos pequeños</span></li><li><a href="2026-10-25.html">Edición nº 29 · domingo 25 de octubre de 2026</a><span class="lead-ctx">*Spark-X2.6-4B*: un millón de *tokens* de contexto y un presupuesto de razonamiento de tres niveles en un LLM de 4.000 millones de parámetros</span></li><li><a href="2026-10-24.html">Edición nº 27 · sábado 24 de octubre de 2026</a><span class="lead-ctx">*DeepSeek-V4.1-Flash-1017*: la familia abierta de DeepSeek mejora razonamiento y agentes, y añade un kit de codificación de prompts</span></li><li><a href="2026-10-23.html">Edición nº 26 · viernes 23 de octubre de 2026</a><span class="lead-ctx">OlmoEarth v1.3: Ai2 libera embeddings de satélite *SOTA* y, junto a los *weights*, los *embeddings* precomputados de *todos* los píxeles de 10 metros del planeta</span></li><li><a href="2026-10-22.html">Edición nº 25 · jueves 22 de octubre de 2026</a><span class="lead-ctx">Granite Speech 5.0: IBM abre tres modelos de voz Apache 2.0 que cubren el *stack* completo — transcripción, traducción y atribución de hablantes</span></li><li><a href="2026-10-21.html">Edición nº 24 · miércoles 21 de octubre de 2026</a><span class="lead-ctx">TorchTPU es abierto: Google y Hugging Face convierten la TPU en un dispositivo PyTorch más, y vLLM y SGLang ya corren sobre ella</span></li><li><a href="2026-10-20.html">Edición nº 23 · martes 20 de octubre de 2026</a><span class="lead-ctx">TorchNeuron: AWS y Hugging Face convierten Trainium en un dispositivo PyTorch más, sin reescribir tu código</span></li><li><a href="2026-10-18.html">Edición nº 22 · domingo 18 de octubre de 2026</a><span class="lead-ctx">DeepSeek libera DeepSeek-V4.1-Flash-1017: multimodal, bajo licencia MIT, y la promesa del &#x27;wish-driven programming&#x27;</span></li><li><a href="2026-10-17.html">Edición nº 21 · sábado 17 de octubre de 2026</a><span class="lead-ctx">Reflection estrena Beam: un MoE disperso de 501B parámetros (23B activos), el primer modelo de pesos abiertos de la nueva lab, con licencia Apache 2.0</span></li><li><a href="2026-10-16.html">Edición nº 20 · viernes 16 de octubre de 2026</a><span class="lead-ctx">Meta estrena Muse Spark Open: un MoE de 816B con 42B activos y contexto de 1M, multimodal de texto a vídeo, con pesos abiertos</span></li><li><a href="2026-10-15.html">Edición nº 19 · jueves 15 de octubre de 2026</a><span class="lead-ctx">LiquidAI estrena LFM2.5-24B-A2B: un MoE de 24B con solo 2B activos para agentes locales y privados</span></li><li><a href="2026-10-14.html">Edición nº 18 · miércoles 14 de octubre de 2026</a><span class="lead-ctx">Cloudflare abre Clef: un modelo de decisión multimodal de 27B que corre en el edge</span></li><li><a href="2026-10-13.html">Edición nº 17 · martes 13 de octubre de 2026</a><span class="lead-ctx">Lightricks libera LTX-2.5: 22B de pesos abiertos para generar vídeo con audio sincronizado</span></li><li><a href="2026-10-12.html">Edición nº 16 · lunes 12 de octubre de 2026</a><span class="lead-ctx">Cloudflare abre los pesos de Clef: sus primeros modelos de decisión, bajo Apache 2.0</span></li><li><a href="2026-10-11.html">Edición nº 15 · domingo 11 de octubre de 2026</a><span class="lead-ctx">LTX-2.5, el modelo de vídeo y audio de pesos abiertos de Lightricks que genera mundo, no solo clips</span></li><li><a href="2026-10-10.html">Edición nº 14 · sábado 10 de octubre de 2026</a><span class="lead-ctx">Cloudflare abre Clef, su familia de modelos de decisión multimodales de pesos abiertos, y una plataforma de afinado con refuerzo</span></li><li><a href="2026-10-09.html">Edición nº 13 · viernes 9 de octubre de 2026</a><span class="lead-ctx">Lightricks abre LTX-2.5, su nuevo modelo de pesos abiertos para generar vídeo y audio</span></li><li><a href="2026-10-08.html">Edición nº 12 · jueves 8 de octubre de 2026</a><span class="lead-ctx">Liquid AI abre d1, su familia de modelos de decisión multimodales para el borde</span></li><li><a href="2026-10-07.html">Edición nº 11 · miércoles 7 de octubre de 2026</a><span class="lead-ctx">Cloudflare abre Clef, su familia de modelos de pesos abiertos para decisiones</span></li><li><a href="2026-10-06.html">Edición nº 10 · martes 6 de octubre de 2026</a><span class="lead-ctx">Ai2 abre AstaBrief, el modelo de generación de informes citados de la plataforma Asta</span></li><li><a href="2026-10-05.html">Edición nº 9 · lunes 5 de octubre de 2026</a><span class="lead-ctx">Aleph Alpha publica Kolibri-1, un modelo soberano de pesos abiertos</span></li><li><a href="2026-10-04.html">Edición nº 8 · domingo 4 de octubre de 2026</a><span class="lead-ctx">Cloudflare abre los pesos de Clef: modelos de decisión para agentes, en lugar de chat</span></li><li><a href="2026-10-03.html">Edición nº 7 · sábado 3 de octubre de 2026</a><span class="lead-ctx">LTX-2.5: Lightricks abre el video generativo con audio</span></li><li><a href="2026-10-02.html">Edición nº 6 · viernes 2 de octubre de 2026</a><span class="lead-ctx">Olmo-core 3: la infraestructura de entrenamiento abierta para modelos MoE gigantes</span></li><li><a href="2026-10-01.html">Edición nº 5 · jueves 1 de octubre de 2026</a><span class="lead-ctx">Hugging Face lanza el Open TTS Leaderboard para medir la voz generada</span></li><li><a href="2026-09-30.html">Edición nº 4 · martes 30 de septiembre de 2026</a><span class="lead-ctx">Qwen-Image-2.1: 7B de pesos abiertos para generar y editar imágenes</span></li><li><a href="2026-09-29.html">Edición nº 3 · Lunes 29 de septiembre de 2026</a><span class="lead-ctx">Holo4: el agente de uso informático generalista de H Company, en pesos abiertos</span></li><li><a href="2026-09-28.html">Edición nº 2 · Lunes 28 de septiembre de 2026</a><span class="lead-ctx">Liquid AI acelera sus modelos de visión-lingüaje con LFM2.5-VL-DSpark</span></li><li><a href="2026-09-27.html">Edición nº 1 · Domingo 27 de septiembre de 2026</a><span class="lead-ctx">Transformers ya ejecuta cuantizados de llama.cpp</span></li></ul></section></div></div></main><footer class="colophon"><div class="wrap"><div class="cols"><div>IA Abierta Hoy: archivo de ediciones diarias de IA abierta.</div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes.</p><div class="license">Licencia: <a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a> (CC-BY-SA)</div></div></footer></body></html>
