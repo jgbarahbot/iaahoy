@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA·A·Hoy — 23 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, software libre para IA y mucho más. Edición nº 26">
+<link rel="alternate" type="application/json" href="editions/2026-10-23.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+  /* long unbreakable tokens (repo slugs, URLs) must wrap, never force
+     horizontal scroll on narrow screens (user report 2026-10-25) */
+  overflow-wrap:anywhere;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;min-width:0}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+.dateline nav .sep{color:var(--rule);margin-right:14px}
+
+/* ---------- Podcast block (the daily audio) ----------
+   Lives INSIDE .wrap (the page container): the old version sat between the
+   masthead and the container and bled to the left edge (user report
+   2026-10-25). The label is the show name itself, on the line above the
+   player, per the same report. */
+.podcast-cta{
+  margin:16px 0 6px;padding:14px 18px 16px;
+  background:var(--paper-2);
+  border:1px solid var(--rule);border-left:4px solid var(--accent);
+  border-radius:2px;
+}
+.podcast-cta .podcast-label{margin:0 0 10px;font-size:15.5px;color:var(--ink);font-style:italic}
+.podcast-cta .podcast-label b{font-style:normal;color:var(--accent);letter-spacing:.01em}
+.podcast-cta audio{width:100%;display:block}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+/* Lead illustration (moss-image-news-illustration): between the summary and
+   the first body paragraph. MUST never force horizontal scroll on narrow
+   screens (user rule 2026-10-25): max-width:100% on the <img> is the guard,
+   width:auto keeps its natural aspect, height:auto avoids distortion. */
+.lead-illo{margin:14px 0 6px}
+.lead-illo img{
+  display:block;width:auto;max-width:100%;height:auto;
+  margin:0 auto;border:1px solid var(--rule);border-radius:2px;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+.lead-illo figcaption{
+  font-family:var(--sans);font-size:12px;color:var(--ink-soft);
+  text-align:center;margin-top:6px;letter-spacing:.02em;
+}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+  min-width:0;word-break:break-word;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+/* Two-pass recap: the single summary paragraph that opens each note. */
+.note .resumen{font-style:italic;color:var(--ink);margin:0 0 10px}
+/* Foreign (still-English) terms marked with *asterisks* in the source.
+   Not italic (the recap already uses italics) — stand out by weight + color. */
+em{font-style:normal;font-weight:600;color:var(--accent-2)}
+.note .resumen em,.featured .lead em{color:var(--ink)}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-width:0}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);
+  max-width:100%;overflow-wrap:anywhere;word-break:break-word;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Small-screen tuning (phones ≤ 480px) ----------
+   The layout is fluid (clamp() + single column below 860px); this block
+   only trims fixed sizes that would feel heavy on a phone (user report
+   2026-10-25: not adapted to mobile). */
+@media(max-width:480px){
+  body{font-size:16px}
+  .wrap{padding:0 14px}
+  .masthead h1{font-size:clamp(34px,11vw,44px)}
+  .dateline{flex-direction:column;align-items:flex-start;gap:4px}
+  .featured .fbody{font-size:16px}
+  .featured .lead{font-size:17px}
+  .note{padding:12px 13px}
+  .note p,.note .resumen{font-size:15px}
+  .dropcap::first-letter{font-size:46px;padding:2px 6px 0 0}
+  .colophon{padding:16px 0 36px}
+}
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* ---------- Archive list (editions/index.html) ----------
+   Each row: the clickable "Edición nº N · <date>" (accent), then the portada
+   headline as plain context below it (user rule 2026-10-25 — the filename
+   never appears). */
+.editions-list{list-style:none;margin:0;padding:0}
+.editions-list li{padding:12px 0;border-bottom:1px dotted var(--rule)}
+.editions-list li:last-child{border-bottom:0}
+.editions-list a{color:var(--accent);font-weight:700;text-decoration:none;font-size:16px;letter-spacing:.01em}
+.editions-list a:hover{color:var(--accent-2)}
+.editions-list .lead-ctx{display:block;color:var(--ink-soft);font-size:14.5px;font-style:italic;margin-top:3px}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La IA abierta resumida por una IA abierta</span><span>Edición en línea</span></div><h1>IA<span class="amp">·</span>A<span class="amp">·</span>Hoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, software libre para IA y mucho más: resumen para quienes estamos obsesionados con estos temas.</p><div class="dateline"><span class="ed">Edición nº 26</span> &nbsp;·&nbsp; viernes 23 de octubre de 2026<nav><a href="#modelos">Modelos</a><a href="#agentes-y-software">Agentes y software</a><a href="#papers-e-investigacion">Papers e investigación</a><a href="#comunidad-y-self-hosting">Comunidad y self-hosting</a><span class="sep">|</span><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<main class="wrap">
+<div class="podcast-cta"><p class="podcast-label">🎧 <b>IA·A·Hoy Hablada</b>: un resumen pensado para oírse.</p><audio controls preload="none" src="../podcast.mp3"></audio></div>
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/blog/allenai/olmoearth-v1-3" style="color:inherit;text-decoration:none" rel="noopener">OlmoEarth v1.3: Ai2 libera embeddings de satélite <em>SOTA</em> y, junto a los <em>weights</em>, los <em>embeddings</em> precomputados de <em>todos</em> los píxeles de 10 metros del planeta</a></h2><p class="lead">El Allen Institute for AI (<em>Ai2</em>) estrena <em>OlmoEarth v1.3</em>, su modelo de <em>embeddings</em> de satélite de la misma familia de fundación <em>OLMo</em> — ahora con un <em>state-of-the-art</em> en <em>remote sensing</em> — y hace el salto de «pesos que tienes que correr» a «resultado que ya está calculado»: publica además un <em>dataset</em> con los <em>embeddings</em> precomputados, anuales, para cada píxel de 10 metros de la superficie terrestre, más un <em>Embeddings Explorer</em> en el navegador donde cualquiera puede poner el modelo a trabajar sin <em>GPU</em>. Para el <em>self-hoster</em> la doble cara de la noticia: puedes bajar <em>OlmoEarth-v1_3-Base</em> de <em>Hugging Face</em> y generar tus propios <em>embeddings</em> de imagen, o bien cazar directamente el <em>corpus</em> precomputado para tareas de <em>change detection</em>, clasificación de ecosistemas o <em>search</em> geoespacial a escala global sin coste de inferencia. Es el ejemplo de la semana del «el <em>foundation model</em> geoespacial abierto que no solo te da el modelo, te da la respuesta del planeta entero».</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/blog/allenai/olmoearth-v1-3" rel="noopener">Blog de Hugging Face (OlmoEarth v1.3)</a><a class="chip link" href="https://huggingface.co/allenai/OlmoEarth-v1_3-Base" rel="noopener">Hugging Face (OlmoEarth-v1_3-Base)</a><a class="chip link" href="https://allenai.org/blog/olmoearth-v1-3" rel="noopener">Blog de Ai2 (OlmoEarth v1.3)</a><span class="chip">ai2</span><span class="chip">olmoearth</span><span class="chip">satellite</span><span class="chip">remote-sensing</span><span class="chip">embeddings</span><span class="chip">open-weights</span><span class="chip">geospatial</span><span class="chip">self-hosting</span></div></div>
+<div class="paper"><div class="main"><section class="block" id="modelos"><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B" rel="noopener"><em>Muse-Spark-Open</em>: <em>Meta</em> libera un <em>MoE</em> abierto de 816B/42B activos, <em>multimodal</em>, con 1M de contexto, enfocado a <em>coding</em> y agentes</a></h4><p><em>meta-models/Muse-Spark-Open-816B-A42B</em> es el <em>open-weights</em> del día: un <em>mixture-of-experts</em> de 816B parámetros totales (42B activos) y 1M de tokens de contexto, nativamente <em>multimodal</em> y construido para <em>coding</em> y trabajo agéntico, publicado por <em>Meta</em> como «el <em>open-weight</em> más capaz de su <em>stack</em> en EE. UU.». Va en la portada del <em>trending</em> de <em>Hugging Face</em> y el <em>blog</em> de <em>research.meta.ai</em> lo enmarca como la opción <em>self-hosted</em> de la familia <em>Muse</em>: <em>weights</em> abiertos con recetas <em>BF16</em> y <em>NVFP4</em>, el tipo de <em>MoE</em> grande que encaja con las recetas de <em>NVMe</em>-streaming de <em>experts</em> que venimos viendo en la comunidad. Para el <em>self-hoster</em>, es el <em>frontier</em>-class <em>open model</em> de la semana: el <em>MoE</em> que no cabe en una <em>GPU</em> y sí en una receta distribuida.</p><div class="chips"><a class="chip link" href="https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B" rel="noopener">Hugging Face (Muse-Spark-Open-816B-A42B)</a><a class="chip link" href="https://research.meta.ai/blog/muse-spark-open" rel="noopener">Meta Research (Muse Spark Open)</a><span class="chip">meta</span><span class="chip">muse-spark</span><span class="chip">moe</span><span class="chip">open-weights</span><span class="chip">1m-context</span><span class="chip">multimodal</span><span class="chip">coding</span><span class="chip">agents</span><span class="chip">nvfp4</span></div></article><article class="note"><h4><a href="https://huggingface.co/black-forest-labs/flux-3-image-klein" rel="noopener"><em>FLUX 3 Image Klein</em>: <em>Black Forest Labs</em> libera el <em>open-weights</em> de <em>FLUX 3</em> — 5.6B de <em>imagen</em> con edición y hasta 10 referencias</a></h4><p><em>black-forest-labs/flux-3-image-klein</em> es la variante <em>open-weights</em> de la familia <em>FLUX 3</em>: un modelo de <em>text-to-image</em> y <em>image editing</em> de 5.6B parámetros que comparte los aprendizajes que <em>BFL</em> ha ido acumulando a lo largo de <em>FLUX 3</em> a través de <em>imagen</em>, <em>vídeo</em> y <em>audio</em> — <em>imagen</em> aporta el detalle espacial, <em>vídeo</em> el <em>motion</em> — y que compone <em>imágenes</em> desde cero o las edita usando hasta 10 imágenes de referencia (o <em>layout boxes</em>) como guía. Sale como <em>diffusion-single-file</em> (listo para <em>ComfyUI</em>) y en un <em>pipeline</em> de <em>diffusers</em>, con un <em>space</em> de <em>Hugging Face</em> para probarlo directamente. Para el <em>self-hoster</em> de generación de <em>imagen</em>, es la pieza abierta de la familia <em>FLUX 3</em> del día: <em>weights</em> que puedes <em>fine-tune</em>ar y correr en tu propio hardware.</p><div class="chips"><a class="chip link" href="https://huggingface.co/black-forest-labs/flux-3-image-klein" rel="noopener">Hugging Face (flux-3-image-klein)</a><a class="chip link" href="https://bfl.ai/blog/flux-3-image-klein" rel="noopener">Blog de BFL (FLUX 3 Image Klein)</a><span class="chip">black-forest-labs</span><span class="chip">flux-3</span><span class="chip">image-generation</span><span class="chip">image-editing</span><span class="chip">open-weights</span><span class="chip">comfyui</span><span class="chip">diffusers</span></div></article><article class="note"><h4><a href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener"><em>LTX-2.5</em>: <em>Lightricks</em> libera su <em>foundation model</em> de <em>audio-vídeo</em> de 22B con <em>weights</em> abiertos</a></h4><p><em>Lightricks/LTX-2.5</em> es el <em>foundation model</em> <em>open-weights</em> del día para <em>vídeo</em> con <em>audio</em>: un modelo de 22B parámetros que cubre <em>text-to-video</em>, <em>image-to-video</em>, <em>video-to-video</em> y las variantes con <em>audio</em> (<em>audio-to-video</em>, <em>text-to-audio</em>, etc.), y que genera escenas <em>multishot</em> en un solo paso, edita <em>footage</em> real y exporta <em>EXR</em> de calidad cinematográfica. <em>Lightricks</em> lo define como un «<em>world model</em>» <em>open-weights</em> que puedes <em>fine-tune</em>ar y correr en tu hardware. Es el <em>anchor</em> de la semana en el espacio <em>video+audio</em> de <em>Hugging Face</em>: el <em>foundation model</em> abierto al que apuntan los que buscan generación de <em>vídeo</em> con sonido nativo, en lugar de los <em>pipelines</em> que pegan <em>TTS</em> y <em>TTS</em>-driven <em>lip-sync</em> encima.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">Hugging Face (LTX-2.5)</a><a class="chip link" href="https://ltx.io/model/ltx-2-5" rel="noopener">LTX (LTX-2.5)</a><span class="chip">lightricks</span><span class="chip">ltx-2.5</span><span class="chip">video</span><span class="chip">audio</span><span class="chip">open-weights</span><span class="chip">world-model</span><span class="chip">diffusion</span></div></article><article class="note"><h4><a href="https://huggingface.co/fishaudio/drama-3" rel="noopener"><em>Drama 3</em> (<em>Fish Audio</em>): <em>TTS</em> multi-hablante «dirigible» — un <em>MoE</em> de 35B/3B con <em>voice direction</em> en lenguaje natural, con receta <em>vLLM-Omni</em></a></h4><p><em>fishaudio/drama-3</em> es la nueva generación de <em>TTS</em> de <em>Fish Audio</em> construida para <em>voice direction</em> y <em>content creation</em>: además del <em>script</em>, describes en lenguaje natural cómo debe interpretarse cada línea (emoción, ritmo, sonidos y pausas), y soporta <em>multi-hablante</em>, <em>voice cloning</em> y control natural. Es un <em>MoE</em> de 35B parámetros totales (3B activos) con <em>tags</em> de hablante y eventos <em>inline</em>, y llega con una receta en <em>vLLM-Omni</em> para servirlo. Es el <em>counterpoint</em> interesante del día frente al <em>Granite Speech</em> de la portada de ayer: no un <em>ASR</em>, sino un <em>TTS</em> «dirigido», con una receta de <em>inference</em> abierta. Para quien genera <em>audio</em> con <em>LLMs</em> locales, es la pieza <em>open</em> del <em>stack</em> de voz del día.</p><div class="chips"><a class="chip link" href="https://huggingface.co/fishaudio/drama-3" rel="noopener">Hugging Face (drama-3)</a><a class="chip link" href="https://docs.fish.audio/features/text-to-speech/drama-3" rel="noopener">Docs de Fish Audio (Drama 3)</a><a class="chip link" href="https://recipes.vllm.ai/fishaudio/drama-3" rel="noopener">vLLM Recipes (drama-3)</a><span class="chip">fish-audio</span><span class="chip">drama-3</span><span class="chip">tts</span><span class="chip">multi-speaker</span><span class="chip">voice-cloning</span><span class="chip">moe</span><span class="chip">vllm-omni</span><span class="chip">open-weights</span></div></article></section><section class="block" id="agentes-y-software"><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/microsoft/thinkingbox-training" rel="noopener"><em>ThinkingBox-Training</em> (<em>Microsoft</em>/<em>Hugging Face</em>): convertir la <em>grading</em> de <em>base de datos</em> en <em>rewards</em> de <em>RL</em> para <em>post-train</em>ar agentes</a></h4><p><em>Microsoft</em> y <em>Hugging Face</em> publican <em>Turning Database Grading into RL Rewards</em> (blog de <em>Hugging Face</em>, 22 de octubre): la idea es tomar <em>ThinkingBox</em> — el <em>benchmark</em> que evalúa a un agente por el <em>estado</em> de la <em>base de datos</em> que deja, no por las frases que genera — y usar esas comprobaciones ejecutables de <em>estado final</em> como <em>rewards</em> de <em>reinforcement learning</em> para <em>post-train</em>ar agentes. El punto de partida es duro: un estudio citado en la semana halló que los agentes «fallan al completar la tarea» en una abultada mayoría de casos, y que lo que el agente <em>dice</em> que hizo no siempre coincide con lo que <em>realmente</em> dejó hecho. La lección práctica del <em>team article</em> es la del día: entrenar con <em>checks</em> de <em>base de datos</em> como <em>reward</em> hizo al agente mucho más consistente completando <em>tasks</em> multi-paso, y es una receta reproducible para quien <em>post-trains</em> sus propios agentes.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/microsoft/thinkingbox-training" rel="noopener">Blog de Hugging Face (ThinkingBox-Training)</a><a class="chip link" href="https://commandline.microsoft.com/thinkingbox-bench-agent-benchmarking/" rel="noopener">Microsoft (ThinkingBox bench)</a><span class="chip">microsoft</span><span class="chip">hugging-face</span><span class="chip">thinkingbox</span><span class="chip">rl</span><span class="chip">agents</span><span class="chip">evaluation</span><span class="chip">post-training</span><span class="chip">rewards</span></div></article><article class="note"><h4><a href="https://github.com/iofold/stablehand" rel="noopener"><em>stablehand</em>: un <em>runtime</em> de agentes autohospedado — corre cualquier <em>harness</em> en <em>sandboxes</em> aislados, con <em>HITL</em>, <em>budgets</em> y <em>streaming</em> <em>UI</em></a></h4><p><em>iofold/stablehand</em> es un <em>runtime</em> de agentes <em>self-hosted</em>: corre cualquier <em>harness</em> (cualquier <em>coding agent</em> que tengas) dentro de <em>sandboxes</em> aislados, y añade la pila operativa que falta en el <em>home-lab</em> — <em>streaming UI</em>, <em>human-in-the-loop</em> (<em>HITL</em>), <em>budgets</em> y <em>durable events</em>. Es el ejemplo concreto de la semana del «el <em>sandbox</em> como primer cliente del <em>endpoint</em> local»: en vez de lanzar el agente <em>bare</em> en tu máquina, lo aíslas, le pones tope de gasto y un canal para que un humano intervenga cuando toca. Para la comunidad <em>self-hosted</em> que ya tiene un <em>LLM</em> en el <em>rack</em>, es la capa de contención del día: seguridad y <em>control</em> sin salir de tu propio hardware.</p><div class="chips"><a class="chip link" href="https://github.com/iofold/stablehand" rel="noopener">GitHub (stablehand)</a><span class="chip">stablehand</span><span class="chip">iofold</span><span class="chip">agents</span><span class="chip">self-hosting</span><span class="chip">sandbox</span><span class="chip">hitl</span><span class="chip">runtime</span><span class="chip">open-source</span></div></article><article class="note"><h4><a href="https://github.com/Yonagi043/vestigium" rel="noopener"><em>vestigium</em>: un <em>MCP server</em> que deja a los agentes <em>leer</em> <em>PDFs</em> largos «por dirección» y <em>citar</em> la página</a></h4><p><em>Yonagi043/vestigium</em> resuelve un dolor muy concreto de los <em>coding agents</em> y asistentes de <em>research</em>: «cada respuesta deja una traza de vuelta a su página». Es un <em>MCP server</em> que permite a un agente <em>leer</em> <em>PDFs</em> largos por <em>dirección</em> (ir a la página <em>N</em>, extraer ese <em>chunk</em>) y <em>citar</em> la página exacta de donde viene cada afirmación. En la semana del <em>RAG</em> y la <em>citas verificables</em> — con <em>Jev-RAG-Claim-Verification-130K</em> y <em>FDE-Gym</em> en el <em>trending</em> de <em>datasets</em> — este es el ladrillo <em>open</em> que cierra el <em>loop</em> entre <em>leer</em> y <em>citar</em>: el agente no «responde de memoria», apunta a la página. Para quien monta <em>RAG</em> local con <em>MCP</em>, es la pieza de <em>grounding</em> de la semana.</p><div class="chips"><a class="chip link" href="https://github.com/Yonagi043/vestigium" rel="noopener">GitHub (vestigium)</a><span class="chip">vestigium</span><span class="chip">mcp</span><span class="chip">pdf</span><span class="chip">citations</span><span class="chip">rag</span><span class="chip">agents</span><span class="chip">self-hosting</span><span class="chip">open-source</span></div></article></section><section class="block" id="papers-e-investigacion"><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.26233" rel="noopener"><em>Heartbeat Thinking</em>: razonamiento y ejecución de <em>tools</em> especulativos mientras el agente <em>escucha</em>, en agentes de <em>voz</em> en <em>realtime</em> (arXiv 2610.26233)</a></h4><p>Zhang, Fu, Tong, Zheng y col. (arXiv 2610.26233, 18 de octubre) parten de un problema muy concreto de los agentes de <em>voz</em>: el usuario tiene que <em>esperar</em> tras <em>terminar</em> de <em>hablar</em>, aunque la información <em>actionable</em> ya llegó antes. Los enfoques <em>speculativos</em> <em>empezar</em> a trabajar <em>durante</em> el <em>speech</em>, pero la generación acotada por <em>chunks</em> o «<em>interruption</em> al actualizar» puede <em>romper</em> cuando el hablante se <em>corta</em>. <em>Heartbeat Thinking</em> propone <em>razonar</em> y ejecutar <em>tools</em> de forma <em>speculativa</em> «mientras <em>escucha</em>» — un <em>heartbeat</em> de trabajo <em>speculativo</em> que no se <em>bloquea</em> esperando el fin del <em>turno</em>. Es el paper del día para quien trabaja con <em>voice agents</em> y la <em>latencia</em> del <em>turno</em> de <em>user</em> como <em>bottleneck</em>: el <em>trick</em> es <em>empezar</em> antes de que el <em>speech</em> <em>termine</em>.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.26233" rel="noopener">arXiv (Heartbeat Thinking)</a><a class="chip link" href="https://huggingface.co/papers/2610.26233" rel="noopener">Hugging Face Papers</a><span class="chip">heartbeat-thinking</span><span class="chip">voice-agents</span><span class="chip">speculative</span><span class="chip">realtime</span><span class="chip">latency</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.19705" rel="noopener"><em>RouteWeaver</em>: tejer <em>selección de modo</em> y <em>ejecución</em> en un <em>routing</em> unificado de <em>LLMs</em> (arXiv 2610.19705)</a></h4><p>Wang, Zhang, Liu, Feng y col. (arXiv 2610.19705, 18 de octubre) atacan el <em>LLM routing</em> — <em>elegir</em> dinámicamente y <em>coordinar</em> <em>LLMs</em> <em>heterogéneos</em> entre <em>tareas</em> <em>diversas</em> — porque los enfoques <em>actuales</em> están <em>cristalizados</em> en un <em>paradigma</em> de <em>ejecución</em> <em>predefinido</em> (<em>single-round</em>, <em>multi-round</em> o <em>agentic</em>), y eso no <em>encaja</em> con todas las <em>tareas</em>. <em>RouteWeaver</em> <em>une</em> la <em>selección</em> del <em>modo</em> y la <em>ejecución</em> en un <em>router</em> <em>unificado</em>, en vez de <em>fijar</em> el <em>paradigma</em> por <em>adelante</em>. Es el <em>ladrillo</em> del día para quien <em>orquesta</em> varios <em>LLMs</em> (el <em>MoE</em> de <em>Muse-Spark</em> de <em>Modelos</em> o la receta <em>NVFP4</em> de <em>NVIDIA</em> son el <em>substrato</em>): cómo <em>ruteas</em> la <em>tarea</em> al <em>modelo</em> y al <em>modo</em> <em>correcto</em> en <em>un</em> <em>paso</em>.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.19705" rel="noopener">arXiv (RouteWeaver)</a><a class="chip link" href="https://huggingface.co/papers/2610.19705" rel="noopener">Hugging Face Papers</a><span class="chip">routeweaver</span><span class="chip">llm-routing</span><span class="chip">orchestration</span><span class="chip">agentic</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.29677" rel="noopener"><em>Toward Recursive Self-Improvement in Physical AI</em>: RSI en el mundo físico (arXiv 2610.29677)</a></h4><p>Luo, Bai, Xu, Li y col. (arXiv 2610.29677, 20 de octubre) extienden la idea de <em>recursive self-improvement</em> — un sistema que no solo <em>mejora</em> su <em>comportamiento</em> sino también el <em>proceso</em> por el que se <em>mejora</em> — del <em>mundo</em> <em>digital</em> (agentes que <em>re-escríben</em> su <em>código</em> y <em>validan</em> cada <em>versión</em> con <em>tests</em> <em>ejecutables</em>) al <em>mundo</em> <em>físico</em>. La pregunta del paper: ¿cómo <em>validas</em> la <em>auto-mejora</em> cuando el <em>estado</em> a <em>verificar</em> no es una <em>salida</em> de <em>código</em> sino un <em>robot</em> <em>actuando</em> en el <em>mundo</em>? Es el <em>counterpoint</em> del día a la ola de «<em>agentes que </em>mejoran<em> a </em>agentes<em>» y el más cercano a la pregunta de </em>Physical AI<em> que la comunidad se </em>hace<em>: ¿de qué </em>sirve<em> el </em>auto-mejoramiento<em> si no </em>escala<em> a la </em>tarea<em> </em>física<em> </em>real*?</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.29677" rel="noopener">arXiv (Recursive Self-Improvement in Physical AI)</a><a class="chip link" href="https://huggingface.co/papers/2610.29677" rel="noopener">Hugging Face Papers</a><span class="chip">recursive-self-improvement</span><span class="chip">physical-ai</span><span class="chip">agents</span><span class="chip">research</span></div></article></section><section class="block" id="comunidad-y-self-hosting"><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/ibm-granite/granite-timeseries-ensemble-r1" rel="noopener"><em>granite-timeseries-ensemble-r1</em>: <em>IBM</em> libera un <em>ensemble</em> de <em>foundation models</em> de <em>series de tiempo</em> <em>Apache 2.0</em> para <em>forecasting</em> local</a></h4><p><em>ibm-granite/granite-timeseries-ensemble-r1</em> es la pieza del día en el <em>stack</em> de <em>forecasting</em> autohospedado: un <em>ensemble</em> probabilístico de <em>foundation models</em> de <em>series de tiempo</em> de la familia <em>Granite</em> — acompañado del <em>team article</em> de <em>IBM Research</em> sobre <em>ensemble forecasting</em> — bajo <em>Apache 2.0</em>, evaluado contra <em>GiftEval</em>. El <em>ensemble</em> combina varios miembros (<em>tspulse-r1</em>, <em>ttm-r2/r3</em>, <em>patchtst</em>, etc.) para mejorar la calidad del pronóstico sin <em>re-train</em>ar de cero. Para quien monta <em>forecasting</em> en el <em>rack</em> — demanda, precio, consumo — es la receta <em>open</em> de la semana: un <em>ensemble</em> de <em>foundation models</em> de <em>series de tiempo</em> <em>Apache 2.0</em> que corre local y se evalúa contra un <em>benchmark</em> público.</p><div class="chips"><a class="chip link" href="https://huggingface.co/ibm-granite/granite-timeseries-ensemble-r1" rel="noopener">Hugging Face (granite-timeseries-ensemble-r1)</a><a class="chip link" href="https://huggingface.co/blog/ibm-research/granite-timeseries-ensemble-r1" rel="noopener">Blog de Hugging Face (ensemble forecasting)</a><span class="chip">ibm</span><span class="chip">granite</span><span class="chip">time-series</span><span class="chip">ensemble</span><span class="chip">forecasting</span><span class="chip">apache-2.0</span><span class="chip">self-hosting</span></div></article><article class="note"><h4><a href="https://huggingface.co/google/embeddinggemma-2" rel="noopener"><em>embeddinggemma-2</em> (<em>Google</em>): <em>embeddings</em> <em>multimodales</em> abiertos — <em>texto</em>, <em>imagen</em>, <em>audio</em> y <em>vídeo</em> en un solo modelo</a></h4><p><em>google/embeddinggemma-2</em> es el <em>open-weights</em> del día para <em>embeddings</em> <em>multimodales</em>: un modelo de <em>feature extraction</em>/<em>sentence-transformers</em> que embebe <em>texto</em>, <em>imagen</em>, <em>audio</em> y <em>vídeo</em> en un espacio común, listo para <em>retrieval</em> y <em>RAG</em> <em>multimodal</em>. Con ~2.850 <em>likes</em> en <em>Hugging Face</em>, es la pieza <em>open</em> del <em>stack</em> de <em>embeddings</em> del día: en lugar de un <em>embedding</em> solo de <em>texto</em>, un modelo unificado que sirve todos los modos y corre local. Para quien monta <em>RAG</em> con imágenes o <em>audio</em> en su propio hardware, es el <em>encoder</em> <em>open</em> que faltaba de la semana.</p><div class="chips"><a class="chip link" href="https://huggingface.co/google/embeddinggemma-2" rel="noopener">Hugging Face (embeddinggemma-2)</a><span class="chip">google</span><span class="chip">embeddinggemma-2</span><span class="chip">embeddings</span><span class="chip">multimodal</span><span class="chip">rag</span><span class="chip">retrieval</span><span class="chip">open-weights</span><span class="chip">self-hosting</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener"><em>MiMo-V2.6-RL-oss</em> (<em>Xiaomi</em>): <em>dataset</em> <em>open</em> de <em>RL</em> para <em>LLMs</em> — <em>documents</em> e <em>imagen</em> a <em>parquet</em></a></h4><p><em>XiaomiMiMo/MiMo-V2.6-RL-oss</em> es el <em>dataset</em> del día en la semana del <em>ThinkingBox-Training</em> (sección de Agentes): datos abiertos de <em>reinforcement learning</em> de la familia <em>MiMo</em> de <em>Xiaomi</em>, a <em>parquet</em> con modalidad de <em>documents</em> e <em>imagen</em> (y <em>texto</em>), del orden de un millón de ejemplos y <em>Apache 2.0</em>. Es la pieza <em>open</em> que cierra el <em>loop</em> de <em>post-training</em> del día: el <em>benchmark</em> <em>ThinkingBox</em> aporta el <em>reward</em> y este <em>dataset</em> el material <em>open</em> para el <em>RL</em>. Para quien <em>post-trains</em> <em>LLMs</em> locales, es el <em>dataset</em> de <em>RL</em> <em>open</em> que complementa la receta de <em>rewards</em> por <em>base de datos</em> de <em>Microsoft</em>.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">Hugging Face (MiMo-V2.6-RL-oss)</a><span class="chip">xiaomi</span><span class="chip">mimo</span><span class="chip">rl</span><span class="chip">dataset</span><span class="chip">post-training</span><span class="chip">open-data</span><span class="chip">apache-2.0</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license">Licencia: <a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a> (CC-BY-SA)</div></div></footer>
+</body></html>

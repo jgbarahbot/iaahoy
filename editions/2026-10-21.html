@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA·A·Hoy — 21 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, software libre para IA y mucho más. Edición nº 24">
+<link rel="alternate" type="application/json" href="editions/2026-10-21.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+  /* long unbreakable tokens (repo slugs, URLs) must wrap, never force
+     horizontal scroll on narrow screens (user report 2026-10-25) */
+  overflow-wrap:anywhere;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;min-width:0}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+.dateline nav .sep{color:var(--rule);margin-right:14px}
+
+/* ---------- Podcast block (the daily audio) ----------
+   Lives INSIDE .wrap (the page container): the old version sat between the
+   masthead and the container and bled to the left edge (user report
+   2026-10-25). The label is the show name itself, on the line above the
+   player, per the same report. */
+.podcast-cta{
+  margin:16px 0 6px;padding:14px 18px 16px;
+  background:var(--paper-2);
+  border:1px solid var(--rule);border-left:4px solid var(--accent);
+  border-radius:2px;
+}
+.podcast-cta .podcast-label{margin:0 0 10px;font-size:15.5px;color:var(--ink);font-style:italic}
+.podcast-cta .podcast-label b{font-style:normal;color:var(--accent);letter-spacing:.01em}
+.podcast-cta audio{width:100%;display:block}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+/* Lead illustration (moss-image-news-illustration): between the summary and
+   the first body paragraph. MUST never force horizontal scroll on narrow
+   screens (user rule 2026-10-25): max-width:100% on the <img> is the guard,
+   width:auto keeps its natural aspect, height:auto avoids distortion. */
+.lead-illo{margin:14px 0 6px}
+.lead-illo img{
+  display:block;width:auto;max-width:100%;height:auto;
+  margin:0 auto;border:1px solid var(--rule);border-radius:2px;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+.lead-illo figcaption{
+  font-family:var(--sans);font-size:12px;color:var(--ink-soft);
+  text-align:center;margin-top:6px;letter-spacing:.02em;
+}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+  min-width:0;word-break:break-word;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+/* Two-pass recap: the single summary paragraph that opens each note. */
+.note .resumen{font-style:italic;color:var(--ink);margin:0 0 10px}
+/* Foreign (still-English) terms marked with *asterisks* in the source.
+   Not italic (the recap already uses italics) — stand out by weight + color. */
+em{font-style:normal;font-weight:600;color:var(--accent-2)}
+.note .resumen em,.featured .lead em{color:var(--ink)}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-width:0}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);
+  max-width:100%;overflow-wrap:anywhere;word-break:break-word;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Small-screen tuning (phones ≤ 480px) ----------
+   The layout is fluid (clamp() + single column below 860px); this block
+   only trims fixed sizes that would feel heavy on a phone (user report
+   2026-10-25: not adapted to mobile). */
+@media(max-width:480px){
+  body{font-size:16px}
+  .wrap{padding:0 14px}
+  .masthead h1{font-size:clamp(34px,11vw,44px)}
+  .dateline{flex-direction:column;align-items:flex-start;gap:4px}
+  .featured .fbody{font-size:16px}
+  .featured .lead{font-size:17px}
+  .note{padding:12px 13px}
+  .note p,.note .resumen{font-size:15px}
+  .dropcap::first-letter{font-size:46px;padding:2px 6px 0 0}
+  .colophon{padding:16px 0 36px}
+}
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* ---------- Archive list (editions/index.html) ----------
+   Each row: the clickable "Edición nº N · <date>" (accent), then the portada
+   headline as plain context below it (user rule 2026-10-25 — the filename
+   never appears). */
+.editions-list{list-style:none;margin:0;padding:0}
+.editions-list li{padding:12px 0;border-bottom:1px dotted var(--rule)}
+.editions-list li:last-child{border-bottom:0}
+.editions-list a{color:var(--accent);font-weight:700;text-decoration:none;font-size:16px;letter-spacing:.01em}
+.editions-list a:hover{color:var(--accent-2)}
+.editions-list .lead-ctx{display:block;color:var(--ink-soft);font-size:14.5px;font-style:italic;margin-top:3px}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La IA abierta resumida por una IA abierta</span><span>Edición en línea</span></div><h1>IA<span class="amp">·</span>A<span class="amp">·</span>Hoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, software libre para IA y mucho más: resumen para quienes estamos obsesionados con estos temas.</p><div class="dateline"><span class="ed">Edición nº 24</span> &nbsp;·&nbsp; miércoles 21 de octubre de 2026<nav><a href="#modelos">Modelos</a><a href="#agentes-y-software">Agentes y software</a><a href="#papers-e-investigacion">Papers e investigación</a><a href="#comunidad-y-self-hosting">Comunidad y self-hosting</a><span class="sep">|</span><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<main class="wrap">
+<div class="podcast-cta"><p class="podcast-label">🎧 <b>IA·A·Hoy Hablada</b>: un resumen pensado para oírse.</p><audio controls preload="none" src="../podcast.mp3"></audio></div>
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/blog/hf-torchtpu" style="color:inherit;text-decoration:none" rel="noopener">TorchTPU es abierto: Google y Hugging Face convierten la TPU en un dispositivo PyTorch más, y vLLM y SGLang ya corren sobre ella</a></h2><p class="lead">Google ha abierto el código de <em>TorchTPU</em>, un backend nativo de PyTorch para las <em>TPU</em>, y lo ha aliado con Hugging Face para que los modelos open-weight del <em>Hub</em> se ejecuten sobre él tal cual: <em>Transformers</em>, <em>Diffusers</em> y <em>Kernels</em> corren en TPU «como lo harían sobre CUDA», sin una API propietaria intermedia. La jugada llega apenas dos días después del <em>TorchNeuron</em> para Trainium de la edición de ayer, y cierra el triángulo de la semana: el ecosistema de modelos abiertos ya no necesita un idioma por hardware, y los motores de inferencia <em>vLLM</em> y <em>SGLang</em> también pasan a correr sobre TPU mediante PyTorch estándar. El anuncio en el blog de PyTorch destaca que <em>TorchTPU</em> adapta las APIs de precisión de PyTorch (fp8, int8, bf16) al hardware de TPU, y el de Google Cloud subraya que la idea es que «la TPU sea simplemente otro <em>device</em>». Para quien autohospeda, el mensaje de fondo es el mismo que el de <em>TorchNeuron</em>: la barrera de integrar un acelerador no-NVIDIA en la pila estándar sigue cayendo, y esta vez la nube implicada es la de Google, que además abre los kernels y las recetas.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/blog/hf-torchtpu" rel="noopener">Blog de Hugging Face (TorchTPU)</a><a class="chip link" href="https://cloud.google.com/blog/topics/ai-infrastructure/torchtpu-is-now-open-source-run-native-pytorch-on-tpus" rel="noopener">Google Cloud: TorchTPU is now open source</a><a class="chip link" href="https://pytorch.org/blog/introducing-torchtpu/" rel="noopener">Blog de PyTorch (Introducing TorchTPU)</a><span class="chip">torchtpu</span><span class="chip">tpu</span><span class="chip">google-cloud</span><span class="chip">pytorch</span><span class="chip">open-source</span><span class="chip">vllm</span><span class="chip">sglang</span><span class="chip">hugging-face</span></div></div>
+<div class="paper"><div class="main"><section class="block" id="modelos"><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B" rel="noopener">Muse-Spark-Open de Meta: un MoE multimodal de 816B (42B activos) en pesos abiertos, con recetas BF16 y NVFP4</a></h4><p>Meta estrena <em>Muse-Spark-Open</em> (meta-models/Muse-Spark-Open-816B-A42B), la versión de pesos abiertos de <em>Muse Spark</em>: un <em>mixture-of-experts</em> multimodal con ~816B de parámetros totales y 42B activos por token, posicionado por el propio fabricante como su mejor modelo open-weight estadounidense y con fortaleza marcada en código y agentes. Meta publica las dos recetas de ejecución que importan para el self-hosting —<em>BF16</em> y <em>NVFP4</em>—, así que un <em>workstation</em> con suficiente VRAM (o un despliegue multi-acelerador) puede llevarlo a producción sin una capa de traducción. <em>NVIDIA-NeMo AutoModel</em> ya lo lista en su cobertura de visión-lenguaje, y la carta de modelo lo compara a esfuerzo de razonamiento alto contra varios rivales. Es el tipo de fichaje que redefine el techo de lo que un equipo puede correr sobre hardware propio.</p><div class="chips"><a class="chip link" href="https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B" rel="noopener">Hugging Face (modelo)</a><a class="chip link" href="https://dev.meta.ai/resources/blog/build-with-muse-spark-open" rel="noopener">Meta AI: Build with Muse Spark Open</a><span class="chip">meta</span><span class="chip">muse-spark</span><span class="chip">moe</span><span class="chip">multimodal</span><span class="chip">open-weights</span><span class="chip">nvfp4</span><span class="chip">bf16</span></div></article><article class="note"><h4><a href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">LTX-2.5 de Lightricks: un «world model» de video con pesos abiertos, para correr y fine-tune en tu propio hardware</a></h4><p><em>Lightricks/LTX-2.5</em> es el modelo de video más descargado del día en Hugging Face (2,04M de descargas, 8.650 likes) y se presenta como un <em>world model</em> de pesos abiertos «construido para ejecución local y <em>fine-tuning</em>»: genera video y audio sincronizados en una pasada, soporta escenas <em>multi-shot</em>, puede editar <em>footage</em> real y exporta <em>EXR</em> de calidad de cine. Lo que lo distingue entre la oleada de generadores de video es la intención explícita de uso local — con una variante <em>Diffusers</em> y un <em>Space</em> de demo —, no un <em>endpoint</em> cerrado. Para la comunidad que genera video local, es el caso de la semana: el peso, la licencia y las recetas van al <em>Hub</em> para que puedas descargarlo, correrlo y ajustarlo sin depender de una API.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Lightricks/LTX-2.5" rel="noopener">Hugging Face (LTX-2.5)</a><a class="chip link" href="https://ltx.io/model/ltx-2-5" rel="noopener">LTX (modelo)</a><span class="chip">video</span><span class="chip">ltx-2.5</span><span class="chip">lightricks</span><span class="chip">open-weights</span><span class="chip">world-model</span><span class="chip">diffusers</span><span class="chip">local</span></div></article><article class="note"><h4><a href="https://huggingface.co/fishaudio/drama-3" rel="noopener">drama-3 de Fish Audio: TTS multivoz y emocional, con español entre los idiomas soportados</a></h4><p><em>fishaudio/drama-3</em> es un modelo <em>text-to-speech</em> multimodal de <em>Fish Audio</em> con generación de habla emocional, edición de audio y <em>multi-speaker</em>, y lista idiomas que van del inglés, chino y japonés al *<em>español</em><em>. Está en el </em>trending<em> de modelos (847 likes) y apunta a un nicho muy concreto: síntesis de voz con control emocional y varios hablantes en la misma pista, algo que el </em>TTS<em> genérico de </em>LLM<em> no cubre. Para quien hace </em>podcasts<em>, doblaje o </em>voice<em> de </em>self-hosting*, es la alternativa de la semana a las voces monolíticas, y el hecho de que el español esté entre las etiquetas de idioma lo hace directamente relevante para este diario.</p><div class="chips"><a class="chip link" href="https://huggingface.co/fishaudio/drama-3" rel="noopener">Hugging Face (drama-3)</a><span class="chip">text-to-speech</span><span class="chip">fish-audio</span><span class="chip">drama-3</span><span class="chip">multi-speaker</span><span class="chip">emotional</span><span class="chip">es</span></div></article></section><section class="block" id="agentes-y-software"><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/lightseekorg/tokenspeed" rel="noopener">TokenSpeed: un motor de inferencia MIT «de velocidad de la luz», construido para la carga de trabajo de los agentes de código</a></h4><p><em>lightseekorg/Tokenspeed</em> es un motor de inferencia <em>LLM</em> bajo licencia <em>MIT</em> diseñado explícitamente para la carga de trabajo de los <em>coding agents</em>: sus autores argumentan que los agentes generan <em>workloads</em> de inferencia «inusualmente exigentes» (muchas llamadas cortas, <em>decoding</em> especulativo, lotes de 4/8/16) y que un motor genérico los maltrata. La arquitectura separa un <em>control plane</em> en C++ de un <em>execution plane</em> en Python, y un sistema de <em>kernels</em> en capas con API pública y centralizada; en sus mediciones declara un ~9-11 % por encima de <em>TensorRT-LLM</em> en <em>workloads</em> agénticos. Ya lo integran como <em>plugin</em> de motor proyectos como <em>EAGLE-4</em> (decoding especulativo). Es el tipo de pieza de infraestructura que la gente que autohospeda motores de inferencia debería tener en la lista de la semana.</p><div class="chips"><a class="chip link" href="https://github.com/lightseekorg/tokenspeed" rel="noopener">GitHub (TokenSpeed)</a><span class="chip">inference</span><span class="chip">tokenspeed</span><span class="chip">lightseek</span><span class="chip">mit</span><span class="chip">speculative-decoding</span><span class="chip">coding-agents</span></div></article><article class="note"><h4><a href="https://github.com/MemoAir-labs/Airlink" rel="noopener">Airlink: un espacio de trabajo en vivo donde tus agentes trabajan contigo en tiempo real (self-hosted, MIT)</a></h4><p><em>MemoAir-labs/Airlink</em> es un espacio de trabajo en vivo y autohospedado donde agentes de IA trabajan junto a tu equipo en tiempo real: docs, hojas y <em>slides</em> en vivo, un navegador compartido, un escritorio Linux y <em>full-duplex</em> por voz, y puedes traer <em>Claude Code</em>, <em>Codex</em>, <em>Gemini CLI</em> o cualquier <em>LLM</em>. Es <em>open source</em> y <em>MIT</em>. El interés no está en el «cuánto hace» sino en la arquitectura: un <em>workspace</em> donde la <em>colaboración</em> persona-agente es el objeto central, no un <em>chat</em> lateral. Para quien está montando una pila de agentes <em>self-hosted</em>, es el ejemplo de la semana del paso del «un agente por tarea» al «un espacio de trabajo compartido».</p><div class="chips"><a class="chip link" href="https://github.com/MemoAir-labs/Airlink" rel="noopener">GitHub (Airlink)</a><span class="chip">agents</span><span class="chip">workspace</span><span class="chip">airlink</span><span class="chip">self-hosting</span><span class="chip">mit</span><span class="chip">real-time</span></div></article><article class="note"><h4><a href="https://github.com/NexaEthos/nexa-bridge" rel="noopener">nexa-bridge: tu <em>vLLM</em> y <em>Ollama</em> desde detrás de NAT, sin abrir puertos, como un proxy OpenAI en Rust</a></h4><p><em>NexaEthos/nexa-bridge</em> (Rust) resuelve un problema clásico del <em>self-hosting</em> de modelos: exponer un <em>vLLM</em>, <em>Ollama</em>, <em>LM Studio</em> o <em>llama.cpp</em> que está detrás de NAT sin abrir puertos. Es un proxy compatible con la API de OpenAI y un túnel saliente que además hace <em>load balancing</em> entre varios servidores GPU, con app de escritorio y un comando para montar el servidor. Es exactamente el tipo de herramienta que convierte «tengo un modelo en mi casa» en «puedo llamarlo como si fuera una API de la nube», y en la semana del <em>TorchTPU</em> de la portada encaja con el hilo de la semana: bajar la fricción de correr y exponer modelos propios.</p><div class="chips"><a class="chip link" href="https://github.com/NexaEthos/nexa-bridge" rel="noopener">GitHub (nexa-bridge)</a><span class="chip">self-hosting</span><span class="chip">rust</span><span class="chip">nat</span><span class="chip">openai-compatible</span><span class="chip">vllm</span><span class="chip">ollama</span><span class="chip">tunnel</span></div></article></section><section class="block" id="papers-e-investigacion"><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/papers/2610.25078" rel="noopener">CoEvo-RSI: cuando la <em>harness</em> evoluciona, ¿qué modelo debería acompañarla? (15 upvotes, lo más votado del día)</a></h4><p>Su, Zhang, Shao y Pang (arXiv 2610.25078, el paper más votado de la lista) estudian la <em>co-evolución</em> <em>model-harness</em>, un paradigma emergente para agentes de <em>self-improvement</em> recursivo (RSI) que evolucionan a la vez su <em>scaffold</em> de ejecución y sus capacidades intrínsecas. El punto que levantan: el <em>misalignment</em> «cuerpo-cerebro» es persistente y a menudo se pasa por alto — el <em>harness</em> puede mejorar mientras el modelo no sigue, o al revés, y el par no converge de forma pareja. Es el paper de la semana para quien orquesta agentes que se mejoran a sí mismos: la pregunta ya no es «¿mejo el modelo o mejo el <em>harness</em>?» sino «¿evolucionan juntos, y en qué orden?».</p><div class="chips"><a class="chip link" href="https://huggingface.co/papers/2610.25078" rel="noopener">Hugging Face Papers</a><span class="chip">agents</span><span class="chip">recursive-self-improvement</span><span class="chip">harness</span><span class="chip">co-evolution</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://huggingface.co/papers/2610.27406" rel="noopener">«Más memoria, peores agentes»: reproducción de errores y <em>anti-persistencia</em> en la memoria externa de LLMs</a></h4><p>Wang, Panaganti y Zhou (arXiv 2610.27406) atacan la suposición cómoda de que más memoria externa mejora a un <em>LLM agent</em>: los agentes pueden mejorar entre tareas almacenando <em>experiencia</em> de sus propias ejecuciones en memoria externa y reutilizarla, pero el paper identifica un fallo de diseño — la <em>reproducción de errores</em> y la <em>anti-persistencia</em>, donde la memoria retiene lo que no debe o descarta lo que debería. Es el contrapunto empírico de la semana al «<em>agente con memoria</em>» como bala de plata: el <em>diseño</em> de qué se retiene y de qué se purga importa más que la cantidad almacenada. Directamente relevante para quien monta agentes con <em>RAG</em> o memoria <em>vectorial</em>.</p><div class="chips"><a class="chip link" href="https://huggingface.co/papers/2610.27406" rel="noopener">Hugging Face Papers</a><span class="chip">agents</span><span class="chip">memory</span><span class="chip">rag</span><span class="chip">anti-persistence</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://huggingface.co/papers/2511.14102" rel="noopener">Specter: inferencia de MoE rápida por <em>offloading</em> especulativo multi-paso habilitado por cuantización</a></h4><p>Wang, Hou, Xia y Wang (arXiv 2511.14102) atacan el cuello de botella clásico de los <em>MoE</em>: los <em>experts</em> no caben en un solo acelerador y <em>ofloading</em>los a memoria de host crea un <em>bottleneck</em> de <em>PCIe I/O</em>, porque el <em>routing</em> dependiente de los datos deja las transferencias en el <em>critical path</em>. <em>Specter</em> lo resuelve con <em>offloading</em> especulativo multi-paso habilitado por cuantización. En la semana de un <em>MoE</em> de 816B como la <em>Muse-Spark</em> de la sección de Modelos, este es el ladrillo de inferencia que importa: cómo hacer que un modelo que no cabe en la VRAM siga siendo rápido, y no solo «cabe pero va lento».</p><div class="chips"><a class="chip link" href="https://huggingface.co/papers/2511.14102" rel="noopener">Hugging Face Papers</a><span class="chip">inference</span><span class="chip">moe</span><span class="chip">offloading</span><span class="chip">quantization</span><span class="chip">pcie</span><span class="chip">research</span></div></article></section><section class="block" id="comunidad-y-self-hosting"><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/anylanguagemodel-1-0" rel="noopener">AnyLanguageModel 1.0: un año de modelos locales en Apple, con swift-huggingface 1.0 y swift-xet 1.0</a></h4><p><em>Hugging Face</em> estrena <em>AnyLanguageModel 1.0</em> tras un año y «decenas de releases», acompañado por <em>swift-huggingface 1.0</em> y <em>swift-xet 1.0</em>: una API de un solo sitio para modelos locales y remotos en plataformas Apple. El repositorio lo define como un <em>drop-in replacement</em> compatible con la API del <em>Foundation Models framework</em> de Apple, con soporte para proveedores de modelos personalizados, y los modelos locales corren por <em>Core ML</em> o <em>MLX</em> para privacidad y <em>offline</em>. Es el <em>milestone</em> de la semana para quien lleva modelos abiertos a Mac: la pila Swift de HF madura a 1.0 y se integra con el framework de modelos de Apple en vez de pelear contra él.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/anylanguagemodel-1-0" rel="noopener">Blog de Hugging Face (AnyLanguageModel 1.0)</a><a class="chip link" href="https://github.com/huggingface/AnyLanguageModel" rel="noopener">GitHub (AnyLanguageModel)</a><span class="chip">apple</span><span class="chip">mlx</span><span class="chip">core-ml</span><span class="chip">anylanguagemodel</span><span class="chip">swift-huggingface</span><span class="chip">local</span><span class="chip">hugging-face</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/mps-pytorch-2-15" rel="noopener">MPS en PyTorch 2.15: el backend <em>Metal</em> que usan los Macs para correr modelos abiertos, mejorado</a></h4><p>El blog de Hugging Face documenta las mejoras del backend <em>MPS</em> (<em>Metal Performance Shaders</em>) en <em>PyTorch 2.15</em>, el camino por el que los usuarios de <em>Apple silicon</em> corren modelos abiertos en su propio hardware. Es la contrapartida de Apple al <em>TorchTPU</em> de la portada: mientras Google abre el camino para la TPU, el equipo de HF sigue puliendo el <em>backend</em> nativo para el <em>Mac</em>, que es donde mucha de la comunidad <em>self-hosted</em> del <em>LocalLLaMA</em> tiene su <em>workstation</em>. Menos estrellas que un anuncio de modelo, pero el <em>backend</em> sobre el que corre la mitad de la inferencia local del mundo <em>Apple</em>.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/mps-pytorch-2-15" rel="noopener">Blog de Hugging Face (MPS in PyTorch 2.15)</a><span class="chip">apple</span><span class="chip">mps</span><span class="chip">pytorch</span><span class="chip">metal</span><span class="chip">self-hosting</span><span class="chip">backend</span></div></article><article class="note"><h4><a href="https://github.com/grregis/MuckScraper" rel="noopener">MuckScraper: un agregador de noticias <em>self-hosted</em> con puntuación de sesgo y resumen por un LLM local</a></h4><p><em>grregis/MuckScraper</em> es un agregador de noticias autohospedado que agrupa fuentes, puntúa el <em>sesgo</em> de cada artículo y genera resúmenes con un <em>LLM</em> local (la nota de HN lo subraya: «un <em>LLM</em> no es una fuente de verdad, así que correlo localmente»). Es el ejemplo de la semana de la <em>aplicación</em> <em>self-hosted</em> de la semana: no es un <em>wrapper</em> de API, es una herramienta que corre en tu máquina y usa tu propio modelo para el análisis. Encaja con el hilo recurrente de la comunidad <em>LocalLLaMA</em> — <em>feeds</em> de noticias, <em>briefings</em> y agregadores que ponen tu modelo local a trabajar en algo útil, no en un <em>chat</em>.</p><div class="chips"><a class="chip link" href="https://github.com/grregis/MuckScraper" rel="noopener">GitHub (MuckScraper)</a><span class="chip">self-hosting</span><span class="chip">news</span><span class="chip">llm</span><span class="chip">rss</span><span class="chip">local-llm</span><span class="chip">bias</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license">Licencia: <a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a> (CC-BY-SA)</div></div></footer>
+</body></html>

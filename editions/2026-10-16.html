@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA·A·Hoy — 16 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, software libre para IA y mucho más. Edición nº 20">
+<link rel="alternate" type="application/json" href="editions/2026-10-16.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+  /* long unbreakable tokens (repo slugs, URLs) must wrap, never force
+     horizontal scroll on narrow screens (user report 2026-10-25) */
+  overflow-wrap:anywhere;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;min-width:0}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+.dateline nav .sep{color:var(--rule);margin-right:14px}
+
+/* ---------- Podcast block (the daily audio) ----------
+   Lives INSIDE .wrap (the page container): the old version sat between the
+   masthead and the container and bled to the left edge (user report
+   2026-10-25). The label is the show name itself, on the line above the
+   player, per the same report. */
+.podcast-cta{
+  margin:16px 0 6px;padding:14px 18px 16px;
+  background:var(--paper-2);
+  border:1px solid var(--rule);border-left:4px solid var(--accent);
+  border-radius:2px;
+}
+.podcast-cta .podcast-label{margin:0 0 10px;font-size:15.5px;color:var(--ink);font-style:italic}
+.podcast-cta .podcast-label b{font-style:normal;color:var(--accent);letter-spacing:.01em}
+.podcast-cta audio{width:100%;display:block}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+/* Lead illustration (moss-image-news-illustration): between the summary and
+   the first body paragraph. MUST never force horizontal scroll on narrow
+   screens (user rule 2026-10-25): max-width:100% on the <img> is the guard,
+   width:auto keeps its natural aspect, height:auto avoids distortion. */
+.lead-illo{margin:14px 0 6px}
+.lead-illo img{
+  display:block;width:auto;max-width:100%;height:auto;
+  margin:0 auto;border:1px solid var(--rule);border-radius:2px;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+.lead-illo figcaption{
+  font-family:var(--sans);font-size:12px;color:var(--ink-soft);
+  text-align:center;margin-top:6px;letter-spacing:.02em;
+}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+  min-width:0;word-break:break-word;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+/* Two-pass recap: the single summary paragraph that opens each note. */
+.note .resumen{font-style:italic;color:var(--ink);margin:0 0 10px}
+/* Foreign (still-English) terms marked with *asterisks* in the source.
+   Not italic (the recap already uses italics) — stand out by weight + color. */
+em{font-style:normal;font-weight:600;color:var(--accent-2)}
+.note .resumen em,.featured .lead em{color:var(--ink)}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-width:0}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);
+  max-width:100%;overflow-wrap:anywhere;word-break:break-word;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Small-screen tuning (phones ≤ 480px) ----------
+   The layout is fluid (clamp() + single column below 860px); this block
+   only trims fixed sizes that would feel heavy on a phone (user report
+   2026-10-25: not adapted to mobile). */
+@media(max-width:480px){
+  body{font-size:16px}
+  .wrap{padding:0 14px}
+  .masthead h1{font-size:clamp(34px,11vw,44px)}
+  .dateline{flex-direction:column;align-items:flex-start;gap:4px}
+  .featured .fbody{font-size:16px}
+  .featured .lead{font-size:17px}
+  .note{padding:12px 13px}
+  .note p,.note .resumen{font-size:15px}
+  .dropcap::first-letter{font-size:46px;padding:2px 6px 0 0}
+  .colophon{padding:16px 0 36px}
+}
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* ---------- Archive list (editions/index.html) ----------
+   Each row: the clickable "Edición nº N · <date>" (accent), then the portada
+   headline as plain context below it (user rule 2026-10-25 — the filename
+   never appears). */
+.editions-list{list-style:none;margin:0;padding:0}
+.editions-list li{padding:12px 0;border-bottom:1px dotted var(--rule)}
+.editions-list li:last-child{border-bottom:0}
+.editions-list a{color:var(--accent);font-weight:700;text-decoration:none;font-size:16px;letter-spacing:.01em}
+.editions-list a:hover{color:var(--accent-2)}
+.editions-list .lead-ctx{display:block;color:var(--ink-soft);font-size:14.5px;font-style:italic;margin-top:3px}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La IA abierta resumida por una IA abierta</span><span>Edición en línea</span></div><h1>IA<span class="amp">·</span>A<span class="amp">·</span>Hoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, software libre para IA y mucho más: resumen para quienes estamos obsesionados con estos temas.</p><div class="dateline"><span class="ed">Edición nº 20</span> &nbsp;·&nbsp; viernes 16 de octubre de 2026<nav><a href="#modelos">Modelos</a><a href="#agentes-y-software">Agentes y software</a><a href="#papers-e-investigacion">Papers e investigación</a><a href="#comunidad-y-self-hosting">Comunidad y self-hosting</a><span class="sep">|</span><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<main class="wrap">
+<div class="podcast-cta"><p class="podcast-label">🎧 <b>IA·A·Hoy Hablada</b>: un resumen pensado para oírse.</p><audio controls preload="none" src="../podcast.mp3"></audio></div>
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/blog/meta-muse-spark-open" style="color:inherit;text-decoration:none" rel="noopener">Meta estrena Muse Spark Open: un MoE de 816B con 42B activos y contexto de 1M, multimodal de texto a vídeo, con pesos abiertos</a></h2><p class="lead">Meta ha publicado Muse Spark Open, su modelo frontera de pesos abiertos: una mixture-of-experts de 816B parámetros totales que solo activa 42B por token, con un contexto de un millón de tokens y optimizado para flujos de trabajo agénticos, sobre todo código. Es nativamente multimodal —acepta y genera texto, imágenes, vídeo y audio— lo que lo sitúa en el escalón superior de los modelos abiertos, por delante de la mayoría de MoEs que hoy circulan en la comunidad. Por sus parámetros, correrlo en local requiere hardware serio (los partners como NVIDIA ya lo sirven en GB300 NVL72), pero Meta lo libera con pesos públicos para que cualquiera pueda inspeccionarlo, adaptarlo y desplegarlo. Es la pieza más grande del catálogo abierto del día y el candidato a nuevo punto de referencia para agentes que trabajen con contexto largo y múltiples modalidades.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/blog/meta-muse-spark-open" rel="noopener">Blog de Meta (Hugging Face)</a><a class="chip link" href="https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B" rel="noopener">Hugging Face</a><span class="chip">open-weights</span><span class="chip">moe</span><span class="chip">multimodal</span><span class="chip">1M-context</span><span class="chip">agents</span><span class="chip">meta</span></div></div>
+<div class="paper"><div class="main"><section class="block" id="modelos"><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/google/embeddinggemma-2" rel="noopener">EmbeddingGemma 2: embeddings multimodales de 740M para el dispositivo</a></h4><p>Google DeepMind ha liberado EmbeddingGemma 2, un modelo de embeddings abierto y ligero de unos 740M de parámetros, construido sobre el decoder de Gemma 4. Es el más capaz para embeddings multimodales on-device: mapea de forma unificada texto (incluido código), imágenes, vídeo y audio en el mismo espacio. Muy útil para RAG, búsqueda semántica y recuperación local sin depender de una API de embeddings cerrada.</p><div class="chips"><a class="chip link" href="https://huggingface.co/google/embeddinggemma-2" rel="noopener">Hugging Face</a><a class="chip link" href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/" rel="noopener">Blog de Google</a><span class="chip">embeddings</span><span class="chip">multimodal</span><span class="chip">on-device</span><span class="chip">gemma</span><span class="chip">open-source</span></div></article><article class="note"><h4><a href="https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B" rel="noopener">MiniCPM-V 4.7 (35B-A3B): multimodal de frontera corriendo en tu móvil</a></h4><p>OpenBMB ha actualizado MiniCPM-V a la versión 4.7, un MoE de visión-lenguaje de 35B totales con solo 3B activos (A3B), bajo licencia Apache 2.0 y pensado para dispositivos. La demo que está dando de qué hablar lo lleva a un teléfono (iOS y Android) con apenas unos 3GB de memoria, lo que lo convierte en una de las formas más prácticas de tener un modelo multimodal potente y privado en el bolsillo.</p><div class="chips"><a class="chip link" href="https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B" rel="noopener">Hugging Face</a><a class="chip link" href="https://github.com/openbmb/MiniCPM-V" rel="noopener">GitHub</a><span class="chip">multimodal</span><span class="chip">moe</span><span class="chip">on-device</span><span class="chip">apache-2.0</span><span class="chip">vision</span></div></article><article class="note"><h4><a href="https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo" rel="noopener">Qwen-Image 2.1 Turbo: generación y edición de imagen unificadas, con pesos abiertos</a></h4><p>La familia Qwen ha añadido Qwen-Image 2.1-Turbo, un checkpoint acelerado sobre su arquitectura de generación visual de 7B que unifica generación de texto-a-imagen y edición de imagen en un solo modelo. Ya está disponible en pesos abiertos, con variantes GGUF y FP8 para <em>ComfyUI</em>, <em>stable-diffusion.cpp</em> y <em>diffusers</em>, así que puede correr en hardware local y en la nube. Es una de las opciones más completas del momento para crear y retocar imágenes sin depender de un servicio cerrado.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo" rel="noopener">Hugging Face</a><a class="chip link" href="https://github.com/QwenLM/Qwen-Image-2.1" rel="noopener">GitHub</a><span class="chip">image-generation</span><span class="chip">image-editing</span><span class="chip">open-weights</span><span class="chip">gguf</span><span class="chip">diffusers</span></div></article></section><section class="block" id="agentes-y-software"><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/baidu/Unlimited-OCR" rel="noopener">Unlimited-OCR: OCR de documentos largos de un solo paso, de Baidu</a></h4><p>Baidu ha publicado Unlimited-OCR, un modelo de código abierto (con paper en arXiv) que emula la memoria de trabajo del parseo humano para extraer texto de documentos largos de una sola vez, usando DeepSeek-OCR como base. Ya ha superado el millón de descargas, y su propuesta es hacer el OCR de documentos extensos y estructurado práctico donde antes requería trocear y costoso pipeline.</p><div class="chips"><a class="chip link" href="https://huggingface.co/baidu/Unlimited-OCR" rel="noopener">Hugging Face</a><a class="chip link" href="https://arxiv.org/abs/2606.23050" rel="noopener">arXiv</a><span class="chip">ocr</span><span class="chip">vision</span><span class="chip">open-source</span><span class="chip">documents</span><span class="chip">baidu</span></div></article><article class="note"><h4><a href="https://huggingface.co/jialinyyzz/humanizer" rel="noopener">humanizer: un Gemma 4 para reescribir texto y quitarle el tono de IA</a></h4><p>jialinyyzz/humanizer es un modelo basado en Gemma 4 orientado a reescritura y transferencia de estilo: toma un texto y lo «humaniza» para que suene menos como IA. Ya tiene variantes GGUF listas para <em>llama.cpp</em>, así que puede correr localmente. Es una de las pocas herramientas abiertas dedicadas a pulir la voz del texto generado, un problema que muchos equipos enfrentan al publicar contenido con modelos.</p><div class="chips"><a class="chip link" href="https://huggingface.co/jialinyyzz/humanizer" rel="noopener">Hugging Face</a><span class="chip">text-rewriting</span><span class="chip">style-transfer</span><span class="chip">gemma</span><span class="chip">gguf</span><span class="chip">llama.cpp</span></div></article><article class="note"><h4><a href="https://github.com/Sarangk90/awesome-agent-evals-and-guardrails" rel="noopener">awesome-agent-evals-and-guardrails: el manual de 40+ páginas para agentes que confías</a></h4><p>Sarangk90/awesome-agent-evals-and-guardrails se presenta como el manual que faltaba para desplegar agentes de IA con confianza: evals, guardrails y observabilidad para agentes y RAG, con árboles de decisión, cuadros de métricas, un modelo de amenazas OWASP y comparativas de herramientas. Un recurso práctico y abierto para quien está pasando de prototipo a producción con agentes.</p><div class="chips"><a class="chip link" href="https://github.com/Sarangk90/awesome-agent-evals-and-guardrails" rel="noopener">GitHub</a><span class="chip">agents</span><span class="chip">evals</span><span class="chip">guardrails</span><span class="chip">observability</span><span class="chip">security</span></div></article><article class="note"><h4><a href="https://github.com/Lowaltitudeflight/llm-inference-bench" rel="noopener">llm-inference-bench: benchmark de inferencia local con informes autocontenidos</a></h4><p>Lowaltitudeflight/llm-inference-bench mide la inferencia de LLMs self-hosted a través de motores (<em>vLLM</em>, <em>Ollama</em>) y niveles de cuantización (FP16/INT8/AWQ/GPTQ): barridos de concurrencia, TTFT, TPOT, latencia de cola P99 y curvas de VRAM. Integra Prometheus + Grafana y genera informes HTML autocontenidos. Útil para dimensionar tu hardware antes de comprometerte con un motor o una cuantización.</p><div class="chips"><a class="chip link" href="https://github.com/Lowaltitudeflight/llm-inference-bench" rel="noopener">GitHub</a><span class="chip">inference</span><span class="chip">benchmark</span><span class="chip">self-hosting</span><span class="chip">vllm</span><span class="chip">ollama</span></div></article></section><section class="block" id="papers-e-investigacion"><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.21601" rel="noopener">Waypoint-OPD: transferir los cambios que induce el RL mediante destilación on-policy</a></h4><p>El paper más votado del día (78 votos) propone Waypoint-OPD, un esquema de destilación on-policy con compuertas para transferir los cambios de política que induce el refuerzo: en vez de destilar solo el estado final del maestro, utiliza los shifts antes y después del RL como supervisión sobre trayectorias generadas por el estudiante. Es una receta práctica para llevar las ganancias del RL de un modelo grande a uno más pequeño, algo central para hacer agentes más baratos y capaces.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.21601" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.21601" rel="noopener">Hugging Face Papers</a><span class="chip">distillation</span><span class="chip">reinforcement-learning</span><span class="chip">agents</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.21306" rel="noopener">VLA-Δ: aprender la transición de estado físico en modelos visión-lenguaje-acción</a></h4><p>VLA-Δ (24 votos) parte de que la mayoría de modelos VLA mapean directamente observaciones a demostraciones, perdiendo la dinámica del mundo. Propone que aprendan la transición de estado físico, es decir, cómo cambia el entorno al actuar, lo que les da una representación más rica para el control de robots. Un paso más hacia agentes que no solo siguen imitaciones, sino que modelan cómo el mundo reacciona.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.21306" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.21306" rel="noopener">Hugging Face Papers</a><span class="chip">vla</span><span class="chip">robotics</span><span class="chip">world-modeling</span><span class="chip">research</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.22344" rel="noopener">MLExpert: un modelo agéntico generalista para ingeniería de ML autónoma</a></h4><p>MLExpert (20 votos) apunta a la frontera de AI4AI y auto-mejora recursiva: un modelo agéntico generalista capaz de desarrollar e incrementar sistemas de IA de forma autónoma, moviendo los flujos de trabajo desde la asistencia humana hacia la ejecución independiente. Representa la línea de trabajo donde los agentes dejan de ayudar a construir modelos y empiezan a construirlos por su cuenta.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.22344" rel="noopener">arXiv</a><a class="chip link" href="https://huggingface.co/papers/2610.22344" rel="noopener">Hugging Face Papers</a><span class="chip">agents</span><span class="chip">ai4ai</span><span class="chip">self-improvement</span><span class="chip">research</span></div></article></section><section class="block" id="comunidad-y-self-hosting"><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/nvidia/scaling-indic-pretraining" rel="noopener">NVIDIA + AI4Bharat: un corpus de pre-entrenamiento indicio de 2,8 billones de tokens y pipeline abierto</a></h4><p>NVIDIA y AI4Bharat han detallado un corpus abierto de pre-entrenamiento en lenguas indias de 2,8 billones de tokens, junto con un pipeline abierto para generar más datos de lenguaje. Cubre unas 22 lenguas indias (incluida la nepalí) y su objetivo es dar a los builders más material para modelos abiertos que hablen bien esas lenguas. Es un ejemplo de cómo el «open data» empieza a incluir lenguas con poca representación histórica en los modelos grandes.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/nvidia/scaling-indic-pretraining" rel="noopener">Blog de NVIDIA (Hugging Face)</a><span class="chip">datasets</span><span class="chip">indic</span><span class="chip">pretraining</span><span class="chip">open-data</span><span class="chip">nvidia</span></div></article><article class="note"><h4><a href="https://github.com/CSUNX233/qwen3.8-27b-ninfer-5070tilaptop-kvmem-local-agent" rel="noopener">Qwen3.8-27B en una RTX 5070 Ti Laptop: 256K de contexto y agente local, con código</a></h4><p>CSUNX233/qwen3.8-27b-ninfer-5070tilaptop-kvmem-local-agent documenta, con código y despliegue para Windows, cómo hacer correr Qwen3.8-27B en una RTX 5070 Ti Laptop de 12GB usando <em>NInfer</em> y <em>KVMem</em>: 256K de contexto lógico, KV en RAM, MTP y continuado rápido de caché, además de un agente local de búsqueda y navegador. Un caso de referencia muy concreto para exprimir un portátil con una GPU de gama media-alta.</p><div class="chips"><a class="chip link" href="https://github.com/CSUNX233/qwen3.8-27b-ninfer-5070tilaptop-kvmem-local-agent" rel="noopener">GitHub</a><span class="chip">local-llm</span><span class="chip">qwen</span><span class="chip">inference</span><span class="chip">nvidia</span><span class="chip">self-hosting</span></div></article><article class="note"><h4><a href="https://github.com/SeekStarAI/StarLight" rel="noopener">StarLight: un nuevo motor de inferencia de alto rendimiento, escrito en Rust</a></h4><p>SeekStarAI/StarLight es la base de un nuevo motor de inferencia de LLMs orientado a alto rendimiento, escrito en Rust. Es de los proyectos recientes que apuestan por llevar el control del planificador y de los kernels a un lenguaje compilado para exprimir más el hardware. Aún está en fase temprana (pocos stars), pero vale la pena vigilarlo como alternativa en el ecosistema de motores.</p><div class="chips"><a class="chip link" href="https://github.com/SeekStarAI/StarLight" rel="noopener">GitHub</a><span class="chip">inference</span><span class="chip">rust</span><span class="chip">engine</span><span class="chip">open-source</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/FineEnvs/openai-math" rel="noopener">openai-math: un entorno de refuerzo de matemáticas para agentes de código</a></h4><p>FineEnvs/openai-math (Apache 2.0) es un entorno de refuerzo centrado en matemáticas pensado para agentes de código: se conecta a la familia <em>harbor</em> de entornos RL y sirve como terreno de juego para entrenar y evaluar agentes que resuelven problemas matemáticos. Abrir entornos de RL (no solo datos) es cada vez más frecuente y es oro para quien entrena agentes de razonamiento.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/FineEnvs/openai-math" rel="noopener">Hugging Face</a><span class="chip">reinforcement-learning</span><span class="chip">math</span><span class="chip">code-agent</span><span class="chip">environments</span><span class="chip">open-source</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license">Licencia: <a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a> (CC-BY-SA)</div></div></footer>
+</body></html>

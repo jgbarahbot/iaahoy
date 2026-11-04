@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IA·A·Hoy — 12 de octubre de 2026</title>
+<meta name="description" content="Edición diaria de IA Abierta Hoy: pesos abiertos, software libre para IA y mucho más. Edición nº 16">
+<link rel="alternate" type="application/json" href="editions/2026-10-12.json">
+<style>/* iaahoy — digital broadsheet. Inlined into each edition so permalinks are standalone. */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe9db;
+  --ink:#1c1a17;
+  --ink-soft:#4a463f;
+  --rule:#c9c1ad;
+  --rule-strong:#1c1a17;
+  --accent:#8a2b1d;      /* deep brick red */
+  --accent-2:#1f4e5f;    /* deep teal blue */
+  --gold:#9a7b2e;
+  --chip-bg:#e7e0cf;
+  --card:#fdfbf5;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;
+  /* long unbreakable tokens (repo slugs, URLs) must wrap, never force
+     horizontal scroll on narrow screens (user report 2026-10-25) */
+  overflow-wrap:anywhere;
+}
+a{color:var(--accent-2);text-underline-offset:2px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;min-width:0}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:18px 0 10px;border-bottom:3px double var(--rule-strong)}
+.masthead .topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:12px;
+}
+.masthead h1{
+  font-family:var(--serif);font-weight:800;letter-spacing:-.01em;
+  font-size:clamp(40px,8vw,82px);line-height:.95;margin:0;
+}
+.masthead h1 .amp{color:var(--accent)}
+.tagline{font-style:italic;color:var(--ink-soft);font-size:16px;margin:6px 0 0}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;
+  margin-top:12px;font-family:var(--sans);font-size:13px;letter-spacing:.02em;
+}
+.dateline .ed{color:var(--accent);font-weight:700}
+.dateline nav a{color:var(--ink-soft);text-decoration:none;margin-right:14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.dateline nav a:hover{color:var(--accent)}
+.dateline nav .sep{color:var(--rule);margin-right:14px}
+
+/* ---------- Podcast block (the daily audio) ----------
+   Lives INSIDE .wrap (the page container): the old version sat between the
+   masthead and the container and bled to the left edge (user report
+   2026-10-25). The label is the show name itself, on the line above the
+   player, per the same report. */
+.podcast-cta{
+  margin:16px 0 6px;padding:14px 18px 16px;
+  background:var(--paper-2);
+  border:1px solid var(--rule);border-left:4px solid var(--accent);
+  border-radius:2px;
+}
+.podcast-cta .podcast-label{margin:0 0 10px;font-size:15.5px;color:var(--ink);font-style:italic}
+.podcast-cta .podcast-label b{font-style:normal;color:var(--accent);letter-spacing:.01em}
+.podcast-cta audio{width:100%;display:block}
+
+/* ---------- Featured / portada ---------- */
+.featured{
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  margin-top:14px;padding:22px 0;
+  display:grid;grid-template-columns:1fr;gap:18px;
+}
+.featured .kicker{
+  font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin:0 0 6px;
+}
+.featured h2{font-size:clamp(30px,5vw,52px);line-height:1.02;margin:0;font-weight:800;letter-spacing:-.01em}
+.featured .lead{font-size:19px;color:var(--ink-soft);font-style:italic;margin:10px 0 0;max-width:60ch}
+.featured .fbody{columns:2;column-gap:34px;column-rule:1px solid var(--rule);font-size:16.5px}
+.featured .fbody p{margin:0 0 10px}
+@media(max-width:640px){.featured .fbody{columns:1}}
+/* Lead illustration (moss-image-news-illustration): between the summary and
+   the first body paragraph. MUST never force horizontal scroll on narrow
+   screens (user rule 2026-10-25): max-width:100% on the <img> is the guard,
+   width:auto keeps its natural aspect, height:auto avoids distortion. */
+.lead-illo{margin:14px 0 6px}
+.lead-illo img{
+  display:block;width:auto;max-width:100%;height:auto;
+  margin:0 auto;border:1px solid var(--rule);border-radius:2px;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+.lead-illo figcaption{
+  font-family:var(--sans);font-size:12px;color:var(--ink-soft);
+  text-align:center;margin-top:6px;letter-spacing:.02em;
+}
+
+/* ---------- Layout grid ---------- */
+.paper{display:grid;grid-template-columns:1fr 340px;gap:34px;padding:24px 0 40px}
+@media(max-width:860px){.paper{grid-template-columns:1fr}}
+.main{min-width:0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding-left:26px}
+@media(max-width:860px){.aside{border-left:0;padding-left:0;border-top:1px solid var(--rule-strong);padding-top:20px}}
+
+/* ---------- Section ---------- */
+section.block{margin:0 0 30px;border-bottom:1px solid var(--rule);padding-bottom:22px}
+section.block:last-child{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .icon{font-size:20px;line-height:1}
+.sec-head h3{
+  font-size:26px;margin:0;font-weight:800;letter-spacing:-.01em;
+  text-transform:none;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--rule-strong);align-self:center;opacity:.5}
+.sec-blurb{font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 14px}
+
+/* ---------- Note card ---------- */
+.note{
+  background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent-2);
+  padding:14px 16px;margin:0 0 14px;border-radius:2px;
+  min-width:0;word-break:break-word;
+}
+.note.feature{border-left-color:var(--accent);background:#fff}
+.note h4{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.005em}
+.note h4 a{color:var(--ink);text-decoration:none}
+.note h4 a:hover{color:var(--accent)}
+.note p{margin:0 0 8px;font-size:15.5px;color:var(--ink-soft)}
+.note .spec{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 8px}
+/* Two-pass recap: the single summary paragraph that opens each note. */
+.note .resumen{font-style:italic;color:var(--ink);margin:0 0 10px}
+/* Foreign (still-English) terms marked with *asterisks* in the source.
+   Not italic (the recap already uses italics) — stand out by weight + color. */
+em{font-style:normal;font-weight:600;color:var(--accent-2)}
+.note .resumen em,.featured .lead em{color:var(--ink)}
+.note .spec b{color:var(--ink)}
+
+/* chips: tags + links */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-width:0}
+.chip{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.03em;
+  background:var(--chip-bg);color:var(--ink-soft);
+  padding:3px 9px;border-radius:999px;border:1px solid var(--rule);
+  max-width:100%;overflow-wrap:anywhere;word-break:break-word;
+}
+.chip.link{background:#fff;color:var(--accent-2);text-decoration:none;border-color:var(--accent-2);font-weight:600}
+.chip.link::before{content:"→ ";opacity:.7}
+.chip.link:hover{background:var(--accent-2);color:#fff}
+.chip.src{background:#fff;color:var(--ink-soft);border-style:dashed;font-weight:400}
+.chip.src::before{content:""; }
+
+/* ---------- Small-screen tuning (phones ≤ 480px) ----------
+   The layout is fluid (clamp() + single column below 860px); this block
+   only trims fixed sizes that would feel heavy on a phone (user report
+   2026-10-25: not adapted to mobile). */
+@media(max-width:480px){
+  body{font-size:16px}
+  .wrap{padding:0 14px}
+  .masthead h1{font-size:clamp(34px,11vw,44px)}
+  .dateline{flex-direction:column;align-items:flex-start;gap:4px}
+  .featured .fbody{font-size:16px}
+  .featured .lead{font-size:17px}
+  .note{padding:12px 13px}
+  .note p,.note .resumen{font-size:15px}
+  .dropcap::first-letter{font-size:46px;padding:2px 6px 0 0}
+  .colophon{padding:16px 0 36px}
+}
+
+/* ---------- Aside blocks ---------- */
+.aside h5{
+  font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 10px;color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.aside h5 .rule{flex:1;height:1px;background:var(--rule);opacity:.6}
+.aside-block{margin:0 0 26px}
+
+.repo{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.repo:last-child{border-bottom:0}
+.repo .name{font-weight:700;font-size:15px}
+.repo .name a{color:var(--ink);text-decoration:none}
+.repo .name a:hover{color:var(--accent)}
+.repo .stars{font-family:var(--sans);font-size:12px;color:var(--gold);font-weight:700;white-space:nowrap}
+.repo .desc{grid-column:1/3;font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.repo .meta{grid-column:1/3;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.02em}
+
+.papers{list-style:none;margin:0;padding:0}
+.papers li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14.5px}
+.papers li:last-child{border-bottom:0}
+.papers li a{color:var(--ink);text-decoration:none;font-weight:600}
+.papers li a:hover{color:var(--accent)}
+.papers .au{display:block;font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:2px}
+.papers .hf{font-family:var(--sans);font-size:11.5px;color:var(--accent-2);font-weight:700}
+
+.community li{list-style:none;padding:9px 0;border-bottom:1px dotted var(--rule);font-size:14px}
+.community li:last-child{border-bottom:0}
+.community ul{list-style:none;margin:0;padding:0}
+.community .src{font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.community a{color:var(--ink);text-decoration:none}
+.community a:hover{color:var(--accent)}
+.community .note-txt{color:var(--ink-soft);font-size:13px}
+
+/* ---------- Colophon ---------- */
+.colophon{
+  border-top:3px double var(--rule-strong);margin-top:10px;padding:20px 0 46px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.colophon h6{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin:0 0 8px}
+.colophon .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.colophon a{color:var(--accent-2)}
+.colophon .fineprint{margin-top:16px;font-size:12px;border-top:1px solid var(--rule);padding-top:12px;font-style:italic}
+
+/* ---------- Archive list (editions/index.html) ----------
+   Each row: the clickable "Edición nº N · <date>" (accent), then the portada
+   headline as plain context below it (user rule 2026-10-25 — the filename
+   never appears). */
+.editions-list{list-style:none;margin:0;padding:0}
+.editions-list li{padding:12px 0;border-bottom:1px dotted var(--rule)}
+.editions-list li:last-child{border-bottom:0}
+.editions-list a{color:var(--accent);font-weight:700;text-decoration:none;font-size:16px;letter-spacing:.01em}
+.editions-list a:hover{color:var(--accent-2)}
+.editions-list .lead-ctx{display:block;color:var(--ink-soft);font-size:14.5px;font-style:italic;margin-top:3px}
+
+/* drop cap on first featured paragraph */
+.dropcap::first-letter{
+  font-size:66px;line-height:.78;float:left;font-weight:800;color:var(--accent);
+  padding:4px 8px 0 0;font-family:var(--serif);
+}
+
+@media print{
+  .paper{grid-template-columns:1fr 1fr}
+  body{background:#fff;font-size:12px}
+  .chip.link{border-color:#888}
+}
+</style></head><body>
+<header class="masthead"><div class="wrap"><div class="topline"><span>La IA abierta resumida por una IA abierta</span><span>Edición en línea</span></div><h1>IA<span class="amp">·</span>A<span class="amp">·</span>Hoy</h1><p class="tagline">IA Abierta Hoy — pesos abiertos, software libre para IA y mucho más: resumen para quienes estamos obsesionados con estos temas.</p><div class="dateline"><span class="ed">Edición nº 16</span> &nbsp;·&nbsp; lunes 12 de octubre de 2026<nav><a href="#modelos">Modelos</a><a href="#agentes-y-software">Agentes y software</a><a href="#papers-e-investigacion">Papers e investigación</a><a href="#comunidad-y-self-hosting">Comunidad y self-hosting</a><span class="sep">|</span><a href="editions/index.html">Archivo</a></nav></div></div></header>
+<main class="wrap">
+<div class="podcast-cta"><p class="podcast-label">🎧 <b>IA·A·Hoy Hablada</b>: un resumen pensado para oírse.</p><audio controls preload="none" src="../podcast.mp3"></audio></div>
+<div class="featured"><p class="kicker">Portada</p><h2><a href="https://huggingface.co/Cloudflare/clef" style="color:inherit;text-decoration:none" rel="noopener">Cloudflare abre los pesos de Clef: sus primeros modelos de decisión, bajo Apache 2.0</a></h2><p class="lead">Cloudflare ha publicado Clef y Clef-flash, los primeros modelos de decisión (decision models) que entrena su equipo de Workers AI, y lo ha hecho con pesos abiertos bajo licencia Apache 2.0. No son chatbots: son modelos que toman decisiones estructuradas. Leen un estado del mundo —como texto o JSON, incluso con imagen— junto con un esquema de preguntas tipadas, y devuelven una respuesta tipada y calibrada, en vez de un texto libre. Clef se basa en Qwen3.8-27B y Clef-flash en Qwen3.5-9B, así que cualquiera puede descargarlos y correrlos en local o en el edge, sin depender de la API de Cloudflare. Cloudflare los está usando en su propio equipo de Threat Intelligence para clasificar dominios, y los presenta como una alternativa abierta a los modelos de decisión propietarios. En Hugging Face, Clef acumula más de 2.000 me gusta y Clef-flash más de 22.000 descargas en pocos días. Para quien construye flujos agenticos y de clasificación automatizada, es la primera vez que una gran empresa de infraestructura abre este tipo de modelo, y lo hace con una licencia que permite uso comercial.</p><div class="fbody"></div><div class="chips"><a class="chip link" href="https://huggingface.co/Cloudflare/clef" rel="noopener">Hugging Face (Cloudflare/clef)</a><a class="chip link" href="https://huggingface.co/Cloudflare/clef-flash" rel="noopener">Hugging Face (Cloudflare/clef-flash)</a><a class="chip link" href="https://blog.cloudflare.com/clef-decision-models/" rel="noopener">Blog de Cloudflare (Clef)</a><span class="chip">Cloudflare</span><span class="chip">Clef</span><span class="chip">decision model</span><span class="chip">pesos abiertos</span><span class="chip">Apache 2.0</span><span class="chip">Workers AI</span></div></div>
+<div class="paper"><div class="main"><section class="block" id="modelos"><div class="sec-head"><span class="icon"></span><h3>Modelos</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/Cloudflare/clef-flash" rel="noopener">Clef-flash, la versión rápida de 9B de los modelos de decisión de Cloudflare</a></h4><p>Acompaña a Clef en la portada: Clef-flash es el hermano ligero de la familia, un modelo multimodal de decisión de 9B basado en Qwen3.5, también en pesos abiertos con Apache 2.0. Está pensado para los casos donde la latencia manda: lee el estado y el esquema de preguntas y devuelve la decisión tipada, pero en un modelo mucho más pequeño y rápido de servir que el Clef de 27B. En Hugging Face ya supera las 22.000 descargas, más que su versión grande, una señal de que el caso de uso de decisión rápida es el que más demanda tiene. Para quien quiere un modelo de decisión tipado que corra en una sola GPU o en el edge, Clef-flash es la vía práctica de la misma familia.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Cloudflare/clef-flash" rel="noopener">Hugging Face (Cloudflare/clef-flash)</a><a class="chip link" href="https://developers.cloudflare.com/workers-ai/models/clef-flash/" rel="noopener">Docs de Workers AI (Clef-flash)</a><span class="chip">Cloudflare</span><span class="chip">Clef-flash</span><span class="chip">decision model</span><span class="chip">9B</span><span class="chip">edge</span></div></article><article class="note"><h4><a href="https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo" rel="noopener">Qwen-Image-2.1-Turbo, generación y edición de imagen de Qwen lista para diffusers</a></h4><p>Qwen publica Qwen-Image-2.1-Turbo, un modelo de pesos abiertos para generación y edición de imagen (text-to-image y image editing) basado en la familia Qwen-Image-2.1 y empaquetado para diffusers, con la pipeline QwenImage21. Es de los pocos modelos de imagen de pesos abiertos que llega ya con soporte nativo de diffusers, lo que lo hace directo de integrar en flujos de generación local o self-hosted sin maquetar nada. En Hugging Face supera las 560 me gusta en sus primeros días. Para quien genera o edita imagen en local con pesos abiertos, es una referencia actual de la familia Qwen-Image.</p><div class="chips"><a class="chip link" href="https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo" rel="noopener">Hugging Face (Qwen/Qwen-Image-2.1-Turbo)</a><span class="chip">Qwen</span><span class="chip">imagen</span><span class="chip">generación</span><span class="chip">diffusers</span><span class="chip">pesos abiertos</span></div></article><article class="note"><h4><a href="https://huggingface.co/jialinyyzz/humanizer" rel="noopener">humanizer, un reescritor de texto basado en Gemma 4 para sonar menos a IA</a></h4><p>jialinyyzz publica humanizer, un modelo de pesos abiertos bajo Apache 2.0 para reescribir y parafrasear texto (text-rewriting, style-transfer) con base en Gemma 4 de 12B, disponible en GGUF y safetensors y pensado para correr con llama.cpp. El objetivo es tomar texto generado por IA y reescribirlo para que suene más natural, un caso de uso muy concreto en la redacción y en la edición de contenido. En Hugging Face supera los 1.100 me gusta y las 37.000 descargas. Para quien escribe con IA y quiere un paso final de humanización en local, es una opción concreta y auto-hospedable.</p><div class="chips"><a class="chip link" href="https://huggingface.co/jialinyyzz/humanizer" rel="noopener">Hugging Face (jialinyyzz/humanizer)</a><span class="chip">Gemma</span><span class="chip">humanizer</span><span class="chip">reescritura</span><span class="chip">GGUF</span><span class="chip">llama.cpp</span></div></article><article class="note"><h4><a href="https://huggingface.co/convaiinnovations/laya" rel="noopener">laya, un modelo de decisiones calibradas de ConvAI para routing, scoring y guardrails</a></h4><p>ConvAI Innovations publica laya, un modelo de texto para decisiones calibradas (calibrated decisions) bajo Apache 2.0, con etiquetas de clasificación, routing, scoring, guardrails y moderación entrenado con aprendizaje por refuerzo. Encaja justo en la misma ola de modelos de decisión que arranca la portada: en vez de generar texto, laya emite una decisión puntual y calibrada, ideal para enrutar tickets, puntuar riesgo o aplicar guardrails en producción. En Hugging Face supera los 5.500 me gusta y las 44.000 descargas. Para quien necesita una capa de decisión fiable y abierta entre el LLM y la aplicación, laya es una opción de pesos abiertos con uso comercial permitido.</p><div class="chips"><a class="chip link" href="https://huggingface.co/convaiinnovations/laya" rel="noopener">Hugging Face (convaiinnovations/laya)</a><span class="chip">ConvAI</span><span class="chip">laya</span><span class="chip">decision model</span><span class="chip">routing</span><span class="chip">guardrails</span><span class="chip">pesos abiertos</span></div></article></section><section class="block" id="agentes-y-software"><div class="sec-head"><span class="icon"></span><h3>Agentes y software</h3><span class="rule"></span></div><article class="note"><h4><a href="https://github.com/onehumanbeing/esp32-iphone-agent" rel="noopener">esp32-iphone-agent, hacer que un LLM use un iPhone real con un ESP32 de 7 dólares</a></h4><p>onehumanbeing publica esp32-iphone-agent, un proyecto que deja que un modelo de IA opere un iPhone real usando un ESP32 de 7 dólares: el ESP32 hace de ojos vía AirPlay y de manos vía USB HID, y el modelo de visión es cualquier modelo compatible con la API de OpenAI. Lo interesante es lo que no necesita: ni cuenta de desarrollador, ni Xcode, ni jailbreak, y el modelo de visión puede correr en local. Encaja en la corriente de agentes de uso de ordenador llevados al hardware de bolsillo y al self-hosting. En GitHub supera las 45 estrellas. Para quien quiere ver un agente de visión manipular un móvil sin tocar la app, es una receta concreta y barata de replicar.</p><div class="chips"><a class="chip link" href="https://github.com/onehumanbeing/esp32-iphone-agent" rel="noopener">GitHub (onehumanbeing/esp32-iphone-agent)</a><span class="chip">agentes</span><span class="chip">esp32</span><span class="chip">iPhone</span><span class="chip">visión</span><span class="chip">self-hosting</span><span class="chip">GitHub</span></div></article><article class="note"><h4><a href="https://huggingface.co/blog/microsoft/thinkingbox" rel="noopener">El agente dijo que estaba hecho. La base de datos dijo que no.</a></h4><p>Microsoft publica en su blog de Hugging Face un texto sobre la brecha entre lo que un agente LLM declara haber hecho y el estado real del sistema. Es el problema central de fiabilidad de los agentes de producción: que el agente confirme una tarea no garantiza que los datos se hayan escrito, que la transacción se haya aplicado o que el efecto sea el que se esperaba. El post plantea la necesidad de verificar el estado real después de cada acción del agente, en vez de confiar en su auto-informe. Para quien despliega agentes sobre bases de datos o APIs con estado, es un recordatorio práctico de que la verificación post-acción es parte del diseño, no una opción.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/microsoft/thinkingbox" rel="noopener">Blog de Hugging Face (Microsoft)</a><span class="chip">agentes</span><span class="chip">fiabilidad</span><span class="chip">verificación</span><span class="chip">Microsoft</span></div></article><article class="note"><h4><a href="https://github.com/iMaatin/Mentat" rel="noopener">Mentat, un agente de código de dos capas donde el código y los datos no salen de tu máquina</a></h4><p>iMaatin publica Mentat, un agente de código de dos capas (two-layer coding agent) cuyo principio es que tu código y tus datos nunca abandonan tu máquina. La arquitectura de dos capas separa el razonamiento de la ejecución para que el material sensible no se envíe a la nube, que es justo la preocupación de privacidad que el self-hosting de IA resuelve. Es un proyecto nuevo, pero apunta a un nicho claro: desarrollo de código local sin fugas de datos a proveedores externos. Para quien programa en local y no quiere que el contexto de su código salga de la máquina, Mentat es una opción de agente de código pensada para la privacidad.</p><div class="chips"><a class="chip link" href="https://github.com/iMaatin/Mentat" rel="noopener">GitHub (iMaatin/Mentat)</a><span class="chip">agentes</span><span class="chip">código</span><span class="chip">local</span><span class="chip">privacidad</span><span class="chip">GitHub</span></div></article></section><section class="block" id="papers-e-investigacion"><div class="sec-head"><span class="icon"></span><h3>Papers e investigación</h3><span class="rule"></span></div><article class="note"><h4><a href="https://arxiv.org/abs/2610.13171" rel="noopener">PreSTO, pre-búsqueda predictiva de subárboles para acelerar el power sampling en LLMs</a></h4><p>PreSTO (arXiv 2610.13171) ataca un cuello de botella del power sampling, una técnica que mejora el razonamiento de los LLMs en tiempo de test muestreando de una versión afinada de la distribución del modelo de base. Su muestreador, PowerMH, es lento porque sus actualizaciones de Metropolis-Hastings son secuenciales: cada una depende de la anterior. El trabajo introduce una pre-búsqueda predictiva de subárboles para saltar ese coste y hacer el muestreado más rápido. Es una investigación aplicada con un problema muy concreto y medible, de los que luego se traducen en inferencia y razonamiento más baratos. Para quien sirve LLMs y usa técnicas de muestreo afinado en tiempo de test, es una optimización directa de la latencia.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.13171" rel="noopener">arXiv (2610.13171)</a><a class="chip link" href="https://huggingface.co/papers/2610.13171" rel="noopener">Hugging Face (paper)</a><span class="chip">inferencia</span><span class="chip">power sampling</span><span class="chip">razonamiento</span><span class="chip">LLM</span><span class="chip">investigación</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.12611" rel="noopener">SoftwareGym, escalar el entrenamiento de agentes de uso de ordenador con entornos de software sintetizados</a></h4><p>SoftwareGym (arXiv 2610.12611) parte de que los agentes de uso de ordenador (CUA) mejoran rápido, pero que sintetizar entornos de software diversos y fiables a escala sigue siendo difícil: los entornos de aplicaciones nativas requieren mucha construcción e integración. El trabajo propone escalar el entrenamiento de CUAs con entornos de software sintetizados, para que los agentes practiquen sobre una variedad de aplicaciones sin construir cada una a mano. Encaja en la corriente de dar a los agentes de ordenador más superficie de entrenamiento, que es lo que les limita hoy. Para quien entrena o evalúa agentes de uso de ordenador, es una vía para multiplicar los escenarios de práctica de forma automatizada.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.12611" rel="noopener">arXiv (2610.12611)</a><a class="chip link" href="https://huggingface.co/papers/2610.12611" rel="noopener">Hugging Face (paper)</a><span class="chip">agentes</span><span class="chip">computer-use</span><span class="chip">entrenamiento</span><span class="chip">entornos</span><span class="chip">investigación</span></div></article><article class="note"><h4><a href="https://arxiv.org/abs/2610.10288" rel="noopener">TouchScale, 500 horas de visión y tacto humano para el aprendizaje visual-táctil</a></h4><p>TouchScale (arXiv 2610.10288) aporta un conjunto de datos de 500 horas de interacción egocéntrica de humanos con visión y tacto, para el aprendizaje visual-táctil. El punto de partida es que el vídeo solo deja sin registrar el contacto y la presión que caracterizan la interacción física, y que el tacto es una señal que el vídeo no captura. El trabajo ofrece esa supervisión física a gran escala para el aprendizaje encarnado (embodied learning). Es una pieza de infraestructura de datos para quien entrena robots o agentes de manipulación y necesita señal táctil real. Para el aprendizaje encarnado, tener 500 horas de visión más tacto es una base de entrenamiento que rara vez se encuentra.</p><div class="chips"><a class="chip link" href="https://arxiv.org/abs/2610.10288" rel="noopener">arXiv (2610.10288)</a><a class="chip link" href="https://huggingface.co/papers/2610.10288" rel="noopener">Hugging Face (paper)</a><span class="chip">robótica</span><span class="chip">datos</span><span class="chip">tacto</span><span class="chip">embodied</span><span class="chip">investigación</span></div></article></section><section class="block" id="comunidad-y-self-hosting"><div class="sec-head"><span class="icon"></span><h3>Comunidad y self-hosting</h3><span class="rule"></span></div><article class="note"><h4><a href="https://huggingface.co/blog/LiquidAI/open-d1" rel="noopener">LiquidAI abre los modelos de decisión d1 para el edge</a></h4><p>LiquidAI publica en su blog de Hugging Face la familia d1 de modelos de decisión multimodales de pesos abiertos para el edge, sobre su arquitectura LFM2.5. Vienen en varios tamaños: d1-omni-600M, que hace extracción de características sobre visión y audio; d1-3B, multimodal y conversacional; y d1-9B, el mayor. La idea es la misma que la de la portada —decisiones tipadas y calibradas— pero llevada al edge, donde el modelo corre en el dispositivo y no en la nube. Encaja en la corriente de modelos de decisión abiertos para hardware con poco cómputo. Para quien quiere decisiones fiables sobre un dispositivo local, d1 es una familia concreta de pesos abiertos por tamaño.</p><div class="chips"><a class="chip link" href="https://huggingface.co/blog/LiquidAI/open-d1" rel="noopener">Blog de Hugging Face (LiquidAI d1)</a><a class="chip link" href="https://huggingface.co/LiquidAI/d1-omni-600M" rel="noopener">Hugging Face (LiquidAI/d1-omni-600M)</a><a class="chip link" href="https://huggingface.co/LiquidAI/d1-3B" rel="noopener">Hugging Face (LiquidAI/d1-3B)</a><span class="chip">LiquidAI</span><span class="chip">d1</span><span class="chip">decision model</span><span class="chip">edge</span><span class="chip">multimodal</span><span class="chip">pesos abiertos</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">MiMo-V2.6-RL-oss, el dataset de refuerzo de Xiaomi MiMo en abierto</a></h4><p>Xiaomi MiMo publica MiMo-V2.6-RL-oss en Hugging Face, un dataset de datos de refuerzo (RL) de pesos abiertos para post-entrenamiento de modelos. La relevancia es que abre el material con el que se refuerza la familia MiMo, lo que permite replicar o estudiar el post-entrenamiento con refuerzo sobre modelos abiertos sin depender de datos propietarios. Encaja en la corriente de abrir no solo los pesos sino también los datos de entrenamiento, que es lo que de verdad permite reproducir un modelo. Para quien hace post-entrenamiento con RL sobre modelos abiertos, es un dataset concreto de referencia que se puede descargar y usar.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss" rel="noopener">Hugging Face (XiaomiMiMo/MiMo-V2.6-RL-oss)</a><span class="chip">Xiaomi</span><span class="chip">MiMo</span><span class="chip">dataset</span><span class="chip">refuerzo</span><span class="chip">post-entrenamiento</span></div></article><article class="note"><h4><a href="https://huggingface.co/datasets/nisten/opus5-5-doctor-patient-conversations-all-human-diseases" rel="noopener">opus5-5, conversaciones doctor-paciente en abierto para IA médica</a></h4><p>nisten publica en Hugging Face un dataset de conversaciones entre doctor y paciente en abierto, opus5-5. Es una base de datos de texto médico conversacional que encaja en la corriente de modelos de IA para la salud en pesos abiertos, donde el reto no es solo el modelo sino también el dato clínico para entrenarlo y evaluarlo. Para quien trabaja en IA médica de pesos abiertos o en asistentes clínicos, es un recurso de datos conversacionales que se puede usar para afinar o evaluar modelos sin depender de datasets propietarios. Es una de las piezas de datos abiertos más útiles de la sección de esta edición.</p><div class="chips"><a class="chip link" href="https://huggingface.co/datasets/nisten/opus5-5-doctor-patient-conversations-all-human-diseases" rel="noopener">Hugging Face (nisten/opus5-5)</a><span class="chip">dataset</span><span class="chip">medicina</span><span class="chip">conversaciones</span><span class="chip">datos abiertos</span></div></article></section></div><div class="aside"></div></div>
+</main>
+<footer class="colophon"><div class="wrap"><div class="cols"><div></div><div><b>Fuentes de esta edición</b><br></div></div><p class="made-with"><b>Hecho con Hermes</b> — este diario se genera automáticamente gracias a estos skills:<ul class="made-list"><li>el skill iaahoy-daily-edition (<a href="https://github.com/jgbarahbot/iaahoy-daily-edition" rel="noopener">https://github.com/jgbarahbot/iaahoy-daily-edition</a>) — recolección, curado y publicación</li><li>el skill espanish-podcast (<a href="https://github.com/jgbarahbot/espanish-podcast" rel="noopener">https://github.com/jgbarahbot/espanish-podcast</a>) — el podcast en audio</li></ul></p><p class="fineprint">Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.</p><div class="license">Licencia: <a class="cc-name" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license noopener">Creative Commons Atribución-CompartirIgual Internacional 4.0</a> (CC-BY-SA)</div></div></footer>
+</body></html>
