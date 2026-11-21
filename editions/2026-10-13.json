@@ -1,0 +1,145 @@
+{
+  "date": "13 de octubre de 2026",
+  "weekday_long": "martes",
+  "edition": "Edición nº 17",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Lightricks libera LTX-2.5: 22B de pesos abiertos para generar vídeo con audio sincronizado",
+    "summary": "Lightricks ha publicado LTX-2.5, su nuevo modelo de generación de vídeo de pesos abiertos con un núcleo de difusión de 22.000 millones de parámetros. Genera clips de unos diez segundos con audio sincronizado directamente desde texto, sin necesidad de dos modelos separados. La versión destilada (22B) funciona en 8+3 pasos y sin CFG, lo que la hace mucho más barata de servir que las generaciones anteriores. Los pesos ya están disponibles en Hugging Face en formato nativo y también como pesos de diffusers, con un Space interactivo para probarlos al momento. Es el salto más serio de los últimos meses en vídeo generativo autoalojable, con el código y los pesos a mano.",
+    "tags": ["pesos abiertos", "generación de vídeo", "difusión", "autoalojamiento"],
+    "links": [
+      {"label": "Ficha en Hugging Face", "url": "https://huggingface.co/Lightricks/LTX-2.5"},
+      {"label": "Space interactivo", "url": "https://huggingface.co/spaces/Lightricks/LTX-2.5"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "Liquid AI abre los d1: modelos de decisión multimodales para el edge",
+          "summary": "Liquid AI ha publicado la familia d1, modelos de decisión abiertos pensados para correr en el edge. El d1-3B (3,1B de parámetros) devuelve decisiones calibradas en torno a 30 ms, y la variante d1-omni-600M añade audio y vídeo al mismo esquema. La idea es que el modelo emita una decisión estructurada, no texto libre: cero tokens de salida, latencia mínima y fácil de integrar en dispositivos locales. La compañía ya había colgado builds GGUF antes del anuncio oficial, y los pesos están en Hugging Face.",
+          "tags": ["edge", "multimodal", "decisión", "GGUF"],
+          "links": [
+            {"label": "d1-3B en Hugging Face", "url": "https://huggingface.co/LiquidAI/d1-3B"},
+            {"label": "Post de Liquid AI", "url": "https://huggingface.co/blog/LiquidAI/open-d1"}
+          ]
+        },
+        {
+          "title": "EmbeddingGemma 2: 740M abiertos para embeddings multimodales en el dispositivo",
+          "summary": "Google DeepMind ha liberado EmbeddingGemma 2, un modelo de embeddings abierto de 740M de parámetros construido sobre Gemma 4. Mapea texto, código, imágenes, vídeo y audio a un mismo espacio vectorial de 768 dimensiones, lo que permite búsqueda unificada entre modos sin un modelo por cada tipo de contenido. Al ser tan ligero, está pensado para correr en el dispositivo: smartphones, routers o cualquier CPU modesta. Es una pieza muy útil para RAG multimodal autoalojado.",
+          "tags": ["embeddings", "multimodal", "on-device", "Gemma"],
+          "links": [
+            {"label": "Ficha en Hugging Face", "url": "https://huggingface.co/google/embeddinggemma-2"},
+            {"label": "Anuncio de Google", "url": "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/"}
+          ]
+        },
+        {
+          "title": "Falcon ASR: reconocimiento de voz abierto de TII",
+          "summary": "Technology Innovation Institute (TII) ha presentado Falcon ASR, su nuevo modelo abierto de transcripción de audio. Está pensado para ser de lo más sólido en su categoría en multilenguaje, y se publica con pesos abiertos para quien quiera servirlo en su propia infraestructura. Es una alternativa más a las opciones cerradas para pipelines de voz locales: transcripción, dictado, subtitulado. La ficha del modelo está en Hugging Face.",
+          "tags": ["ASR", "voz", "multilenguaje"],
+          "links": [
+            {"label": "Post de TII", "url": "https://huggingface.co/blog/tiiuae/falcon-asr"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "vllm-sm70: vLLM de producción para GPUs Volta (V100)",
+          "summary": "El repositorio xormal/vllm-sm70 documenta un stack de vLLM de producción para tarjetas NVIDIA de la generación Volta (V100, sm_70), que muchos vLLM modernos ya dan por muertas. Sirve Qwen3.8-27B cuantizado a GPTQ-Int8 con 262K de contexto en 2x V100 de 32 GB, e incluye decisiones de Cloudflare Clef sobre los mismos pesos. Para quien tiene hardware de hace años y no quiere tirarlo, es una receta completa y verificable.",
+          "tags": ["vLLM", "inferencia", "hardware viejo", "GPTQ"],
+          "links": [
+            {"label": "Repositorio en GitHub", "url": "https://github.com/xormal/vllm-sm70"}
+          ]
+        },
+        {
+          "title": "vibereceipt: imprime el ticket de tu coding con IA",
+          "summary": "glmn-ai/vibereceipt es un juguete útil: imprime un ticket de tienda con lo que te costó tu coding asistido por IA. Cuenta los tokens, cuánto habrían costado a precios de API y cuántas veces el agente te dijo «You're absolutely right». Funciona con Claude Code, Codex y OpenCode, y todo se queda 100% local. Divertido, sí, pero también un recordatorio de lo que se gasta de verdad una sesión de agente.",
+          "tags": ["agentes", "CLI", "finops"],
+          "links": [
+            {"label": "Repositorio en GitHub", "url": "https://github.com/glmn-ai/vibereceipt"}
+          ]
+        },
+        {
+          "title": "opencode-rust: el agente de coding open source, ahora en Rust",
+          "summary": "vakandi/opencode-rust es una reescritura en Rust del agente de coding open source: CLI, TUI y servidor HTTP para agentes locales, sin necesidad de Docker. El objetivo es arrancar rápido y con dependencias mínimas, aprovechando el binario único de Rust. Está todavía temprano (pocas estrellas), pero la dirección apunta a un agente de terminal ligero y portable.",
+          "tags": ["agentes", "Rust", "CLI"],
+          "links": [
+            {"label": "Repositorio en GitHub", "url": "https://github.com/vakandi/opencode-rust"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "El agente dijo que estaba hecho. La base de datos no estuvo de acuerdo",
+          "summary": "Microsoft publica en el blog de Hugging Face un caso de estudio sobre ThinkingBox: qué pasa cuando un agente declara una tarea completada y la base de datos dice lo contrario. Es una radiografía de la verificación en agentes: el problema no es generar el código, sino comprobar que los efectos reales coincidieron con la intención. Un recordatorio práctico de por qué los agentes de producción necesitan chequeos de estado, no solo confianza en la última respuesta.",
+          "tags": ["agentes", "verificación", "confiabilidad"],
+          "links": [
+            {"label": "Artículo en Hugging Face", "url": "https://huggingface.co/blog/microsoft/thinkingbox"}
+          ]
+        },
+        {
+          "title": "Megakernels de Cohere: un solo kernel para todo el forward pass",
+          "summary": "Cohere cuenta cómo su motor de serving de North Mini Code compila cada forward pass del LLM en un único megakernel, en vez de encadenar kernels separados de QKV, atención y MLP. Al eliminar el overhead de lanzar cientos de kernels pequeños por token, la latencia de inferencia baja de forma medible. Sigue la línea de los megakernels de Kog en MI300X, que reportan más de 3.000 tokens por segundo.",
+          "tags": ["inferencia", "kernels", "GPU"],
+          "links": [
+            {"label": "Blog de Cohere", "url": "https://cohere.com/blog/megakernels"}
+          ]
+        },
+        {
+          "title": "Open TTS Leaderboard: evaluación escalable de TTS y clonación de voz",
+          "summary": "El blog de Hugging Face publica Open TTS Leaderboard, una leaderboard abierta para evaluar text-to-speech multilingüe y clonación de voz de forma escalable. El problema es clásico: comparar modelos de voz a mano es caro e inconsistente, y aquí proponen un benchmark común con pesos abiertos para que cualquiera pueda reproducir los resultados. Útil si estás eligiendo qué modelo de voz autoalojar.",
+          "tags": ["TTS", "benchmark", "voz"],
+          "links": [
+            {"label": "Artículo en Hugging Face", "url": "https://huggingface.co/blog/open-tts-leaderboard"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "TokenSpeed: motor de inferencia «speed of light» con API portable",
+          "summary": "TokenSpeed, el motor de inferencia open source de LightSeek, ha publicado TokenSpeed-Kernel, un subsistema standalone para abstraer la complejidad de backends GPU. Es open source y está documentado en el blog de PyTorch, con una API portable para kernels de alto rendimiento. Reportan 580 TPS con Qwen3 y sigue ganando estrellas semana a semana.",
+          "tags": ["inferencia", "kernels", "open source"],
+          "links": [
+            {"label": "Repositorio en GitHub", "url": "https://github.com/lightseekorg/tokenspeed"},
+            {"label": "Post de PyTorch", "url": "https://pytorch.org/blog/lightseek-tokenspeed-kernel/"}
+          ]
+        },
+        {
+          "title": "solid-glass: un sistema de diseño para apps de IA",
+          "summary": "deeplethe/solid-glass es un sistema de diseño en TypeScript para aplicaciones de IA, con una estética material, física y táctil en lugar del look genérico de «panel de control». Lleva una semana subiendo en trending. Si estás construyendo una interfaz para un agente local y no quieres que parezca otra herramienta genérica, es un buen punto de partida.",
+          "tags": ["frontend", "diseño", "TypeScript"],
+          "links": [
+            {"label": "Repositorio en GitHub", "url": "https://github.com/deeplethe/solid-glass"}
+          ]
+        },
+        {
+          "title": "ai-slop-detector: 120 patrones que delatan el texto generado por IA",
+          "summary": "FeedHive/ai-slop-detector cataloga 120 patrones que hacen que un texto se lea como «AI slop», e incluye un skill listo para Claude Code y Codex. La idea es revisarlo sobre tu propio output antes de publicarlo: muletillas, estructura predecible, adjetivos de relleno. Un recordatorio práctico de que el estilo también se puede auditar.",
+          "tags": ["escritura", "agentes", "QA"],
+          "links": [
+            {"label": "Repositorio en GitHub", "url": "https://github.com/FeedHive/ai-slop-detector"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

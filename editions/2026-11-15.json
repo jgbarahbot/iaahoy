@@ -1,0 +1,541 @@
+{
+  "date": "15 de noviembre de 2026",
+  "weekday_long": "domingo",
+  "edition": "Edición nº 40",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "MiniMax presenta *H3-Image*: 16 megapíxeles en seis pasos, con una licencia que deja fuera a la UE",
+    "summary": "MiniMax ha publicado *H3-Image*, un modelo de imágenes de 33.100 millones de parámetros sobre un transformer de difusión (DiT) denso que genera imágenes de hasta 16 megapíxeles en solo seis pasos de muestreo, sin guía de clase. Sirve tanto para generar a partir de texto como para editar con hasta 16 imágenes de referencia, y ya está disponible en *SGLang*, *vLLM-Omni*, *diffusers* y *ComfyUI*. Cinco días después de su publicación ha acumulado más de 1.100 me gusta y medio millón de descargas. El detalle que ha dividido a la comunidad es legal: la *MiniMax-H3-Image Community License* excluye la Unión Europea, Reino Unido, EE. UU. y Corea del Sur, y exige autorización escrita a empresas con ingresos de más de un millón de dólares. Es, en resumen, un modelo de pesos abiertos que todavía no es «abierto» en lo que a estas regiones respecta.",
+    "tags": [
+      "minimax",
+      "h3-image",
+      "generacion-de-imagenes",
+      "difusion",
+      "pesos-abiertos",
+      "licencias"
+    ],
+    "links": [
+      {
+        "label": "Hugging Face — MiniMaxAI/MiniMax-H3-Image",
+        "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image"
+      },
+      {
+        "label": "Comfy-Org/MiniMax-H3-Image",
+        "url": "https://huggingface.co/Comfy-Org/MiniMax-H3-Image"
+      },
+      {
+        "label": "Blog de MiniMax",
+        "url": "https://www.minimax.io/blog/minimax-h3-image"
+      },
+      {
+        "label": "DataNorth — análisis de la licencia",
+        "url": "https://datanorth.ai/news/minimax-h3-image-licence-eu-us"
+      }
+    ],
+    "body": [
+      "Publicado el 10 de noviembre, *H3-Image* es el primer modelo de imágenes de MiniMax cuyos pesos llegan a la comunidad. Bajo el capó hay un transformer de difusión denso (DiT, de «diffusion transformer») de 33.100 millones de parámetros y 50 capas, en un único stream y entrenado en BF16, derivado de la arquitectura *H3* de la familia audio-lingüística de la empresa con la capa de audio retirada. El codificador de texto es *Qwen3-VL* (66,7 GB) y el VAE de compresión 2,34 GB. Dos detalles técnicos marcan la diferencia respecto a otros generadores: el modelo está destilado para funcionar en seis pasos de muestreo sin guía por clase (CFG), y trabaja de forma nativa a 16 megapíxeles —4096×4096 píxeles, o hasta 6272×2688 en formato 21:9—, de modo que el propio modelo resuelve el detalle sin depender de un mejorador externo. Su rango útil, según el informe técnico, va de 4 a 20 megapíxeles, con resoluciones intermedias como 8000×4000.",
+      "El ecosistema está disponible desde el día uno. MiniMax publica integraciones oficiales en *SGLang*, *vLLM-Omni*, *diffusers* y *LightX2V*, y la organización *Comfy-Org* ya ha colgado un repositorio —1,6 millones de descargas— con plantillas de flujos de trabajo listas para usar. En velocidad, la empresa reporta generar una imagen de 16,8 megapíxeles en menos de cuatro segundos con cuatro *H200* usando *vLLM* (o 7,4 segundos en *SGLang*), y ofrece además versiones destiladas a uno y dos pasos para cuando la velocidad importe más que el detalle. En la ficha de *Hugging Face* hay versiones cuantizadas (FP8, NVFP4, con un total de 17,9 GB) que permiten cargar el modelo en dos GPUs de 24 GB, y MiniMax también ofrece el modelo por API con un 50 % de descuento hasta el 17 de noviembre: 6,9 céntimos por imagen a 4K. El modo de edición admite hasta 16 imágenes de referencia y, entre sus aplicaciones, la edición de producto, la composición publicitaria y el restyling de ropa.",
+      "La noticia que ha dividido a la comunidad, sin embargo, no es técnica sino legal. La *MiniMax-H3-Image Community License* permite descargar y usar los pesos, pero dibuja una línea dura entre geografía e ingresos: las empresas con más de un millón de dólares de ingresos anuales necesitan una autorización escrita por escrito antes de cualquier uso comercial; la Unión Europea, el Reino Unido, Estados Unidos y Corea del Sur quedan explícitamente excluidos, y la licencia cita, entre otros, el Reglamento europeo de IA (EU AI Act), el GDPR y regímenes de derechos de autor como el DMCA. Añade más: si el uso es un servicio alojado —SaaS o API—, la autorización es necesaria incluso para empresas pequeñas; el nombre del modelo debe aparecer en la interfaz; no se pueden usar las salidas para entrenar o mejorar otros modelos de IA; y los conflictos se someten a arbitraje en Hong Kong. El análisis de DataNorth lo resume en una frase que ya está dando la vuelta a la red: «pesos abiertos, pero aún no una licencia para la UE».",
+      "Quedan dos lecturas. Primera: técnicamente, generar 16 megapíxeles nativos en seis pasos con 33.000 millones de parámetros es un hito nuevo para los modelos de imágenes de pesos abiertos, y es fácil de reproducir —la ficha de *Comfy-Org* tiene plantillas y las cuantizadas caben en hardware de consumo. Segunda: el documento de licencia es una carta abierta a la era de los «pesos abiertos». MiniMax publica los pesos, pero la licencia deja el uso comercial en los mercados más grandes sujeto a una autorización escrita, y la propia página cierra con un «no todavía, pero no nunca» que promete una evolución. Las próximas semanas dirán si *H3-Image* sigue la ruta de los modelos que llegan cerrados y luego se abren de verdad, o si marca el patrón del sector: pesos visibles, uso condicionado."
+    ],
+    "illustration": {
+      "file": "lead-illo-2026-11-15.jpg",
+      "alt": "Un estudio de fotografía nocturno: al centro de una mesa de madera oscura, bajo una lámpara cálida, un pequeño chip con borde dorado; a la derecha, un gran print de un lago montañoso, nítido; al fondo, una estantería con seis marcos pequeños que muestran el mismo paisaje, cada vez más definidos de izquierda a derecha.",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: el chip de *H3-Image* resuelve el detalle de los 16 megapíxeles, y los seis marcos evocan las seis muestras, de la imagen borrosa a la nítida."
+    }
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*Arete-27B*: Nous Research alinea *Qwen3.8-27B* con valores, sin degradar sus capacidades",
+          "summary": "Nous Research publica *Arete-27B*, un post-entrenamiento de *Qwen3.8-27B* que reduce de 22 % a 0,9 % las respuestas con propaganda estatal y mejora la exactitud factual (de 2,32 a 2,98 sobre 5), sin merma medible en codificación ni razonamiento. Se entrena con 20.000 prompts sobre siete categorías de valores (libertad de expresión, democracia, privacidad de datos, educación…) y también publica los 52,8 millones de tokens del entrenamiento. Apache 2.0.",
+          "tags": [
+            "nous-research",
+            "arete",
+            "alineacion",
+            "post-entrenamiento"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face — NousResearch/Arete-27B",
+              "url": "https://huggingface.co/NousResearch/Arete-27B"
+            },
+            {
+              "label": "Datos de entrenamiento",
+              "url": "https://huggingface.co/datasets/NousResearch/arete-data-pairs"
+            },
+            {
+              "label": "arXiv 2607.02151",
+              "url": "https://arxiv.org/abs/2607.02151"
+            },
+            {
+              "label": "GitHub — NousResearch/Arete",
+              "url": "https://github.com/NousResearch/Arete"
+            }
+          ],
+          "body": [
+            "La premisa es sencilla: un modelo que responda desde un conjunto de valores definido explícitamente. *Arete* es el post-entrenamiento de *Qwen3.8-27B* centrado en una de las dimensiones menos exploradas de los modelos abiertos. El material de entrenamiento son 20.000 prompts generados con una pipeline que impide duplicados, cubriendo siete categorías —libertad de expresión, ideología estatal, estado frente a libre mercado, educación, privacidad de datos, democracia y medio ambiente—, con 52,8 millones de tokens a 64k de contexto y dos épocas. El maestro elegido para la etapa de *DPO* es *Inkling* (de Thinking Machines), que el equipo escogió como el mejor modelo abierto con evaluación positiva en lo que buscaban impartir.",
+            "Los resultados publicados son concretos: la tasa de respuestas con propaganda estatal cae del 22 % al 0,9 % y la puntuación factual sube de 2,32 a 2,98 sobre 5 en su evaluación *Propaganda_Eval* (803 prompts, con un juez de *LLM* —*Grok 4.7*— que no sabe qué modelo escribió cada respuesta). Lo más relevante para la comunidad es que el ajuste no rompe nada: *Hermes Bench* pasa de 65,77 % a 65,60 %, y *Terminal-Bench-2.1* de 67 % a 70 %. La tarjeta del modelo —con los pesos, los pares de preferencia del *DPO* y el set de 803 prompts, todo bajo Apache 2.0— deja la puerta abierta a reproducir el ajuste; una versión destilada de 8B (*Arete-8B*) ya está publicada."
+          ]
+        },
+        {
+          "title": "*ZONOS3-Mini*: Zyphra reduce su modelo de voz a 800 millones de parámetros (100 M activos)",
+          "summary": "El laboratorio francés Zyphra encoge su modelo de voz *ZONOS3* hasta 800 millones de parámetros (100 M activos por un MoE latente de 64 expertos): 43 idiomas, clonación de voz desde una muestra de 60 segundos, emoción y velocidad por palabra, audio a 44,1 kHz con 15 Hz de latente, y síntesis en tiempo real en un portátil o un móvil, incluso en el navegador. Apache 2.0, con pesos *GGUF* para *llama.cpp*.",
+          "tags": [
+            "zyphra",
+            "zonos",
+            "tts",
+            "voz",
+            "on-device"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face — Zyphra/ZONOS3-Mini",
+              "url": "https://huggingface.co/Zyphra/ZONOS3-Mini"
+            },
+            {
+              "label": "arXiv 2611.16525",
+              "url": "https://arxiv.org/abs/2611.16525"
+            },
+            {
+              "label": "GitHub — zyphra/ZONOS",
+              "url": "https://github.com/zyphra/ZONOS"
+            }
+          ],
+          "body": [
+            "La familia *ZONOS* ya era de pesos abiertos; ahora su versión de 3B tiene un «Mini». Se trata de un MoE latente con 64 expertos (dos activos por capa) que pesa 340 MB en 16 bits (34 MB cuantizado a 4 bits), un codificador de dos latentes a 15 Hz y 44,1 kHz de salida —la mitad de latencia que la versión anterior—, clonación de voz desde un único clip de hasta 60 segundos (o desde un *embedding* precomputado) y control de emoción y velocidad palabra a palabra. El informe técnico (*arXiv* 2611.16525) reporta 80 ms hasta el primer audio y 457 veces la velocidad de tiempo real en una *H100*.",
+            "La diferencia práctica es el hardware: el modelo corre en un portátil, un teléfono o directamente en un navegador vía WebGPU, y se sirve por *SGLang-Omni* o por *llama.cpp* gracias a los pesos *GGUF*. En la ficha hay un audio de prueba de 60 segundos para oírlo antes de descargarlo, y la licencia es Apache 2.0. Es el competidor más compacto que ha aparecido esta semana en la clase de modelos de voz, justo en el nicho que la comunidad está reescribiendo a su favor."
+          ]
+        },
+        {
+          "title": "IBM lanza *LLMON*: un lenguaje de marcado nativo para LLMs, ya en *Granite 4.1* 3B y 8B",
+          "summary": "IBM publica dos modelos de pesos abiertos (3B y 8B, Apache 2.0) entrenados para entender de forma nativa *LLMON*, un lenguaje de marcado con delimitadores de un solo token que da al modelo una estructura de bloques: un bloque *exec* con reglas de privilegio separa las instrucciones de confianza del contenido no confiable, reduciendo la superficie de ataque de la inyección de prompts. Dos papers de *arXiv* documentan el formato y el post-entrenamiento.",
+          "tags": [
+            "ibm",
+            "granite",
+            "llmon",
+            "seguridad",
+            "prompt-injection"
+          ],
+          "links": [
+            {
+              "label": "Blog Hugging Face — IBM Granite",
+              "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite"
+            },
+            {
+              "label": "Modelo ibm-granite/granite-4.1-8b-llmon-preview",
+              "url": "https://huggingface.co/ibm-granite/granite-4.1-8b-llmon-preview"
+            },
+            {
+              "label": "arXiv 2603.22519 (el formato)",
+              "url": "https://arxiv.org/abs/2603.22519"
+            },
+            {
+              "label": "Espacio de visualización de la atención",
+              "url": "https://huggingface.co/spaces/ibm-granite/LLMON-Attention-Visualization"
+            }
+          ],
+          "body": [
+            "La idea: en lugar de pedir al modelo que «interprete» un prompt mezclado, *LLMON* define una estructura de bloques delimitados por un único token, y cada bloque puede llevar reglas de privilegio. El bloque *exec* es donde van las instrucciones ejecutables, y el modelo se entrena desde el principio —el post-entrenamiento de *Granite 4.1* 3B y 8B— para tratarlas de forma distinta al texto ordinario. La inyección de prompts —introducir instrucciones maliciosas dentro de un contenido no confiable— deja de ser un problema de buena voluntad del modelo y se vuelve estructural: el modelo sabe, por formato, qué bloques son instrucciones y cuáles son datos.",
+            "Los modelos *Granite 4.1* en esta variante soportan 12 idiomas, *tool calling* nativo y 32k de contexto, y su licencia es Apache 2.0. IBM acompaña la publicación con dos papers en *arXiv* (2603.22519, sobre el formato; 2610.38120, sobre el post-entrenamiento) y un espacio en *Hugging Face* para visualizar cómo la atención del modelo se reparte entre bloques. La apuesta, según el blog, es clara: si los agentes van a convivir con contenido no confiable, el delimitador tiene que pertenecer al lenguaje, no al prompt."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*BotPsy-0.8B*: una asistente personal de 0.8B parámetros que supera a un modelo 2,5 veces mayor",
+          "summary": "Tether AI Research (*qvac*) publica un modelo de 800 millones de parámetros sobre *Qwen3.5-0.8B* especializado en *tool calling*: una asistente personal *on-device* (búsqueda, viaje, comercio, archivos, correo) que logra el mejor resultado de su clase de tamaño (≤1,2B) y gana a su hermana mayor, *Qwen3.5-2B-Think*, en cinco de seis *benchmarks* agénticos. Apache 2.0, con *GGUF* para *llama.cpp*.",
+          "tags": [
+            "botpsy",
+            "tether-ai",
+            "agentes",
+            "tool-calling",
+            "on-device"
+          ],
+          "links": [
+            {
+              "label": "Blog Hugging Face — qvac/BotPsy",
+              "url": "https://huggingface.co/blog/qvac/botpsy"
+            },
+            {
+              "label": "Modelo qvac/BotPsy-0.8B",
+              "url": "https://huggingface.co/qvac/BotPsy-0.8B"
+            },
+            {
+              "label": "GGUF para llama.cpp",
+              "url": "https://huggingface.co/qvac/BotPsy-0.8B-GGUFs"
+            }
+          ],
+          "body": [
+            "Los números son la noticia: frente al modelo base, *BFCL v4* sube de 23,4 a 44,0, *ACEBench* de 30,1 a 58,7 y *τ-bench* de 23,2 a 51,5. En la prueba de *τ²-bench* en telecomunicaciones —una conversación de cliente larga, con una estricta política que seguir— saca 82,5 frente a 69,3 del modelo de 2B. Y en las pruebas de alucinación de *BFCL* —las que verifican que el modelo se niega a actuar cuando no existe herramienta adecuada— es el mejor de todos los evaluados (86,1). El entrenamiento tiene cuatro etapas: *SFT*, destilación on-policy de varios maestros y dos rondas de *RL*.",
+            "El modelo conserva la arquitectura híbrida de *Qwen3.5* (Gated DeltaNet + atención con compuerta), así que corre en *Transformers*, *vLLM* y *llama.cpp* sin código propio, y la cuantización *Q4_K_M* cabe sin esfuerzo en un móvil. El equipo es honesto sobre los límites: está pensado para tareas de dificultad baja o media —su conocimiento sigue siendo el del modelo base, y su diseño es llamar a herramientas para saber lo que no sabe. El informe completo, con todos los *benchmarks* y la receta de entrenamiento, está en el blog de *Hugging Face*."
+          ]
+        },
+        {
+          "title": "*vid2context*: convierte cualquier vídeo en contexto para agentes (MCP + CLI + API)",
+          "summary": "Un proyecto nuevo de código abierto (*nirholas/vid2context*, TypeScript, Apache-2.0) convierte cualquier vídeo —YouTube con subtítulos, archivo local con transcripción por voz, o una URL— en contexto listo para agentes: texto, metadatos, capítulos, detección de escenas, fotogramas y objetos. Se integra como servidor *MCP*, por CLI o como API *FastAPI*.",
+          "tags": [
+            "vid2context",
+            "mcp",
+            "agentes",
+            "video"
+          ],
+          "links": [
+            {
+              "label": "GitHub — nirholas/vid2context",
+              "url": "https://github.com/nirholas/vid2context"
+            },
+            {
+              "label": "Documentación",
+              "url": "https://vid2context-docs.vercel.app/"
+            }
+          ],
+          "body": [
+            "La promesa: un agente que «ve» un vídeo no tiene que hacerlo a ojo. *vid2context* ingiere el vídeo (YouTube vía subtítulos, un archivo local con transcripción automática de la voz, o una URL directa) y produce un contexto estructurado: texto, metadatos, capítulos, escenas detectadas, fotogramas clave e incluso objetos en pantalla. Sobre ese contexto se puede razonar, resumir o programar como con cualquier texto.",
+            "Además, el proyecto se puede usar de tres formas: como servidor *MCP* (Model Context Protocol) para agentes que hablan el protocolo, como CLI, o como API *FastAPI* por HTTP. Es joven —dos estrellas en *GitHub*—, pero apunta a uno de los huecos reales de la era de los agentes: el contenido multimodal que un modelo no puede ver de forma nativa. El *README* lleva una tabla de capacidades por tipo de entrada, y el código es Apache-2.0."
+          ]
+        },
+        {
+          "title": "*astro-weights*: un agente que hace «pequeños ajustes de rumbo» a los pesos de un LLM, exportados como *LoRA*",
+          "summary": "El proyecto *astro-weights* (Python) automatiza lo que su nombre, metáfora náutica, anuncia: no reentrena el modelo, hace pequeños ajustes de rumbo a sus pesos. Un lazo agéntico evalúa las salidas del LLM, decide qué cambiar y aplica la edición, exportando el resultado como un adaptador *LoRA* portátil y reversible.",
+          "tags": [
+            "astro-weights",
+            "lora",
+            "agentes",
+            "pesos"
+          ],
+          "links": [
+            {
+              "label": "GitHub — astro-weights/astro-weights",
+              "url": "https://github.com/astro-weights/astro-weights"
+            }
+          ],
+          "body": [
+            "El nombre describe el método: como un astromón que corrige el rumbo con pequeños impulsos, el sistema no vuelve a entrenar el modelo, sino que edita sus pesos para ajustar un comportamiento concreto. El lazo que orquesta el agente evalúa las salidas del LLM, decide qué ajuste aplicar y lo materializa —y el resultado se exporta como un adaptador *LoRA*, de modo que el cambio es portable y se puede deshacer.",
+            "Es un proyecto muy joven (cuatro estrellas, Python), pero dibuja una de las fronteras más curiosas de la era de los agentes: los agentes que no solo usan modelos, sino que los afinan. Mientras la mayoría de la automatización se queda en el prompt, aquí el objeto de la automatización es el modelo en sí."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*llama.cpp* alcanza la *v1.0.0*: «una base más fuerte para el ecosistema de IA local»",
+          "summary": "El motor de inferencia local más extendido para modelos *GGUF* cruza el umbral de la versión 1.0.0: tanto *llama.cpp* como su librería *ggml* pasan al versionado semántico 1.0, de modo que a partir de ahora un cambio mayor señaliza una rotura y la API gana garantías de estabilidad para los proyectos que se construyen encima. Un hito de madurez del ecosistema de IA local, anunciado en el blog de *Hugging Face*.",
+          "tags": [
+            "llama-cpp",
+            "gguf",
+            "ia-local",
+            "v1"
+          ],
+          "links": [
+            {
+              "label": "Blog Hugging Face — llama.cpp v1",
+              "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+            },
+            {
+              "label": "GitHub — ggml-org/llama.cpp (release)",
+              "url": "https://github.com/ggml-org/llama.cpp/releases"
+            }
+          ],
+          "body": [
+            "El lanzamiento (este sábado) importa menos por funciones nuevas que por declaración de intenciones: el motor que convirtió en opción por defecto la ejecución de LLMs en GPUs de consumo cruza la marca 1.0. A partir de ahora *llama.cpp* y *ggml* siguen versionado semántico —nuevas capacidades en versiones menores, cambios rotos en versiones mayores—, lo que para los decenas de proyectos construidos sobre él (*Ollama*, herramientas de cuantización, servidores de *GGUF*) significa una API estable en la que pueden confiar.",
+            "La publicación es el post «A stronger foundation for the local AI ecosystem» del blog de *Hugging Face*, que repasa el camino hasta la 1.0: la madurez del formato *GGUF*, la API consolidada y el ecosistema de cuantización y herramientas que ha crecido a su alrededor. Para el campo del self-hosting, es el paso simbólico que convierte a *llama.cpp* en lo que ya era: la capa sobre la que descansa media IA local."
+          ]
+        },
+        {
+          "title": "*tinyinfer*: un motor de inferencia CUDA escrito desde cero (sin PyTorch, sin cuBLAS)",
+          "summary": "Un proyecto nuevo en C++ (*Aadithya-kl/tinyinfer*) construye un motor de inferencia completo para la familia *Llama* desde cero: kernels *GEMV* manuales en *f16*/*INT8*/*INT4*, *flash-decoding* y *CUDA Graphs* —sin *PyTorch* ni *cuBLAS*. El autor reporta 235 tokens/s en una *RTX 3050*.",
+          "tags": [
+            "tinyinfer",
+            "cuda",
+            "inferencia",
+            "kernels"
+          ],
+          "links": [
+            {
+              "label": "GitHub — Aadithya-kl/tinyinfer",
+              "url": "https://github.com/Aadithya-kl/tinyinfer"
+            }
+          ],
+          "body": [
+            "Su valor está en el enfoque pedagógico: cada componente —la multiplicación matriz-vector, el *flash-decoding* para prompts cortos, los *CUDA Graphs* para la inferencia repetida— se implementa a mano y está documentado, sin una sola librería externa de inferencia. El *README* explica el diseño de cada kernel y cómo compilarlo para la GPU del lector.",
+            "En números absolutos no compite con los motores optimizados (235 tokens/s en una *RTX 3050* es decente, pero no es un récord), y el proyecto es joven (dos estrellas). Pero para quien quiera entender qué hay bajo el capó del ecosistema *GGUF*, leer *tinyinfer* es el atajo más directo que existe esta semana."
+          ]
+        },
+        {
+          "title": "*llm-egress-watch*: con *bpftrace*, un registro de a qué se conectan tus LLMs locales",
+          "summary": "El proyecto de seguridad (*7hemas7er/llm-egress-watch*) responde a una pregunta que crece con el self-hosting: ¿qué proceso local de LLMs o agentes está conectándose al exterior? En *Linux* usa *bpftrace* para registrar el tráfico saliente de cada proceso y generar un informe que el usuario puede revisar. «Registrar y juzgar» es su filosofía.",
+          "tags": [
+            "seguridad",
+            "self-hosting",
+            "ebpf",
+            "auditoria"
+          ],
+          "links": [
+            {
+              "label": "GitHub — 7hemas7er/llm-egress-watch",
+              "url": "https://github.com/7hemas7er/llm-egress-watch"
+            }
+          ],
+          "body": [
+            "La premisa es simple: un modelo local debería ser local. Pero los agentes, los servidores *MCP* y las herramientas con LLMs abren conexiones constantemente —APIs, telemetría, búsqueda web. *llm-egress-watch* se engancha al proceso con *bpftrace*, el trazador *eBPF* del kernel de *Linux*, y registra el tráfico saliente (direcciones, puertos) de los procesos de inferencia.",
+            "El informe resultante es una herramienta de revisión: se ve a qué estaba hablando el modelo, y el usuario juzga. El proyecto es joven (una estrella, *Python*), pero apunta a una necesidad que va a crecer con la adopción: la auditabilidad de la pila de IA local. Corre en *Linux* y pide permisos de administrador para leer los eventos del kernel."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "«Unbundling Multimodal Vision Encoding»: el codificador visual preentrenado no es tan sagrado",
+          "summary": "Uno de los papers más votados del día (14 *upvotes* en *Hugging Face*) compara, en condiciones controladas, dos formas de dotar de visión a un modelo multimodal: reutilizar un codificador preentrenado (estilo *CLIP*) o entrenar el propio desde cero con los mismos datos y el mismo cómputo. Conclusión: lo que importa no es el prior preentrenado, sino la capacidad visual dedicada del modelo.",
+          "tags": [
+            "multimodal",
+            "vision",
+            "encoders",
+            "vlm"
+          ],
+          "links": [
+            {
+              "label": "arXiv 2611.17334",
+              "url": "https://arxiv.org/abs/2611.17334"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2611.17334"
+            }
+          ],
+          "body": [
+            "El diseño del estudio es limpio: mismos datos, mismo cómputo, dos variantes. Una reutiliza un codificador de visión preentrenado (el prior visual de *CLIP*) y otra entrena su propio codificador conjuntamente con el LLM. El resultado sorprende: un codificador entrenado conjuntamente es comparable al preentrenado, así que el prior visual no es tan imprescindible como la ortodoxia asumía.",
+            "Pero hay un matiz clave: sí importa que la visión tenga capacidad dedicada. La variante *encoder-free* —un único backbone para todo— queda por detrás incluso agrandándolo, es decir, la capacidad tiene que vivir en la parte visual. Y un segundo resultado de interés arquitectónico: esa capacidad no tiene que estar antes de la fusión de los streams; un módulo visual en el punto de fusión, en las capas iniciales, logra prestaciones comparables y puede reducir el tiempo hasta el primer token (*TTFT*). Para los equipos que construyen sus propios *VLMs*, el paper es un mapa de dónde sí merece la pena invertir."
+          ]
+        },
+        {
+          "title": "«Experience-Handoff» (ACERL): un RL que aprende a dejar «apuntes» a sus propias ejecuciones futuras",
+          "summary": "Un paper de *UC Berkeley* (*ACERL*) sobre *RL* para tareas agénticas: en lugar de optimizar solo la acción, co-optimiza tres cosas —la acción, una reflexión y una entrada en un *playbook* de experiencia—, y evalúa cada apunte por su impacto real en las ejecuciones de los episodios futuros. Supera a las baselines en *benchmarks* agénticos.",
+          "tags": [
+            "rl",
+            "agentes",
+            "memoria",
+            "acerl"
+          ],
+          "links": [
+            {
+              "label": "arXiv 2611.16409",
+              "url": "https://arxiv.org/abs/2611.16409"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2611.16409"
+            }
+          ],
+          "body": [
+            "La idea central: en una tarea agéntica de muchos pasos, el valor de una experiencia no está solo en lo que el agente hace ahora, sino en lo que deja tras de sí. *ACERL* entrena al agente para producir, además de la acción, una reflexión y una entrada en un *playbook* (memoria de experiencia reutilizable), y la señal de *RL* evalúa el «handoff» —el apunte— por el impacto que realmente tiene en las ejecuciones de los episodios que vienen.",
+            "El resultado: en *benchmarks* agénticos con el mismo modelo base, supera a las baselines, y con la ventaja añadida de que el *playbook* mejora con el tiempo como memoria genuina. Es un paper a tener en cuenta para quien trabaje en agentes con memoria persistente: el «handoff» como objeto de optimación de primera clase, no como subproducto."
+          ]
+        },
+        {
+          "title": "«TurtLES»: 14 TB de flujos turbulentos para entrenar operadores neuronales",
+          "summary": "Un set de datos de flujos turbulentos 3D alrededor de un cilindro (14 TB, unas 400 simulaciones × 400 pasos de tiempo, hasta 11 millones de puntos por fotograma) publicado por el equipo de la Universidad de la Sorbona: simulaciones de alta fidelidad de la transición de capa de cizalla, con variaciones de geometría, número de Reynolds y ángulo de ataque —y un *benchmark* de operadores neuronales de vanguardia que expone sus modos de fallo.",
+          "tags": [
+            "ciencia-de-datos",
+            "turbulencia",
+            "operadores-neurales",
+            "les"
+          ],
+          "links": [
+            {
+              "label": "arXiv 2611.09567",
+              "url": "https://arxiv.org/abs/2611.09567"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2611.09567"
+            }
+          ],
+          "body": [
+            "*TurtLES* no es un modelo, es datos: 14 terabytes de simulación numérica directa del estela de un cilindro en régimen de transición de capa de cizalla, obtenidas con *LES* implícito de alta fidelidad. Cada simulación tiene 400 pasos de tiempo y entre 3 y 11 millones de puntos por fotograma, y la colección varía geometría, número de Reynolds y ángulo de ataque —exactamente los ejes en los que los operadores neuronales suelen extrapolarse sin haber sido probados.",
+            "El paper usa el set para *benchmark* de operadores neuronales de vanguardia en ejecuciones autorregresivas y mapea sus modos de fallo: inestabilidad temporal, pérdida de energía a escala pequeña y degradación en mallas irregulares. Es infraestructura necesaria para el campo: física con calidad de datos *DL*, lista para los próximos operadores."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "NVIDIA publica una guía de *SimReady* para simulaciones de *pick-and-place* con activos abiertos",
+          "summary": "El blog de *NVIDIA* (13 de noviembre) recorre paso a paso la construcción de una simulación de *pick-and-place* robótica con *SimReady*: la librería de activos 3D con propiedades físicas «autorizadas» (masa, articulaciones, fricción) bajo licencia *CC-BY-4.0*, que ya suma 1,6 millones de descargas. El espacio *SimReady Central* centraliza la librería y permite contribuir.",
+          "tags": [
+            "nvidia",
+            "simready",
+            "robotica",
+            "simulacion",
+            "3d"
+          ],
+          "links": [
+            {
+              "label": "Blog Hugging Face — NVIDIA SimReady",
+              "url": "https://huggingface.co/blog/nvidia/simready-assets-robot-pick-and-place"
+            },
+            {
+              "label": "Dataset nvidia/simready-assets",
+              "url": "https://huggingface.co/datasets/nvidia/simready-assets"
+            },
+            {
+              "label": "Espacio SimReady Central",
+              "url": "https://huggingface.co/spaces/nvidia/simready-central"
+            }
+          ],
+          "body": [
+            "El post es práctico: cómo montar un escenario completo de *pick-and-place* (un brazo que coge y coloca objetos) con los activos *SimReady*, la librería de objetos 3D de *NVIDIA* lista para simular. Lo que la distingue de otras librerías de 3D es que los activos llevan propiedades físicas autorizadas —masa, articulaciones, fricción, materiales—, y no son solo mallas a las que el desarrollador tiene que pegarles la física a mano.",
+            "La licencia es abierta (*CC-BY-4.0*) y la ficha en *Hugging Face* —1.581 *me gusta*, 1,6 M de descargas— tiene una pestaña de comunidad activa para aportar nuevos activos. El espacio *SimReady Central* es el punto de encuentro para explorar y usar la librería. Para la comunidad de robótica y simulación, es la oferta pública más completa de la semana en este terreno."
+          ]
+        },
+        {
+          "title": "«open-index/hacker-news»: un corpus abierto de Hacker News con 1,2M de descargas",
+          "summary": "Un dataset en tendencia en *Hugging Face* (582 *me gusta*, 1,2M de descargas) es la versión *open-index* del corpus de *Hacker News*: textos a escala de 10M a 100M bajo licencia *ODC-BY*, con enlace a los datos originales. Una base fácil de usar para entrenar o evaluar modelos locales en inglés.",
+          "tags": [
+            "datasets",
+            "hacker-news",
+            "entrenamiento-local"
+          ],
+          "links": [
+            {
+              "label": "Dataset open-index/hacker-news",
+              "url": "https://huggingface.co/datasets/open-index/hacker-news"
+            }
+          ],
+          "body": [
+            "El proyecto *open-index* republica datasets públicos de gran tamaño con licencias permisivas y formato listo para *Hugging Face*. Esta colección es *Hacker News*: un corpus de texto a gran escala (la ficha indica el orden de 10M a 100M de textos) bajo licencia *ODC-BY*, con los datos fuente en el lado de *Hacker News*.",
+            "¿Por qué importa para el self-hosting? Porque es de los datasets más fáciles de poner a trabajar en un entrenamiento o evaluación local de modelos pequeños: texto en inglés, abierto, ya en formato *datasets*. La organización *open-index* publica otras colecciones con el mismo enfoque, y es un buen punto de partida para quien quiera datos grandes sin perseguir permisos."
+          ]
+        },
+        {
+          "title": "r/LocalLLaMA: «Qwen3 TTS está infrautilizado — lo tengo corriendo en tiempo real en local»",
+          "summary": "Un hilo que vuelve a circular esta semana en *r/LocalLLaMA* documenta un despliegue local en tiempo real de *Qwen3 TTS*, el modelo de voz de *Qwen* de 1,7B parámetros (el mismo motor que usa *IA·A·Hoy* para su podcast). Consejos concretos de hardware, latencia y *prompts* para cualquiera que quiera un *TTS* en español con voz clonada, en casa.",
+          "tags": [
+            "tts",
+            "qwen3-tts",
+            "self-hosting",
+            "comunidad"
+          ],
+          "links": [
+            {
+              "label": "Hilo en r/LocalLLaMA",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1ssugid/qwen3_tts_is_seriously_underrated_i_got_it/"
+            }
+          ],
+          "body": [
+            "El hilo —publicado esta primavera y resucitado esta semana— documenta una ejecución local en tiempo real de *Qwen3 TTS*: el modelo de voz de 1,7B parámetros de *Qwen* que corre sin apuros en GPUs de consumo, tanto en el modo clonación (unos segundos de audio de referencia de la voz que se quiere clonar) como en el modo de diseño (una voz descrita en texto). El autor comparte el hardware, la latencia medida y los ajustes de *sampling* para obtener un español natural.",
+            "Es una referencia útil para el creciente campo del *TTS* self-hosted: el mismo motor que *IA·A·Hoy* usa para su podcast diario se puede ejecutar en casa, y el hilo está lleno de consejos prácticos (cuantización, latencia, voz). Complementa bien la nota de *ZONOS3-Mini* (ver Modelos), que ataca el mismo nicho con un modelo muy inferior en tamaño."
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "brave-plum-co/leonardo-ai-desktop",
+        "stars": "★ 359",
+        "desc": "Una aplicación de escritorio de un solo archivo que corre modelos LLM en local, en formato *GGUF* (Windows, macOS y Linux).",
+        "meta": "C++",
+        "url": "https://github.com/brave-plum-co/leonardo-ai-desktop"
+      },
+      {
+        "name": "AIwithhassan/likhari-ai",
+        "stars": "★ 11",
+        "desc": "Un modelo de IA de pesos abiertos para escribir en urdú (Shakal), con interfaz web.",
+        "meta": "Python",
+        "url": "https://github.com/AIwithhassan/likhari-ai"
+      },
+      {
+        "name": "mr-secret-0/termux-pilot",
+        "stars": "★ 1",
+        "desc": "Un piloto para Termux que automatiza un iPhone desde un teléfono Android, vía *MCP*.",
+        "meta": "Python",
+        "url": "https://github.com/mr-secret-0/termux-pilot"
+      },
+      {
+        "name": "abdul27c/ai-agent-security-proxy",
+        "stars": "★ 1",
+        "desc": "Un filtro de seguridad que audita las herramientas que ejecutan los agentes de IA.",
+        "meta": "Python",
+        "url": "https://github.com/abdul27c/ai-agent-security-proxy"
+      },
+      {
+        "name": "abhijeet-maharana/voice-agent-eval",
+        "stars": "★ 1",
+        "desc": "Evalúa la calidad de las respuestas de un agente de voz en tiempo real, por streaming.",
+        "meta": "TypeScript",
+        "url": "https://github.com/abhijeet-maharana/voice-agent-eval"
+      }
+    ],
+    "papers": [
+      {
+        "title": "Unbundling Multimodal Vision Encoding: A Controlled Comparison of Pretrained vs. Trained Vision Encoders",
+        "authors": "14 upvotes",
+        "url": "https://arxiv.org/abs/2611.17334"
+      },
+      {
+        "title": "Who Remembers What? An Open Benchmark for Long-Context LLM Agents",
+        "authors": "8 upvotes",
+        "url": "https://arxiv.org/abs/2611.10439"
+      },
+      {
+        "title": "The Value of Thinking: Structured Reasoning for Multi-objective Optimization",
+        "authors": "5 upvotes",
+        "url": "https://arxiv.org/abs/2611.16961"
+      },
+      {
+        "title": "Experience-Handoff Reinforcement Learning: Co-Optimizing Action, Reflection, and Experience Curation",
+        "authors": "5 upvotes",
+        "url": "https://arxiv.org/abs/2611.16409"
+      },
+      {
+        "title": "Back to Pixels: A Vision-First Framework for Agentic GUI Automation",
+        "authors": "4 upvotes",
+        "url": "https://arxiv.org/abs/2611.17336"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLaMA",
+        "title": "«Estamos en la edad de oro de los LLMs locales»",
+        "note": "Flash-Next ya llegó y Qwen 4 está a la vuelta de la esquina (6 nov).",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xppbht/we_are_in_the_golden_age_of_local_llm/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "«Hice una tabla de clasificación con código abierto de los mejores modelos que tu máquina puede correr»",
+        "note": "Una herramienta para saber qué modelos caben en tu propio hardware.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x3wp8c/i_made_an_opensource_ai_leaderboard_that_shows/"
+      },
+      {
+        "src": "Hacker News",
+        "title": "«Para los que se self-hostean LLMs en casa: ¿qué casos de uso tenéis?»",
+        "note": "Un hilo de casos de uso reales de modelos locales.",
+        "url": "https://news.ycombinator.com/item?id=41856567"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

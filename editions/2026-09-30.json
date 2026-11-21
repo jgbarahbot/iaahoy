@@ -1,0 +1,165 @@
+{
+  "date": "30 de septiembre de 2026",
+  "weekday_long": "martes",
+  "edition": "Edición nº 4",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Qwen-Image-2.1: 7B de pesos abiertos para generar y editar imágenes",
+    "summary": "Alibaba ha publicado Qwen-Image-2.1, el nuevo modelo unificado de generación y edición de imágenes de la familia Qwen, con pesos abiertos y licencia Qwen. La componente visual de generación pesa solo 7B parámetros sobre 32 capas de DiT Single-Stream, con atención de granularidad mixta y reutilización de KV cache por prefijo para equilibrar calidad, eficiencia y versatilidad. Aporta salida RGBA con canal alfa, lo que facilita el recorte de fondos y la composición directa, y se apoya en un modelo de texto de 8B para entender prompts complejos. El repositorio acumula más de 64.000 descargas en Hugging Face, hay una cuantización GGUF de la comunidad (abenzerps) con 1,15M de descargas y un demo interactivo en Spaces para probarlo sin montar nada. Es una de las opciones locales más serias que hay hoy para pipelines de imagen con open weights.",
+    "tags": ["imagen", "generación", "Qwen", "pesos abiertos", "diffusers"],
+    "links": [
+      {"label": "Hugging Face: Qwen/Qwen-Image-2.1", "url": "https://huggingface.co/Qwen/Qwen-Image-2.1"},
+      {"label": "GGUF de la comunidad (abenzerps)", "url": "https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF"},
+      {"label": "Demo en Spaces", "url": "https://huggingface.co/spaces/Qwen/Qwen-Image-2.1"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos nuevos y en tendencia",
+      "notes": [
+        {
+          "title": "LTX-2.5 de Lightricks: video con audio nativo y 1,5M de descargas",
+          "summary": "LTX-2.5, el modelo de video de Lightricks con pesos abiertos, lidera las tendencias de Hugging Face con más de 1,5 millones de descargas. Es un modelo difusivo de 22B parámetros que genera y edita video con audio nativo, y su nuevo Decodificador de Video por Difusión mantiene nítidos rostros, texto en pantalla y movimiento rápido. El paquete incluye checkpoints GGUF para ejecución local y un benchmark propio. El acceso a los pesos es restringido bajo la licencia comunitaria LTX-2.x, que exige licencia comercial a quien supere 10 millones de dólares de ingresos.",
+          "tags": ["video", "difusión", "pesos abiertos", "Lightricks", "GGUF"],
+          "links": [
+            {"label": "Hugging Face: Lightricks/LTX-2.5", "url": "https://huggingface.co/Lightricks/LTX-2.5"},
+            {"label": "Paquete Diffusers", "url": "https://huggingface.co/Lightricks/LTX-2.5-Diffusers"}
+          ]
+        },
+        {
+          "title": "Bonsai 2 27B en ternario: un 27B que cabe en 5,9 GB",
+          "summary": "Prism ML publica en GGUF la cuantización ternaria (2-bit) de Qwen3.8-27B, con licencia Apache 2.0 y lista para llama.cpp en CUDA, Metal o CPU. El modelo ocupa unos 5,9 GB frente a los ~54 GB del FP16, conservando el 98,2% de la inteligencia del original según sus 14 benchmarks, y mantiene el comportamiento de razonamiento y agente incluso en régimen sub-4-bit. La referencia de cuantización extrema que la comunidad está probando esta semana, con 3,5M de descargas ya.",
+          "tags": ["cuantización", "llama.cpp", "GGUF", "local-first"],
+          "links": [
+            {"label": "Hugging Face: prism-ml/Ternary-Bonsai-2-27B-gguf", "url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf"},
+            {"label": "Whitepaper y demo (GitHub)", "url": "https://github.com/PrismML-Eng/Bonsai-demo"}
+          ]
+        },
+        {
+          "title": "Qwen3.8-27B: 7M de descargas y el modelo de la semana",
+          "summary": "Qwen3.8-27B, el multimodal de texto e imagen de la familia Qwen, es el modelo más descargado de Hugging Face esta semana con más de 7 millones de descargas y 16.500 likes. Sirve de base a media tendencia local —incluida la cuantización ternaria de Bonsai que aparece antes en esta edición— y es también el motor que genera esta misma edición del periódico. Un caso raro y simpático: la portada se escribe con el modelo que cubre.",
+          "tags": ["Qwen", "multimodal", "trending", "pesos abiertos"],
+          "links": [
+            {"label": "Hugging Face: Qwen/Qwen3.8-27B", "url": "https://huggingface.co/Qwen/Qwen3.8-27B"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software y agentes",
+      "notes": [
+        {
+          "title": "dots: un agente de IA con su propio navegador, open source",
+          "summary": "feder-cr/dots es el repositorio que más estrellas está ganando en GitHub esta semana: un agente de IA con su propio navegador, que no depende de un proveedor de browser-as-a-service y corre íntegramente en tu hardware. Está escrito en Python, con 403 estrellas y actualizado ayer. Un ejemplo directo de cómo los agentes de navegación se están des-privatizando y volviendo autohospedables.",
+          "tags": ["agentes", "self-hosting", "browser", "open-source"],
+          "links": [
+            {"label": "GitHub: feder-cr/dots", "url": "https://github.com/feder-cr/dots"}
+          ]
+        },
+        {
+          "title": "local-enough: ¿cabe esta tarea de IA en tu hardware?",
+          "summary": "B0yko/local-enough es una herramienta nueva para medir si una tarea concreta de IA (clasificación, extracción, resumen) puede correr en tu propio hardware: compara precisión contra un umbral y coste de inferencia local. Es el tipo de script que falta en el mundo self-hosted: en vez de preguntar '¿cuántos GB necesita el modelo?', preguntas '¿mi caso de uso cabe en lo que tengo?'.",
+          "tags": ["self-hosting", "llamada", "hardware modesto", "GitHub"],
+          "links": [
+            {"label": "GitHub: B0yko/local-enough", "url": "https://github.com/B0yko/local-enough"}
+          ]
+        },
+        {
+          "title": "Transformers ya ejecuta cuantizados de llama.cpp",
+          "summary": "El blog de Hugging Face documenta la ejecución de cuantizados de llama.cpp dentro de Transformers: GGUF y variantes de bajo bit directamente en la librería de modelos, sin saltar de framework. Reduce la fricción de pasar un checkpoint cuantizado a inferencia y abre la puerta a servir modelos de precisión reducida en los mismos pipelines de siempre.",
+          "tags": ["Transformers", "cuantización", "GGUF", "librería"],
+          "links": [
+            {"label": "Blog: transformers-llama-cpp-quants", "url": "https://huggingface.co/blog/transformers-llama-cpp-quants"}
+          ]
+        },
+        {
+          "title": "semgate: puerta de permisos para agentes de código",
+          "summary": "th3nolo/semgate es un permission gate para agentes de código (Claude Code, Codex, OpenCode, Gemini CLI): decide qué acciones puede tomar el agente y cuáles requieren aprobación humana. Un matón de seguridad útil para quien deja a los agentes de programación sueltos en repositorios propios.",
+          "tags": ["agentes", "seguridad", "código", "GitHub"],
+          "links": [
+            {"label": "GitHub: th3nolo/semgate", "url": "https://github.com/th3nolo/semgate"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "VoxMem: ¿recuerda tu asistente de voz quién te dijo algo?",
+          "summary": "El paper de hoy mide la memoria multimodal de los grandes modelos de audio: 3.196 instancias de evaluación sobre 34.743 sesiones habladas (177 horas), cruzando cuatro tipos de evidencia acústica (semántica del habla, identidad del hablante, cues paralingüísticos y sonido ambiental) con cuatro operaciones de memoria (extracción, razonamiento entre sesiones, seguimiento temporal y rechazo a responder). El resultado: los asistentes de voz recuerdan qué se dijo, pero rara vez quién lo dijo. Un benchmark honesto sobre el punto débil de los asistentes de voz de largo horizonte, con 42 upvotes en Hugging Face.",
+          "tags": ["audio", "memoria", "benchmark", "LALM"],
+          "links": [
+            {"label": "arXiv 2609.32607", "url": "https://arxiv.org/abs/2609.32607"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2609.32607"}
+          ]
+        },
+        {
+          "title": "Omni-IO Skills: agentes omni-nativos con skills reutilizables",
+          "summary": "Yanlin Li y colegas proponen Omni-IO Skills: un marco para que agentes de propósito general reutilicen 'skills' aprendidas a lo largo de tareas de horizonte largo, en vez de replanear cada vez desde cero. El paper se centra en cómo estructurar esas skills para que sean portables entre dominios y cómo evaluarlas. 14 upvotes y una línea de trabajo interesante para quien monta agentes que acumulan experiencia.",
+          "tags": ["agentes", "skills", "aprendizaje", "arXiv"],
+          "links": [
+            {"label": "arXiv 2609.31847", "url": "https://arxiv.org/abs/2609.31847"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2609.31847"}
+          ]
+        },
+        {
+          "title": "EpiCon: agentes que aprenden de forma colectiva",
+          "summary": "EpiCon propone un mecanismo de aprendizaje colectivo entre agentes mediante memoria multimodal co-evolutiva: en vez de que cada agente aprenda solo de sus propias ejecuciones, la memoria se comparte y evoluciona entre ellos. Interesante como paso hacia flotas de agentes que se mejoran mutuamente sin reentrenar el modelo base.",
+          "tags": ["agentes", "memoria", "multimodal", "arXiv"],
+          "links": [
+            {"label": "arXiv 2609.37923", "url": "https://arxiv.org/abs/2609.37923"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2609.37923"}
+          ]
+        },
+        {
+          "title": "EngiWorld: qué pueden hacer los agentes en entornos de ingeniería real",
+          "summary": "Un paper nuevo mide lo que los agentes de frontera realmente entregan en entornos de ingeniería profesional: no tareas genéricas de computer-use, sino flujos de trabajo concretos de ingeniería. El objetivo es un benchmark más honesto que los que se publican para agentes 'generalistas'. 15 upvotes y una línea útil para quien evalúa agentes en producción.",
+          "tags": ["agentes", "benchmark", "ingeniería", "arXiv"],
+          "links": [
+            {"label": "arXiv 2609.37686", "url": "https://arxiv.org/abs/2609.37686"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2609.37686"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "4 GB de RAM y un curador de noticias 24/7",
+          "summary": "Un artículo de la comunidad documenta un setup completo: LLMs locales y un curador de noticias personal 24/7 corriendo en un Raspberry Pi 4 de 4 GB. Cuantización agresiva, swap inteligente y modelos pequeños bien elegidos. La prueba de que el self-hosting ya no exige un equipo dedicado, y una receta concreta para quien quiere montar un asistente personal con lo mínimo.",
+          "tags": ["local-first", "cuantización", "hardware modesto", "comunidad"],
+          "links": [
+            {"label": "Artículo (Medium)", "url": "https://life-of-utkarsh.medium.com/pushing-the-limits-running-local-llms-and-a-24-7-personal-news-curator-on-4gb-of-ram-c55f9498bf3c"}
+          ]
+        },
+        {
+          "title": "Tokenizers v1: encode, decode y escalado, medidos",
+          "summary": "La versión 1 de tokenizers, el motor de tokenización de Hugging Face, llega con cifras de encode/decode y un estudio de escalado a varios hilos. Para quien sirve muchos tokens al día, la diferencia entre versiones se nota en latencia de preprocesado, que suele ser la parte invisible de la inferencia.",
+          "tags": ["tokenizers", "rendimiento", "Hugging Face"],
+          "links": [
+            {"label": "Blog: tokenizers-v1", "url": "https://huggingface.co/blog/tokenizers-v1"}
+          ]
+        },
+        {
+          "title": "NVIDIA KUMO: kernels GPU para ML tabular a escala",
+          "summary": "NVIDIA publica KUMO Tabular, una librería de kernels GPU para entrenar y servir modelos sobre datos tabulares, el tipo de datos que todavía domina los sistemas de negocio. El blog de Hugging Face incluye un how-to para correrla localmente. Interesante como ejemplo de cómo la infraestructura de kernels para LLMs se está reutilizando para ML tabular clásico.",
+          "tags": ["tabular", "kernels", "GPU", "NVIDIA"],
+          "links": [
+            {"label": "Blog: how-to-use-nvidia-kumo-tabular", "url": "https://huggingface.co/blog/nvidia/kumo-tabular"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando ggml-org/Qwen3.8-27B-GGUF:Q4_K_M, para que lo disfrutes y te sea útil."
+  }
+}

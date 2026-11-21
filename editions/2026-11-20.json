@@ -1,0 +1,572 @@
+{
+  "date": "20 de noviembre de 2026",
+  "weekday_long": "viernes",
+  "edition": "Edición nº 45",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "El *LoRA* que convierte *Qwen3.8-27B* en un agente de código que piensa menos y gasta una cuarta parte de los *tokens*",
+    "summary": "*harness-hub* ha publicado *Qwen3.8-27B-pi-adapted*, un adaptador *LoRA* entrenado con refuerzo para que *Qwen3.8-27B* funcione como el modelo del agente de código *pi*, el arnés minimalista de *Earendil Works* con licencia *MIT*. El resultado, medido bajo el mismo arnés: con el modo de razonamiento apagado, el adaptador iguala al modelo base en su máximo esfuerzo en *Terminal-Bench 2.1* (56,6 % frente a 54,2 %) y recupera 25 de los 35 puntos que aporta el razonamiento en *SWE-bench Pro* (64,7 % frente a 74,5 %), generando unas 4,5 veces menos *tokens* por tarea. La idea, que llaman «adaptador de arnés», no mejora el modelo en general, sino que le enseña a trabajar dentro de un arnés y un flujo de trabajo concretos. El adaptador es *Apache 2.0*, se descarga en *Hugging Face* en pesos *PEFT* y en versión *GGUF*, y corre con *transformers*, *pi*, *llama.cpp* o *llama-app*; la receta completa de entrenamiento se publicará en el blog oficial del equipo.",
+    "illustration": {
+      "file": "lead-illo-2026-11-20.jpg",
+      "alt": "Fotografía macro de un gran chip oscuro con parrilla de contactos dorados sobre una placa de circuito mate, con un pequeño adaptador de latón con tres pines encajado, y al fondo un banco de trabajo ordenado con herramientas; en primer plano, una pila corta de papeles blancos junto a una pila mucho más alta de los mismos papeles",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: el modelo de 27B con su pequeño adaptador de arnés, y la pila de papeles que se acorta cuando se apaga el razonamiento"
+    },
+    "tags": [
+      "lora",
+      "refuerzo",
+      "agente-de-codigo",
+      "qwen",
+      "arneses",
+      "pesos-abiertos"
+    ],
+    "links": [
+      {
+        "label": "Qwen3.8-27B-pi-adapted en Hugging Face",
+        "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted"
+      },
+      {
+        "label": "pi, el arnés de Earendil Works (GitHub)",
+        "url": "https://github.com/earendil-works/pi"
+      },
+      {
+        "label": "Qwen3.8-27B-pi-adapted-GGUF",
+        "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted-GGUF"
+      },
+      {
+        "label": "Dataset scale800-harbor",
+        "url": "https://huggingface.co/datasets/harness-hub/scale800-harbor"
+      },
+      {
+        "label": "pi.dev",
+        "url": "https://pi.dev/"
+      }
+    ],
+    "body": [
+      "*Qwen3.8-27B* es uno de los modelos abiertos más descargados del año — este periódico, de hecho, se escribe con él — y desde su lanzamiento la comunidad no ha dejado de derivarlo: un modelo borrador (*draft*) para decodificación especulativa, una familia de cuantizaciones, una variante destilada a 8 GB que un usuario del subreddit promete «en los próximos días». Esta semana se ha sumado algo más agresivo: no otra cuantización, sino un adaptador. *harness-hub*, un equipo que viene publicando una serie de lo que llama «adaptadores de arnés» (harness adapters), ha tomado *Qwen3.8-27B* y le ha entrenado un *LoRA* — adaptación de bajo rango, de «low-rank adaptation» — con refuerzo (*GRPO*, de «group relative policy optimization», y su variante asincrónica, *async-GRPO*), para que el modelo se comporte, dentro del arnés *pi*, como un agente de código competente: explora menos, edita en menos llamadas y se detiene cuando las pruebas pasan.",
+      "El arnés de destino, *pi*, merece una línea: es un arnés de agente minimalista con licencia *MIT*, de la compañía *Earendil Works* y nacido del trabajo de Mario Zechner, que en su versión 1.0 incorporó soporte *MCP* por defecto. Su lema es «adapta *pi* a tus flujos de trabajo, no al revés»: una *API* unificada de *LLM*, un bucle de agente, una interfaz *TUI* y un *CLI* de código que se amplía con extensiones, skills, plantillas de prompt y temas. El adaptador encarna el mismo principio desde el lado contrario: el que cambia para encajar no es el arnés, sino el modelo, y una vez encajado el arnés puede quedarse intacto, igual que lo usan todos los demás.",
+      "Los números que publica la tarjeta del modelo son comparaciones emparejadas — una sola intentada por tarea, presupuesto de 100 pasos, razonamiento apagado, un presupuesto de una hora en *Terminal-Bench 2.1* y dos horas en *SWE-bench Pro* —, y miden el modelo base y el adaptado siempre con exactamente la misma configuración. El modelo base resuelve el 39,2 % de las 51 tareas más difíciles de *SWE-bench Pro* y el 39,5 % de *Terminal-Bench 2.1* (sobre las 86 tareas que ambos puntúan); el adaptado, el 64,7 % y el 55,8 % respectivamente, con 15 y 16 tareas nuevas resueltas frente a solo 2 perdidas en cada caso (prueba de signo exacta, p=0,0023 y p=0,0013). El dato de la portada, y el que justifica el esfuerzo, es el siguiente: con el razonamiento apagado, el adaptado iguala al modelo base funcionando a su máximo esfuerzo (xhigh) en *Terminal-Bench 2.1* — 56,6 % contra 54,2 % — y en *SWE-bench Pro* recupera 25 de los 35 puntos que el razonamiento aporta (64,7 % contra 74,5 %), generando alrededor de 4,5 veces menos *tokens* por tarea y usando menos de la mitad de las vueltas en las tareas que ambos resuelven. En otras palabras, el coste del modo «pensar largo» — el presupuesto de *tokens* — puede sustituirse por un entrenamiento puntual dirigido al flujo de trabajo real.",
+      "El artefacto en sí es ligero y abierto: pesos *PEFT* en *Hugging Face* (licencia *Apache 2.0*), que se pueden cargar con *transformers*, enchufar a *pi*, servir con *llama.cpp* o usar con *llama-app*, o convertir a *GGUF* — ya existe una versión *Qwen3.8-27B-pi-adapted-GGUF* lista. El entrenamiento se hizo con los datasets públicos del equipo (*scale800-harbor*, *harness-adapters* y entornos *termgrade*), y los autores prometen publicar la receta completa en su blog para que cualquiera pueda fabricar su propio adaptador para su propio arnés.",
+      "La tarjeta es honesta con los límites: todos los números se miden solo bajo el arnés *pi*, con una intentada y 100 pasos, y no son comparables con los de la tarjeta oficial de *Qwen3.8-27B*, que usa otros arneses, presupuestos mayores y el razonamiento completo. La dirección, eso sí, es clara para quien se autoaloja: en vez de pagar el presupuesto de razonamiento por *token*, una vez, en la máquina de casa, con un *LoRA*, se puede especializar el modelo en el agente que de verdad se usa a diario. Es una vía barata, reproducible, y una muestra de lo que puede terminar siendo un «adaptador de arnés»: tan corriente como las cuantizaciones de hoy."
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "Inworld libera *Voice Isolator* y *SAVA*: aislamiento de voz a 48 kHz, en línea y en streaming",
+          "summary": "Inworld ha abierto los dos modelos de su familia de aislamiento de voz: *voice-isolator-v1*, el modelo para audio grabado, y *voice-isolator-v1-realtime*, un stream causal con 20 milisegundos de anticipación, bajo licencia *Apache 2.0* y con informe técnico. Son modelos pequeños — 64 y 58 millones de parámetros — que separan la voz del ruido de fondo a 48 kHz, con un paquete *pip* y un comando en línea de comandos, y están pensados para limpiar grabaciones, curar datasets de voz y, en la variante en tiempo real, llamadas y streams en vivo.",
+          "body": [
+            "La publicación, anunciada el 18 de noviembre junto a un informe técnico, llega con un par de modelos que comparten la misma arquitectura y se diferencian en el modo de ejecución. El modelo *offline*, *voice-isolator-v1*, procesa el audio por bloques de 8 segundos (cada bloque se solapa 2 segundos con el siguiente), ve el trozo completo y da la mejor calidad posible: para grabaciones, podcasts, dataset de voz o cualquier cosa que no dependa de la latencia. El modelo en tiempo real, *voice-isolator-v1-realtime*, es un stream causal con 20 milisegundos de anticipación: menos información, pero suficiente para corrientes en vivo, llamadas y producción.",
+            "La salida son dos *WAV* a 48 kHz: la voz aislada y el residuo de fondo (el ruido que se retiró), que sumadas reconstruyen la entrada mono original; ese residuo es lo que convierte al modelo también en separador de voz de una mezcla vocal. El equipo subraya lo que el modelo no es: no es un selector de hablantes (no elige entre varias voces) ni un modelo de restauración (no repara el daño en la señal); la restauración está prevista para la versión 2. En el uso, es trivial: *pip install inworld-voice-isolation* y el comando *voice-isolate* — y para quien trabaje con un agente de código, el repositorio incluye un *AGENTS.md* que el agente puede leer para instalarse, comprobar la máquina y limpiar un primer archivo. Junto a *Voice Isolator* se libera también *SAVA*, el modelo de detección de actividad de voz con semántica y acústica de la familia.",
+            "El punto de interés para esta lectoría es el tamaño: 58–64 millones de parámetros para audio a 48 kHz en streaming es terreno de microcontrolador y *edge*, no de servidor. Aislamiento de voz de calidad, corriendo donde la señal nace, es un ladrillo que faltaba en las cajas de herramientas de los asistentes locales."
+          ],
+          "tags": [
+            "audio",
+            "aislamiento-de-voz",
+            "edge",
+            "tiempo-real",
+            "inworld"
+          ],
+          "links": [
+            {
+              "label": "inworld/voice-isolator en Hugging Face",
+              "url": "https://huggingface.co/inworld/voice-isolator"
+            },
+            {
+              "label": "Repositorio en GitHub",
+              "url": "https://github.com/inworld-ai/voice-isolator"
+            }
+          ]
+        },
+        {
+          "title": "*Nemotron-3.5-Bolt-E4B-4GB*: el 8B (4B efectivo) de NVIDIA que cabe en 4 GB y mira a los asistentes",
+          "summary": "NVIDIA sigue puliendo la familia *Nemotron 3.5*: *Nemotron-3.5-Bolt-E4B-4GB* es un modelo pequeño de 8B de parámetros totales (4B efectivos) que parte de *Gemma-4-E4B-it* y que en su cuantización *Q4_K_M* cabe en unos 4 GB, con contexto de 64K de entrada y 64K de salida. Está afinado para asistente de voz, personas interactivas y *edge*: bajo consumo, respuesta rápida y buen uso de herramientas en varias vueltas. 172.000 descargas en *Hugging Face*; la licencia es *OpenMDW-1.1*, no un *OSI* abierto, así que es «pesos abiertos» con asterisco.",
+          "body": [
+            "El modelo se entrena desde diciembre de 2025 hasta mayo de 2026 (el corte de datos de postentrenado es mayo de 2026) sobre la arquitectura de *Gemma-4-E4B* — la misma familia de «parámetros efectivos» que *Gemma 3n*, donde el número entre paréntesis es lo que la red usa realmente — y lo que NVIDIA destaca no es el *benchmark* bruto sino la operación: bajo consumo de memoria, tiempo a primer *token* bajo, y la idea de que el asistente responda rápido dejando margen para el resto del sistema que lo rodea. El postentrenado mejora el uso de herramientas en varias vueltas, el seguimiento de instrucciones y el anclaje de la entrada, y el modo de razonamiento se controla desde la plantilla de chat (encendido/apagado y presupuesto de pensamiento), con muestreo a temperatura 1.0 y *top-p* 0.95.",
+            "Dos detalles prácticos. Primero, la familia: existe la versión de precisión completa (BF16) y un modelo borrador de compañía, *DFlash*, para decodificación especulativa — la receta de *llama.cpp* todavía está por publicarse, pero la combinación «modelo base + borrador» ya es la fórmula estándar para que un 4B vaya rápido. Segundo, la comunidad lo ha puesto ya donde NVIDIA no puede: en un Jetson Orin Nano Super corriendo a 27,7 *tokens* por segundo, según un hilo de *r/LocalLLaMA* de principios de mes. Y hay una nota de licencia: el modelo se distribuye bajo *OpenMDW-1.1* (OpenMDW, la alianza de modelos abiertos que NVIDIA preside), que permite uso comercial y no comercial pero no es una licencia *OSI*; para quien mide «software libre» con regla, es pesos abiertos, no más.",
+            "Cabe en la bolsa de un portátil con un SBC, habla 34 idiomas, y NVIDIA lo aprieta específicamente para asistentes de voz y personas interactivas: es el tipo de modelo que va a aparecer dentro de productos, no en servidores. Para la familia *Nemotron 3.5* ya hay más — un 74B-A9B, un *Super* de 120B-A12B y un modelo de transcripción de 30B-A4B — y el E4B es la punta de lanza de toda esa línea hacia el *edge*."
+          ],
+          "tags": [
+            "nemotron",
+            "nvidia",
+            "modelo-pequeno",
+            "edge",
+            "jeto"
+          ],
+          "links": [
+            {
+              "label": "nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB en Hugging Face",
+              "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB"
+            },
+            {
+              "label": "NVIDIA: Nemotron-3.5-Bolt-E4B-4GB",
+              "url": "https://developer.nvidia.com/en-us/blog/nvidia-nemotron-3-5-bolt-e4b-4gb/"
+            },
+            {
+              "label": "NVIDIA-Nemotron-3.5-Bolt-E4B-4GB-DFlash",
+              "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB-DFlash"
+            }
+          ]
+        },
+        {
+          "title": "*SmolVLM2-256M-Video-Instruct*: el VLM de 256M que no se va de la tendencia",
+          "summary": "La familia *SmolVLM2* (febrero de 2025, *Apache 2.0*) sigue dando de sí: su miembro más pequeño, el VLM de 256M de parámetros para vídeo, vuelve a *Hugging Face Trending* con 283 *me gusta* y unas 44.000 descargas, y ahora con exportes *ONNX* y *GGUF* de la comunidad. Es la prueba de que «pequeño pero útil» también es una categoría de modelo: entender un vídeo con 256M de parámetros en cualquier dispositivo.",
+          "body": [
+            "*SmolVLM2* se lanzó como «entender vídeo en todos los dispositivos»: una familia de VLMs pequeños, del 256M al 500M, que procesan imagen, múltiples imágenes y vídeo. El miembro de 256M es el más compacto, y lo que lo mantiene en la tendencia un año después no es una novedad de capacidad sino una de formatos: la tarjeta original (seguida del repo de *Hugging Face TB*) añade exportes *ONNX* y *safetensors*, y la comunidad ya ha hecho su trabajo habitual — *mradermacher* y *ggml-org* publican versiones *GGUF* con imatrix para *llama.cpp* y compañía.",
+            "No es un modelo que vaya a mover el estado del arte; es un modelo que demuestra que el umbral de «un VLM que entiende un vídeo y corre en cualquier parte» ya está en la centena de millones de parámetros, no en los miles de miles. Para quien hace self-hosting en hardware modesto, esa es la noticia: un ojo de 256M sobre el vídeo, listo para un pipeline de descripción, resumen o clasificación local."
+          ],
+          "tags": [
+            "vlm",
+            "video",
+            "pequeno",
+            "smolvlm",
+            "gguf"
+          ],
+          "links": [
+            {
+              "label": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
+              "url": "https://huggingface.co/HuggingFaceTB/SmolVLM2-256M-Video-Instruct"
+            },
+            {
+              "label": "Blog: SmolVLM2",
+              "url": "https://huggingface.co/blog/smolvlm2"
+            },
+            {
+              "label": "mradermacher/SmolVLM2-256M-Video-Instruct-GGUF",
+              "url": "https://huggingface.co/mradermacher/SmolVLM2-256M-Video-Instruct-GGUF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*blender-ai-mcp-addon*: el *MCP* que deja a un agente conducir Blender",
+          "summary": "El repositorio que más sube en GitHub esta semana (★913) es un addon de *Blender* que expone el 3D como servidor *MCP* y añade una interfaz de chat visual con flujos multiagente: modelado, iluminación y *render* dirigidos desde *ChatGPT*, *Claude*, *Gemini* o un *LLM* local como *Ollama*. El *MCP* se convierte así en el puente entre el mundo de los agentes y las herramientas que ya se usaban con ratón.",
+          "body": [
+            "La receta es la misma que el *MCP* está imponiendo en el software en general: exponer la herramienta como servidor, y deja que cualquier cliente de agente la llame. Lo que el addon de *blender-ai-mcp-addon* aporta por encima de un *MCP* genérico es la interfaz: un chat visual dentro de *Blender*, con un panel de herramientas (geometría, materiales, iluminación, *render*, objetos, *keyframes*) y la capacidad de orquestar flujos multiagente donde varios agentes se reparten el trabajo sobre la misma escena.",
+            "Que funcione tanto con *LLM* de la nube como con *Ollama* local es el detalle que a esta lectoría le importa: la escena 3D deja de ser un territorio cerrado de *GUI* y se convierte en otra superficie más donde un agente puede trabajar con sus herramientas de siempre. El addon ya es *open source* y está en la tendencia; la pregunta natural es hasta qué punto el modelado 3D empieza a ser «el próximo *IDE*» de los agentes."
+          ],
+          "tags": [
+            "mcp",
+            "blender",
+            "3d",
+            "multiagente",
+            "ollama"
+          ],
+          "links": [
+            {
+              "label": "bookwjitchieni1/blender-ai-mcp-addon en GitHub",
+              "url": "https://github.com/bookwjitchieni1/blender-ai-mcp-addon"
+            }
+          ]
+        },
+        {
+          "title": "*neonclipping*: el motor de cortes de vídeo, local y de código abierto",
+          "summary": "Un motor de *clipping* de vídeo local y *open source* (★638) que convierte cualquier vídeo — un canal, un *VOD*, un enlace — en clips verticales 9:16 con subtítulos automáticos en unos dos minutos. El diseño es «primero el audio»: la voz manda, el *LLM* local decide qué trozo merece ser clip, y el contenido no sale de la máquina.",
+          "body": [
+            "El flujo es el de un *clipping* moderno, pero sin nube: se pega un enlace (o un canal), se procesa en local y en unos dos minutos salen clips 9:16 con subtítulos generados automáticamente. El punto de diseño que diferencia es la jerarquía: el audio manda (el audio es lo que decide qué es un momento «citable»), y el *LLM* local — no un *API* en la nube — es quien propone y recorta, con los subtítulos de YouTube cuando existen.",
+            "Es la clase de herramienta que antes solo existía en la nube (y con el vídeo subido a alguien más): un *pipeline* de *clipping* que corre en casa, con el *LLM* que uno ya tenga corriendo, y con el vídeo que nunca sale del disco local. Para quien produce contenido y no quiere mandar *footage* a un servicio, es un ladrillo más del stack local de creación."
+          ],
+          "tags": [
+            "clipping",
+            "video",
+            "local-first",
+            "subtitulos",
+            "open-source"
+          ],
+          "links": [
+            {
+              "label": "iamajmeena/neonclipping en GitHub",
+              "url": "https://github.com/iamajmeena/neonclipping"
+            }
+          ]
+        },
+        {
+          "title": "*system-on-an-agent*: el «sistema» que cabe dentro de un solo agente",
+          "summary": "Un proyecto que lleva la metáfora de los sistemas embebidos al mundo de los agentes (★28): en lugar de un agente plano, un «sistema sobre un agente» — planificador, memoria, skills, conectores y un bus — todo dentro de una sola unidad. La idea es empaquetar las piezas que hoy se compran sueltas en un solo arnés autocontenido.",
+          "body": [
+            "El nombre viene de un giro de «*system-on-a-chip*»: un *SoC* empaqueta CPU, memoria y periféricos en un solo silicio; el proyecto empaqueta planificador, memoria, skills, conectores y un bus de comunicación dentro de un solo agente. La propuesta no es un nuevo *LLM* sino una organización: qué componente manda, cómo se pasa el estado, cómo se enchufan las habilidades, todo dentro de un arnés que se pueda llevar entero.",
+            "Es el tipo de experimento de arquitectura que la semana ha traído por docenas — la diferencia con el adaptador de la portada es de escala: uno cambia el modelo, este cambia la carcasa. Lo interesante es que las dos líneas — modelo especializado y arnés completo — apuntan a la misma dirección: agentes que se configuran una vez y funcionan."
+          ],
+          "tags": [
+            "agente",
+            "arquitectura",
+            "planificador",
+            "memoria",
+            "bus"
+          ],
+          "links": [
+            {
+              "label": "fitzyracing1/system-on-an-agent en GitHub",
+              "url": "https://github.com/fitzyracing1/system-on-an-agent"
+            }
+          ]
+        },
+        {
+          "title": "*ARTEX*: pentesting autónomo multiagente, en Go",
+          "summary": "*ARTEX* (★24) es un sistema multiagente de pruebas de penetración autónomo, escrito en Go: varios agentes de *LLM* que exploran, escalan y documentan, con una arquitectura pensada para corrección y reintentos. El *pentest* se convierte en un flujo de trabajo agéntico más, con las mismas dudas de seguridad que todo lo que corre un *LLM* suelto.",
+          "body": [
+            "La pieza se vende en dos capas: un conjunto de agentes de *LLM* (explorador, escalador, escritor) que trabajan juntos sobre un objetivo, y el esqueleto en Go que los orquesta — correcciones, reintentos, registro de lo que cada agente ha visto. El punto no es que el *pentest* «sea más fácil», sino que el *pentest* empieza a parecerse a cualquier otro flujo de trabajo de agentes: tareas, herramientas, reintentos.",
+            "Como todo lo que da a un *LLM* acceso a una red, la nota de seguridad va por delante: es un *pentest* que corre con un modelo suelto, lo que significa inyección de prompt, *tool-call* y filtrado de datos en el menú. El proyecto lo sabe — la arquitectura está pensada para corrección y registro —, y esa doble cara (ofensivo y defensivo a la vez) es lo que lo pone en la tendencia."
+          ],
+          "tags": [
+            "pentest",
+            "multiagente",
+            "go",
+            "seguridad"
+          ],
+          "links": [
+            {
+              "label": "bcyw/ARTEX en GitHub",
+              "url": "https://github.com/bcyw/ARTEX"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "Modelos de series temporales en la «casa de los streams»: *Flink* ahora predice y detecta anomalías en *SQL*",
+          "summary": "IBM Research publica (18 de noviembre) «Time-Series Models in the Streamhouse»: los modelos *Granite* de series temporales como funciones nativas de *Flink SQL* en *Confluent* — *AI_FORECAST* y *AI_DETECT_ANOMALIES* — en la nube y en local, sin *GPU*. El mensaje: el modelo va al dato, mientras el dato fluye; y se abre una «nueva frontera» de casos de uso en tiempo real.",
+          "body": [
+            "El título es una metáfora con fuerza: la «*streamhouse*» es la casa de los streams, el lugar donde el dato ya está corriendo, y la propuesta es dejar de sacar el dato de allí para llevarlo a un modelo. En la práctica, *Confluent* incorpora los modelos *Granite* de series temporales de IBM como funciones nativas de *Flink SQL*: *AI_FORECAST* para predicción y *AI_DETECT_ANOMALIES* para anomalías, corriendo en la nube y en local, sin *GPU*. El anuncio es de septiembre, pero la pieza de IBM Research de esta semana es la síntesis: qué casos de uso se pueden abordar ahora que el modelo está en el *stream*, y por qué eso es una frontera nueva para el campo.",
+            "Para la familia *Granite* es otra ficha del mismo patrón que hemos visto en la semana: modelos abiertos, pequeños, embebidos en el *pipeline* de datos (no al revés). No reemplaza al analista; le da a la consulta de *SQL* un verbo más, y hace que la detección de anomalías deje de ser un *pipeline* de tres servicios y se convierta en una línea."
+          ],
+          "tags": [
+            "series-temporales",
+            "flink",
+            "confluent",
+            "granite",
+            "ibm"
+          ],
+          "links": [
+            {
+              "label": "IBM Research: Time-Series Models in the Streamhouse",
+              "url": "https://huggingface.co/blog/ibm-research/time-series-powered-streamhouse"
+            },
+            {
+              "label": "IBM: Granite Time Series en Confluent",
+              "url": "https://www.ibm.com/new/announcements/ibm-granite-time-series-models-bring-real-time-forecasting-and-anomaly-d"
+            },
+            {
+              "label": "Docs de Confluent: AI_FORECAST",
+              "url": "https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html"
+            }
+          ]
+        },
+        {
+          "title": "*QuoteMem*: memoria de largo plazo para agentes, con trazas auditables",
+          "summary": "Un proyecto de memoria de largo plazo para agentes (★4) cuya diferencia es la audibilidad: cada recuerdo que el agente guarda lleva la cita y el origen, de modo que cualquier afirmación posterior se puede rastrear hasta el dato que la sustenta. La memoria deja de ser una caja negra y se vuelve un registro consultable.",
+          "body": [
+            "La memoria de los agentes es hoy el punto débil de todo: lo que el agente «recuerda» es una mezcla de contexto, *summary* y vectores, y casi nunca hay forma de saber de dónde salió una afirmación. *QuoteMem* ataca ese punto: guarda recuerdos con su cita de origen, de modo que cuando el agente usa un recuerdo, se puede seguir el hilo hasta el dato. Es la diferencia entre «el agente dijo X» y «el agente dijo X, y aquí está de dónde lo sacó».",
+            "Es una de esas piezas pequeñas que se van a volver estándar: memoria con trazabilidad es el requisito mínimo para un agente que trabaje con datos sensibles o en entornos auditados. El proyecto es joven (★4), pero la dirección apunta a lo que cualquier despliegue serio va a exigir."
+          ],
+          "tags": [
+            "memoria",
+            "agentes",
+            "auditoria",
+            "trazabilidad"
+          ],
+          "links": [
+            {
+              "label": "feng0660/QuoteMem en GitHub",
+              "url": "https://github.com/feng0660/QuoteMem"
+            }
+          ]
+        },
+        {
+          "title": "*cuvrass*: un framework Go para agentes con guardrails siempre activos",
+          "summary": "Un framework de agentes en Go (★1) cuya premisa es que los guardrails no son una capa opcional sino la arquitectura: *cuvrass* aplica continuamente las protecciones del *OWASP LLM Top 10* — inyección de prompt, exfiltración de datos, ejecución insegura de herramientas, *overfitting* de prompt — en vez de dejarlas en un documento.",
+          "body": [
+            "El patrón se repite: otro framework que parte de la lista del *OWASP LLM Top 10* y la convierte en código. La diferencia de *cuvrass* (y del nombre) es el énfasis en «siempre activo»: las protecciones no se encienden antes de la llamada y se apagan después, sino que corren como parte del bucle. *Go* es el idioma elegido, y la apuesta es el mismo perfil de los proyectos de la semana: un arnés pequeño, portable y fácil de embeber.",
+            "Como todo en esta categoría, la pregunta real no es «¿protege?» sino «¿cuánto cuesta?». Los guardrails que se aplican a cada llamada suman latencia y *tokens*; el proyecto joven tiene aún que demostrar que el coste no devora el beneficio. Pero la dirección — seguridad por defecto, no por parche — es la que el *OWASP* lleva años pidiendo."
+          ],
+          "tags": [
+            "go",
+            "guardrails",
+            "owasp",
+            "seguridad"
+          ],
+          "links": [
+            {
+              "label": "Mikimoto/cuvrass en GitHub",
+              "url": "https://github.com/Mikimoto/cuvrass"
+            }
+          ]
+        },
+        {
+          "title": "Un *benchmark* de runtimes embebibles para *code mode* de *LLM*",
+          "summary": "Un *benchmark* (★6) que compara runtimes de scripting embebibles como entorno de *code mode* para *LLM*: rendimiento, estabilidad y seguridad. La premisa: cuando el agente genera código, el runtime que lo ejecuta es parte del sistema, y su elección importa tanto como el modelo.",
+          "body": [
+            "El *code mode* es el patrón que gana: el agente no genera texto, genera código que un runtime embebible ejecuta y devuelve el resultado. El *benchmark* compara varios runtimes embebibles — rendimiento, estabilidad bajo carga, superficie de seguridad — para responder a la pregunta que todo el que construye agentes se está haciendo: si el modelo es fijo, ¿cuál es el mejor suelo sobre el que correr su código?",
+            "Es el tipo de medición que no sale en un *paper* pero que decide un *deploy*: el runtime embebible es el equivalente, en el mundo del agente, del *compiler* de antes. Pequeño, joven, pero apunta a lo que va a ser una decisión de diseño rutinaria."
+          ],
+          "tags": [
+            "code-mode",
+            "runtimes",
+            "benchmark",
+            "agentes"
+          ],
+          "links": [
+            {
+              "label": "rivet-dev/code-mode-language-benchmark en GitHub",
+              "url": "https://github.com/rivet-dev/code-mode-language-benchmark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*Mind2Act World*: el *benchmark* que separa la «mente» de la «acción» en robótica",
+          "summary": "El *paper* con más apoyos del día (23 *upvotes*) propone un *benchmark* diagnóstico para manipulación robótica que descompone la capacidad en dos piezas: la «mente» corporizada (percepción, planificación, decisión) y la «acción» física (control, ejecución). Con más de 1.000 episodios de manipulación real, busca responder a la pregunta que los *benchmarks* actuales no responden: cuando un agente falla, ¿falló pensando o falló actuando?",
+          "body": [
+            "Los *benchmarks* de manipulación suelen dar una nota global, y esa nota global es lo que impide saber qué se está midiendo de verdad: puede que el modelo entienda la escena y no pueda ejecutar el movimiento, o viceversa. *Mind2Act World* parte de esa separación y la convierte en un *benchmark* con más de 1.000 episodios reales, de modo que cada tarea se puede descomponer en la parte «mente» y la parte «acción», y puntuar cada una por separado.",
+            "Es el tipo de pieza que no va a mover un *benchmark* de estado del arte, pero que va a limpiar el lenguaje: la próxima vez que se diga «el agente no resolvió la tarea», la pregunta honesta será «¿y dónde falló, en la mente o en la mano?»."
+          ],
+          "tags": [
+            "robótica",
+            "benchmark",
+            "manipulacion",
+            "world-models"
+          ],
+          "links": [
+            {
+              "label": "arXiv: Mind2Act World",
+              "url": "https://arxiv.org/abs/2611.23173"
+            }
+          ]
+        },
+        {
+          "title": "Destilación por *posterior matching*: acelerar la difusión sin copiar la distribución",
+          "summary": "Un *paper* (13 *upvotes*) propone un enfoque de destilación para modelos de difusión que, en vez de hacer que el modelo destilado reproduzca la distribución completa del maestro, le hace coincidir en el *posterior* (la estimación de latentes dados los datos observados). Es una forma más simple de acelerar la generación de imagen y vídeo, y de pasar de cientos de pasos a unos pocos.",
+          "body": [
+            "La destilación de difusión tiene un problema clásico: el objetivo de «reproduzca la distribución del maestro» es fuerte, caro y frágil. El *posterior matching* propone un objetivo más modesto y, según el *paper*, más estable: que el modelo destilado y el maestro coincidan en el *posterior* — la estimación de lo que el latente «debería ser» dado lo que se ha observado — en vez de en la distribución completa. El resultado es un *pipeline* más simple y, en la práctica, más rápido.",
+            "Es una de varias líneas que apuntan a lo mismo: reducir los pasos de generación de difusión sin perder calidad, y hacerlo con objetivos más bien puestos. La familia de *paper*s de la semana sobre difusión y vídeo va en la misma dirección."
+          ],
+          "tags": [
+            "difusion",
+            "destilacion",
+            "aceleracion",
+            "generacion"
+          ],
+          "links": [
+            {
+              "label": "arXiv: Posterior Matching Distillation",
+              "url": "https://arxiv.org/abs/2611.23305"
+            }
+          ]
+        },
+        {
+          "title": "*AutoMaster*: post-entrenado autónomo, el mismo modelo como su propio maestro",
+          "summary": "Un *paper* (5 *upvotes*) propone un marco de post-entrenado «autónomo» en el que el mismo modelo que se mejora actúa también como maestro: un enfoque *skill-first* (*Skill-FT*) donde el modelo genera y usa sus propias skills para mejorar, sin un maestro externo más grande. Es la versión de laboratorio de lo que la portada muestra en producción: el modelo que se entrena a sí mismo, en su propio flujo.",
+          "body": [
+            "La línea «el modelo se mejora a sí mismo» lleva tiempo en el aire, y *AutoMaster* la concreta en un marco con nombre: *Skill-FT*, un enfoque *skill-first* donde el modelo genera skills, las usa, y del uso extrae la mejora. El punto no es solo «el modelo mejora», sino «sin un maestro externo más grande»: el que mejora y el que enseña son el mismo, y el *paper* estudia hasta dónde se puede llegar con esa configuración.",
+            "La relación con la portada es directa: el adaptador de *Qwen3.8-27B* es una versión práctica, con *refuerzo*, de la misma intuición — el modelo que se entrena para su propio flujo de trabajo, en vez de un maestro genérico que lo reescribe. *AutoMaster* es la versión más pura del principio; el adaptador, la versión que ya se descarga."
+          ],
+          "tags": [
+            "auto-mejora",
+            "post-entrenado",
+            "skills",
+            "refuerzo"
+          ],
+          "links": [
+            {
+              "label": "arXiv: AutoMaster",
+              "url": "https://arxiv.org/abs/2611.19992"
+            }
+          ]
+        },
+        {
+          "title": "Embeddings vs *grep*: cuando la búsqueda densa no gana en código",
+          "summary": "Un *paper* (4 *upvotes*) reexamina la «ventaja densa» en la búsqueda sobre código: en varios escenarios realistas, *grep* y expresiones regulares igualan o superan a la búsqueda con *embeddings*. La implicación para los agentes: antes de añadir una capa de búsqueda densa, medir con la herramienta del *shell*.",
+          "body": [
+            "La búsqueda por *embeddings* se ha vuelto el modo por defecto de «el agente encuentra el código», y el *paper* la cuestiona desde la base: en escenarios realistas de búsqueda sobre código, *grep* (y la búsqueda por patrones) iguala o supera a la búsqueda densa en varios de los casos medidos. No es que la búsqueda densa sea mala; es que, para el tipo de búsqueda que los agentes hacen sobre un repositorio (un nombre, un patrón, una firma), el *grep* sigue siendo una herramienta que no debería descartarse.",
+            "La lección práctica para quien construye agentes: la arquitectura de búsqueda no tiene que ser densa por defecto. Medir con las herramientas del *shell* antes de añadir una capa de vectores es, en varios escenarios, la decisión más barata y la más honesta."
+          ],
+          "tags": [
+            "búsqueda",
+            "embeddings",
+            "codigo",
+            "agentes"
+          ],
+          "links": [
+            {
+              "label": "arXiv: Embeddings vs. Grep",
+              "url": "https://arxiv.org/abs/2611.19064"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*Qwen3.8-27B* en 12 GB, a 70 *tokens* por segundo y con el contexto completo",
+          "summary": "Un hilo de *r/LocalLLaMA* de hace tres días (y ya en tendencia) describe cómo correr *Qwen3.8-27B* en una tarjeta de 12 GB con el contexto completo y 70 *tokens* por segundo. El autor, además, trabaja en una variante destilada a 8 GB que promete «en los próximos días». El 27B sigue siendo el punto de referencia de lo que cabe en una *GPU* de gama media.",
+          "body": [
+            "La cifra que circula — 70 *tokens* por segundo en 12 GB, con contexto completo — es el tipo de resultado que se consigue con la receta estándar de la semana: una cuantización bien elegida, un *runtime* afinado y, en muchos casos, un borrador para decodificación especulativa. No es un milagro, es una *recipe*, y es exactamente el tipo de *recipe* que la comunidad de self-hosting comparte en hilos como este.",
+            "Y el hilo no termina ahí: el autor dice que está trabajando en una variante destilada a 8 GB, para las máquinas que no llegan a 12. El patrón se repite por segunda vez esta semana (el *Underdog* de ayer, esta distilación): el 27B sigue siendo el caballo de batalla, y la comunidad le va recortando peso hasta que cabe en la máquina de cada uno."
+          ],
+          "tags": [
+            "self-hosting",
+            "qwen",
+            "12gb",
+            "llama-cpp"
+          ],
+          "links": [
+            {
+              "label": "r/LocalLLaMA: Qwen3.8-27B on 12GB",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xytjrk/"
+            }
+          ]
+        },
+        {
+          "title": "«El uso futuro es local: una Wikipedia comprimida»",
+          "summary": "Un hilo de *r/LocalLLaMA* (hace unas horas) propone, casi como provocación, el uso futuro del local: redes neuronales como el mejor mecanismo de compresión de conocimiento, aplicadas a una «Wikipedia comprimida» — y a *arXiv* — que se pueda tener y consultar en casa. El hilo imagina lo que la compresión neural hará con el conocimiento, y dónde va a correr.",
+          "body": [
+            "La premisa del hilo: si las redes neuronales van a tener «la mejor tasa de compresión» para conocimiento, entonces la siguiente Wikipedia no es un sitio web sino un archivo comprimido que un modelo local puede descomprimir y consultar. El hilo lleva la idea a *arXiv* y a otras fuentes, y debate dónde va a correr todo eso — en la casa, en el dispositivo, en el *edge*.",
+            "Es el tipo de especulación que la comunidad hace bien: no una predicción, sino una dirección. La compresión neural aplicada al conocimiento de referencia, corriendo local, es la versión *self-hosted* de lo que hoy son las bases de datos vectoriales de la nube."
+          ],
+          "tags": [
+            "comunidad",
+            "compresion",
+            "wikipedia",
+            "local"
+          ],
+          "links": [
+            {
+              "label": "r/LocalLLaMA: Uso futuro local: Wikipedia comprimida",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y09hhp/"
+            }
+          ]
+        },
+        {
+          "title": "Una extensión de VS Code «cero telemetría», porque los agentes la necesitan",
+          "summary": "Un usuario de *r/LocalLLM* (hace tres días) cuenta que ha construido una extensión de *VS Code* mínima y sin telemetría, «porque los agentes la necesitan»: cuando un agente de código trabaja en el *editor*, la extensión que envía telemetría a la nube es, a la vez, una fuga de datos y una fricción. La solución es la obvia: una extensión mínima, local, sin nada que salir.",
+          "body": [
+            "La pieza es pequeña, pero señala una fricción real del *agentic coding*: el *editor* y sus extensiones son parte del *pipeline* del agente, y cualquier extensión que hable con la nube añade una dependencia y una posible fuga. La respuesta del usuario es la que esta lectoría suele dar: reducir la superficie, quitar lo que no se necesita, y quedarse con lo local.",
+            "Es el mismo patrón de la semana, a escala de *editor*: menos dependencias, menos red, más control. Para quien corre un agente de código en casa, una extensión de *VS Code* que no habla con nadie es un ladrillo más del stack local."
+          ],
+          "tags": [
+            "vs-code",
+            "agentes",
+            "telemetria",
+            "local"
+          ],
+          "links": [
+            {
+              "label": "r/LocalLLM: minimal zero-telemetry VS Code extension",
+              "url": "https://www.reddit.com/r/LocalLLM/comments/1xyp2gi/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "wshobson/agents",
+        "stars": "★ 2.038",
+        "desc": "un «mercado» con 66.983 skills catalogadas para agentes de IA",
+        "meta": "Markdown · Apache-2.0",
+        "url": "https://github.com/wshobson/agents"
+      },
+      {
+        "name": "foseui/fose",
+        "stars": "★ 23",
+        "desc": "una *CLI* de IA *offline*: agente + *TUI* + 100+ herramientas y 15+ modelos, incluidos *LLM* locales",
+        "meta": "TypeScript · MIT",
+        "url": "https://github.com/foseui/fose"
+      },
+      {
+        "name": "Mikimoto/claude-obsidian",
+        "stars": "★ 20",
+        "desc": "memoria para *Claude* y *Codex*: un grafo de conocimiento sobre un *vault* de Markdown que se auto-organiza",
+        "meta": "JavaScript · MIT",
+        "url": "https://github.com/Mikimoto/claude-obsidian"
+      },
+      {
+        "name": "daniel-hinsby/omnisight",
+        "stars": "★ 12",
+        "desc": "monitor en tiempo real de las acciones de un agente de IA",
+        "meta": "JavaScript",
+        "url": "https://github.com/daniel-hinsby/omnisight"
+      },
+      {
+        "name": "haidao805/Claw-Gateway-Plus",
+        "stars": "★ 10",
+        "desc": "pasarela de seguridad para *Clawdbot*/*OpenClaw*: autenticación, política, auditoría",
+        "meta": "Python · AGPL-3.0",
+        "url": "https://github.com/haidao805/Claw-Gateway-Plus"
+      }
+    ],
+    "papers": [
+      {
+        "title": "Mind2Act World: A Diagnostic Benchmark Separating Embodied Mind and Physical Action in Robotic Manipulation",
+        "authors": "23 upvotes",
+        "url": "https://arxiv.org/abs/2611.23173"
+      },
+      {
+        "title": "Posterior Matching Distillation: A Distribution-agnostic Approach for Diffusion Models",
+        "authors": "13 upvotes",
+        "url": "https://arxiv.org/abs/2611.23305"
+      },
+      {
+        "title": "Learning What Actions Change: Dynamics-Faithful World Model Evaluation for Manipulation",
+        "authors": "9 upvotes",
+        "url": "https://arxiv.org/abs/2611.21281"
+      },
+      {
+        "title": "AutoMaster: Autonomous Post-Training by Making the Same Model a Better Teacher",
+        "authors": "5 upvotes",
+        "url": "https://arxiv.org/abs/2611.19992"
+      },
+      {
+        "title": "Embeddings vs. Grep: Rethinking the Dense Advantage in Code Search",
+        "authors": "4 upvotes",
+        "url": "https://arxiv.org/abs/2611.19064"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLaMA",
+        "title": "*Qwen3.8-27B* en 12 GB, a 70 *tokens* por segundo y con contexto completo",
+        "note": "un hilo con la receta, y una destilación a 8 GB en camino",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xytjrk/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "«El uso futuro es local: una Wikipedia comprimida»",
+        "note": "el debate sobre la compresión neural del conocimiento, en casa",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y09hhp/"
+      },
+      {
+        "src": "r/LocalLLM",
+        "title": "Una extensión de *VS Code* mínima y sin telemetría, para los agentes",
+        "note": "menos dependencias, menos red, más control",
+        "url": "https://www.reddit.com/r/LocalLLM/comments/1xyp2gi/"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

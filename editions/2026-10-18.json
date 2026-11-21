@@ -1,0 +1,163 @@
+{
+  "date": "18 de octubre de 2026",
+  "weekday_long": "domingo",
+  "edition": "Edición nº 22",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "DeepSeek libera DeepSeek-V4.1-Flash-1017: multimodal, bajo licencia MIT, y la promesa del 'wish-driven programming'",
+    "summary": "DeepSeek ha publicado DeepSeek-V4.1-Flash-1017 (el 17 de octubre), la versión más reciente de su familia Flash: un modelo *image-text-to-text* liberado bajo licencia MIT, con mejoras de benchmark, tareas completadas más rápido y salidas más cortas que la versión anterior — lo que DeepSeek describe como una mejora de Pareto. El lanzamiento llega acompañado del concepto de 'wish-driven programming': describir en lenguaje natural lo que se quiere y dejar que el modelo programe y ejecute. Ya es el modelo más descargado y votado del *trending* de *Hugging Face* (más de 1.000 likes en sus primeras horas), lo que en la comunidad de pesos abiertos se lee como el relevo natural de la versión Flash anterior. Con el MIT, cualquier persona o empresa puede usarlo, modificarlo y servirlo sin condiciones: para quienes autohospedan, la noticia de la semana.",
+    "tags": ["deepseek", "open-weights", "mit", "multimodal", "agentic", "1017"],
+    "links": [
+      {"label": "Hugging Face", "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"},
+      {"label": "Noticia oficial (api-docs.deepseek.com)", "url": "https://api-docs.deepseek.com/news/news261017/"},
+      {"label": "Anuncio en X", "url": "https://x.com/deepseek_ai/status/2111375640717033777"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "NVIDIA y AI4Bharat: Nemotron-pretraining-Indic-v1, 2,8 billones de tokens indios con pipeline de datos abierto",
+          "summary": "NVIDIA y AI4Bharat publican Nemotron-pretraining-Indic-v1, un corpus de preentrenamiento de 2,8 billones (2.8 T) de tokens para las lenguas del sur de Asia, y —lo más importante para la comunidad— el pipeline abierto de generación de datos con el que se produjo: un proceso transparente que va de documentos fuente en inglés a textos en lenguas indicas. Es un caso de referencia de cómo se hace un corpus de preentrenamiento serio y reproducible, y abre la puerta a fine-tunings y auditorías sobre cómo se construyen los datos. Ya está disponible en *Hugging Face* junto a la línea Nemotron.",
+          "tags": ["open-data", "pretraining", "nvidia", "ai4bharat", "indic-languages"],
+          "links": [
+            {"label": "Blog (Hugging Face)", "url": "https://huggingface.co/blog/nvidia/scaling-indic-pretraining"},
+            {"label": "Datasets de NVIDIA", "url": "https://huggingface.co/nvidia/datasets"}
+          ]
+        },
+        {
+          "title": "Unlimited-OCR de Baidu: un VLM de OCR multilingüe bajo MIT, con 1,5 millones de descargas",
+          "summary": "Baidu libera Unlimited-OCR, un modelo de visión-lenguaje (VLM) para OCR multilingüe, bajo licencia MIT y con código propio (*custom code*). Con casi 4.800 likes y más de 1,5 millones de descargas, ya es uno de los modelos de OCR abiertos más descargados, y viene con su propio *paper* (arXiv 2606.23050). Para quien trabaja con documentos, escaneos o capturas en varios idiomas, es el punto de entrada de la semana a un OCR que se corre en local.",
+          "tags": ["ocr", "vision-language", "multilingual", "mit", "baidu"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/baidu/Unlimited-OCR"},
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2606.23050"}
+          ]
+        },
+        {
+          "title": "MiniCPM-V 4.7 (35B-A3B y 1B) de OpenBMB: el MoE multimodal on-device, Apache 2.0",
+          "summary": "OpenBMB actualiza la familia MiniCPM-V a la 4.7, con dos tamaños: un MoE de 35B totales con 3B activos y una versión de 1B, ambos multimodales y bajo Apache 2.0, orientados explícitamente a equipos *on-device*. La idea de siempre de la línea: un modelo de visión-lenguaje que cabe en móviles y edge, con calidad suficiente para asistentes locales, documentación y visión. Un candidato serio para quien quiere un ojo local sin nube.",
+          "tags": ["multimodal", "moe", "on-device", "apache-2.0", "openbmb"],
+          "links": [
+            {"label": "Modelo 35B-A3B", "url": "https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B"},
+            {"label": "Modelo 1B", "url": "https://huggingface.co/openbmb/MiniCPM-V-4.7-1B"}
+          ]
+        },
+        {
+          "title": "humanizer de jialinyyzz: un fine-tune de Gemma 4-12B que 'des-robotiza' el texto (Apache 2.0, GGUF)",
+          "summary": "jialinyyzz/humanizer es un fine-tune de *Gemma* 4-12B, en GGUF y Apache 2.0, especializado en reescribir texto para que suene menos generado: parafraseo, transferencia de estilo y depuración de los tics típicos de los modelos (más de 1.900 likes). Es el tipo de modelo pequeño y barato que encaja perfecto en una tubería de contenido autohospedada: antes de publicar, el texto pasa por el 'humanizador' local.",
+          "tags": ["fine-tuning", "gemma-4", "gguf", "style-transfer", "local-llm"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/jialinyyzz/humanizer"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "DeepSeek-V4.1-Flash-1017 en dos DGX Spark: TensorFold TP2, scripts y resultados de lucataco",
+          "summary": "Poniendo los pies en la tierra del modelo de la portada: lucataco/DeepSeek-V4.1-Flash-2x-DGX-Spark documenta DeepSeek-V4.1-Flash-1017 corriendo en dos NVIDIA DGX Spark (GB10) con TensorFold y paralelismo tensorial 2, incluyendo la corrección del *chat template* y medidas de velocidad y calidad. Es el tipo de repositorio que la comunidad busca el primer día de un lanzamiento: cómo se sirve en hardware que la gente puede tener, no solo en un clúster.",
+          "tags": ["deepseek", "dgx-spark", "inference", "tensor-fold", "trending"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/lucataco/DeepSeek-V4.1-Flash-2x-DGX-Spark"}
+          ]
+        },
+        {
+          "title": "vramkit: compresión de VRAM para inferencia, con KV-cache int8 'casi sin pérdida' por canal",
+          "summary": "SRKRZ23/vramkit ataca el coste de memoria de la inferencia por dos frentes: un codificador de pesos sin pérdidas que reduce un 33 % frente a la cuantización a 4 bits (y supera a *zstd* en pesos reales de Qwen), y una compresión de la caché KV que se integra en PyTorch. El hallazgo central: cuantizar las *keys* del KV por canal (no por token) da un int8 casi sin pérdida, con +0,1 % de perplejidad real y el doble de cabida. Funciona en ROCm, CUDA, MPS y CPU.",
+          "tags": ["inference", "vram", "kv-cache", "quantization", "pytorch"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/SRKRZ23/vramkit"}
+          ]
+        },
+        {
+          "title": "konsey-cli: un 'consejo' de varios modelos de LLM sobre los agentes que ya pagas",
+          "summary": "slmndrmz1134/konsey-cli monta un consejo (en el estilo del *llm-council* de Karpathy) sobre los agentes CLI que ya tienes: Codex, Antigravity, OpenCode, *Claude Code*. En Python estándar, listo para Windows, y con un skill para *Claude Code*. La idea: en vez de confiar en un solo modelo, que varios opinen y se contrasten entre sí —una forma barata de reducir el sesgo de un único LLM en decisiones importantes.",
+          "tags": ["agents", "llm-council", "cli", "multi-model"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/slmndrmz1134/konsey-cli"}
+          ]
+        },
+        {
+          "title": "awesome-llm-on-anything: LLMs locales en hardware que no debería poder con ellos",
+          "summary": "emrehangorgec/awesome-llm-on-anything es una lista curada (ya en tendencia de GitHub) de modelos de lenguaje corriendo localmente sobre hardware 'que no debería poder': consolas, SBCs, portátiles antiguos, hardware embebido. Es el tipo de recurso que captura el espíritu del ecosistema de pesos abiertos: cada día, el modelo cabe en más cosas.",
+          "tags": ["awesome", "local-llm", "edge", "curated"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/emrehangorgec/awesome-llm-on-anything"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "semCER: un carácter de error no es igual que otro (OCR pesado por severidad)",
+          "summary": "Nguyen y Zang muestran que la tasa de error de caracteres (CER), la métrica estándar de OCR, trata un simple *typo* y un nombre equivocado igual de mal. Introducen *semCER*, que mantiene la alineación y el denominador del CER pero carga cada edición según su severidad semántica. Publicar la semana de la llegada de Unlimited-OCR de Baidu, encaja perfecto: se necesitan métricas que midan el daño real, no solo la distancia edit.",
+          "tags": ["ocr", "evaluation", "metrics", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.20461"}
+          ]
+        },
+        {
+          "title": "Copy-Paste Language Models: mejorar el copia-y-pega en contexto con modelado explícito",
+          "summary": "Godey y Artzi desmontan la intuición de que los transformers copian bien de su propio contexto: muestran que la capacidad de *copy-paste* de los LLMs se puede mejorar con un modelado explícito del copiado, y proponen CPLMs (*Copy-Paste Language Models*). Relevante para tareas donde el modelo debe replicar fragmentos exactos —extractos, código, tablas— y para entender un fallo silencioso que los benchmarks rara vez miden.",
+          "tags": ["architecture", "copy-paste", "transformers", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.19247"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.19247"}
+          ]
+        },
+        {
+          "title": "LeanPRM: supervisión de proceso anclada en Lean para verificar pruebas matemáticas paso a paso",
+          "summary": "LeanPRM aborda el cuello de botella de verificar las pruebas matemáticas largas que los sistemas de IA ya saben escribir: un verificador aprendido que comprueba el paso a paso, entrenado sin etiquetar la corrección de cada paso a mano, anclando la supervisión al verificador formal Lean. Es la vía para que las pruebas generadas dejen de depender de un auditor humano o de un *checker* lento.",
+          "tags": ["math", "process-supervision", "lean", "proofs", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.17697"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "deepseek-local-guide-ru: la guía completa (en ruso) para correr DeepSeek en local",
+          "summary": "En tendencia de GitHub, justxor/deepseek-local-guide-ru es la guía completa en ruso para instalar y correr DeepSeek en local (V4 y R1) en PC, Mac y servidor: Ollama, *llama.cpp*, LM Studio, *vLLM*, *Open WebUI*, API, RAG, agentes, fine-tuning y las mejores trucos. Un buen recordatorio de que el ecosistema de pesos abiertos no es solo en inglés: la documentación comunitaria se está globalizando rápido, y con la V4.1 de hoy el repos tiene nuevo oxígeno.",
+          "tags": ["deepseek", "self-hosting", "guide", "community", "russian"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/justxor/deepseek-local-guide-ru"}
+          ]
+        },
+        {
+          "title": "llm-inference-hosting: cómo dimensionar tu servidor para el modelo, y no pagar por GPUs ociosas",
+          "summary": "qfc50785/llm-inference-hosting es una guía práctica (nueva en tendencia) sobre hosting de inferencia: cómo dimensionar un servidor para el modelo concreto, comparar costes reales y no pagar por GPUs que duermen. Para quien da el salto de la tarjeta de sobremesa al servidor propio, es el tipo de hoja de ruta que evita el error clásico: comprar potencia que el modelo nunca va a llenar.",
+          "tags": ["self-hosting", "inference", "sizing", "costs"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/qfc50785/llm-inference-hosting"}
+          ]
+        },
+        {
+          "title": "EgoDemo de LightwheelAI: video egocéntrico público con trazabilidad, para IA encarnada",
+          "summary": "LightwheelAI/EgoDemo publica un conjunto de datos de vídeo egocéntrico (demostraciones humanas) con énfasis en la trazabilidad (*provenance*) de cada toma. Para la IA encarnada —robótica, asistentes con visión en primera persona—, datos de demo en primera persona con procedencia clara es lo que falta para entrenar y auditar; un paso más en la infraestructura de datos abiertos más allá del texto.",
+          "tags": ["datasets", "egocentric-video", "embodied-ai", "provenance"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/datasets/LightwheelAI/EgoDemo"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

@@ -1,0 +1,352 @@
+{
+  "date": "31 de octubre de 2026",
+  "weekday_long": "sábado",
+  "edition": "Edición nº 34",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Mistral abre los pesos de *Le Chonk*, su modelo de un billón de parámetros entrenado en Europa",
+    "summary": "El 29 de octubre, Mistral publicó los pesos abiertos de *Mistral Large 4*, apodado *Le Chonk*: un modelo nativamente multimodal con un billón (1T) de parámetros en total, unos 52.000 millones activos por token, y entrenado desde cero en sus propios centros de datos europeos sobre 3.800 GPU *Grace Blackwell*. Con él, el laboratorio francés entrega el modelo occidental de pesos abiertos más grande y, según *Artificial Analysis*, el más inteligente de la región, además del mejor en codificación agéntica de los pesos abiertos: empata con *GLM-5.3*, el líder de la categoría, consumiendo un 47 % menos de tokens por tarea. Trae un millón de tokens de contexto, visión nativa, razonamiento con esfuerzo configurable y fluidez en más de 160 idiomas. El checkpoint viaja bajo la *Mistral Ecosystem Open-Weight License*, una versión modificada de MIT: uso comercial y no comercial libre, pero operar un negocio *Model-as-a-Service* exige una licencia comercial aparte. Ya hay cuantización oficial *NVFP4* y versión *GGUF* para *llama.cpp* en Hugging Face.",
+    "body": [
+      "Mistral venía preparando este lanzamiento desde principios de octubre, cuando presentó *Mistral Large 4* con una API de vista previa bajo el apodo «Le Chonk» —una palabra familiar en inglés, 'trozo grande', que hace referencia a su tamaño. Ayer, 29 de octubre, el laboratorio abrió el checkpoint por completo: un modelo de mezcla de expertos nativamente multimodal, con 1T de parámetros en total y 49.000 millones activos por token (52.000 millones si se incluyen las capas de embedding y de salida). La arquitectura usa 128 expertos ruteados, de los cuales solo se activan 4 por token, más un experto compartido; ese diseño es lo que lo hace entrenable y servible, porque el tamaño total es enorme pero el cómputo por token es comparable al de un modelo denso mucho menor. Según Mistral, se entrenó desde cero en 3.800 GPU *Grace Blackwell* de NVIDIA, en centros de datos propios de la empresa y en Europa, una decisión deliberada que convierte el lanzamiento en un manifiesto de soberanía técnica continental.",
+      "En función, es un modelo generalista que unifica el seguimiento de instrucciones, el razonamiento, la codificación y los flujos de trabajo agénticos en un único set de pesos. Acepta texto e imágenes como entrada —con un codificador de visión de estilo *Pixtral*, entrenado para tamaños y relaciones de aspecto variables—, soporta una ventana de contexto de un millón de tokens, y ofrece razonamiento en tres niveles de esfuerzo (bajo, medio y alto, este último por defecto) junto con llamadas de función nativas y aplicación estricta de esquemas JSON. La ficha reivindica fluidez nativa en más de 160 idiomas, incluidos todos los oficiales de la Unión Europea. Las cifras que más destacan son las de *Artificial Analysis*: en el *Coding Agent Index* anota 48 %, un empate técnico con *GLM-5.3*, el actual líder de los pesos abiertos, pero consumiendo de media un 47 % menos de tokens por tarea —una mejora directa en el coste de ejecutar agentes de codificación grandes; y en el índice de inteligencia v5 se coloca como el mejor modelo de pesos abiertos occidental, aunque algunos modelos chinos puntuaban por encima en el índice agregado. La empresa subraya además su rendimiento en ciberseguridad —lo mejor de los pesos abiertos, mientras se niega a ejecutar peticiones maliciosas—, en finanzas y en derecho, y un anclaje visual que dice ser el mejor entre los pesos abiertos.",
+      "La parte «abierta» llega con matices. El checkpoint se publica bajo la *Mistral Ecosystem Open-Weight License*, una variante del MIT: permite el uso comercial y no comercial, pero operar un negocio *Model-as-a-Service* requiere una licencia comercial separada con Mistral. Es decir, son pesos abiertos, no un software libre al uso, y la cláusula ya ha encendido el debate en la comunidad. En cuanto a disponibilidad, el ecosistema se está moviendo rápido: junto a los pesos originales hay una cuantización oficial *NVFP4* (menor huella de memoria, inferencia más rápida, pensada para GPU Blackwell y compatible con *vLLM* y *SGLang*), una versión *GGUF* de *unsloth* para *llama.cpp*, y el checkpoint incluye un cabezal de borrador para decodificación especulativa *DSpark*. También se sirve por la API de Mistral como *mistral-large-4*, y la compañía ha montado una galería de demos en la que se puede probar el modelo con un presupuesto gratuito limitado durante la primera semana. A efectos prácticos, un billón de parámetros no cabe en un portátil: son los 52.000 millones activos y la cuantización los que hacen el modelo servible en un clúster, no en hardware de sobremesa.",
+      "Para la comunidad de autolojamiento, el lanzamiento marca un hito: es el primer modelo de un billón de parámetros con pesos abiertos de un laboratorio occidental, y llega justo cuando los laboratorios chinos habían saturado la franja de los cientos de miles de millones de parámetros. La apuesta de Mistral es que un MoE fino (4 de 128 expertos activos) puede mantener el coste de servir un modelo de frontera al alcance de quien tiene hardware serio, y que un 1T entrenado en Europa compite de tú a tú con *DeepSeek* y el resto en tareas de codificación y seguridad. La comunidad ya estaba descargando el modelo el primer día: más de 1.300 me gusta en Hugging Face, miles de descargas, y un hilo activo en *r/LocalLLaMA*.",
+      "El nombre, el eslogan («Built for Coders, Trusted by Defenders») y la elección de entrenar en el continente apuntan en la misma dirección: Mistral juega la carta de la soberanía con el modelo abierto más grande que Europa haya tenido. Si la cláusula *Model-as-a-Service* de la licencia enfría el entusiasmo de quien quiera servirlo comercialmente solo el tiempo lo dirá, pero los números, tal y como están hoy, dibujan la carta de pesos abiertos más fuerte del año."
+    ],
+    "tags": ["mistral_large_4", "open_weights", "moe", "multimodal", "soberania"],
+    "links": [
+      {"label": "Noticia de Mistral: Le Chonk is now open weight", "url": "https://mistral.ai/news/mistral-large-4-oss/"},
+      {"label": "Ficha en Hugging Face: Mistral-Large-4-1T-A52B", "url": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"},
+      {"label": "Cuantización NVFP4 oficial", "url": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B-NVFP4"},
+      {"label": "GGUF de unsloth", "url": "https://huggingface.co/unsloth/Mistral-Large-4-1T-A52B-GGUF"},
+      {"label": "Hugging Face celebra la llegada: Welcome Le Chonk", "url": "https://huggingface.co/blog/huggingface/welcome-le-chonk"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*DeepSeek-V4.1-Flash-1017*: la actualización que se ha comido la tendencia",
+          "summary": "Dos semanas después del lanzamiento de *DeepSeek-V4.1-Flash*, DeepSeek publicó la versión 1017, del 17 de octubre, y la ficha la presenta como una mejora de Pareto: mejores resultados en benchmarks, tareas completadas más rápido y salidas más cortas. Lo más novedoso está fuera de los pesos: la empresa ha abierto al público sus endpoints *Search* y *Fetch*, apoyados en su motor de búsqueda interno, a 0,75 dólares por 1.000 llamadas. El modelo viaja bajo licencia MIT en Hugging Face y ModelScope, lleva más de 140.000 descargas y ha arrastrado consigo un buen puñado de cuantizaciones *GGUF* a la lista de tendencia.",
+          "body": [
+            "La actualización 1017 se enmarca bajo el lema «Wish-Driven Programming Made Real»: además de mejorar los benchmarks de codificación y tareas agénticas, DeepSeek la entrenó con aprendizaje por refuerzo y auto-retroalimentación para desarrollar proyectos completos desde cero —modelado 3D, juegos web, una recreación de *Portal 2* con *Godot*—. La ficha destaca la optimización para *DeepSeek Harness* (v0.2.1-rc.1 o superior) y para entornos de terceros como *Tencent CodeBuddy*. Sigue siendo el modelo accesible de la familia *Flash*, y es multimodal: texto e imagen en entrada.",
+            "Las dos noticias del ecosistema están fuera de los pesos. La primera: las API de búsqueda y fetch, antes internas, son ya públicas y se facturan a 0,75 dólares por 1.000 llamadas por endpoint; mientras tanto, las llamadas a través de las herramientas de servidor de *DeepSeek Harness*, *Claude Code* y *Codex* siguen siendo gratuitas para los usuarios de la API, con el cobro empezando el 31 de octubre a las 16:00 UTC. La segunda: la comunidad ya las cuantiza —la versión *GSQ-RCO-GGUF* de *ISTA-DASLab* y la versión desinhibida de *orcarouter* ocupan la tendencia de Hugging Face junto al modelo original, e incluso hay un cuaderno para correr una cuantización *IQ2_XS* en Colab. Con licencia MIT, la puerta queda abierta a cualquier uso."
+          ],
+          "tags": ["deepseek", "codificacion", "api"],
+          "links": [
+            {"label": "Hugging Face: DeepSeek-V4.1-Flash-1017 (MIT)", "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"},
+            {"label": "Anuncio de DeepSeek (news 261017)", "url": "https://api-docs.deepseek.com/news/news261017/"}
+          ]
+        },
+        {
+          "title": "*Nanbeige4.3-33B*: el «maestro» agéntico de la clase de los 30B",
+          "summary": "*Nanbeige4.3-33B*, publicado el 24 de octubre bajo licencia *Apache 2.0*, es el modelo insignia de la serie Nanbeige4.3: un modelo de 33.000 millones de parámetros diseñado como «agente maestro» de alta capacidad, que la empresa usará para destilar capacidades agénticas en modelos más pequeños, como el *Nanbeige4.3-3B* que viene después. La ficha lo sitúa como el de mejor rendimiento agéntico entre los modelos abiertos de la clase de ~30B, con especial foco en codificación compleja y tareas de colaboración profesional.",
+          "body": [
+            "La estrategia es la vía clásica de la destilación: primero construir el modelo más fuerte de su clase y usarlo para anclar el entrenamiento de los pequeños. Nanbeige presenta el 33B como una opción que se puede desplegar de inmediato —capaz y económica— y, al mismo tiempo, como la base de la línea de destilación. Es un modelo de texto bilingüe inglés-chino, y la ficha pone el acento en la codificación compleja y en las tareas de «cowork» profesional como su fortaleza.",
+            "A 33.000 millones de parámetros y licencia *Apache 2.0*, cabe sin apuros en GPU de gama media, lo que lo convierte en un candidato razonable para quien quiere un modelo agéntico sin tener que mirar al billón de parámetros de la portada."
+          ],
+          "tags": ["nanbeige", "agentes", "destilacion"],
+          "links": [
+            {"label": "Hugging Face: Nanbeige4.3-33B", "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B"}
+          ]
+        },
+        {
+          "title": "*Unlimited OCR 2*: el OCR multilingüe de Baidu, ya en la tendencia",
+          "summary": "Baidu publicó el 26 de octubre *Unlimited OCR 2* (licencia MIT): un modelo de visión-lingüaje multilingüe dedicado a la extracción de texto de imágenes y documentos, que en apenas días ya acumula más de 24.000 descargas y unos 460 me gusta en Hugging Face.",
+          "body": [
+            "Es la segunda generación de la línea Unlimited OCR: se entrega con la librería *transformers* y un paquete de código propio, y la ficha lo presenta como multilingüe. El OCR es uno de los frentes donde los modelos de pesos abiertos han acortado más la distancia con los cerrados, y Baidu apuesta por convertir el tratamiento de documentos y escaneos en algo casi de serie: un modelo de visión-lingüaje que corre en una sola GPU y alimenta tuberías de *RAG*.",
+            "Con 24.000 descargas en cinco días, el interés de la comunidad está claro: es de esos modelos que no hacen titulares, pero que acaban funcionando en medio stack."
+          ],
+          "tags": ["ocr", "baidu", "vision"],
+          "links": [
+            {"label": "Hugging Face: baidu/Unlimited-OCR-2", "url": "https://huggingface.co/baidu/Unlimited-OCR-2"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*sapper-v2*: una legión de pentesting autónoma que clasificó tercera en el torneo de Tencent",
+          "summary": "El repositorio de agentes con más estrellas de la tendencia de hoy (~250, Python, MIT): un sistema de pentesting autónomo de tres capas —un «comandante» IA, un enjambre de trabajadores y un grafo por capas de hechos e intenciones—, con el que su equipo reclama la tercera plaza en el campeonato online *Intelligent Attack-Defense* de Tencent, entre 634 equipos.",
+          "body": [
+            "La arquitectura es de enjambre de agentes: el comandante decide y coordina, el enjambre ejecuta las acciones ofensivas y defensivas, y el grafo de hechos e intenciones mantiene el estado de lo descubierto y de lo que se espera del adversario. Es el tipo de sistema que se ha multiplicado desde los primeros frameworks de pentesting autónomo, pero lo que diferencia a este es la plaza en un campeonato real —tercero de 634 equipos—, no una demo en un sandbox.",
+            "Licencia MIT y código público: sirve como referencia leída en frío para ver cómo se organiza un enjambre de agentes de seguridad y qué modos de fallo aparecen cuando la competencia es de verdad."
+          ],
+          "tags": ["pentesting", "enjambre", "seguridad"],
+          "links": [
+            {"label": "GitHub: N1nEmAn/sapper-v2", "url": "https://github.com/N1nEmAn/sapper-v2"}
+          ]
+        },
+        {
+          "title": "*NamiAgent*: el tutorial en chino que enseña a construir un agente —y acaba desmontando a *Claude Code*",
+          "summary": "Un curso en chino («introducción desde cero a los agentes de IA») que además es un agente local funcionando: parte de un bucle mínimo de 100 líneas y añade una capacidad por lección —leer y escribir archivos, ejecutar comandos, *MCP*, memoria a largo plazo— hasta acabar en un agente con interfaz web que muestra cada paso. El curso cierra desmontando agentes populares como *Claude Code* y *Codex*.",
+          "body": [
+            "Es de esos proyectos donde el objetivo didáctico y el producto son la misma cosa: lo que se lee se puede ejecutar. La progresión (bucle mínimo → una capacidad por lección) es el patrón pedagógico clásico para agentes, pero el valor añadido es que el agente resultante es completo: acceso a archivos, shell, protocolo *MCP*, memoria persistente y una capa web que expone el estado del agente en claro.",
+            "Para quien quiera entender qué hay debajo de los agentes de codificación populares, el último módulo —la disección de *Claude Code* y *Codex*— es el gancho: todo el código está público, en Python, con licencia MIT."
+          ],
+          "tags": ["tutorial", "mcp", "educacion"],
+          "links": [
+            {"label": "GitHub: aa1143/NamiAgent", "url": "https://github.com/aa1143/NamiAgent"}
+          ]
+        },
+        {
+          "title": "*voxwright*: la capa de voz para agentes, offline y con replay determinístico",
+          "summary": "Una «capa de aplicación de agentes de voz» en Python (MIT) pensada para funcionar sin red: un núcleo de sesión con replay byte a byte determinístico, adaptadores de LLM hablado en tres modos (guión, replay, *loopback* simulado) y medidas de seguridad contra inyección. Es infraestructura de agentes de voz testeable y auditable offline.",
+          "body": [
+            "La pieza interesante es el replay determinístico: el núcleo de sesión puede reproducir una conversación byte a byte, lo que convierte a los agentes de voz en algo debugueable y testeable como cualquier programa, sin depender de un modelo vivo. Los adaptadores de LLM hablado permiten enchufar una voz guiada, un replay grabado o un mock de *loopback*, ideal para pruebas continuas.",
+            "El módulo de seguridad contra inyección aborda el ataque clásico a los asistentes de voz: instrucciones embebidas en lo que el sistema «oye». No es un agente completo, sino la capa de infraestructura sobre la que un agente de voz se construye."
+          ],
+          "tags": ["voz", "offline", "seguridad"],
+          "links": [
+            {"label": "GitHub: ideapacket/voxwright", "url": "https://github.com/ideapacket/voxwright"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*WarpMoE*: MoE a escala *DeepSeek* sin toda la VRAM, con GPU+CPU híbrida",
+          "summary": "Un nuevo motor de inferencia de descarga híbrida GPU–CPU: corre modelos MoE de escala *DeepSeek* muy por encima de la VRAM disponible, y reclama 83–119 tokens por segundo en una sola A100, con escalones de 24 a 80 GB de VRAM.",
+          "body": [
+            "La idea es la de siempre —descargar los expertos menos activos a memoria de sistema—, pero lo que llama la atención es la velocidad reclamada en una sola A100: para un MoE cuyo total de parámetros excede la VRAM, rebaja el coste de correr modelos de esta clase a una GPU de centro de datos. Los escalones de 24, 48 y 80 GB significan que el mismo motor escala con el hardware que tenga cada uno.",
+            "Python con licencia MIT, y una respuesta directa a la ola de modelos de 1T+ que empieza hoy con la portada: si *Le Chonk* es el modelo, *WarpMoE* es uno de los motores que intenta hacerlo servible sin un clúster de 3.800 GPU."
+          ],
+          "tags": ["inferencia", "moe", "offloading"],
+          "links": [
+            {"label": "GitHub: Mr-Skeleton-Max/WarpMoE", "url": "https://github.com/Mr-Skeleton-Max/WarpMoE"}
+          ]
+        },
+        {
+          "title": "*bruce-engine*: un motor CUDA desde cero, más rápido que *llama.cpp* en una RTX 3060",
+          "summary": "Un motor de inferencia CUDA escrito desde cero (no un *fork*) para el modelo *Nemotron Dory 1.0 4B* sobre una sola RTX 3060: reclamar hasta 1,56× más rápido en prefill y 2,70× en decodificación que *llama.cpp*. CUDA, licencia MIT.",
+          "body": [
+            "Es el «motor a medida» que la comunidad está debatiendo hoy: en vez de apostar por un motor generalista, se construye uno especializado por modelo y por GPU. Para un modelo de 4B en una GPU de gama media de sobremesa, los márgenes reclamados son grandes —y más, tratándose de una implementación limpia, no de un parche.",
+            "Líneas como esta (*bruce-engine*, *WarpMoE*, *xllm*) son justo lo que se discute en el hilo de *r/LocalLLaMA* de los motores «piezas sueltas»: la capa de inferencia se fragmenta en especialistas, cada uno optimizado para un modelo y un hardware concreto."
+          ],
+          "tags": ["inferencia", "cuda", "nvidia"],
+          "links": [
+            {"label": "GitHub: qbit-corp/bruce-engine", "url": "https://github.com/qbit-corp/bruce-engine"}
+          ]
+        },
+        {
+          "title": "*awesome-selfhosted-ai*: la lista curada de IA autalojada, con chequeo semanal",
+          "summary": "Una lista curada (CC0-1.0) de software libre de IA para autolojamiento: LLM locales, interfaces de chat, agentes, servidores *MCP*, *RAG*, voz y generación de imágenes. Su rasgo distintivo es el mantenimiento: los enlaces se chequean cada semana y se retiran los muertos.",
+          "body": [
+            "Las listas «awesome» mueren cuando dejan de mantenerse, y este es el caso en que prometen lo contrario: un chequeo de salud semanal de cada entrada. Sirve como punto de partida de referencia para quien esté montando un stack de IA autalojada y no quiera perder una semana distingviendo lo vivo de lo muerto."
+          ],
+          "tags": ["selfhosting", "lista", "curaduria"],
+          "links": [
+            {"label": "GitHub: glincker/awesome-selfhosted-ai", "url": "https://github.com/glincker/awesome-selfhosted-ai"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "El teorema de representación platónica: demostrar que los *JEPA* convergen a la misma representación",
+          "summary": "El paper con más *upvotes* del día (54) convierte una hipótesis en teorema: las *JEPA* (arquitecturas predictivas de embebido conjunto) entrenadas por separado sobre cualquier número de modalidades aprenden la misma representación del mundo, a una rotación de distancia, cuando sus pares positivos son dos «buenas vistas» de una misma escena. De regalo, explica por qué los modelos de lenguaje solo se alinean con la visión a base de escala: la predicción del siguiente token es una *JEPA* con «malas vistas».",
+          "body": [
+            "La hipótesis de representación platónica (PRH) —que los modelos entrenados sobre modalidades distintas convergen a la misma representación del mundo a medida que escalan— era una conjetura sin demostración, y sin ella no ofrecía ni garantía ni receta. Este paper la convierte en teorema para la familia *JEPA*: si los pares de entrenamiento son buenas vistas de la misma escena y el desajuste queda acotado, los codificadores entrenados por separado convergen a la misma representación, salvo una rotación. Los autores validan la teoría desde 145.000 leyendas hasta el texto de 940 millones de imágenes web, y sacan de ella una ley de escala de la alineación que predice corridas no vistas dentro del ruido de la semilla.",
+            "Los números prácticos: las «buenas vistas» necesitan 42 veces menos ejemplos de entrenamiento que la predicción del siguiente token sobre el mismo corpus para alcanzar la misma alineación; y una *JEPA* de texto de 109 millones de parámetros se alinea mejor con *DINOv2* y el codificador de imágenes de *CLIP* que cualquier modelo de lenguaje evaluado hasta 72B. El *showcase*: una sola rotación convierte los codificadores entrenados por separado en un legendador de imágenes (0,838 de *CIDEr* en COCO), y en *ImageNet-100* la *JEPA* de texto llega al 64 % frente a un máximo de 56 % de los LLM zero-shot hasta 8B. La conclusión es una palanca: no es solo la escala, sino la calidad de las vistas positivas, lo que construye representaciones platónicas."
+          ],
+          "tags": ["jepa", "multimodal", "teoria"],
+          "links": [
+            {"label": "arXiv 2610.39302", "url": "https://arxiv.org/abs/2610.39302"},
+            {"label": "En Hugging Face Papers", "url": "https://huggingface.co/papers/2610.39302"}
+          ]
+        },
+        {
+          "title": "Entrenar modelos fundacionales con un solo algoritmo",
+          "summary": "Una propuesta (5 *upvotes*) para unificar las fases clásicas del entrenamiento —preentrenamiento, *midtraining*, ajuste fino supervisado (SFT) y aprendizaje por refuerzo (RL)— bajo un único algoritmo basado en verosimilitud: derivando los objetivos RL como ajuste de máxima verosimilitud a distribuciones objetivo generadas por el propio modelo, todas las fases caben en un «entrenador unificado» que mezcla datos estáticos y generaciones RL.",
+          "body": [
+            "El argumento central es que la separación algorítmica entre las fases del entrenamiento no es fundamental, sino convención histórica: si los objetivos de refuerzo se pueden expresar como ajuste de máxima verosimilitud a distribuciones objetivo que el modelo mismo genera, entonces preentrenamiento, SFT y RL son instancias de la misma operación. El entrenador resultante mezcla datos estáticos y datos generados dentro de un solo proceso, y la decisión real de diseño se reduce a qué datos usar, en qué proporción y en qué momento.",
+            "En experimentos controlados y en el mundo real reportan una mejor relación precisión/cómputo y una mayor cobertura de tareas, preservando capacidades amplias y dejando un punto de partida más fuerte para el aprendizaje continuado. Es investigación de nivel de infraestructura, pero toca el bucle de entrenamiento de cualquier laboratorio de frontera."
+          ],
+          "tags": ["entrenamiento", "refuerzo", "teoria"],
+          "links": [
+            {"label": "arXiv 2610.40564", "url": "https://arxiv.org/abs/2610.40564"}
+          ]
+        },
+        {
+          "title": "*Broken on Arrival*: los *GGUF* que llegan rotos a los registros de modelos",
+          "summary": "Una auditoría de 305 etiquetas *GGUF* con capacidad de código de la librería oficial de *Ollama* (15 líneas de modelos) y 22 ficheros comunitarios de Hugging Face: siete etiquetas oficiales (2,3 %) resultaron prácticamente no funcionales —todas cuantizaciones de pocos bits de modelos de hasta 4B—, y ninguna estaba corrupta: los pesos se reproducían tensor a tensor, el fallo era una cuantización sin calibrar.",
+          "body": [
+            "Ninguno de los registros examinados documentaba pruebas funcionales de los ficheros que publica. Los autores aplicaron un filtro de código de 15 tareas para identificar sospechosos y los retestearon en las 164 tareas de *HumanEval+*: las siete etiquetas oficiales rotas resolvían como máximo seis, y todas eran cuantizaciones de bajo bit de modelos de 4B o menos. Reconstruyeron cinco ficheros sospechosos desde los pesos originales y obtuvieron una coincidencia tensor a tensor: los artefactos no estaban corruptos, estaban simplemente cuantizados con una receta que no funcionaba.",
+            "La reparación: añadir una matriz de importancia a la cuantización llevó tres construcciones de *Qwen2.5-Coder-3B* de cero a 76–113 tareas resueltas, aunque la misma receta sin calibrar dejó funcional al modelo de 1,5B, de modo que la receta sola no predice el fallo. Publican los datos de la auditoría y una herramienta, *quantcheck*, y recomiendan filtrar las etiquetas de bajo bit antes de publicar y calibrar —o retirar— las que fallen. Para quien cuantiza en local o corre modelos *GGUF* desde *Ollama*, la advertencia es directa: comprueba la función, no solo el fichero."
+          ],
+          "tags": ["cuantizacion", "gguf", "calidad"],
+          "links": [
+            {"label": "arXiv 2609.05881", "url": "https://arxiv.org/abs/2609.05881"}
+          ]
+        },
+        {
+          "title": "*MCP* o *CLI*: mismas capacidades, comportamientos distintos",
+          "summary": "Un estudio controlado (3 *upvotes*) de cómo la interfaz entre el modelo y las herramientas cambia el comportamiento del agente: el método *MICA* renderiza *MCP* y *CLI* desde un mismo contrato semántico de acciones y rutea las acciones por el mismo tiempo de ejecución; en 6 modelos y 3 entornos interactivos, las interfaces a medida producen diferencias sustanciales en rendimiento y en coste de interacción.",
+          "body": [
+            "El diseño de *MICA* (comparación y análisis de interfaces a medida) elimina las variables evidentes: mismas capacidades, mismo tiempo de ejecución, y solo cambia la representación —el protocolo *MCP* frente a la línea de comandos—. El resultado es que la diferencia no está en la validez superficial, sino en el comportamiento: la selección de acciones semánticas, las rutas de fallo y la recuperación cambian. Las trayectorias naturales muestran divergencia estructurada en el 94,3 % de los 2.004 episodios analizados, con diferencias tempranas que se propagan por el resto de la interacción.",
+            "Como intervención proponen *DART* (realización desacoplada de la acción y reparación dirigida): preserva los compromisos semánticos ya validados y solo repara la realización específica de la interfaz. Mejora la puntuación en los seis escenarios evaluados hasta en 9,0 puntos y reduce el coste en tokens de *MCP* hasta 27.100 tokens por tarea. El mensaje para quien elige entre *MCP* y un *CLI* simple para su agente: la representación de la interfaz es parte del entorno de decisión, no una tubería neutra."
+          ],
+          "tags": ["mcp", "agentes", "interfaces"],
+          "links": [
+            {"label": "arXiv 2610.34298", "url": "https://arxiv.org/abs/2610.34298"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*r/LocalLLaMA* digiere el 1T europeo: las primeras reacciones a *Le Chonk*",
+          "summary": "La publicación de los pesos de *Mistral Large 4* es el tema del día en el subreddit: el hilo de anuncio reúne las primeras reacciones de la comunidad, y el debate orbita en torno a qué hardware hace servible un billón de parámetros, qué implica la cláusula *Model-as-a-Service* de la licencia, y cómo se mide el 1T europeo frente a sus rivales chinos.",
+          "body": [
+            "El post anuncia la apertura de los pesos y enlaza la ficha de Hugging Face, y el hilo acaba siendo el punto de referencia natural de la conversación: un billón de parámetros está lejos del hardware de sobremesa, pero los 52.000 millones activos y las cuantizaciones *NVFP4* y *GGUF* bajan el listón de entrada a quien tiene hardware de centro de datos; y la cláusula *Model-as-a-Service* de la licencia *Mistral Ecosystem* es el punto más discutido entre quienes sirven modelos como servicio.",
+            "Es el hilo a leer si se quiere ver cómo la comunidad calibra sus expectativas: entusiasmo por el 1T europeo, sobriedad sobre lo que de verdad puede correrse, y la pregunta abierta de qué tan «abierto» es el modelo cuando la licencia tiene esa letra pequeña."
+          ],
+          "tags": ["comunidad", "selfhosting", "debate"],
+          "links": [
+            {"label": "Hilo en r/LocalLLaMA", "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xil3qy/mistral_large_4_le_chonk_is_now_open_weight/"}
+          ]
+        },
+        {
+          "title": "*NewsGator*: un agregador de noticias autalojado para cualquier LLM local",
+          "summary": "El post del día en *r/LocalLLM*: *NewsGator* es un agregador de noticias autalojado «agnóstico de proveedor» —funciona con cualquier LLM compatible con la API de OpenAI, desde *Ollama* hasta *llama.cpp* o *LM Studio*—. El autor recomienda corriendo el LLM en local.",
+          "body": [
+            "Es el tipo de aplicación pequeña de autolojamiento que cubre un nicho real: la agregación de flujos de noticias con la ayuda de un modelo local, sin dar tus lecturas a una API cerrada. El diseño agnóstico de proveedor (cualquier endpoint compatible con la API de OpenAI) significa que no depende de un stack concreto: el modelo que ya corras es el que alimenta tu digest.",
+            "El mismo espíritu que el de este periódico: el pipeline en tu hardware, el modelo a tu elección."
+          ],
+          "tags": ["selfhosting", "noticias", "utilidad"],
+          "links": [
+            {"label": "Hilo en r/LocalLLM", "url": "https://www.reddit.com/r/LocalLLM/comments/1w0tp5s/newsgator_a_selfhosted_news_aggregator_that/"}
+          ]
+        },
+        {
+          "title": "«Los motores de inferencia serán una serie de piezas sueltas»: el debate del día",
+          "summary": "Un post en *r/LocalLLaMA* sostiene que, en lugar de converger en unos pocos motores generalistas, la capa de inferencia se fragmentará en motores «a medida» por modelo y por hardware —y la tendencia de hoy lo ilustra: *WarpMoE*, *bruce-engine*, *xllm*…",
+          "body": [
+            "El argumento: cada familia de modelos acaba teniendo su motor óptimo (su propia cuantización, su propio layout de expertos, su GPU objetivo), y un motor generalista siempre pagará un peaje en ese caso concreto. El hilo debate si esa fragmentación es buena —más rendimiento por hardware— o mala —más mantenimiento, menos ecosistema—, y las tres repos de la sección de software de hoy son ejemplos concretos de la tesis."
+          ],
+          "tags": ["inferencia", "debate", "ecosistema"],
+          "links": [
+            {"label": "Hilo en r/LocalLLaMA", "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wtg7zu/inference_engines_will_become_a_series_of_oneoffs/"}
+          ]
+        },
+        {
+          "title": "*TyphoonLLM*: inferencia 100 % local en una PlayStation Vita",
+          "summary": "Una repo pequeña (3 estrellas) con una gran declaración: inferencia de LLM totalmente local en una *PlayStation Vita*, corriendo el *LFM2.5-230M* de liquid.ai. C++; el port que lleva el autolojamiento hasta una consola portátil.",
+          "body": [
+            "Es la otra cara del self-hosting: modelos que caben en la memoria de una consola portátil, sin red y sin nube. El *LFM2.5-230M* estaba diseñado para ese tipo de borde, y el port a Vita (C++) muestra que la distancia entre «un móvil con un modelo» y «una consola de hace una década con un modelo» se acorta rápido.",
+            "Si la portada de hoy es un 1T entrenado en 3.800 GPU, esta es la otra punta del espectro: los 230M que caben en tu estantería. Ambos son abiertos, ambos son autalojables, y esa es la amplitud que ofrece el campo."
+          ],
+          "tags": ["selfhosting", "edge", "consolas"],
+          "links": [
+            {"label": "GitHub: daivarsi/TyphoonLLM", "url": "https://github.com/daivarsi/TyphoonLLM"}
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "N1nEmAn/sapper-v2",
+        "stars": "★ 234",
+        "desc": "Legión de pentesting autónoma: comandante IA, enjambre de trabajadores y grafo por capas de hechos e intenciones; tercera plaza en el campeonato online de Tencent (634 equipos).",
+        "meta": "Python · MIT",
+        "url": "https://github.com/N1nEmAn/sapper-v2"
+      },
+      {
+        "name": "aa1143/NamiAgent",
+        "stars": "★ 45",
+        "desc": "Curso en chino de agentes que además es un agente local funcionando: archivos, shell, MCP, memoria a largo plazo e interfaz web; cierra desmontando Claude Code y Codex.",
+        "meta": "Python · MIT",
+        "url": "https://github.com/aa1143/NamiAgent"
+      },
+      {
+        "name": "ideapacket/voxwright",
+        "stars": "★ 32",
+        "desc": "Capa de aplicación para agentes de voz offline: núcleo de sesión con replay byte a byte, adaptadores de LLM hablado y seguridad contra inyección.",
+        "meta": "Python · MIT",
+        "url": "https://github.com/ideapacket/voxwright"
+      },
+      {
+        "name": "gh9ko8y/graphmemory",
+        "stars": "★ 20",
+        "desc": "Memoria bitemporal para IA: decaimiento de seis variables, recall graduado en el tiempo, expiración TTL, deduplicación y recuperación competitiva sobre Neo4j + PostgreSQL + Redis.",
+        "meta": "Python · MIT",
+        "url": "https://github.com/gh9ko8y/graphmemory"
+      },
+      {
+        "name": "daivarsi/TyphoonLLM",
+        "stars": "★ 3",
+        "desc": "Inferencia de LLM 100 % local en una PlayStation Vita, corriendo el LFM2.5-230M de liquid.ai.",
+        "meta": "C++ · —",
+        "url": "https://github.com/daivarsi/TyphoonLLM"
+      }
+    ],
+    "papers": [
+      {
+        "title": "Proving and Improving the Platonic Representation Hypothesis with JEPAs",
+        "authors": "54 upvotes",
+        "url": "https://arxiv.org/abs/2610.39302"
+      },
+      {
+        "title": "Training Foundation Models with a Single Algorithm",
+        "authors": "5 upvotes",
+        "url": "https://arxiv.org/abs/2610.40564"
+      },
+      {
+        "title": "Matched Capabilities, Different Behaviors: A Controlled Study of MCP and CLI Interfaces for Language Agents",
+        "authors": "3 upvotes",
+        "url": "https://arxiv.org/abs/2610.34298"
+      },
+      {
+        "title": "Broken on Arrival: Non-Functional Quantized LLM Artifacts in Public Model Registries and How to Catch Them",
+        "authors": "3 upvotes",
+        "url": "https://arxiv.org/abs/2609.05881"
+      },
+      {
+        "title": "ABF-Bench: A Verifiable Benchmark for Agentic Blockchain Forensics",
+        "authors": "3 upvotes",
+        "url": "https://arxiv.org/abs/2610.23656"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLaMA",
+        "title": "Mistral Large 4 (Le Chonk) is now open weight",
+        "note": "El hilo de las primeras reacciones al 1T europeo: hardware, licencia y comparativa con los 1T chinos.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xil3qy/mistral_large_4_le_chonk_is_now_open_weight/"
+      },
+      {
+        "src": "r/LocalLLM",
+        "title": "NewsGator — un agregador de noticias autalojado",
+        "note": "Agnóstico de proveedor: funciona con cualquier LLM compatible con la API de OpenAI — Ollama, llama.cpp, LM Studio.",
+        "url": "https://www.reddit.com/r/LocalLLM/comments/1w0tp5s/newsgator_a_selfhosted_news_aggregator_that/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "¿Qué modelo local te tiene ilusionado ahora mismo?",
+        "note": "Hilo sobre qué podría deparar el panorama de los modelos locales: qué es lo que más excita a la comunidad ahora mismo.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1whiz3y/whats_the_next_local_model_you_are_excited_about/"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

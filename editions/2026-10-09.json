@@ -1,0 +1,171 @@
+{
+  "date": "9 de octubre de 2026",
+  "weekday_long": "viernes",
+  "edition": "Edición nº 13",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Lightricks abre LTX-2.5, su nuevo modelo de pesos abiertos para generar vídeo y audio",
+    "summary": "Lightricks ha publicado LTX-2.5, la nueva versión de su familia LTX, un modelo de pesos abiertos de generación de vídeo y audio pensado para flujos de trabajo de producción reales. Trae varias piezas nuevas: generación multishot nativa (mantiene una escena coherente a través de varios planos), una técnica llamada Diffusion Fidelity Rendering que invierte más cómputo donde la escena lo necesita, un decodificador de vídeo por difusión nuevo y un codificador de texto propio basado en Gemma 4 de 12.000 millones de parámetros, además de un potenciador de prompts. En Hugging Face acumula casi 7.000 me gusta y más de 1,6 millones de descargas, lo que dice mucho de la demanda de modelos de vídeo abiertos que se pueden correr y afinar en local. El equipo mantiene el repositorio abierto con los modelos de 2B y 13B y su entrenador para afinar. Para quien trabaja con vídeo generativo en local, es de las opciones abiertas más serias del momento, con pesos, código y una comunidad enorme alrededor.",
+    "tags": ["vídeo", "generación", "pesos abiertos", "Lightricks", "difusión"],
+    "links": [
+      {"label": "Hugging Face (Lightricks/LTX-2.5)", "url": "https://huggingface.co/Lightricks/LTX-2.5"},
+      {"label": "GitHub (Lightricks/ltx-video)", "url": "https://github.com/Lightricks/ltx-video"},
+      {"label": "LTX (ltx.io)", "url": "https://ltx.io/"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "Google abre EmbeddingGemma 2, el modelo de embeddings multimodal",
+          "summary": "Google DeepMind ha publicado EmbeddingGemma 2, un modelo de embeddings multimodal de pesos abiertos que mapea texto (incluido código), imágenes, vídeo y audio en un mismo espacio vectorial. Es la evolución de la familia Gemma hacia las representaciones: en vez de generar respuesta, produce un vector que luego puedes usar para buscar, agrupar o filtrar contenido multimodal. Se puede correr con vLLM o Hugging Face y tiene versiones optimizadas para el dispositivo vía LiteRT, lo que lo pone al alcance de quien hace búsqueda semántica o retrieval en local. Acumula más de 1.200 me gusta en Hugging Face en unos días, una señal clara de la demanda de modelos de embeddings abiertos y multimodales.",
+          "tags": ["embeddings", "multimodal", "Gemma", "pesos abiertos", "Google"],
+          "links": [
+            {"label": "Hugging Face (google/embeddinggemma-2)", "url": "https://huggingface.co/google/embeddinggemma-2"},
+            {"label": "Blog de Google (EmbeddingGemma 2)", "url": "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/"}
+          ]
+        },
+        {
+          "title": "Aleph Alpha abre Kolibri-1, su MoE germano-anglés de 78B",
+          "summary": "Aleph Alpha ha publicado Kolibri-1, un modelo de pesos abiertos con arquitectura mixture-of-experts de 78.000 millones de parámetros totales y solo unos 3.500 millones activos por paso, con licencia Apache 2.0 y contexto de hasta 1 millón de tokens. Está centrado en alemán e inglés, con razonamiento explícito, y llega con una clara intención de soberanía: es un modelo europeo, de pesos abiertos, que se puede desplegar en la nube o en infraestructura propia. Encaja en la corriente de MoE abiertos que priorizan el coste por inferencia (pocos parámetros activos) sin perder capacidad, y es de las apuestas abiertas más relevantes de las últimas semanas para el mundo germanófono.",
+          "tags": ["MoE", "Aleph Alpha", "razonamiento", "pesos abiertos", "soberanía"],
+          "links": [
+            {"label": "Hugging Face (Aleph-Alpha/Kolibri-1)", "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1"},
+            {"label": "Blog de Aleph Alpha (Kolibri)", "url": "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/"}
+          ]
+        },
+        {
+          "title": "Xing4.0-29B-A4B, un MoE de 29B ya cuantizado a GGUF para correr en local",
+          "summary": "Venastine Research publica Xing4.0-29B-A4B-GGUF, una cuantización GGUF del MoE Xing 4.0: unos 29.000 millones de parámetros totales con apenas 4.000 millones activos, pensada para que el modelo entre en hardware local sin perder la eficiencia de la arquitectura de expertos. Ya suma más de 670 me gusta y decenas de miles de descargas, una cifra normal para una cuantización y buena señal de la demanda de MoE abiertos listos para usar. Es el tipo de pieza que hace que los modelos de expertos dejen de ser solo para centros de datos y pasen a correr en una máquina modesta, con la relación parámetros totales/activos que define el coste real de cada generación.",
+          "tags": ["MoE", "GGUF", "cuantización", "local"],
+          "links": [
+            {"label": "Hugging Face (Xing4.0-29B-A4B-GGUF)", "url": "https://huggingface.co/Venastine-Research/Xing4.0-29B-A4B-GGUF"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "autonomous-pentest-agent, un sistema multiagente de pentesting autónomo",
+          "summary": "kutukam publica autonomous-pentest-agent, un sistema de pruebas de penetración autónomo basado en varios agentes de IA, con backend en Go y una interfaz en Next.js, bajo licencia AGPL-3.0. La idea es encadenar varios agentes LLM para explorar y atacar una superficie de red de forma autónoma, algo que hasta ahora era puramente manual o muy guiado. Encaja en la corriente de agentes que empiezan a operar en ciberseguridad, un dominio donde el feedback es directo y verificable. Es un proyecto abierto para quien quiere ver cómo se estructura un multiagente de ofensiva real, y una muestra de hacia dónde va la automatización de las pruebas de seguridad.",
+          "tags": ["agentes", "ciberseguridad", "multiagente", "GitHub"],
+          "links": [
+            {"label": "GitHub (kutukam/autonomous-pentest-agent)", "url": "https://github.com/kutukam/autonomous-pentest-agent"}
+          ]
+        },
+        {
+          "title": "superfluid, un demonio de servicio para LLMs locales a lo largo de runtimes y máquinas",
+          "summary": "basecompute publica superfluid, un solo demonio de servicio para la inferencia local de LLMs que funciona a lo largo de distintos runtimes y de distintas máquinas. El problema que ataca es el fragmentado: cada runtime de inferencia (llama.cpp, vLLM, SGLang…) tiene su API, su forma de servir y su forma de hacer cola, y unificar eso es una de las fricciones clásicas del self-hosting. Una capa única de servicio que se pone por encima de varios runtimes y varios equipos es exactamente la infraestructura que hace que el despliegue local pase de experimento a servicio. Muy útil para quien tiene varios modelos y varios ordenadores y quiere un solo punto de entrada.",
+          "tags": ["servicio", "self-hosting", "inferencia", "GitHub"],
+          "links": [
+            {"label": "GitHub (basecompute/superfluid)", "url": "https://github.com/basecompute/superfluid"}
+          ]
+        },
+        {
+          "title": "tokenlift, decodificación especulativa sin pérdidas para LLMs del índico",
+          "summary": "rochitl72 publica tokenlift, una implementación de decodificación especulativa a nivel de palabra, sin pérdida de calidad, para LLMs en idiomas del índico (tamil e hindi, con byte-BPE). La decodificación especulativa acelera la generación dejando que un modelo pequeño proponga tokens y el grande los verifique, y hacerla a nivel de palabra en vez de token la hace más eficiente cuando la lengua tiene muchos tokens por palabra. El detalle clave es que la salida es idéntica a la del modelo original: más velocidad, cero degradación. Es una pieza concreta para quien corre modelos del índico en un portátil y quiere que respondan más rápido.",
+          "tags": ["inferencia", "decodificación especulativa", "multilingüe", "GitHub"],
+          "links": [
+            {"label": "GitHub (rochitl72/tokenlift)", "url": "https://github.com/rochitl72/tokenlift"}
+          ]
+        },
+        {
+          "title": "tapediff, pruebas de snapshot para tráfico de agentes de IA",
+          "summary": "codalexic publica tapediff, una herramienta de pruebas de snapshot para agentes de IA: graba, reproduce y hace el diff del tráfico de llamadas a LLM de un agente. Es el equivalente, para agentes, del testing de snapshot que ya usamos con código: si cambias el prompt, el modelo o el entorno, el tráfico de llamadas cambia y tapediff te muestra exactamente qué cambió. Es una línea muy sana para quien despliega agentes: en vez de mirar resultados, se mira la secuencia de llamadas, y cualquier regresión queda registrada. Una pieza práctica para dar fiabilidad a agentes que de otro modo son difíciles de probar.",
+          "tags": ["agentes", "tests", "observabilidad", "GitHub"],
+          "links": [
+            {"label": "GitHub (codalexic/tapediff)", "url": "https://github.com/codalexic/tapediff"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "MARGIN, calibración de confianza en tiempo de ejecución para multiagentes",
+          "summary": "Cuando un coordinador compara las respuestas de varios modelos de base distintos, la confianza que cada modelo se auto-reporta no significa lo mismo según quién la emite ni según la carga de trabajo. MARGIN (Multi-Agent Runtime Grading via Incremental Normalisation) propone una calibración de confianza en tiempo de ejecución que aprende, por modelo, cómo normalizar esas autovaloraciones para que el coordinador pueda compararlas de verdad. Es una pieza muy concreta para sistemas multiagente: el problema no es que un modelo diga algo, sino saber a cuántos modelos confiarle el resultado cuando cada uno habla con su propio acento de confianza.",
+          "tags": ["multiagente", "confianza", "calibración", "coordinación"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2605.22949"},
+            {"label": "Hugging Face (paper)", "url": "https://huggingface.co/papers/2605.22949"}
+          ]
+        },
+        {
+          "title": "La destilación on-policy enseña nuevas habilidades, pero no nuevos conocimientos",
+          "summary": "La destilación on-policy refuerza el razonamiento de los modelos de lenguaje, pero este trabajo separa dos cosas que suelen confundirse: si el estudiante aprende conocimiento factual nuevo o solo compone mejor lo que ya sabía. Usando un entorno sintético controlado, los autores muestran que la destilación on-policy transfiere habilidad composicional (saber combinar el conocimiento existente para razonar en varias pasos) pero no inyecta conocimiento factual nuevo. Es una distinción importante para quien post-entrena con destilación: saber que estás enseñando a razonar, no a saber, cambia cómo se interpreta el resultado.",
+          "tags": ["destilación", "razonamiento", "post-entrenamiento"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.09639"},
+            {"label": "Hugging Face (paper)", "url": "https://huggingface.co/papers/2610.09639"}
+          ]
+        },
+        {
+          "title": "Preciso pero no humilde: evaluar la humildad epistémica de los agentes ante el conflicto de conocimiento",
+          "summary": "Cuando la evidencia recuperada contradice las creencias previas de un agente, ¿corrige su respuesta, reconoce la incertidumbre o se aferra a una conclusión errónea? Este trabajo propone un marco para evaluar la humildad epistémica de los agentes de LLM, con dimensiones de comportamiento tipo identificar-resolver-escalar. El problema es real y poco medido: los agentes que fallan en producción suelen ser los que se muestran seguros cuando deberían mostrar duda. Evaluar cuándo un agente reconoce que no sabe, y cuándo sabe delegar, es una línea de evaluación más útil que medir solo si pasa la tarea.",
+          "tags": ["agentes", "evaluación", "incertidumbre", "humildad epistémica"],
+          "links": [
+            {"label": "Hugging Face (paper)", "url": "https://huggingface.co/papers/2610.12360"}
+          ]
+        },
+        {
+          "title": "BrickBench, un benchmark para que los agentes diseñen sets de LEGO construíbles",
+          "summary": "BrickBench es un benchmark para el diseño agéntico de sets de LEGO condicionado por texto: dado un prompt, el agente debe producir un montaje que no solo cumpla criterios semánticos y de diseño, sino que sea físicamente construíble. Evaluar agentes en algo con restricciones físicas reales es una línea más dura que generar texto o código: aquí hay que respetar la mecánica de encaje de las piezas. Es un test de integración real para agentes de diseño, con acierto verificable por construcción y no solo por parecer bien.",
+          "tags": ["agentes", "benchmark", "diseño", "evaluación"],
+          "links": [
+            {"label": "Hugging Face (paper)", "url": "https://huggingface.co/papers/2610.12452"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "TII abre Falcon ASR, un modelo de transcripción de 1,6B para el árabe",
+          "summary": "El Technology Innovation Institute (TII) ha publicado Falcon ASR, un modelo de reconocimiento automático de voz de unos 1.600 millones de parámetros centrado en el árabe: soporta el árabe emiratí y el árabe estándar, y además anota cuándo se pronuncia cada palabra dentro del audio. Ese detalle de marcas temporales por palabra lo hace directamente útil para subtitulado preciso, búsqueda por voz en audio y dictado. Es una apuesta de soberanía lingüística muy concreta: un modelo de voz abierto para una de las lenguas donde la oferta de ASR abierto todavía es escasa. Para quien trabaja con contenido en árabe, es una pieza local y abierta que antes no existía.",
+          "tags": ["voz", "ASR", "árabe", "TII", "pesos abiertos"],
+          "links": [
+            {"label": "Falcon (falconllm.tii.ae)", "url": "https://falconllm.tii.ae/"}
+          ]
+        },
+        {
+          "title": "Open TTS Leaderboard, evaluación a escala de TTS multilingüe y clonación de voz",
+          "summary": "Hugging Face publica Open TTS Leaderboard, un marco de evaluación a escala para la síntesis de voz multilingüe y la clonación de voz. El problema que resuelve es comparar modelos de TTS de forma seria: hay cientos de modelos abiertos de voz, pero medir cuál suena mejor, en qué lengua y con qué fidelidad de clonación no era simple. Un leaderboard abierto y reproducible es justo lo que faltaba para dejar de elegir modelo de voz a ciegas. Es una pieza de infraestructura de evaluación que beneficia a toda la comunidad de TTS local y abierto.",
+          "tags": ["TTS", "voz", "evaluación", "Hugging Face"],
+          "links": [
+            {"label": "Blog de Hugging Face (Open TTS Leaderboard)", "url": "https://huggingface.co/blog/open-tts-leaderboard"}
+          ]
+        },
+        {
+          "title": "arxiv-complete, un dataset con el corpus completo de arXiv",
+          "summary": "secemp9 publica arxiv-complete, un dataset en Hugging Face con el corpus completo de arXiv, listo para descargar y usar. Ya suma más de 640 me gusta y más de 160.000 descargas, una cifra que dice mucho de cuánta gente necesita el corpus íntegro de la preimpresión científica para entrenar, buscar o indexar. Tenerlo empaquetado en un dataset estándar elimina la fricción de montar el crawler propio y de lidiar con la estructura de arXiv. Es de las aperturas de datos más prácticas de la semana para quien trabaja con literatura científica y modelos de lenguaje.",
+          "tags": ["datasets", "arXiv", "literatura", "self-hosting"],
+          "links": [
+            {"label": "Hugging Face (dataset arxiv-complete)", "url": "https://huggingface.co/datasets/secemp9/arxiv-complete"}
+          ]
+        },
+        {
+          "title": "MuckScraper, un agregador de noticias self-hosted con sesgo medido por LLM",
+          "summary": "grregis publica MuckScraper, un agregador de noticias self-hosted que además usa un LLM para medir el sesgo de cada fuente y de cada artículo. La idea es montar tu propio feed de noticias sin pasar por un agregador cerrado, y además ver el sesgo de lo que te llega, algo que los agregadores comerciales rara vez te dicen. Encaja en la corriente de herramientas locales para el consumo de información: el feed, la selección y la evaluación de fuentes, todo en tu propia infraestructura. Es una pieza muy alineada con el espíritu de self-hosting que atraviesa el periódico.",
+          "tags": ["self-hosting", "noticias", "sesgo", "GitHub"],
+          "links": [
+            {"label": "GitHub (grregis/MuckScraper)", "url": "https://github.com/grregis/MuckScraper"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

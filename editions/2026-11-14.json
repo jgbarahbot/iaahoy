@@ -1,0 +1,351 @@
+{
+  "date": "14 de noviembre de 2026",
+  "weekday_long": "sábado",
+  "edition": "Edición nº 39",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Ripple-65B: el denso 65B de *Ricursive* que se proclama campeón agéntico de los pesos abiertos de EE. UU.",
+    "summary": "Ricursive Intelligence, el laboratorio full-stack que co-diseña su propio chip, su software y su modelo alrededor de su plataforma de diseño de chips con IA, ha publicado *Ripple-65B Preview*: un modelo denso de 65.000 millones de parámetros entrenado desde cero sobre 12 billones de tokens, con hasta un millón de tokens de contexto. El número de portada es la programación agéntica: 80,52 en *TerminalBench* 2.1, el mejor resultado entre los modelos de pesos abiertos de Estados Unidos, por delante de *Reflection Beam* 501B y del 816B de Meta. El segundo número es el coste: la empresa informa de 32 millones de dólares de inversión total —unos décimos del anterior estado del arte abierto— y de un resultado final alcanzado con 1,4 millones de rollouts de refuerzo, unos 70 veces menos que el anterior campeón. Apache 2.0, pesos en Hugging Face, y listo para correr en *llama.cpp* v1.0.0 —el motor estable que llegó ayer— sobre máquinas como el *NVIDIA DGX Spark*.",
+    "illustration": {
+      "file": "lead-illo-2026-11-14.jpg",
+      "alt": "Un procesador pequeño y perfectamente pulido con un borde dorado, sobre una alfombrilla antiestática, en el banco de un laboratorio de diseño electrónico de noche; a su alrededor, tres bloques de procesador de servidor mucho mayores, con pinzas de precisión y un pequeño destornillador; mesa de madera de nogal y luz cálida de una lámpara de escritorio",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: el chip compacto sobre el banco del laboratorio, rodeado por bloques de procesador de servidor mucho más grandes"
+    },
+    "body": [
+      "Ricursive Intelligence no es un laboratorio de modelos clásico: es una empresa «full-stack» que construye sistemas auto-mejorables co-optimizando hardware, software y modelo, y el primer cliente de ese trabajo es su propia plataforma de diseño de chips con IA. Hoy la empresa publica *Ripple-65B Preview*, la versión generalista del modelo propietario que alimenta esa plataforma: una arquitectura densa de 65.000 millones de parámetros, entrenada desde cero sobre 12 billones de tokens, con hasta un millón de tokens de contexto. Los pesos se publican con licencia Apache 2.0 en Hugging Face —el repositorio suma ya 576 «me gusta» y 8.518 descargas— y la empresa también los ofrece como servicio en Together AI, GMI Cloud, OpenRouter y Fireworks. El anuncio data del 3 de noviembre, y desde entonces las primeras cuantizaciones y variantes comunitarias no han dejado de multiplicarse.",
+      "El número que la empresa resalta es el de la programación agéntica, la clase de benchmarks que se ha convertido en el termómetro de facto de los modelos que trabajan en terminales y repositorios reales: 80,52 en *TerminalBench* 2.1, que la empresa presenta como el mejor resultado entre los modelos de pesos abiertos de Estados Unidos. Eso sitúa a *Ripple-65B* por delante de *Reflection Beam* 501B (80,1), por delante del *Muse Spark Open* 816B de Meta (76,4) y muy por delante del *Inkling* 975B de Thinking Machines (63,8) o del *Nemotron 3 Ultra* 550B de NVIDIA (56,4). La arquitectura densa —todos los parámetros activos por token, a diferencia de un *MoE*— es la respuesta que la empresa da a la latencia: la misma clase de razonamiento que modelos mucho mayores, con generación de tokens rápida y un envelope de parámetros pequeño, que cabe en máquinas locales como el *NVIDIA DGX Spark*, que combina mucha potencia de cálculo con poca banda de memoria. El movimiento comunitario ya está encima: en Hugging Face hay versiones GGUF con más de 100.000 descargas, variantes *NVFP4* para inferencia en GPU actuales, un modelo draft *DFlash2* para decodificación especulativa y las habituales versiones «abliterated» sin filtros de contenido.",
+      "El segundo número es el coste. La empresa informa de 32 millones de dólares de inversión en el I+D completo —la escalera de pre-entrenamiento, la mezcla de datos, las evaluaciones, los datos sintéticos, la receta de post-entrenamiento y la corrida final—, lo que, por su propia estimación, es un orden de magnitud menos de lo que costó el anterior estado del arte abierto en programación agéntica. Para llegar ahí sin comprar datos de post-entrenamiento, construyó su propio pipeline de datos sintéticos con filtros de calidad y métricas de cobertura; la receta de aprendizaje por refuerzo mezcla muestreo de importancia truncado, centrado de puntuaciones y penalización lineal de longitud sobre entornos sintéticos de horizonte largo, con dificultad que sube conforme el modelo mejora. El resultado es lo que la empresa llama una «escalada pronunciada»: un 80,5 en *TerminalBench* 2.1 con solo 1,4 millones de rollouts de refuerzo, unos 70 veces menos que el anterior campeón. Todo ello co-diseñado con hardware de NVIDIA —una decisión que explica, además, parte de la eficiencia. Conviene leer el número con una sal de cautela: es la contabilidad de la propia empresa y el «SOTA estadounidense» se mide en un benchmark, no en una categoría universal.",
+      "Para el lector self-hosting la noticia llega con un puente directo hacia la portada de ayer: la arquitectura «ricursive» —esto es, este modelo denso de 65B— es una de las nuevas familias que *llama.cpp* v1.0.0, el primer estable del motor de referencia para LLMs locales, ha añadido a su lista. Traducido: el campeón estadounidense de pesos abiertos en programación agéntica ya puede correr sobre las builds oficiales del 1.0 —Docker, Debian, Homebrew, conda-forge y la app de escritorio del equipo—, sin esperar a que la comunidad lo meta a golpe de parche. El debate ya está en marcha: en *Hacker News* el anuncio acumula más de 340 puntos de conversación, y entre ellos la comparación práctica de las variantes GGUF, el camino *NVFP4* y el modelo draft *DFlash2* que la comunidad ya ha empaquetado para la decodificación especulativa."
+    ],
+    "tags": ["ripple_65b", "dense", "agentic_coding", "open_weights"],
+    "links": [
+      {"label": "Ricursive: Ripple-65B", "url": "https://ricursive.com/ripple"},
+      {"label": "Hugging Face: ricursive/Ripple-65B-Preview", "url": "https://huggingface.co/ricursive/Ripple-65B-Preview"},
+      {"label": "llama.cpp v1.0.0 (la nueva arquitectura)", "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*Kimi K3.1 Pro*: la variante *K3* con la atención *MLA* sustituida por dispersa",
+          "summary": "Moonshot ha publicado la primera variante «Pro» de la familia K3: las capas de atención plena MLA se sustituyen por DSA, una variante de atención dispersa. El modelo es multimodal (texto e imagen de entrada), se distribuye con tensores comprimidos a 8 bits y en una docena de días ha acumulado más de 2.000 «me gusta» y 41.000 descargas. Es una de las nuevas arquitecturas que ya soporta *llama.cpp* v1.0.0.",
+          "body": [
+            "El K3.1 Pro es la variante Pro de la familia K3, y la diferencia —según la ficha y la lista de arquitecturas del *llama.cpp* v1.0.0— está en la atención: las capas de atención plena de la K3 original, basadas en la atención latente multi-cabeza (MLA, de «multi-head latent attention»), se sustituyen por DSA, una variante de atención dispersa que solo calcula una fracción de las claves por consulta. El resultado es un coste menor en las secuencias largas y un servicio más rápido, de ahí el prefijo «Pro»: la misma familia, con la parte cara de la atención rediseñada. La ficha declara el par *image-text-to-text* —acepta texto e imagen y produce texto— y distribuye los pesos como tensores comprimidos a 8 bits.",
+            "El repositorio público se mueve rápido: creado el 2 de noviembre, suma ya 2.050 «me gusta» y más de 41.000 descargas, y entra de lleno en el nuevo estable del motor local de referencia. Un detalle que no pasa desapercibido al público self-hosting: la licencia no es una estándar —la ficha declara una licencia propia, «kimi-k3.1-pro»—, de modo que se trata de pesos abiertos con términos de uso propios, no de un modelo plenamente abierto como Apache 2.0. Vale la pena leer las condiciones antes de usarlo en un producto."
+          ],
+          "tags": ["kimi_k31", "sparse_attention", "multimodal"],
+          "links": [
+            {"label": "Hugging Face: moonshotai/Kimi-K3.1-Pro", "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"},
+            {"label": "llama.cpp v1.0.0", "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0"}
+          ]
+        },
+        {
+          "title": "*Idol*: de una foto a un *3D Gaussian splat* de un millón de puntos",
+          "summary": "Sperid Labs ha publicado *Idol*, un modelo que convierte una única imagen de un objeto —una foto, un render, una imagen generada— en un *3D Gaussian splat* de hasta 1.048.576 gaussianas, incluidas las caras que la imagen original no mostraba. Corre en una GPU de consumo con 7,2 GB de VRAM en menos de 2 segundos y da de salida el formato *.ply* estándar del mundo 3DGS.",
+          "body": [
+            "La receta de *Idol*: se toma una imagen de un objeto (una foto, un render, una imagen generada), se elimina el fondo, se enmarca el sujeto y se generan hasta 1.048.576 gaussianas que describen el objeto en tres dimensiones, incluidas las partes que la imagen original no mostraba. La salida es un archivo *.ply* estándar de *3D Gaussian Splatting* (3DGS), el formato más extendido para representar escenas en tiempo real, así que el resultado se usa directamente en los visores y motores habituales de 3DGS. El modelo corre en GPU de consumo: 7,2 GB de VRAM y menos de 2 segundos por objeto.",
+            "Apache 2.0, código en GitHub (*idol-sdk*, el SDK del modelo) y una demo pública en Hugging Face Spaces: la combinación lo convierte en nota para el público self-hosting, porque el ciclo completo —de la foto de producto al activo 3D— se hace sin rigs de captura ni estudio. El equipo publica una página de proyecto con los detalles técnicos. En el panorama de pesos abiertos es una pieza pequeña pero interesante: la generación de 3D a partir de una sola imagen sigue siendo un terreno en construcción, y estas cifras apuntan a que empieza a ser práctica."
+          ],
+          "tags": ["gaussian_splatting", "image_to_3d", "consumer_gpu"],
+          "links": [
+            {"label": "Hugging Face: Sperid-Labs/Idol", "url": "https://huggingface.co/Sperid-Labs/Idol"},
+            {"label": "GitHub: idol-sdk", "url": "https://github.com/Sperid-Labs/idol-sdk"},
+            {"label": "Página de proyecto", "url": "https://speridlabs.com/research/idol"}
+          ]
+        },
+        {
+          "title": "*Inkling 2 Small*: el *MoE* multimodal de Thinking Machines con pesos abiertos",
+          "summary": "La familia Inkling 2 de Thinking Machines gana una variante «Small»: un modelo multimodal generalista (texto e imagen de entrada, texto de salida) de arquitectura *MoE*, publicado con pesos abiertos bajo Apache 2.0 para investigación, ajuste fino e integración en productos de terceros. La ficha aporta checkpoints *NVFP4* y *MXFP8*, un playground y la libreta de *Tinker*.",
+          "body": [
+            "El Inkling 2 Small apunta al desarrollador que construye: sistemas agénticos y uso de herramientas, asistentes de código, chatbots y generación aumentada por recuperación (RAG, de «retrieval-augmented generation»). El modelo acepta texto e imagen y genera texto; la ficha declara capacidad multilingüe general además del inglés. La familia viene de la línea Inkling —la misma que el Inkling 975B que aparece en las comparaciones de la portada de hoy— y esta variante «Small» va dirigida a quien quiere ajustar o integrar en casa sin el peso del modelo insignia.",
+            "Pesos abiertos bajo Apache 2.0: la ficha es explícita en que la intención es «apoyar la investigación, el ajuste fino y la integración en productos de terceros». Los detalles que ahorran tiempo: checkpoints cuantizados en *NVFP4* y *MXFP8* —los dos formatos de baja precisión que las GPU actuales de NVIDIA usan de forma nativa—, un playground para probarlo, y la libreta de *Tinker* con recetas para ajustar el modelo con el propio marco de la empresa. Con 269 «me gusta» en diez días es un lanzamiento callado, sin benchmarks para hacer ruido, pero con licencia completa y receta completa, que para el público self-hosting es exactamente lo que cuenta."
+          ],
+          "tags": ["moe", "multimodal", "fine_tuning"],
+          "links": [
+            {"label": "Hugging Face: thinkingmachines/Inkling-2-Small", "url": "https://huggingface.co/thinkingmachines/Inkling-2-Small"},
+            {"label": "Tinker cookbook", "url": "https://github.com/thinking-machines-lab/tinker-cookbook"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*BotPsy*: el asistente personal on-device con menos de mil millones de parámetros",
+          "summary": "Tether AI Research ha publicado *BotPsy*, un modelo de 0.8B basado en *Qwen3.5-0.8B* para un nicho claro: el asistente personal que corre en el propio dispositivo. La empresa lo presenta como el mejor en uso de herramientas y flujos agénticos entre los modelos de menos de 1.2B parámetros que han probado, con licencia Apache 2.0 y cobertura de ocho dominios, de la investigación en la web al control de dispositivos y vehículos.",
+          "body": [
+            "La motivación la escribe la propia empresa en el blog: los LLM en la nube cuestan por llamada, dependen de un proveedor y plantean problemas de privacidad, y el caso de uso de asistente personal —el que más tráfico continuo tiene— es el que más lo padece. BotPsy va en la otra dirección: un modelo de 800 millones de parámetros, sobre la base *Qwen3.5-0.8B*, ajustado con SFT (de «supervised fine-tuning») en cuatro etapas para que sea una máquina de llamada de herramientas y de flujos agénticos que vive en el dispositivo.",
+            "La afirmación es fuerte y bien acotada: el mejor uso de herramientas y la mejor capacidad agéntica entre todos los modelos de menos de 1.2B parámetros que han evaluado, lo que en la práctica son modelos que corren en un teléfono o en un portátil sin servidor. Los ocho dominios entrenados: búsqueda y research en la web; viajes y vida diaria; comercio y finanzas; operaciones de negocio y soporte al cliente; control de dispositivos y vehículos; archivos y documentos; calendario; y correo y mensajería. Apache 2.0, pesos en Hugging Face y blog con la metodología: una nota para quien construye asistentes on-device."
+          ],
+          "tags": ["on_device", "tool_calling", "agentic"],
+          "links": [
+            {"label": "Hugging Face blog: BotPsy", "url": "https://huggingface.co/blog/qvac/botpsy"},
+            {"label": "Hugging Face: qvac/BotPsy-0.8B", "url": "https://huggingface.co/qvac/BotPsy-0.8B"}
+          ]
+        },
+        {
+          "title": "*Octomind*: el agente de código en un binario de *Rust* cuya política vive en TOML, no en prompts",
+          "summary": "*Octomind* es un harness de agentes de código de código abierto empaquetado como un único binario estático de *Rust*: da a cualquier LLM las herramientas para trabajar en un repositorio (archivos, shell, búsqueda, subagentes vía *MCP*) y puede correr como CLI interactiva, por *stdin*, como daemon, servidor *WebSocket* o agente ACP dentro del editor. Su diferencia: en vez de parar y preguntar al humano antes de cada paso arriesgado, escribe la política como guardas en TOML y un modelo supervisor que planifica y comprueba el trabajo.",
+          "body": [
+            "La mayoría de los agentes de código se detienen y preguntan al humano antes de cada paso arriesgado: funciona en el teclado, pero bloquea el trabajo en un *CI* o en segundo plano. *Octomind* toma esa política y la escribe: guardas en *TOML* que definen qué puede el agente hacer sin preguntar, más un modelo supervisor que planifica el trabajo y comprueba el resultado, de modo que la misma sesión pueda correr sin supervisión. El harness es un único binario estático —un binario, un fichero de configuración—, cualquier modelo por detrás, y todas las herramientas expuestas por *MCP*: leer y editar archivos, ejecutar el shell, buscar en el código y delegar en subagentes.",
+            "El resto es distribución: el mismo binario funciona como CLI interactiva en el terminal, como tubería por *stdin*, como daemon, como servidor *WebSocket* o como agente ACP en el editor, con la misma configuración. Está en *crates.io*, el proyecto tiene sitio web con documentación y benchmarks, y el hilo de *Hacker News* (56 puntos) resalta el ahorro de tokens: un harness que no repite el prompt de sistema por cada subagente. Es software del estilo que le va a la línea de esta publicación: un harness abierto cuya política es datos que puedes leer, no una caja negra."
+          ],
+          "tags": ["rust", "mcp", "coding_agent"],
+          "links": [
+            {"label": "GitHub: Muvon/octomind", "url": "https://github.com/Muvon/octomind"},
+            {"label": "octomind.run", "url": "https://octomind.run"}
+          ]
+        },
+        {
+          "title": "*Cosh*: el agente de terminal que pone a *Claude*, *Gemini* y *Codex* en el mismo espacio de trabajo",
+          "summary": "*Cosh* es un agente de código de terminal generalista con «computer tools» —puede operar con aplicaciones gráficas—, pero su novedad real es la capa de orquestación: varios agentes distintos (*Claude*, *Gemini*, *Codex*, *Cline*) pueden correr a la vez en la misma interfaz TUI, compartiendo un espacio de trabajo y comunicándose a través de una sola interfaz. Se presenta como capa de colaboración sobre agentes existentes, no como sustituto.",
+          "body": [
+            "La propuesta es honesta: *Cosh* no pretende sustituir a los agentes de código establecidos, sino trabajar junto a ellos como capa de orquestación. Concretamente: corre varios agentes de última generación (*Claude*, *Gemini*, *Codex*, *Cline*) directamente en la misma interfaz de terminal (TUI), con un espacio de trabajo compartido en el que pueden comunicarse y colaborar entre sí. Para el desarrollador que quiere probar y combinar varios agentes y sus fortalezas sin comprometerse con un solo ecosistema, es la interfaz que hace el comparison fácil —mismo proyecto, mismos ficheros, misma conversación—.",
+            "Hay además un «manager mode» que mantiene el harness de agente que ya se use (el agente CLI de la propia empresa, por ejemplo) y añade la orquestación por encima: útil para quien no quiere migrar su stack. El agente de terminal en sí trae herramientas de ingeniería de software y computer tools para interactuar con aplicaciones gráficas, y la interfaz está disponible en seis idiomas, incluido el español. El proyecto es joven —un Show HN con 10 puntos la semana pasada—, pero la nota vale por la idea: el agente del futuro quizá no sea «el mejor», sino el que orqueste lo mejor de cada uno."
+          ],
+          "tags": ["multi_agent", "tui", "orchestration"],
+          "links": [
+            {"label": "GitHub: ttt490/cosh", "url": "https://github.com/ttt490/cosh"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*DSpine*: el modelo draft de Tencent para el *speculative decoding* de *Qwen3.8-27B*",
+          "summary": "Tencent ha publicado *DSpine*, un modelo draft de cinco capas para acelerar *Qwen3.8-27B* con *speculative decoding*: bloque de 16 tokens, ventana deslizante de 8.000 tokens y 7.20 de longitud media de aceptación en *GSM8K* (frente a 5.69 del *DFlash2*). Apache 2.0 y con receta para *SGLang*; la técnica está descrita en un paper en arXiv.",
+          "body": [
+            "El *speculative decoding* funciona así: un modelo pequeño, el «draft», propone un bloque de tokens y el modelo grande los verifica en paralelo; si el bloque se acepta, cada ciclo de verificación produce más salida de la que el grande habría generado solo. *DSpine* es ese draft: un modelo denso de cinco capas, bloque de 16 tokens y ventana deslizante de 8.000 —la ventana es la parte que decide la calidad, porque el grande es un *Qwen3.8-27B* de comportamiento de contexto largo. La ficha informa de una tasa de aceptación del 95,7 % en la evaluación *GSM8K*, con una media de 7.20 tokens aceptados por ciclo: el valor de referencia del anterior campeón, *DFlash2*, es 5.69.",
+            "La técnica está descrita en un paper en arXiv (2609.36173), de ahí el nombre: el draft es un «espalda» fina, un esqueleto de la arquitectura original. Apache 2.0, pesos en Hugging Face y receta para *SGLang* para activarlo en el servicio. Publicado a principios de septiembre y aún en tendencia, la nota tiene impacto directo para quien sirve un *Qwen3.8-27B* —del tamaño de este modelo se aprovecha más de la optimización—: más tokens por segundo sobre la misma GPU, sin cambiar el modelo."
+          ],
+          "tags": ["speculative_decoding", "sglang", "qwen38"],
+          "links": [
+            {"label": "Hugging Face: tencent/Qwen3.8-27B-DSpine-b16", "url": "https://huggingface.co/tencent/Qwen3.8-27B-DSpine-b16"},
+            {"label": "arXiv: 2609.36173", "url": "https://arxiv.org/abs/2609.36173"}
+          ]
+        },
+        {
+          "title": "*llama-sleep*: aparcar el modelo en RAM y cambiarlo en 2 segundos en vez de 10",
+          "summary": "Robert Zaage ha publicado un artículo (10 minutos de lectura) sobre cómo recortar el cambio entre dos modelos de *llama.cpp* que llenan la GPU de 10,3 segundos a 2,1: en vez de parar el modelo saliente, se «aparca» su memoria GPU en la RAM del sistema con *cuda-checkpoint*. Con páginas transparentes enormes (THP) cae a 1,7 —unas 6 veces más rápido— y el prompt en caché del modelo saliente sigue intacto.",
+          "body": [
+            "El contexto es el del servidor de casa que corre dos modelos que cada uno llena la GPU: un 12B para el asistente por voz y un 26B para las entradas largas de la automatización. Un proxy de *llama-swap* —el que detiene el modelo que corre y arranca el que se pide— costaba una recarga completa: 10,3 segundos por cambio, y la pérdida de la caché de prompts del modelo saliente, que en un escenario de automatización obliga a reconstruir el contexto cada vez.",
+            "La fix: en vez de parar el modelo saliente, «apcarlo» —su memoria GPU se copia a la RAM del sistema mediante *cuda-checkpoint*, un mecanismo que toma una instantánea del estado de CUDA— y al volver se restaura sin recargar todo. Un cambio de configuración y un wrapper pequeño, *llama-sleep*, bajan el cambio a 2,1 segundos y la caché de prompts sobrevive. El artículo hace las cuentas de dónde va el tiempo: la copia entre RAM y GPU se resiente sobre todo de las páginas de 4K, no del PCIe; habilitar páginas transparentes enormes de varios tamaños (una opción de kernel) la baja a 1,7 segundos. Una nota para guardar en el bolsillo de quien corra varios modelos locales sobre la misma GPU."
+          ],
+          "tags": ["llama_cpp", "gpu_memory", "cuda_checkpoint"],
+          "links": [
+            {"label": "El artículo de Robert Zaage", "url": "https://zaage.it/writing/llama-sleep/"},
+            {"label": "Hacker News: el hilo", "url": "https://news.ycombinator.com/item?id=47451234"}
+          ]
+        },
+        {
+          "title": "Hugging Face: paga tu *Hub* con una cuenta de *Google Cloud*",
+          "summary": "Hugging Face ha publicado una guía para conectar una organización a *Google Cloud* y que el uso del *Hub* —inferencia, datasets, spaces— aparezca en la factura de *GCP* en vez de en una tarjeta de crédito. El camino pasa por el *Google Cloud Marketplace*: para las empresas que ya pagan su nube con un proceso de facturación corporativo (presupuestos, aprobaciones, cuotas), la cuenta llega con el resto de la infraestructura.",
+          "body": [
+            "El flujo: se conecta la organización de Hugging Face al proyecto de *GCP* de la empresa y se activa la facturación a través del *Google Cloud Marketplace*; a partir de ahí, el uso del *Hub* de la organización —puntos finales de inferencia, datasets, *Spaces*— se cobra contra la cuenta de *GCP*. El artículo va dirigido a los equipos que ya usan Google Cloud: la factura llega consolidada, con el mismo proceso de facturación, y con los mismos controles —presupuestos, aprobaciones, cuotas por proyecto— que la empresa ya aplica al resto de su infraestructura. Ni tarjeta aparte, ni cuenta que conciliar.",
+            "Es de esas notas de ecosistema que no hacen titular pero cambian el día a día: para una empresa con varios proyectos de IA, consolidar el gasto (modelos, datos, inferencia) en un único proceso de facturación corporativo es una diferencia operativa real —y también para el público self-hosting, porque el *Hub* es donde viven los pesos y los datasets, y que la factura no sea una partida suelta simplifica el cierre. Es una de las pocas veces que «paga con tu cuenta de nube existente» se ofrece como camino documentado y soportado, no como experimento."
+          ],
+          "tags": ["hugging_face", "google_cloud", "billing"],
+          "links": [
+            {"label": "Hugging Face blog: el marketplace de GCP", "url": "https://huggingface.co/blog/hub-gcp-marketplace"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*Unbundling Multimodal Vision Encoding*: el prior visual no es tan necesario como parecía",
+          "summary": "El paper más votado del día (13 upvotes) se mete en una de las preguntas abiertas de los LLM multimodales: ¿es un codificador visual preentrenado realmente necesario? Los autores montan un marco controlado que compara tipos de codificador a mismo presupuesto de cómputa, y la conclusión: un codificador entrenado desde cero alcanza al preentrenado en muchos regímenes —el «prior visual» que la comunidad daba por requisito es menos necesario de lo que se pensaba.",
+          "body": [
+            "Los modelos multimodales (texto e imagen) suelen tomar la parte visual de algún sitio: un codificador preentrenado —un clasificador de imágenes, un *ViT* (de «Vision Transformer») entrenado sobre un gran corpus— se enchufa y se ajusta. La pregunta del paper: ¿es ese prior realmente necesario, o es costumbre? Para responderla, los autores montan un marco controlado que compara tipos de codificador a mismo presupuesto de cómputa, porque en la práctica la comparación es injusta: el codificador preentrenado llega con miles de horas de trabajo que el codificador desde cero no tiene.",
+            "La conclusión del abstract: un codificador desde cero alcanza el nivel del preentrenado en muchos regímenes —es decir, el «prior visual» no es el muro que parecía. Es un paper que importa para quien construye modelos multimodales desde cero (un público creciente en pesos abiertos, justamente porque los grandes laboratorios preentrenan la visión sobre datos cerrados): si el prior no aporta tanto como se creía, la receta se simplifica y se aligera el cuello de botella de datos del lado visual. Trece upvotes y el primer puesto en los papers diarios de Hugging Face."
+          ],
+          "tags": ["multimodal", "vision_encoder"],
+          "links": [
+            {"label": "arXiv: 2611.17334", "url": "https://arxiv.org/abs/2611.17334"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2611.17334"}
+          ]
+        },
+        {
+          "title": "*The Value of Thinking*: enseñar al modelo a decidir cuándo piensa",
+          "summary": "Este paper ataca el problema del «thinking cero o T»: cómo decide un modelo si responde directamente o genera una cadena de razonamiento larga. La respuesta es un «modelo de decisión híbrido» con un bloque de autorre-encaminado que estima el valor de pensar antes de comprometerse, todo sobre un solo backbone congelado y dos modos.",
+          "body": [
+            "Los modelos de razonamiento —los que «piensan» antes de responder— tienen un coste conocido: generan miles de tokens de razonamiento aunque la respuesta sea trivial. El paper ataca lo que sus autores llaman el problema del «thinking cero o T»: el modelo debería decidir si genera cero tokens de razonamiento o hasta T, y hacerlo con una decisión informada, no con un umbral. La receta: un único backbone congelado que funciona en dos modos —rápido y directo, o razonamiento largo— y un bloque de autorre-encaminado que estima, para cada consulta, el valor de pensar antes de comprometerse con uno u otro.",
+            "El interés está en el detalle: en vez de un clasificador externo (otro modelo que decide) o de una regla fija (pensar siempre si la pregunta supera X caracteres), el re-encaminado vive dentro del modelo —un bloque que «piensa si vale la pena pensar». Es un paso en la dirección de la eficiencia del razonamiento, el tema caliente del momento: el coste de un modelo de razonamiento a escala es la suma de todos los tokens de razonamiento que no hacían falta. En el paper la comparación se hace sobre un backbone congelado, de modo que el efecto se puede atribuir al re-encaminado y no a capacidad nueva."
+          ],
+          "tags": ["reasoning", "efficiency", "self_routing"],
+          "links": [
+            {"label": "arXiv: 2611.16961", "url": "https://arxiv.org/abs/2611.16961"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2611.16961"}
+          ]
+        },
+        {
+          "title": "*Who Remembers What?*: memoria a varias granularidades para sistemas multiusuario y multiagente",
+          "summary": "El paper propone extraer las lecciones aprendidas por sistemas auto-mejorables con varios usuarios y agentes a distintos ámbitos: una lección puede pertenecer a un par usuario-agente, a un solo usuario, a un solo agente, o al ámbito global. Los autores presentan además *CrossLearnBench*, un benchmark nuevo para el escenario, y reportan +16 puntos de tasa de éxito frente a una línea base de ámbito único.",
+          "body": [
+            "Los agentes que se auto-mejoran tienen un problema conocido: la memoria que acumula las lecciones aprendidas acaba mezclada. Si el agente A aprende una lección trabajando con la usuaria X, ¿esa lección es de A (el agente), de X (el usuario), del par, o de todo el sistema? El paper responde con una «extracción multi-granularidad»: cada lección se clasifica en el ámbito que mejor la describe —par usuario-agente, usuario, agente, o global— y cada ámbito mantiene su propia memoria.",
+            "La contribución es doble: el método (cómo se decide el ámbito de cada lección) y la evaluación —*CrossLearnBench*, un benchmark nuevo para escenarios multiusuario y multiagente, donde la línea base de ámbito global único pierde: la memoria granular gana +16 puntos de tasa de éxito. Es una nota de horizonte: los sistemas que vienen no son un agente por usuario, sino equipos de agentes con varios usuarios, y la memoria es de los primeros problemas que se rompe a esa escala."
+          ],
+          "tags": ["memory", "multi_agent", "self_improvement"],
+          "links": [
+            {"label": "arXiv: 2611.10439", "url": "https://arxiv.org/abs/2611.10439"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2611.10439"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "Un exinvestigador de *OpenAI* dice haber encontrado firmas de *Blackwell* en los modelos abiertos chinos",
+          "summary": "Will Depue, exinvestigador de *OpenAI*, ha publicado una afirmación que la comunidad está debatiendo hoy: «evidencia forense concluyente», dice, de que los últimos modelos de cuatro laboratorios chinos —*DeepSeek*, *Moonshot*, *MiniMax* y *Ant Group*— se construyeron sobre chips *Blackwell* de NVIDIA, prohibidos para exportar a China. El post, de hace dos días, ha subido a *Hacker News* hoy sábado y levanta el debate sobre la naturaleza de la evidencia.",
+          "body": [
+            "La afirmación: Depue dice tener «evidencia forense concluyente» de que los cuatro principales laboratorios de IA chinos —*DeepSeek*, *Moonshot*, *MiniMax* y *Ant Group*— entrenaron sus modelos más recientes sobre chips *Blackwell* de NVIDIA, los más avanzados, y prohibidos para exportar a China. El tweet data del 12 de noviembre y ha acumulado atención; el hilo de *Hacker News* de hoy sábado lo lleva a la superficie, con 7 puntos pero del tipo de tema —los controles de exportación y el entrenamiento de los modelos de pesos abiertos— que tiende a multiplicar el debate.",
+            "La cautela que la propia comunidad aplica: una afirmación publicada en *X* sin paper revisado ni metodología reproducible todavía es eso, una afirmación —la parte «forense» del método (qué firmas son, dónde están, cómo se comprueban) es justo lo que el hilo de *Hacker News* está pidiendo. Si se sostuviera, sería un hecho de peso: significaría que los modelos de pesos abiertos que el público self-hosting sirve en casa se entrenaron sobre el hardware que Washington ha intentado mantener fuera de China. Si no se sostiene, será un buen recordatorio de que la «evidencia forense» que llega en un tweet necesita más. Se sigue esta semana."
+          ],
+          "tags": ["open_weights", "export_controls", "blackwell"],
+          "links": [
+            {"label": "El tweet de Will Depue", "url": "https://x.com/willdepue/status/2021595859866135860"},
+            {"label": "Hacker News: el hilo", "url": "https://news.ycombinator.com/item?id=50363821"}
+          ]
+        },
+        {
+          "title": "*Octen WebGR*: 200 millones de URLs en los parámetros de un modelo de 4B",
+          "summary": "Octen ha publicado *WebGR*, un modelo de «recuperación generativa» que guarda 200 millones de páginas web en los parámetros de un modelo de 4B (un *Qwen3-4B-Base*): en vez de un índice que se consulta, el modelo genera el identificador semántico (2 tokens) de la página que responde a la consulta. Corre en una GPU de 10 GB de VRAM y da de salida un servicio de búsqueda de unos 10 milisegundos.",
+          "body": [
+            "La recuperación generativa invierte la búsqueda clásica: en vez de un índice que se consulta (una base vectorial o un *BM25*), el modelo genera el identificador del documento que responde. En *WebGR* ese identificador es un identificador semántico de 2 tokens (*SID*, de «semantic ID»): el modelo de 4B, sobre la base *Qwen3-4B-Base*, aprende durante el ajuste fino la correspondencia entre consultas y los *SIDs* de 200 millones de páginas —el identificador de una página no es su URL, es un código compacto que codifica su contenido. El resultado: una GPU de 10 GB, un servicio de búsqueda de unos 10 milisegundos (la API *Pulse Search*) y un informe técnico con todos los detalles.",
+            "La nota para el público self-hosting: un buscador web de 200 millones de páginas que cabe en una GPU sola es una pieza concreta y reproducible —el informe explica el entrenamiento y el esquema de *SIDs*. Un detalle de licencia: el modelo es *CC-BY-NC*, no comercial, esto es, ideal para investigación y para proyectos personales, no para un producto. En *Hacker News* (111 puntos) el debate va sobre lo que esto significa para la infraestructura de búsqueda: si el modelo puede generar el identificador de la página, el «índice» pasa a ser parte del modelo, y eso cambia el stack entero."
+          ],
+          "tags": ["generative_retrieval", "web_search", "self_hosting"],
+          "links": [
+            {"label": "Hugging Face: Octen/WebGR", "url": "https://huggingface.co/Octen/WebGR"},
+            {"label": "arXiv: 2611.15527", "url": "https://arxiv.org/abs/2611.15527"},
+            {"label": "Hacker News: el hilo", "url": "https://news.ycombinator.com/item?id=50337518"}
+          ]
+        },
+        {
+          "title": "*Revolut* recorta un 10× el coste de su IA de código autoalojando *GLM* en vez de *Claude*",
+          "summary": "*The Register* informa de que el fín-tec británico *Revolut* ha recortado unos 900 puntos porcentuales de su coste de ingeniería con IA: la compañía dejó de usar *Claude* para el código y se autoalojó el modelo de pesos abiertos *GLM* sobre su propia infraestructura. La historia circula por *Hacker News* como ejemplo de la ecuación costes-abiertos para las empresas que procesan mucho código.",
+          "body": [
+            "El artículo de *The Register*: *Revolut*, el fín-tec británico de millones de usuarios, movió el trabajo de IA de código a infraestructura propia: en vez de llamar a *Claude* —cerrado, con facturación por token— la empresa se autoalojó *GLM*, un modelo de pesos abiertos, sobre sus propias GPU, y el coste del trabajo de ingeniería baja unos 900 puntos porcentuales. El número del 10× está en el titular de la noticia y en el hilo de *Hacker News* (más de 190 puntos), y el debate gira en torno a lo que significa a escala: para una empresa que genera un volumen grande de código al día, la diferencia entre una API por token y GPU propia acaba siendo la diferencia entre un presupuesto y una partida.",
+            "Es de los terceros o cuartos casos del tipo que la comunidad ha documentado en los últimos meses: una empresa con volumen real, coste real, y la decisión de autoalojar. La cautela que señala el hilo de *Hacker News*: el self-hosting tiene un coste operativo que el titular no muestra —el equipo de servicio, la cuantización, la evaluación—, y solo se paga a volumen. Pero la dirección es clara: para las cargas de IA de flujo continuo, los pesos abiertos sobre infraestructura propia están dejando de ser una apuesta filosófica para ser una alternativa económica real."
+          ],
+          "tags": ["self_hosting", "cost", "glm"],
+          "links": [
+            {"label": "The Register: el artículo", "url": "https://www.theregister.com/2026/11/13/revolut_self_hosted_ai_coding/"},
+            {"label": "Hacker News: el hilo", "url": "https://news.ycombinator.com/item?id=50245908"}
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "rtx233/newapi-bionic-plugin",
+        "stars": "★ 3",
+        "desc": "Plugin de la comunidad de *New API* para enchufar los modelos que corren en *Bionic* (aplicación de escritorio) en la pasarela, con *Responses*, *Claude Messages*, *Gemini*, completados y embeddings.",
+        "meta": "JavaScript · MIT",
+        "url": "https://github.com/rtx233/newapi-bionic-plugin"
+      },
+      {
+        "name": "Noman654/hybrid-llm-serving",
+        "stars": "★ 1",
+        "desc": "«¿A dónde fue el tiempo?»: perfilado del servicio de un LLM híbrido (*Qwen3.8-27B*, *Gated DeltaNet* + atención) sobre H100 con *vLLM*: 1.72× de mejora.",
+        "meta": "Python · Apache-2.0",
+        "url": "https://github.com/Noman654/hybrid-llm-serving"
+      },
+      {
+        "name": "carloseduardoscsouza-dot/prompt-shield",
+        "stars": "★ 1",
+        "desc": "Linter de seguridad ultra-rápido (menos de 1 ms) y sin dependencias para prompts de LLM y flujos agénticos; protege *OpenAI*, *Claude* y el resto.",
+        "meta": "Python · MIT",
+        "url": "https://github.com/carloseduardoscsouza-dot/prompt-shield"
+      },
+      {
+        "name": "Dariaaa/base-agent",
+        "stars": "★ 1",
+        "desc": "Agente local de LLM para *Obsidian* y cualquier carpeta de notas: roles intercambiables, respuesta en cualquier idioma, búsqueda semántica, sin dependencias externas.",
+        "meta": "Python",
+        "url": "https://github.com/Dariaaa/base-agent"
+      },
+      {
+        "name": "ntwarikbrian/colab_llms",
+        "stars": "★ 2",
+        "desc": "Notebooks para correr modelos de código de alto rendimiento con LLM agénticos, con el objetivo de igualar a los modelos cerrados sin salir de casa.",
+        "meta": "Jupyter Notebook",
+        "url": "https://github.com/ntwarikbrian/colab_llms"
+      }
+    ],
+    "papers": [
+      {
+        "title": "Unbundling Multimodal Vision Encoding",
+        "authors": "13 upvotes",
+        "url": "https://arxiv.org/abs/2611.17334"
+      },
+      {
+        "title": "Who Remembers What? Multi-Granularity Memory Extraction for Multi-User, Multi-Agent Interaction",
+        "authors": "5 upvotes",
+        "url": "https://arxiv.org/abs/2611.10439"
+      },
+      {
+        "title": "TurtLES: Task- and Time-aware Reinforcement Learning for LLM-based Service Level Objectives",
+        "authors": "4 upvotes",
+        "url": "https://arxiv.org/abs/2611.09567"
+      },
+      {
+        "title": "Consensus Capture in Reference-Based UAV Video Stabilization",
+        "authors": "3 upvotes",
+        "url": "https://arxiv.org/abs/2611.17190"
+      },
+      {
+        "title": "Back to Pixels: Efficient Latent-to-Pixel Video Diffusion via Decoupled Residual Flow Matching",
+        "authors": "2 upvotes",
+        "url": "https://arxiv.org/abs/2611.17336"
+      }
+    ],
+    "community": [
+      {
+        "src": "Hacker News",
+        "title": "Swapping LLMs in Under Two Seconds: A Sleep Mode for Llama.cpp",
+        "note": "Aparcar la memoria GPU del modelo en la RAM del sistema: cambios de 2,1 s en vez de 10,3, sin perder la caché de prompts.",
+        "url": "https://zaage.it/writing/llama-sleep/"
+      },
+      {
+        "src": "Hacker News",
+        "title": "GPUWorks – A 40 MB GPU cluster manager for vLLM/SGLang, no K8s needed",
+        "note": "Un plano de control *MaaS* de 40 MB (Apache-2.0) para clústers mixtos de NVIDIA, AMD, *Ascend* y Apple, sin Kubernetes.",
+        "url": "https://github.com/flitai-io/gpuworks"
+      },
+      {
+        "src": "Hacker News",
+        "title": "Ask HN: What hardware are you using to run local LLMs?",
+        "note": "El hilo eterno de la comunidad: qué hardware doméstico y mini-PC usan las personas para correr modelos abiertos.",
+        "url": "https://news.ycombinator.com/item?id=50337431"
+      },
+      {
+        "src": "The Register",
+        "title": "British fintech Revolut slashes AI coding costs 10x by cutting out Claude and going self-hosted",
+        "note": "Autoalojar *GLM* en vez de *Claude*: unos 900 puntos porcentuales menos de coste en el trabajo de IA de la ingeniería.",
+        "url": "https://www.theregister.com/2026/11/13/revolut_self_hosted_ai_coding/"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

@@ -1,0 +1,598 @@
+{
+  "date": "21 de noviembre de 2026",
+  "weekday_long": "sábado",
+  "edition": "Edición nº 46",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*Inkling 2 Mini*: Thinking Machines estrena su primer «transformer en bucle» y empata con *Qwen3.8-27B* en local",
+    "summary": "Thinking Machines ha publicado el 20 de noviembre *Inkling 2 Mini*, un modelo multimodal —acepta texto e imágenes y responde en texto— bajo licencia *Apache 2.0*. Es el primer «transformer en bucle» que la compañía estrena: 24 capas físicas, de las cuales las 12 centrales se ejecutan tres veces con los mismos pesos, de modo que cada token atraviesa 48 capas aplicadas sin engordar el archivo de pesos. Con 26,4B parámetros totales y solo 3,4B activos por pase (5,4B efectivos), una ventana de un millón de tokens y cuantización *GGUF* de *unsloth*, el modelo apunta de lleno a la inferencia local. En el índice de *Artificial Analysis* empata con *Qwen3.8-27B* (20,1 puntos) y, en *CyberBench*, el benchmark de ciberseguridad de *ValsAI*, la comunidad ya ha verificado que iguala a *Claude Opus 5.5*.",
+    "tags": [
+      "inkling-2-mini",
+      "thinking-machines",
+      "transformer-en-bucle",
+      "moe",
+      "multimodal",
+      "pesos-abiertos",
+      "inferencia-local"
+    ],
+    "links": [
+      {
+        "label": "Página de Thinking Machines: Inkling 2 Mini",
+        "url": "https://thinkingmachines.ai/news/inkling-2-mini/"
+      },
+      {
+        "label": "thinkingmachines/Inkling-2-Mini en Hugging Face",
+        "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"
+      },
+      {
+        "label": "Blog de Hugging Face: Welcome Inkling 2 Mini",
+        "url": "https://huggingface.co/blog/inkling2mini"
+      },
+      {
+        "label": "Artificial Analysis: Inkling 2 Mini",
+        "url": "https://artificialanalysis.ai/models/inkling-2-mini"
+      },
+      {
+        "label": "r/LocalLLM: «Inkling 2 Mini ties Opus 5.5 on CyberBench»",
+        "url": "https://www.reddit.com/r/LocalLLM/comments/1y1iuom/inkling_2_mini_ties_opus_55_on_cyberbench_valsai/"
+      }
+    ],
+    "body": [
+      "Thinking Machines —la empresa detrás de la plataforma *Tinker* y de la familia Inkling— ha publicado el 20 de noviembre *Inkling 2 Mini*. Es un modelo multimodal de propósito general: acepta texto e imágenes como entrada y produce texto como salida, y la ficha lo señala para sistemas agénticos y de uso de herramientas, asistentes de código, chatbots y *RAG*. Los pesos van bajo licencia *Apache 2.0* y el modelo se descarga en *Hugging Face* con disponibilidad nativa en 8 bits, o se entrena directamente sobre *Tinker*. Es el segundo modelo de la generación Inkling 2 en dos semanas —el *Inkling 2 Small* de 594B llegó el 5 de noviembre— y el blog de *Hugging Face* lo recibe con el lema «rendimiento de vanguardia para tu configuración local». No es casualidad: el objetivo declarado es que este calibre de modelo se ejecute en equipos domésticos.",
+      "La novedad que convierte a *Inkling 2 Mini* en noticia de arquitectura —y no solo de benchmarks— es que se trata del primer transformer en bucle que la compañía ha publicado. El modelo es un decodificador de 24 capas con bloques feed-forward de mezcla de expertos (MoE, de «mixture of experts») dispersos, pero las 12 capas centrales se ejecutan tres veces reutilizando los mismos pesos: cada token atraviesa 48 visitas de capa con un archivo de 26,4B parámetros. En cada visita, el token se enruta a 8 de 128 expertos más uno compartido, es decir, 3,4B parámetros activos por pase, y 5,4B efectivos si se cuentan las tres pasadas, que es lo que contabiliza *Artificial Analysis*. Cada pase añade unos 1.000M de parámetros efectivos: la profundidad se compra compartiendo pesos en vez de copiándolos. La ficha documenta soporte nativo para los formatos *NVFP4* y *MXFP8*, un decodificador especulativo *DSpark*, un codificador de imágenes (*ViT*) que proyecta los píxeles al mismo espacio latente que el texto, y una ventana de hasta un millón de tokens.",
+      "Las tablas de evaluación de la ficha explican el movimiento que está provocando en la comunidad. En el índice de *Artificial Analysis* v5.0 consigue 20,1 puntos, empatando con *Qwen3.8-27B* y quedando muy por delante de *Nemotron 3.5 Super VL* (13,6). En código: 79,2 % en *SWE-bench Verified* (solo *bash*), 77,9 % en *SWE-bench Pro v2* (nivel difícil), 73,7 % en *SWE-bench Multilingual* y 71,6 % en *Terminal Bench v2.1* con el arnés *pi*. En trabajo agéntico: 79,0 % en *BrowseComp* con compactación, 85,3 % en *DeepSearchQA* y 82,7 % en *MCP Atlas*. Y en *CyberBench*, el benchmark de ciberseguridad de *ValsAI*, un hilo de la comunidad publicado esta madrugada afirma que el modelo iguala a *Claude Opus 5.5* —con parámetros activos muy inferiores a los de un modelo denso de su clase.",
+      "El diseño apunta a un cálculo económico concreto. La inferencia local depende sobre todo de los parámetros activos por token, porque es lo que gobierna el ancho de banda de memoria y la latencia; y *Inkling 2 Mini* activa el equivalente a un modelo pequeño mientras la profundidad repetida de sus capas aporta el razonamiento de uno grande. El resultado, según las tablas, es un modelo que compite con *Qwen3.8-27B* en la mayor parte de las pruebas mientras cabe en una GPU de 24GB —*unsloth* ya publica cuantizaciones *GGUF* con *imatrix*—. Es una apuesta por la reutilización de pesos que, si se consolida, podría mover el equilibrio entre calidad y coste en la IA local.",
+      "A la publicación le ha seguido, en pocas horas, un ecosistema denso. Por un lado, la propia familia: el *Inkling 2 Small* (594B totales, 17B activos) ya fue convertido por la comunidad en *Tess-4.5-594B-A17B*, un modelo agéntico de código afinado con 46,9M de tokens reales en *Tinker* mediante un *LoRA* de 327 MB, y *drost-ai* ha publicado como *skill* para agentes la receta completa para reproducir el afinado. Por otro, la reacción clásica a un lanzamiento: *OpenUncensored* publicó un ajuste «sin censura» de *Inkling 2 Mini* en las primeras horas (221 votos en *r/LocalLLaMA*), y el viernes el modelo ya era el más visto de *Hugging Face*. La velocidad del eco, esta vez, le está haciendo justicia al modelo."
+    ],
+    "illustration": {
+      "file": "lead-illo-2026-11-21.jpg",
+      "alt": "Un pequeño chip cuadrado en el centro de una ranura circular tallada en una mesa de madera oscura de un despacho doméstico al anochecer, con una cinta de cobre que da tres vueltas consecutivas antes de entrar en el chip; luz cálida de una lámpara a la izquierda, luz azul del ocaso por la ventana a la derecha, y un teclado y una taza de café desenfocados al fondo.",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: las capas repetidas de un «transformer en bucle», dibujadas como una cinta de cobre que da tres vueltas antes de entrar en el chip."
+    }
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*Hy4* de Tencent: el MoE de 770B con un millón de tokens, y *Hy4-flash* para el resto",
+          "summary": "El equipo Tencent Hy ha publicado el 20 de noviembre los pesos de *Hy4*, su modelo insignia de mezcla de expertos: 770B parámetros totales, 49B activos por token, comprensión nativa de texto, imagen y vídeo, y ventana de un millón de tokens. Junto a *Hy4-flash* (220B, de los cuales 64B son memoria *Engram* y solo 12B activos), publicado el 17, completa una familia que la compañía sitúa «entre los modelos de pesos abiertos más fuertes disponibles hoy». Ambos se distribuyen bajo la *Tencent Hy License* —no *Apache 2.0*— en *Hugging Face*, *ModelScope* y *GitCode*.",
+          "tags": [
+            "hy4",
+            "tencent",
+            "moe",
+            "multimodal",
+            "pesos-abiertos"
+          ],
+          "links": [
+            {
+              "label": "tencent/Hy4 en Hugging Face",
+              "url": "https://huggingface.co/tencent/Hy4"
+            },
+            {
+              "label": "tencent/Hy4-flash en Hugging Face",
+              "url": "https://huggingface.co/tencent/Hy4-flash"
+            },
+            {
+              "label": "r/LocalLLaMA: «Tencent Hy4 (flagship multimodal MoE A49B/770B) released»",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y0vaey/tencent_hy4_flagship_multimodal_moe_a49b_770b_released/"
+            }
+          ],
+          "body": [
+            "El modelo insignia *Hy4* es la nueva generación de MoEs del equipo Tencent Hy: acepta texto, imágenes y vídeo, y genera texto. De sus 770B parámetros totales solo se activan 49B por token, y la ventana de contexto llega a un millón. La ficha es honesta sobre las limitaciones: «aunque *Hy4* es uno de los modelos de pesos abiertos más fuertes disponibles hoy, queda una diferencia notable respecto a los modelos propietarios de élite, sobre todo en matemáticas de nivel investigación, codificación de largo horizonte, automejora del modelo y preguntas visuales avanzadas». El matiz de fondo, que la comunidad está debatiendo ya en el AMA del equipo, es la licencia: *Tencent Hy License*, descargable y con pesos abiertos, pero no una licencia abierta clásica como *Apache 2.0*.",
+            "*Hy4-flash* es la versión «para el resto»: 220B parámetros totales, de los cuales 64B corresponden a *Engram* —representaciones aprendidas de bigramas y trigramas recuperadas mediante una búsqueda por tabla de hashes multi-cabeza— y solo 12B activos por token. El tronco de lenguaje tiene 42 capas (una feed-forward densa y 41 de MoE); cada token activa 16 de 512 expertos ruteados, más uno compartido, y los expertos ruteados operan en un espacio latente de dimensión reducida (*LatentMoE*). La combinación de atención híbrida, *LatentMoE* y *Engram* reduce la caché *KV* a 1/6 de la de *Hy4* y a 1/24 de la de *Hy3*, y habilita decodificación especulativa de contexto «a coste bajo y constante». El post-entrenamiento del *flash* se hizo por autodestilación desde *Hy4*."
+          ]
+        },
+        {
+          "title": "*LTX-2.5*: el vídeo abierto de *Lightricks* con audio sincronizado, a tres millones de descargas",
+          "summary": "*Lightricks* sigue empujando en vídeo generativo: *LTX-2.5* se presenta como «un mundo abierto de pesos abiertos, construido para ejecución local y afinado». A partir de texto, imagen o vídeo genera vídeo y audio de alta fidelidad y sincronizados en una sola pasada, con clips de hasta 20 segundos. El modelo acumula 12.929 me gusta y 2,96M de descargas en *Hugging Face*, y la ficha adelanta su uso emergente en robótica e IA física.",
+          "tags": [
+            "ltx-2.5",
+            "lightricks",
+            "video",
+            "multimodal",
+            "pesos-abiertos"
+          ],
+          "links": [
+            {
+              "label": "Lightricks/LTX-2.5 en Hugging Face",
+              "url": "https://huggingface.co/Lightricks/LTX-2.5"
+            },
+            {
+              "label": "LTX-2.5 en fal.ai",
+              "url": "https://fal.ai/ltx-2.5"
+            },
+            {
+              "label": "Endpoint image-to-video de LTX-2.5 en fal",
+              "url": "https://fal.ai/models/lightricks/ltx-2.5/image-to-video/fast"
+            }
+          ],
+          "body": [
+            "La tarjeta del modelo es explícita sobre el posicionamiento: *LTX-2.5* «es un mundo abierto de pesos abiertos, construido para ejecución local y afinado», y su uso consolidado es «generar vídeo y audio de alta fidelidad y sincronizados a partir de entradas de texto, imagen y vídeo», mientras que «su aplicabilidad a dominios emergentes, como la robótica y la IA física, está en desarrollo». En *fal* se sirve la variante de imagen a vídeo, que «anima una imagen estática en vídeo con audio sincronizado en una sola pasada»; la página de producto destaca además el «*Diffusion Fidelity Rendering*» para escenas complejas y el soporte de multi-toma nativo, que sostiene la misma escena entre tomas.",
+            "El dato que más llama la atención es la tracción: casi 3M de descargas y 12.929 me gusta, una cifra que lo sitúa entre los modelos de vídeo generativo más descargados del ecosistema abierto. Para el público de *ia·ahoy* el interés es doble: el modelo corre en local (pesos abiertos y afinables) y la sincronización de audio y vídeo en una sola pasada elimina el pegote clásico de dos modelos por separado, que es donde se perdía la coherencia."
+          ]
+        },
+        {
+          "title": "*Haru-4B*: conversación de voz *full-duplex* nativa a 7,5 fotogramas por segundo",
+          "summary": "*higurashi-ai* ha publicado *Haru-4B*, un modelo base de voz a voz *full-duplex* nativa bajo licencia *Apache 2.0*. A 7,5 Hz, el modelo toma un fotograma del audio del usuario cada 133 ms y produce a la vez un fotograma de su propio audio y de su propio texto: escuchar y hablar nunca se esperan el uno al otro. Imita la voz de un clip de referencia y sostiene una conversación natural, aunque la ficha lo declara explícitamente base, no un asistente.",
+          "tags": [
+            "haru-4b",
+            "voz-a-voz",
+            "full-duplex",
+            "pesos-abiertos"
+          ],
+          "links": [
+            {
+              "label": "higurashi-ai/Haru-4B en Hugging Face",
+              "url": "https://huggingface.co/higurashi-ai/Haru-4B"
+            },
+            {
+              "label": "r/LocalLLaMA: «Haru-4B: Full-Duplex Native Speech-to-Speech»",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y15x4b/haru4b_fullduplex_native_speechtospeech/"
+            }
+          ],
+          "body": [
+            "La ficha técnica de *Haru-4B* es escueta y directa: es un modelo base preentrenado «publicado para investigación», con arquitectura *full-duplex* nativa a 7,5 Hz. Cada 133 ms el modelo toma un fotograma del audio del usuario y produce un fotograma de su propio audio y de su propio texto; el audio del usuario, el audio del modelo y el texto del modelo se suman en una única posición del modelo de lenguaje, de modo que «escuchar y hablar nunca se esperan el uno al otro». La cabeza de audio es una red *MeanFlow* de cuatro capas *MLP* que genera el audio con un único paso de muestreo (escala de guía 1-2, por defecto 1,5).",
+            "La honestidad sobre las limitaciones es lo más destacable: «sostiene una conversación natural, pero no es una fuente fiable de hechos y no sigue instrucciones como un asistente». El modelo puede además imitar la voz de un clip de referencia, con la advertencia de «solo usar voces de las que tengas los derechos». Con 5.707 me gusta en *Hugging Face*, es uno de los modelos de voz a voz con más tracción de la temporada, y se perfila como la alternativa local y de pesos abiertos a los sistemas de llamada *full-duplex* de la nube."
+          ]
+        },
+        {
+          "title": "*Rumble-2-Flash*: reconocimiento de voz de 0,5B parámetros para más de 40 idiomas",
+          "summary": "*Reson8* ha liberado *Rumble-2-Flash*, un modelo abierto de reconocimiento de voz automático (*ASR*) de 0,5B parámetros que cubre más de 40 idiomas. Es la pieza de transcripción que faltaba para los pipelines locales de voz: lo bastante pequeño para correr donde sea y lo bastante amplio como para no limitarse al inglés y al español.",
+          "tags": [
+            "rumble-2-flash",
+            "reson8",
+            "asr",
+            "multilingüe"
+          ],
+          "links": [
+            {
+              "label": "Reson8/Rumble-2-Flash en Hugging Face",
+              "url": "https://huggingface.co/Reson8/Rumble-2-Flash"
+            },
+            {
+              "label": "Blog de Hugging Face: Rumble-2-Flash",
+              "url": "https://huggingface.co/blog/rumble-2-flash"
+            }
+          ],
+          "body": [
+            "Publicado en el blog de *Hugging Face* y liberado bajo *Apache 2.0*, *Rumble-2-Flash* es un modelo de reconocimiento de voz automático de 0,5B parámetros para más de 40 idiomas. En el contexto del movimiento de la semana sobre voz a voz —el *Haru-4B* de más arriba, los AMA de *Hy4*—, un *ASR* pequeño y multilingüe es la pieza que cerraba el circuito: transcripción local, rápida, y sin enviar el audio a la nube. Para quien esté montando un asistente de voz en casa, la combinación de un modelo *full-duplex* como *Haru* con un *ASR* de este calibre resuelve el flujo completo en hardware propio."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "Un *LoRA* de rango 96 que mejora *Qwen3.8-27B* a la vez en *pi*, *Hermes Agent* y *OpenCode*",
+          "summary": "El equipo *harness-hub* ha publicado su «super-adaptador»: tres *LoRA* entrenados por refuerzo (*GRPO*) sobre entornos *Harbor*/*OpenEnv*, uno por cada arnés agéntico (*pi*, *Hermes Agent*, *OpenCode*), fusionados en un solo adaptador de rango 96 que mejora *Qwen3.8-27B* en los tres a la vez, con una media del 63,5 %. La idea: en vez de cambiar de modelo para cada agente, adaptar el modelo a tu arnés.",
+          "tags": [
+            "harness-adapters",
+            "lora",
+            "grpo",
+            "agentes",
+            "openenv"
+          ],
+          "links": [
+            {
+              "label": "Blog de Hugging Face: Harness adapters at scale",
+              "url": "https://huggingface.co/blog/harness-hub/harness-adapters-at-scale"
+            },
+            {
+              "label": "harness-hub/harness-adapters en Hugging Face",
+              "url": "https://huggingface.co/collections/harness-hub/harness-adapters"
+            },
+            {
+              "label": "r/LocalLLaMA: «Qwen3.8-27B super adapter: one rank-96 LoRA that improves 3 agent harnesses»",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y16sam/qwen3827b_super_adapter_one_rank96_lora_that_improves/"
+            }
+          ],
+          "body": [
+            "El blog «*Harness adapters: Safe RL for efficient agentic development*» (6 de noviembre) establecía el enfoque: en vez de elegir el arnés que mejor funcione con tu modelo, se entrena un adaptador *PEFT* (*LoRA*) por arnés, usando refuerzo por aprendizaje (*GRPO*) sobre entornos de *OpenEnv* —con el arnés *pi* y los entornos *Harbor*— y se fusionan. Esta semana *harness-hub* ha dado el paso siguiente: *Qwen3.8-27B-super-adapter*, un *LoRA* de rango 96 que «corre sin cambios» bajo *pi*, *Hermes Agent* y *OpenCode*, con una puntuación media del 63,5 % entre los tres. La colección en *Hugging Face* incluye además los adaptadores individuales de cada arnés.",
+            "La conversación en *r/LocalLLaMA* («*Qwen3.8-27B super adapter: one rank-96 LoRA that improves 3 agent harnesses*», 57 votos, «content to answer questions!») apunta a una práctica que empieza a asentarse: tratar el arnés agéntico como una capa que puede afinarse con datos del dominio, en vez de tomarlo como un dado. Para quien corre agentes en local, la promesa es concreta: un fichero *LoRA* pequeño que hace que el mismo modelo base se comporte mejor bajo el arnés que tú uses, sin reentrenar nada grande."
+          ]
+        },
+        {
+          "title": "*Tess-4.5-594B-A17B*: la receta agéntica sobre *Inkling 2 Small*, ahora como *skill* reutilizable",
+          "summary": "*Migel Tissera* ha publicado *Tess-4.5-594B-A17B*: *Inkling 2 Small* (594B parámetros, 17B activos) post-entrenado con la receta *Tess* de codificación agéntica sobre *Tinker*. El adaptador completo son 327 MB de *LoRA* entrenados con 46,9M de tokens de trabajo agéntico real, y *drost-ai* ha publicado la receta como *skill* para agentes.",
+          "tags": [
+            "tess",
+            "inkling-2-small",
+            "lora",
+            "tinker",
+            "agentes"
+          ],
+          "links": [
+            {
+              "label": "migttissera/Tess-4.5-594B-A17B en Hugging Face",
+              "url": "https://huggingface.co/migttissera/Tess-4.5-594B-A17B"
+            },
+            {
+              "label": "migttissera/Tess-4.5-594B-A17B-LoRA en Hugging Face",
+              "url": "https://huggingface.co/migttissera/Tess-4.5-594B-A17B-LoRA"
+            },
+            {
+              "label": "drost-ai/finetune-inkling-2-small en GitHub",
+              "url": "https://github.com/drost-ai/finetune-inkling-2-small"
+            }
+          ],
+          "body": [
+            "La familia *Tess* lleva meses afinando el oficio de convertir modelos grandes en agénticos de código, y esta semana llega la variante a escala frontera: *Tess-4.5-594B-A17B*, «la receta *Tess* de codificación agéntica sobre una base a escala frontera» —en este caso, *Inkling 2 Small*, el 594B de Thinking Machines del 5 de noviembre. El fichero del adaptador es un *LoRA* de 327 MB en formato *PEFT*, entrenado en la plataforma *Tinker* con 46,9M de tokens de trabajo agéntico real, y el anuncio en X lo presenta como «el mejor modelo *Tess* hasta la fecha».",
+            "Lo relevante para la comunidad no es solo el modelo, sino el empaquetado: *drost-ai* ha publicado *finetune-inkling-2-small* como *skill* para agentes —instrucciones que un agente puede seguir paso a paso para afinar *Inkling 2 Small* con *LoRA* en *Tinker* y publicar el resultado—. Es una muestra de cómo las «recetas» de afinado empiezan a circular como piezas reutilizables de software, no como posts: un agente que lee el *skill* puede reproducir el pipeline completo."
+          ]
+        },
+        {
+          "title": "*System 1 agents*: agentes locales, fiables y rápidos para datos clínicos sensibles",
+          "summary": "El preprint *System 1 agents: a method for local, reliable and fast agentic AI* (21 de noviembre) parte de un dilema concreto: automatizar el análisis de datos clínicos sensibles con IA agéntica, pero los LLMs en la nube exponen los datos de los pacientes y los LLMs locales se alucinan —y un valor inventado en una llamada a herramienta se propaga por el resto del trabajo. La propuesta es una arquitectura de agentes «sistema 1» pensada para correr en local, de forma fiable y rápida.",
+          "tags": [
+            "system-1-agents",
+            "agentes-locales",
+            "fiabilidad",
+            "arxiv"
+          ],
+          "links": [
+            {
+              "label": "arXiv: System 1 agents (2611.21053)",
+              "url": "https://arxiv.org/abs/2611.21053"
+            }
+          ],
+          "body": [
+            "El paper, publicado el 21 de noviembre en *arXiv*, enuncia el problema con precisión: la IA agéntica podría automatizar el análisis de datos clínicos sensibles, pero los agentes actuales dependen de LLMs grandes; los LLMs en la nube exponen los datos de los pacientes, y los LLMs locales se alucinan, y «un valor inventado en una llamada a herramienta se propaga». La propuesta es un método de agentes «sistema 1» —rápidos, locales, y sin dependencia de un modelo frontera en la nube— orientado a la fiabilidad en entornos donde el fallo no es un error recuperable. Encaja en la corriente de agentes locales que este diario lleva siguiendo, y lo interesante para el público de *ia·ahoy* es el enfoque: perseguir la fiabilidad por diseño, no por el tamaño del modelo."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*llama.cpp* v1.0.0: versionado semántico, API estable y «una base más fuerte para el ecosistema de IA local»",
+          "summary": "*llama.cpp* y *ggml* han alcanzado su primera versión 1.0.0 el 13 de noviembre, tres años y medio después de nacer el proyecto. La versión introduce versionado semántico para *libllama* y *libggml*, una API *C* estable, soporte de más de 150 arquitecturas, optimizaciones de memoria y aplicaciones de escritorio. Es el hito que el ecosistema de inferencia local llevaba tiempo esperando: una base con contrato de estabilidad.",
+          "tags": [
+            "llama.cpp",
+            "gguf",
+            "inference-local",
+            "api"
+          ],
+          "links": [
+            {
+              "label": "GitHub: llama.cpp v1.0.0 (release)",
+              "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0"
+            },
+            {
+              "label": "Blog de Hugging Face: llama.cpp v1",
+              "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+            },
+            {
+              "label": "r/LocalLLaMA: «llama.cpp v1.0 is here»",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xv8t2e/llamacpp_v10_is_here/"
+            }
+          ],
+          "body": [
+            "Tras tres años y medio de desarrollo, *llama.cpp* y su librería *ggml* han marcado su primera versión mayor, la v1.0.0, el 13 de noviembre. El cambio de fondo no está en los benchmarks, sino en el contrato: *libllama* y *libggml* adoptan versionado semántico, lo que da a quienes construyen sobre ellas (servidores, interfaces, herramientas) una API *C* estable y predecible. La versión agrega además soporte para más de 150 arquitecturas de modelos, optimizaciones de memoria y un conjunto de aplicaciones de escritorio. El blog del equipo en *Hugging Face* lo presenta como «una base más fuerte para el ecosistema de IA local».",
+            "La recepción en *r/LocalLLaMA* («*llama.cpp v1.0 is here*») ha sido entusiasta, con un hilo paralelo repasando la historia del proyecto. El matiz que la comunidad está discutiendo: la mayor versión se justifica por los cambios de la API *C*, no por nuevas capacidades de inferencia. Para el público de *ia·ahoy* el dato práctico es el de siempre, pero ahora con garantía: lo que se construye sobre *llama.cpp* —cuantizaciones *GGUF*, servidores, *frontends*— puede asumir una base estable."
+          ]
+        },
+        {
+          "title": "180B parámetros en 32GB de RAM: *transformers* estrena *streaming* de expertos para el Mac",
+          "summary": "Tarek Ziadé (Hugging Face) ha publicado el 18 de noviembre «180B Parameters, 32GB of RAM»: la nueva vía *experts_offload* de *transformers* mantiene los expertos de un MoE en el disco y los *streaming* a la GPU a medida, lo que permite correr un modelo de 180B parámetros en un Mac de 32GB. La implementación va en un PR experimental (*huggingface/transformers* #50717) con benchmarks públicos.",
+          "tags": [
+            "transformers",
+            "moe",
+            "apple-silicon",
+            "experts-offload"
+          ],
+          "links": [
+            {
+              "label": "Blog de Hugging Face: MoE expert streaming",
+              "url": "https://huggingface.co/blog/moe-expert-streaming"
+            },
+            {
+              "label": "GitHub: PR transformers #50717 (experts offload)",
+              "url": "https://github.com/huggingface/transformers/pull/50717"
+            }
+          ],
+          "body": [
+            "El post describe una técnica que explota la naturaleza de los MoE: cada token solo activa un puñado de expertos, así que la inmensa mayoría del archivo de pesos está dormida la mayor parte del tiempo. En vez del *offload* clásico de *Accelerate* (que mueve capas completas entre CPU y GPU), la nueva vía *experts_offload* hace que el cargador se salte los tensores de los expertos y las capas de MoE pasen a una implementación *offloaded*: los expertos viven en el disco y se leen bajo demanda, *streaming* durante la decodificación. El resultado: un MoE de 180B parámetros que cabe en un Mac de 32GB, con las cifras de referencia en un *Space* público.",
+            "La implementación está en el PR experimental *huggingface/transformers* #50717, y la autoría es de Tarek Ziadé, del equipo de *Hugging Face*. El post lo sitúa explícitamente en hardware de consumo (Silicon de *Apple*), y se suma a otra apuesta reciente de la semana —motores como *Gufo* para AMD Strix Halo— por sacarse modelos enormes de la chistera en equipos modestos. Es la otra cara de un modelo como *Inkling 2 Mini*: el motor se estira para lo que el modelo ya sabe pedir."
+          ]
+        },
+        {
+          "title": "*Gufo*: el motor de IA abierto para AMD Strix Halo ya sirve *Hy4-flash*",
+          "summary": "*Gufo* (*gufo-org/gufo*) se presenta como «el motor de IA abierto para AMD Strix Halo»: un motor de inferencia para la plataforma *Ryzen AI* de AMD, con un binario que sirve modelos desde una imagen Docker y una interfaz *serve*. En sus primeras horas, la comunidad le ha añadido soporte para *Hy4-flash* mediante una extensión *C++* para *gfx1151*.",
+          "tags": [
+            "gufo",
+            "amd",
+            "strix-halo",
+            "inferencia-local"
+          ],
+          "links": [
+            {
+              "label": "gufo-org/gufo en GitHub",
+              "url": "https://github.com/gufo-org/gufo"
+            },
+            {
+              "label": "franzmoca/hy4-gufo-extension en GitHub",
+              "url": "https://github.com/franzmoca/hy4-gufo-extension"
+            }
+          ],
+          "body": [
+            "El repositorio *gufo-org/gufo* se define como «el motor de IA abierto para AMD Strix Halo» (la plataforma *Ryzen AI* de AMD para equipos compactos, *gfx1151*). El motor se empaqueta como imagen Docker (*gufo-runtime*) con un binario *gufo* que sirve modelos —*gufo serve llm*— y los deja disponibles para otras herramientas desde otro terminal. La señal de que gana tracción: *franzmoca* ha publicado *hy4-gufo-extension*, una extensión en *C++* para que *Hy4-flash* de Tencent corra sobre *Gufo* en Strix Halo. En *r/StrixHalo* circulan ya hilos de usuarios que han «cortado» de *llama.cpp* a *Gufo* y lo describen como «casi tan ágil como un modelo frontera de la nube»."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "El post-entrenamiento *RL* en transformadores de difusión «es solo *steering* de activaciones»",
+          "summary": "Un paper de 18 de noviembre (14 votos en *Hugging Face*) demuestra que la mayor parte de las mejoras que aporta el refuerzo por aprendizaje (*RL*) a los transformadores de difusión (*DiT*, de «diffusion transformer») se reproduce con un truco barato: un conjunto fijo de vectores de dirección sumados a las salidas de las capas del modelo congelado. En *SD3.5-M*, los vectores —0,29M de parámetros, 65× menos que el *LoRA* afinado por *RL*— recuperan el 90-96 % de la ganancia de recompensa.",
+          "tags": [
+            "rl",
+            "diffusion-transformers",
+            "activation-steering",
+            "arxiv"
+          ],
+          "links": [
+            {
+              "label": "arXiv: RL Post-Training in Diffusion Transformers Is Activation Steering (2611.26627)",
+              "url": "https://arxiv.org/abs/2611.26627"
+            }
+          ],
+          "body": [
+            "El paper «RL Post-Training in Diffusion Transformers Is Activation Steering» parte de una hipótesis natural: mejorar el renderizado de texto pedido o la composición de varios objetos parece requerir aprender transformaciones complejas que dependen de cada prompt. Para aislar cuánto de la ganancia se explica por un desplazamiento que no depende de la entrada, los autores prueban cada modelo afinado por *RL* con un parametrización deliberadamente simple: un conjunto fijo de vectores de dirección (*steering*) sumados a las salidas de los bloques del modelo base, congelado.",
+            "Los resultados en *SD3.5-M*: los vectores tienen 65× menos parámetros que el *LoRA* afinado por *RL* (0,29M frente a 18,8M), se ajustan para igualar las predicciones de velocidad de los checkpoints *RL* publicados, sin recompensa en el objetivo, y recuperan el 90,0-96,3 % de la ganancia de recompensa de seis modelos de imagen afinados por *RL* (y 89,8 % y 111,9 % en dos de vídeo). Entrenados desde cero con *RL* en línea, los vectores solos superan la ganancia del *RL* sobre los pesos en renderizado de texto (*OCR*) y en preferencia humana (*PickScore*). Conclusión: «un desplazamiento constante basta para la mayor parte de la ganancia del post-entrenamiento por gradiente de política: en vez de nuevas transformaciones que dependan de la entrada, lo que hace es dirigir el generador preentrenado hacia lo que ya sabe calcular»."
+          ]
+        },
+        {
+          "title": "Detección online de errores en vídeo procedural: el asistente que vigila el trabajo en curso",
+          "summary": "El preprint «Online Mistake Detection in Instruction-Conditioned Procedural Video» (9 votos) parte de una idea práctica: un asistente que vigila a alguien mientras realiza un procedimiento es más útil cuando detecta el error mientras aún hay tiempo de recuperarse, no después. El paper formula la detección de errores en tiempo real, condicionada a la instrucción, sobre vídeo de pasos procedurales.",
+          "tags": [
+            "video",
+            "deteccion-de-errores",
+            "online",
+            "arxiv"
+          ],
+          "links": [
+            {
+              "label": "arXiv: Online Mistake Detection in Instruction-Conditioned Procedural Video (2611.25567)",
+              "url": "https://arxiv.org/abs/2611.25567"
+            }
+          ],
+          "body": [
+            "Publicado el 21 de noviembre, el paper se centra en el problema de un asistente que vigila a una persona mientras realiza un procedimiento (una receta, un montaje, un protocolo): la detección clásica de errores se hace a posteriori, pero «un asistente que vigila a alguien que realiza un procedimiento es más útil cuando puede detectar errores mientras aún hay tiempo de recuperar». La formulación del problema —detección online, condicionada a la instrucción, sobre vídeo procedural— encaja en la línea de asistentes que observan acciones del mundo real, y es el tipo de pieza que, un día, acabará corriendo en la cocina o en la sala de montaje, sobre el hardware que ya tienes."
+          ]
+        },
+        {
+          "title": "Los modelos de lenguaje pueden reescribir sus propios pesos",
+          "summary": "«Language Models Can Rewrite Their Own Weights» (6 votos, 21 de noviembre) documenta que un modelo frontera ha sido capaz de editar sus propios pesos. Los LLMs se entrenan una vez, se congelan y se despliegan; mejorarlos de nuevo exige otra ronda de entrenamiento —y este trabajo muestra que, en ciertas condiciones, el modelo puede reescribir la propia red que lo define.",
+          "tags": [
+            "self-modification",
+            "pesos",
+            "arxiv"
+          ],
+          "links": [
+            {
+              "label": "arXiv: Language Models Can Rewrite Their Own Weights (2611.21885)",
+              "url": "https://arxiv.org/abs/2611.21885"
+            }
+          ],
+          "body": [
+            "El paper del 21 de noviembre parte de la observación de que «los modelos de lenguaje se entrenan una vez, se congelan y se despliegan: mejorarlos de nuevo exige otra ronda de entrenamiento», y documenta que un modelo frontera ha sido capaz de editar sus propios pesos (self-weight editing). Es la versión extrema de la edición de pesos que ya se usaba como herramienta de análisis —desactivar o reescribir circuitos concretos—, con la diferencia de que ahora quien ejecuta la edición es el propio modelo. El trabajo se suma a la discusión sobre la automejora de modelos —el mismo campo que, de pasada, aparece en la ficha de *Hy4*, que lista la «automejora del modelo» entre las brechas con los modelos propietarios— y plantea las preguntas de control y seguridad que se derivan de un sistema capaz de modificar el sistema que lo ejecuta."
+          ]
+        },
+        {
+          "title": "Agentes de código entrenan redes neuronales ópticas *in situ*, sin modelo digital calibrado",
+          "summary": "«In Situ Training of Optical Neural Networks by Coding Agents» (21 de noviembre) ataca el último eslabón de las computadoras ópticas: cada dispositivo físico se desvía de su diseño y debe entrenarse sobre el hardware real, y el entrenamiento *in situ* clásico depende de un modelo digital calibrado construido por un experto. El trabajo muestra que agentes de código pueden hacerse cargo de ese proceso directamente sobre el aparato.",
+          "tags": [
+            "optical-computing",
+            "coding-agents",
+            "in-situ",
+            "arxiv"
+          ],
+          "links": [
+            {
+              "label": "arXiv: In Situ Training of Optical Neural Networks by Coding Agents (2611.23875)",
+              "url": "https://arxiv.org/abs/2611.23875"
+            }
+          ],
+          "body": [
+            "Las redes neuronales ópticas prometen un cómputo rápido y de bajo consumo, pero «cada dispositivo se desvía de su diseño y debe entrenarse con el hardware». El entrenamiento *in situ* —configurar los pesos físicos (intensidades, fases, atenuadores) directamente sobre el aparato óptico— se ha apoyado hasta ahora en un modelo digital calibrado construido por un experto, y ese es el cuello de botella. El paper del 21 de noviembre demuestra que agentes de código pueden dirigir el entrenamiento *in situ* sobre el hardware, sin depender de ese modelo calibrado: el agente mide, ajusta, mide, en el mismo lazo. Es un ejemplo concreto de la corriente de «agentes que hacen experimentos científicos y de ingeniería», y una de las aplicaciones menos vistosas —pero más duras— de la IA agéntica."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "En directo: el equipo Tencent Hy en AMA sobre *Hy4* y *Hy4-flash* en *r/LocalLLaMA*",
+          "summary": "«*Tencent Hy Team & Shunyu Yao Here! Ask Us Anything about Hy4 & Hy4 flash!*»: el equipo que publicó esta semana los 770B de *Hy4* se sienta ahora mismo en *r/LocalLLaMA* a responder preguntas —151 votos y más de 300 comentarios en unas horas. Junto al hilo de la publicación del insignia (360 votos, 70 comentarios), es el foro donde la comunidad está desmontando la arquitectura *Engram*, la caché *KV* reducida y la licencia no abierta.",
+          "tags": [
+            "tencent",
+            "hy4",
+            "ama",
+            "r-localllama"
+          ],
+          "links": [
+            {
+              "label": "AMA: Tencent Hy Team & Shunyu Yao (r/LocalLLaMA)",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y15w4a/"
+            },
+            {
+              "label": "r/LocalLLaMA: «Tencent Hy4 (flagship multimodal MoE A49B/770B) released»",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y0vaey/tencent_hy4_flagship_multimodal_moe_a49b_770b_released/"
+            }
+          ],
+          "body": [
+            "La publicación de la familia *Hy* —el *Hy4-flash* el 17 de noviembre, el insignia de 770B el 20— ha llevado al equipo Tencent Hy, y a *Shunyu Yao*, a un AMA en *r/LocalLLaMA* que está ocurriendo ahora mismo: «*Tencent Hy Team & Shunyu Yao Here! Ask Us Anything about Hy4 & Hy4 flash!*», 151 votos y 325 comentarios al cierre de esta edición. El hilo de la publicación del insignia («*Tencent Hy4 (flagship multimodal MoE A49B/770B) released*») acumula 360 votos y 70 comentarios.",
+            "Los temas del foro son los de siempre cuando un MoE grande cae en manos de la comunidad: cómo corren las variantes *FP8* y *Base*, qué papel juega *Engram* en la caché *KV*, qué se puede esperar de la decodificación especulativa de contexto, y la discusión de fondo sobre la *Tencent Hy License* —pesos descargables, pero no una licencia abierta clásica. Para quien tenga un servidor grande, el *flash* de 12B activos con un millón de contexto es lo más accesible de la familia."
+          ]
+        },
+        {
+          "title": "*Inkling 2 mini uncensored*: la reacción de la comunidad en las primeras horas",
+          "summary": "Ocho horas después del lanzamiento, *OpenUncensored* ya publica *Inkling-2-Mini-Uncensored*, un ajuste «sin censura» del modelo (221 votos en *r/LocalLLaMA*). Es el movimiento que se repite con cada gran liberación: la comunidad abre variantes del modelo base en horas, y el «eco» de un lanzamiento puede ser tan grande como el propio lanzamiento.",
+          "tags": [
+            "inkling-2-mini",
+            "openuncensored",
+            "comunidad"
+          ],
+          "links": [
+            {
+              "label": "OpenUncensored/Inkling-2-Mini-Uncensored en Hugging Face",
+              "url": "https://huggingface.co/OpenUncensored/Inkling-2-Mini-Uncensored"
+            },
+            {
+              "label": "r/LocalLLaMA: «Inkling 2 mini uncensored»",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y1ig9e/"
+            }
+          ],
+          "body": [
+            "El patrón se repite con cada modelo grande y abierto: en las primeras horas, *OpenUncensored* —el proyecto que lleva meses publicando ajustes «sin censura» de los modelos populares— ha lanzado *Inkling-2-Mini-Uncensored*, un ajuste fino de *Inkling 2 Mini* cuyo hilo en *r/LocalLLaMA* ha acumulado 221 votos en pocas horas. A esto se suma la verificación comunitaria de que el modelo «empata con *Opus 5.5* en *CyberBench*» (hilo en *r/LocalLLM*) y la receta *Tess* sobre su hermano mayor, el *Inkling 2 Small*. El ecosistema alrededor de *Inkling 2* se está formando a velocidad de comunidad, no de empresa."
+          ]
+        },
+        {
+          "title": "*songe*: un motor de entrenamiento para tus modelos locales, usando el cómputo ocioso",
+          "summary": "*sous-labs/songe* (Python, 52 estrellas, *Apache 2.0*) se describe como «un motor de entrenamiento para tu modelo local, usando tu cómputo ocioso»: la idea es que la máquina siga afinando o entrenando modelos mientras duermes o trabaja, sin que el entrenamiento compita con el resto.",
+          "tags": [
+            "songe",
+            "entrenamiento",
+            "self-hosting"
+          ],
+          "links": [
+            {
+              "label": "sous-labs/songe en GitHub",
+              "url": "https://github.com/sous-labs/songe"
+            }
+          ],
+          "body": [
+            "La entrada más reciente de la tendencia de *GitHub* es *songe*, de *sous-labs*: «un motor de entrenamiento para tu modelo local, usando tu cómputo ocioso». El enfoque —entrenar o afinar modelos locales aprovechando el tiempo en que la máquina no hace otra cosa— es el típico de la comunidad de *self-hosting*: convertir el equipo de trabajo en un pequeño laboratorio nocturno. Va en la misma línea de los «recetarios» de afinado que vemos en la sección de agentes: el cómputo ocioso se empieza a tratar como un recurso de primera clase del taller doméstico. Código en Python, bajo *Apache 2.0*."
+          ]
+        },
+        {
+          "title": "*StickLLM*: un pendrive arrancable con Debian y un LLM local",
+          "summary": "*StickLLM/stickllm* es un pendrive arrancable con Debian «live» y un LLM local: «Bootable Privacy AI USB — local LLM on Debian live (AMD + RTX 3090)». La premisa es la de siempre llevada al extremo: si la máquina te la confiesan, el LLM lo llevas contigo.",
+          "tags": [
+            "stickllm",
+            "debian",
+            "self-hosting",
+            "privacidad"
+          ],
+          "links": [
+            {
+              "label": "StickLLM/stickllm en GitHub",
+              "url": "https://github.com/StickLLM/stickllm"
+            }
+          ],
+          "body": [
+            "El repositorio *StickLLM/stickllm* describe su producto como «un pendrive de IA privada arrancable — un LLM local sobre Debian live (AMD + RTX 3090)». Es el punto final natural de la filosofía *self-hosting*: en vez de correr el modelo en una máquina que no es tuya, llevas la máquina entera —sistema operativo, modelo, runtime— en un pendrive y la arrancas en cualquier equipo compatible. Encaja en la semana de *llama.cpp* 1.0 y de motores como *Gufo*: la infraestructura de inferencia local madura, y la pregunta del público pasa a ser «¿y si la llevo conmigo?»."
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "han938/open-webui-private-ai-desk",
+        "stars": "★ 153",
+        "desc": "Interfaz de chat para modelos de IA privados que corren en tu propio hardware",
+        "meta": "TypeScript · sin licencia indicada",
+        "url": "https://github.com/han938/open-webui-private-ai-desk"
+      },
+      {
+        "name": "CYFARE/Mariana-Studio",
+        "stars": "★ 58",
+        "desc": "Estudio local de un solo panel: datos, entrenamiento, agentes, evaluación y exportación a *GGUF*, *ONNX* o *safetensors*",
+        "meta": "Python · AGPL-3.0",
+        "url": "https://github.com/CYFARE/Mariana-Studio"
+      },
+      {
+        "name": "sous-labs/songe",
+        "stars": "★ 52",
+        "desc": "Motor de entrenamiento para modelos locales que aprovecha el cómputo ocioso de la máquina",
+        "meta": "Python · Apache-2.0",
+        "url": "https://github.com/sous-labs/songe"
+      },
+      {
+        "name": "prp/oscar",
+        "stars": "★ 8",
+        "desc": "Sirviendo elástico de LLMs grandes sobre Silicon de *Apple*",
+        "meta": "Rust · Apache-2.0",
+        "url": "https://github.com/prp/oscar"
+      },
+      {
+        "name": "Magirad/ComfyUI-SingleEncoderEnhancer",
+        "stars": "★ 4",
+        "desc": "Nodo de *ComfyUI* que reescribe el prompt con su propio LLM antes de codificarlo",
+        "meta": "Python · GPL-3.0",
+        "url": "https://github.com/Magirad/ComfyUI-SingleEncoderEnhancer"
+      }
+    ],
+    "papers": [
+      {
+        "title": "RL Post-Training in Diffusion Transformers Is Activation Steering",
+        "authors": "14 upvotes",
+        "url": "https://arxiv.org/abs/2611.26627"
+      },
+      {
+        "title": "Online Mistake Detection in Instruction-Conditioned Procedural Video",
+        "authors": "9 upvotes",
+        "url": "https://arxiv.org/abs/2611.25567"
+      },
+      {
+        "title": "Language Models Can Rewrite Their Own Weights",
+        "authors": "6 upvotes",
+        "url": "https://arxiv.org/abs/2611.21885"
+      },
+      {
+        "title": "PAD: Policy-Aware Data Valuation for Autonomous Driving",
+        "authors": "4 upvotes",
+        "url": "https://arxiv.org/abs/2611.25604"
+      },
+      {
+        "title": "System 1 agents: a method for local, reliable and fast agentic AI",
+        "authors": "4 upvotes",
+        "url": "https://arxiv.org/abs/2611.21053"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLaMA",
+        "title": "Tencent Hy Team & Shunyu Yao: AMA sobre *Hy4* y *Hy4-flash*",
+        "note": "El equipo responde en directo sobre el insignia de 770B y el flash de 12B activos",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y15w4a/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "«Qwen3.8-27B super adapter»: un *LoRA* de rango 96 que mejora tres arneses de agentes",
+        "note": "Un solo adaptador para *pi*, *Hermes Agent* y *OpenCode*",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y16sam/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "«Inkling 2 mini uncensored»: ajuste sin censura en las primeras horas",
+        "note": "La comunidad ya abre variantes de *Inkling 2 Mini*",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y1ig9e/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "«Tencent Hy4 (flagship multimodal MoE A49B/770B) released»",
+        "note": "La publicación del insignia: 360 votos, 70 comentarios",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y0vaey/"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

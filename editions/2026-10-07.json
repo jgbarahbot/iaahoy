@@ -1,0 +1,171 @@
+{
+  "date": "7 de octubre de 2026",
+  "weekday_long": "miércoles",
+  "edition": "Edición nº 11",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Cloudflare abre Clef, su familia de modelos de pesos abiertos para decisiones",
+    "summary": "Cloudflare ha publicado Clef, una familia de modelos de pesos abiertos pensados para decidir: a partir de un estado y de un esquema de preguntas tipadas, el modelo emite la decisión, y lo lee tanto si el estado llega como texto o JSON como si incluye imágenes. Se trata de un modelo multimodal de unos 27.000 millones de parámetros (basado en la familia Qwen) que Cloudflare entrena y abre para que cualquiera lo use en local, con una visión nueva y una variante más ligera y rápida, clef-flash, para quien no pueda con el tamaño completo. La idea no es la chat: es meter un LLM en el punto exacto donde un sistema tiene que tomar una decisión y justificarla, que es justo donde la mayoría de los modelos generalistas se quedan cortos. En Hugging Face ya acumula más de un millar de likes y cuantizaciones de la comunidad para correrlo en casa. Para quien self-hosta, es una pieza muy atractiva: un modelo de decisión abierto, multimodal y con una versión rápida que cabe en hardware modesto.",
+    "tags": ["pesos abiertos", "decisiones", "multimodal", "Cloudflare"],
+    "links": [
+      {"label": "Hugging Face (Cloudflare/clef)", "url": "https://huggingface.co/Cloudflare/clef"},
+      {"label": "Hugging Face (Cloudflare/clef-flash)", "url": "https://huggingface.co/Cloudflare/clef-flash"},
+      {"label": "Colección Clef (Hugging Face)", "url": "https://huggingface.co/collections/Cloudflare/clef"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "Kolibri-1, el modelo soberano europeo de Aleph Alpha",
+          "summary": "Aleph Alpha ha publicado Kolibri-1, un modelo MoE de 78.000 millones de parámetros con unos 3.460 millones activos por token, pesos abiertos bajo Apache 2.0 y contexto de un millón de tokens. Está entrenado desde cero y orientado a entornos críticos (soberano, pensado para alemán e inglés), y se presenta en la frontera de Pareto entre coste y calidad. El requisito mínimo de hardware no es exiguo (una H200 o dos A100/H100), pero es una señal clara de lo que llegan de la corriente de modelos abiertos europeos con vocación de producción. Para quien quiere un MoE grande y abierto sin depender de un proveedor de API, es de los que hay que vigilar.",
+          "tags": ["MoE", "pesos abiertos", "Apache 2.0", "Europa"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1"},
+            {"label": "Aleph Alpha (Kolibri)", "url": "https://aleph-alpha.com/en/kolibri/"}
+          ]
+        },
+        {
+          "title": "EmbeddingGemma 2, embeddings multimodales abiertos para el dispositivo",
+          "summary": "Google DeepMind ha abierto EmbeddingGemma 2, un modelo ligero y multimodal de embeddings que mapea texto (incluido código), imágenes, vídeo y audio en el mismo espacio dimensional, de modo que las representaciones de distintas modalidades se pueden comparar directamente. Es el modelo abierto más capaz para embeddings multimodales sobre el dispositivo, pensado para correr en local y sin nube. Ya está disponible en Hugging Face y en Ollama. Para quien construye sistemas de búsqueda o RAG multimodal y no quiere mandar datos a un servicio externo, es una de las piezas abiertas más prácticas del momento.",
+          "tags": ["embeddings", "multimodal", "on-device", "Google"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/google/embeddinggemma-2"},
+            {"label": "Blog de Google", "url": "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/"}
+          ]
+        },
+        {
+          "title": "LTX-2.5, generación de vídeo y audio abierta de Lightricks",
+          "summary": "Lightricks ha publicado LTX-2.5, un modelo de pesos abiertos de generación de vídeo y audio sincronizados, con continuidad de escenas multishot nativa y una técnica de renderizado que mete más cómputo en las escenas complejas. Es uno de los modelos abiertos más completos de vídeo del momento, con miles de likes en Hugging Face y workflows en ComfyUI y en fal. La corriente es clara: llevar la generación de vídeo de vuelta al hardware propio, en vez de depender de una API de pago. Para quien hace prototipos de vídeo en local o quiere una generación sin nube, es de las referencias abiertas que están moviendo el terreno.",
+          "tags": ["vídeo", "audio", "generación", "open-weight"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/Lightricks/LTX-2.5"},
+            {"label": "LTX (Lightricks)", "url": "https://ltx.io/"}
+          ]
+        },
+        {
+          "title": "Qwen3.8-27B, el 27B de pesos abiertos que arrasa en tendencias",
+          "summary": "Qwen3.8-27B, el modelo de 27.000 millones de parámetros de la generación Qwen3.8, sigue siendo de los más descargados y mejor puntuados de Hugging Face, con decenas de miles de likes. Está abierto bajo licencia Apache 2.0, con un contexto de unos 262.000 tokens, y es de los modelos que más se montan en entornos locales por su relación entre tamaño, calidad y coste. Ya hay cuantizaciones GGUF de la comunidad para correrlo en una sola GPU decente. Es un punto de partida muy sólido para quien quiere un LLM grande y abierto sin complicaciones de licencias ni de API.",
+          "tags": ["Qwen", "pesos abiertos", "Apache 2.0", "local"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/Qwen/Qwen3.8-27B"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "Falcon-Emirati: un LLM que aprende el dialecto, la cultura y el matiz",
+          "summary": "El Technology Innovation Institute (TII) de Emiratos publica Falcon-Emirati, un trabajo sobre cómo un LLM aprende no solo el dialecto emiratí sino también la cultura y el matiz que van con él. Es una muestra muy representativa de la carrera por modelos soberanos en el mundo árabe: en vez de un modelo genérico, un LLM afinado para un registro cultural concreto. La entrada del blog de Hugging Face detalla la decisión de abrirlo y los resultados. Para quien trabaja en modelos multilingües o en IA para el mundo árabe, es un punto de referencia actual sobre lo que puede llegar a capturar un LLM de un registro dialectal completo.",
+          "tags": ["multilingüe", "dialecto", "soberano", "TII"],
+          "links": [
+            {"label": "Blog de Hugging Face (TII)", "url": "https://huggingface.co/blog/tiiuae/falcon-emirati"}
+          ]
+        },
+        {
+          "title": "From Evidence to Action: por qué fallan los agentes que usan herramientas",
+          "summary": "Este trabajo estudia dónde se rompe la cadena de 'evidencia a acción' en los agentes que usan herramientas: que el resultado sea correcto no garantiza que la acción estuviera respaldada por la evidencia establecida antes de ejecutarla. Los autores mapean los puntos de fallo cuando el agente cambia el estado externo. Es una línea muy práctica para quien despliega agentes con efectos reales: no basta con que acaben la tarea, hay que verificar que cada acción partió de una base verificada. Complementa bien el debate reciente sobre evaluar agentes por el estado del sistema, no por la confidencia del mensaje.",
+          "tags": ["agentes", "herramientas", "evaluación", "fiabilidad"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.07753"},
+            {"label": "Hugging Face (paper)", "url": "https://huggingface.co/papers/2610.07753"}
+          ]
+        },
+        {
+          "title": "open-academic-paper-gen: del tema a un borrador de paper con citas reales",
+          "summary": "mmlong818 publica open-academic-paper-gen, un pipeline multi-agente que convierte un tema de investigación en un borrador de paper anclado en literatura real, con detección de alucinación de citas y comprobación de que cada afirmación tiene soporte. Es una pieza muy de la actualidad: en un ecosistema inundado de texto generado, separar lo que está respaldado de lo que el modelo inventa es una necesidad real. Encaja en la corriente de agentes de investigación que verifican sus propias fuentes en vez de confiar en su propia pluma.",
+          "tags": ["agentes", "investigación", "citas", "GitHub"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/mmlong818/open-academic-paper-gen"}
+          ]
+        },
+        {
+          "title": "llm-gateway: enrutado compatible con el estado para inferencia local",
+          "summary": "randzero publica llm-gateway, un gateway agnóstico de motor y consciente del estado para inferencia de LLMs: un router compatible con OpenAI/Anthropic, con un plugin opcional de vLLM y una capa de estado extensible para enrutado consciente del KV-cache y de la latencia. La idea es dirigir cada petición al nodo que mejor la atienda según su estado, no al primero de la cola. Encaja en la corriente de self-hosting serio: orquestar varios workers locales de forma inteligente sin una SaaS de inferencia entre medio.",
+          "tags": ["self-hosting", "gateway", "vLLM", "ruteo"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/randzero/llm-gateway"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "NeMo-DCR: refit delta-comprimido para RL agéntico a escala de billones de parámetros",
+          "summary": "El aprendizaje por refuerzo agéntico separa el entrenamiento del rollout, así que cada actualización de la política tiene que llegar a los clusters de rollout antes del siguiente lote. Transferir un checkpoint completo de 1 billón de parámetros para esa sincronización tarda 87,5 minutos. Este trabajo propone NeMo-DCR, un refit delta-comprimido y bit-exacto para que la sincronización de pesos no sea el cuello de botella. Es infraestructura pura para RL agéntico a escala: quien entrena agentes enormes sabe que la comunicación de pesos, no el cómputo, es donde se pierde el tiempo.",
+          "tags": ["refuerzo", "RL", "escala", "NVIDIA"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.08430"}
+          ]
+        },
+        {
+          "title": "HLA: atención lineal híbrida con mezcla dinámica por trozos",
+          "summary": "La atención lineal permite decodificación eficiente de contexto largo comprimiendo el historial en estados recurrentes, pero esa comprimsión dificulta el acceso selectivo a información dispersa y lejana. Este trabajo propone HLA, una atención lineal híbrida que mezcla dinámicamente por trozos (chunk-wise) para recuperar ese acceso selectivo. Es una línea de eficiencia para contexto largo muy concreta: mantener el coste bajo de la atención lineal sin perder la capacidad de saltar a la información que importa. Interesante para quien necesita ventana larga sin un coste de atención cuadrático.",
+          "tags": ["atención", "contexto largo", "eficiencia", "arquitectura"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.05842"}
+          ]
+        },
+        {
+          "title": "Taming VLAs: compensación propia y pruebas de estrés para robots",
+          "summary": "Las políticas vision-lenguaje-acción (VLA) suelen fallar cuando el movimiento ejecutado por el robot se desvía de la acción comandada, por el desgaste mecánico o cambios de carga. Este trabajo propone auto-compensación y pruebas de estrés para domar a los VLAs bajo errores de ejecución reales. Es un paso práctico hacia robots que se recuperan de sus propios errores en vez de colapsar: no basta que la política sea buena en simulación, hay que estresarla con la mecánica real. Clave para quien lleva VLAs a hardware físico.",
+          "tags": ["robótica", "VLA", "robustez", "control"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2609.37334"}
+          ]
+        },
+        {
+          "title": "MEND: refuerzo para modelos de flujo con emparejamiento de velocidad",
+          "summary": "El post-entrenamiento por recompensa de modelos de flujo o re-pondera las muestras propias bajo una penalización KL o retro-propaga la recompensa moviendo cada muestra sin comprobar que el movimiento vale la pena. MEND propone un refuerzo para modelos de flujo vía emparejamiento de velocidad proximal (proximal velocity matching), para que la actualización por recompensa sea más estable. Es un trabajo de la frontera del entrenamiento de generadores por flujo: mejorar la calidad por recompensa sin romper lo que el modelo ya sabía generar.",
+          "tags": ["flujo", "generación", "refuerzo", "entrenamiento"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.05954"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "decision: la capa de decisión con confianza antes de que el agente actúe",
+          "summary": "DcisionIO publica decision, la capa de decisión para la IA: decisiones tipadas con un nivel de confianza antes de que el agente ejecute. Viene con plantillas, Decision Schemas y ejemplos de API en cURL, Node y Python. La idea es que la toma de decisión deje de estar enterrada en el prompt y pase a ser un objeto explícito y auditable. Encaja en la corriente de agentes con garantías: saber qué va a decidir el sistema y con qué confianza, antes de que toque el mundo real.",
+          "tags": ["decisiones", "agentes", "auditoría", "GitHub"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/DcisionIO/dcision"}
+          ]
+        },
+        {
+          "title": "MI50: afinar inferencia local en hardware AMD antiguo",
+          "summary": "DByte308 publica MI50, un diario de afinación de inferencia de LLMs local sobre una GPU MI50 (gfx906), comparando ROCm frente a Vulkan, MoE, decodificación especulativa (MTP/DFlash/EAGLE3), cuantización y los límites reales del hardware. Es exactamente el tipo de conocimiento que falta a quien corre modelos en hardware no estándar: no solo el 'cómo', sino el 'qué cabe y dónde se topa' en una GPU concreta. Muy útil para la comunidad de self-hosting en AMD y para quien quiere exprimir hardware antiguo.",
+          "tags": ["self-hosting", "AMD", "ROCm", "inferencia"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/DByte308/MI50"}
+          ]
+        },
+        {
+          "title": "scholar-llm-wiki: papers y notas en un wiki de Obsidian interconectado",
+          "summary": "lkhfrgc publica scholar-llm-wiki, un kit de base de conocimiento para investigación y revisión de literatura: agentes de IA compilan papers, libros y notas en un wiki de Obsidian estructurado y densamente interconectado, construido sobre el enfoque de llm-wiki de Karpathy, con skills de ingestión, consulta y limpieza y un vocabulario de etiquetas controlado. Es una aplicación muy práctica de LLMs abiertos a la investigación: una biblioteca personal que se escribe y mantiene sola, en formato abierto y local. Ideal para quien hace revisión de literatura y quiere un segundo cerebro autoorganizado.",
+          "tags": ["investigación", "Obsidian", "agentes", "conocimiento"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/lkhfrgc/scholar-llm-wiki"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

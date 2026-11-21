@@ -1,0 +1,165 @@
+{
+  "date": "17 de octubre de 2026",
+  "weekday_long": "sábado",
+  "edition": "Edición nº 21",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Reflection estrena Beam: un MoE disperso de 501B parámetros (23B activos), el primer modelo de pesos abiertos de la nueva lab, con licencia Apache 2.0",
+    "summary": "Reflection, una nueva laboratorio estadounidense, ha publicado Beam, su primer modelo de pesos abiertos: una mixture-of-experts dispersa de 501 mil millones de parámetros (501B) que solo activa 23 mil millones (23B) por token, entrenada con unos 23.8 billones de tokens y liberada bajo licencia Apache 2.0. Está orientada especialmente a flujos agénticos de código, y Reflection la presenta como un modelo que puedes poseer, personalizar y escalar —una apuesta directa por la autonomía de los equipos sobre su propio modelo frontera. Su llegada, el mismo fin de semana que Meta libera Muse Spark Open, confirma que el espacio de los grandes MoE abiertos se está llenando rápido, y da a la comunidad un nuevo candidato de referencia para agentes que necesitan razonamiento y ejecución de tareas largas.",
+    "tags": ["open-weights", "moe", "agentic-coding", "apache-2.0", "501B", "reflection"],
+    "links": [
+      {"label": "Blog de Reflection (Hugging Face)", "url": "https://huggingface.co/blog/reflection-beam"},
+      {"label": "Blog de Reflection", "url": "https://reflection.ai/blog/introducing-beam"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "LTX-2.5 de Lightricks: vídeo con audio nativo y sincronizado, en pesos abiertos",
+          "summary": "Lightricks ha lanzado LTX-2.5, su modelo de pesos abiertos para generación de vídeo con audio nativo y sincronizado. Combina difusión con una asignación dinámica de *keyframes* que dedica más cómputa a las escenas complejas, y admite todas las combinaciones de texto, imagen, vídeo y audio. Con más de 1.9 millones de descargas y una de las mayores cifras de likes de la semana, ya es uno de los modelos de vídeo abiertos más usados, y corre en local y en servicios como *fal*.",
+          "tags": ["video-generation", "audio", "open-weights", "diffusion", "lightricks"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/Lightricks/LTX-2.5"},
+            {"label": "fal.ai", "url": "https://fal.ai/ltx-2.5"}
+          ]
+        },
+        {
+          "title": "IBM lanza Granite Switch 4.1: chat, decisiones y voz en un solo endpoint (30B y 8B)",
+          "summary": "IBM presenta Granite Switch 4.1, una familia (30B y 8B) que reúne en un solo endpoint conversación, razonamiento para decisiones y reconocimiento de voz. La idea es simplificar un pipeline que antes requería varios modelos: uno que chatea, otro que clasifica y otro que transcribe. Ya está en *Hugging Face* y se está probando en *r/LocalLLaMA*, con debate sobre el equilibrio entre el 30B y el 8B según el hardware disponible.",
+          "tags": ["ibm", "granite", "multimodal", "asr", "open-weights"],
+          "links": [
+            {"label": "Blog (Hugging Face)", "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1"},
+            {"label": "Modelo 30B", "url": "https://huggingface.co/ibm-granite/granite-switch-4.1-30b"}
+          ]
+        },
+        {
+          "title": "FLUX.3 Image Klein: la última generación de FLUX, compacta y dentro de Diffusers",
+          "summary": "Black Forest Labs ha añadido FLUX.3 Image Klein a *diffusers*: un modelo compacto de generación y edición de imagen dentro de la familia FLUX.3, con variantes pensadas para integrarse en *ComfyUI*. Es la forma más práctica de llevar la última generación de FLUX a flujos de trabajo de imagen tanto en local como en la nube.",
+          "tags": ["image-generation", "image-editing", "diffusers", "comfyui", "black-forest-labs"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein"},
+            {"label": "Blog (Hugging Face)", "url": "https://huggingface.co/blog/flux-3"}
+          ]
+        },
+        {
+          "title": "drama-3 de Fish Audio: TTS de pesos abiertos para diálogos con varios hablantes y emoción",
+          "summary": "Fish Audio ha publicado drama-3, un modelo de voz (TTS) de pesos abiertos orientado a diálogo y actuación: varios hablantes, edición de audio y generación de habla emocional, en varios idiomas (español incluido). Con más de 560 likes, apunta a generar diálogos realistas para doblaje y ficción en audio sin depender de un servicio cerrado de síntesis de voz.",
+          "tags": ["tts", "speech", "multi-speaker", "open-weights", "fish-audio"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/fishaudio/drama-3"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "Qwen3.8-27B (Apache 2.0): la base de tamaño medio para agentes que se configuran en hardware modesto",
+          "summary": "Qwen3.8-27B, bajo licencia Apache 2.0, sigue siendo de referencia como modelo de tamaño medio para agentes locales: razonamiento, código y uso de herramientas en 27B parámetros, con variantes cuantizadas para *llama.cpp* y *vLLM*. Varios repos de esta semana lo configuran en hardware modesto (GPU de portátil, clústeres de tarjetas reutilizadas) como base de agentes que buscan, navegan y ejecutan código.",
+          "tags": ["qwen", "agents", "local-llm", "apache-2.0", "27B"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/Qwen/Qwen3.8-27B"},
+            {"label": "Guía de tuning multi-GPU", "url": "https://github.com/Lowaltitudeflight/local-llm-tuning-guide"}
+          ]
+        },
+        {
+          "title": "LFM2.5-24B-A2B de LiquidAI: agentes rápidos y privados, on-device",
+          "summary": "LiquidAI libera LFM2.5-24B-A2B, un MoE de 24B totales con solo 2B activos, optimizado para agentes rápidos y privados *on-device*: se corre en portátiles y equipos sin GPU dedicada manteniendo un buen rendimiento. Su propuesta es tener un agente que razona y usa herramientas de forma local, sin enviar los datos a la nube.",
+          "tags": ["moe", "on-device", "agents", "private", "liquidai"],
+          "links": [
+            {"label": "Blog (Hugging Face)", "url": "https://huggingface.co/blog/LiquidAI/lfm25-24b-a2b"},
+            {"label": "Hugging Face", "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B"}
+          ]
+        },
+        {
+          "title": "gemini-stealth-bridge: una API compatible con OpenAI servida desde la web de Gemini",
+          "summary": "En tendencia, azrinaldi/gemini-stealth-bridge expone una API compatible con *OpenAI* (*v1/chat/completions* y *v1/responses*) servida desde la web de Gemini mediante Chrome sin navegador con uTLS + HTTP/2. Es una forma de encajar un modelo de Google en cualquier cliente que hable la API de OpenAI —con las salvedades de uso y de los términos del servicio de Google.",
+          "tags": ["api", "openai-compatible", "gemini", "agents", "trending"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/azrinaldi/gemini-stealth-bridge"}
+          ]
+        },
+        {
+          "title": "recipe-nook: un 'agente doméstico' con biblioteca de recetas y una LLM local",
+          "summary": "wave2234/recipe-nook es un ejemplo simpático de autohospedaje con LLM: una biblioteca de recetas de 280.000 entradas, una ruleta para decidir qué comer, un registro de comidas y una herramienta de IA que busca recetas, enseña a cocinar y puntúa la dieta. Un buen caso de 'agente doméstico' construido con una LLM local y una base de datos autohospedada.",
+          "tags": ["self-hosting", "local-llm", "agents", "practical"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/wave2234/recipe-nook"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "Composición conductual de las representaciones de SAE: no siempre se suman",
+          "summary": "El paper más votado del día (82 votos) estudia si las características que extraen los autoencodores dispersos (SAE) se combinan de forma aditiva, como se suele asumir. Introduce los SAE Additivity Residuals (SAR) para medir qué comportamiento emerge al activar varias características a la vez. Es importante porque los SAE son la herramienta clave para interpretar modelos grandes, y entender cuándo sus características componen —o no— afecta directamente a cómo podemos usarlas para auditar y controlar modelos.",
+          "tags": ["interpretability", "sparse-autoencoders", "research", "82-upvotes"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.21261"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.21261"}
+          ]
+        },
+        {
+          "title": "LEASH: escalada 'del débil al fuerte' con conciencia de la incertidumbre para agentes de ordenador",
+          "summary": "LEASH propone una escalada 'del modelo débil al fuerte' para agentes que usan el ordenador: un modelo abierto pequeño actúa en los pasos de bajo riesgo y solo escalaría al modelo frontera cuando la incertidumbre o el riesgo lo justifican, con supervisión consciente de la confianza. Es una receta para pagar por la capacidad frontera solo cuando de verdad hace falta —clave para agentes de tareas largas que corren cada día.",
+          "tags": ["agents", "computer-use", "weak-to-strong", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.22280"}
+          ]
+        },
+        {
+          "title": "HiRO-ACEv2 de AI2: simular el clima extremo global a 3 km por una fracción del coste",
+          "summary": "AI2 presenta HiRO-ACEv2, un sistema que simula el clima extremo a escala global con resolución de 3 km por una fracción (alrededor de 1/300) del coste de un modelo numérico clásico. La nueva versión predice simultáneamente varios campos de alta resolución (lluvia, viento, presión) y reproduce mejor los valores más intensos. Es un caso claro de cómo un modelo de IA puede emular una simulación científica cara, abriendo la puerta a prever eventos extremos donde antes era prohibitivo.",
+          "tags": ["weather", "emulation", "science", "allenai", "research"],
+          "links": [
+            {"label": "Blog (Hugging Face)", "url": "https://huggingface.co/blog/allenai/hiro-acev2"},
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.17693"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "MiMo-V2.6-RL-oss de Xiaomi: datos de refuerzo abiertos (Apache 2.0)",
+          "summary": "Xiaomi MiMo ha abierto MiMo-V2.6-RL-oss, un conjunto de datos de refuerzo (Apache 2.0) con documentos, imagen y texto, ya con más de 960 likes y 150.000 descargas. Publicar los datos con los que se entrenan los modelos —y no solo los pesos— sigue siendo una de las formas más útiles de reproducir y auditar el aprendizaje por refuerzo de un modelo.",
+          "tags": ["datasets", "reinforcement-learning", "open-data", "xiaomi", "apache-2.0"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss"}
+          ]
+        },
+        {
+          "title": "local-llm-tuning-guide: decisiones para exprimir varias GPU sin NVLink",
+          "summary": "Lowaltitudeflight/local-llm-tuning-guide es una biblioteca de decisiones para correr LLMs en local sobre varios GPU sin NVLink: paralelismo, comunicación, cuantización, decodulación especulativa y gestión de la caché KV. Muy práctico para quien tiene varias tarjetas y quiere exprimir el hardware antes de decidirse a comprar una interconexión cara.",
+          "tags": ["self-hosting", "multi-gpu", "inference", "tuning", "local-llm"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/Lowaltitudeflight/local-llm-tuning-guide"}
+          ]
+        },
+        {
+          "title": "MOSS-Image de OpenMOSS: un modelo base DiT de 5B para generación y fine-tuning de imagen",
+          "summary": "OpenMOSS publica MOSS-Image, un modelo base DiT de 5B parámetros para generación de imagen con renderizado de texto de alta calidad, generación de layout y fine-tuning eficiente. Al ser un modelo base pequeño, es de los pocos que se pueden adaptar y reconstruir en local —un punto de entrada para quien quiere su propio generador de imágenes con pesos abiertos de principio a fin.",
+          "tags": ["image-generation", "dit", "base-model", "fine-tuning", "open-weights"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/OpenMOSS/MOSS-Image"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

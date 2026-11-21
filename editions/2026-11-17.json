@@ -1,0 +1,534 @@
+{
+  "date": "17 de noviembre de 2026",
+  "weekday_long": "martes",
+  "edition": "Edición nº 42",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*Hugging Face* y *OpenRouter* se alían: un solo token abre la puerta a todos los modelos de pesos abiertos",
+    "summary": "La alianza anunciada este lunes cambia la forma en que se llaman los modelos de pesos abiertos: los *Inference Providers* de *Hugging Face* pasan a enrutarse a través de *OpenRouter*, que elige el mejor de más de 80 proveedores para cada petición y reintenta la llamada si el proveedor falla. El resultado es que cualquier modelo del *Hub* servido por alguno de esos proveedores se llama con el token de *Hugging Face* y la misma *API* (la de *OpenAI* o la de *Anthropic*), sin margen añadido sobre el precio. Los pesos abiertos ya representan el 71,7 % de los tokens servidos en la plataforma, cuestan unos cuatro veces menos que los cerrados, y el post incluye guías de configuración listas para *Claude Code*, *Codex*, *OpenCode*, *Pi* y *Hermes Agent*.",
+    "body": [
+      "La noticia del lunes une a dos piezas clave del ecosistema: *Hugging Face*, donde se publican ya todos los grandes lanzamientos de pesos abiertos, y *OpenRouter*, que sirve esos modelos a escala. A partir de ahora, las peticiones de los *Inference Providers* de *Hugging Face* no pasan por el enrutador propio de la casa, sino por el de *OpenRouter*, que elige el mejor proveedor para cada llamada en base a mediciones en vivo de precio, velocidad y fiabilidad de cada uno de sus más de 80 proveedores. Y si el primero falla, la petición se reintenta en el siguiente dentro de la misma llamada. El código no cambia: se sigue usando el token de *Hugging Face* y la misma interfaz de siempre.",
+      "En la práctica, esto significa que cualquier modelo abierto del *Hub* que sirva alguno de esos proveedores se puede llamar con el token de *Hugging Face* a través de una única *API*: el enrutador habla las *Chat Completions* y *Responses* de *OpenAI*, así como la *Messages API* de *Anthropic*, de modo que cualquier agente de código o biblioteca funciona sin cambios. El post incluye guías de configuración listas para *Claude Code*, *Codex*, *OpenCode*, *Pi* y *Hermes Agent*, e incluso ofrece copiar toda la configuración como un prompt para que el agente la aplique. El mismo token sigue sirviendo para almacenamiento (*Storage Buckets*), cómputo (*Jobs*) y endpoints dedicados de inferencia, y los planes *PRO*, *Team* y *Enterprise* incluyen créditos mensuales. El único cambio rompedor señalado: las claves de proveedor personal dejan de usarse. Y en lo económico, *Hugging Face* no añade margen: se paga el precio del proveedor, en la factura de *Hugging Face*. La generación de imagen, vídeo y audio sigue yendo directamente por *Inference Providers*, con el catálogo de decenas de miles de *LoRA* intacto.",
+      "Los números del post cuentan la verdadera historia. En *OpenRouter*, los modelos de pesos abiertos pasaron del 26,8 % de los tokens servidos en octubre de 2025 al 71,7 % a finales de septiembre de este año, tras picar en el 77,5 % en julio; en ese periodo, el volumen semanal de pesos abiertos creció más de sesenta veces, frente a apenas diez de los modelos cerrados. Esta semana, el modelo más usado de toda la plataforma es uno abierto, *DeepSeek V4.1 Flash 1017*, con 59.200 millones de tokens procesados. Y los pesos abiertos siguen siendo, de media, unas cuatro veces más baratos: 0,28 dólares por millón de tokens de entrada y 1,62 por millón de salida, frente a 1,27 y 6,36 de los cerrados.",
+      "La distancia entre lo abierto y lo cerrado todavía existe, pero a una fracción del precio: en el índice de inteligencia de *Artificial Analysis*, *Kimi K3.1 Pro* —el mejor modelo de pesos abiertos— puntuó 46, frente a 65 de *Claude Fable 5.2*, a un precio por tarea unas siete veces menor (3,68 dólares frente a 26,54). Para muchos usos, ese intercambio compensa; y eso es justo la apuesta de la alianza: bajar a cero la fricción de probar cada nuevo lanzamiento abierto, para que la elección del modelo dependa del coste y la velocidad reales, y no del esfuerzo de configurar otra *API*.",
+      "*OpenRouter* aporta el músculo: más de 800.000 millones de tokens al mes, más de 10 millones de usuarios, más de 600 modelos de más de 80 proveedores. Su enrutado, recién reconstruido, ya dio sus frutos en su propio tráfico: los errores de capacidad cayeron un 46 %, el tiempo hasta el primer token mejoró un 16,9 % y el caudale un 16,3 %. El enrutado es además consciente de la caché: la conversación se queda en el proveedor que guarda la caché de prompt, y quien quiera hacerlo explícito envía un identificador estable por conversación en la cabecera *X-HF-Session-Id*. En cada página de modelo, dos pestañas nuevas (*Providers* y *Metrics*) permiten ver quién lo sirve y cómo: precio, velocidad y disponibilidad de las últimas 24 horas. Para la comunidad que vive de los pesos abiertos, es de esas noticias que cambian el flujo de trabajo diario: probar un modelo nuevo pasa a ser tan simple como cambiarle el nombre."
+    ],
+    "tags": [
+      "openrouter",
+      "huggingface",
+      "inference-providers",
+      "open-weights",
+      "routing",
+      "partnership"
+    ],
+    "links": [
+      {
+        "label": "Post oficial (blog de Hugging Face)",
+        "url": "https://huggingface.co/blog/openrouter"
+      },
+      {
+        "label": "Anuncio en X",
+        "url": "https://x.com/huggingface/status/2122393775314264519"
+      },
+      {
+        "label": "Cobertura de prensa (Gigazine)",
+        "url": "https://gigazine.net/gsc_news/en/20261117-hugging-face-openrouter/"
+      }
+    ],
+    "illustration": {
+      "file": "lead-illo-2026-11-17.jpg",
+      "alt": "Una moneda de latón con un resplandor dorado sobre un banco de trabajo de madera oscura, de la que se eleva un haz de finas hebras de fibra óptica que se ramifica hacia un rack de servidores, mientras una unidad se enciende en blanco cálido bajo la luz de una lámpara de escritorio",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: una única moneda de la que se despliegan hebras de fibra óptica hacia una hilera de servidores, bajo la luz cálida de una lámpara"
+    }
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*K2-Horizon*: el informe técnico de la flota de seis modelos abiertos de *IFM* ya está disponible",
+          "summary": "El informe técnico de *K2-Horizon* —la flota de seis modelos totalmente abiertos del *Institute of Foundation Models*, de 900 millones a 375.000 millones de parámetros— es el paper más votado de la lista diaria de *Hugging Face*. Detalla cómo un modelo de 36.000 millones con 4.000 millones activos casi iguala a uno denso de 32.000 millones, una aceleración de la decodificación hasta 2,2 veces sin modelo de borrador, y unos 10 billones de tokens sintéticos de preentrenamiento.",
+          "body": [
+            "*K2-Horizon* es una flota de seis modelos de lenguaje totalmente abiertos, de un denso de 900 millones de parámetros a un *MoE* de 375.000 millones con 23.000 millones activos, construido para razonamiento general y trabajo de agentes en matemáticas, ciencia, ingeniería de software y *deep research*. El informe técnico, publicado en *arXiv* el 15 de noviembre y en lo más alto de la lista diaria de papers, va más allá de las tablas: explica las decisiones de modelado y cómo se validó cada una.",
+            "Destacan dos novedades. La *Mixture-of-Value Attention* (MoVA) aplica la filosofía *MoE* a las proyecciones de valor de la atención, y un gateado de atención *softplus* —más flexible y con motivación teórica— permite que el modelo de 36.000 millones con 4.000 millones de parámetros activos casi iguale a un denso de 32.000 millones entrenado con los mismos datos, usando una séptima parte de parámetros activos. La otra es *Uno*, unos adaptadores de difusión sin pérdida que aceleran la decodificación hasta 2,2 veces sin un modelo de borrador aparte: la misma línea de la decodificación especulativa, pero implementada dentro del propio modelo.",
+            "En lo abierto, el lanzamiento sigue la definición *LLM360* de código abierto: el historial de desarrollo completo, los puntos de control intermedios de cada etapa, los datos de preentrenamiento, los registros de entrenamiento y todo el código de entrenamiento, evaluación e infraestructura —incluido el marco *xLLM* a escala de producción para entrenamiento denso y *MoE*, y la pila de refuerzo *RL360*. Los pipelines produjeron unos 10 billones de tokens sintéticos de preentrenamiento —una muestra de que los datos sintéticos pueden ser un ingrediente mayor del preentrenamiento a escala—, y cuatro de los modelos comparten un corpus de 22 billones de tokens, lo que permite estudios controlados de escala y esparsidad. Los modelos ya están en *Hugging Face*, en versiones originales y cuantizadas a *FP8* y *NVFP4*."
+          ],
+          "tags": [
+            "k2-horizon",
+            "moe",
+            "open-weights",
+            "technical-report",
+            "ifm",
+            "diffusion-adapters"
+          ],
+          "links": [
+            {
+              "label": "Informe técnico (arXiv 2611.21003)",
+              "url": "https://arxiv.org/abs/2611.21003"
+            },
+            {
+              "label": "Colección de modelos (Hugging Face)",
+              "url": "https://huggingface.co/collections/IFM/k2-horizon"
+            },
+            {
+              "label": "Lanzamiento (blog de IFM)",
+              "url": "https://ifm.ai/blog/k2/"
+            }
+          ]
+        },
+        {
+          "title": "*MiniMax-H3-Image*: el generador de imagen de la familia *H3* pasa de 600.000 descargas",
+          "summary": "*MiniMax* ha publicado el modelo de imagen de su familia *H3*: generación, edición y transformación de imagen a imagen en el ecosistema *diffusers*, con 609.130 descargas y 1.350 *likes* en pocos días. La variante de la comunidad para *ComfyUI* ya acumula 2,3 millones de descargas.",
+          "body": [
+            "La familia *H3* de *MiniMax*, hasta ahora centrada en modelos de lenguaje, ya tiene su modelo de imagen: *MiniMax-H3-Image* es un generador de texto a imagen con capacidad de edición y de imagen a imagen, publicado en el ecosistema *diffusers*. En unos pocos días ha superado las 600.000 descargas y los 1.350 *likes* en *Hugging Face*, cifras que lo sitúan entre los más descargados de la lista de tendencia.",
+            "Curiosamente, la variante mantenida por la organización de *ComfyUI* (*Comfy-Org/MiniMax-H3-Image*) ya supera los 2,3 millones de descargas: la comunidad la está integrando en sus flujos de trabajo prácticamente desde el primer día, el patrón habitual de los modelos de imagen que llegan a *ComfyUI*. La licencia figura como la genérica «other», así que conviene leer los términos antes de un uso comercial."
+          ],
+          "tags": [
+            "minimax",
+            "h3",
+            "text-to-image",
+            "diffusers",
+            "comfyui",
+            "image-editing"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face — MiniMaxAI/MiniMax-H3-Image",
+              "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image"
+            },
+            {
+              "label": "Variante ComfyUI — Comfy-Org/MiniMax-H3-Image",
+              "url": "https://huggingface.co/Comfy-Org/MiniMax-H3-Image"
+            }
+          ]
+        },
+        {
+          "title": "*LTX-2.5*: el modelo de vídeo en archivo único de *Lightricks* supera los 2,8 millones de descargas",
+          "summary": "La segunda versión del modelo de vídeo de *Lightricks* ya acumula 2,8 millones de descargas y más de 12.000 *likes* en *Hugging Face*: formato «archivo único» (sin dependencias de framework) y una matriz completa de generación desde texto, imagen y audio hacia vídeo, y en las direcciones inversas.",
+          "body": [
+            "*LTX-2.5* es el modelo de generación de vídeo de *Lightricks*, publicado en el formato «archivo único»: un punto de control autocontenido, sin dependencia de un framework concreto, que se puede integrar en cualquier ecosistema. La ficha está etiquetada para generación desde texto, imagen y audio hacia vídeo, y también en las direcciones inversas (vídeo a audio, vídeo a vídeo, audio a audio): un modelo de difusión multimodal todoterreno.",
+            "Con 2,8 millones de descargas y más de 12.000 *likes*, es uno de los modelos de vídeo más adoptados de la semana en la página de tendencia. Para quien genera vídeo en su propia máquina, el formato de archivo único significa descargar un solo punto de control y enchufarlo a cualquier pipeline: el camino habitual en esta rama del ecosistema."
+          ],
+          "tags": [
+            "ltx",
+            "lightricks",
+            "text-to-video",
+            "single-file",
+            "diffusion",
+            "audio"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face — Lightricks/LTX-2.5",
+              "url": "https://huggingface.co/Lightricks/LTX-2.5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*inference-optimisation-skill*: el *skill* de agente que optimiza tu inferencia local por escalada de colinas",
+          "summary": "El repositorio con más estrellas de la semana (384) es un *skill* de agente que sube la velocidad de tu inferencia local de *LLM*: aplica escalada de colinas sobre decodificación, decodificación especulativa, prellenado, caché *KV*, arranque y *TTFT*, en cualquier hardware y cuantización.",
+          "body": [
+            "La idea es delegar en un agente el trabajo de medir y ajustar la inferencia: el *skill* encadena experimentos sobre los parámetros que afectan a la velocidad de un servicio local —decodificación, decodificación especulativa, prellenado, caché *KV*, tiempo de arranque y tiempo hasta el primer token (*TTFT*)— y ajusta la configuración por escalada de colinas, en el hardware y la cuantización que tenga cada uno. El agente lee las mediciones, propone la siguiente configuración y repite hasta converger.",
+            "Es un ejemplo nítido de la tendencia de empaquetar flujos de trabajo expertos como *skills* de agentes: en lugar de un tutorial estático, el agente mide en tu máquina y se adapta a ella. Con 384 estrellas en *GitHub* en pocos días, es el repositorio más popular de la lista de tendencia de esta semana."
+          ],
+          "tags": [
+            "agent-skill",
+            "inference",
+            "optimization",
+            "llama.cpp",
+            "local-llm"
+          ],
+          "links": [
+            {
+              "label": "GitHub — sybil-solutions/inference-optimisation-skill",
+              "url": "https://github.com/sybil-solutions/inference-optimisation-skill"
+            }
+          ]
+        },
+        {
+          "title": "*Capri*: mascota de escritorio, *overlay* de juegos y compañero de voz, todo en un *software* libre",
+          "summary": "El proyecto más adoptado de la semana en el nicho de «compañeros» (216 estrellas) es *Capri*, para *Windows*: una mascota de escritorio libre que además es interfaz visual para *Claude Code*, *Ollama*, *DeepSeek* y *MCP*, que entra en llamadas de *Discord*, lanza juegos de *Steam* y comenta la partida.",
+          "body": [
+            "*Capri* mezcla dos mundos que rara vez se juntan: la mascota de escritorio —un personaje que vive en la pantalla— y una interfaz de verdad para tus modelos locales y remotos. Aporta una *GUI* visual para usar *Claude Code*, *Ollama*, *DeepSeek* y servidores *MCP*, de modo que no hace falta vivir en una terminal para trabajar con agentes.",
+            "El compañero no se queda en la pantalla: entra en llamadas de *Discord*, lanza juegos de *Steam*, comenta la partida en curso y automatiza acciones sobre la pantalla. Con 216 estrellas en sus primeros días, es el proyecto de este nicho que más tracción ha cogido esta semana."
+          ],
+          "tags": [
+            "desktop-pet",
+            "voice-companion",
+            "mcp",
+            "ollama",
+            "windows",
+            "claude-code"
+          ],
+          "links": [
+            {
+              "label": "GitHub — edgerunners2/capri-ai-desktop",
+              "url": "https://github.com/edgerunners2/capri-ai-desktop"
+            }
+          ]
+        },
+        {
+          "title": "*claude's-workbench*: un modelo frontera que orquesta tu flota de *LLM* locales",
+          "summary": "El proyecto propone la división de trabajo contraria a la de la portada: *Claude* diseña el proyecto, lo descompone en tareas pequeñas, entrega a cada agente local las *skills* que necesita y revisa cada *diff* con su propio estándar, mientras la *GPU* hace el trabajo pesado.",
+          "body": [
+            "La división del trabajo es explícita: un modelo frontera (en este caso, *Claude*) actúa como arquitecto —diseña el proyecto y lo descompone en tareas manejables— mientras los *LLM* locales hacen la ejecución, sobre tu *GPU*. El banco de trabajo entrega a cada agente las *skills* que necesita para su tarea y el modelo frontera revisa cada *diff* con su propio estándar de calidad.",
+            "Es un patrón que está ganando terreno: equipos híbridos en que el modelo caro planifica y el local ejecuta. Con pocas estrellas por ahora (7), el proyecto es un boceto interesante del modo de usar una *API* cerrada como supervisor de modelos abiertos: la cara opuesta de la portada de hoy, pero con la misma lógica, de que cada modelo haga lo que mejor sabe."
+          ],
+          "tags": [
+            "agent-orchestration",
+            "claude-code",
+            "local-llm",
+            "hybrid-team",
+            "code-review"
+          ],
+          "links": [
+            {
+              "label": "GitHub — a-schaefers/claudes-workbench",
+              "url": "https://github.com/a-schaefers/claudes-workbench"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*llama.cpp v1.0.0*: tres años y medio de inferencia local llegan al primer punto cero",
+          "summary": "El equipo *ggml-org* (con Georgi Gerganov) ha publicado la versión 1.0.0 de las librerías *llama.cpp* y *ggml* (205 *upvotes*): a partir de ahora, los cambios incompatibles de la *API* en *C* llevarán versión mayor, y el post detalla la expansión de la distribución (Docker, Debian, Homebrew, conda-forge, MacPorts, Winget, XCFramework) y el soporte de más de 150 arquitecturas de modelos.",
+          "body": [
+            "Tres años y medio después de su nacimiento, *llama.cpp* —el proyecto en *C/C++* que hizo posible ejecutar *LLM* en prácticamente cualquier hardware, de la máquina de sobremesa al servidor— alcanza su 1.0. El post, con 205 *upvotes*, va dirigido sobre todo a los desarrolladores que ya dependen de la librería: a partir de ahora, *llama.cpp* y *ggml* seguirán versionado semántico estricto —versión mayor para cambios rompedores de la *API* pública en *C*, menor para funciones y backends compatibles, y parche para correcciones—, y el equipo promete cuidar esas fronteras mientras crece la adopción.",
+            "El post también repasa la distribución: artefactos precompilados para Linux, macOS, Windows, Android e iOS, además de Docker, Debian, Homebrew, conda-forge, MacPorts, Winget y XCFramework para móvil. En lo técnico, *ggml* sigue funcionando en «prácticamente cualquier hardware» gracias a backends dedicados que se compilan como librerías dinámicas y se cargan en tiempo de ejecución, y *llama.cpp* ya cubre más de 150 variantes de arquitecturas de modelo, además de todos los métodos de decodificación especulativa en uso.",
+            "La maquinaria de desarrollo también crece: la infraestructura de pruebas se apoya en tecnologías de *Hugging Face* (Buckets y *Jobs*) para escalar la capacidad, con ejecutores autoalojados donados por NVIDIA, AMD, Qualcomm, Arm, IBM e Intel. Es un hito que afecta a todo el ecosistema: cada herramienta que se construye encima de *llama.cpp* —cuantizadores, servidores, aplicaciones de escritorio— depende a partir de ahora de una *API* con contrato estable."
+          ],
+          "tags": [
+            "llama.cpp",
+            "ggml",
+            "v1.0",
+            "local-inference",
+            "semantic-versioning",
+            "backends"
+          ],
+          "links": [
+            {
+              "label": "Post oficial (blog de Hugging Face)",
+              "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+            },
+            {
+              "label": "GitHub — ggml-org/llama.cpp",
+              "url": "https://github.com/ggml-org/llama.cpp"
+            }
+          ]
+        },
+        {
+          "title": "*saetta*: motor de inferencia en *Zig* y *Metal* para *Apple Silicon*",
+          "summary": "Nuevo motor de inferencia nativo para los chips *M* de *Apple*, escrito en *Zig* y usando *Metal* para la *GPU*: un servidor compatible con la *API* de *OpenAI*, afinado para *Qwen3.8-Flash-Next* (125.000 millones de parámetros, *NVFP4*) en un *M5 Max*, con agentes de código como objetivo.",
+          "body": [
+            "*saetta* es un motor de inferencia de *LLM* completo —no una extensión del ecosistema *ggml-llama.cpp*— construido a medida para el *Apple Silicon*: escrito en *Zig* y usando *Metal* para la *GPU*, expone un servidor compatible con la *API* de *OpenAI* y está afinado para correr *Qwen3.8-Flash-Next*, un *MoE* de 125.000 millones de parámetros en *NVFP4*, en un *M5 Max*. El objetivo declarado: servir a los agentes de código que viven en portátiles de *Apple*.",
+            "Con 2 estrellas por ahora, está en sus inicios, pero entra en la olea actual de motores de inferencia nativos por arquitectura: este mes han aparecido además motores para *APU* de *AMD* en *Rust* y *HIP*, y un motor en *C++* para *CPU* pura. La fragmentación crece, pero también las opciones de cada plataforma."
+          ],
+          "tags": [
+            "zig",
+            "metal",
+            "apple-silicon",
+            "inference-engine",
+            "qwen",
+            "nvfp4"
+          ],
+          "links": [
+            {
+              "label": "GitHub — antonellof/saetta",
+              "url": "https://github.com/antonellof/saetta"
+            },
+            {
+              "label": "GitHub — duckpage/malleus (motor Rust/HIP para APUs AMD)",
+              "url": "https://github.com/duckpage/malleus"
+            }
+          ]
+        },
+        {
+          "title": "*malleus*: inferencia en *Rust* sobre las *APU* de *AMD*",
+          "summary": "Motor de inferencia de *LLM* de código abierto, escrito en *Rust* y *HIP*, para las *GPU* integradas de las *APU* *RDNA 3.5* de *AMD* (gfx1150 y gfx1151): *LLM* locales sin *GPU* discreta, en el chip del portátil.",
+          "body": [
+            "El objetivo de *malleus* es la *GPU* integrada de las nuevas *APU* de *AMD* —la familia *RDNA 3.5*, con los gfx1150 y gfx1151—, ejecutando la inferencia con *HIP*, el equivalente de *CUDA* para *AMD*. El motor es de código abierto, escrito en *Rust*, y forma parte de la ola de motores nativos por arquitectura que no dependen de frameworks generalistas.",
+            "Con 2 estrellas por ahora, está en fases tempranas, pero apunta a la historia que define el año: la inferencia local migrando al hardware de consumo heterogéneo, donde las *APU* y el *Apple Silicon* son los frentes más activos."
+          ],
+          "tags": [
+            "rust",
+            "hip",
+            "amd",
+            "apu",
+            "rdna",
+            "inference-engine"
+          ],
+          "links": [
+            {
+              "label": "GitHub — duckpage/malleus",
+              "url": "https://github.com/duckpage/malleus"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*SPILLWAY*: separar la admisión de la sanitización para defender agentes que usan herramientas",
+          "summary": "El paper más votado de la sección (17 *upvotes*) ataca la inyección de prompts en agentes que usan herramientas: en lugar de poner un modelo de lenguaje en el camino de decisión —lo que hace la propia defensa vulnerable—, separa la decisión de admitir un objetivo de la sanitización del contenido que se va a confiar.",
+          "body": [
+            "Los agentes que usan herramientas actúan sobre correos, archivos y pagos; una instrucción oculta en una página web o en un documento compartido puede hacer que el agente envíe datos o dinero al atacante. Muchas de las defensas actuales ponen un modelo de lenguaje en el camino de decisión de la acción, y eso convierte a la propia defensa en una superficie de ataque.",
+            "*SPILLWAY* propone otra división: la admisión del objetivo (decidir sobre qué actuar) se separa de la sanitización (decidir qué contenido del objetivo se puede confiar). La separación impide que la instrucción inyectada viaje junto al objetivo legítimo hasta la acción. El trabajo es del equipo de Woosang Lim, Yeseul Chang y Jaewoo Lee, y es el paper más votado de la lista diaria con 17 *upvotes*."
+          ],
+          "tags": [
+            "prompt-injection",
+            "agent-security",
+            "defense",
+            "tool-use"
+          ],
+          "links": [
+            {
+              "label": "arXiv 2611.07222",
+              "url": "https://arxiv.org/abs/2611.07222"
+            }
+          ]
+        },
+        {
+          "title": "*PaperCritic*: entrenar revisores de *IA* que evalúen la solidez de los artículos",
+          "summary": "16 *upvotes* para un paper sobre el debate de los revisores de *IA*: con el crecimiento de envíos de *IA* a las conferencias, imitar la revisión humana es problemático —cubre varios fines a la vez—, así que *PaperCritic* entrena un evaluador centrado solo en la solidez técnica del artículo.",
+          "body": [
+            "El número de artículos de *IA* enviados a las conferencias crece rápido, y con él la discusión sobre si los revisores de *IA* pueden ser una alternativa. El problema que señala el paper: simplemente imitar la revisión humana no funciona, porque la revisión sirve para varios fines a la vez —evaluar el artículo, orientar al autor, filtrar para la comunidad—, y un modelo entrenado a «escribir como un revisor» absorbe todo ese ruido.",
+            "*PaperCritic* toma el camino contrario: entrena un revisor de *IA* que evalúa específicamente la solidez (soundness) del artículo, separando esa función del resto. Con 16 *upvotes*, es un paper a vigilar tanto para quien envía —saber cómo se evaluará— como para los comités que ya experimentan con revisión asistida por *IA*."
+          ],
+          "tags": [
+            "ai-reviewers",
+            "peer-review",
+            "soundness",
+            "conferences"
+          ],
+          "links": [
+            {
+              "label": "arXiv 2611.17834",
+              "url": "https://arxiv.org/abs/2611.17834"
+            }
+          ]
+        },
+        {
+          "title": "*MovieRoll*: un marco sistemático para el vídeo largo por streaming",
+          "summary": "4 *upvotes* para el paper que ataca el principal problema de la generación de vídeo en streaming: mantener la calidad más allá del horizonte de entrenamiento mientras el modelo consume su propia historia y la caché crece. La respuesta es un marco de modelo base a destilado, con etapas definidas.",
+          "body": [
+            "La generación de vídeo en streaming tiene dos problemas que se agudizan con la duración: el modelo tiene que sostener la calidad más allá del horizonte con que se entrenó, y lo hace consumiendo su propia historia auto-generada, con costes de caché que crecen sin cesar. *MovieRoll* ataca los dos a la vez.",
+            "El marco sigue un camino de base a destilado: un modelo base capaz de sostener la generación larga, y una versión destilada que se pueda ejecutar en la práctica. Es un enfoque sistemático de lo que la mayoría de los modelos de este tipo hacen a destiempo: un pipeline con etapas definidas, no un montón de parches."
+          ],
+          "tags": [
+            "video-generation",
+            "streaming",
+            "distillation",
+            "long-form"
+          ],
+          "links": [
+            {
+              "label": "arXiv 2611.21339",
+              "url": "https://arxiv.org/abs/2611.21339"
+            }
+          ]
+        },
+        {
+          "title": "*VoxMel TTS*: síntesis de voz autoregresiva continua que trabaja con espectros *mel*",
+          "summary": "6 *upvotes* para el informe técnico de *VoxMel*: en lugar de la representación comprimida aprendida —el *tokenizer* de voz habitual—, el modelo usa el espectro *mel*, la representación clásica del procesamiento de audio, como objetivo acústico para el modelado estable del siguiente latente.",
+          "body": [
+            "La *TTS* autoregresiva continua necesita un objetivo acústico que permita un modelado estable del siguiente latente preservando al mismo tiempo el detalle fino de la señal. Los enfoques actuales usan una representación comprimida aprendida —un *tokenizer* de voz— como objetivo, y el informe de *VoxMel* defiende que el espectro *mel*, la representación clásica del procesamiento de audio, es un objetivo más adecuado para esa tarea.",
+            "El informe técnico detalla el modelo y los resultados de trabajar directamente con *mel*. Para la comunidad de *TTS* es un recordatorio de un debate de años: qué tan lejos de la señal bruta puede comprimirse sin perder detalle, y si la representación aprendida intermedia es realmente necesaria."
+          ],
+          "tags": [
+            "tts",
+            "autoregressive",
+            "mel-spectrogram",
+            "voice-cloning"
+          ],
+          "links": [
+            {
+              "label": "arXiv 2611.20254",
+              "url": "https://arxiv.org/abs/2611.20254"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*NewsGator*: el agregador de noticias autoalojado del *r/LocalLLM*",
+          "summary": "El post que circula en el *r/LocalLLM* presenta *NewsGator*, un agregador de noticias que se autoaloja en casa: el flujo clásico de flujos *RSS* + modelo local, aplicado al seguimiento de noticias, con el debate de siempre sobre calidad, coste y recursos del modelo que hace el trabajo.",
+          "body": [
+            "El post que está dando vueltas en el *r/LocalLLM* presenta *NewsGator*, un agregador de noticias pensado para autoalojar: en lugar de un servicio en la nube que digiere tus feeds, el agregador corre en tu propia máquina. Es la receta clásica del ecosistema —tus datos, tu infraestructura— aplicada a la información.",
+            "En el hilo, la conversación se centra en los intercambios habituales cuando un modelo local hace el trabajo de filtrado y resumen: la calidad que se obtiene con un modelo pequeño, el coste de subir de tamaño, y cómo mantener el agregador corriendo sin comerse la *RAM* disponible. Un buen ejemplo de la ola de «el *LLM* local como curador personal»."
+          ],
+          "tags": [
+            "self-hosting",
+            "news-aggregator",
+            "rss",
+            "local-llm",
+            "community"
+          ],
+          "links": [
+            {
+              "label": "r/LocalLLM — NewsGator",
+              "url": "https://www.reddit.com/r/LocalLLM/comments/1w0tp5s/newsgator_a_selfhosted_news_aggregator_that/"
+            }
+          ]
+        },
+        {
+          "title": "Un curador personal de noticias 24/7 corriendo en 4 GB de *RAM*",
+          "summary": "Una crónica personal en Medium: cómo se monta un curador de noticias que corre 24 horas al día con un *LLM* local, en un equipo de solo 4 GB de *RAM* —«empujando los límites» con modelos pequeños, cuantización agresiva y contextos cortos.",
+          "body": [
+            "El post es una crónica de primera persona: el autor monta un curador de noticias personal que corre las 24 horas con un *LLM* local, en un entorno de solo 4 GB de *RAM*. El título lo dice todo —«Pushing the Limits»— y la crónica documenta qué hizo falta para que cupiera: modelos pequeños, cuantización agresiva y la disciplina de mantener el contexto corto.",
+            "Es el tipo de post que se comparte cada semana en este espacio, y por algo: convierte «la *IA* local» en una línea de presupuesto. Para la comunidad, el valor está en la receta: qué cabe en 4 GB, qué no cabe, y dónde están los límites cuando el equipo es un portátil modesto."
+          ],
+          "tags": [
+            "self-hosting",
+            "low-ram",
+            "4gb",
+            "news-curator",
+            "local-llm"
+          ],
+          "links": [
+            {
+              "label": "Medium — Pushing the Limits",
+              "url": "https://life-of-utkarsh.medium.com/pushing-the-limits-running-local-llms-and-a-24-7-personal-news-curator-on-4gb-of-ram-c55f9498bf3c"
+            }
+          ]
+        },
+        {
+          "title": "«Estamos en la edad de oro de los *LLM* locales», el hilo que resume el momento",
+          "summary": "El hilo de *r/LocalLLaMA* que se ha hecho viral: los modelos que el año pasado exigían 24 GB de *VRAM* ahora caben con holgura en 16, la cuantización es una rutina y las herramientas han llegado a la madurez del 1.0. Los comentarios dividen a la comunidad entre eufóricos y cautos.",
+          "body": [
+            "El hilo de *r/LocalLLaMA* titulado «We are in the golden age of Local LLM» funciona como termómetro del momento actual: los modelos que hace un año exigían una tarjeta de 24 GB ahora corren con holgura en 16, la cuantización es una rutina de cinco minutos, y las herramientas —de *llama.cpp* a *Ollama*— han llegado a la madurez del 1.0, el mismo que se anunció este mes.",
+            "Los comentarios, como siempre, parten el hilo por la mitad: de un lado, quienes ya han movido parte de su flujo de trabajo a lo local; del otro, los que recuerdan que la distancia con los mejores modelos frontera sigue existiendo en las tareas más difíciles. Sea como sea, el hilo resume bien lo que la comunidad da hoy por normal —y dónde sigue discutiendo."
+          ],
+          "tags": [
+            "community",
+            "local-llm",
+            "reddit",
+            "vram",
+            "quantization"
+          ],
+          "links": [
+            {
+              "label": "r/LocalLLaMA — golden age of Local LLM",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xppbht/we_are_in_the_golden_age_of_local_llm/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "sybil-solutions/inference-optimisation-skill",
+        "stars": "★ 384",
+        "desc": "Un *skill* de agente que optimiza la velocidad de la inferencia local: decodificación, especulativa, prellenado, *KV*, arranque y *TTFT*",
+        "meta": "Python",
+        "url": "https://github.com/sybil-solutions/inference-optimisation-skill"
+      },
+      {
+        "name": "edgerunners2/capri-ai-desktop",
+        "stars": "★ 216",
+        "desc": "Mascota de escritorio, *overlay* de juegos y compañero de voz libre para *Windows*, con *GUI* para *Claude Code*, *Ollama* y *MCP*",
+        "meta": "Python",
+        "url": "https://github.com/edgerunners2/capri-ai-desktop"
+      },
+      {
+        "name": "zxfccmm4/magpie-remote",
+        "stars": "★ 38",
+        "desc": "Centro de control nativo de *iOS*/*iPadOS* para *magpie*: proveedores, enrutado, uso, sesiones y plugins, sin dependencias de terceros",
+        "meta": "Swift",
+        "url": "https://github.com/zxfccmm4/magpie-remote"
+      },
+      {
+        "name": "antonellof/saetta",
+        "stars": "★ 2",
+        "desc": "Motor de inferencia de *LLM* en *Zig* y *Metal* para *Apple Silicon*, con servidor compatible con la *API* de *OpenAI*",
+        "meta": "Zig",
+        "url": "https://github.com/antonellof/saetta"
+      },
+      {
+        "name": "duckpage/malleus",
+        "stars": "★ 2",
+        "desc": "Motor de inferencia de *LLM* en *Rust* y *HIP* para las *APU* *RDNA 3.5* de *AMD* (gfx1150, gfx1151)",
+        "meta": "Rust",
+        "url": "https://github.com/duckpage/malleus"
+      }
+    ],
+    "papers": [
+      {
+        "title": "K2-Horizon: A Frontier Fleet of Open Source Language Models",
+        "authors": "28 upvotes",
+        "url": "https://arxiv.org/abs/2611.21003"
+      },
+      {
+        "title": "AllocFlow: End-to-End Portfolio Trading Action Generation from Raw Market Data",
+        "authors": "24 upvotes",
+        "url": "https://arxiv.org/abs/2611.19937"
+      },
+      {
+        "title": "SPILLWAY: Separating Target Admission from Sanitization to Defend Tool-Using Agents against Prompt Injection",
+        "authors": "17 upvotes",
+        "url": "https://arxiv.org/abs/2611.07222"
+      },
+      {
+        "title": "PaperCritic: Training AI Reviewers to Assess the Soundness of Papers",
+        "authors": "16 upvotes",
+        "url": "https://arxiv.org/abs/2611.17834"
+      },
+      {
+        "title": "VoxMel TTS Technical Report",
+        "authors": "6 upvotes",
+        "url": "https://arxiv.org/abs/2611.20254"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLM",
+        "title": "*NewsGator*, el agregador de noticias que se autoaloja",
+        "note": "Flujos *RSS* + modelo local para filtrar y resumir las noticias en casa",
+        "url": "https://www.reddit.com/r/LocalLLM/comments/1w0tp5s/newsgator_a_selfhosted_news_aggregator_that/"
+      },
+      {
+        "src": "Medium",
+        "title": "Un curador de noticias 24/7 en 4 GB de *RAM*",
+        "note": "Crónica de cómo cabe un *LLM* local corriendo siempre en un equipo modesto",
+        "url": "https://life-of-utkarsh.medium.com/pushing-the-limits-running-local-llms-and-a-24-7-personal-news-curator-on-4gb-of-ram-c55f9498bf3c"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "«Estamos en la edad de oro de los *LLM* locales»",
+        "note": "El hilo que resume el momento: 16 GB de *VRAM* dan de sobra, y las herramientas han madurado",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xppbht/we_are_in_the_golden_age_of_local_llm/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "Una tabla de clasificación abierta de *IA*",
+        "note": "La comunidad construye su propio marcador de los mejores modelos, en abierto",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x3wp8c/i_made_an_opensource_ai_leaderboard_that_shows/"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

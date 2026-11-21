@@ -1,0 +1,140 @@
+{
+  "date": "20 de octubre de 2026",
+  "weekday_long": "martes",
+  "edition": "Edición nº 23",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "TorchNeuron: AWS y Hugging Face convierten Trainium en un dispositivo PyTorch más, sin reescribir tu código",
+    "summary": "Amazon y Hugging Face han anunciado *TorchNeuron*, un backend de PyTorch abierto para las chips *Trainium* de AWS: Transformers, Diffusers, Accelerate, PEFT y TRL ahora corren sobre Trainium como lo harían sobre CUDA, y el cambio para una pila existente es de una sola línea. La noticia cae en el momento exacto en que el ecosistema de modelos abiertos deja de ser solo 'modelos en la nube' y pasa a ser 'el mismo código, en cualquier acelerador': un *fine-tune* o un pipeline de difusión escrito para NVIDIA se despliega a Trainium sin reescrituras ni APIs propias. El blog de PyTorch lo presenta como el fin del 'idioma por hardware' en el entrenamiento, y la comunidad ya lo lee como una jugada de Amazon contra la ventaja de software de NVIDIA. Para quien autohospeda, es la primera vez que una nube no-NVIDIA se integra en la pila estándar sin una capa de traducción a medida: el coste por hora de Trainium, con el mismo flujo de *Hugging Face*, empieza a importar de verdad.",
+    "tags": ["trainium", "aws", "pytorch", "torchneuron", "open-source", "hugging-face"],
+    "links": [
+      {"label": "Blog de Hugging Face", "url": "https://huggingface.co/blog/hf-torchneuron"},
+      {"label": "Blog de PyTorch", "url": "https://pytorch.org/blog/introducing-torchneuron-native-pytorch-backend-for-aws-trainium/"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "Halcyon: generación de imagen texto-a-imagen entrenada desde cero, sin preentrenamiento de lenguaje",
+          "summary": "Chandrasegaran, Wu y colaboradores (arXiv 2610.26863) atacan una suposición básica de la generación de imagen: que hace falta un *language model* preentrenado a escala de internet para condicionar por texto. Su familia *Halcyon* son modelos autoregresivos multimodales de fusión temprana, entrenados de cero sobre *GPIC*, 100 millones de pares imagen-texto: Halcyon-0.52B se acerca a *LlamaGen-XL*/8 (gFD 63.3 frente a 48.0) con 18,2× menos cómputa de preentrenamiento, y Halcyon-1.6B supera a *JiT-T2I-XXL*/8++ (35.3 frente a 41.0 gFD) con 275× menos. El experimento controlado que vale la semana: el preentrenado solo en texto NO mejora la generación de imagen. Una receta barata y abierta para quien quiere su propio generador de imágenes sin pagar un *LM* gigante.",
+          "tags": ["text-to-image", "research", "autoregressive", "gpic", "gfd"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.26863"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.26863"}
+          ]
+        },
+        {
+          "title": "MOSS-Image de OpenMOSS: un generador de imágenes open-weight con SOTA en renderizado de texto (Apache 2.0)",
+          "summary": "OpenMOSS publica MOSS-Image (informe técnico arXiv 2610.23374) en dos pesos: *Base* y *SFT*, ambos Apache 2.0 y con pipeline propio en *Diffusers*. Lo que lo distingue entre la oleada de generadores: el renderizado de texto dentro de la imagen, donde el informe reporta una cobertura media de texto del 96,3 % en *LLTB*, el mejor resultado entre los modelos open-weight, con resultados fuertes también en composiciones complejas. Es el tipo de modelo que hace útil la generación local de material gráfico: pósters, UI, infografías, sin que las letras salgan como jeroglíficos. Integrado en *ComfyUI* desde el día uno, según sus propias plantillas.",
+          "tags": ["text-to-image", "open-weights", "apache-2.0", "moss-image", "text-rendering"],
+          "links": [
+            {"label": "Hugging Face (Base)", "url": "https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base"},
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.23374"}
+          ]
+        },
+        {
+          "title": "Xiaomi abre MiMo-V2.6-RL-oss: entornos y datos de RL de su MoE de 309B, Apache 2.0",
+          "summary": "Xiaomi amplía lo que abrió en septiembre con MiMo-V2.6-Flash (MIT): *MiMo-V2.6-RL-oss* es su conjunto de entornos y datos de refuerzo (Apache 2.0) para la familia MiMo, con 976 likes y ya casi 200.000 descargas en Hugging Face. Lo que importa: es el registro de cómo se entrenó por RL un MoE de 309B totales / 15B activos, con el material reproducible para quien quiera repetir o auditar el proceso — y *NVIDIA-NeMo* ya lo lista para *fine-tuning* completo de parámetros. En la misma línea, la semana la completan los entornos de matemáticas de *FineEnvs* (*openai-math*, Apache 2.0, para agentes de código con RL).",
+          "tags": ["xiaomi", "mimo", "reinforcement-learning", "apache-2.0", "rl-environments"],
+          "links": [
+            {"label": "Hugging Face (dataset)", "url": "https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss"},
+            {"label": "FineEnvs/openai-math", "url": "https://huggingface.co/datasets/FineEnvs/openai-math"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "MemT-1.0 de MemTensor: la memoria como capacidad nativa del modelo, no como biblioteca externa",
+          "summary": "MemTensor publica MemT-1.0 (trending en GitHub, paper arXiv 2610.26825): un modelo fundacional 'memory-native' que internaliza la memoria dentro del cómputo del modelo en vez de apoyarse en bases vectoriales externas. Sobre *Metis*, usa *Gated DeltaNet-2* con una actualización de memoria estable por token dentro de cada turno, y *Mixture-of-Storage* para escalar la capacidad; el entrenamiento va en dos fases (preentrenado continuo + post-entrenado) con 34B de tokens. Es el intento más serio visto hasta ahora de responder a la pregunta que la comunidad de agentes lleva meses debatiendo: ¿la memoria debería ser un *tool call* o parte del modelo?",
+          "tags": ["agents", "memory", "gated-deltanet", "foundation-model", "trending"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/MemTensor/MemT-1.0"},
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.26825"}
+          ]
+        },
+        {
+          "title": "Lampline: agentes de voz autohospedados que importan tus agentes de *Dialogflow CX*",
+          "summary": "C4rohan/Lampline (130 estrellas, nuevo y ya trending) es una plataforma de agentes de voz que se autohospeda: importas tus agentes de *Dialogflow CX* y de CX Agent Studio, los construyes y pruebas sobre tu propio hardware, y atiendes llamadas reales por teléfono o SIP a través de *jambonz*. Soporta 20 proveedores de modelos, así que los *flows* corporativos que hoy viven en la nube de Google pueden volver al servidor propio. Es el ejemplo de la semana de la migración inversa: software de nube maduro, con salida self-hosted.",
+          "tags": ["voice-agents", "self-hosting", "sip", "dialogflow", "trending"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/C4rohan/Lampline"}
+          ]
+        },
+        {
+          "title": "agents-contract: un contrato AGENTS.md para tus agentes de código, con linter sin dependencias",
+          "summary": "AntoGA/agents-contract formaliza lo que la comunidad de agentes de código empezó a hacer a mano: un *AGENTS.md* como contrato explícito (reglas, límites, definiciones de done) más un linter de cero dependencias y un hook de *SessionStart* que lo aplica a *Claude Code*, Codex, Cursor y Copilot. Pequeño en estrellas (40), grande en idea: convertir la 'personalidad' del agente en un artefacto verificable, no en un prompt que se degrada. Para quien ya orquesta varios agentes, es el paso del 'pásale esto' al 'cumple esta'.",
+          "tags": ["agents", "agents-md", "linter", "coding-agents"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/AntoGA/agents-contract"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "Sauron: verificación agéntica 'evidence-first' que no se traga el informe de éxito del propio agente",
+          "summary": "Sanayei y colaboradores (arXiv 2610.17724) describen Sauron, un verificador agéntico para tareas de agentes a largo plazo: en vez de puntuar contra un *rubric* a ciegas, investiga a la vez el estado del entorno y la traza de ejecución, y solo acepta una afirmación tras validarla contra su fuente. Lo crítico: cuando los juicios del *judge* se usan como recompensas de RL, un verificador que olvida evidencia o acepta claims sin base refuerza comportamientos indeseados; las consultas acotadas y la investigación conjunta de criterios relacionados reducen el coste de contexto. Un ladrillo más para la verificación de agentes que la industria necesita antes de confiarles dinero.",
+          "tags": ["verification", "agents", "rl", "evaluation", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.17724"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.17724"}
+          ]
+        },
+        {
+          "title": "HSPR: recuperar la puntuación de un benchmark de agentes sin correr todo el benchmark",
+          "summary": "Chen y colaboradores (arXiv 2610.24611) atacan el coste de evaluar agentes de software sobre un benchmark completo: *HSPR* (*Hierarchical Score Posterior Recovery*) combina factores de respuesta ajustados desde tareas fuente con tasas de éxito de grupo inciertas, y actualiza los posteriores con los resultados observados del agente objetivo; la selección de la siguiente tarea se guía por la reducción esperada de la varianza del score completo. Traducción práctica: puedes comparar agentes corriendo una fracción del benchmark y seguir obteniendo un score defendible, no solo un ranking.",
+          "tags": ["evaluation", "benchmarks", "agents", "posterior-inference", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.24611"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "AirDrop-LLM: inferencia pipeline-parallel multi-nodo, con tu propia pila de hardware de sobra",
+          "summary": "Mohit-jpg-dot/AirDrop-LLM (Rust) es un broker de inferencia LLM *offline* y sin dependencias que hace *pipeline-parallel* multi-nodo agrupando hardware heterogéneo de consumo —Apple *Metal* + NVIDIA *CUDA*— sobre una red *hotspot* local ad hoc, con una API gateway compatible con OpenAI integrada. El espíritu: en vez de una GPU de 30.000 dólares, dos portátiles y un Mac con un *hotspot* WiFi. No es rápido, pero es la infraestructura de 'lo que tengo por casa' llevada al extremo, y en la semana del *TorchNeuron* de la portada el mensaje es el mismo: la barrera de entrada sigue bajando.",
+          "tags": ["inference", "multi-node", "rust", "self-hosting", "pipeline-parallel"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/Mohit-jpg-dot/AirDrop-LLM"}
+          ]
+        },
+        {
+          "title": "ai-jailbreaks: 35 *jailbreaks* listos para pegar, para 25+ LLMs de frontera y open-weight",
+          "summary": "AndreSzymanski15/ai-jailbreaks (424 estrellas, ya trending) reúne 35 *jailbreak* prompts listos para pegar contra más de 25 LLMs de frontera y open-weight: system prompts, *persona locks*, especificaciones *AGENTS.md* e incluso *Modelfiles* para Ollama. Está construido explícitamente para investigación de seguridad y *red-teaming*: si vas a auditarte un modelo antes de autohospedarlo, es el punto de partida de la semana. El dato incómodo que lleva implícito: con la facilidad de los pesos abiertos, el *red-team* también es autohospedable.",
+          "tags": ["security", "red-team", "jailbreaks", "trending"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/AndreSzymanski15/ai-jailbreaks"}
+          ]
+        },
+        {
+          "title": "BlenderWorld (Qwen): benchmark de agentes visuales para creación 3D desde referencias del mundo real",
+          "summary": "Fang, Wang, Yu y otros (arXiv 2610.23986, dataset MIT de Qwen en Hugging Face) publican *BlenderWorld*: agentes multimodales que crean y editan modelos 3D en *Blender* a partir de referencias del mundo real, y la necesidad de inferir la forma de objetos a partir de fotografías. Es el tipo de *benchmark* que mide lo que los *MLLM* prometen en demos y rara vez soportan: manipulación de software creativo real, no imágenes planas. Con el *SFT* de MOSS-Image y la oleada de modelos visuales, la escena 3D se está convirtiendo en el nuevo campo de batalla de la visión abierta.",
+          "tags": ["3d", "visual-agents", "benchmark", "blender", "qwen"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.23986"},
+            {"label": "Hugging Face (dataset)", "url": "https://huggingface.co/datasets/Qwen/BlenderWorld"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

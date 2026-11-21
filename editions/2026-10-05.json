@@ -1,0 +1,133 @@
+{
+  "date": "5 de octubre de 2026",
+  "weekday_long": "lunes",
+  "edition": "Edición nº 9",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Aleph Alpha publica Kolibri-1, un modelo soberano de pesos abiertos",
+    "summary": "La alemana Aleph Alpha ha puesto en marcha Kolibri-1, un modelo MoE de pesos abiertos que apunta directo a la soberanía de la IA europea. Son 78.000 millones de parámetros totales, de los que solo unos 3.460 millones se activan por token, lo que lo hace sorprendentemente ligero de ejecutar para su capacidad. Es bilingüe alemán-inglés, con 262.000 tokens de contexto nativo (ampliable hasta 1 millón) y licencia Apache 2.0, así que puedes descargarlo, modificarlo y desplegarlo donde quieras. La ficha de Hugging Face ya acumula varios cientos de likes y la comunidad lo enmarca como la apuesta seria de un fabricante europeo por un modelo abierto de referencia, capaz de correr en infraestructura propia sin depender de la nube. Para quien self-hosta, la combinación de MoE de pocos parámetros activos y licencia permisiva lo convierte en una opción muy atractiva para tener un modelo grande sin una granja de GPUs.",
+    "tags": ["modelo abierto", "MoE", "soberanía", "multilingüe"],
+    "links": [
+      {"label": "Hugging Face", "url": "https://huggingface.co/Aleph-Alpha/Kolibri-1"},
+      {"label": "Blog de Aleph Alpha", "url": "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "Qwen3.8-27B, el VLM de pesos abiertos que no para de descargarse",
+          "summary": "El 27B de la familia Qwen 3.8 se ha convertido en una referencia de los modelos visuales-lingüísticos abiertos: más de 16.000 likes y casi 7 millones de descargas en Hugging Face. Es un modelo image-text-to-text que entiende imágenes y texto por igual, lo que lo hace versátil para agentes, OCR y razonamiento multimodal. Pesa lo suficiente como para ser capaz, pero lo bastante razonable como para self-hostearlo con una GPU decente. Si solo vas a montar un solo modelo multimodal local, este es de los que hay que tener en el radar.",
+          "tags": ["visión-lingüística", "Qwen", "open-weight"],
+          "links": [{"label": "Hugging Face", "url": "https://huggingface.co/Qwen/Qwen3.8-27B"}]
+        },
+        {
+          "title": "Lightricks LTX-2.5: vídeo a partir de imagen, en abierto",
+          "summary": "LTX-2.5 de Lightricks encabeza las tendencias de generación de vídeo de la comunidad: pasa de una imagen a un clip y acumula miles de likes y un millón y medio de descargas. Es de los pocos motores de vídeo con pesos abiertos que permite trabajar localmente sin pagar por API. Para quien hace prototipos de video-to-video o generación a partir de frames propios, es una opción inmediata para experimentar en el propio hardware.",
+          "tags": ["video", "generación", "Lightricks"],
+          "links": [{"label": "Hugging Face", "url": "https://huggingface.co/Lightricks/LTX-2.5"}]
+        },
+        {
+          "title": "Cloudflare Clef, su apuesta por modelos abiertos",
+          "summary": "Cloudflare ha subido a Hugging Face su modelo Clef, un image-text-to-text que sigue la línea de poner infraestructura y modelos a pie de CDN. La familia ya incluye también una variante Clef-flash, pensada para latencias bajas. Es señal de que los proveedores de red están entrando en la carrera de los pesos abiertos, con la ventaja de poder desplegarlos junto a su propia red de borde.",
+          "tags": ["Cloudflare", "visión", "open-weight"],
+          "links": [{"label": "Hugging Face", "url": "https://huggingface.co/Cloudflare/clef"}]
+        },
+        {
+          "title": "Nemotron-3-Diarization de NVIDIA: saber quién dice quién",
+          "summary": "NVIDIA ha publicado Nemotron-3-Diarization, un modelo de detección de actividad de voz enfocado en la diarización de hablantes: separar quién dijo qué en una grabación. Con decenas de miles de descargas, es una pieza útil para pipelines de transcripción local y de reuniones. Sumado a los modelos de STT ya existentes, ayuda a cerrar el bucle de una transcripción local de principio a fin sin subir audio a la nube.",
+          "tags": ["audio", "diarización", "NVIDIA"],
+          "links": [{"label": "Hugging Face", "url": "https://huggingface.co/nvidia/Nemotron-3-Diarization"}]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "H Company presenta Holo4, agentes de uso general del ordenador",
+          "summary": "H Company ha publicado Holo4, una familia de modelos orientados a agentes de computer-use de propósito general: capaces de operar una interfaz de escritorio de forma autónoma. El modelo estrella, Holo4-35B-A3B, es un MoE ligero en parámetros activos pensado para razonar sobre pantallas y ejecutar acciones. La empresa acompaña el lanzamiento con una entrada de blog con resultados de benchmarks. Es un paso más en la carrera por agentes que trabajan directamente sobre tu sistema operativo.",
+          "tags": ["agentes", "computer-use", "H Company"],
+          "links": [
+            {"label": "Blog en Hugging Face", "url": "https://huggingface.co/blog/Hcompany/holo4"},
+            {"label": "Ficha del modelo", "url": "https://huggingface.co/Hcompany/Holo4-35B-A3B"}
+          ]
+        },
+        {
+          "title": "homebrew-ai: fine-tuning de modelos desde la consola",
+          "summary": "empero-org ha lanzado homebrew-ai, un agente de consola para afinar (fine-tuning) modelos de IA con poca o ninguna experiencia previa. El objetivo es que el ajuste de pesos deje de ser un ritual de scripts y se sienta como una herramienta de uso diario. Sube rápido en GitHub y encaja perfecto en la corriente de llevar el entrenamiento local de vuelta al usuario.",
+          "tags": ["fine-tuning", "herramienta", "GitHub"],
+          "links": [{"label": "GitHub", "url": "https://github.com/empero-org/homebrew-ai"}]
+        },
+        {
+          "title": "AiPC: dale al agente un ordenador de verdad",
+          "summary": "SysikNagibator presenta AiPC, un proyecto cuyo eslogan es 'dale esto al agente y recibe un PC real'. La idea es dar a los agentes un entorno de ejecución aislado pero completo, donde puedan instalar, ejecutar y verificar cosas sin que toquen tu máquina principal. Es de las líneas de trabajo que intentan que los agentes corran a tope pero dentro de una caja de arena.",
+          "tags": ["agentes", "sandbox", "self-hosting"],
+          "links": [{"label": "GitHub", "url": "https://github.com/SysikNagibator/AiPC"}]
+        },
+        {
+          "title": "hermes-mobile-app: tu agente en el móvil, en el dispositivo",
+          "summary": "Un desarrollador ha publicado hermes-mobile-app, una app Android nativa para Hermes Agent que corre íntegramente en el dispositivo vía Termux. No necesita nube: el agente vive en el móvil. Es un ejemplo muy concreto de la tendencia a empujar la IA de agentes hacia el edge y al hardware propio, sin depender de un backend.",
+          "tags": ["móvil", "on-device", "Termux"],
+          "links": [{"label": "GitHub", "url": "https://github.com/omarqaterge/hermes-mobile-app"}]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "¿Aprender a plegar proteínas generaliza a razonamiento más amplio?",
+          "summary": "Este trabajo usa el plegamiento de proteínas como banco de prueba del razonamiento de los LLM: una estructura resuelta genera miles de afirmaciones espaciales y topológicas exactas y comprobables. Los autores estudian si la capacidad de razonar sobre geometría molecular se transfiere a tareas de razonamiento más generales. Es de los papers mejor votados de la semana y un recordatorio de que el texto humano suele dar respuestas de superficie, no la lógica espacial que hay detrás.",
+          "tags": ["razonamiento", "biología", "evaluación"],
+          "links": [{"label": "arXiv", "url": "https://arxiv.org/abs/2609.38879"}]
+        },
+        {
+          "title": "MotorMind: andamiaje para manipulación robótica zero-shot",
+          "summary": "MotorMind conecta las acciones a nivel medio que proponen los modelos visuales-lingüísticos generales con un control robótico determinista, de modo que los VLM estándar logren manipulación zero-shot sin entrenamiento especializado. La apuesta es que el scaffolding, no el modelo, es lo que permite generalizar a nuevas tareas y entornos. Interesante para quienes trabajan en robots y quieren aprovechar modelos abiertos multimodales.",
+          "tags": ["robótica", "VLM", "zero-shot"],
+          "links": [{"label": "arXiv", "url": "https://arxiv.org/abs/2609.38078"}]
+        },
+        {
+          "title": "Looping Beyond Twice: una receta escalable para MoE en bucle",
+          "summary": "Este paper estudia cómo exprimir los looped Transformers combinados con Mixture-of-Experts: aplicar en bucle bloques compartidos aumenta la profundidad efectiva sin añadir parámetros. Los autores proponen una receta escalable para el looping más allá de la segunda iteración, analizando el coste en FLOPs y la profundidad del bucle. Una línea de investigación prometedora para modelos más profundos con la misma memoria.",
+          "tags": ["MoE", "transformers", "escalado"],
+          "links": [{"label": "arXiv", "url": "https://arxiv.org/abs/2610.01153"}]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "State of Open Models: Summer 2026, el termómetro de Hugging Face",
+          "summary": "Hugging Face publica su informe semestral sobre el estado de los modelos abiertos: tendencias de pesos abiertos, adopción, capacidades y qué está funcionando de verdad. Es el punto de referencia habitual para saber hacia dónde va el ecosistema. Vale la pena pasarse por el blog para leerlo completo y ver las comparativas de modelos.",
+          "tags": ["estado del arte", "Hugging Face", "resumen"],
+          "links": [{"label": "Blog de Hugging Face", "url": "https://huggingface.co/blog/state-of-open-models-summer-2026"}]
+        },
+        {
+          "title": "Superpoder a tus pipelines de OCR con modelos abiertos",
+          "summary": "Una guía de Hugging Face sobre cómo montar pipelines de OCR (reconocimiento óptico de caracteres) con modelos abiertos, para extraer texto de imágenes y documentos sin depender de servicios cerrados. Es un ejemplo práctico de cómo los pesos abiertos están llenando huecos en flujos de trabajo de producción que antes solo cubría la API de un proveedor.",
+          "tags": ["OCR", "visión", "self-hosting"],
+          "links": [{"label": "Blog de Hugging Face", "url": "https://huggingface.co/blog/ocr-open-models"}]
+        },
+        {
+          "title": "Los modelos locales a mediados de 2026, según la comunidad",
+          "summary": "En r/LocalLLaMA se debate qué están usando de verdad quienes corren modelos en casa a mediados de 2026: qué arquitecturas rinden, qué hardware tiene sentido y qué ha funcionado en la práctica. Es un hilo útil para calibrar expectativas antes de meter dinero en GPUs o de elegir un modelo para montar.",
+          "tags": ["comunidad", "self-hosting", "r/LocalLLaMA"],
+          "links": [{"label": "Reddit", "url": "https://www.reddit.com/r/LocalLLaMA/comments/1u5fv6n/local_models_in_mid2026/"}]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IAAHoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

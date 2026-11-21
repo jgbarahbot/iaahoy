@@ -1,0 +1,147 @@
+{
+  "date": "3 de octubre de 2026",
+  "weekday_long": "sábado",
+  "edition": "Edición nº 7",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "LTX-2.5: Lightricks abre el video generativo con audio",
+    "summary": "Lightricks está encendiendo Hugging Face con LTX-2.5, su modelo abierto de generación de video que hoy domina las tendencias con más de 6.000 'likes' y cerca de 1,6 millones de descargas. La novedad no es solo el video: el modelo maneja un abanico amplio de tareas, desde imagen-a-video y texto-a-video hasta generación de audio y secuencias con audio sincronizado, todo en un solo archivo de difusión. Eso lo convierte en una de las piezas más completas del ecosistema de video generativo abierto: una sola descarga cubre prototipado, animación de imágenes y creación de escenas sonoras. El código y los pesos son públicos (licencia de la comunidad Lightricks, no Apache), y el movimiento se apoya en la familia LTX, que ya es una referencia en inferencia rápida de video en GPUs de consumo. Para quien hace self-hosting, es una opción seria para producir video localmente sin salir a la nube.",
+    "tags": ["video", "generación", "Lightricks", "audio", "self-hosting"],
+    "links": [
+      {"label": "Lightricks/LTX-2.5 (Hugging Face)", "url": "https://huggingface.co/Lightricks/LTX-2.5"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "Qwen-Image 2.1 acelera el ecosistema local con la versión turbo de Viggle",
+          "summary": "El modelo de generación de imágenes de Qwen sigue generando variantes comunitarias: Viggle publica una versión 'turbo' destilada de Qwen-Image 2.1, optimizada para pocos pasos de inferencia y compatible con ComfyUI, además de GGUF para cuantizarla. Mientras tanto, la variante 'uncensored' de abenzers acumula más de 1,3 millones de descargas, señal de la demanda por modelos de imagen que corran en local sin restricciones de plataforma. La familia Qwen-Image se está consolidando como el punto de partida de facto para generación de imágenes auto-hospedada.",
+          "tags": ["modelos", "generación-de-imágenes", "Qwen", "ComfyUI", "GGUF"],
+          "links": [
+            {"label": "Qwen/Qwen-Image-2.1", "url": "https://huggingface.co/Qwen/Qwen-Image-2.1"},
+            {"label": "Viggle turbo (distilada)", "url": "https://huggingface.co/Viggle/Qwen-Image-2.1-viggle-turbo"},
+            {"label": "Qwen-Image-2.1 GGUF", "url": "https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF"}
+          ]
+        },
+        {
+          "title": "Nemotron-3 Diarization: diarización de hablantes de NVIDIA en abierto",
+          "summary": "NVIDIA publica Nemotron-3 Diarization en Hugging Face, basado en su arquitectura streaming Sortformer: asigna quién habló cuándo en una grabación, con detección de actividad de voz incluida, y hasta en formato GGUF para inferencia ligera. Es el paso que faltaba para montar un pipeline completo de transcripción de reuniones en local: diarización, reconocimiento de voz y resumen, sin enviar audio a la nube. Ya suma más de 44.000 descargas.",
+          "tags": ["modelos", "audio", "diarización", "NVIDIA", "self-hosting"],
+          "links": [
+            {"label": "nvidia/Nemotron-3-Diarization", "url": "https://huggingface.co/nvidia/Nemotron-3-Diarization"}
+          ]
+        },
+        {
+          "title": "ZDTaichu 5.0: visión y agentes en un modelo compacto de 9B",
+          "summary": "TaichuAI libera ZDTaichu 5.0-9B, un modelo de visión-lenguaje de 9B orientado a razonamiento espacial, comprensión de video y uso como agente, bilingüe en inglés y chino. Los modelos compactos multimodales son el nicho donde el self-hosting más compite: caben en una sola GPU de consumo y permiten pipelines de agentes con visión sin servicios externos. Lleva código propio, así que conviene revisar los requisitos de ejecución antes de descargarlo.",
+          "tags": ["modelos", "multimodal", "agentes", "9B"],
+          "links": [
+            {"label": "TaichuAI/ZDTaichu5.0-9B", "url": "https://huggingface.co/TaichuAI/ZDTaichu5.0-9B"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "CLIProxyAPI-Rust: tus suscripciones como una API única",
+          "summary": "IuCC123/CLIProxyAPI-Rust empaqueta las suscripciones de Claude, ChatGPT y Gemini en un único binario Rust que expone endpoints compatibles con OpenAI, Anthropic y Gemini, con WebSockets y un panel de administración incluido. Es una herramienta de la categoría de 'gateways': un punto único desde el que tus aplicaciones consumen varios modelos. El patrón de la semana —CLIProxyAPI, LTZY-API, Tuskira— es claro: la capa que enrutiza y unifica accesos a modelos es tan importante como los propios modelos. Úsalo bajo tu responsabilidad: envía tráfico a servicios de terceros con una API no oficial.",
+          "tags": ["agentes", "gateway", "Rust", "API"],
+          "links": [
+            {"label": "IuCC123/CLIProxyAPI-Rust", "url": "https://github.com/IuCC123/CLIProxyAPI-Rust"},
+            {"label": "LTZY-API (gateway self-hosted)", "url": "https://github.com/LTZY-ACU/LTZY-API"}
+          ]
+        },
+        {
+          "title": "EvoVLM: programas de inferencia evolutivos para VLMs",
+          "summary": "zzzz7788990213-ops/EvoVLM aplica búsqueda evolutiva guiada por LLM para generar programas de inferencia de visión-lenguaje más precisos y eficientes, en lugar de encadenados fijos. La idea es tratar el pipeline de inferencia como un espacio de búsqueda: proponer, evaluar y mutar flujos hasta encontrar el que rinde mejor para cada tarea. Es una línea de investigación aplicada que empieza a destacar en GitHub y que, si madura, podría automatizar la optimización de pipelines multimodales.",
+          "tags": ["agentes", "VLM", "búsqueda-evolutiva", "GitHub"],
+          "links": [
+            {"label": "zzzz7788990213-ops/EvoVLM", "url": "https://github.com/zzzz7788990213-ops/EvoVLM"}
+          ]
+        },
+        {
+          "title": "Sentry: aprender a recuperarse de fallos en tiempo de test",
+          "summary": "nuglifeleoji/Sentry aborda un problema muy práctico de los agentes: qué hacer cuando el agente se equivoca en el momento de la ejecución. La propuesta entrena al agente para detectar y recuperarse de sus propios fallos en tiempo de test, en vez de depender solo de un mejor entrenamiento inicial. Es la versión 'a prueba de errores' del post-entrenamiento de agentes: la robustez se mide en cuánto se recupera un agente de una mala racha, no solo en cuántas tareas resuelve de entrada.",
+          "tags": ["agentes", "robustez", "test-time", "GitHub"],
+          "links": [
+            {"label": "nuglifeleoji/Sentry", "url": "https://github.com/nuglifeleoji/Sentry"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "Los transformers dejan de pensar demasiado pronto (y un LoRA minúsculo lo arregla)",
+          "summary": "El paper con más 'upvotes' del día ('Transformers Stop Thinking Too Early, and a Tiny LoRA Fixes It') muestra que los transformers preentrenados apenas usan su profundidad para seguir referencias en contexto: 13 modelos base solo siguen fiablemente 1,4–3,6 líneas. Un LoRA de rango 8 entrenado en una capa temprana extiende ese seguimiento de forma notable. Es un resultado elegante y barato de reproducir: un adaptador diminuto que corrige un sesgo de comportamiento de los modelos grandes. Interesante para quien entrena o fine-tunea localmente.",
+          "tags": ["papers", "LoRA", "razonamiento", "fine-tuning"],
+          "links": [
+            {"label": "arXiv:2609.36585", "url": "https://arxiv.org/abs/2609.36585"},
+            {"label": "Hugging Face papers", "url": "https://huggingface.co/papers/2609.36585"}
+          ]
+        },
+        {
+          "title": "X-Tree: tokenizar experiencia reutilizable para agentes",
+          "summary": "X-Tree propone que los agentes multi-paso no se entrenen sobre flujos planos de acciones, sino sobre la jerarquía de sub-procedimientos que se repiten entre tareas —la misma jerarquía con la que los humanos planifican reutilizando rutinas. El trabajo tokeniza esa experiencia reutilizable para que el agente generalice mejor entre tareas. Con 18 'upvotes', es una de las líneas más prometedoras para agentes que deben hacer muchas cosas distintas con la misma base de conocimiento.",
+          "tags": ["papers", "agentes", "generalización", "SFT"],
+          "links": [
+            {"label": "arXiv:2609.32993", "url": "https://arxiv.org/abs/2609.32993"},
+            {"label": "Hugging Face papers", "url": "https://huggingface.co/papers/2609.32993"}
+          ]
+        },
+        {
+          "title": "Encuesta: post-entrenamiento y alineación de modelos de video",
+          "summary": "'Video Generation Models: A Survey of Post-Training and Alignment' (23 'upvotes') hace inventario de cómo se afinan los modelos de video después del preentrenamiento: DPO, preferecias humanas, control de movimiento y coherencia temporal. Es el mapa de referencia justo en el momento en que modelos abiertos como LTX-2.5 ponen el video generativo al alcance de cualquiera. Útil para entender qué se puede mejorar de un modelo de video abierto y por qué unos clips coheren y otros no.",
+          "tags": ["papers", "video", "alineación", "survey"],
+          "links": [
+            {"label": "arXiv:2610.00812", "url": "https://arxiv.org/abs/2610.00812"},
+            {"label": "Hugging Face papers", "url": "https://huggingface.co/papers/2610.00812"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "Open TTS Leaderboard: evaluación escalable de TTS multilingüe",
+          "summary": "Hugging Face publica el Open TTS Leaderboard, un marco de evaluación escalable para text-to-speech y clonación de voz en múltiples idiomas. El TTS abierto ha mejorado muchísimo (Piper, Coqui, CosyVoice…), pero medirlo comparando audios a mano no escala: este leaderboard intenta poner cifras serias sobre la mesa. Es la referencia que faltaba para elegir modelo de voz en pipelines auto-hospedados sin depender de benchmarks propietarios.",
+          "tags": ["comunidad", "TTS", "evaluación", "Hugging-Face"],
+          "links": [
+            {"label": "Open TTS Leaderboard", "url": "https://huggingface.co/blog/open-tts-leaderboard"}
+          ]
+        },
+        {
+          "title": "MiMo-V2.6-RL-oss: datos RL de Xiaomi abiertos",
+          "summary": "Xiaomi publica MiMo-V2.6-RL-oss, su dataset de refuerzo para RL con documentos e imágenes bajo licencia Apache 2.0. Abrir los datos de RL (no solo los pesos) es cada vez más la norma: permite reproducir y auditar la etapa de refuerzo de un modelo, y reutilizarla en tus propios fine-tunings. Con casi 58.000 descargas, la comunidad ya lo está usando. Es de esos datasets que alimentan el ciclo completo: preentrenar, afinar y reforzar en local.",
+          "tags": ["datasets", "RL", "Xiaomi", "Apache-2.0"],
+          "links": [
+            {"label": "XiaomiMiMo/MiMo-V2.6-RL-oss", "url": "https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss"}
+          ]
+        },
+        {
+          "title": "AutoSynthData: generar datos de entrenamiento para agentes de empresa",
+          "summary": "ServiceNow AI publica AutoSynthData, un enfoque para generar datos de entrenamiento sintéticos para agentes de empresa. El problema que ataca es real: los agentes empresariales necesitan miles de ejemplos de flujos específicos y recopilarlos a mano no escala. La generación sintética, bien filtrada, es la alternativa —y el post detalla cómo evitar los sesgos que los datos sintéticos introducen. Un buen punto de partida para quien construye agentes sobre flujos internos.",
+          "tags": ["comunidad", "datos-sintéticos", "agentes", "ServiceNow"],
+          "links": [
+            {"label": "AutoSynthData (HF blog)", "url": "https://huggingface.co/blog/ServiceNow-AI/autosynthdata"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}
