@@ -1,0 +1,513 @@
+{
+  "date": "24 de noviembre de 2026",
+  "weekday_long": "martes",
+  "edition": "Edición nº 49",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*Inkling 2 Mini*: cuarenta y ocho capas por token con veinticuatro, y un razonamiento que se puede vigilar",
+    "summary": "*Inkling 2 Mini* ya tiene historia en este periódico, pero lo que *Thinking Machines* más quiere que se mire esta vez no es que el modelo quepa en 20 GB, sino que su *transformer* no es un apilamiento: es un bucle. Son 24 capas organizadas en cuatro bloques, y los dos bloques centrales se recorren tres veces por token — cuarenta y ocho aplicaciones de capa con veinticuatro capas distintas. El modelo publicado, *TML-d24-varloop-research*, hace además el bucle variable: la red decide cuántas veces repasar cada bloque. Lo que acompaña a la publicación es un estudio de monitorabilidad: el horizonte de razonamiento sin *CoT* crece de 16 a 37 segundos, el *CoT* se comprime de 3.703 a 1.661 tokens sin dejar de ser legible, la controllabilidad baja al 0,1% y en *LinuxArena* no hay rastro de furtividad. La apuesta: un modelo pequeño y abierto que se puede ver razonar, no solo usar.",
+    "body": [
+      "La semana pasada *Thinking Machines* publicó *Inkling 2 Mini* y el ruido se quedó en lo previsible: un *MoE* de 26.000 millones de parámetros que cabe en 20 GB, contexto de un millón de tokens, licencia *Apache 2.0* y un *GGUF* que ya pasó del millón de descargas. Pero la ficha y el informe técnico que acompañan a la publicación apuntan a algo menos ruidoso y más importante: la red no es un *transformer* apilado, es un bucle. Tiene 24 capas organizadas en cuatro bloques de seis, y los dos bloques centrales se recorren tres veces por cada token — cuarenta y ocho aplicaciones de capa, con solo veinticuatro capas distintas.",
+      "El bucle no es un detalle estético. Repetir las mismas capas permite gastar más computación por token sin añadir pesos: es la misma lógica que la *MoE* ya aplicaba a los expertos, trasladada a la profundidad de la red. El modelo publicado — su nombre en *Hugging Face* es *TML-d24-varloop-research* — va un paso más allá y hace el bucle variable: la red decide cuántas veces repasar cada bloque según la entrada. Y la línea de investigación que se publica junto al modelo no vende la característica, la mide: comparan el bucle fijo contra el variable y contra la red sin bucle, tratando el número de pasadas como una variable de diseño sujeta a medida, no como un eslogan.",
+      "La otra mitad del informe responde a la pregunta que más interesa antes de dar a un modelo una terminal: ¿se puede vigilar? Cuatro indicadores. El horizonte de razonamiento sin *CoT* — cuánto puede seguir actuando coherentemente sin monólogo interno — crece de 16 a 37 segundos. El *CoT* que genera cuando hace falta se comprime de 3.703 a 1.661 tokens y, lo importante, sigue siendo legible: las frases no se alargan, se hacen menos. La controllabilidad — cuánto se puede dirigir el comportamiento desde el prompt — baja al 0,1%. Y en *LinuxArena* no aparece ninguna tendencia a la furtividad: el agente no esconde sistemáticamente lo que está haciendo. Un modelo pequeño que piensa en pasos cortos y legibles, y no oculta sus movimientos, es el tipo de modelo que se puede auditar antes de conectarlo a una shell.",
+      "Que estos indicadores aparezcan en la misma publicación que el modelo no es casualidad. La semana de los *harness* y de las batallas de evaluaciones va en una sola dirección: en la IA agéntica, el bien escaso ya no es el modelo que responde, sino el modelo que se puede verificar. Un *MoE* de 26B con controllabilidad del 0,1% y un *CoT* legible es lo opuesto a una caja negra, y la apuesta de *Thinking Machines* se lee así: no «nuestro modelo es el más pequeño que hace X», sino «el más pequeño que se puede ver hacer X».",
+      "El contexto ayuda a leerlo. Los *transformers* con bucle no son nuevos — la idea de aplicar las mismas capas repetidamente lleva años en el papel —, pero hasta ahora era un tema de laboratorio. Esta semana hay dos modelos bucle publicados y abiertos: este y *SenseNova-Loop-9B* (ver *Modelos*), y la ficha de *Inkling* los compara en la misma tabla. Cuando dos laboratorios independientes publican la misma idea en la misma semana, la pregunta de diseño cambia: ya no es «¿bucle o no?», sino «¿cuántas pasadas, fijas o variables, y para qué tareas conviene que la red lo decida sola?».",
+      "Las salvedades, por supuesto. Los números vienen de la propia empresa, la monitorabilidad depende de los *benchmarks* y de las métricas elegidas, y el bucle variable es, literalmente, investigación: lo dice el nombre del repositorio. Y la versión de 20 GB que corre en local (*NVFP4* nativo, *GGUF* por *Unsloth* y *ggml-org*) no es exactamente la que miden las tablas. Lo que sí se puede afirmar: es *Apache 2.0*, lleva cuatro días encabezando *Hugging Face* con más de 5.000 me gusta, su *GGUF* va por el millón y medio de descargas, y esta misma semana ha llegado un segundo bucle de otro laboratorio. La pregunta que el informe deja abierta es buena, y no es una pregunta propietaria: cuánta computación conviene gastar repitiendo las mismas capas, y si lo que se obtiene a cambio se puede mirar de cerca."
+    ],
+    "tags": [
+      "inkling-2-mini",
+      "thinking-machines",
+      "looped-transformer",
+      "moe",
+      "monitorability",
+      "local-llm"
+    ],
+    "links": [
+      {
+        "label": "Thinking Machines: Inkling 2 Mini",
+        "url": "https://thinkingmachines.ai/news/inkling-2-mini/"
+      },
+      {
+        "label": "Model card",
+        "url": "https://thinkingmachines.ai/model-card/inkling-2-mini/"
+      },
+      {
+        "label": "Hugging Face",
+        "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"
+      },
+      {
+        "label": "Blog Hugging Face (20 nov)",
+        "url": "https://huggingface.co/blog/inkling2mini"
+      },
+      {
+        "label": "r/LocalLLaMA",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y1diuk/thinkingmachinesinkling2mini_moe_26b_a3b/"
+      }
+    ],
+    "illustration": {
+      "file": "lead-illo-2026-11-24.jpg",
+      "alt": "Fotomacro de una placa de circuito verde oscuro bajo la luz cálida de una lámpara de escritorio: un chip cuadrado con un rastro de cobre que da tres vueltas en espiral por un grupo de pastillas en el centro del silicio, y un hilo de fibra óptica que sigue el mismo camino con un tenue brillo rojo",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: un chip de silicio en un banco de trabajo, con un rastro de cobre que se enrosca tres veces por el mismo grupo de patillas y una fibra óptica que recorre el mismo camino."
+    }
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "La ola *GGUF* de *Inkling 2 Mini*: *imatrix*, *ggml* y el *NVFP4* nativo",
+          "summary": "Los *GGUF* de *Inkling 2 Mini* pasaron del millón de descargas en cuatro días, y esta vez la cuantización es distinta: el modelo es *NVFP4* nativo — 4 bits con escalado *FP8* — y *ggml* ya sabe leerlo, así que la conversión pierde menos de lo que suele. *Unsloth* y *ggml-org* publican versiones paralelas generadas con *imatrix*, y la versión de unos 20 GB ya corre en los *Mac* y las GPUs de consumo que llenan *r/LocalLLaMA*.",
+          "body": [
+            "La cuantización llegó el mismo día que el modelo, el 20 de noviembre: el repositorio de *unsloth* supera ya 1,29 millones de descargas, generadas con *imatrix* — la matriz que aproxima el daño de la cuantización usando las activaciones reales del modelo —, y *ggml-org*, la organización detrás de *llama.cpp*, ha publicado su propia versión con la variante *IQ4_NL*. Dos repositorios, el mismo modelo: la señal es que la ola de cuantización de esta semana no tiene un líder, tiene una carrera.",
+            "La novedad técnica es que *Inkling 2 Mini* es *NVFP4* nativo: 4 bits con escalado *FP8*. El ecosistema *ggml* ya tiene el aparato para leer ese formato directamente, sin la conversión de *FP8* a 4 bits que costaba precisión medible en las capas de atención y en los expertos de la *MoE*. El resultado práctico: la versión de unos 20 GB que ya corre en un *Mac* de 32 GB o en una GPU de consumo. La licencia es *Apache 2.0* de punta a punta, así que las cuantizaciones son obras de la comunidad, no un favor."
+          ],
+          "tags": [
+            "gguf",
+            "nvfp4",
+            "quantization",
+            "unsloth",
+            "llama-cpp"
+          ],
+          "links": [
+            {
+              "label": "GGUF (unsloth)",
+              "url": "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF"
+            },
+            {
+              "label": "GGUF (ggml-org)",
+              "url": "https://huggingface.co/ggml-org/Inkling-2-Mini-GGUF"
+            },
+            {
+              "label": "Blog Hugging Face (20 nov)",
+              "url": "https://huggingface.co/blog/inkling2mini"
+            }
+          ]
+        },
+        {
+          "title": "*SenseNova-Loop-9B*: un segundo *transformer* con bucle, y es *Apache 2.0*",
+          "summary": "El bucle no es capricho de un laboratorio: *SenseNova-Loop-9B* (multimodal, bilingüe en inglés y chino, *Apache 2.0*) lleva en *Hugging Face* desde el 17 de noviembre y aparece como referencia en la propia tabla comparativa de la ficha de *Inkling*. Dos laboratorios independientes publicando la misma idea en la misma semana: el bucle empieza a ser una familia.",
+          "body": [
+            "La ficha de *Inkling 2 Mini* no lo esconde: su tabla de comparación sitúa a *SenseNova-Loop-9B* junto a los otros *transformers* con bucle del momento. Es un modelo multimodal (imagen a texto) entrenado bilingüe en inglés y chino, con licencia *Apache 2.0*, y lleva acumulando más de 650 me gusta en *Hugging Face* desde el 17 de noviembre. Su arquitectura repite el patrón: el mismo conjunto de capas se recorre dos veces, lo que multiplica la profundidad efectiva sin multiplicar los pesos.",
+            "Cuando dos laboratorios independientes publican arquitecturas con bucle en la misma semana, deja de ser una apuesta y se convierte en una tendencia. Es el mismo movimiento que la *MoE* ya había hecho con los expertos — gastar más computación de la que pesan los pesos —, pero trasladado a la profundidad: repetir las mismas capas en lugar de añadir nuevas. Para el *self-hosting* la consecuencia es directa: un modelo de 9B con una profundidad efectiva muy superior, que cabe en la misma máquina."
+          ],
+          "tags": [
+            "senzenova",
+            "looped-transformer",
+            "multimodal",
+            "open-weights"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face: SenseNova-Loop-9B",
+              "url": "https://huggingface.co/SenseNova/SenseNova-Loop-9B"
+            },
+            {
+              "label": "Model card de Inkling (comparativa)",
+              "url": "https://thinkingmachines.ai/model-card/inkling-2-mini/"
+            }
+          ]
+        },
+        {
+          "title": "*Haru-4B*: *speech-to-speech* en dúplex total, nueve idiomas",
+          "summary": "*higurashi-ai* publica *Haru-4B*, un modelo de voz a voz de 4.000 millones de parámetros y licencia *Apache 2.0* que escucha y habla al mismo tiempo — dúplex total, con interrupción natural — y cubre nueve idiomas: inglés, español, portugués, alemán, francés, chino, japonés, ruso y coreano.",
+          "body": [
+            "La ficha de *Haru-4B* es clara sobre lo que la diferencia: es *full duplex*. Un modelo de voz convencional alterna turnos — escucha y luego habla —; *Haru* hace las dos cosas a la vez, y puede ser interrumpido sin esperar a que la otra parte termine la frase. Es el detalle que hace que una conversación con un asistente de voz se sienta humana, y hasta la semana pasada solo estaba en modelos propietarios o de muy gran tamaño.",
+            "Con 4.000 millones de parámetros, licencia *Apache 2.0* y casi 9.000 descargas en doce días, no compite en calidad con los grandes: compite en ser el primer modelo de pesos abiertos que trae el dúplex a casa. Para el ecosistema de agentes de voz — los asistentes locales, las líneas de atención, los compañeros de voz — eso vale más que un punto en un *benchmark*: la naturalidad de la conversación es lo que el usuario nota primero."
+          ],
+          "tags": [
+            "haru",
+            "speech-to-speech",
+            "full-duplex",
+            "multilingual"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face: Haru-4B",
+              "url": "https://huggingface.co/higurashi-ai/Haru-4B"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*RoboTrack* de *AllenAI*: seguir un punto para manipular en el mundo real",
+          "summary": "*AllenAI* publica *RoboTrack* (23 de noviembre): un *benchmark* de 30 tareas de manipulación, 15 millones de muestras generadas en simulación y un seguidor de puntos entrenado sobre ellas. El problema que ataca: los seguidores de puntos corrientes se rompen cuando la cámara tiembla, la luz cambia o el objeto gira — justo lo que pasa fuera de la simulación.",
+          "body": [
+            "El artículo parte de una falla concreta. Para coger un objeto, un robot tiene que seguir las posiciones de la pinza y del objeto mientras se mueven; y en el mundo real, a diferencia de la simulación, la cámara tiembla, la iluminación cambia y el objeto rota. Los seguidores de puntos — las redes que siguen un punto de fotograma en fotograma — se rompen en ese escenario. *RoboTrack-Bench* lo mide con manipulación real, en 30 tareas.",
+            "La respuesta tiene tres piezas, todas abiertas. *RoboTrack-15M*, 15 millones de muestras generadas en el entorno de simulación *MolmoSpaces* (con renderizado de *Kubric*), para entrenar a un seguidor que sepa cómo se ve la manipulación; y *RoboTracker*, el seguidor de puntos entrenado sobre esa data. El modelo, el informe técnico, la data y el código están todos disponibles, y la página del proyecto muestra el *benchmark* y el despliegue en robots de *Allen*. Es una vuelta a la lección clásica del aprendizaje robótico: una simulación con buena data es el puente hacia el mundo real, y seguir un punto es el primer ladrillo."
+          ],
+          "tags": [
+            "allenai",
+            "robotrack",
+            "point-tracking",
+            "manipulation"
+          ],
+          "links": [
+            {
+              "label": "Blog AllenAI: RoboTrack",
+              "url": "https://huggingface.co/blog/allenai/robotrack"
+            },
+            {
+              "label": "GitHub: allenai/robotrack",
+              "url": "https://github.com/allenai/robotrack"
+            },
+            {
+              "label": "Informe técnico (AllenAI)",
+              "url": "https://allenai.org/papers/robotrack"
+            }
+          ]
+        },
+        {
+          "title": "*opensre*: el agente *SRE* abierto para fiabilidad de *CI/CD*",
+          "summary": "*Tracer-Cloud* publica *opensre*, un agente en Python bajo licencia *Apache 2.0* (14.900 estrellas, con actividad de esta misma mañana) que vigila los pipelines de *CI/CD* y actúa sobre las fallas: el *SRE* que no duerme, escrito en código abierto.",
+          "body": [
+            "El repositorio se presenta en una frase: un agente de código abierto para la fiabilidad de *CI/CD*. El problema que ataca es el que conoce todo equipo de ingeniería: a las tres de la madrugada hay que ver el pipeline que ha fallado, leer los logs, identificar la causa y decidir si se reintenta, si se hace *rollback* o si se despierta a un humano. *opensre* es ese alguien, en forma de agente que se puede autalojar en la propia infraestructura.",
+            "Las 14.900 estrellas y un *push* de esta mañana dicen que no es un prototipo. Es Python, *Apache 2.0*, y está pensado para formar parte del stack, no para ser una caja negra: se puede leer qué decide el agente y cambiarlo. En la semana de los *harness* y de las evaluaciones agénticas, *opensre* es la otra mitad de la ecuación: un agente que vigila la infraestructura en lugar de escribir código."
+          ],
+          "tags": [
+            "opensre",
+            "sre",
+            "ci-cd",
+            "agents"
+          ],
+          "links": [
+            {
+              "label": "GitHub: Tracer-Cloud/opensre",
+              "url": "https://github.com/Tracer-Cloud/opensre"
+            }
+          ]
+        },
+        {
+          "title": "*stitch-skills*: la biblioteca de *Agent Skills* del servidor *Stitch MCP*",
+          "summary": "*Google Labs* publica *stitch-skills* (12.400 estrellas, *Apache 2.0*): la biblioteca de habilidades diseñada para el servidor *MCP* de *Stitch* — el estándar de *Agent Skills* que ya usan *Claude* y *Hermes*, aplicado a la interfaz que conecta a los agentes con el entorno de diseño *Stitch*.",
+          "body": [
+            "*Stitch* es el servidor *MCP* que permite a los agentes — los de *Gemini*, los de *Claude*, los de otros sistemas — manipular el entorno de diseño *Stitch*, y *stitch-skills* es la biblioteca de habilidades que les enseña a hacerlo bien. Cada habilidad sigue el estándar abierto *Agent Skills* — el mismo que usa *Claude* y el mismo que implementa *Hermes* —, de modo que cualquier agente que entienda el formato puede leerlas, adaptarlas y ampliarlas.",
+            "12.400 estrellas para una biblioteca de habilidades no es poco: la combinación *MCP* + *Agent Skills* se está consolidando como la interfaz entre agentes y herramientas profesionales. Lo que antes era un *prompt* con instrucciones, ahora es un activo con versión, testeable y compartible; y que *Google Labs* lo publique bajo *Apache 2.0* significa que la comunidad puede extenderlo sin pedir permiso."
+          ],
+          "tags": [
+            "stitch",
+            "agent-skills",
+            "mcp",
+            "google-labs"
+          ],
+          "links": [
+            {
+              "label": "GitHub: google-labs-code/stitch-skills",
+              "url": "https://github.com/google-labs-code/stitch-skills"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*AMD* y *Unsloth* desbloquean el *NPU*: *XDNA 2* es el primero",
+          "summary": "El anuncio (19 de noviembre) hace oficial lo que la comunidad ya estaba probando: la *NPU XDNA 2* de los *PC Ryzen AI* corre modelos en *Unsloth Desktop*, el primer *NPU* de consumo con soporte. Un modelo de 35B sobre la *NPU* — hasta 28 GB en la configuración *Strix Halo* — con un consumo entre dos y cuatro veces menor que la *GPU*, y más de cien aplicaciones agénticas que ya enrutan la inferencia local por la *NPU*.",
+          "body": [
+            "El comunicado del *newsroom* de *AMD* es un hito en la guerra silenciosa de aceleradores: la *NPU XDNA 2* de los *PC Ryzen AI* es la primera con soporte en *Unsloth Desktop*, la interfaz local para correr y ajustar modelos. La demostración es un modelo de 35.000 millones de parámetros corriendo sobre la *NPU* — en la configuración *Strix Halo* hay hasta 28 GB de memoria disponible —, y *Unsloth* asegura que la *NPU* consume entre dos y cuatro veces menos energía que la *GPU* para la misma inferencia.",
+            "Lo que cambia la ecuación no es el modelo: son las cien aplicaciones agénticas que ahora enrutan su inferencia local por la *NPU*. Una *NPU* siempre encendida, con un perfil de energía distinto al de la *GPU*, convierte el «tengo que encender la *GPU* para usar el modelo» en «el modelo está en la *NPU*, esperando». Los detalles de *Linux* — kernel, drivers, firmware, formato *Q4NX* — son los que la comunidad está documentando hoy (ver *Comunidad*)."
+          ],
+          "tags": [
+            "amd",
+            "unsloth",
+            "npu",
+            "ryzen-ai",
+            "local-inference"
+          ],
+          "links": [
+            {
+              "label": "Newsroom AMD",
+              "url": "https://newsroom.amd.com/news/amd-unsloth-bring-npu-support-agentic-ai-applications/"
+            },
+            {
+              "label": "Blog AMD: Unlocking the XDNA 2 NPU for Unsloth Desktop",
+              "url": "https://www.amd.com/en/blogs/2026/unlocking-the-amd-ryzen-ai-npu-for-unsloth-desktop.html"
+            },
+            {
+              "label": "GitHub: unslothai/unsloth",
+              "url": "https://github.com/unslothai/unsloth"
+            }
+          ]
+        },
+        {
+          "title": "*CLI-Anything*: hacer que cualquier software sea *agent-native*",
+          "summary": "*HKUDS* — el equipo detrás de *OpenHands* — publica *CLI-Anything* (64.000 estrellas, *Apache 2.0*): una biblioteca en Python que envuelve cualquier software en una interfaz de línea de comandos que los agentes pueden usar nativamente, más *CLI-Hub*, el catálogo público de las interfaces resultantes.",
+          "body": [
+            "La idea lleva semanas en este periódico: los agentes no hablan *GUI*, hablan *CLI*. *CLI-Anything* toma una pieza de software y genera la interfaz de comandos que el agente puede usar: los comandos, los argumentos, la salida documentada. Es Python, *Apache 2.0*, y 64.000 estrellas en una semana dicen que toca un nervio real.",
+            "*CLI-Hub* (clianything.cc) es el catálogo público de interfaces generadas. Es la misma filosofía que *MCP* con menos ceremonia: en vez de construir un servidor de herramientas para cada aplicación, se genera una *CLI* y el agente ya sabe usarla. Para el mundo del *self-hosting* es la vía más directa para que el software que ya está instalado sea usable por un agente local, sin escribir una línea."
+          ],
+          "tags": [
+            "cli-anything",
+            "agent-interface",
+            "hkuds"
+          ],
+          "links": [
+            {
+              "label": "GitHub: HKUDS/CLI-Anything",
+              "url": "https://github.com/HKUDS/CLI-Anything"
+            }
+          ]
+        },
+        {
+          "title": "*cachebridge*: la caché *KV* acotada en *CPU* para *nano-vLLM*",
+          "summary": "*wangly228* publica *cachebridge* (24 estrellas, *MIT*): una caché *KV* de prefijos acotada en *CPU* para *nano-vLLM*, evaluada con *Qwen3-4B* sobre una *RTX 3090* — el tipo de proyecto pequeño que resuelve un problema real de la inferencia local y solo aparece en las listas de tendencia porque alguien lo necesitaba.",
+          "body": [
+            "La caché *KV* es la memoria que los motores tipo *vLLM* dedican al contexto, y crece con el número de secuencias concurrentes. *cachebridge* hace algo simple y útil: mueve parte de la caché de prefijos a la *CPU*, con un tope explícito sobre cuánto, de modo que la *GPU* se queda con la parte caliente y la *CPU* con la fría. La evaluación usa *Qwen3-4B* sobre una *RTX 3090* — la misma clase de máquina en la que corre este periódico.",
+            "Son 24 estrellas, *MIT*, y no aparece en ningún radar: el objetivo, *nano-vLLM*, es la variante ligera para máquinas con poca memoria de vídeo, y una caché *CPU* acotada es exactamente el truco que permite más secuencias en la misma tarjeta. El código es corto, legible y adaptable a otros motores: el tipo de pieza que el *self-hosting* agradece y los *trending* de vez en cuando descubren."
+          ],
+          "tags": [
+            "kvcache",
+            "nano-vllm",
+            "local-inference",
+            "cpu-offload"
+          ],
+          "links": [
+            {
+              "label": "GitHub: wangly228/cachebridge",
+              "url": "https://github.com/wangly228/cachebridge"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*RUIBench*: la interfaz decide el éxito del agente robótico",
+          "summary": "El artículo (12 upvotes, 22 de noviembre) mide lo que todos dan por supuesto y nadie había medido: cuánto determina la interfaz entre el agente y el robot el resultado de la manipulación. Mucho: con el mismo agente, la tasa de éxito pasa del 45% al 81% al cambiar solo la interfaz, y un modelo de 4B ajustado, del 13% al 47%.",
+          "body": [
+            "*RUIBench* es un *benchmark* de 30 tareas de manipulación en cinco suites, y la novedad es el *RUIKit*: un conjunto de 13 interfaces de uso de robot, cruzando seis abstracciones de acción con dos formatos de interacción. En lugar de preguntar «¿qué modelo manipula mejor?», pregunta «dado el mismo modelo, cuánto cambia el resultado al cambiar la interfaz?».",
+            "La respuesta: mucho. Un agente de frontera pasa del 45% al 81% de éxito al cambiar solo la interfaz, y un modelo de 4B ajustado — la opción realista para quien no puede correr un modelo de frontera — del 13% al 47%. La conclusión del artículo: la interfaz que encaja bien entre la forma en que el agente expresa la acción y la forma en que el robot la ejecuta vale más que algunos puntos de modelo. Antes de cambiar de modelo, comprueba la interfaz."
+          ],
+          "tags": [
+            "ruibench",
+            "robotics",
+            "agents",
+            "benchmark"
+          ],
+          "links": [
+            {
+              "label": "arXiv: RUIBench",
+              "url": "https://arxiv.org/abs/2611.31115"
+            }
+          ]
+        },
+        {
+          "title": "*WorldLeague*: ¿qué tan lejos puede actuar la IA en el mundo físico?",
+          "summary": "*WorldLeague* (10 upvotes, 22 de noviembre) es un *benchmark* de 60 tareas de robots simulados que mide la agencia física: un modelo de visión-lenguaje elige los objetivos y las acciones, un modelo de visión-lenguaje-acción los ejecuta, y la puntuación es el progreso hacia el objetivo físico, no si el último fotograma salió bien.",
+          "body": [
+            "El artículo abre con una buena pregunta: los sistemas de IA pueden operar *Blender*, seguir instrucciones en videojuegos complejos y manipular objetos con brazos robóticos — pero, ¿qué rango de objetivos físicos puede alcanzar uno, por su cuenta? *WorldLeague* responde con un marco común: 60 tareas en tres suites (*WorldSeek*, explorar para reunir evidencias; *WorldShape*, reordenar la escena; *WorldShift*, adaptarse a un estado nuevo), que demandan combinaciones distintas de percepción, memoria, planificación y acción.",
+            "El diseño es un dúo *VLM* + *VLA*: el modelo de visión-lenguaje elige el objetivo y la acción, y el modelo de visión-lenguaje-acción la ejecuta en el robot. La puntuación no es «¿se cumplió en el último fotograma?», sino el progreso hacia el objetivo a lo largo de la trayectoria, lo que castiga a los sistemas que se mueven sin avanzar. Es de los primeros *benchmarks* que toman la «agencia física» en serio, como una magnitud medible."
+          ],
+          "tags": [
+            "worldleague",
+            "vlm",
+            "vla",
+            "physical-agency"
+          ],
+          "links": [
+            {
+              "label": "arXiv: WorldLeague",
+              "url": "https://arxiv.org/abs/2611.30989"
+            }
+          ]
+        },
+        {
+          "title": "Auditoría de *SWE-Gym*: el 74% de las tareas «imposibles» tienen la prueba rota",
+          "summary": "El estudio (5 upvotes, 22 de noviembre) audita *SWE-Gym*, la colección con la que se entrenan los agentes de código: el 74% de las tareas que un modelo de 9B no resuelve nunca tienen pruebas que rechazan la corrección correcta. Con los falsos negativos corregidos, los modelos mejoran 2,4 puntos en *SWE-bench Verified* y 2,7 en *SWE-bench Pro* a igualdad de tamaño.",
+          "body": [
+            "Las colecciones que entrenan a los agentes de código con aprendizaje por refuerzo usan pruebas ocultas para dar la recompensa, pero las pruebas solo se validaban contra la corrección de referencia. *Zhang* y coautores auditaron *SWE-Gym* con dos familias de *LLM*, y solo cuentan como error el que se reproduce ejecutándolo. El resultado incómoda: las tareas que un modelo de 9B no resuelve nunca no son difíciles, están mal etiquetadas — la prueba rechaza la corrección correcta, el 74% del total, contra el 20% de las tareas parcialmente resolubles.",
+            "La consecuencia directa está en el entrenamiento: con la colección corregida y depurada, los modelos mejoran 2,4 puntos en *SWE-bench Verified* y 2,7 en *SWE-bench Pro* a igualdad de tamaño. Es del género de auditoría de datos de esta semana — *WorldLeague*, *RUIBench* y *HIVE-Bench* van en la misma dirección: antes de entrenar más, comprobar con qué se está entrenando. La recompensa del aprendizaje por refuerzo es tan buena como sus etiquetas."
+          ],
+          "tags": [
+            "swe-gym",
+            "rlhf",
+            "data-audit",
+            "coding-agents"
+          ],
+          "links": [
+            {
+              "label": "arXiv: auditoría de SWE-Gym",
+              "url": "https://arxiv.org/abs/2611.30207"
+            }
+          ]
+        },
+        {
+          "title": "Cómo construir (y mantener) una evaluación agéntica",
+          "summary": "El blog de *Hugging Face* (35 upvotes, 23 de noviembre) de *Ghosh*, *Burtenshaw* y *Solaiman* — los nombres que han construido evaluaciones en los grandes laboratorios — es un manual de diseño de evaluaciones agénticas: qué reutilizar, qué adaptar, qué validar, y las lecciones amargas: la revisión pública es obligatoria, se valida la afirmación no solo el código, y hay que distinguir contaminación de saturación.",
+          "body": [
+            "No es un *benchmark*, es un método. El artículo recorre la anatomía de una evaluación agéntica: la afirmación que se quiere validar, la tarea inicial, la ejecución sin cambios, la adaptación al contexto, la validación de la propia evaluación, y la ejecución con lectura de trazas. Los autores ponen en el centro lo que separa una evaluación útil de una vanidosa: la afirmación debe ser verificable, y la verificación de la afirmación importa tanto como la del código.",
+            "La sección de lecciones amargas es la que se va a citar: la revisión pública es obligatoria para corregir un *benchmark* (lo que uno construye solo no se autocorrige), la afirmación se valida tanto como el código (una implementación correcta de una afirmación equivocada no vale), y hay que distinguir la contaminación — el modelo ha visto la tarea — de la saturación — la tarea es demasiado fácil para el modelo. Cierra con una lista de verificación del «abrir estratégicamente»: cuándo, en qué forma y qué dejar propietario. Es el tipo de artículo que conviene leer antes de publicar una evaluación, no después."
+          ],
+          "tags": [
+            "agentic-evals",
+            "evaluation",
+            "hugging-face"
+          ],
+          "links": [
+            {
+              "label": "Blog Hugging Face: agentic-evals",
+              "url": "https://huggingface.co/blog/agentic-evals"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*AMD* × *Unsloth* en *Linux*: la guía y los hilos de hoy",
+          "summary": "La noticia de la *NPU* sigue su curso: *NeoTeo* publica la guía de montaje en *Linux* (kernel, drivers, firmware, el hardware que de verdad soporta la *XDNA 2*, el formato *Q4NX*), y los hilos en *r/LocalLLaMA* y *r/unsloth* — más de 500 upvotes entre los dos — documentan lo que funciona, qué *Ryzen* sirve y lo primero que se rompe.",
+          "body": [
+            "El anuncio de *AMD* y *Unsloth* fue el viernes, pero lo que llegó hoy es el detalle que importaba para la mitad de la comunidad: *NeoTeo* publica la guía en *Linux*. Qué versión de kernel trae los drivers de *XDNA 2*, qué firmware, qué *PC* de verdad tiene una *NPU* que funciona (destaca la *Strix Halo* con 128 GB de memoria unificada), y el formato *Q4NX* que *Unsloth* usa para la *NPU*.",
+            "El hilo de *r/LocalLLaMA* — la copia del anuncio, más de 180 upvotes — y el de *r/unsloth* (411 upvotes, 68 comentarios) hacen el trabajo comunitario de siempre: qué *Ryzen* sirve, cuánta memoria se comparte con la *NPU*, los primeros resultados con el modelo de 35B, lo que se rompe en *Ubuntu* y en *Fedora*. Si tienes un *PC Ryzen AI* y quieres probar la *NPU* antes que la *GPU*, esta es la semana: la información es fresca y la comunidad está encima."
+          ],
+          "tags": [
+            "amd",
+            "unsloth",
+            "npu",
+            "linux",
+            "community"
+          ],
+          "links": [
+            {
+              "label": "NeoTeo: Ryzen AI NPU on Linux (guía)",
+              "url": "https://www.neoteo.com/en/unsloth-ryzen-ai-npu-on-linux-hardware-and-setup"
+            },
+            {
+              "label": "r/LocalLLaMA: anuncio AMD × Unsloth",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y0ioi5/"
+            },
+            {
+              "label": "r/unsloth: modelos sobre la NPU",
+              "url": "https://www.reddit.com/r/unsloth/comments/1y0bos4/"
+            }
+          ]
+        },
+        {
+          "title": "*Inkling 2 Mini* sigue en lo más alto de *r/LocalLLaMA* cuatro días después",
+          "summary": "El hilo del modelo (1.700 upvotes, casi 500 comentarios) sigue siendo el más activo del *subreddit* cuatro días después del lanzamiento: el millón de tokens en el *Mac* de 32 GB, el *GGUF* con *imatrix*, y hoy el bucle y el *CoT* legible.",
+          "body": [
+            "Cuatro días después del lanzamiento, el hilo de *r/LocalLLaMA* sigue en lo más alto: más de 1.700 upvotes y casi 500 comentarios, con el contenido típico del *self-hosting* — el millón de tokens de contexto en el *Mac* de 32 GB (el *GGUF* *IQ4_NL* cabe, la caché *KV* no), los resultados en *Ollama* y *llama.cpp*, y la comparación contra el *Qwen3.8-27B* en la misma tarjeta.",
+            "Hoy la conversación se ha movido al bucle: cuarenta y ocho aplicaciones de capa por token, el *TML-d24-varloop-research* de bucle variable, y la pregunta de la semana — ¿es el *CoT* comprimido pero legible más fiable que el *CoT* largo? Es el tipo de hilo que acaba siendo documentación comunitaria: los que prueban, los que corrigen, los que publican resultados en *Gist*. El modelo abierto que cabe en casa sigue siendo la arena principal del *self-hosting*."
+          ],
+          "tags": [
+            "inkling-2-mini",
+            "local-llama",
+            "self-hosting",
+            "community"
+          ],
+          "links": [
+            {
+              "label": "r/LocalLLaMA: Inkling 2 Mini",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y1diuk/thinkingmachinesinkling2mini_moe_26b_a3b/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "unslothai/unsloth",
+        "stars": "★ 80.1k",
+        "desc": "interfaz local para correr y ajustar *LLM*s y modelos de difusión (*GGUF*, *MLX*, *Qwen3.8*)",
+        "meta": "Python · Apache-2.0",
+        "url": "https://github.com/unslothai/unsloth"
+      },
+      {
+        "name": "HKUDS/CLI-Anything",
+        "stars": "★ 64.1k",
+        "desc": "convierte cualquier software en *agent-native* (con el catálogo *CLI-Hub*)",
+        "meta": "Python · Apache-2.0",
+        "url": "https://github.com/HKUDS/CLI-Anything"
+      },
+      {
+        "name": "Tracer-Cloud/opensre",
+        "stars": "★ 14.9k",
+        "desc": "agente *SRE* de código abierto para la fiabilidad de *CI/CD*",
+        "meta": "Python · Apache-2.0",
+        "url": "https://github.com/Tracer-Cloud/opensre"
+      },
+      {
+        "name": "openvinotoolkit/openvino",
+        "stars": "★ 12.3k",
+        "desc": "toolkit de *Intel* para optimizar y desplegar inferencia de *IA* en hardware heterogéneo",
+        "meta": "C++ · Apache-2.0",
+        "url": "https://github.com/openvinotoolkit/openvino"
+      },
+      {
+        "name": "grregis/MuckScraper",
+        "stars": "★ 170",
+        "desc": "agregador de noticias que puedes autalojar, con puntuación de sesgo por *LLM*",
+        "meta": "Python · MIT",
+        "url": "https://github.com/grregis/MuckScraper"
+      }
+    ],
+    "papers": [
+      {
+        "title": "RUIBench: What Makes a Good Robot-Use Interface?",
+        "authors": "12 upvotes",
+        "url": "https://arxiv.org/abs/2611.31115"
+      },
+      {
+        "title": "WorldLeague: Benchmarking Physical Agency",
+        "authors": "10 upvotes",
+        "url": "https://arxiv.org/abs/2611.30989"
+      },
+      {
+        "title": "What Makes Good Data for Training Coding Agents? A Systematic Study on SWE-Gym",
+        "authors": "5 upvotes",
+        "url": "https://arxiv.org/abs/2611.30207"
+      },
+      {
+        "title": "HIVE-Bench: Evaluating Patch-Level Visual Representations for Egocentric Robot Manipulation",
+        "authors": "3 upvotes",
+        "url": "https://arxiv.org/abs/2611.30813"
+      },
+      {
+        "title": "Embo-Harness: Towards Understanding Frontier-Model-as-Policy Harness",
+        "authors": "2 upvotes",
+        "url": "https://arxiv.org/abs/2611.31201"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLaMA",
+        "title": "*AMD* × *Unsloth*: el primer *NPU* que corre en *Unsloth Desktop*",
+        "note": "copia del anuncio oficial; la *XDNA 2* de *Ryzen AI*, más de 180 upvotes",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y0ioi5/"
+      },
+      {
+        "src": "r/unsloth",
+        "title": "*AMD* × *Unsloth*: modelos sobre la *NPU*",
+        "note": "411 upvotes, 68 comentarios; el 35B en *XDNA 2* con 2-4× menos consumo",
+        "url": "https://www.reddit.com/r/unsloth/comments/1y0bos4/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "*Inkling 2 Mini*: cuatro días y sigue en lo más alto",
+        "note": "1.700+ upvotes, casi 500 comentarios: millón de tokens, *GGUF* y el bucle",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y1diuk/"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

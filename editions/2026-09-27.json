@@ -1,0 +1,465 @@
+{
+ "edition": "Edición nº 1",
+ "date": "27 de septiembre de 2026",
+ "weekday_long": "Domingo",
+ "place": "Publicado desde GitHub Pages · 08:30 CEST",
+ "prev": null,
+ "next": null,
+ "lead": {
+  "kicker": "Portada · Inferencia",
+  "title": "Transformers ya ejecuta cuantizados de llama.cpp",
+  "summary": "La librería Transformers de Hugging Face incorpora soporte nativo para modelos GGUF: cargar y servir cuantizaciones de llama.cpp directamente desde el ecosistema de Python, sin salirte de tu notebook ni de tu stack.",
+  "body": [
+   "Durante años, correr un GGUF cuantizado obligaba a elegir entre la potencia de llama.cpp y la comodidad del ecosistema de Transformers. Esa frontera acaba de desaparecer: el blog oficial de Hugging Face detalla cómo cargar GGUF con Transformers, servirlo con la interfaz que prefieras y compararlo en benchmarks frente a llama.cpp.",
+   "Para quien se autoaloja modelos en casa, esto significa poder experimentar con cuantizaciones, ajustar parámetros y cablear agentes sin renunciar a las utilidades del stack de Transformers — ni a los modelos ya cuantizados por la comunidad. El hilo en r/LocalLLaMA (con casi 280 votos) confirma que es el tipo de cambio que la gente estaba esperando."
+  ],
+  "links": [
+   {
+    "kind": "blog",
+    "label": "Blog HF",
+    "url": "https://huggingface.co/blog/transformers-llama-cpp-quants"
+   },
+   {
+    "kind": "reddit",
+    "label": "r/LocalLLaMA",
+    "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wnxm0r/ggufs_in_transformers_natively/"
+   }
+  ],
+  "tags": [
+   "Transformers",
+   "GGUF",
+   "llama.cpp",
+   "self-hosting"
+  ],
+  "source": "Hugging Face"
+ },
+ "sections": [
+  {
+   "id": "modelos",
+   "icon": "🧠",
+   "title": "Modelos nuevos y fine-tunes",
+   "blurb": "Lo que suena en pesos abiertos: nuevas arquitecturas, versiones y derivadas que ya se pueden descargar.",
+   "notes": [
+    {
+     "title": "Qwen-Image-2.1 se vuelve referencia en generación de imagen abierta",
+     "spec": "text-to-image · 2.400+ likes · ~48.000 descargas",
+     "body": [
+      "Qwen-Image-2.1 encabeza los modelos en tendencia de Hugging Face. En la misma familia ya circula una variante GGUF no censurada (abenzerps/Qwen-Image-2.1-Uncensored-GGUF) con casi 900.000 descargas, señal de que la comunidad se la está llevando a hardware modesto.",
+      "Si te interesa la imagen local, la tarjeta original y la variante GGUF son el punto de partida para ver qué caben en tu GPU."
+     ],
+     "links": [
+      {
+       "kind": "hf",
+       "label": "Tarjeta HF",
+       "url": "https://huggingface.co/Qwen/Qwen-Image-2.1"
+      },
+      {
+       "kind": "hf",
+       "label": "GGUF",
+       "url": "https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF"
+      }
+     ],
+     "tags": [
+      "Qwen",
+      "text-to-image",
+      "GGUF"
+     ],
+     "source": "Hugging Face"
+    },
+    {
+     "title": "Xing4.0-29B-A4B: MoE de 29B con solo 4B activos",
+     "spec": "text-generation · 1.750 likes · MoE 29B-A4B",
+     "body": [
+      "Un mixture-of-experts de 29B totales pero 4B parámetros activos por token, diseñado para que un modelo grande se comporte como uno pequeño en costo de inferencia. Es la receta que permite correr capacidades grandes en hardware de consumo.",
+      "La ficha en Hugging Face explica la arquitectura y los pesos; busca una cuantización GGUF si quieres probarlo sin una GPU de gama alta."
+     ],
+     "links": [
+      {
+       "kind": "hf",
+       "label": "Tarjeta HF",
+       "url": "https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B"
+      }
+     ],
+     "tags": [
+      "MoE",
+      "text-generation",
+      "eficiente"
+     ],
+     "source": "Hugging Face"
+    },
+    {
+     "title": "Qwen3.8-27B sigue siendo el punto de referencia de la familia abierta",
+     "spec": "image-text-to-text · ~16.400 likes · ~6,6 M descargas",
+     "body": [
+      "El modelo de la generación Qwen3.8 con más tracción en pesos abiertos. Con 27B en formato multimodal, se ha convertido en el 'caballo de batalla' para quien busca calidad generalista en una sola tarjeta.",
+      "La tarjeta oficial de Qwen documenta la arquitectura y los resultados de la familia; las variantes GGUF (p. ej. de unsloth) lo hacen corrible en local."
+     ],
+     "links": [
+      {
+       "kind": "hf",
+       "label": "Tarjeta HF",
+       "url": "https://huggingface.co/Qwen/Qwen3.8-27B"
+      },
+      {
+       "kind": "hf",
+       "label": "GGUF (unsloth)",
+       "url": "https://huggingface.co/unsloth/Qwen3.8-27B"
+      }
+     ],
+     "tags": [
+      "Qwen",
+      "multimodal",
+      "GGUF"
+     ],
+     "source": "Hugging Face"
+    },
+    {
+     "title": "MiMo-V2.6 de Xiaomi: RL, destilación y variantes ligeras",
+     "spec": "varios pipelines · familia con 3 modelos en tendencia",
+     "body": [
+      "Xiaomi publica la familia MiMo-V2.6: una variante Pro con refuerzo, una destilación de Qwen de 9B y una Flash-RL. Además suena el dataset de RL (MiMo-V2.6-RL-oss), útil si quieres reproducir o seguir su receta de post-entreno.",
+      "Es un buen ejemplo de cómo los grandes fabricantes están soltando pesos y datos a la vez, no solo modelos."
+     ],
+     "links": [
+      {
+       "kind": "hf",
+       "label": "MiMo-V2.6-Pro-RL",
+       "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
+      },
+      {
+       "kind": "hf",
+       "label": "Dataset RL",
+       "url": "https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss"
+      }
+     ],
+     "tags": [
+      "Xiaomi",
+      "RL",
+      "fine-tuning",
+      "dataset"
+     ],
+     "source": "Hugging Face"
+    }
+   ]
+  },
+  {
+   "id": "inferencia",
+   "icon": "⚙️",
+   "title": "Inferencia y kernels",
+   "blurb": "Herramientas para ejecutar modelos: cuantización, tokenización y entornos de serving.",
+   "notes": [
+    {
+     "title": "tokenizers v1: codificar, decodificar y escalar, medido",
+     "spec": "Hugging Face · tokenización a gran escala",
+     "body": [
+      "Hugging Face publica la primera versión estable de la librería tokenizers con números de rendimiento en mano: cómo se comportan la codificación, la decodificación y el escalado. Imprescindible si entrenas o sirves y quieres que el tokenizer no sea el cuello de botella."
+     ],
+     "links": [
+      {
+       "kind": "blog",
+       "label": "Blog HF",
+       "url": "https://huggingface.co/blog/tokenizers-v1"
+      }
+     ],
+     "tags": [
+      "tokenizers",
+      "rendimiento",
+      "Hugging Face"
+     ],
+     "source": "Hugging Face"
+    },
+    {
+     "title": "Async GRPO con LoRA a través de HF Jobs",
+     "spec": "post-entreno · 'un bucket, un proxy y sin NCCL'",
+     "body": [
+      "Receta para hacer GRPO asíncrono con LoRA usando los jobs de Hugging Face, sin orquestación compleja de NCCL. Es el tipo de tutorial que baja la barrera para aplicar RL a tus modelos sin un clúster dedicado.",
+      "La entrada detalla el pipeline completo y el código para replicarlo."
+     ],
+     "links": [
+      {
+       "kind": "blog",
+       "label": "Blog HF",
+       "url": "https://huggingface.co/blog/asyncgrpo-lora-hfjobs"
+      }
+     ],
+     "tags": [
+      "GRPO",
+      "LoRA",
+      "RL",
+      "HF Jobs"
+     ],
+     "source": "Hugging Face"
+    },
+    {
+     "title": "NVIDIA Warp y MjWarp para simulación robótica",
+     "spec": "robotics · simulación acelerada",
+     "body": [
+      "Guía para usar NVIDIA Warp y MjWarp para acelerar simulación y aprendizaje robótico. Relevante si trabajas en agentes que actúan en entornos físicos o quieres entrenar políticas sin esperar a hardware real."
+     ],
+     "links": [
+      {
+       "kind": "blog",
+       "label": "Blog HF",
+       "url": "https://huggingface.co/blog/nvidia/how-to-use-nvidia-warp-and-mjwarp"
+      }
+     ],
+     "tags": [
+      "NVIDIA",
+      "robotics",
+      "simulación"
+     ],
+     "source": "Hugging Face"
+    }
+   ]
+  },
+  {
+   "id": "agentes",
+   "icon": "🤖",
+   "title": "Agentes",
+   "blurb": "Lo que está en movimiento en agentes de código, voz y decisión.",
+   "notes": [
+    {
+     "title": "DORA: ¿pueden los agentes de LLM responder a desastres?",
+     "spec": "NeurIPS 2026 Oral",
+     "body": [
+      "Un paper aceptado como Oral en NeurIPS 2026 que hace benchmark de agentes de LLM ante desastres, midiendo si se recuperan ante condiciones heterogéneas. Si te interesa la robustez real de los agentes (no solo en el demo), vale la pena leerlo."
+     ],
+     "links": [
+      {
+       "kind": "gh",
+       "label": "Repositorio",
+       "url": "https://github.com/Junjue-Wang/DORA"
+      }
+     ],
+     "tags": [
+      "agentes",
+      "robustez",
+      "NeurIPS"
+     ],
+     "source": "GitHub"
+    },
+    {
+     "title": "mobile_agent: un agente Android de código abierto que opera tu teléfono",
+     "spec": "Kotlin · agente móvil self-hosted",
+     "body": [
+      "Un agente de IA para Android, de código abierto, que interactúa con la pantalla de tu teléfono. Todavía es temprano, pero es la clase de proyecto que muestra hacia dónde va la automatización local y privada de dispositivos."
+     ],
+     "links": [
+      {
+       "kind": "gh",
+       "label": "Repositorio",
+       "url": "https://github.com/looper42/mobile_agent"
+      }
+     ],
+     "tags": [
+      "Android",
+      "agente",
+      "self-hosted"
+     ],
+     "source": "GitHub"
+    },
+    {
+     "title": "Verzeta Studio: un workspace de equipos de IA local-first",
+     "spec": "C++ · varios agentes de IA",
+     "body": [
+      "Un workspace de código abierto, local-first, para trabajar con varios agentes de IA a la vez. La apuesta por el local-first en el nivel de 'equipo' (no solo modelo) es una señal de que la privacidad empieza a ser criterio de diseño, no de marketing."
+     ],
+     "links": [
+      {
+       "kind": "gh",
+       "label": "Repositorio",
+       "url": "https://github.com/Verzeta/Verzeta-Studio"
+      }
+     ],
+     "tags": [
+      "agentes",
+      "local-first",
+      "workspace"
+     ],
+     "source": "GitHub"
+    }
+   ]
+  },
+  {
+   "id": "selfhosted",
+   "icon": "🏠",
+   "title": "Self-hosting IA",
+   "blurb": "Para el que monta su propio stack: apps, agregadores y utilidades para correrlo en casa.",
+   "notes": [
+    {
+     "title": "Ensu: la app local de LLM de Ente",
+     "spec": "app local-first · entrevista en Hacker News",
+     "body": [
+      "Ensu es la aplicación de LLM local de Ente (el equipo detrás de la sincronización de archivos cifrada). En Hacker News hay una conversación larga sobre casos reales de gente que se autoaloja LLMs en casa — el mejor punto de entrada para ver qué uso le dan a sus stacks."
+     ],
+     "links": [
+      {
+       "kind": "news",
+       "label": "Hacker News",
+       "url": "https://news.ycombinator.com/item?id=47516650"
+      },
+      {
+       "kind": "other",
+       "label": "Ensu (Ente)",
+       "url": "https://ente.com/blog/ensu/"
+      }
+     ],
+     "tags": [
+      "app local",
+      "self-hosted",
+      "HN"
+     ],
+     "source": "Hacker News / Ente"
+    },
+    {
+     "title": "MuckScraper: agregador de noticias self-hosted con IA",
+     "spec": "agregador de noticias + LLM",
+     "body": [
+      "Un agregador de noticias que se autoaloja y usa un LLM para resumir y filtrar. Es un buen patrón para construir tu propio briefing diario sin depender de un servicio de terceros."
+     ],
+     "links": [
+      {
+       "kind": "gh",
+       "label": "Repositorio",
+       "url": "https://github.com/grregis/MuckScraper"
+      }
+     ],
+     "tags": [
+      "noticias",
+      "agregador",
+      "self-hosted"
+     ],
+     "source": "GitHub"
+    },
+    {
+     "title": "¿Qué casos reales tenéis los que os autoalojáis LLMs en casa?",
+     "spec": "Hacker News · debate comunitario",
+     "body": [
+      "Un hilo de Hacker News que pregunta, sin postureo, qué uso le dan en la práctica quienes corren LLMs en casa. De lo más útil para no copiar ideas que solo funcionan en el paper."
+     ],
+     "links": [
+      {
+       "kind": "news",
+       "label": "Hacker News",
+       "url": "https://news.ycombinator.com/item?id=41856567"
+      }
+     ],
+     "tags": [
+      "self-hosted",
+      "debate",
+      "casos de uso"
+     ],
+     "source": "Hacker News"
+    }
+   ]
+  }
+ ],
+ "aside": {
+  "trending": [
+   {
+    "name": "amitshekhariitbhu/ai-system-design",
+    "stars": "★ 435",
+    "desc": "Guía de diseño de sistemas de IA",
+    "meta": "Markdown · recién creado",
+    "url": "https://github.com/amitshekhariitbhu/ai-system-design"
+   },
+   {
+    "name": "JoinArtisanVent/x-scraper-no-api",
+    "stars": "★ 89",
+    "desc": "Scraper self-hosted de X (Twitter) sin API key",
+    "meta": "JavaScript",
+    "url": "https://github.com/JoinArtisanVent/x-scraper-no-api"
+   },
+   {
+    "name": "architectds/collabosm",
+    "stars": "★ 84",
+    "desc": "Alquila una GPU en tu cuenta de Colab localmente",
+    "meta": "Python",
+    "url": "https://github.com/architectds/collabosm"
+   },
+   {
+    "name": "tomascupr/reelql",
+    "stars": "★ 25",
+    "desc": "Da ojos a tu agente: enlazas vídeo, sale JSON tipado",
+    "meta": "Python",
+    "url": "https://github.com/tomascupr/reelql"
+   },
+   {
+    "name": "FeiLiuEM/open-medical-jev",
+    "stars": "★ 21",
+    "desc": "Resultados tipo Jev en medicina con modelos abiertos congelados",
+    "meta": "Python",
+    "url": "https://github.com/FeiLiuEM/open-medical-jev"
+   }
+  ],
+  "papers": [
+   {
+    "title": "Your Transformer Can Hold Two Thoughts at Once: Evidence of Linear Superposition in LLMs",
+    "authors": "71 upvotes",
+    "url": "https://huggingface.co/papers/2609.29845"
+   },
+   {
+    "title": "Rufus-Air: An Open LLM Post-Training Recipe",
+    "authors": "16 upvotes",
+    "url": "https://huggingface.co/papers/2609.29421"
+   },
+   {
+    "title": "Parts-of-Speech as Emergent Categories in SAE Latent Space",
+    "authors": "10 upvotes",
+    "url": "https://huggingface.co/papers/2609.29362"
+   },
+   {
+    "title": "Coding Agents for Generalized Task and Motion Planning Problems",
+    "authors": "9 upvotes",
+    "url": "https://huggingface.co/papers/2609.30233"
+   },
+   {
+    "title": "Learning to Discover Interesting Mathematics",
+    "authors": "8 upvotes",
+    "url": "https://huggingface.co/papers/2609.28603"
+   }
+  ],
+  "community": [
+   {
+    "src": "r/LocalLLaMA",
+    "title": "GGUFs in transformers natively!",
+    "note": "Casi 280 votos: la comunidad celebra que Transformers cargue GGUF.",
+    "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wnxm0r/ggufs_in_transformers_natively/"
+   },
+   {
+    "src": "r/selfhosted",
+    "title": "Looking for self-hosted AI news repos",
+    "note": "La comunidad de self-hosted comparte repos de agregadores con IA.",
+    "url": "https://www.reddit.com/r/selfhosted/comments/1wnbdgt/looking_for_selfhosted_ai_news_repos/"
+   },
+   {
+    "src": "Hacker News",
+    "title": "¿Qué casos de uso tenéis los que os autoalojáis LLMs en casa?",
+    "note": "Debate práctico sobre uso doméstico de LLMs.",
+    "url": "https://news.ycombinator.com/item?id=41856567"
+   },
+   {
+    "src": "Hacker News",
+    "title": "Ensu – Ente's Local LLM app",
+    "note": "La app local-first de LLMs de Ente, en discusión.",
+    "url": "https://news.ycombinator.com/item?id=47516650"
+   }
+  ]
+ },
+ "colophon": {
+  "about": "IA Abierta Hoy (ia·ahoy) es una edición diaria, 100% estática, sobre IA de pesos abiertos y software libre para IA. Se genera cada mañana a las 08:30 (CEST) y se publica en GitHub Pages. Cada nota lleva al menos un enlace de seguimiento; cuando es posible, enlaza al repositorio, a la tarjeta de Hugging Face o al documento técnico. Cada edición incluye además un podcast en audio para escucharla.",
+  "sources": [
+   "Hugging Face (modelos, datasets, papers, blog)",
+   "GitHub (repositorios en tendencia)",
+   "Reddit (r/LocalLLaMA, r/LocalLLM, r/selfhosted)",
+   "Hacker News",
+   "Blogs y medios técnicos"
+  ],
+  "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil.",
+  "model": "Qwen3.8-27B",
+  "made_with": [
+   "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+   "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+  ]
+ }
+}

@@ -1,0 +1,344 @@
+{
+  "date": "2 de noviembre de 2026",
+  "weekday_long": "lunes",
+  "edition": "Edición nº 36",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "DeepSeek-V4.1-Flash-1017: la actualización que adelgaza la salida y adelanta a los modelos cerrados en tareas agénticas",
+    "summary": "DeepSeek publicó el 17 de octubre una actualización menor de DeepSeek-V4.1-Flash, y en quince días se ha convertido en el modelo abierto con más descargas de *Hugging Face*: más de 177.000, cerca de 4.400 me gusta, y variantes a ocho bits en circulación desde el primer día. La tarjeta del modelo la presenta como una mejora de Pareto: sube en razonamiento, código, tareas agénticas y visión respecto a la versión anterior, y además reduce el tiempo de ejecución y la longitud de la salida, lo que se traduce en tareas completadas más rápido y a menos coste. Lo más llamativo es la tabla comparativa frente a K3, GLM-5.3, GPT-5.6 y Opus 5: supera a los dos modelos cerrados de frontera en varios benchmarks de agentes, aunque en razonamiento puro y en algunas pruebas visuales con herramientas todavía les va detrás. La distribución es la de siempre: licencia *MIT*, multimodal (texto e imágenes) y pesos en *FP8*. Y un detalle que no suele estar en las fichas: en lugar de una plantilla de *Jinja*, DeepSeek entrega una implementación de referencia en Python autocontenida y una librería en Rust llamada *deepseek-recipe*, y el anuncio oficial promete optimización para el *harness* propio y para *Tencent CodeBuddy*.",
+    "body": [
+      "El nombre lo cuenta todo: *1017* es la fecha de salida, el 17 de octubre, y el prefijo *Flash* recuerda a qué apunta la familia —velocidad y coste por tarea, no tamaño. No es un modelo nuevo de cero: es una iteración sobre DeepSeek-V4.1-Flash, que llegó el 10 de septiembre, dentro de una racha de entregas de la familia V4 que arrancó con la versión preliminar en abril y continuó con V4-Pro a finales de agosto. El comunicado oficial, titulado «*Wish-Driven Programming Made Real*», va al grano: mejor rendimiento en benchmarks, tareas completadas más rápido y salidas más cortas, «una mejora de Pareto en rendimiento y coste», ya disponible en el sitio, la aplicación y la API. La idea detrás del nombre *wish-driven* es la que viene marcando la agenda de los agentes: que la distancia entre describir lo que se quiere y que el sistema lo ejecute siga acortándose.",
+      "La tarjeta del modelo incluye una tabla comparativa que es, probablemente, la parte más citada del lanzamiento. Frente a su propia versión anterior, los saltos son consistentes: *Terminal-Bench 4.0* sube de 31,2 a 42,3, *DeepSWE* de 74,2 a 77,0, *ProgramBench* de 20,3 a 29,1, *NL2Repo-Bench* de 65,4 a 68,2 y *HLE* sin herramientas de 36,8 a 42,6. Frente a la competencia, el mapa es más matizado. En la zona de ejecución agéntica, DeepSeek-V4.1-Flash-1017 va por delante de GPT-5.6 y de Opus 5: *Automation-Bench* 60,5 contra 45,8 y 50,3; *Agents' Last Exam* 35,4 contra 26,7 y 28,6; *Apex Bench* 72,1 contra 54,3 y 65,8. En *DeepSWE*, evaluado con el *harness* Mini-SWE-V2, también gana (77,0 contra 73,0 y 74,0). Pero la lectura honesta tiene otra cara: en *HLE* sin herramientas, Opus 5 sigue por delante (56,3 contra 42,6) y GPT-5.6 también (44,5); en *Terminal-Bench*, con el *harness* Claude Code, la diferencia con Opus 5 se mantiene (51,8 contra 42,3); y en las pruebas visuales con herramientas los resultados se intercambian —*Chartography* 83,0, *BabyVision* 92,5, *ZeroBench* 51,0, números muy parejos con los cerrados. El patrón que emerge: un modelo que compite en la cabeza del pelotón en ejecución de agentes y en tareas de código, con un coste de salida y una latencia que los propios anunciantes presumen, y que todavía no ha cerrado la brecha en el razonamiento crudo.",
+      "En la distribución, todo es más de lo que DeepSeek ya hizo en la V4: licencia *MIT*, arquitectura multimodal (la tarjeta lo etiqueta como *image-text-to-text*) y pesos disponibles en *FP8*, además de una variante a ocho bits que la comunidad está cuantizando a *GGUF* desde el primer día. Hay un detalle que no suele estar en las fichas: el modelo no incluye una plantilla de *Jinja* para el formato de conversación; en su lugar DeepSeek publica en la carpeta *encoding* una implementación de referencia en Python, con casos de prueba para conversaciones de varios turnos, *tool calling*, modo de pensamiento, esfuerzo de razonamiento numérico, mensajes de sistema a mitad de conversación e imágenes intercaladas; y por encima de eso, una librería en Rust —*deepseek-recipe*— orientada a producción. Es la firma de un equipo que piensa la integración de su modelo como una pieza de ingeniería. El anuncio cierra anunciando que la versión está «optimizada para *DeepSeek Harness* y *Tencent CodeBuddy*», una pista de hacia dónde va la optimización: no solo el modelo, sino también los *harnesses* que lo ejecutan."
+    ],
+    "tags": ["deepseek", "open_weights", "agentes", "benchmarks", "multimodal", "mit"],
+    "links": [
+      {"label": "Hugging Face — DeepSeek-V4.1-Flash-1017", "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"},
+      {"label": "Anuncio oficial de DeepSeek (17-10-2026)", "url": "https://api-docs.deepseek.com/news/news261017/"},
+      {"label": "GitHub — deepseek-recipe", "url": "https://github.com/deepseek-ai/deepseek-recipe"},
+      {"label": "Hugging Face — DeepSeek-V4.1-Flash (versión anterior)", "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "LTX-2.5: el video generativo de Lightricks en un solo archivo, y el más descargado de su clase",
+          "summary": "LTX-2.5 es la nueva generación de Lightricks en la familia LTX-Video, y es el modelo de video con más descargas de *Hugging Face* este mes: más de 2,4 millones y unos 10.000 me gusta. Se distribuye como *single-file diffusion* (un solo archivo autocontenido), con un decodificador de difusión que es, a su vez, un modelo de difusión propio, y cubre las modalidades *any-to-any* de la familia: de imagen a video, de texto a audio, y variantes pre-entrenadas que combinan un decodificador de unos 20B de parámetros con un codificador de texto grande. El acceso es con restricción: hay que aceptar los términos del repo, lo que no impide que sea el más movido de su categoría.",
+          "body": [
+            "Lightricks lleva dos años construyendo la familia LTX-Video como referencia del video generativo open: la generación anterior era un modelo de 2B de parámetros, y LTX-2.5 da un salto de tamaño a una clase de decodificadores de unos 20B. El detalle técnico interesante es el formato: en lugar de un directorio de piezas sueltas, el modelo se entrega como *single-file diffusion* —un único archivo que incluye el decodificador de difusión, que es a su vez un modelo de difusión completo—, la misma filosofía «un archivo, todo dentro» que se está extendiendo este mes por el resto de la categoría (MOSS-Image, FLUX klein, Qwen-Image).",
+            "La variabilidad de la familia también crece: además del repo principal hay una variante *Diffusers* de unos 19B orientada a texto a video, y un repo pre-entrenado que combina el decodificador con un codificador de texto grande (la carpeta apunta a 22B + un codificador de 12B). El acceso está con restricción —hay que aceptar los términos en *Hugging Face*—, pero el movimiento es el más grande de la semana en video: 2,4 millones de descargas en menos de un mes. Para la comunidad de *self-hosting* la cuestión práctica será la cuantización: el formato de un solo archivo simplifica el empaquetado, aunque el tamaño del decodificador sigue exigiendo varias GPUs o quant agresivo."
+          ],
+          "tags": ["video-generativo", "lightricks", "single-file", "any-to-any", "hugging-face"],
+          "links": [
+            {"label": "Hugging Face — Lightricks/LTX-2.5", "url": "https://huggingface.co/Lightricks/LTX-2.5"},
+            {"label": "Hugging Face — LTX-2.5-Diffusers", "url": "https://huggingface.co/Lightricks/LTX-2.5-Diffusers"},
+            {"label": "Hugging Face — LTX-2.5-Pre-Trained", "url": "https://huggingface.co/Lightricks/LTX-2.5-Pre-Trained"}
+          ]
+        },
+        {
+          "title": "LiquidAI LFM3: 1,7 mil millones de parámetros para agentes locales, y un omni de 2B que reemplaza toda la cadena",
+          "summary": "La familia LFM3 de LiquidAI sigue creciendo. El LFM3-1.7B es un modelo de texto para agentes locales y aplicaciones especializadas, basado en la arquitectura «tri-híbrida» de la compañía —13 capas de convolución corta con puerta, 5 de atención de ventana deslizante y 6 de atención global—, post-entrenado para *harnesses* agénticos como Hermes Agent, Pi y OpenClaw, con contexto de 256K tokens y, a cuatro bits, un peso de apenas 1 GB, que cabe en cualquier teléfono o portátil. Junto a él llega el LFM3-Omni-2B, el primer modelo omni-modal de la familia: un único modelo *end-to-end* de 2,2 mil millones de parámetros que entiende texto, imágenes, vídeo y audio, y responde en texto y voz, reemplazando en el dispositivo la cadena de *ASR* + *VLM* + *LLM* + *TTS*. Todo se publica bajo la *LFM Open License v1.0*.",
+          "body": [
+            "La ficha del LFM3-1.7B destaca tres cosas. Primero, el entrenamiento agéntico: está post-entrenado para los *harnesses* Hermes Agent, Pi y OpenClaw, con énfasis en *tool calling* y salidas estructuradas, y con una ventana de 256K tokens que es generosa para un modelo de ese tamaño. Segundo, el tamaño: la arquitectura tri-híbrida (convoluciones cortas con puerta + atención de ventana deslizante + atención global) lo hace eficiente, y a cuatro bits ocupa unos 1 GB de memoria —el tipo de modelo que corre en un teléfono sin despeinarse, en 14 idiomas. Tercero, la especialización: LiquidAI propone adaptarlo a dominios, formatos y herramientas con un ajuste fino rápido en una sola GPU, y el blog de la semana pasada (27 de octubre) lo demostró con modelos multimodales especializados.",
+            "El LFM3-Omni-2B es la pieza más curiosa: un único modelo que entiende texto, imágenes, vídeo y audio, y contesta por texto o por voz, pensado para correr en el dispositivo. La consecuencia práctica es que reemplaza cuatro modelos por uno: preguntar por voz sobre una foto, transcribir o traducir una grabación, conversar en voz alta, o hacer preguntas sobre un vídeo y su banda sonora a la vez. La familia completa (base, texto, visión, audio, omni y modelos de decisión) se distribuye bajo la *LFM Open License v1.0*, una licencia abierta propia de la compañía."
+          ],
+          "tags": ["liquidai", "lfm3", "edge", "omni-modal", "agentes", "hugging-face"],
+          "links": [
+            {"label": "Hugging Face — LiquidAI/LFM3-1.7B", "url": "https://huggingface.co/LiquidAI/LFM3-1.7B"},
+            {"label": "Hugging Face — LiquidAI/LFM3-Omni-2B", "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B"},
+            {"label": "Blog de LiquidAI — LFM3", "url": "https://www.liquid.ai/blog/lfm3"}
+          ]
+        },
+        {
+          "title": "Nemotron 3.5 Transcribe: 40 idiomas y una hora de audio, sin salir del equipo",
+          "summary": "NVIDIA publica un modelo de voz y audio de pesos abiertos (licencia *OpenMDW 1.1*) para transcripción en 40 idiomas, con soporte de grabaciones de hasta una hora y un contexto de 65.536 tokens. La arquitectura híbrida *MoE* activa unos 4,3 mil millones de parámetros, incluyendo el codificador de audio, y se distribuye en *BF16*, *FP8* y *NVFP4*. Además de transcribir, traduce voz, hace *diarización* de hablantes, marca *timestamps*, identifica el idioma y maneja *code-switching* —y todo offline, construido sobre la base del Nemotron 3.5 Lightning 30B-A3B.",
+          "body": [
+            "El modelo se apoya en una base conocida: el Nemotron 3.5 Lightning 30B-A3B, del que hereda la estructura de *MoE* con unos 4,3 mil millones de parámetros activos, codificador de audio incluido. El resultado es un *ASR* offline que cabe en el equipo de sobremesa y que no envía la grabación a la nube —la línea que NVIDIA está dibujando con la generación 3.5 de Nemotron: modelos de voz de peso, con licencia abierta, y tareas completas en lugar de una sola transcripción. Entrenado sobre el dataset Granary-v2, cubre 40 idiomas y soporta grabaciones de hasta una hora gracias a un contexto de 65.536 tokens.",
+            "El catálogo de tareas es lo que lo distingue de un transcriptor clásico: transcripción con *timestamps*, traducción de voz, *diarización* (quién habló cuándo), identificación de idioma, *code-switching* (cambios de idioma a mitad de frase), preguntas sobre el audio y seguimiento de instrucciones. Las tres precisiones —*BF16*, *FP8* y *NVFP4*— permiten despliegues desde la GPU más potente hasta hardware más modesto, y el proyecto vive en el repositorio NeMo Speech de NVIDIA, con ejemplos de uso y una guía de *prompts* para cada tarea."
+          ],
+          "tags": ["nvidia", "nemotron", "asr", "voz", "openmdw", "multilingüe"],
+          "links": [
+            {"label": "Hugging Face — NVIDIA-Nemotron-3.5-Transcribe-30B-A4B", "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B"},
+            {"label": "GitHub — NVIDIA NeMo Speech", "url": "https://github.com/NVIDIA-NeMo/Speech"}
+          ]
+        },
+        {
+          "title": "Baidu Unlimited OCR 2: el paper llega hoy, y con él la era «OCR-3.0» del análisis de documentos sin horizonte",
+          "summary": "El equipo de PaddlePaddle (Baidu) publicó Unlimited OCR 2 hace una semana, y hoy el paper acompaña al modelo en *arXiv*. El lema del proyecto es inaugurar la «era OCR-3.0»: pasar del análisis de documentos largos al de horizonte ilimitado, gracias a un mecanismo llamado *SR-SWA*. El paquete incluye *MarathonDocBench*, un benchmark para el análisis de documentos ultralargos, y el modelo ya está disponible en *ModelScope* y en la nube de Baidu, con licencia *MIT* y más de 100.000 descargas en *Hugging Face*.",
+          "body": [
+            "El argumento de Unlimited OCR 2 es que el análisis de documentos dejó de ser un problema de «texto de una página» para convertirse en uno de «horizonte»: manuscritos, expedientes, libros y documentos que miden miles de páginas, donde el contexto de cualquier *LLM* se queda corto. La respuesta del equipo es el mecanismo *SR-SWA*, con el que el modelo pasa «de lo largo a lo ilimitado»: un esquema de atención que permite procesar documentos de longitud arbitraria sin degradarse. El paper publicado hoy en *arXiv* (2610.39308) describe la arquitectura y el entrenamiento.",
+            "La entrega va acompañada de *MarathonDocBench*, publicado la semana pasada, un benchmark específico para documentos ultralargos —naming que deja claro la distancia con los datasets clásicos de OCR de página suelta—. El modelo está en *Hugging Face* (con más de 100.000 descargas y un Space de demostración), en *ModelScope* y en la nube de Baidu, bajo licencia *MIT*. Para quien trabaja con documentación extensa —expedientes, manuscritos, libros escaneados— es una de las apuestas más concretas del mes."
+          ],
+          "tags": ["baidu", "paddlepaddle", "ocr", "documentos-largos", "mit", "arxiv"],
+          "links": [
+            {"label": "Hugging Face — baidu/Unlimited-OCR-2", "url": "https://huggingface.co/baidu/Unlimited-OCR-2"},
+            {"label": "arXiv 2610.39308 — Unlimited OCR 2", "url": "https://arxiv.org/abs/2610.39308"},
+            {"label": "GitHub — baidu/Unlimited-OCR", "url": "https://github.com/baidu/Unlimited-OCR"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "uncut: un harness de coding sin recortes, en un binario estático de 7 MB",
+          "summary": "El repo que más crece hoy en la lista de tendencias de *GitHub* es uncut: un *harness* de agentes de código «pérdida cero y sin cabeza», escrito en Go, que compila a un único binario estático de 7 MB con cuatro herramientas y comunicación por *stdin*/*stdout* plano. Su promesa, según la propia descripción del repo, es que el *harness* no corte silenciosamente la salida del modelo: todo lo que el modelo produce llega intacto, sin recortes, al *frontend* o a la terminal. Lleva unas 400 estrellas desde su publicación.",
+          "body": [
+            "La idea de uncut se resume en dos adjetivos de su descripción: «lossless» y «headless». *Lossless* porque el *harness* no modifica, resume ni recorta la salida del modelo —el nombre del proyecto lo dice: *uncut*, sin cortar—, y *headless* porque no impone ninguna interfaz: el *harness* habla *stdin*/*stdout* plano, y es el programa que lo llame el que decide qué hacer con el resultado. Cuatro herramientas, un binario estático de 7 MB, escrito en Go: la huella mínima para un arnés que deja al modelo (y al *frontend* que el usuario elija) como protagonistas.",
+            "Es el tipo de proyecto que define la sección: no añade un modelo, añade el arnés. Y el problema que ataca es real —los *harnesses* que recortan, reformatean o resumen la salida del modelo a su antojo están en todas partes, y es una de las quejas habituales de la comunidad de agentes locales. Un *harness* de 7 MB que no toca la salida es también, por lo que pesa, fácil de incrustar en *scripts*, contenedores y flujos de trabajo, sin depender de una instalación grande ni de una nube."
+          ],
+          "tags": ["agentes", "harness", "go", "github-trending", "cli"],
+          "links": [
+            {"label": "GitHub — Balanov/uncut", "url": "https://github.com/Balanov/uncut"}
+          ]
+        },
+        {
+          "title": "usta, un agente de código abierto que apunta a que los modelos locales pequeños entreguen código completo",
+          "summary": "usta (de SoundByGAIA) se presenta como un agente de código «universal y de código abierto» bajo licencia *Apache 2.0*: un *harness* de agentes pensado para que los modelos locales pequeños produzcan de forma fiable código completo y correcto, sin dependencia de un proveedor. Es la apuesta contraria al tamaño: en lugar de esperar un modelo enorme, el proyecto trabaja en que el arnés saque partido a un modelo modesto, sin *vendor lock-in*.",
+          "body": [
+            "El repo de Python se enmarca en la corriente de *harnesses* de agentes que llevan varias semanas dominando la lista de tendencias: la tesis compartida es que, con el modelo local, la diferencia entre que un agente funcione o falle la marca el arnés —el bucle de herramientas, el manejo de errores, la forma de presentar el contexto— y no tanto los parámetros. usta apunta explícitamente al extremo «modelo pequeño»: que un *LLM* modesto, corriendo en hardware doméstico, entregue código completo y correcto de forma repetible.",
+            "La licencia *Apache 2.0* y la autodescripción «sin *vendor lock-in*» son la otra mitad del mensaje: el agente no está atado a una API ni a un modelo concreto. En un mes en que casi todos los grandes laboratorios han movido fichas en agentes, los proyectos de este tipo son la contrapartida del *self-hosting*: la misma idea, pero con lo que cabe en el equipo propio."
+          ],
+          "tags": ["agentes", "código-abierto", "apache-2.0", "modelos-locales"],
+          "links": [
+            {"label": "GitHub — SoundByGAIA/usta", "url": "https://github.com/SoundByGAIA/usta"}
+          ]
+        },
+        {
+          "title": "De la foto a la CNC: un paquete de skills para agentes que dibuja en relieve",
+          "summary": "Una de las aplicaciones más concretas de la semana llega como un paquete de *skills* para agentes: photo-to-cnc-svg convierte una fotografía en arte en blanco y negro de trazos gruesos, y de ahí genera un *SVG* de *V-carve* listo para *CNC*. El repo (Python) se enorgullece de que el paso de imagen a trazos sea «60 veces más rápido que cualquier *LLM*», dejando al agente solo la orquestación del flujo. Del mundo de los agentes al taller, en un solo *pipeline*.",
+          "body": [
+            "El formato del proyecto es el que más se está extendiendo esta semana: un *skill pack*, un paquete de instrucciones y *scripts* que un agente puede cargar y ejecutar en secuencia. En este caso, la secuencia es: recibir una foto, convertirla en un bodegón en blanco y negro de alto contraste y trazos gruesos (el paso rápido, 60 veces más rápido que pedirlo a un *LLM* general), y exportar el resultado como *SVG* de *V-carve*, el formato de grabado en V que usan las fresadoras de control numérico.",
+            "Es un ejemplo de la tendencia que marca la sección: los agentes dejan de ser solo asistente de código y se meten en flujos físicos —grabado, fabricación, taller—, donde el valor no está en que el modelo «sepa» grabar, sino en que orqueste bien un *pipeline* de herramientas baratas y rápidas. Para quien tenga una *CNC* en casa, es el tipo de *skill* que convierte un fin de semana en un objeto."
+          ],
+          "tags": ["agentes", "skills", "cnc", "generación-imagen", "fabricación"],
+          "links": [
+            {"label": "GitHub — SnazzyGaz/photo-to-cnc-svg", "url": "https://github.com/SnazzyGaz/photo-to-cnc-svg"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "Speedy: Qwen3.8-Flash-Next de 125B con un millón de tokens de contexto en una o dos GPU",
+          "summary": "El motor de inferencia Speedy (C++, un *fork* de Strata) lleva el Qwen3.8-Flash-Next —un *MoE* de 125 mil millones de parámetros— a una o dos tarjetas *RTX* con hasta un millón de tokens de contexto, con el ajuste hecho en una *RTX 3080* de 10 GB y benchmarks publicados. Es la demostración de que la combinación de cuantización agresiva, *MoE* y una buena gestión de la memoria *KV* sigue bajando la barrera de lo que cabe en un equipo de sobremesa.",
+          "body": [
+            "Speedy se describe a sí mismo como un *fork* de Strata reescrito para exprimir los *MoE* grandes: el protagonista de la demo es el Qwen3.8-Flash-Next, un modelo de 125 mil millones de parámetros con arquitectura de expertos, corriendo en una o dos *RTX* con ventanas de hasta un millón de tokens. El detalle que lo vuelve útil para la comunidad no es solo el tamaño del modelo, sino dónde se ha hecho el ajuste: una *RTX 3080* de 10 GB, hardware de sobremesa corriente, y con benchmarks publicados para que cualquiera pueda replicar o comparar.",
+            "Es la segunda semana seguida en que aparece un motor de este tipo en la lista de tendencias, y el patrón es claro: la carrera de la inferencia local ya no compite en «el modelo más grande que cabe», sino en «el contexto más largo que cabe» en el mismo hardware. Para los que corren agentes con ventanas enormes sobre GPUs de una sola tarjeta, ese es el frente donde se está moviendo el terreno esta semana."
+          ],
+          "tags": ["inferencia", "c++", "moe", "contexto-largo", "gpu"],
+          "links": [
+            {"label": "GitHub — DevDock-AI/Speedy", "url": "https://github.com/DevDock-AI/Speedy"}
+          ]
+        },
+        {
+          "title": "dsh-see-now: visión en tiempo real para agentes, sin quemar tokens en pantallas quietas",
+          "summary": "El problema clásico de la visión de agentes: cada fotograma de la pantalla enviado al modelo cuesta tokens, aunque la pantalla no haya cambiado. dsh-see-now (JavaScript, sin dependencias) ataca justo eso: filtra fotogramas por cambios, hace *compositing* de varios fotogramas y mantiene el coste cerca de cero en pantallas estáticas, con soporte multisesión. Es un repo pequeño, pero resuelve el impuesto más caro del bucle de visión.",
+          "body": [
+            "Un agente que «mira» la pantalla en bucle paga un peaje enorme: cada fotograma se convierte en tokens de entrada, y una pantalla que no cambia sigue costando lo mismo que una que está en plena acción. dsh-see-now propone la solución directa: capturar en tiempo real, pero solo enviar lo que ha cambiado —filtrado de fotogramas por delta—, y componer varios fotogramas cuando el cambio es leve, de modo que el coste en tokens cae a casi cero cuando la interfaz está quieta.",
+            "El repo está escrito en JavaScript sin dependencias, soporta varias sesiones a la vez, y se publica en la lista de tendencias con 62 estrellas. No es un modelo ni un *harness*: es la pieza de plomería que hace el resto del *pipeline* de visión económico, y es el tipo de repositorio que la comunidad de agentes locales va coleccionando —los que no dan la noticia, pero hacen que la noticia sea rentable."
+          ],
+          "tags": ["visión", "agentes", "javascript", "tokens", "tiempo-real"],
+          "links": [
+            {"label": "GitHub — SAOS-3624/dsh-see-now", "url": "https://github.com/SAOS-3624/dsh-see-now"}
+          ]
+        },
+        {
+          "title": "Frontier-UI: una interfaz generativa para Open WebUI, en un solo archivo y sin API key",
+          "summary": "Frontier-UI añade a Open WebUI una capa de interfaz generativa: galería, mapa en vivo, presupuesto, clima y bolsa, y exportación a *Office* con un clic. Se distribuye como un único archivo, sin *API key* y con enfoque *local-first*: la interfaz se genera en el navegador y el modelo ya lo tiene el usuario corriendo en su propia instancia. Es el ejemplo más claro de la tendencia «la UI es también generación».",
+          "body": [
+            "La lista de bloques que genera Frontier-UI —galería, mapa en tiempo real, gestor de presupuesto, clima y bolsa, exportación a *Office* con un clic— es un buen mapa de hacia dónde va la interfaz generativa: en lugar de un *chat* que devuelve texto, el *frontend* se construye a demanda, con bloques que el modelo compone y el navegador pinta. El proyecto se integra en Open WebUI, el *frontend* autoalojado más extendido, y se publica como un solo archivo Python, sin *API key*: la generación de la interfaz la hace el propio modelo local, y los datos salen de la instancia del usuario.",
+            "Es una de las piezas de software que más encaja con el lector de este diario: no añade un modelo, añade una forma de usar el modelo que ya tienes, y lo hace con la receta de siempre del *self-hosting* —un archivo, sin dependencia de nube, y con el control en el propio equipo."
+          ],
+          "tags": ["open-webui", "interfaz-generativa", "local-first", "frontend"],
+          "links": [
+            {"label": "GitHub — Jumbomuffin777/Frontier-UI", "url": "https://github.com/Jumbomuffin777/Frontier-UI"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "Apriel Voice 27B Preview: voz abierta que razona y llama a herramientas, con 1,9 segundos de latencia",
+          "summary": "El paper más votado de hoy presenta Apriel Voice 27B Preview, un modelo de voz y lenguaje abierto construido sobre el checkpoint post-entrenado de Gemma 4 26B-A4B, que procesa directamente la voz y genera respuestas y llamadas a herramientas sin un modelo de diálogo por separado. El entrenamiento va en dos fases: primero establece la interfaz de voz, y después adapta conjuntamente el *projector* y el *backbone* con ajuste fino supervisado (SFT, de «supervised fine-tuning»), *replay* de texto, y una destilación online con un *teacher* local. En modo *thinking* obtiene 98,90 en *Big Bench Audio*, 81,13 en *Speech-BFCL* y un 65,51% de éxito en *tau*-Voice, con una latencia media de 1,91 segundos.",
+          "body": [
+            "El planteamiento del paper parte de una queja extendida: un asistente de voz útil no se limita a reconocer palabras, tiene que entender la petición, razonar sobre el contexto, mantener la conversación y actuar mediante herramientas. Apriel Voice integra todo eso en un *backbone* de razonamiento compartido, conservando además las modalidades de entrada de texto e imagen: el modelo procesa la voz directamente y produce tanto la respuesta hablada como las llamadas a herramientas, sin un modelo de diálogo intermediario.",
+            "La receta de entrenamiento es la parte más interesante para quien quiere replicar algo parecido: una primera fase que establece la interfaz de voz, y una segunda que adapta conjuntamente el *projector* y el *backbone*, usando *replay* de texto para no degradar las capacidades escritas, y una destilación online donde un *teacher* local sirve de referencia y el cómputo de *teacher* y alumno se solapa para no frenar el *pipeline*. Los números del modo *thinking* —98,90 en *Big Bench Audio*, 81,13 en *Speech-BFCL*, 65,51% de éxito de tarea en *tau*-Voice con 1,91 segundos de latencia media— lo sitúan, según los autores, en la zona de lo competitivo para un modelo de voz abierto de 27B."
+          ],
+          "tags": ["voz", "gemma", "paper", "destilación", "herramientas"],
+          "links": [
+            {"label": "arXiv 2610.40738 — Apriel Voice 27B Preview", "url": "https://arxiv.org/abs/2610.40738"}
+          ]
+        },
+        {
+          "title": "CaPtain: convertir un VLM pequeño y abierto en un agente de robot que programa en código",
+          "summary": "El segundo paper destacado aplica la receta estándar de los agentes —ajuste fino supervisado (SFT, de «supervised fine-tuning») para aprender la interfaz, y *RL* multiturno para dominarla— al *code-as-policy* (*CaP*), donde la política del robot escribe código contra las API del robot y lee de vuelta el resultado. El problema que señalan: los agentes *CaP* existentes se saltan el entrenamiento (le piden a modelos cerrados de frontera o delegan en *VLA* pre-entrenados), y los *VLM* abiertos pequeños fallan. CaPtain es un *pipeline* de post-entrenamiento abierto que convierte un *VLM* pequeño en un agente *CaP* capaz, sin *VLA*, sin modelo de frontera y sin estado privilegiado en el momento de la prueba.",
+          "body": [
+            "CaPtain entrena y despliega la política dentro de CaPtain-Harness, un arnés que expone primitivas de bajo nivel —percepción, geometría y movimiento con salvaguardas— tanto en simulación como en hardware real. El *pipeline* tiene dos fases: primero un SFT sobre trayectorias sintéticas generadas con GPT-6 Astra, y después *RL* multiturno. El *RL* multiturno en robótica tiene un problema específico que el paper ataca de frente: una única recompensa al final del episodio tiene que acreditar a decenas de peticiones del agente, cuyos efectos físicos a menudo no se manifiestan hasta varios turnos después. La solución es un *crítico* físico que lee estado privilegiado durante el entrenamiento y distribuye la recompensa de forma razonable.",
+            "Lo que importa de CaPtain no es el número final, sino la demostración: la receta *SFT* + *RL* multiturno que los laboratorios aplican a agentes de código y de web se traslada a la robótica con un *VLM* pequeño y abierto, sin recurrir a un modelo de frontera ni a un *VLA* pre-entrenado, y sin estado privilegiado en el momento de la prueba. Es, en resumen, la versión «pesos abiertos» del agente de robot que programa."
+          ],
+          "tags": ["robótica", "code-as-policy", "rl", "paper", "vlm"],
+          "links": [
+            {"label": "arXiv 2610.40799 — CaPtain", "url": "https://arxiv.org/abs/2610.40799"}
+          ]
+        },
+        {
+          "title": "Por qué el RL «on-policy» nunca lo es de verdad: el desajuste entre entrenamiento e inferencia",
+          "summary": "El tercer paper del día ataca una suposición central del *RL* en *LLMs*: el *RL* «on-policy» asume que las respuestas de entrenamiento se muestrean de la política actual, pero en la práctica las muestrea un motor de inferencia y un entrenador separado calcula los gradientes, y el desajuste entre ambos hace que los datos sean *off-policy*. Los autores descomponen el error *token* a *token* en sus dos fuentes: la numérica del motor (aproximadamente constante, y cuyo sesgo principal se elimina centrando el *score* en cada prefijo) y el retraso de la política por muestreo asíncrono, que forma un bucle de retroalimentación que el *importance weighting* solo corta mientras la razón de retraso sigue concentrada.",
+          "body": [
+            "La separación entre el motor que muestrea y el entrenador que calcula gradientes es tan universal en el *RL* de *LLMs* grandes que casi nadie la menciona; este paper la convierte en el objeto de estudio. Evaluando el entrenador con los pesos del muestreador, los autores parten cada error de *token* en dos: una discrepancia numérica del motor, que se mantiene aproximadamente constante durante el entrenamiento (y por eso sesga las actualizaciones en un monto casi fijo, corrigible centrando el *score* en cada prefijo), y un retraso de la política, que lo produce la propia actualización del entrenador: el sesgo que deja entra en la siguiente actualización, que agranda el siguiente retraso, y así cierra un bucle de retroalimentación.",
+            "El resultado práctico es una guía: el *importance weighting* —el correctivo estándar— solo corta ese bucle mientras la razón de retraso sigue concentrada; los autores lo muestran fallando en Qwen3-1.7B justo en el paso donde el tamaño efectivo de muestra se agota. Para quien entrena con *RL* propio, el mensaje es el de siempre de esta sección: los *harnesses* y los motores de inferencia no son neutros, y la distancia entre «así muestrea el motor» y «así cree el entrenador» es una fuente de error medible y, con el análisis adecuado, corregible."
+          ],
+          "tags": ["rl", "llms", "teoría", "paper", "inferencia"],
+          "links": [
+            {"label": "arXiv 2610.40945 — Training-Inference Mismatch in LLM RL", "url": "https://arxiv.org/abs/2610.40945"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "Qwen3.8-27B sobre AMD con EXL3 y decodificación especulativa: la receta del elpis-on-7900xtx",
+          "summary": "Para los que corren modelos sobre *ROCm*, el repo elpis-on-7900xtx documenta una receta completa: Qwen3.8-27B cuantizado a *EXL3*, con decodificación especulativa *DFlash2*, corriendo sobre una *RX 7900 XTX* mediante *exllamav3-rocm*. Incluye el *tuning*, los parches y benchmarks de rendimiento —de lo más práctico que ha salido esta semana en la comunidad, y la demostración de que el 27B ya no pide GPU de 24 GB para ser usable.",
+          "body": [
+            "La receta que documenta el repo es el tipo de contenido que la comunidad de *self-hosting* agradece: no es una anécdota, es un *pipeline* reproducible. Qwen3.8-27B —el modelo abierto más descargado del año según el ranking del domingo— cuantizado a *EXL3* (la cuantización mixta de *exllamav3*), con *DFlash2* para la decodificación especulativa, y todo corriendo en la versión *ROCm* de *exllamav3* sobre una *RX 7900 XTX*, la GPU de sobremesa de gama alta de AMD.",
+            "El repo incluye los parches necesarios y benchmarks, que es justo lo que falta en la mayoría de las guías: números, no promesas. Es la contrapartida AMD de la oleada de recetas NVIDIA de las últimas semanas, y confirma la tendencia de mes: los modelos de 27B ya no están reservados a tarjetas de 24 GB, y la decodificación especulativa es el multiplicador que los hace fluidos."
+          ],
+          "tags": ["self-hosting", "amd", "rocm", "exl3", "decodificación-especulativa"],
+          "links": [
+            {"label": "GitHub — thefahien/elpis-on-7900xtx", "url": "https://github.com/thefahien/elpis-on-7900xtx"}
+          ]
+        },
+        {
+          "title": "hecate: 753 mil millones de parámetros en una sola estación de trabajo",
+          "summary": "El repo hecate documenta GLM-5.3 —un *MoE* de 753 mil millones de parámetros— corriendo en una única DGX Station GB300, con unas 138 tokens por segundo usando inferencia híbrida: *ExLlamaV3* y *TabbyAPI* por separado. La nota no es solo una hazaña de hardware: es una receta de combinación de motores de inferencia para *MoE* enormes, en una sola máquina.",
+          "body": [
+            "La cifra que importa no es el 753B, sino el «en una sola estación de trabajo»: no un clúster, no una fila de GPUs, un solo nodo. La receta que describe hecate es una inferencia híbrida —*ExLlamaV3* para una parte del *pipeline* y *TabbyAPI* para otra— que logra unas 138 tokens por segundo, que es velocidad de uso real, no de demostración.",
+            "El valor de repos como este para la comunidad es doble. Uno, obvio: que un *MoE* de esa clase cabe en un solo equipo, y que la frontera de «lo que cabe en una estación» sigue subiendo cada mes. Dos, menos obvio: que la combinación de dos motores de inferencia distintos en el mismo despliegue es una técnica documentada y reproducible, y no solo el truco de un único equipo con suerte. Es *self-hosting* en su forma más extrema, y la receta está publicada para quien tenga la hardware."
+          ],
+          "tags": ["self-hosting", "moe", "glm", "inferencia", "dgx"],
+          "links": [
+            {"label": "GitHub — chronarion/hecate", "url": "https://github.com/chronarion/hecate"}
+          ]
+        },
+        {
+          "title": "MuckScraper: un agregador de noticias autoalojado que puntúa el sesgo con un LLM local",
+          "summary": "MuckScraper (JavaScript) es un agregador de noticias de autoalojamiento que agrupa las mismas historias llegadas de varias fuentes y puntúa el sesgo de cada una usando un *LLM* local. En una época en que el *LLM* local dejó de ser un juguete, este tipo de herramientas —donde el modelo es el componente del *backend* y no la interfaz— se está multiplicando, y es de los que mejor encajan con el espíritu del diario.",
+          "body": [
+            "La función básica es la de un agregador clásico: juntar las historias de varias fuentes y agrupar las que cuentan lo mismo. Lo que lo distingue es el paso de calidad: un *LLM* local puntuar el sesgo de cada agrupación, sin enviar las noticias a una API externa. Para quien se autoaloja, eso convierte el agregador en un nodo de verdad —el análisis se hace en el equipo propio, con el modelo propio—, y no en un *frontend* de nube con un *wrapper* bonito.",
+            "Es uno de los ejemplos más directos de la corriente que viene marcando el mes: el *LLM* local como componente de un *software* con nombre y oficio —un agregador, un motor de inferencia, un *harness*—, y no como un *chat* suelto. Para el lector que ya tiene un modelo corriendo en casa, proyectos como MuckScraper son la forma de empezar a sacarle trabajo real, con datos propios y sin depender de una cuenta en la nube."
+          ],
+          "tags": ["self-hosting", "llm-local", "noticias", "agregador", "sesgo"],
+          "links": [
+            {"label": "GitHub — grregis/MuckScraper", "url": "https://github.com/grregis/MuckScraper"}
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "Balanov/uncut",
+        "stars": "★ 407",
+        "desc": "Un *harness* de agentes de *coding* «pérdida cero y sin cabeza»: un binario estático de 7 MB, cuatro herramientas, *stdin*/*stdout* plano, sin recortes silenciosos.",
+        "meta": "Go · MIT",
+        "url": "https://github.com/Balanov/uncut"
+      },
+      {
+        "name": "SAOS-3624/dsh-see-now",
+        "stars": "★ 62",
+        "desc": "Visión en tiempo real para IA: filtrado de fotogramas por cambios, *compositing* de varios, coste bajo en tokens cuando la pantalla no cambia, multisesión, sin dependencias.",
+        "meta": "JavaScript · GPL-3.0",
+        "url": "https://github.com/SAOS-3624/dsh-see-now"
+      },
+      {
+        "name": "Jumbomuffin777/Frontier-UI",
+        "stars": "★ 40",
+        "desc": "Interfaz generativa para Open WebUI: galería, mapa en vivo, presupuesto, clima y bolsa, y exportación a *Office* con un clic; un solo archivo, sin *API key*, *local-first*.",
+        "meta": "Python · Apache-2.0",
+        "url": "https://github.com/Jumbomuffin777/Frontier-UI"
+      },
+      {
+        "name": "DevDock-AI/Speedy",
+        "stars": "★ 20",
+        "desc": "Motor de inferencia en C++ (un *fork* de Strata): lleva el Qwen3.8-Flash-Next (125B, *MoE*) a una o dos *RTX* con hasta un millón de tokens de contexto, ajustado en una *RTX 3080* de 10 GB.",
+        "meta": "C++",
+        "url": "https://github.com/DevDock-AI/Speedy"
+      },
+      {
+        "name": "thu-rllab/LPO",
+        "stars": "★ 13",
+        "desc": "LPO (NeurIPS 2026): optimización de política lista a lista, con recompensas conscientes de preferencias para *RLVR*; una alternativa a *DPO* y *KTO*.",
+        "meta": "Python · Apache-2.0",
+        "url": "https://github.com/thu-rllab/LPO"
+      }
+    ],
+    "papers": [
+      {
+        "title": "Apriel Voice 27B Preview: An Open Model for Speech, Reasoning, and Tool Use",
+        "authors": "14 upvotes",
+        "url": "https://arxiv.org/abs/2610.40738"
+      },
+      {
+        "title": "CaPtain: An Open Post-Training Pipeline for Code-as-Policy Robot Agents",
+        "authors": "14 upvotes",
+        "url": "https://arxiv.org/abs/2610.40799"
+      },
+      {
+        "title": "Probing Spatial State Representations in Vision-Language-Action Models",
+        "authors": "8 upvotes",
+        "url": "https://arxiv.org/abs/2610.40636"
+      },
+      {
+        "title": "ReLift: Fast 3D Object Tracking via Dense-Lift and Confidence-Aware Refinement",
+        "authors": "5 upvotes",
+        "url": "https://arxiv.org/abs/2610.42136"
+      },
+      {
+        "title": "HALO: Human-Grounded Evaluation of Proactive Agents",
+        "authors": "5 upvotes",
+        "url": "https://arxiv.org/abs/2610.39086"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLaMA",
+        "title": "Implementé un LLM moderno en 700 líneas de C",
+        "note": "El hilo que compara la latencia de una implementación casera de 700 líneas con los motores de siempre; la comunidad mide y discute.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1w0ao39/i_implemented_a_modern_llm_in_700_lines_of_c/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "Los mejores LLM locales, agosto 2026",
+        "note": "El repaso mensual de la comunidad (183 votos, 269 comentarios): consenso en que estamos en el mejor período de los pesos abiertos.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1vkmhyl/best_local_llms_august_2026_we_probably_have_had/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "Modelos abiertos recientes de los últimos 6 meses (nov 2025 – abr 2026)",
+        "note": "Un catálogo de los lanzamientos abiertos del semestre, que la comunidad ha convertido en referencia de consulta rápida.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1sskmhv/recent_open_models_from_last_6_months_nov_2025/"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

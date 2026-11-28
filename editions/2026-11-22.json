@@ -1,0 +1,252 @@
+{
+  "date": "22 de noviembre de 2026",
+  "weekday_long": "domingo",
+  "edition": "Edición nº 47",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*Hugging Face* y *OpenRouter* se alían: cada modelo de pesos abiertos se llama con un solo *token*",
+    "summary": "Hugging Face cambia sus proveedores de inferencia a *OpenRouter*: a partir de ahora, cualquier modelo de pesos abiertos del *Hub* servido por uno de sus proveedores se puede llamar con tu *token* de *HF*, por una única API (las *Chat Completions* y *Responses* de *OpenAI*, o la *Messages* de *Anthropic*), y el ruteo entre más de 80 proveedores es en vivo — el mejor por precio, velocidad y fiabilidad en cada petición, y reintento automático en otro proveedor si el primero falla. Los datos marcaban ya la tendencia: los modelos de pesos abiertos pasaron del 26,8 % al 71,7 % de los tokens procesados en un año, y esta semana el modelo más usado de la plataforma fue uno de pesos abiertos, con 59,2 billones de tokens. Imagen, vídeo y audio no pasan por esta vía de momento; y en las próximas semanas llega el paso de enlazar cuentas de *OpenRouter* con el *Hub*.",
+    "illustration": {
+      "file": "lead-illo-2026-11-22.jpg",
+      "alt": "Una pequeña llave de latón de pie sobre un escritorio de madera oscura, iluminada por una luz dorada cálida, con su sombra proyectada a lo largo de un pasillo de racks de servidores que se pierden en la niebla, cada rack brillando con un color apagado distinto",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: la llave que abre la flota de más de 80 proveedores tras un solo *token* de *Hugging Face*"
+    },
+    "tags": ["openrouter", "hugging-face", "ruteo-en-vivo", "pesos-abiertos", "inferencia", "ecosistema"],
+    "links": [
+      {"label": "Blog de Hugging Face: la alianza con OpenRouter", "url": "https://huggingface.co/blog/openrouter"},
+      {"label": "OpenRouter: OpenRouter Now Powers Inference on Hugging Face", "url": "https://openrouter.ai/blog/announcements/hugging-face-inference-providers/"},
+      {"label": "The New Stack: Hugging Face hands model inference traffic to OpenRouter", "url": "https://thenewstack.io/hugging-face-openrouter-inference/"},
+      {"label": "Changelog de Hugging Face: Inference Providers Powered by OpenRouter", "url": "https://huggingface.co/changelog/inference-by-openrouter"},
+      {"label": "Docs: Inference Providers", "url": "https://huggingface.co/docs/inference-providers/index"}
+    ],
+    "body": [
+      "El lunes 16 de noviembre, el blog de *Hugging Face* publicaba el acuerdo con un título que no deja dudas. El *Hub* ya permitía llamar a modelos de pesos abiertos a través de sus proveedores de inferencia, pero el tráfico pasaba por un enrutador propio. A partir de ahora, ese papel lo asume *OpenRouter*, la infraestructura que ya concentra la mayor parte del tráfico de modelos abiertos: más de 800 billones de tokens al mes, más de 10 millones de usuarios, más de 600 modelos y más de 80 proveedores detrás de una API única. La consecuencia práctica: cualquier modelo de pesos abiertos del *Hub* que esté servido por alguno de esos proveedores se puede llamar ahora con tu *token* de *HF*, por las APIs *Chat Completions* y *Responses* (formato *OpenAI*) y la *Messages* (formato *Anthropic*). Y la configuración de los grandes clientes — *Claude Code*, *Codex*, *OpenCode*, *Pi*, *Hermes Agent* — queda en un par de líneas, como muestra la guía que publica la entrada para cada uno.",
+      "La clave del acuerdo es el ruteo en vivo. *OpenRouter* no elige un proveedor de antemano: cada petición va al que mejor combine precio, velocidad y fiabilidad en ese momento — valores medidos en tiempo real —, y si el proveedor al que va la petición falla, la petición se reintenta automáticamente en otro. Quien quiera forzar la opción puede usar los sufijos *model:fastest*, *model:cheapest* o *model:provider*, y la cabecera *X-HF-Session-Id* mantiene una conversación en el mismo proveedor para aprovechar la caché. El ruteo nuevo ya muestra números propios de *OpenRouter*: un 46 % menos de errores de capacidad, un 16,9 % más de rapidez hasta el primer token y un 16,3 % más de caudal. Y las páginas de los modelos ganan dos pestañas nuevas — *Providers* y *Metrics* — para ver quién los sirve, a qué precio, y el propio uso de cada usuario, desgranado por proveedor.",
+      "Los datos que hay detrás de la jugada son la parte más interesante. Los modelos de pesos abiertos pasaron del 26,8 % de los tokens que procesaba la plataforma en octubre de 2025 al 71,7 % de finales de septiembre de 2026, con un pico del 77,5 % en julio: el volumen de pesos abiertos creció más de 60 veces en el año, frente a unas 10 de los modelos cerrados. Esta semana, el modelo más usado de la plataforma fue el de pesos abiertos *DeepSeek V4.1 Flash 1017*, con 59,2 billones de tokens. La brecha de precio también es amplia: la media de un modelo de pesos abiertos cuesta 0,28 $ por millón de tokens de entrada y 1,62 $ por millón de salida, frente a 1,27 $ y 6,36 $ de los cerrados. El modelo abierto más fuerte (*Kimi K3.1 Pro*) aún va por detrás de la frontera cerrada en el *Artificial Analysis Intelligence Index* — 46 contra 65 —, pero logra resultados similares por una séptima parte del coste por tarea: 3,68 $ contra 26,54 $.",
+      "El lado comercial es sencillo: el mismo *token* que ya usas para el *Hub* ahora cubre también *Storage Buckets*, *Jobs* e *Inference Endpoints*, y los planes *PRO*, *Team* y *Enterprise* incluyen una cuota mensual de cómputa. Un cambio a tener en cuenta: las claves de proveedor personalizadas para modelos de lenguaje dejan de funcionar — el cargo pasará a la cuenta de *HF* —, aunque se puede salir de cada proveedor desde la configuración, y para imagen y vídeo las claves personalizadas sí siguen funcionando. Esos dos últimos no pasan por *OpenRouter* de momento: la inferencia de imagen, vídeo y audio, y los modelos *LoRA*, siguen por los proveedores propios de *Hugging Face*. El plan anunciado pasa por permitir enlazar la cuenta de *OpenRouter* con el *Hub* y extender la integración a más tareas. La conversación ya ha empezado en los comentarios del blog, con preguntas sobre cómo afectará el ruteo entre proveedores al precio de las entradas de caché."
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*DaisyRose-27B*: el primer modelo de *RadixArk*, un ajuste fino de *Qwen3.8-27B* con refuerzo puro",
+          "summary": "RadixArk publica su primer modelo: *DaisyRose-27B*, un razonador multimodal de 27B construido sobre *Qwen3.8-27B* y entrenado solo con aprendizaje por refuerzo — sin ajuste fino supervisado ni destilación —, sobre unas 1.200 tareas agénticas de horizonte largo con sesiones de hasta 1M de tokens, durante 18 días en 144 GPUs *H200*. El *pass@1* de *Terminal Bench* 4.1 pasa de 5,6 a 12,0, y mejora en la mayoría de los demás *benchmarks* de codificación, razonamiento y seguimiento de instrucciones. Mantiene la arquitectura, el tokenizador, la plantilla de chat, la comprensión de imagen y el contexto de 256K del modelo base, así que es un sustituto directo: licencia Apache-2.0, con *BF16*, *FP8*, *NVFP4* y *GGUF* el mismo día.",
+          "tags": ["daisyrose-27b", "radixark", "rl", "qwen3-8-27b", "pesos-abiertos"],
+          "links": [
+            {"label": "RadixArk/DaisyRose-27B en Hugging Face", "url": "https://huggingface.co/RadixArk/DaisyRose-27B"},
+            {"label": "Blog de RadixArk: DaisyRose-27B", "url": "https://www.radixark.com/blog/daisyrose-27b"},
+            {"label": "r/LocalLLaMA: DaisyRose-27B, un fine-tune de RL plug-and-play", "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y1wpv9/"}
+          ],
+          "body": [
+            "El primer modelo de RadixArk — la empresa detrás del framework de refuerzo Radix — es un ajuste fino de *Qwen3.8-27B*, el caballo de batalla del ecosistema local, y lo llamativo está en cómo se entrenó: con refuerzo puro. Sin ajuste fino supervisado (SFT, de «supervised fine-tuning») y sin destilación: el modelo parte de los pesos originales del base y solo aprende de las recompensas de unas 1.200 tareas agénticas de horizonte largo, con sesiones de hasta 1M de tokens, durante 18 días en 144 *H200*. El resultado es un modelo que mejora en la mayoría de los *benchmarks* del base sin cambiarle el ADN: misma arquitectura, mismo tokenizador, misma plantilla de chat, misma comprensión de imagen, mismo contexto de 256K. En la práctica, es un sustituto directo: entra en los stacks de inferencia y de post-entrenamiento existentes tal cual, como dice la propia tarjeta del modelo.",
+            "El número más vistoso es el *pass@1* de *Terminal Bench* 4.1, que pasa de 5,6 a 12,0 — más que se duplica. El blog de RadixArk reporta además mejoras en *SWE Bench Pro*, *CodeForces*, *LiveCodeBench*, *IFBench*, *GPQA* y *DeepSWE*, y la comunidad ya ha publicado sus propias mediciones, en análisis de datos y en tareas agénticas. Los pesos salen bajo Apache-2.0, y el mismo día hay cuatro precisiones: *BF16*, *FP8*, *NVFP4* y *GGUF* — desde el repositorio oficial y desde el de *bartowski*. La conversación está en *r/LocalLLaMA*, donde ya se prueba como alternativa local a *Qwen3.8-27B* para trabajo de código y agentes."
+          ]
+        },
+        {
+          "title": "*FastFrames*: *Apple* publica un texto-a-vídeo a latencia interactiva (36 ms por cuadro)",
+          "summary": "El equipo de investigación de *Apple* publica *FastFrames*: modelos de texto-a-vídeo autoregresivos de 1,3B (*FastFrames-S*) y 14B (*FastFrames-L*) que usan una difusión de vídeo de dos pasos para generar cuadros a 480p a 36 ms por cuadro en una sola *B200* (28 peticiones por segundo) y a 45 ms en 8 *B200* (22 pps) — con la calidad de modelos unas 8 veces más lentos. El perfilado del pipeline reveló que el cuello de botella no era la red de difusión, sino el decodificado del *VAE* y la actualización de la caché de contexto: más de la mitad del tiempo por cuadro.",
+          "tags": ["fastframes", "apple", "text-to-video", "latencia", "difusion"],
+          "links": [
+            {"label": "apple/FastFrames-L en Hugging Face", "url": "https://huggingface.co/apple/FastFrames-L"},
+            {"label": "arXiv 2611.23226: FastFrames", "url": "https://arxiv.org/abs/2611.23226"},
+            {"label": "Página del proyecto", "url": "https://apple-aiml-research.github.io/ml-fastframes/"}
+          ],
+          "body": [
+            "El equipo de investigación de *Apple* ha puesto la latencia en primera página del texto-a-vídeo. Los modelos *FastFrames* son autoregresivos sobre el eje de los cuadros: usan una difusión de vídeo de dos pasos (un paso de la red de vídeo sobre un *DiT*, de «diffusion transformer») y descodifican los cuadros del vídeo uno a uno, en vez de correr todo el proceso de denoisado por cuadro. El resultado es latencia interactiva a 480p: el modelo pequeño (1,3B) tarda 36 ms por cuadro en una sola *B200* — 28 peticiones por segundo, un 100 % más rápido que *Wan2.1-T2V-14B* en 8 *B200* —, y el de 14B, 45 ms en 8 *B200* (22 pps). El de 14B iguala la calidad de un modelo *LingBot* unas 8 veces más lento, y el pequeño adaptado a *LingBot 1.3B* corre 16 veces más rápido que el original.",
+            "La clave está en la medición: el equipo perfiló el pipeline completo y descubrió que la red no era el cuello de botella — el decodificado del *VAE* y la actualización de la caché de contexto, guardada en memoria de GPU con kernels fusionados de *Triton*, se comían más de la mitad del tiempo por cuadro. Optimizaron esas etapas y mantienen el mismo *VAE* en las dos variantes. El paper (arXiv 2611.23226) también calcula el límite teórico: si el modelo pequeño corriera al pico de ancho de banda, cada cuadro costaría 7 ms, así que queda recorrido. Los pesos se publican bajo la licencia *apple-amlr*, con la página del proyecto abierta."
+          ]
+        },
+        {
+          "title": "*inworld* publica *voice-isolator*: aislamiento de voz a 48 kHz, con un modo en tiempo real de 20 ms",
+          "summary": "*inworld* publica la v1 de *voice-isolator*, bajo Apache-2.0: un sistema de aislamiento de voz a 48 kHz con dos modelos — uno offline (64M de parámetros, en trozos de 8 segundos) y otro causal (58M) para tiempo real con una ventana de prelectura de 20 ms — que toma la mezcla y una referencia de la voz objetivo y deja pasar solo esa voz, bloqueando a las personas, la música y el acompañamiento. Los autores lo orientan a grabaciones limpias, curaduría de conjuntos de datos, llamadas en vivo y producción en tiempo real. La salvedad honesta: no es un selector de hablantes, y la v2 añadirá la restauración de voz.",
+          "tags": ["voice-isolator", "inworld", "audio", "tiempo-real", "pesos-abiertos"],
+          "links": [
+            {"label": "inworld/voice-isolator en Hugging Face", "url": "https://huggingface.co/inworld/voice-isolator"},
+            {"label": "GitHub: inworld-ai/voice-isolator", "url": "https://github.com/inworld-ai/voice-isolator"}
+          ],
+          "body": [
+            "Aislar la voz que te interesa de una mezcla es uno de los problemas clásicos del audio. *voice-isolator* v1 lo aborda con dos modelos complementarios: uno offline (64M de parámetros) que procesa trozos de 8 segundos con la mejor calidad, y otro causal (58M) para tiempo real, con una ventana de prelectura de 20 ms. Ambos trabajan a 48 kHz y reciben dos entradas: la mezcla y una referencia de la voz objetivo. El modelo aprende a dejar pasar esa voz y bloquear el resto — otras personas, música, acompañamiento — y entrega la señal limpia.",
+            "El README es claro sobre lo que no es: no es un selector de hablantes en el sentido clásico — no etiqueta a cada voz de la mezcla, solo deja pasar la que le des —, y hay hoja de ruta: la v2 añadirá la restauración de voz para mejorar la calidad de la señal recuperada. Para equipos locales y de self-hosting, es una pieza útil de infraestructura de audio: dos modelos pequeños, licencia Apache-2.0, y la elección entre calidad y latencia."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*PiBot*: un equipo de agentes de código abierto para tu escritorio",
+          "summary": "*PiBot* (Apache-2.0, TypeScript) es un equipo de agentes local-first para el escritorio: bots con nombre, rol, modelo, habilidades, permisos y memoria propios, que pueden chatear en directo o en grupos con un coordinador que planifica y asigna el trabajo. Pueden usar la computadora (computer use), el navegador y conectores *MCP*; tienen rutinas para tareas periódicas y un sistema de aprobaciones para los pasos arriesgados; y todo el dato (chats, archivos, memoria, claves) se queda en tu máquina. Ya está en tendencia en GitHub, con más de 250 estrellas.",
+          "tags": ["pibot", "agentes", "local-first", "multi-agente"],
+          "links": [
+            {"label": "GitHub: w01fb0ss/PiBot", "url": "https://github.com/w01fb0ss/PiBot"},
+            {"label": "pibot.space", "url": "https://pibot.space"}
+          ],
+          "body": [
+            "*PiBot* organiza los agentes como se organiza un pequeño equipo: cada bot tiene nombre, rol, su propio modelo, habilidades, permisos y memoria. Se les puede hablar uno a uno, en chat directo, o en un chat de grupo donde un coordinador planifica el trabajo y asigna cada tarea al bot más adecuado. Los bots pueden usar la computadora (clics, archivos), el navegador y conectores *MCP* (de «Model Context Protocol») para hablar con herramientas externas; tienen rutinas para tareas periódicas, y un sistema de aprobaciones que pregunta al humano antes de los pasos arriesgados.",
+            "La apuesta es el local-first: los chats, los archivos, la memoria y las claves se quedan en tu máquina, y el proyecto es Apache-2.0, escrito en TypeScript y construido sobre el kernel de agentes *pi*. Promete funcionar en macOS, Windows, Linux y Android, y la web (pibot.space) trae guías y un vídeo. Ya es uno de los repositorios en tendencia de GitHub — y, en una lista llena de ruido, uno de los pocos que no es una copia SEO."
+          ]
+        },
+        {
+          "title": "*secret-scratch*: pasa secretos al agente sin que el modelo los vea",
+          "summary": "*secret-scratch* (MIT, TypeScript, cero dependencias) ataca el clásico problema de seguridad de los agentes de código — el usuario pega una clave en el chat, y la clave viaja al modelo y a los registros — desde el protocolo: escribes el valor con el prefijo $$ en un mensaje, y antes de llegar al modelo el sistema lo levanta a una zona de trabajo local (archivo con permisos 0600) y el modelo solo ve una referencia opaca. El agente recupera el valor a través de las herramientas *MCP* *secret_scratch* y *secret_pipe* — la segunda le pasa el secreto por la entrada estándar al comando y descarta la salida —, o como variable de entorno. Funciona como middleware *ACP* (*Zed*, *JetBrains*, *Claude Code*, *Codex*, *Gemini CLI*), como servidor *MCP* por *stdio*, o como librería.",
+          "tags": ["secret-scratch", "seguridad", "agentes", "mcp"],
+          "links": [
+            {"label": "GitHub: inixiative/secret-scratch", "url": "https://github.com/inixiative/secret-scratch"}
+          ],
+          "body": [
+            "El sistema también cierra dos puertas por las que el secreto podría escapar: bloquea los comandos que leen directamente los archivos de entorno (un *cat* de *.env.local*, por ejemplo) y las herramientas *MCP* de los servidores conectados. *secret_pipe* es la pieza que deja que el agente use el valor de verdad: abre el comando que pida, le pasa el secreto por la entrada estándar y descarta la salida, de modo que el valor nunca cae en el registro. El modelo puede orquestar el secreto — usarlo donde haga falta —, pero no lo memoriza.",
+            "El proyecto es MIT, TypeScript, sin dependencias, y funciona en tres modos: como middleware *ACP* (la vía de *Zed* y del plugin de *JetBrains*, pero también de los clientes oficiales de *Claude Code*, *Codex* y *Gemini CLI*), como servidor *MCP* por *stdio* que se enchufa a cualquier cliente *MCP*, y como librería. Es una pieza pequeña de infraestructura, pero de las que faltaban en seguridad de agentes."
+          ]
+        },
+        {
+          "title": "*EvalSift Lite*: análisis de errores de las trazas de un agente, sin clave de API ni dependencias",
+          "summary": "*EvalSift Lite* (MIT, Python, cero dependencias) es una herramienta para descubrir cómo falla de verdad un agente: valida un archivo de trazas *traces.jsonl*, aplica comprobaciones deterministas de código y genera un informe en Markdown y HTML, todo sin una sola clave de API. El repositorio documenta un caso real: 100 trazas de un agente de soporte que usa herramientas, etiquetadas a mano — pasan 88, fallan 12, y de esos 12 hay 7 casos donde el agente pidió al usuario detalles que un tool que podía haber llamado le habría dado.",
+          "tags": ["evalsift", "evaluacion", "trazas", "agentes"],
+          "links": [
+            {"label": "GitHub: Eddie-Town/evalsift-lite", "url": "https://github.com/Eddie-Town/evalsift-lite"}
+          ],
+          "body": [
+            "Cuando un agente falla, la pregunta no es solo por qué, sino dónde: una respuesta mala, una herramienta que no se llamó, una regla de borde violada. *EvalSift Lite* es la versión gratuita de ese análisis: toma el archivo *traces.jsonl* (el formato de las trazas grabadas), lo valida, aplica comprobaciones de código deterministas y genera el informe, sin necesidad de ninguna clave de API. El caso documentado es un agente de soporte con herramientas: de 100 trazas etiquetadas a mano, pasan 88 y fallan 12 — siete pidieron al usuario información que una herramienta le habría dado, dos eran reglas de borde de la política, uno un producto ambiguo, uno una fecha con un error de uno, y uno una respuesta que salió del alcance.",
+            "La conclusión que sacan los autores: la mayoría de los fallos no son de inteligencia, son de proceso. El repositorio explica los criterios de etiquetado y la estructura de las trazas que espera, de modo que puedes aplicar el método a tus propios agentes — el tamaño justo para un análisis de errores de tu trabajo, antes de añadir otra capa de complejidad."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*inference-stack*: *vLLM* + *LiteLLM* + *llm-d* + *Grafana* con un solo comando",
+          "summary": "El equipo de los modelos *Granite* (*BerriAI*) publica *inference-stack* (MIT): un solo comando que deja subido un stack de inferencia completo — el motor *vLLM* detrás de un gateway compatible con la API de *OpenAI* (*LiteLLM*), con el agendamiento de *llm-d* y un panel *Prometheus*/*Grafana* —, vía Docker Compose o *Kubernetes*/*Helm*, con una interfaz de arranque en localhost:8080 y un modo simulación que permite probar todo sin GPU.",
+          "tags": ["inference-stack", "vllm", "litellm", "llm-d", "grafana"],
+          "links": [
+            {"label": "GitHub: BerriAI/inference-stack", "url": "https://github.com/BerriAI/inference-stack"}
+          ],
+          "body": [
+            "Montar un stack de inferencia moderno — un motor *vLLM* detrás de un gateway compatible con la API de *OpenAI*, con agendamiento de inferencia y observabilidad — suele ser una semana de YAML y bastante Google. *inference-stack* lo comprime a un comando: el proyecto publica los cuatro componentes juntos, con Docker Compose o *Kubernetes*/*Helm*, la interfaz de arranque en localhost:8080 (modelos, claves, ruteo) y un modo simulación que corre el stack entero sin GPU — de modo que puedes validar la infraestructura en el portátil antes de desplegar en el clúster de verdad.",
+            "Es MIT, viene de *BerriAI* (el equipo de los modelos *Granite*), y el repositorio trae los paneles de *Prometheus* ya configurados y una guía para el primer pedido en menos de cinco minutos. El proyecto se presenta como el punto de partida de referencia para autoalojar inferencia sobre *vLLM*, con los mismos componentes que se usan en los despliegues grandes."
+          ]
+        },
+        {
+          "title": "*ledger*: la contabilidad kernel por kernel de la inferencia LLM en la GPU",
+          "summary": "*sec4si/ledger* (Apache-2.0, *CUDA*) hace la contabilidad que los perfiladores no hacen: registra los parámetros de cada lanzamiento de kernel — incluidos los que viven dentro de los grafos *CUDA* — y resuelve los argumentos puntero contra el mapa de memoria de tensores para saber qué pesos y qué cachés lee o escribe cada lanzamiento, comparando el tráfico medido contra el límite de banda. El caso de estudio que lo motivó: *Qwen3.8-27B* en *NVFP4* en un *DGX Spark* (*GB10*), donde el kernel de decodificación *GDN* escribe 12,6 MB de estado recurrente sucio por capa.",
+          "tags": ["ledger", "cuda", "profilado", "vllm", "gdn"],
+          "links": [
+            {"label": "GitHub: sec4si/ledger", "url": "https://github.com/sec4si/ledger"},
+            {"label": "PR en vLLM (#69160)", "url": "https://github.com/vllm-project/vllm/pull/69160"}
+          ],
+          "body": [
+            "Los perfiladores dicen cuánto tarda cada kernel, pero no qué hizo con la memoria. *ledger* se engancha a *CUDA* (y a *Triton*, a través del runtime) para registrar los parámetros de cada lanzamiento — incluidos los que viven dentro de los grafos *CUDA*, invisibles a los perfiladores clásicos — y resuelve los argumentos puntero contra el mapa de memoria de tensores que la herramienta construye: para cada lanzamiento queda saber qué pesos y qué cachés leyó o escribió, y qué tráfico midió frente al límite teórico de banda.",
+            "El caso de estudio que lo motivó es elocuente: *Qwen3.8-27B* en *NVFP4* con MTP (de «multi-token prediction») en un *DGX Spark* (*GB10*). El perfilado muestra que el kernel de decodificación *GDN* escribe 12,6 MB de estado recurrente sucio por capa en cada paso, y ese volcado pasa por la L2 mientras el siguiente GEMM está streaming pesos. Diferir esos almacenes — un cambio pequeño en el kernel — mejora el caudal de servicio un 5,2 % a concurrencia 4 y un 7,5 % a concurrencia 8, y ya está subido como PR en *vLLM*. La herramienta es Apache-2.0 y funciona con los principales runtimes."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "Cómo enseñar a un robot a detenerse con seguridad: el método *SAFI* para los modelos *VLA*",
+          "summary": "Un nuevo paper (arXiv 2611.26239) destapa un punto ciego de los modelos de visión-idioma-acción (VLA, de «vision-language-action»): las políticas que se han enseñado a suprimir una tarea desde el estado inicial la completan cuando toman el control de una ejecución a mitad — el entrenamiento nunca les mostró qué hacer desde un estado intermedio. La propuesta *SAFI* (State-Aware Fallback Imitation) trabaja en dos vías: construir objetivos de respaldo (en los tramos prohibidos, el brazo quieto y la garra en un estado coherente) y adaptar la política junto con las acciones originales de las tareas que se conservan.",
+          "tags": ["vla", "saifi", "robotica", "seguridad"],
+          "links": [
+            {"label": "arXiv 2611.26239: Teaching Vision-Language-Action Models to Stop Safely", "url": "https://arxiv.org/abs/2611.26239"}
+          ],
+          "body": [
+            "La observación es incómoda: un modelo *VLA* entrenado para no ejecutar la tarea X la suprime cuando parte desde cero, pero cuando el sistema toma el control de un robot que ya está ejecutando X, la completa. La razón: la política nunca vio qué hacer desde un estado intermedio — el entrenamiento solo le mostró las trayectorias completas desde el inicio. Por eso el «interruptor de apagado» entrenado por supresión falla justo cuando más se necesita.",
+            "La propuesta *SAFI* (State-Aware Fallback Imitation) trabaja en dos vías. Primero, construye objetivos de respaldo: en los tramos de las demostraciones donde la tarea está prohibida, el brazo del robot queda quieto y la garra toma un objetivo coherente, en vez de ignorar el tramo. Segundo, aprende a adaptar la política junto con las acciones originales de las tareas que se conservan. El resultado es una política que puede detenerse a mitad de movimiento, y que si la tarea no está terminada, deja caer el objeto que sostiene en vez de dejarlo colgando."
+          ]
+        },
+        {
+          "title": "*Squoosh Bench*: *UX-1* predice el ganador de 318 test A/B reales con un 84 % de acierto",
+          "summary": "Un benchmark saca del laboratorio a *UX-1*, un modelo multimodal afinado sobre datos de navegación humana: se revisaron 412 test A/B históricos de webs reales, se conservaron 318, y al modelo se le pidió predecir qué variante ganaría como si fuera 1.000 usuarios simulados por brazo. *UX-1* acierta en el 84,0 % de los casos (intervalo al 95 % de *Wilson*: 79,5-87,6), frente al 61,6 % de la línea base *Qwen3 Next 80B*. Y de los 126 experimentos donde eligió una variante concreta, 118 ganaron en el test real (93,7 %).",
+          "tags": ["ux-1", "squosh-bench", "ab-testing", "simulacion"],
+          "links": [
+            {"label": "arXiv 2611.25200: Squoosh Bench", "url": "https://arxiv.org/abs/2611.25200"}
+          ],
+          "body": [
+            "Simular usuarios es el santo grial de los experimentos online: si puedes predecir qué variante de dos ganará antes de correr el test, el coste del experimento se hunde. *Squoosh Bench* lo prueba con datos reales: 412 test A/B históricos de sitios públicos, de los que se conservan 318 en 21 días; para cada uno, el modelo ve las variantes y predice el ganador como una distribución de 1.000 usuarios simulados por brazo.",
+            "El resultado es una señal fuerte: *UX-1* (afinado sobre datos de navegación humana) acierta en el 84,0 % de los tests — 267 de 318, con intervalo al 95 % de *Wilson* de 79,5 a 87,6 —, frente al 61,6 % de la línea base (*Qwen3 Next 80B*). Y no es suerte de empates: en los 126 experimentos donde el modelo eligió una variante concreta, 118 de ellas ganaron en el test real (93,7 %). El benchmark abre la puerta a modelos de «usuarios digitales» evaluados contra evidencia histórica, no contra tareas sintéticas."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*Inkling 2 Mini* en *Ampere*: un parche de *vLLM* para correrlo en GPUs *sm_80*",
+          "summary": "El *Inkling 2 Mini* de ayer ya tiene camino a la generación anterior: el repositorio *snailbrainx/inkling-2-mini-sm80* (Apache-2.0) publica un único parche a la imagen oficial de *vLLM* que deja correr el modelo en GPUs *Ampere* (*GA100*/*A100*, *sm_80*) — sin compilar, sin instalar nada, la imagen tal y como se publicó. El test del autor: unas 190 tokens por segundo en una GPU de 64 GB y 180 W, con contexto de 262K.",
+          "tags": ["inkling-2-mini", "ampere", "vllm", "self-hosting"],
+          "links": [
+            {"label": "GitHub: snailbrainx/inkling-2-mini-sm80", "url": "https://github.com/snailbrainx/inkling-2-mini-sm80"},
+            {"label": "thinkingmachines/Inkling-2-Mini en Hugging Face", "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"}
+          ],
+          "body": [
+            "El *Inkling 2 Mini* salió con una imagen que exigía *Hopper* o más reciente, y eso dejaba fuera a la generación anterior — un problema real para quien se aloja el modelo en GPUs más viejas. *snailbrainx* ha publicado un único parche a la imagen oficial de *vLLM* que deja el modelo funcionando en *sm_80*: sin compilar, sin instalar nada, y el resto de la imagen intacto.",
+            "El test de referencia es una GPU de 64 GB de memoria de vídeo con un límite de potencia de 180 W (una *CMP 170HX*), con contexto de 262K y 4 tokens de borrador especulativos (*DSpark*, el mecanismo del modelo): unas 190 tokens por segundo. Si cabe en ese presupuesto de potencia, el camino a una *A100* completa — la *Ampere* más común en el mercado — queda abierto."
+          ]
+        },
+        {
+          "title": "*Rumble-2-Flash* en el navegador: 494 MB de *ONNX* sobre *WebGPU*",
+          "summary": "La comunidad ya llevó *Rumble-2-Flash* (el 0.5B de reconocimiento de voz de *Reson8*) al navegador: *kaptionai* publicó la conversión *onnxruntime-web* sobre *WebGPU* (494 MB en total, Apache-2.0), con el mismo esquema que su puerto *qwen3-asr-web*. El modelo base es un ajuste fino de *Qwen3-ASR-0.6B* con el decodificador recortado a 14 capas y el vocabulario a 99.630 tokens, y soporta 41 idiomas, entre ellos el español.",
+          "tags": ["rumble-2-flash", "onnx", "webgpu", "asr", "navegador"],
+          "links": [
+            {"label": "kaptionai/rumble-2-flash-web en Hugging Face", "url": "https://huggingface.co/kaptionai/rumble-2-flash-web"},
+            {"label": "Reson8/Rumble-2-Flash en Hugging Face", "url": "https://huggingface.co/Reson8/Rumble-2-Flash"}
+          ],
+          "body": [
+            "El *Rumble-2-Flash* que apareció esta semana como la versión rápida de *Reson8* ya está en el navegador: el repositorio de *kaptionai* trae los archivos *ONNX* para correrlo con *onnxruntime-web* sobre *WebGPU*, 494 MB de tamaño total y licencia Apache-2.0 — el mismo esquema del puerto *qwen3-asr-web* que ya era conocido. El base es un ajuste fino de *Qwen3-ASR-0.6B* (Apache-2.0) con el decodificador recortado a 14 capas y el vocabulario a 99.630 tokens, y soporta 41 idiomas, entre ellos el español.",
+            "Es el mismo patrón de los otros puertos web del ecosistema: un modelo pequeño de ASR que corre en la GPU del navegador, sin servidor y sin enviar el audio a la nube. Para quien prefiera los runtimes clásicos, la cuantización *GGUF* del mismo modelo por *AtomicChat* ya está disponible para inferencia local."
+          ]
+        },
+        {
+          "title": "Día uno: la comunidad cuantiza *Inkling 2 Mini* (*GGUF* y versión sin censura)",
+          "summary": "El *Inkling 2 Mini* de la portada de ayer ya circula en la comunidad en 24 horas: los *GGUF* de *unsloth* acumulan 694 me gusta y unas 240.000 descargas, y la versión sin censura del 12B de *AtomicChat* ya pasa de los 290. Es el patrón que se repite con cada modelo abierto del año: las cuantizaciones llegan antes de que el modelo se asiente.",
+          "tags": ["inkling-2-mini", "gguf", "unsloth", "cuantizacion"],
+          "links": [
+            {"label": "unsloth/Inkling-2-Mini-GGUF en Hugging Face", "url": "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF"},
+            {"label": "AtomicChat/Inkling-2-Mini-Uncensored-GGUF en Hugging Face", "url": "https://huggingface.co/AtomicChat/Inkling-2-Mini-Uncensored-GGUF"}
+          ],
+          "body": [
+            "El ecosistema reacciona rápido: en las primeras 24 horas desde el anuncio, *unsloth* publica los *GGUF* de *Inkling 2 Mini* (unas 240.000 descargas en total) y *AtomicChat* la variante sin censura del 12B, ambas para inferencia local. El 4B, con 4 tokens de borrador especulativos, es la variante pensada para máquinas modestas, y el 12B cabe en una tarjeta de 24 GB en *Q4*. Sumado al parche *sm_80* de la nota anterior, el modelo de ayer ya es alcanzable desde una amplia gama de hardware."
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {"name": "w01fb0ss/PiBot", "stars": "★ 250", "desc": "Equipo de agentes locales para el escritorio: bots con rol, habilidades y memoria propios, chat grupal con coordinador, uso de computadora y navegador", "meta": "TypeScript · Apache-2.0", "url": "https://github.com/w01fb0ss/PiBot"},
+      {"name": "BerriAI/inference-stack", "stars": "★ 5", "desc": "Stack de inferencia de un comando: *vLLM* + *LiteLLM* + *llm-d* + *Grafana*, Docker Compose o *Kubernetes*, con modo simulación sin GPU", "meta": "Python · MIT", "url": "https://github.com/BerriAI/inference-stack"},
+      {"name": "snailbrainx/inkling-2-mini-sm80", "stars": "★ 4", "desc": "Parche a la imagen oficial de *vLLM* para correr *Inkling 2 Mini* en GPUs *Ampere* (*sm_80*), unas 190 tokens por segundo en una GPU", "meta": "Python · Apache-2.0", "url": "https://github.com/snailbrainx/inkling-2-mini-sm80"},
+      {"name": "inixiative/secret-scratch", "stars": "★ 2", "desc": "Pasa secretos al agente sin que el LLM los vea: zona de trabajo 0600 + herramientas *MCP*, cero dependencias", "meta": "TypeScript · MIT", "url": "https://github.com/inixiative/secret-scratch"},
+      {"name": "sec4si/ledger", "stars": "★ 2", "desc": "Contabilidad kernel por kernel de la inferencia LLM en la GPU: quién lee y quién escribe, contra el límite de banda", "meta": "CUDA · Apache-2.0", "url": "https://github.com/sec4si/ledger"}
+    ],
+    "papers": [
+      {"title": "RL Post-Training in Diffusion Transformers Is Activation Steering", "authors": "19 upvotes", "url": "https://arxiv.org/abs/2611.26627"},
+      {"title": "Online Mistake Detection in Instruction-Conditioned Procedural Video", "authors": "11 upvotes", "url": "https://arxiv.org/abs/2611.25567"},
+      {"title": "Language Models Can Rewrite Their Own Weights", "authors": "10 upvotes", "url": "https://arxiv.org/abs/2611.21885"},
+      {"title": "Teaching Vision-Language-Action Models to Stop Safely", "authors": "7 upvotes", "url": "https://arxiv.org/abs/2611.26239"},
+      {"title": "System 1 agents: a method for local, reliable and fast agentic AI", "authors": "6 upvotes", "url": "https://arxiv.org/abs/2611.21053"}
+    ],
+    "community": [
+      {"src": "r/LocalLLaMA", "title": "«DaisyRose-27B: un fine-tune de RL *plug-and-play* de *Qwen3.8-27B*»", "note": "La comunidad ya está probando el primer modelo de *RadixArk*", "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y1wpv9/"},
+      {"src": "r/LocalLLaMA", "title": "«RadixArk/DaisyRose-27B · Hugging Face»", "note": "Segunda hilada del día: primeras impresiones y preguntas sobre el entrenamiento", "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xzok2t/"},
+      {"src": "The New Stack", "title": "«Hugging Face hands model inference traffic to OpenRouter»", "note": "El análisis de prensa de la jugada de la semana", "url": "https://thenewstack.io/hugging-face-openrouter-inference/"}
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

@@ -1,0 +1,462 @@
+{
+  "date": "24 de octubre de 2026",
+  "weekday_long": "sábado",
+  "edition": "Edición nº 27",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*DeepSeek-V4.1-Flash-1017*: la familia abierta de DeepSeek mejora razonamiento y agentes, y añade un kit de codificación de prompts",
+    "summary": "DeepSeek publica *DeepSeek-V4.1-Flash-1017*, una actualización menor de su familia abierta *DeepSeek-V4.1-Flash* que mejora el razonamiento, la programación, las tareas agénticas y los benchmarks visuales, y al mismo tiempo acorta el tiempo de ejecución y la longitud de la salida. El objetivo es avanzar la frontera de rendimiento por coste en varios entornos de agentes. Junto a los pesos, bajo licencia *MIT*, DeepSeek entrega un kit de codificación de prompts —un script *Python* de referencia y un conjunto de librerías *Rust* (*deepseek-recipe*)— que convierte las peticiones de las APIs *Messages*, *Chat Completions* y *Responses* en el formato interno del modelo, codifica tokens e interpreta de nuevo la salida, cubriendo el modo de razonamiento, las llamadas a herramientas, las imágenes y los parámetros de generación. El resto del artículo repasa qué mejora, cómo se sirve localmente y qué incluye el kit.",
+    "body": [
+      "*DeepSeek-V4.1-Flash-1017* es una actualización menor de *DeepSeek-V4.1-Flash*, la variante de la familia abierta de DeepSeek orientada a agentes y a un coste por consulta bajo. No es un rediseño: la idea es extraer más rendimiento del mismo modelo base. En la evaluación de la compañía, la versión «1017» mejora a la vez el razonamiento, la programación, las tareas agénticas y los benchmarks de visión, y reduce a la vez el tiempo que tarda en ejecutar una tarea y la longitud de la salida. Menos tokens por respuesta y menos tiempo de cómputo significan completar más trabajo por el mismo dinero, y eso es lo que DeepSeek presenta como un avance de la frontera de Pareto entre rendimiento y coste, medido en varios entornos (harnesses) de agentes distintos.",
+      "Un detalle práctico importante: esta publicación no incluye la plantilla de chat en formato *Jinja* que otros modelos entregan. En su lugar, la carpeta encoding contiene una implementación de referencia autocontenida en *Python* —un único archivo, *encoding.py*, con casos de prueba— que cubre las conversaciones de varios turnos, la llamada a herramientas, el modo de razonamiento, el ajuste numérico del «esfuerzo de razonamiento», los mensajes de sistema insertados a mitad de conversación y las imágenes entrelazadas. Es decir, el modelo no viene con una plantilla lista para pegar en un motor de inferencia, sino con un código de referencia del que cada quien deriva la suya.",
+      "Para uso en producción, DeepSeek añade *deepseek-recipe*, un conjunto de librerías en *Rust* con bindings en *Python* que empaqueta exactamente ese mismo formato de prompts como una «caja de herramientas» mantenida y consciente del protocolo. Convierte las peticiones de las APIs *Messages*, *Chat Completions* y *Responses* en el formato interno de conversación del modelo, las codifica en prompts o en identificadores de token de *DeepSeek V4* y *V4.1*, y vuelve a interpretar la salida del modelo —ya sea una respuesta completa o una en streaming— cubriendo el razonamiento, las llamadas a herramientas, las imágenes y los parámetros de generación. Deja en manos de quien lo usa la inferencia del modelo en sí, la ejecución de las herramientas y el transporte *HTTP*.",
+      "El repositorio también incluye instrucciones para una inferencia mínima: una carpeta inference con los pasos para convertir los pesos y ejecutar el modelo localmente, y una tabla de parámetros de muestreo recomendados (temperatura, *top-p*, *top-k*). Los pesos, el código y todo el material se publican bajo licencia *MIT*, la más permisiva, lo que permite el uso comercial sin restricciones de atribución. Las mejoras de esta revisión no cambian la arquitectura; cambian el rendimiento por token y el kit de herramientas alrededor del modelo, dos cosas que se notan directamente en el coste y en la fiabilidad al integrarlo en un agente.",
+      "En la práctica, para servir el modelo localmente hay que convertir los pesos al formato del motor de inferencia (el repo documenta el paso en *vLLM* y *SGLang*) y usar la plantilla de codificación que se entrega, porque el modelo espera un formato concreto de conversación. Esa es la razón de que DeepSeek haya hecho público *deepseek-recipe*: en lugar de dejar que cada integración reimplemente el protocolo a mano, ofrece una librería mantenida que lo hace una sola vez y se puede importar. Para un equipo que ya tiene *DeepSeek-V4* en producción, el paso a la revisión «1017» es directo: mismos pesos, mismos parámetros, y las mejoras en razonamiento, programación y agentes se notan sin rediseñar la integración. Es el tipo de actualización incremental que, en la práctica, suele dar el mejor salto de rendimiento por unidad de trabajo."
+    ],
+    "tags": [
+      "deepseek",
+      "deepseek-v4.1-flash",
+      "open-weights",
+      "mit",
+      "1m-context",
+      "multimodal",
+      "coding",
+      "agents",
+      "vllm",
+      "fp8"
+    ],
+    "links": [
+      {
+        "label": "Hugging Face (DeepSeek-V4.1-Flash-1017)",
+        "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+      },
+      {
+        "label": "Hugging Face (DeepSeek-V4.1-Flash)",
+        "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"
+      },
+      {
+        "label": "r/huggingface (anuncio del release)",
+        "url": "https://www.reddit.com/r/huggingface/comments/1x85es4/deepseekv41flash1017_released_mit_weights_1m/"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*MOSS-Image* (*OpenMOSS*): *DiT* de 5B parámetros con pesos abiertos (*Apache 2.0*) — generación de imágenes a partir de texto, con buen renderizado de texto y control de maquetación",
+          "summary": "*OpenMOSS* ha publicado *MOSS-Image*, un sistema de generación de gráficos con pesos abiertos (licencia *Apache 2.0*) construido alrededor de un transformador de difusión (*DiT*) de 5B parámetros, entrenado desde cero, y un módulo de mejora de prompts consciente de la intención: juntos traducen una petición breve en una especificación detallada de contenido y maquetación, que el generador luego representa fielmente en la imagen. El informe técnico (arXiv 2610.23374) lo sitúa al frente de los modelos de pesos abiertos en renderizado de texto bilingüe largo, y su núcleo gana la comparación del *RealLayoutArena* con prompts compartidos; se lanzó el 16 de octubre con soporte de día cero en *SGLang*, *vLLM-Omni* y *ComfyUI*, y una versión de ajuste fino supervisado lista para *diffusers*.",
+          "body": [
+            "*OpenMOSS* ha publicado *MOSS-Image*: un sistema de generación de gráficos complejos construido alrededor de un transformador de difusión (*DiT*, de «diffusion transformer») de 5.000 millones de parámetros, entrenado desde cero y liberado bajo la licencia *Apache 2.0*, junto con su receta de entrenamiento y dos benchmarks de evaluación nuevos. El informe técnico (arXiv 2610.23374) lo sitúa como el mejor entre los modelos de pesos abiertos en renderizado de texto largo, y es la apuesta más seria hasta la fecha por resolver lo que la generación de imágenes abiertas todavía no resuelve bien: que el texto de la imagen sea legible, que el contenido esté completo y que los elementos estén espacialmente organizados.",
+            "En arquitectura, el generador procesa cada bloque de tokens de texto y latentes de imagen a la vez, mediante atención conjunta, sobre un autoencoder *FLUX.2* congelado y un codificador *Qwen3.5-9B* también congelado. Usa además un sistema de posiciones rotatorias (*RoPE*) de cuatro dimensiones que codifica el índice de referencia, la posición en la secuencia, el ancho y el alto de la imagen, con coordenadas espaciales centradas en cero: ese es el truco que le permite situar cada elemento donde lo pide la maquetación y generalizar a resoluciones no vistas en el entrenamiento.",
+            "El sistema combina el generador con un módulo de mejora de prompts consciente de la intención: este último, que usa *GPT-6* en el momento de la inferencia, traduce una petición breve en una especificación ejecutable con el texto literal, los elementos, las cajas delimitadoras, la tipografía y las relaciones espaciales, validada antes de generar y capaz de aceptar prompts de hasta 4.000 tokens. El generador, por su parte, procesa la descripción en lenguaje natural y la maquetación estructurada por la misma vía de condicionamiento textual, de modo que puede seguir ambas formas de instrucción sin un canal aparte.",
+            "En resultados: en su propio *LongLongTextBench* (*LLTB*) — 240 tareas, con texto inglés y chino de 180 a 2.800 caracteres, tomado de fuentes como *Project Gutenberg* o las obras de Lu Xun —, *MOSS-Image* obtiene una media de 96,3, la más alta entre los modelos de pesos abiertos; y en el *RealLayoutArena* (*RLA*), la comparación de sistemas completos de extremo a extremo, el sistema queda en segunda posición, por detrás de la referencia propietaria, mientras que su núcleo gana el duelo de nueve generadores que comparten el mismo prompt mejorado, con 1.807,34 puntos *Elo*.",
+            "El lanzamiento del 16 de octubre trajo soporte de día cero en *SGLang*, *vLLM-Omni* y *ComfyUI* — el paquete en un solo archivo de *Comfy-Org* acumula ya más de 1,6 millones de descargas — y una versión de ajuste fino supervisado (*SFT*, de «supervised fine-tuning») lista para la librería *diffusers*. La comunidad ya lo ha afinado con adaptadores *LoRA* en 6 GB de memoria. El propio paper señala, con transparencia, que el núcleo aún no soporta condicionar sobre imágenes de referencia ni editar imágenes.",
+            "Para el self-hoster, es la pieza abierta del día: un modelo de 5B parámetros que cabe con holgura en una GPU de consumo, con la receta de entrenamiento completa y sus benchmarks publicados, listo para adaptarse a infografías, diapositivas o pósters con texto que de verdad se lee."
+          ],
+          "tags": [
+            "openmoss",
+            "moss-image",
+            "text-to-image",
+            "dit",
+            "open-weights",
+            "apache-2.0",
+            "comfyui",
+            "diffusers"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face (MOSS-Image-Base)",
+              "url": "https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base"
+            },
+            {
+              "label": "arXiv (MOSS-Image Technical Report)",
+              "url": "https://arxiv.org/abs/2610.23374"
+            },
+            {
+              "label": "Hugging Face (MOSS-Image-SFT)",
+              "url": "https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT"
+            },
+            {
+              "label": "ComfyUI (paquete en un solo archivo)",
+              "url": "https://huggingface.co/Comfy-Org/MOSS-Image"
+            }
+          ]
+        },
+        {
+          "title": "*MiniMax-M3.1-Flash*: MoE multimodal de 428B (23B activos) para agentes, con contexto de 1M y atención dispersa",
+          "summary": "*MiniMax* publica *M3.1-Flash*, un modelo multimodal nativo de mezcla de expertos (MoE) con unos 428.000 millones de parámetros, de los cuales solo 23.000 millones se activan por token, y contexto de hasta 1.000.000 de tokens. Está diseñado para programación, flujos agénticos, uso del ordenador y ciberseguridad, y acepta texto, imagen y vídeo. Sus mejoras sobre *M3* vienen de la atención dispersa *MiniMax Sparse Attention* (*MSA*) en todo el modelo, el entrenamiento consciente de cuantización y la decodificación especulativa *DSpark*, y se publica bajo licencia comunitaria.",
+          "body": [
+            "*MiniMax-M3.1-Flash* es la nueva versión de *M3* de *MiniMax*: un modelo multimodal nativo de mezcla de expertos (MoE, de «mixture of experts») con unos 428.000 millones de parámetros en total, pero solo 23.000 millones activos por token, que acepta texto, imagen y vídeo como entrada y produce texto como salida, con un contexto de hasta 1.000.000 de tokens. El objetivo declarado del modelo es cubrir cuatro frentes: programación, flujos agénticos, uso del ordenador (computer use) y ciferseguridad, con énfasis especial en la eficiencia de inferencia.",
+            "La novedad técnica central es la *MiniMax Sparse Attention* (*MSA*), una atención dispersa por bloques construida sobre la atención de consultas agrupadas (*GQA*), que *MiniMax* describe en su informe técnico (arXiv 2606.13392) y que recorre todo el modelo. Su idea: un «rama de índice» ligera puntuá los bloques de clave-valor y selecciona un subconjunto Top-k por grupo, y una «rama principal» ejecuta entonces la atención dispersa exacta solo sobre los bloques elegidos. Diseñada para la simplicidad y la escalabilidad, la *MSA* permite desplegar eficientemente en una amplia gama de GPUs: en un modelo de 109B con entrenamiento multimodal nativo, mantiene el mismo rendimiento que la *GQA* y reduce el cómputo de atención por token en 28,4 veces a contexto de 1M; con su kernel co-diseñado (selección Top-k sin exponencial y atención KV-externa) logra 14,2 veces más velocidad de prellenado y 7,6 veces en decodificado en *H800*.",
+            "Junto a la atención dispersa, *M3.1-Flash* incorpora entrenamiento consciente de la cuantización y la decodificación especulativa *DSpark*, un «cabezal de borrador» incluido en el modelo que predice varios tokens a la vez para acelerar la inferencia. El resultado, según la tarjeta del modelo, es un salto generacional en tareas agénticas: 76,2 en *BankerToolBench*, 73,7 % en *DeepSWE v1.1*, 61,7 en *OSWorld V2*, 29,6 en *Agents' Last Exam* y 82,2 en *CyberGym*. En la tabla de comparación de la compañía, compite en la misma liga que *DeepSeek-V4.1-Flash* y *Kimi K3*.",
+            "La relación con *M3*, el modelo de la generación anterior, es directa: *M3.1-Flash* hereda su arquitectura y su entrenamiento multimodal nativo, pero cambia las piezas que más cuesta. *MiniMax* no ha rediseñado el MoE ni el contexto, sino la atención y la cuantización, que son donde se nota la factura. El informe técnico de la *MSA* está pensado como pieza independiente —con su propio código— y se aplica a cualquier modelo de la familia, no solo a *M3.1-Flash*, así que el avance se puede separar del del modelo. En la web de *MiniMax* y en su *Agent* el modelo está ya disponible para probarlo en la nube, y en *Hugging Face* y *ModelScope* están los pesos.",
+            "Hay un detalle importante: la licencia. *MiniMax-M3.1-Flash* no se publica bajo una licencia abierta clásica como *MIT* o *Apache 2.0*, sino bajo la «licencia comunitaria de *MiniMax*» (otro), que restringe usos y es propia de la compañía. Los pesos se descargan de *Hugging Face* y *ModelScope*, y *MiniMax* ofrece además su propio *Agent* y una API, así que es un modelo «abierto pero comunitario» más que abierto de pleno. Para quien quiera reproducir la inferencia, *MiniMax* publica también el kernel de la *MSA* en el informe.",
+            "En resumen, *MiniMax* ataca aquí dos puntos débiles históricos de los modelos grandes: el coste de la atención a contextos muy largos y la eficiencia de la decodificación. Si los números del *MSA* se sostienen fuera de sus propios benchmarks, *M3.1-Flash* puede ser de los modelos de 1M de tokens más baratos de servir por respuesta, a cambio de una licencia que hay que leer con atención antes de usarlo en producción."
+          ],
+          "tags": [
+            "minimax",
+            "m3.1-flash",
+            "moe",
+            "multimodal",
+            "open-weights",
+            "1m-context",
+            "nvfp4",
+            "dspark",
+            "vllm",
+            "computer-use"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face (MiniMax-M3.1-Flash)",
+              "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+            },
+            {
+              "label": "vLLM Recipes (M3.1-Flash)",
+              "url": "https://recipes.vllm.ai/MiniMaxAI/MiniMax-M3.1-Flash"
+            }
+          ]
+        },
+        {
+          "title": "*Sage-A1.5* (*InternScience*): MoE de 35B basado en *Qwen3.6* para resolución científica de largo alcance",
+          "summary": "*InternScience* publica *Sage-A1.5*, un modelo agéntico de mezcla de expertos de 35.000 millones de parámetros, construido sobre *Qwen3.6* y *Agents-A1* del *Shanghai AI Laboratory*, y orientado a la resolución de problemas científicos de largo alcance. Lo que lo distingue son tres capacidades: orquestación agéntica (delegar a subagentes con contextos aislados), verificación (auto-revisión dentro de su propio razonamiento, sin crítico externo) y descubrimiento científico abierto. Los pesos salen bajo *Apache 2.0* y son compatibles con *Transformers*, *vLLM* y *SGLang*.",
+          "body": [
+            "*Sage-A1.5* es un modelo agéntico de mezcla de expertos (MoE) de 35.000 millones de parámetros que *InternScience* construye sobre *Qwen3.6* y sobre *Agents-A1*, el agente del *Shanghai AI Laboratory*. No es un modelo conversacional genérico: está entrenado para resolver problemas científicos de largo alcance, es decir, tareas que requieren planificar, ejecutar, verificar y corregirse a lo largo de muchos pasos, y no simplemente responder. El informe técnico (arXiv 2610.28578) lo describe como un modelo que no solo resuelve tareas individuales, sino que también organiza el trabajo y revisa su propio enfoque durante la ejecución.",
+            "La primera de sus tres capacidades clave es la orquestación agéntica. En lugar de un solo agente que lo hace todo, *Sage-A1.5* delega tareas en subagentes con contextos aislados, de modo que pueden trabajar en paralelo y luego sintetizar sus hallazgos. La idea es reducir la interferencia entre líneas de investigación concurrentes: cada subagente ve su propio contexto, puede cuestionar suposiciones y refinar conclusiones, y un orquestador combina los resultados. Es el patrón «jefe de proyecto» aplicado a un modelo de lenguaje.",
+            "La segunda capacidad es la verificación agéntica, y es probablemente la más interesante. Es una auto-revisión opcional que vive dentro de la propia cadena de pensamiento del modelo: *Sage-A1.5* se detiene a mitad de su razonamiento, revisa qué ha logrado y qué ha fallado, y sigue en la misma vuelta con una dirección corregida, sin necesidad de un crítico externo. En tareas de largo alcance, donde un error temprano se propaga, esa capacidad de «darse cuenta de que va por el camino equivocado» y desviarse sin un segundo modelo supervisando es lo que distingue un agente fiable de uno que solo suena confiado.",
+            "La tercera es el descubrimiento científico abierto: el modelo no se limita a responder preguntas predefinidas, sino que puede llevar a cabo investigación exploratoria, conectar la indagación con análisis interactivo y con artefactos de investigación inspeccionables. Adicionalmente, *Sage-A1.5* soporta de forma nativa la llamada de funciones y la integración de herramientas —APIs, intérpretes de código, motores de búsqueda—, lo que en la práctica significa que puede actuar sobre el mundo, no solo hablar de él.",
+            "En lo práctico, los pesos se publican en *Hugging Face*, *ModelScope* y *GitHub* bajo licencia *Apache 2.0*, en formato *Transformers*, y la tarjeta afirma compatibilidad con *vLLM* y *SGLang*. Para *InternScience*, la apuesta es clara: ofrecer una base accesible para el descubrimiento científico abierto, un camino práctico desde la ejecución de tareas de largo alcance hasta la exploración científica colaborativa, verificable e inspeccionable.",
+            "En números, la tarjeta del modelo y el informe técnico no publican una batería de benchmarks tan amplia como la de los fundacionales, y se centran más en las tareas agénticas de la serie *Agents-A1* de la que *Sage-A1.5* desciende. Lo que *InternScience* subraya es que el modelo es usable en una sola GPU de consumo: 35.000 millones de parámetros en total, con la mayoría inactivos por token gracias al MoE, lo que en la práctica se traduce en un coste de memoria y de cómputo similar al de un modelo denso de unos 5.000-8.000 millones. Se puede servir con *vLLM* o *SGLang*, usar desde *Transformers* para el ajuste fino, y la familia *Agents-A1* ya tiene variantes en *GGUF* para *llama.cpp*, que es el camino más práctico para el self-hoster sin *NVIDIA*."
+          ],
+          "tags": [
+            "internscience",
+            "sage-a1.5",
+            "qwen3",
+            "moe",
+            "vlm",
+            "vision",
+            "agentic",
+            "tool-use",
+            "gguf",
+            "llama.cpp"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face (Sage-A1.5)",
+              "url": "https://huggingface.co/InternScience/Sage-A1.5"
+            },
+            {
+              "label": "Hugging Face (Sage-A1.5-Q4_K_M-GGUF)",
+              "url": "https://huggingface.co/InternScience/Sage-A1.5-Q4_K_M-GGUF"
+            }
+          ]
+        },
+        {
+          "title": "*Flint* (*RecursiveSI*): MoE de 40B/2.5B para agentes de código, con 89,7 % en *SWE-bench Pro*",
+          "summary": "*Recursive* publica *Flint*, su modelo de mezcla de expertos para agentes de programación: 39.800 millones de parámetros en total y unos 2.500 millones activos por token, entrenado desde cero y publicado bajo *Apache 2.0* con un kit de servicio en *SGLang*. Acepta texto, soporta razonamiento y uso de herramientas en varias vueltas, y en sus evaluaciones obtiene 54,9 % en *Terminal-Bench 2.1*, 89,7 % en *SWE-bench Pro v2* y 74,2 % en *SWE-bench Verified*. La nota repasa la arquitectura, los números, cómo se sirve y sus límites.",
+          "body": [
+            "*Flint* es el modelo de mezcla de expertos (MoE) de *Recursive* para agentes de código. Tiene 39.800 millones de parámetros en total y unos 2.500 millones activos por token —la compañía lo denomina «40B-A2.5B»—, y está diseñado para investigar bases de código, corregir errores, implementar funciones y escribir pruebas. A diferencia de un modelo conversacional, *Flint* está pensado para trabajar en un bucle: lee, decide, llama a herramientas, observa el resultado y sigue, así que su entrenamiento incluye explícitamente tareas agénticas, no solo texto y código.",
+            "En sus evaluaciones de lanzamiento, *Flint* obtiene 54,9 % en *Terminal-Bench 2.1* (usando *Terminus 2*), 89,7 % en *SWE-bench Pro v2* y 74,2 % en *SWE-bench Verified*, con un *pass@1* medio de al menos cinco intentos y muestreos de temperatura 1,0, *top-p* 0,95 y *top-k* 20. Un matiz que *Recursive* señala con transparencia: su puntuación en *Terminal-Bench* cuenta como incorrectas las soluciones que dependen de recuperar contenido de la web, un ajuste que otros fabricantes no siempre aplican, y por eso sus números pueden no ser directamente comparables con los de la competencia.",
+            "El modelo se entrena desde cero, en cuatro fases: preentrenamiento, entrenamiento intermedio, ajuste fino supervisado y refuerzo (RL), con texto, código, seguimiento de instrucciones y tareas agénticas. *Recursive* lo publica bajo licencia *Apache 2.0*, con el *checkpoint* en *BF16*, la configuración, el tokenizador y la plantilla de chat, más un kit de servicio en *SGLang*. La recomendación de despliegue es una *B300* o *H200* por réplica; no incluye aún código de modelado para *Transformers*, y las variantes cuantizadas para *NVIDIA* y *Apple Silicon* se preparan por separado. También publican el motor local *rec* (en GitHub) para correrlo sin nube, y lo integran en *LM Studio*.",
+            "Hay que leer sus advertencias. *Recursive* avisa que, pese a incluir ejemplos de seguridad en el ajuste fino, el modelo puede seguir produciendo contenido incorrecto o dañino, código defectuoso o llamadas a herramientas impropias: el usuario debe probar el código generado y revisar los cambios importantes. Y señala que el razonamiento largo puede estirar la latencia y agotar el presupuesto de salida antes de terminar la respuesta. En otras palabras: es una herramienta potente que no debe usarse sin supervisión.",
+            "Un detalle práctico: *Recursive* publica el motor local *rec* (abreviatura de «Recursive») como un paquete descargable, y *Flint* aparece desde el día uno en *LM Studio*, el cliente de escritorio popular para modelos locales, así que probar el modelo sin tocar *SGLang* es tan simple como descargarlo. *LM Studio* no es el único: el kit *SGLang* que incluye el repositorio soporta varios GPUs y la API compatible con *OpenAI*, y las variantes cuantizadas —para *NVIDIA* con *FP8* y para *Apple Silicon* con *MLX*— están en preparación, aunque aún no son la forma «oficial» de bajar el modelo. *Recursive*, la compañía detrás, es un laboratorio fundado en 2024 con foco en agentes de código y en un modelo propio de inferencia; *Flint* es su primera publicación grande.",
+            "En el panorama de la semana, *Flint* encaja en la tendencia clara: modelos MoE relativamente pequeños (un par de miles de millones activos) especializados en agentes de código, con pesos abiertos, que compiten en los mismos benchmarks —*SWE-bench*, *Terminal-Bench*— que los gigantes. Su baza es el equilibrio entre coste de inferencia y capacidad agéntica, y su apuesta por publicar todo (pesos, kit, motor local) deja a la comunidad decidir si sus números se sostienen."
+          ],
+          "tags": [
+            "recursivesi",
+            "flint",
+            "text-generation",
+            "coding-agents",
+            "open-weights",
+            "apache-2.0",
+            "lm-studio"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face (Flint)",
+              "url": "https://huggingface.co/RecursiveSI/flint"
+            },
+            {
+              "label": "LM Studio (Recursive Flint)",
+              "url": "https://lmstudio.ai/models/recursive-flint"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "*VocabX* (*Dharma-AI*): especializar el vocabulario de un SLM puede cortar el coste de inferencia un 77 %",
+          "summary": "Un equipo de *Dharma-AI* muestra con *VocabX* cómo el tokenizador, que casi nadie toca, es uno de los mayores palancas de coste cuando se especializa un modelo pequeño en un solo dominio y una sola tarea. En su corrector automático de redacciones en portugués (sobre *Qwen3-4B*), reconstruir el vocabulario alrededor del coste de cada token en vez de su frecuencia —sin tocar el modelo base, sus datos ni su receta de entrenamiento— redujo el coste medido de inferencia un 77 %. El artículo del blog anticipa los resultados de su paper, aún en revisión.",
+          "body": [
+            "Cuando se toma un modelo abierto genérico como *Qwen* o *Gemma* y lo se especializa por ajuste fino en un dominio, se hereda un vocabulario construido para muchos dominios a la vez. *VocabX* parte de una observación simple: en una tarea concreta y repetitiva, ese vocabulario «para todos» acaba costando dinero. El caso de *Dharma-AI* es un corrector automático de redacciones en portugués sobre *Qwen3-4B*: recibe la redacción, el tema y los textos de apoyo, y devuelve una valoración en *JSON* con una nota y un comentario por cada competencia. El modelo ya era pequeño (4.000 millones de parámetros) y estaba entrenado, pero seguía usando el tokenizador original de *Qwen3-4B*, hecho para muchas lenguas, cuando la tarea solo usa una lengua y un único formato.",
+            "Eso tenía dos costes. El primero: el texto que el corrector escribe en cada petición se dividía en más tokens de los necesarios, porque el vocabulario genérico fragmenta de forma subóptima el portugués de un solo dominio. El segundo, y el mayor: en cada token que el modelo genera, puntúa un vocabulario de 151.669 entradas, muchas de las cuales esa tarea apenas usa. Cada uno de esos millones de puntos por token es cómputo que se paga y que, para esa tarea, no aporta nada. El tokenizador es, en efecto, una de las palancas de coste más grandes, y se fija antes de dar el primer paso de entrenamiento.",
+            "*VocabX* reconstruye el vocabulario especializándolo no por frecuencia —el criterio estándar del *BPE*—, sino por el coste de cada token: cuánto cuesta, para ese modelo y en esa tarea, generar un token que apenas se usa frente a uno que domina la distribución. El método reduce el vocabulario para que las entradas que la tarea casi no pide desaparecen o se fusionan, dejando espacio para las que de verdad importan. El resultado en el corrector de portugués: sin cambiar el modelo base, los datos ni la receta de entrenamiento, el coste medido de inferencia baja un 77 %. El mismo modelo, los mismos datos, la misma receta: solo cambia el vocabulario, y el ahorro es cercano a cuatro quintos del gasto.",
+            "Hay matices. Los números vienen de la versión actual del paper, aún en revisión, y pueden cambiar. Y la técnica no es libre de costes: un vocabulario más pequeño reduce el espacio de salida (el modelo puntúa menos candidatos por token, lo que acelera y abarata la generación), pero también reduce su capacidad de representar con precisión los textos que caen fuera del dominio. Para un sistema de una lengua y un formato, la cuenta está muy a favor; para un asistente multilingüe general, la misma reconstrucción podría ser contraproducente. La lección general: el tokenizador no es una propiedad fija heredada del modelo base, es una decisión de diseño que se toma una vez, antes de entrenar, y condiciona el coste de cada consulta posterior.",
+            "Para quien tenga un modelo pequeño dedicado a una tarea repetitiva (clasificación, extracción, un formato fijo, traducción de un par de lenguas), *VocabX* propone mirar el tokenizador antes de mirar la arquitectura: el ahorro potencial, según los números del blog, es del mismo orden que pasar de un MoE grande a uno pequeño, sin tocar el entrenamiento. El paper completo —con la definición formal del coste por token y las ablativas— se publicará próximamente; el artículo del blog de *Hugging Face* (21 de octubre, de Bernardo França de Aguiar, Gabriel Pimenta de Freitas Cardoso, Bruno Duarte y Francisco de Almeida Rocha Alves, todos de *Dharma-AI*) ya deja ver lo suficiente para replicar la idea."
+          ],
+          "tags": [
+            "dharma-ai",
+            "vocabx",
+            "slm",
+            "tokenization",
+            "inference-cost",
+            "vocabulary-specialization",
+            "self-hosting"
+          ],
+          "links": [
+            {
+              "label": "Blog de Hugging Face (VocabX)",
+              "url": "https://huggingface.co/blog/Dharma-AI/vocabx-vocabulary-specialization"
+            }
+          ]
+        },
+        {
+          "title": "*llm-inference-gateway*: una pasarela de enrutamiento de modelos LLM con una caché de clave-valor (KV) distribuida",
+          "summary": "Proyecto nuevo y todavía en fases muy tempranas: *llm-inference-gateway*, de *Eugenehwng* en *GitHub*. Su descripción —«A Cache Aware LLM Routing Gateway with a Distributed KV Cache»— es una pasarela de enrutamiento de peticiones LLM que es consciente de la caché y mantiene una caché de clave-valor (KV) distribuida. El repositorio no tiene documentación todavía, así que esta nota se queda corta a propósito: solo recoge lo que el propio repositorio dice.",
+          "body": [
+            "Es la pieza menos madura de la lista de hoy: *llm-inference-gateway*, publicado ayer por *Eugenehwng* en *GitHub*. La descripción del repositorio dice «A Cache Aware LLM Routing Gateway with a Distributed KV Cache»: una pasarela que, cuando recibe peticiones de varios modelos, decide a cuál reenviarlas teniendo en cuenta el estado de la caché de clave-valor (KV) de cada instancia, y mantiene esa caché de forma distribuida. La intuición detrás es la misma que en otras piezas de la semana: compartir el trabajo de prefilledo entre instancias (o entre nodos) evita repetir el cálculo de lo que ya se ha calculado, y es una de las fuentes de ahorro más grandes en la inferencia a escala —el prefill, que es el paso donde se procesa todo el prompt de golpe, es el que consume más energía por token de salida.",
+            "No hay todavía documentación pública, ni README, y el repositorio acumula una estrella, así que esta nota se queda corta a propósito: solo recoge lo que el propio repositorio afirma. Se monitorizará: cuando aparezca documentación, benchmarks o un paper, la nota crecerá. El repositorio está escrito en Go, un idioma razonable para este tipo de infraestructura de red, y el tema —ruteo de peticiones LLM consciente de la caché— es un hueco real en los stack de autoalojamiento, donde hoy la decisión de a qué nodo va cada petición la suele tomar un balanceador de carga genérico que no ve dentro de la memoria de las GPUs."
+          ],
+          "tags": [
+            "llm-inference-gateway",
+            "routing",
+            "kv-cache",
+            "distributed",
+            "inference",
+            "self-hosting",
+            "open-source"
+          ],
+          "links": [
+            {
+              "label": "GitHub (llm-inference-gateway)",
+              "url": "https://github.com/Eugenehwng/llm-inference-gateway"
+            }
+          ]
+        },
+        {
+          "title": "*IssuePilot*: de un *issue* de *GitHub* a un *pull request*, todo local y con un sandbox de *Docker*",
+          "summary": "*IssuePilot* es un agente de código abierto que recibe una URL de un *issue* de *GitHub* y devuelve un *pull request*. Todo corre localmente: el modelo por *Ollama*, un vector store local, *Docker* para ejecutar el código de prueba no confiable, y la librería *LangGraph* orquestando las nueve pasos. El agente lee el *issue*, busca el código relevante, escribe un test de reproducción, redacta la corrección, ejecuta la batería de tests en un sandbox aislado y abre el *pull request* en una rama, sin tocar la rama por defecto y sin que los tokens de *GitHub* toquen el sandbox.",
+          "body": [
+            "*IssuePilot* es un agente que automatiza el camino completo entre un *issue* de *GitHub* y un *pull request* que lo corrige. Se le pasa la URL del *issue*; el agente lee el *issue*, localiza el código relevante con una pila de recuperación local, escribe un test de reproducción que falla, redacta la corrección, ejecuta la batería de tests dentro de un sandbox de *Docker* aislado, y finalmente abre un *pull request* en una rama nueva con todo el contexto adjunto. No hay nube de por medio: el modelo va por *Ollama*, el vector store es local, *Docker* es el único contenedor, y *LangGraph* orquesta las nueve pasos con reintentos. En otras palabras: es el «de la queja al *patch*» completo, corriendo en tu máquina.",
+            "El modelo de seguridad es la parte que más se cuida, y con razón: el agente clona y ejecuta código que no ha escrito. Los repositorios no confiables —los que se clonan de *GitHub* como parte de la tarea— se ejecutan solo dentro de *Docker*; si no hay *Docker*, el agente se niega a correr el código y lo explica. El único atajo es el demo embebido, que es código de primera parte y confiable, y solo entonces puede caer en un subproceso local restringido. Con *GitHub* hay reglas duras: el agente nunca empuja a la rama por defecto, crea una rama *issuepilot/fix-<número>*, y abre el *pull request* desde ahí. Si no existe un bifurcado (fork), lo crea antes (requiere *GITHUB_TOKEN* y *GITHUB_USER*). El modo *--dry-run* o el botón «Dry run» de la interfaz web para justo antes del *push*: la rama, el *commit* y el *diff* se producen localmente, pero no se empujan. Y los tokens de *GitHub* nunca se escriben en el repositorio, nunca se registran en logs y nunca se pasan al sandbox —un paso explícito los limpia del entorno de la ejecución de tests.",
+            "El demo incluye tres repositorios embebidos, cada uno con un bug deliberado, un *issue* que lo describe y un test que lo caza. Junto a cada uno hay un directorio *reference/* con el *patch* esperado, el test de reproducción y un análisis de causa raíz; ese material es lo que hace que el demo offline (sin modelo, sin *Docker*, sin red) sea determinista, porque el «backend LLM» de referencia solo lo reproduce. El *reference* se excluye de la copia de trabajo, así que el agente real nunca ve la respuesta. Para probarlo sin nada: *uvx* lo instala, hay una interfaz web (elige un demo o pega una URL, pulsa «Run» y ves los pasos, el log en vivo, el *diff* generado y el informe de tests), y un comando para revisar el entorno (*Docker*, la imagen del sandbox, el backend LLM, *gh* CLI y el token de *GitHub*).",
+            "Las limitaciones se documentan con honestidad: es un agente de repositorios *Python*, la recuperación local no es un *RAG* perfecto, y la ejecución de tests en *Docker* añade latencia. Pero la combinación —todo local, un sandbox de *Docker* obligatorio para código no confiable, *dry-run* de serie, y los tokens fuera del sandbox— lo hace una de las piezas más serias de la semana para la categoría «agente de código abierto que toca *GitHub* sin tocar tu rama principal ni tus credenciales»."
+          ],
+          "tags": [
+            "issuepilot",
+            "github",
+            "pull-request",
+            "agentic-coding",
+            "testing",
+            "docker",
+            "ollama",
+            "langgraph",
+            "local-only",
+            "open-source"
+          ],
+          "links": [
+            {
+              "label": "GitHub (IssuePilot)",
+              "url": "https://github.com/aeyjeyaryan/IssuePilot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*Agent Mosaic*: el «efecto mosaico», cuando un agente reconstruye y revela datos confidenciales",
+          "summary": "Un paper nuevo (Ruiz, Luceri y Ferrara, arXiv 2610.30418) cuantifica un riesgo concreto de los agentes LLM: que al consultar varios documentos por separado, cada uno aparentemente inofensivo, el agente puede «ensamblar» una conclusión sensible y revelarla. Con 30 escenarios sintéticos (ciberseguridad, médico, militar) y 10.800 respuestas en simulación, el mejor modelo probado —*GPT-5.6-Sol*— revela el compuesto prohibido en el 7,08 % de las respuestas, y el porcentaje sube en entornos reales. Añadir cabeceras de clasificación visibles y reglas de agregación reduce el problema, pero no lo resuelve: el 32,37 % de las respuestas simuladas siguen filtrando, y muchas de las «rechazadas» revelan la conclusión al explicar el porqué.",
+          "body": [
+            "Los agentes modernos de LLM pueden recuperar información de documentos a los que tienen acceso. El paper *Agent Mosaic* (Daniel Ruiz, Luca Luceri, Emilio Ferrara; arXiv 2610.30418) se ocupa de lo que pasa cuando ese acceso es a una colección de documentos confidenciales, cada uno con un nivel de clasificación distinto, y el agente puede leer varios de ellos. El riesgo que mide es lo que los autores llaman el «efecto mosaico»: el agente, sin que ningún documento individual sea secreto en su conjunto, puede combinar fragmentos de varios de ellos para reconstruir una conclusión que, en su conjunto, es sensible, y luego revelarla en su respuesta.",
+            "La experimentación es rigurosa. *Agent Mosaic* construye 30 escenarios sintéticos en tres dominios —ciberseguridad, médico y militar— y evalúa tres agentes LLM en simulación controlada, produciendo 10.800 respuestas finales, más 1.440 respuestas de agentes en vivo en dos entornos (harnesses) de código abierto. El diseño de las consultas es deliberadamente benigno: la pregunta se puede responder legítimamente desde un solo documento, sin necesidad de cruzar niveles de clasificación. Y aun así, el mejor modelo probado, *GPT-5.6-Sol*, revela el compuesto prohibido en el 7,08 % de las respuestas en simulación (intervalo al 95 %: 3,75-10,67 %), con tasas de revelación peores en los entornos en vivo.",
+            "Los autores prueban entonces dos salvaguardias estándar: cabeceras de clasificación visibles en los documentos, y reglas explícitas de agregación. Estas dos cosas reducen de forma sustancial la tasa de revelación en conjunto. Pero no la resuelven: aun con las salvaguardias, el 32,37 % de las respuestas simuladas (intervalo al 95 %: 28,33-36,19 %) siguen revelando información prohibida, y esto se mantiene en todos los tipos de intención de consulta. Peor aún, un punto que el paper subraya: aumentar el número de rechazos no garantiza confidencialidad. Un agente que dice «no puedo responder» puede, en la explicación del rechazo, describir con suficiente detalle la conclusión prohibida. El rechazo, en otras palabras, no siempre protege el dato; a veces solo cambia el canal por el que sale.",
+            "La conclusión de los autores es directa: la fuga de datos sensibles por eventos de tipo mosaico es un modo de fallo de confidencialidad observado, a tasas no despreciables, en los entornos evaluados. No es un caso aislado de un modelo particular mal alineado; es un patrón que aparece en varios modelos y en varias configuraciones. El paper lo presenta como una motivación para controles más fuertes sobre lo que un agente puede inferir y revelar, en entornos de datos sensibles con usuarios de niveles de acceso mixtos. Es decir: si tu organización tiene un agente que consulta documentos de diferentes niveles de clasificación, el riesgo no es solo que el agente «lea un documento clasificado», sino que «lea varios documentos no clasificables en sí mismos y los combine».",
+            "Para quien implementa agentes sobre datos sensibles, el paper ofrece un par de lecciones prácticas. Primero: las salvaguardias estándar (marcar los documentos con su nivel y dar reglas de agregación) ayudan, pero no son suficientes, y deben combinarse con otros controles. Segundo: hay que auditar no solo las respuestas completas sino también los rechazos, porque un «no puedo» bien construido puede contener el dato que debería estar protegido. Y tercero: el riesgo no es simétrico; los entornos en vivo, con entornos (harnesses) reales, tienden a filtrar más que la simulación, así que los números de laboratorio son un suelo, no un techo."
+          ],
+          "tags": [
+            "agent-mosaic",
+            "confidentiality",
+            "privacy",
+            "agentic",
+            "rag",
+            "security",
+            "research"
+          ],
+          "links": [
+            {
+              "label": "arXiv (Agent Mosaic)",
+              "url": "https://arxiv.org/abs/2610.30418"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2610.30418"
+            }
+          ]
+        },
+        {
+          "title": "*T²Quant*: cuantización que asigna precisión según la tarea y el paso de denoising en modelos de lenguaje por difusión",
+          "summary": "Un paper (Avivi, Rahimi, Mendelson y Baskin, arXiv 2610.31198) estudia la cuantización de los modelos de lenguaje por difusión (DLM), que son distintos de los autoregresivos tradicionales. Demuestran que la sensibilidad a la cuantización depende a la vez de la tarea y del paso de denoising: distintas tareas piden distintas precisiones en distintos pasos. Con esa observación, proponen *T²Quant*, un marco de cuantización de precisión mixta que asigna bits de activación según una señal de sensibilidad sin etiquetas, y que mejora la precisión media hasta 6,7 puntos porcentuales sobre los métodos existentes, con el mismo presupuesto de bits, en tres DLMs y seis benchmarks.",
+          "body": [
+            "Los modelos de lenguaje por difusión (DLM, de «diffusion language model») son una alternativa a los autoregresivos clásicos: en vez de predecir el siguiente token, «denuean» la secuencia completa paso a paso, partiendo de ruido. Ese proceso iterativo plantea un problema específico para la cuantización, y el paper de Ofek Avivi, Eliron Rahimi, Avi Mendelson y Chaim Baskin (arXiv 2610.31198) lo ataca de frente. La observación central es que la sensibilidad a la cuantización de un DLM no es una constante: depende de la tarea (clasificar vs. traducir vs. razonar) y del paso de denoising en el que estés. Es decir, el mismo parámetro del modelo necesita más o menos precisión dependiendo de qué está haciendo el modelo en ese momento.",
+            "Lo más útil del paper es que los autores muestran que esos patrones de sensibilidad se pueden predecir sin etiquetas de verdad ni métricas de evaluación específicas de cada tarea. En la práctica, eso significa que no hace falta una batería de tests por tarea para saber dónde poner los bits: basta con medir una señal de sensibilidad genérica durante la inferencia, y asignar la precisión de las activaciones según esa señal, paso a paso. El marco que proponen se llama *T²Quant* (task-and-time-aware quantization): asigna precisión de forma mixta —distintos bits en distintos pasos y distintas tareas— bajo un presupuesto fijo de bits por parámetro, que es la restricción que de verdad importa al desplegar.",
+            "Los experimentos cubren tres DLMs distintos y seis benchmarks. El resultado: *T²Quant* mejora de forma consistente la precisión media de los métodos de cuantización existentes, con ganancias de hasta 6,7 puntos porcentuales bajo el mismo presupuesto de bits. Seis y siete puntos es una diferencia grande en un benchmark de precisión; no es un ajuste marginal. Y la clave del gancho es que no pide datos de tarea específica, no pide etiquetas y no cambia la arquitectura: es una política de asignación de precisión que se aprieta en el runtime.",
+            "Hay matices que el paper no oculta. Los DLMs son una familia de modelos más joven que los autoregresivos, y la cuantización de los DLMs en general es un problema menos estudiado que la de los autoregresivos: la literatura previa se centraba en cuantización de pesos, no en cuantización de activaciones con sensibilidad temporal. *T²Quant* ataca ese vacío. También, como toda cuantización, tiene un trade-off: más precisión en unos pasos implica menos en otros, y el presupuesto global es fijo. La señal sin etiquetas es el truco que permite hacer esa asignación bien sin tener que hacer una batería de ajuste por cada tarea y cada DLM.",
+            "Para el self-hoster, la implicación práctica es directa: si estás cuantizando un DLM, la elección de «qué cuantización usar» ya no es una sola (Q4, Q5, Q8) sino una política por paso. El paper no incluye todavía una herramienta lista para usar, pero la señal de sensibilidad y la asignación por pasos están descritas con suficiente detalle para reimplementar. Es el tipo de trabajo que, en un año, acabe en una herramienta que te diga «para este DLM, este benchmark y este presupuesto de VRAM, usa 4 bits en los primeros pasos de denoising y 8 bits en los últimos»."
+          ],
+          "tags": [
+            "diffusion-language-models",
+            "quantization",
+            "task-aware",
+            "temporal",
+            "inference",
+            "research"
+          ],
+          "links": [
+            {
+              "label": "arXiv (Temporal Task-Aware Quantization for DLMs)",
+              "url": "https://arxiv.org/abs/2610.31198"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2610.31198"
+            }
+          ]
+        },
+        {
+          "title": "*TARSphere*: un marco de extremo a extremo para agentes corporizados de largo alcance en entornos físicos y sociales",
+          "summary": "Un paper (Xu, Xu, Chen, Dong, Zhang, Xue, Liu y Zhang, arXiv 2610.30043) presenta *TARSphere*, un marco de extremo a extremo para agentes corporizados: un robot debe actuar bajo restricciones físicas y sociales, adaptándose a cambios en el entorno y en las necesidades humanas. La aportación es una pila completa —infraestructura de simulación con NPCs corporizados, un entorno de ejecución (harness) que deja a un MLLM congelado actuar a través de habilidades ejecutables multi-nivel, y un benchmark de 360 episodios en 30 escenas—. Evaluando 8 MLLMs, los autores encuentran que los modelos generalistas pueden superar a los modelos corporizados, y que las actualizaciones de tarea y la interacción con humanos siguen siendo difíciles.",
+          "body": [
+            "*TARSphere* (Yicheng Xu, Zhikai Xu, Ziyuan Chen, Yuhang Dong, Tao Zhang, Zhucun Xue, Yong Liu, Jiangning Zhang; arXiv 2610.30043) se presenta como un marco de extremo a extremo para agentes corporizados de largo alcance, es decir, robots que tienen que actuar en un mundo físico y social que cambia. El problema que ataca: los sistemas de agentes corporizados existentes suelen centrarse en un objetivo dado o abstracten la ejecución a acciones simbólicas, lo que limita la evaluación en un mundo que evoluciona. *TARSphere* no abstrae: simula el mundo, el robot, otros agentes y la conversación, y mide lo que de verdad pasa.",
+            "La pila tiene tres piezas. *TARSphere-Infra* corre las políticas del robot en un simulador de física, con NPCs corporizados (otros robots o personajes con cuerpo simulado) y diálogo restringido. Un autómata de estados finitos (*FSM*) dirigido por eventos usa las acciones completadas y la información entregada para actualizar los estados de la tarea y evaluar los resultados: es la «lógica de negocio» que sabe si una tarea está terminada, si una entrega se hizo, si un objetivo se cumplió. *TARSphere-Harness* es el «cerebro corporizado»: deja a un MLLM (modelo de lenguaje multimodal) congelado actuar a través de habilidades ejecutables multi-nivel, usando las observaciones, la memoria jerárquica y la retroalimentación de ejecución para revisar sus decisiones. El MLLM no se reentrena; es un agente que toma decisiones usando herramientas.",
+            "Sobre esa base, la pieza de curation con el agente en el bucle alinea la semántica de las tareas, las dependencias causales y la geometría de la escena para construir *TARSphere-Bench*: 360 episodios en 30 escenas interiores. El benchmark evalúa cinco condiciones emparejadas: robustez perceptiva, adaptación a interrupciones, actualización de tareas, coordinación con humanos y comprensión de intención, en dos tipos de tarea: «navegar e informar» y «recoger y entregar». La evaluación de ocho MLLMs muestra un resultado que los autores no ocultan: los modelos generalistas, los que no están especializados en robótica, pueden superar a los modelos corporizados. Y dos categorías siguen siendo difíciles para todos: las actualizaciones de tarea (cuando el objetivo cambia a mitad de episodio) y la interacción con humanos.",
+            "Un hallazgo práctico que el paper subraya: con la misma interfaz de acción y el mismo presupuesto de decisiones, los robots colisionan y caen con frecuencia. Es decir, incluso cuando un modelo «sabe» qué hacer, la ejecución física no es perfecta, y la seguridad de la ejecución (no chocar, no tirar algo) merece ser evaluada junto con el éxito de la tarea. Para la comunidad de *physical AI* y robótica, es un recordatorio de que «el modelo tomó la decisión correcta» no es lo mismo que «el robot la ejecutó bien».",
+            "En el contexto de la semana, *TARSphere* encaja en la tendencia de mirar el «agente» más allá del LLM: el agente es el LLM más el entorno (harness) más el mundo. La aportación del paper no es un nuevo LLM, sino una pila de evaluación y un entorno (harness) que deja al MLLM congelado. Es el tipo de infraestructura que, si la comunidad la adopta, hará comparable el rendimiento de los agentes corporizados de la misma forma que *SWE-bench* y *Terminal-Bench* lo hacen para los agentes de código."
+          ],
+          "tags": [
+            "tarsphere",
+            "embodied-agents",
+            "robotics",
+            "physical-ai",
+            "long-horizon",
+            "full-stack",
+            "research"
+          ],
+          "links": [
+            {
+              "label": "arXiv (TARSphere)",
+              "url": "https://arxiv.org/abs/2610.30043"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2610.30043"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*DeepSeek-V4.1-Flash-1017* abliterated en FP8 sobre 4x *RTX PRO 6000*: 846 *tok/s* en 8 streams",
+          "summary": "Un repo de la comunidad documenta cómo correr *DeepSeek-V4.1-Flash-1017* cuantizado a *FP8* y «abliterated» (con la censura de seguridad desactivada) en una máquina de cuatro *NVIDIA RTX PRO 6000*, usando *vLLM* y la decodificación especulativa *DSpark*. El despliegue es en *GCP* (*Compute Engine*, VM *G4* spot), el *checkpoint* ocupa 475 *GiB*, y el autor mide 846,8 tokens por segundo con ocho streams en curso y un pool de caché KV de 6,5 millones de tokens que deja servir el contexto completo de 1M a una petición. Es una de las guías más detalladas de la semana para el self-hoster de *DeepSeek*.",
+          "body": [
+            "El repo de *hanxiao* documenta, con nivel de detalle poco habitual, cómo correr *DeepSeek-V4.1-Flash-1017* en cuatro *NVIDIA RTX PRO 6000* (96 GB cada una). El modelo se sirve cuantizado a *FP8* y «abliterated» —con la censura de seguridad de DeepSeek desactivada—, sobre el motor *vLLM* de la imagen *LiL* (una variante de la comunidad) con la decodificación especulativa *DSpark* del propio *DeepSeek* activada. El *checkpoint* ocupa 475 *GiB* de tensores, repartidos entre las cuatro tarjetas; las tablas *Engram* se quedan en el *RAID* local (*NVIDIA* *Titanium* *NVMe*) y solo sus escalas residen en memoria, de modo que el arranque reporta 5,72 *GiB* de tablas empaquetadas mapeadas en memoria de host.",
+            "La máquina es una VM *G4* de *GCP* (*g4-standard-192*: 4 *RTX PRO 6000*, 192 vCPU, 720 GB de RAM, y 16 discos *Titanium* *NVMe* locales de 375 GB que se incluyen en el precio y se tienen que adjuntar todos o ninguno). El autor documenta con honestidad el problema de *stock* que tiene en *GCP*: *Cloud Run* solo adjunta una GPU por instancia, así que un modelo con tensor-parallel de cuatro vías exige una VM *Compute Engine* de verdad. Y el stock de *RTX PRO 6000* a pedido es escaso: en una prueba de 42 rondas en 75 minutos, las 270 intentos a pedido fallaron (132 por agotamiento de existencias, 131 por disponibilidad de recurso, 7 por disponibilidad de GPU), así que el default del repo es *spot* —más barato y con más capacidad, a cambio de que *GCP* puede retirar la máquina con 5 minutos de aviso.",
+            "En números de inferencia, con el benchmark del repo (un streaming de un ensayo de 1.500 palabras con *maxtokens* 2048, el modo de razonamiento siempre activado, sobre *HTTPS* por un proxy *TLS*), el *checkpoint* *mrfakename* (uno de los cuatro construcciones «abliterated» que el autor compara) entrega 824,8 tokens por segundo con ocho streams en curso, y un build alternativo (CSF) llega a 846,8. El pool de caché KV totaliza 6.560.752 tokens repartidos entre las cuatro tarjetas, lo que significa que una petición puede usar el contexto completo de 1.048.576 tokens mientras otras corren en paralelo. El *script* de arranque montado sobre la imagen *LiL* usa *host networking*, *shm-size* 128g, *seccomp=unconfined* y *memlock* sin límite, y sobre-escribe el codificador *DeepSeek* que la imagen trae (más antiguo que el de la versión 1017) con el *encoding.py* que el *checkpoint* incluye, porque las llamadas a herramientas exigen el codificador de la versión 1017.",
+            "El repo también documenta las cuatro variantes «abliterated» que el autor probó, cada una con su propia tarjeta de rechazos, y explica por qué eligió *mrfakename*: es el que tiene la menor divergencia de *KL* en prompts inofensivos, mantiene la disposición de archivos nativa de *DeepSeek* (el loader genérico de *LiL* lo lee sin cambios con *CHECKPOINT=original*), y solo edita las dos escrituras residuales densas, dejando los expertos ruteados, los embeddings, las tablas *Engram* y las capas *DSpark* bit a bit idénticos al *checkpoint* 1017 estándar. Es el tipo de detalle que un self-hoster agradece: no es «aquí está el *checkpoint*», es «aquí está el *checkpoint*, aquí están los tres builds alternativos, aquí está el por qué de cada elección, y aquí están los números con que los comparamos»."
+          ],
+          "tags": [
+            "deepseek",
+            "self-hosting",
+            "rtx-pro-6000",
+            "fp8",
+            "abliterated",
+            "lil-vllm",
+            "dspark",
+            "1m-context",
+            "multi-gpu"
+          ],
+          "links": [
+            {
+              "label": "GitHub (4x RTX PRO 6000)",
+              "url": "https://github.com/hanxiao/DeepSeek-V4.1-Flash-1017-FP8-abliterated-4x-RTX-PRO-6000"
+            },
+            {
+              "label": "Hugging Face (DeepSeek-V4.1-Flash-1017)",
+              "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+            }
+          ]
+        },
+        {
+          "title": "*quantpicker* (Rust): mide en tu GPU qué cuantización *GGUF* de un modelo es la más rápida y casi tan buena",
+          "summary": "*quantpicker* es un pequeño CLI en *Rust* que ataca una pregunta concreta: «¿qué cuantización *GGUF* de este modelo debería correr en mi GPU?». En vez de dar la respuesta por defecto (*Q4_K_M*), baja cada cuantización *GGUF* del modelo, la mide con *llama-bench* en tu GPU, compara su salida con la referencia *Q8_0* usando la prueba de divergencia *KL* de *llama.cpp*, y te dice cuál es la más rápida que sigue estando cerca del original. Un solo comando, nada que configurar: encuentra tu GPU, baja la compilación de *llama.cpp* que toca, fetcha el texto de *wikitext-2* y borra cada modelo tras medirla, de modo que solo necesitas disco para dos cuantizaciones a la vez.",
+          "body": [
+            "La pregunta que *quantpicker* resuelve es la que casi todo self-hoster se hace al elegir una cuantización: «¿*Q4_K_M* o *IQ4_XS* o *Q5_K_M*?». La respuesta por defecto de la comunidad —*Q4_K_M*— es un tanteo, no una medida. *quantpicker* (escrito en *Rust*, licencia *MIT*) la convierte en una medición: descargas de *Hugging Face* cada variante *GGUF* del modelo, la corres con *llama-bench* en tu GPU (todo el modelo en la GPU, no CPU+híbrido), la comparas con la referencia *Q8_0* usando la prueba de divergencia *KL* que *llama.cpp* ya incluye, y la herramienta te devuelve la más rápida que sigue estando «cercana» al original según un umbral *KL* que tú pones (por defecto 0,05). El ejemplo del README es *Qwen3-8B* en una *RTX 5090*: *Q4_K_M* es lo que casi todos elegirían, pero *IQ4_XS* es un 11 % más rápido y casi igual de cerca de *Q8_0*. En otra GPU la respuesta puede ser distinta, y ese es el punto.",
+            "La instalación es un solo comando: *uvx quantpicker unsloth/Qwen3-8B-GGUF*, o bajar los binarios de las versiones (Windows, Linux, macOS), o *cargo install quantpicker*. La herramienta encuentra tu GPU solo, baja la compilación de *llama.cpp* que toca (*CUDA*, *Vulkan*, *Metal* o CPU), fetcha el texto de *wikitext-2* y borra cada cuantización tras medirla, así que solo necesitas disco para dos cuantizaciones a la vez. Si no conoces el repo, hay un comando de búsqueda; y si pasas un repo sin *GGUF*, te sugiere los de la comunidad que lo tienen.",
+            "Los números que reporta son cuatro: *gen tok/s* y *prompt tok/s* de *llama-bench* (velocidad de generación y de prellenado, todo en la GPU); la *mean KLD*, la distancia media de la distribución del siguiente token respecto a la referencia, promediada sobre todos los tokens del texto de prueba (es el número que los propios desarrolladores de *llama.cpp* usan para comparar cuantizaciones, y más bajo es mejor, 0 es idéntico); la *99% KLD*, el peor 1 % de tokens (una cuantización puede estar bien de media y fallar mal en los tokens difíciles); y el *same top*, la frecuencia con que la cuantización elige el mismo token más probable que la referencia. Además reporta el *PPL* (perplejidad) como referencia legible, con la advertencia de que la *KLD* caza daños que la perplejidad esconde. Los veredictos de la herramienta son una guía: menos de 0,01 es casi sin pérdida, menos de 0,1 es bueno, más de 0,3 se nota.",
+            "Matices: la divergencia *KL* se mide sobre texto inglés general; si te importa el código u otra lengua, pasa tu texto con *--text*, porque las cuantizaciones no pierden calidad uniformemente entre dominios. Los números de calidad son relativos a la referencia (*Q8_0* por defecto), así que una cuantización no puede puntuar mejor que la referencia. La velocidad se mide con el modelo entero en la GPU; las que no caben se listan pero no se corren. Solo *NVIDIA* y Apple se detectan automáticamente; para otra GPU pasa *--vram*. Para repos restringidos, *HF_TOKEN*; para un espejo, *HF_ENDPOINT*.",
+            "Es una de esas piezas pequeñas que resuelven un problema concreto muy bien: en vez de «confía en que *Q4_K_M* va a servirte», te da un número medido en tu hardware. En la semana, encaja junto a *VocabX* y a la cuantización *T²Quant* en la tendencia clara de la comunidad: dejar de suponer y empezar a medir. Un CLI en *Rust*, un solo comando, y la respuesta a la pregunta que casi todo self-hoster se hace antes de lanzar un modelo grande."
+          ],
+          "tags": [
+            "quantpicker",
+            "gguf",
+            "quantization",
+            "kl-divergence",
+            "llama.cpp",
+            "rust",
+            "self-hosting",
+            "benchmark"
+          ],
+          "links": [
+            {
+              "label": "GitHub (quantpicker)",
+              "url": "https://github.com/alleyxd/quantpicker"
+            }
+          ]
+        },
+        {
+          "title": "*PaperDuet*: un traductor de artículos local que mantiene el layout original, con cinco modelos a elegir",
+          "summary": "*PaperDuet* es una aplicación de escritorio (macOS *Apple silicon* y Windows 64-bit) que traduce artículos científicos manteniendo el layout original: el *PDF* va a la izquierda, la traducción a la derecha, y ambas páginas se desplazan y hacen zoom juntas. Reconoce automáticamente columnas, cabeceras, pies de página, referencias y fórmulas, y enlaza los párrafos que cruzan columnas o páginas. No hay registro, no hay clave de API, no hay tarifa: la traducción corre localmente con cinco modelos de IA de código abierto a elegir. Licencia *PolyForm Noncommercial*.",
+          "body": [
+            "*PaperDuet* ataca un problema que todo investigador hispanohablante conoce: leer un artículo en inglés cuando tu lengua de trabajo es otra. La solución típica —traductores web, *ChatGPT*, *DeepL*— rompe el layout: las tablas, las figuras, las ecuaciones y las referencias se desordenan, y comparar el original con la traducción exige ir y venir entre ventanas. *PaperDuet* (de *KalenHwei*) es una aplicación de escritorio que traduce el artículo «espejo»: el *PDF* original a la izquierda, la traducción a la derecha, y las dos páginas se desplazan y hacen zoom juntas, con las ecuaciones, las figuras y las tablas alineadas página a página en el mismo sitio donde estaban en el original. La comparación original-vs-traducción es entonces directa, sin recopiar.",
+            "La detección de estructura es automática: la aplicación reconoce columnas, cabeceras, pies de página, pies de figura y referencias, y enlaza los párrafos que cruzan columnas o páginas, de modo que un párrafo que empieza en la columna izquierda y termina en la derecha no se parte en dos traducciones. El ejemplo del README es el paper *Attention Is All You Need* (15 páginas) traducido desde cero: el índice en la barra lateral se traduce primero, y luego el título y el resumen aparecen en la página de la derecha, en el mismo sitio que en el original. Las capturas del repo muestran cómo el diagrama del *Transformer* y los diagramas de atención quedan en la misma posición en ambos lados, con solo el texto inglés sustituido por chino en la derecha (el README también está en chino simplificado, chino tradicional, japonés, coreano, francés, alemán, español y ruso, así que la audiencia es claramente internacional).",
+            "La parte «local» es lo que distingue a *PaperDuet* de los traductores en la nube. No hay registro, no hay clave de API, no hay tarifa, y la traducción corre enteramente en tu computadora. La aplicación trae cinco modelos de traducción de IA de código abierto a elegir (la lista exacta está en el README y en las versiones), y el usuario elige cuál usar según la GPU que tenga y la calidad que quiera. La aplicación se descarga desde las versiones de *GitHub*: un binario para macOS 13.3+ en *Apple silicon* y otro para Windows 10/11 de 64-bit. El hero.gif del README muestra la traducción de *Attention Is All You Need* desde cero, y el layout.gif el desplazamiento sincronizado de las páginas 3 a 5.",
+            "Hay un maticito en la licencia: *PaperDuet* no está bajo una licencia abierta clásica (*MIT*, *Apache*), sino bajo *PolyForm Noncommercial 1.0.0*, que permite el uso, la modificación y la redistribución, pero prohíbe el uso comercial del software. Para el investigador, el estudiante o el self-hoster personal, no cambia nada: es gratis, local, y sin telemetría. Para quien lo quiera empaquetar en un producto comercial, hay que leer la licencia. La aplicación es la pieza que falta en el ecosistema de lectura de papers en otras lenguas: no reemplaza a *ChatGPT* para resumir, pero para leer un artículo de 30-100 páginas con su layout intacto, y con la opción de cambiar de modelo de traducción según la GPU, es una de las herramientas más útiles de la semana para la comunidad de investigación."
+          ],
+          "tags": [
+            "paperduet",
+            "translation",
+            "pdf",
+            "local-model",
+            "self-hosting",
+            "research",
+            "open-source"
+          ],
+          "links": [
+            {
+              "label": "GitHub (PaperDuet)",
+              "url": "https://github.com/KalenHwei/PaperDuet"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

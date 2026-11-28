@@ -1,0 +1,161 @@
+{
+  "date": "23 de octubre de 2026",
+  "weekday_long": "viernes",
+  "edition": "Edición nº 26",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "OlmoEarth v1.3: Ai2 libera embeddings de satélite *SOTA* y, junto a los *weights*, los *embeddings* precomputados de *todos* los píxeles de 10 metros del planeta",
+    "summary": "El Allen Institute for AI (*Ai2*) estrena *OlmoEarth v1.3*, su modelo de *embeddings* de satélite de la misma familia de fundación *OLMo* — ahora con un *state-of-the-art* en *remote sensing* — y hace el salto de «pesos que tienes que correr» a «resultado que ya está calculado»: publica además un *dataset* con los *embeddings* precomputados, anuales, para cada píxel de 10 metros de la superficie terrestre, más un *Embeddings Explorer* en el navegador donde cualquiera puede poner el modelo a trabajar sin *GPU*. Para el *self-hoster* la doble cara de la noticia: puedes bajar *OlmoEarth-v1_3-Base* de *Hugging Face* y generar tus propios *embeddings* de imagen, o bien cazar directamente el *corpus* precomputado para tareas de *change detection*, clasificación de ecosistemas o *search* geoespacial a escala global sin coste de inferencia. Es el ejemplo de la semana del «el *foundation model* geoespacial abierto que no solo te da el modelo, te da la respuesta del planeta entero».",
+    "tags": ["ai2", "olmoearth", "satellite", "remote-sensing", "embeddings", "open-weights", "geospatial", "self-hosting"],
+    "links": [
+      {"label": "Blog de Hugging Face (OlmoEarth v1.3)", "url": "https://huggingface.co/blog/allenai/olmoearth-v1-3"},
+      {"label": "Hugging Face (OlmoEarth-v1_3-Base)", "url": "https://huggingface.co/allenai/OlmoEarth-v1_3-Base"},
+      {"label": "Blog de Ai2 (OlmoEarth v1.3)", "url": "https://allenai.org/blog/olmoearth-v1-3"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*Muse-Spark-Open*: *Meta* libera un *MoE* abierto de 816B/42B activos, *multimodal*, con 1M de contexto, enfocado a *coding* y agentes",
+          "summary": "*meta-models/Muse-Spark-Open-816B-A42B* es el *open-weights* del día: un *mixture-of-experts* de 816B parámetros totales (42B activos) y 1M de tokens de contexto, nativamente *multimodal* y construido para *coding* y trabajo agéntico, publicado por *Meta* como «el *open-weight* más capaz de su *stack* en EE. UU.». Va en la portada del *trending* de *Hugging Face* y el *blog* de *research.meta.ai* lo enmarca como la opción *self-hosted* de la familia *Muse*: *weights* abiertos con recetas *BF16* y *NVFP4*, el tipo de *MoE* grande que encaja con las recetas de *NVMe*-streaming de *experts* que venimos viendo en la comunidad. Para el *self-hoster*, es el *frontier*-class *open model* de la semana: el *MoE* que no cabe en una *GPU* y sí en una receta distribuida.",
+          "tags": ["meta", "muse-spark", "moe", "open-weights", "1m-context", "multimodal", "coding", "agents", "nvfp4"],
+          "links": [
+            {"label": "Hugging Face (Muse-Spark-Open-816B-A42B)", "url": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B"},
+            {"label": "Meta Research (Muse Spark Open)", "url": "https://research.meta.ai/blog/muse-spark-open"}
+          ]
+        },
+        {
+          "title": "*FLUX 3 Image Klein*: *Black Forest Labs* libera el *open-weights* de *FLUX 3* — 5.6B de *imagen* con edición y hasta 10 referencias",
+          "summary": "*black-forest-labs/flux-3-image-klein* es la variante *open-weights* de la familia *FLUX 3*: un modelo de *text-to-image* y *image editing* de 5.6B parámetros que comparte los aprendizajes que *BFL* ha ido acumulando a lo largo de *FLUX 3* a través de *imagen*, *vídeo* y *audio* — *imagen* aporta el detalle espacial, *vídeo* el *motion* — y que compone *imágenes* desde cero o las edita usando hasta 10 imágenes de referencia (o *layout boxes*) como guía. Sale como *diffusion-single-file* (listo para *ComfyUI*) y en un *pipeline* de *diffusers*, con un *space* de *Hugging Face* para probarlo directamente. Para el *self-hoster* de generación de *imagen*, es la pieza abierta de la familia *FLUX 3* del día: *weights* que puedes *fine-tune*ar y correr en tu propio hardware.",
+          "tags": ["black-forest-labs", "flux-3", "image-generation", "image-editing", "open-weights", "comfyui", "diffusers"],
+          "links": [
+            {"label": "Hugging Face (flux-3-image-klein)", "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein"},
+            {"label": "Blog de BFL (FLUX 3 Image Klein)", "url": "https://bfl.ai/blog/flux-3-image-klein"}
+          ]
+        },
+        {
+          "title": "*LTX-2.5*: *Lightricks* libera su *foundation model* de *audio-vídeo* de 22B con *weights* abiertos",
+          "summary": "*Lightricks/LTX-2.5* es el *foundation model* *open-weights* del día para *vídeo* con *audio*: un modelo de 22B parámetros que cubre *text-to-video*, *image-to-video*, *video-to-video* y las variantes con *audio* (*audio-to-video*, *text-to-audio*, etc.), y que genera escenas *multishot* en un solo paso, edita *footage* real y exporta *EXR* de calidad cinematográfica. *Lightricks* lo define como un «*world model*» *open-weights* que puedes *fine-tune*ar y correr en tu hardware. Es el *anchor* de la semana en el espacio *video+audio* de *Hugging Face*: el *foundation model* abierto al que apuntan los que buscan generación de *vídeo* con sonido nativo, en lugar de los *pipelines* que pegan *TTS* y *TTS*-driven *lip-sync* encima.",
+          "tags": ["lightricks", "ltx-2.5", "video", "audio", "open-weights", "world-model", "diffusion"],
+          "links": [
+            {"label": "Hugging Face (LTX-2.5)", "url": "https://huggingface.co/Lightricks/LTX-2.5"},
+            {"label": "LTX (LTX-2.5)", "url": "https://ltx.io/model/ltx-2-5"}
+          ]
+        },
+        {
+          "title": "*Drama 3* (*Fish Audio*): *TTS* multi-hablante «dirigible» — un *MoE* de 35B/3B con *voice direction* en lenguaje natural, con receta *vLLM-Omni*",
+          "summary": "*fishaudio/drama-3* es la nueva generación de *TTS* de *Fish Audio* construida para *voice direction* y *content creation*: además del *script*, describes en lenguaje natural cómo debe interpretarse cada línea (emoción, ritmo, sonidos y pausas), y soporta *multi-hablante*, *voice cloning* y control natural. Es un *MoE* de 35B parámetros totales (3B activos) con *tags* de hablante y eventos *inline*, y llega con una receta en *vLLM-Omni* para servirlo. Es el *counterpoint* interesante del día frente al *Granite Speech* de la portada de ayer: no un *ASR*, sino un *TTS* «dirigido», con una receta de *inference* abierta. Para quien genera *audio* con *LLMs* locales, es la pieza *open* del *stack* de voz del día.",
+          "tags": ["fish-audio", "drama-3", "tts", "multi-speaker", "voice-cloning", "moe", "vllm-omni", "open-weights"],
+          "links": [
+            {"label": "Hugging Face (drama-3)", "url": "https://huggingface.co/fishaudio/drama-3"},
+            {"label": "Docs de Fish Audio (Drama 3)", "url": "https://docs.fish.audio/features/text-to-speech/drama-3"},
+            {"label": "vLLM Recipes (drama-3)", "url": "https://recipes.vllm.ai/fishaudio/drama-3"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "*ThinkingBox-Training* (*Microsoft*/*Hugging Face*): convertir la *grading* de *base de datos* en *rewards* de *RL* para *post-train*ar agentes",
+          "summary": "*Microsoft* y *Hugging Face* publican *Turning Database Grading into RL Rewards* (blog de *Hugging Face*, 22 de octubre): la idea es tomar *ThinkingBox* — el *benchmark* que evalúa a un agente por el *estado* de la *base de datos* que deja, no por las frases que genera — y usar esas comprobaciones ejecutables de *estado final* como *rewards* de *reinforcement learning* para *post-train*ar agentes. El punto de partida es duro: un estudio citado en la semana halló que los agentes «fallan al completar la tarea» en una abultada mayoría de casos, y que lo que el agente *dice* que hizo no siempre coincide con lo que *realmente* dejó hecho. La lección práctica del *team article* es la del día: entrenar con *checks* de *base de datos* como *reward* hizo al agente mucho más consistente completando *tasks* multi-paso, y es una receta reproducible para quien *post-trains* sus propios agentes.",
+          "tags": ["microsoft", "hugging-face", "thinkingbox", "rl", "agents", "evaluation", "post-training", "rewards"],
+          "links": [
+            {"label": "Blog de Hugging Face (ThinkingBox-Training)", "url": "https://huggingface.co/blog/microsoft/thinkingbox-training"},
+            {"label": "Microsoft (ThinkingBox bench)", "url": "https://commandline.microsoft.com/thinkingbox-bench-agent-benchmarking/"}
+          ]
+        },
+        {
+          "title": "*stablehand*: un *runtime* de agentes autohospedado — corre cualquier *harness* en *sandboxes* aislados, con *HITL*, *budgets* y *streaming* *UI*",
+          "summary": "*iofold/stablehand* es un *runtime* de agentes *self-hosted*: corre cualquier *harness* (cualquier *coding agent* que tengas) dentro de *sandboxes* aislados, y añade la pila operativa que falta en el *home-lab* — *streaming UI*, *human-in-the-loop* (*HITL*), *budgets* y *durable events*. Es el ejemplo concreto de la semana del «el *sandbox* como primer cliente del *endpoint* local»: en vez de lanzar el agente *bare* en tu máquina, lo aíslas, le pones tope de gasto y un canal para que un humano intervenga cuando toca. Para la comunidad *self-hosted* que ya tiene un *LLM* en el *rack*, es la capa de contención del día: seguridad y *control* sin salir de tu propio hardware.",
+          "tags": ["stablehand", "iofold", "agents", "self-hosting", "sandbox", "hitl", "runtime", "open-source"],
+          "links": [
+            {"label": "GitHub (stablehand)", "url": "https://github.com/iofold/stablehand"}
+          ]
+        },
+        {
+          "title": "*vestigium*: un *MCP server* que deja a los agentes *leer* *PDFs* largos «por dirección» y *citar* la página",
+          "summary": "*Yonagi043/vestigium* resuelve un dolor muy concreto de los *coding agents* y asistentes de *research*: «cada respuesta deja una traza de vuelta a su página». Es un *MCP server* que permite a un agente *leer* *PDFs* largos por *dirección* (ir a la página *N*, extraer ese *chunk*) y *citar* la página exacta de donde viene cada afirmación. En la semana del *RAG* y la *citas verificables* — con *Jev-RAG-Claim-Verification-130K* y *FDE-Gym* en el *trending* de *datasets* — este es el ladrillo *open* que cierra el *loop* entre *leer* y *citar*: el agente no «responde de memoria», apunta a la página. Para quien monta *RAG* local con *MCP*, es la pieza de *grounding* de la semana.",
+          "tags": ["vestigium", "mcp", "pdf", "citations", "rag", "agents", "self-hosting", "open-source"],
+          "links": [
+            {"label": "GitHub (vestigium)", "url": "https://github.com/Yonagi043/vestigium"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*Heartbeat Thinking*: razonamiento y ejecución de *tools* especulativos mientras el agente *escucha*, en agentes de *voz* en *realtime* (arXiv 2610.26233)",
+          "summary": "Zhang, Fu, Tong, Zheng y col. (arXiv 2610.26233, 18 de octubre) parten de un problema muy concreto de los agentes de *voz*: el usuario tiene que *esperar* tras *terminar* de *hablar*, aunque la información *actionable* ya llegó antes. Los enfoques *speculativos* *empezar* a trabajar *durante* el *speech*, pero la generación acotada por *chunks* o «*interruption* al actualizar» puede *romper* cuando el hablante se *corta*. *Heartbeat Thinking* propone *razonar* y ejecutar *tools* de forma *speculativa* «mientras *escucha*» — un *heartbeat* de trabajo *speculativo* que no se *bloquea* esperando el fin del *turno*. Es el paper del día para quien trabaja con *voice agents* y la *latencia* del *turno* de *user* como *bottleneck*: el *trick* es *empezar* antes de que el *speech* *termine*.",
+          "tags": ["heartbeat-thinking", "voice-agents", "speculative", "realtime", "latency", "research"],
+          "links": [
+            {"label": "arXiv (Heartbeat Thinking)", "url": "https://arxiv.org/abs/2610.26233"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.26233"}
+          ]
+        },
+        {
+          "title": "*RouteWeaver*: tejer *selección de modo* y *ejecución* en un *routing* unificado de *LLMs* (arXiv 2610.19705)",
+          "summary": "Wang, Zhang, Liu, Feng y col. (arXiv 2610.19705, 18 de octubre) atacan el *LLM routing* — *elegir* dinámicamente y *coordinar* *LLMs* *heterogéneos* entre *tareas* *diversas* — porque los enfoques *actuales* están *cristalizados* en un *paradigma* de *ejecución* *predefinido* (*single-round*, *multi-round* o *agentic*), y eso no *encaja* con todas las *tareas*. *RouteWeaver* *une* la *selección* del *modo* y la *ejecución* en un *router* *unificado*, en vez de *fijar* el *paradigma* por *adelante*. Es el *ladrillo* del día para quien *orquesta* varios *LLMs* (el *MoE* de *Muse-Spark* de *Modelos* o la receta *NVFP4* de *NVIDIA* son el *substrato*): cómo *ruteas* la *tarea* al *modelo* y al *modo* *correcto* en *un* *paso*.",
+          "tags": ["routeweaver", "llm-routing", "orchestration", "agentic", "research"],
+          "links": [
+            {"label": "arXiv (RouteWeaver)", "url": "https://arxiv.org/abs/2610.19705"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.19705"}
+          ]
+        },
+        {
+          "title": "*Toward Recursive Self-Improvement in Physical AI*: RSI en el mundo físico (arXiv 2610.29677)",
+          "summary": "Luo, Bai, Xu, Li y col. (arXiv 2610.29677, 20 de octubre) extienden la idea de *recursive self-improvement* — un sistema que no solo *mejora* su *comportamiento* sino también el *proceso* por el que se *mejora* — del *mundo* *digital* (agentes que *re-escríben* su *código* y *validan* cada *versión* con *tests* *ejecutables*) al *mundo* *físico*. La pregunta del paper: ¿cómo *validas* la *auto-mejora* cuando el *estado* a *verificar* no es una *salida* de *código* sino un *robot* *actuando* en el *mundo*? Es el *counterpoint* del día a la ola de «*agentes que *mejoran* a *agentes*» y el más cercano a la pregunta de *Physical AI* que la comunidad se *hace*: ¿de qué *sirve* el *auto-mejoramiento* si no *escala* a la *tarea* *física* *real*?",
+          "tags": ["recursive-self-improvement", "physical-ai", "agents", "research"],
+          "links": [
+            {"label": "arXiv (Recursive Self-Improvement in Physical AI)", "url": "https://arxiv.org/abs/2610.29677"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.29677"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*granite-timeseries-ensemble-r1*: *IBM* libera un *ensemble* de *foundation models* de *series de tiempo* *Apache 2.0* para *forecasting* local",
+          "summary": "*ibm-granite/granite-timeseries-ensemble-r1* es la pieza del día en el *stack* de *forecasting* autohospedado: un *ensemble* probabilístico de *foundation models* de *series de tiempo* de la familia *Granite* — acompañado del *team article* de *IBM Research* sobre *ensemble forecasting* — bajo *Apache 2.0*, evaluado contra *GiftEval*. El *ensemble* combina varios miembros (*tspulse-r1*, *ttm-r2/r3*, *patchtst*, etc.) para mejorar la calidad del pronóstico sin *re-train*ar de cero. Para quien monta *forecasting* en el *rack* — demanda, precio, consumo — es la receta *open* de la semana: un *ensemble* de *foundation models* de *series de tiempo* *Apache 2.0* que corre local y se evalúa contra un *benchmark* público.",
+          "tags": ["ibm", "granite", "time-series", "ensemble", "forecasting", "apache-2.0", "self-hosting"],
+          "links": [
+            {"label": "Hugging Face (granite-timeseries-ensemble-r1)", "url": "https://huggingface.co/ibm-granite/granite-timeseries-ensemble-r1"},
+            {"label": "Blog de Hugging Face (ensemble forecasting)", "url": "https://huggingface.co/blog/ibm-research/granite-timeseries-ensemble-r1"}
+          ]
+        },
+        {
+          "title": "*embeddinggemma-2* (*Google*): *embeddings* *multimodales* abiertos — *texto*, *imagen*, *audio* y *vídeo* en un solo modelo",
+          "summary": "*google/embeddinggemma-2* es el *open-weights* del día para *embeddings* *multimodales*: un modelo de *feature extraction*/*sentence-transformers* que embebe *texto*, *imagen*, *audio* y *vídeo* en un espacio común, listo para *retrieval* y *RAG* *multimodal*. Con ~2.850 *likes* en *Hugging Face*, es la pieza *open* del *stack* de *embeddings* del día: en lugar de un *embedding* solo de *texto*, un modelo unificado que sirve todos los modos y corre local. Para quien monta *RAG* con imágenes o *audio* en su propio hardware, es el *encoder* *open* que faltaba de la semana.",
+          "tags": ["google", "embeddinggemma-2", "embeddings", "multimodal", "rag", "retrieval", "open-weights", "self-hosting"],
+          "links": [
+            {"label": "Hugging Face (embeddinggemma-2)", "url": "https://huggingface.co/google/embeddinggemma-2"}
+          ]
+        },
+        {
+          "title": "*MiMo-V2.6-RL-oss* (*Xiaomi*): *dataset* *open* de *RL* para *LLMs* — *documents* e *imagen* a *parquet*",
+          "summary": "*XiaomiMiMo/MiMo-V2.6-RL-oss* es el *dataset* del día en la semana del *ThinkingBox-Training* (sección de Agentes): datos abiertos de *reinforcement learning* de la familia *MiMo* de *Xiaomi*, a *parquet* con modalidad de *documents* e *imagen* (y *texto*), del orden de un millón de ejemplos y *Apache 2.0*. Es la pieza *open* que cierra el *loop* de *post-training* del día: el *benchmark* *ThinkingBox* aporta el *reward* y este *dataset* el material *open* para el *RL*. Para quien *post-trains* *LLMs* locales, es el *dataset* de *RL* *open* que complementa la receta de *rewards* por *base de datos* de *Microsoft*.",
+          "tags": ["xiaomi", "mimo", "rl", "dataset", "post-training", "open-data", "apache-2.0"],
+          "links": [
+            {"label": "Hugging Face (MiMo-V2.6-RL-oss)", "url": "https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

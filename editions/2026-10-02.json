@@ -1,0 +1,148 @@
+{
+  "date": "2 de octubre de 2026",
+  "weekday_long": "viernes",
+  "edition": "Edición nº 6",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Olmo-core 3: la infraestructura de entrenamiento abierta para modelos MoE gigantes",
+    "summary": "Allen AI (Ai2) acaba de publicar Olmo-core 3, una actualización importante de su infraestructura de entrenamiento de código abierto para modelos mixture-of-experts (MoE). El objetivo es escalar el entrenamiento de MoE hasta el rango de billones de parámetros manteniendo la eficiencia computacional, sin cerrar el proceso en una caja negra propietaria. Es uno de los sistemas centrales detrás del próximo gran salto de la familia Olmo, y lo abre a laboratorios universitarios, investigadores independientes y la comunidad. Publicar infraestructura de entrenamiento (no solo pesos finales) es un movimiento poco común: permite a cualquiera reproducir, auditar y construir sobre cómo se entrena un modelo grande. La noticia llega en un momento en que el debate sobre qué significa realmente 'IA abierta' pasa tanto por el pipeline de entrenamiento como por los pesos. Sigue el anuncio oficial en el blog de Ai2 y en Hugging Face.",
+    "tags": ["MoE", "entrenamiento", "infraestructura", "abierta", "Allen-AI"],
+    "links": [
+      {"label": "Blog Ai2: Introducing Olmo-core 3", "url": "https://huggingface.co/blog/allenai/olmocore3"},
+      {"label": "Blog oficial de Allen AI", "url": "https://allenai.org/blog/olmocore3"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "Cloudflare Clef: un modelo de decisión multimodal de 27B con salida estructurada",
+          "summary": "Cloudflare publica Clef y Clef-flash, modelos de decisión de 27B que devuelven probabilidades sobre opciones tipadas en lugar de prosa libre. La idea es que el siguiente paso de un agente no sea texto que parsear, sino una salida estructurada con la que trabajar directamente. Los pesos están abiertos y también se hospedan en Workers AI. Es una apuesta interesante por reducir el 'ruido' de la salida natural en flujos de agentes.",
+          "tags": ["modelos", "decision-models", "salida-estructurada", "agentes", "Cloudflare"],
+          "links": [
+            {"label": "Cloudflare/clef (Hugging Face)", "url": "https://huggingface.co/Cloudflare/clef"},
+            {"label": "Workers AI: Clef", "url": "https://developers.cloudflare.com/workers-ai/models/"}
+          ]
+        },
+        {
+          "title": "Qwen-Image 2.1 llega a Hugging Face",
+          "summary": "El modelo de generación de imágenes Qwen-Image 2.1 aterriza en Hugging Face y ya genera variantes de la comunidad, como GGUF para inferencia local y forks optimizados. Es una señal de madurez: la familia Qwen-Image se integra en el ecosistema de self-hosting con cuantizaciones y aceleraciones de terceros. Ideal para quien quiere generar imágenes sin salir de su propia máquina.",
+          "tags": ["modelos", "generación-de-imágenes", "Qwen", "self-hosting"],
+          "links": [
+            {"label": "Qwen/Qwen-Image-2.1", "url": "https://huggingface.co/Qwen/Qwen-Image-2.1"},
+            {"label": "Qwen-Image-2.1 GGUF", "url": "https://huggingface.co/abenzerps/Qwen-Image-2.1-Uncensored-GGUF"}
+          ]
+        },
+        {
+          "title": "Nemotron-3 Diarization: quién habló cuándo, en abierto",
+          "summary": "NVIDIA pone en Hugging Face Nemotron-3 Diarization, un modelo de diarización de hablantes: asigna quién dijo qué en una grabación. Es una pieza clave para cualquier pipeline de transcripción automática de reuniones o podcasts que quieres correr en local. La diarización es uno de los pasos más difíciles de reproducir sin servicios en la nube.",
+          "tags": ["modelos", "audio", "diarización", "NVIDIA", "self-hosting"],
+          "links": [
+            {"label": "nvidia/Nemotron-3-Diarization", "url": "https://huggingface.co/nvidia/Nemotron-3-Diarization"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "Transformers ya ejecuta cuantizaciones llama.cpp",
+          "summary": "Hugging Face anuncia que la librería Transformers ya puede ejecutar cuantizaciones de llama.cpp directamente. Esto acerca el rendimiento de inferencia optimizada de llama.cpp al ecosistema Python estándar, con una sola línea de instalación desde git. Para quien self-hostea, es una forma de obtener pesos cuantizados sin cambiar de librería ni de pipeline.",
+          "tags": ["software", "inferencia", "cuantización", "Transformers", "llama.cpp"],
+          "links": [
+            {"label": "Transformers now runs llama.cpp quants", "url": "https://huggingface.co/blog/transformers-llama-cpp-quants"}
+          ]
+        },
+        {
+          "title": "Holo4: agentes de uso generalista de la pantalla",
+          "summary": "H Company presenta Holo4, una línea de agentes 'computer-use' de uso generalista: modelos capaces de operar interfaces de usuario de forma más amplia. El computer-use es uno de los frentes donde la IA abierta aún compite con soluciones cerradas, y cada modelo abierto publicado acorta esa distancia. Vale la pena seguir cómo se evalúa su fiabilidad real en tareas de escritorio.",
+          "tags": ["agentes", "computer-use", "software", "generalista"],
+          "links": [
+            {"label": "Holo4 (Hugging Face blog)", "url": "https://huggingface.co/blog/Hcompany/holo4"}
+          ]
+        },
+        {
+          "title": "swe-sweep y el gateway de agentes de Facebook Research",
+          "summary": "En GitHub destaca facebookresearch/swe-sweep, orientado a automatizar flujos de ingeniería de software con agentes, junto a gateways de orquestación como Tuskira/ai-agent-gateway. El patrón de la semana es claro: la capa que conecta y coordina agentes (el 'glue') está recibiendo tanto atención como los propios modelos. Para equipos que quieren orquestar varios agentes, estas herramientas son el punto de partida natural.",
+          "tags": ["agentes", "orquestación", "GitHub", "swe"],
+          "links": [
+            {"label": "facebookresearch/swe-sweep", "url": "https://github.com/facebookresearch/swe-sweep"},
+            {"label": "Tuskira/ai-agent-gateway", "url": "https://github.com/Tuskira/ai-agent-gateway"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "Transferencia de KV cache sin prefill entre familias de modelos",
+          "summary": "El paper 'Prefill-Free Cross-Family KV Cache Transfer for Heterogeneous Multi-Agent LLMs' propone transferir el KV cache entre modelos de familias distintas sin re-calcular el prefill. En sistemas multi-agente que combinan modelos heterogéneos, esto puede ahorrar latencia y cómputo considerable. Es una de esas piezas de infraestructura de inferencia que, de madurar, cambia la economía de ejecutar flujos de varios modelos a la vez.",
+          "tags": ["papers", "inferencia", "KV-cache", "multi-agente"],
+          "links": [
+            {"label": "arXiv:2609.32259", "url": "https://arxiv.org/abs/2609.32259"},
+            {"label": "Hugging Face papers", "url": "https://huggingface.co/papers/2609.32259"}
+          ]
+        },
+        {
+          "title": "Memorizon: world models más allá de la ventana de contexto",
+          "summary": "'Memorizon: Training World Models Beyond Their Context Window' aborda un problema central: que los world models de streaming rendericen un lugar de forma consistente en visitas repetidas. La dificultad es supervisar esas visitas directamente, porque requieren muestras que capturan ambas y a menudo abarcan minutos. El trabajo propone un mecanismo de memoria para que el modelo recuerde estados pasados y cierre los 'loops' de forma coherente. Interesante para simulaciones y agentes que navegan entornos persistentes.",
+          "tags": ["papers", "world-models", "memoria", "contexto"],
+          "links": [
+            {"label": "arXiv:2610.00544", "url": "https://arxiv.org/abs/2610.00544"},
+            {"label": "Hugging Face papers", "url": "https://huggingface.co/papers/2610.00544"}
+          ]
+        },
+        {
+          "title": "Make Sparse Rewards Count: agregación de recompensas densa",
+          "summary": "'Make Sparse Rewards Count: Density-Aware Reward Aggregation for Multi-Reward RL' se centra en el entrenamiento con refuerzo de múltiples recompensas simultáneas en LLMs. El problema es que las recompensas son escaras y, con varias a la vez, el modelo se queda corto de señal. La propuesta pondera la agregación según la densidad de cada recompensa para que ninguna se pierda. Es relevante para quien entrena modelos con varios objetivos de comportamiento a la vez.",
+          "tags": ["papers", "RL", "recompensas", "entrenamiento"],
+          "links": [
+            {"label": "arXiv:2610.00574", "url": "https://arxiv.org/abs/2610.00574"},
+            {"label": "Hugging Face papers", "url": "https://huggingface.co/papers/2610.00574"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "Jun Kim, creador de oMLX, se une a Hugging Face",
+          "summary": "Hugging Face anuncia que Jun Kim, creador y mantenedor de oMLX, se une al equipo para apoyar a la comunidad MLX. MLX está ganando terreno en inferencia local en Apple Silicon, y el refuerzo de su mantenimiento en un proyecto de referencia como HF es buena señal. Para la comunidad de self-hosting en Mac, esto suele traducirse en mejor soporte y más modelos compatibles.",
+          "tags": ["comunidad", "MLX", "Hugging-Face", "self-hosting"],
+          "links": [
+            {"label": "Jun Kim joins Hugging Face (oMLX)", "url": "https://huggingface.co/blog/omlx"}
+          ]
+        },
+        {
+          "title": "arxiv-complete: todo arXiv en un dataset",
+          "summary": "El dataset 'arxiv-complete' de secemp9 reúne el corpus completo de arXiv en un formato listo para usar. Es el tipo de recurso que alimenta RAG, entrenamiento local y auditorías de datos a escala. Tener todo arXiv disponible de una sola pieza simplifica montar pipelines de recuperación sobre el estado de la investigación.",
+          "tags": ["datasets", "arxiv", "RAG", "auto-hospedado"],
+          "links": [
+            {"label": "secemp9/arxiv-complete", "url": "https://huggingface.co/datasets/secemp9/arxiv-complete"}
+          ]
+        },
+        {
+          "title": "MuckScraper: agregador de noticias auto-hospedado con LLM",
+          "summary": "grregis/MuckScraper es un agregador de noticias que puedes self-hostear, con un toque de LLM para filtrar y sesgar hacia fuentes de tu interés. Encaja con la tendencia de la comunidad de montar su propio feed de noticias sin depender de un servicio en la nube. Es un buen punto de partida para quien quiere un resumen diario local de fuentes RSS.",
+          "tags": ["self-hosting", "RSS", "GitHub", "LLM"],
+          "links": [
+            {"label": "grregis/MuckScraper", "url": "https://github.com/grregis/MuckScraper"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

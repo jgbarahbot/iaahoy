@@ -1,0 +1,484 @@
+{
+  "date": "29 de octubre de 2026",
+  "weekday_long": "jueves",
+  "edition": "Edición nº 33",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*DeepSeek-V4.1-Flash*: pesos abiertos, un millón de tokens de contexto y la primera oleada de cuantizaciones *GGUF* para usarlo en local",
+    "summary": "*DeepSeek* ha publicado *DeepSeek-V4.1-Flash-1017*, la actualización de su familia *V4.1-Flash*, con pesos abiertos bajo licencia *MIT*. Es un modelo de expertos mixtos (MoE) con un millón de tokens de contexto, y la guía de despliegue local de *Unsloth* lo describe como el modelo abierto más fuerte hasta la fecha en codificación y en tareas agénticas. Apenas unos días después, la comunidad ya ha respondido con cuantizaciones independientes en formato *GGUF*: la de *ISTA-DASLab* (esquema GSQ-RCO de precisión mixta) acumula más de un millón y trescientos mil descargas, y existe también una variante *abliterated* para *llama.cpp*. Para quien autoaloja, esto significa que un modelo de primer nivel puede correr en hardware propio, sin tocar la API del proveedor.",
+    "body": [
+      "*DeepSeek* ha actualizado su familia Flash con *DeepSeek-V4.1-Flash-1017*, publicado el 17 de octubre y distribuido con pesos abiertos bajo la licencia *MIT*. No es un modelo cerrado que solo se sirve por API: los pesos completos están disponibles en *Hugging Face*, y la ficha del modelo incluye variantes de 8 bits y *FP8* listas para autoalojar, además de la etiqueta de compatibilidad con los principales frameworks de inferencia. Se trata de un modelo de expertos mixtos (MoE) que admite como entrada imágenes y texto, lo que lo coloca en la categoría de modelos multimodales ligeros.",
+      "El rasgo que más llama la atención es el contexto: un millón de tokens. Eso permite meter en una sola llamada documentos enteros, repositorios o conversaciones largas sin recortes, algo que hasta ahora estaba en el terreno de modelos mucho más grandes. La guía de despliegue local de *Unsloth* lo presenta como el modelo abierto más fuerte hasta la fecha en codificación y en tareas agénticas, y otros analistas, como *Artificial Analysis*, le dedican fichas de comparación. Según el análisis de *DataStudios*, *DeepSeek* mantiene el precio de su API prácticamente sin cambios respecto a la versión anterior, lo que sugiere que la mejora viene por la calidad y el contexto, no por subir la tarifa.",
+      "Aquí está la parte que más interesa a quien autoaloja: la comunidad no ha esperado. En pocos días han aparecido cuantizaciones independientes en formato *GGUF*. La más descargada es la de *ISTA-DASLab*, que usa el esquema GSQ-RCO de precisión mixta y ya supera el millón y trescientos mil descargas; también existe una variante *abliterated*, con cuantización *imatrix* y *engram*, orientada a *llama.cpp* y pensada para correr en local sin restricciones. En la práctica, un modelo de esta categoría puede vivir en una máquina propia, en un *llama.cpp* o en un motor *vLLM*, sin depender del endpoint del fabricante. Para la comunidad de modelos abiertos, un lanzamiento de esta magnitud que desde el primer día genera un ecosistema de cuantizaciones es una buena señal: cuanto más gente lo comprime, lo afina y lo ejecuta en su propio hardware, más útil se vuelve para todos.",
+      "La combinación de licencia *MIT*, un millón de tokens de contexto y disponibilidad inmediata en formatos listos para *GGUF* hace de *DeepSeek-V4.1-Flash* el modelo abierto más «autoalojable» de la semana. Para quien mantiene un servidor en casa o en una *VPS*, es la oportunidad de probar un modelo de primer nivel sin costo de API; y para quien quiere ver hasta dónde llega la cuantización, el material de *ISTA-DASLab* y de *orcarouter* es el punto de partida."
+    ],
+    "tags": [
+      "deepseek",
+      "pesos_abiertos",
+      "gguf",
+      "autoalojamiento",
+      "moe",
+      "contexto_largo"
+    ],
+    "links": [
+      {
+        "label": "Ficha en Hugging Face",
+        "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+      },
+      {
+        "label": "Cuantización GGUF de ISTA-DASLab",
+        "url": "https://huggingface.co/ISTA-DASLab/DeepSeek-V4.1-Flash-1017-GSQ-RCO-GGUF"
+      },
+      {
+        "label": "Guía de despliegue local (Unsloth)",
+        "url": "https://unsloth.ai/docs/models/deepseek-v4.1-flash"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*LTX-2.5* de *Lightricks*: video, audio y simulación de mundo en un modelo abierto",
+          "summary": "*Lightricks* publica *LTX-2.5*, su modelo fundacional abierto para generación de video, audio y simulación de mundo. Destaca por repartir el cómputo de renderizado según la complejidad de cada escena (asignación dinámica de fotogramas clave más difusión por píxeles), una nueva decodificadora de video por difusión y un codificador de texto *Gemma 4 12B* propio. Con más de nueve mil «me gusta» y más de dos millones y medio de descargas en *Hugging Face*, es el modelo con más tracción de la semana.",
+          "body": [
+            "*Lightricks* ha actualizado su familia *LTX* con *LTX-2.5*, un modelo fundacional abierto para generación de video, audio y, más ampliamente, para simulación de mundo. La novedad técnica es el reparto de cómputo por complejidad de escena: combina una asignación dinámica de fotogramas clave con una difusión por píxeles, de modo que se dedica más cálculo a las zonas que cambian y menos a las estáticas. El resultado, según el propio *Lightricks*, es una calidad de píxel que se sostiene fotograma a fotograma, incluso en resoluciones altas.",
+            "El modelo añade además generación mult tiro nativa, una nueva decodificadora de video por difusión, un codificador de texto propio basado en *Gemma 4 12B* y un amplificador de prompt que expande la instrucción de entrada. En *Hugging Face* es, con diferencia, el modelo con más descargas de la semana (más de dos millones y medio) y también de los más votados (más de nueve mil «me gusta»), lo que lo sitúa como la referencia abierta actual en video generativo."
+          ],
+          "tags": [
+            "ltx",
+            "video",
+            "audio",
+            "difusion",
+            "lightricks"
+          ],
+          "links": [
+            {
+              "label": "Ficha en Hugging Face",
+              "url": "https://huggingface.co/Lightricks/LTX-2.5"
+            },
+            {
+              "label": "Página del modelo (ltx.io)",
+              "url": "https://ltx.io/model/ltx-2-5"
+            }
+          ]
+        },
+        {
+          "title": "*Nemotron 3.5 Transcribe* de *NVIDIA*: transcripción, traducción y diarización en un solo modelo abierto de 30B",
+          "summary": "*NVIDIA* presenta *Nemotron 3.5 Transcribe*, un modelo de lenguaje con audio (SALM, de «speech-augmented language model») de 30B parámetros en total y unos 4B activos, con una arquitectura híbrida *Mamba*–*Transformer* y expertos mixtos (MoE). Integra transcripción en más de 40 idiomas, traducción del habla, transcripción contextual y comprensión de audio en un único checkpoint. *NVIDIA* lo describe como un modelo abierto que «se puede promptear y adaptar», y el blog de *Hugging Face* (28 de octubre) lo sitúa junto a *Granary v2*.",
+          "body": [
+            "*NVIDIA* ha publicado *Nemotron 3.5 Transcribe*, un modelo de lenguaje con audio (SALM, de «speech-augmented language model») pensado para transcripción inteligente. Es un modelo de 30B parámetros en total y unos 4B activos, con una arquitectura híbrida que combina *Mamba* y *Transformer* en un esquema de expertos mixtos (MoE). A diferencia de un reconocedor clásico, se puede promptear: acepta contexto e instrucciones para adaptar la transcripción al dominio, traducir el habla a otro idioma, atribuir hablantes (diarización) y comprender el audio, todo en un único checkpoint. *NVIDIA* lo presenta como un modelo de pesos abiertos con transcripción en más de 40 idiomas.",
+            "La publicación llega junto a una entrada del blog de *Hugging Face* del 28 de octubre («NVIDIA Nemotron 3.5 Transcribe and Granary v2») y a un artículo de la investigación de *NVIDIA* que detalla el enfoque SALM. Para quien autoaloja, lo interesante es que agrupa en un solo modelo tareas que antes exigían varios componentes —transcripción, traducción, diarización y comprensión—, en un tamaño (30B-A4B) que puede correr en hardware propio."
+          ],
+          "tags": [
+            "nemotron",
+            "nvidia",
+            "asr",
+            "traduccion",
+            "diarizacion",
+            "salm"
+          ],
+          "links": [
+            {
+              "label": "Ficha en Hugging Face",
+              "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B"
+            },
+            {
+              "label": "Página de investigación de NVIDIA",
+              "url": "https://research.nvidia.com/labs/nemotron/NVIDIA-Nemotron-3.5-Transcribe/"
+            }
+          ]
+        },
+        {
+          "title": "*Unlimited-OCR-2* de *Baidu*: un modelo abierto y multilingüe para extraer texto de cualquier documento",
+          "summary": "*Baidu* actualiza *Unlimited-OCR-2*, su modelo de visión-lenguaje para OCR (reconocimiento óptico de caracteres) multilingüe, con licencia *MIT*. Está pensado para extraer y estructurar texto de documentos, imágenes y escaneos, y encaja en la tendencia de modelos abiertos para pipelines de OCR.",
+          "body": [
+            "*Baidu* ha publicado *Unlimited-OCR-2*, la segunda versión de su modelo de OCR multilingüe, con licencia *MIT*. Es un modelo de visión-lenguaje (con entrada de imagen y salida de texto) especializado en extraer texto de documentos, escaneos e imágenes, y viene acompañado de un informe técnico en *arXiv* que describe el enfoque. La licencia *MIT* y la disponibilidad en *Hugging Face* lo hacen fácil de integrar en un pipeline propio.",
+            "El OCR es un eslabón clave para alimentar a un LLM con documentos escaneados, y un modelo abierto y multilingüe de esta clase permite montar ese paso en local, sin enviar las páginas a un servicio externo. *Unlimited-OCR-2* se suma así a la ola de modelos abiertos para la extracción de texto que ha aparecido en los últimos meses."
+          ],
+          "tags": [
+            "baidu",
+            "ocr",
+            "vision_lenguaje",
+            "multilingue"
+          ],
+          "links": [
+            {
+              "label": "Ficha en Hugging Face",
+              "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+            },
+            {
+              "label": "Informe técnico (arXiv)",
+              "url": "https://arxiv.org/abs/2606.23050"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*grim-prompter*: modelado de amenazas para agentes de codificación, con trazas de evidencia",
+          "summary": "El repo *jmanico/grim-prompter* (89 estrellas, *MIT*) permite apuntar un agente de codificación (*Claude Code*, *Codex* u otro) a un repositorio y obtener un modelo de amenazas trazado por evidencia. Cubre 36 arquitecturas y 29 métodos, y está pensado para auditar la superficie de ataque que introduce un agente que tiene acceso al código.",
+          "body": [
+            "Con la proliferación de agentes de codificación que leen y modifican repositorios, surge la necesidad de auditar qué riesgos introducen. *grim-prompter* (de *jmanico*) es un repo libre, bajo *MIT*, que toma un repositorio como entrada y, mediante un agente (por ejemplo *Claude Code* o *Codex*), genera un modelo de amenazas trazado por evidencia: cada hallazgo apunta a la parte del código o del flujo que lo respalda. El proyecto documenta 36 arquitecturas y 29 métodos de modelado.",
+            "Es un ejemplo de cómo la seguridad empieza a especializarse en la superficie de ataque de los propios agentes: no solo se protege el código, sino el proceso por el que un agente con acceso a él lo genera y modifica. Para equipos que ya usan agentes de codificación en producción, es una herramienta para hacer visible ese riesgo."
+          ],
+          "tags": [
+            "seguridad",
+            "agentes",
+            "modelado_de_amenazas"
+          ],
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/jmanico/grim-prompter"
+            }
+          ]
+        },
+        {
+          "title": "*Sara*: una compañera de IA autoalojada que además es una compañera de código real",
+          "summary": "El repo *farena-ai/sara* (*MIT*) propone una «compañera de IA» que se aloja en tu propio servidor: elige su personalidad, recuerda, planifica, lee tus documentos, y construye y prueba software en un sandbox, usando cualquier modelo (local o en la nube). Es un ejemplo de agente personal autoalojable.",
+          "body": [
+            "*farena-ai* publica *sara*, una compañera de IA autoalojada, bajo *MIT*. La idea es un agente personal que vives en tu propio servidor: eliges su personalidad, y además de chatear, recuerda, planifica, lee tus documentos, y construye y prueba software en un sandbox. Soporta cualquier modelo, local o en la nube, y destaca por no depender de un proveedor concreto.",
+            "*Sara* encaja en la corriente de agentes personales que se autoalojan: en lugar de un chatbot genérico, es un «colega» con memoria y capacidad de actuar sobre tu entorno, que puedes mantener bajo tu control. Es un buen ejemplo del patrón de agente + sandbox + memoria persistente que está ganando terreno."
+          ],
+          "tags": [
+            "agentes",
+            "autoalojamiento",
+            "sandbox",
+            "companera_de_ia"
+          ],
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/farena-ai/sara"
+            }
+          ]
+        },
+        {
+          "title": "*tiny-agent-training*: post-entrenamiento mínimo de LLMs (SFT, *GRPO* y agentes con herramientas) en un juego diminuto",
+          "summary": "El repo *shoaibphysics/tiny-agent-training* reduce el post-entrenamiento de un LLM a lo mínimo: ajuste fino supervisado (SFT, de «supervised fine-tuning»), *GRPO* y agentes que usan herramientas, todo dentro de un pequeño juego numérico. Sirve como banco de pruebas para entender el proceso sin infraestructura pesada.",
+          "body": [
+            "*shoaibphysics* sube *tiny-agent-training*, un proyecto para hacer post-entrenamiento de un LLM «en diminuto»: aplica ajuste fino supervisado (SFT, de «supervised fine-tuning»), *GRPO* (un método de refuerzo por grupos) y agentes que usan herramientas, el todo dentro de un pequeño juego numérico. La idea es poder recorrer el ciclo completo —preparar datos, ajustar, entrenar con refuerzo, evaluar agentes— sin necesidad de un clúster.",
+            "Es el tipo de proyecto que ayuda a entender, a escala, qué hace cada paso del post-entrenamiento de un agente moderno, y es un punto de partida para quien quiere experimentar con *GRPO* y agentes con herramientas antes de escalar."
+          ],
+          "tags": [
+            "post_entrenamiento",
+            "sft",
+            "grpo",
+            "agentes"
+          ],
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/shoaibphysics/tiny-agent-training"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*talus-public*: un motor de inferencia LLM en Rust afinado para AMD Strix Halo",
+          "summary": "El repo *nsbradley88/talus-public* es un motor de inferencia de LLMs en Rust, un fork de *Strata* con kernels *HIP* derivados de *ggml*/*llama.cpp*, afinado para la GPU *gfx1151* de AMD Strix Halo. Permite correr cinco modelos a la vez en una sola máquina de 128 GB.",
+          "body": [
+            "*nsbradley88* publica *talus-public*, un motor de inferencia de LLMs escrito en Rust y afinado para el hardware AMD Strix Halo (GPU *gfx1151*). Es un fork de *Strata* que incorpora kernels *HIP* derivados de *ggml* y *llama.cpp*, es decir, reutiliza el trabajo de inferencia de *llama.cpp* pero adaptado a las GPU AMD. La promesa es práctica: correr cinco modelos a la vez en una sola máquina de 128 GB de RAM.",
+            "Es un ejemplo de cómo la inferencia local se está especializando por hardware: en lugar de un motor genérico, uno afinado para una GPU concreta. Para quien tiene un equipo con Strix Halo, es una vía para exprimir más modelos sin hardware dedicado."
+          ],
+          "tags": [
+            "inferencia",
+            "rust",
+            "amd",
+            "llama_cpp"
+          ],
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/nsbradley88/talus-public"
+            }
+          ]
+        },
+        {
+          "title": "*chalk-router*: un enrutador de LLMs, «extremadamente rápido y enfocado», ahora en su versión open source",
+          "summary": "El repo *chalk-ai/chalk-router-oss* es la versión de código abierto de *chalk-router*, un enrutador de LLMs «extremadamente rápido y enfocado». Un enrutador decide, en cada petición, qué modelo o backend debe atenderla, y esta versión libre permite montar ese componente bajo tu control.",
+          "body": [
+            "*chalk-ai* libera *chalk-router-oss*, la variante de código abierto de su enrutador *chalk-router*. Un enrutador de LLMs es el componente que, ante cada petición, decide qué modelo o backend la debe atender (por costo, latencia, capacidad, etc.). La propuesta de *chalk* es un enrutador «extremadamente rápido y enfocado», y al publicarlo en abierto permite a quien autoaloja montar esa capa de decisión sin depender de un servicio cerrado.",
+            "Los enrutadores se han convertido en una pieza habitual cuando se orquestan varios modelos: permiten balancear costo y calidad, hacer *failover* y dirigir las peticiones al recurso adecuado. Tener uno rápido y libre es un buen complemento para quien ya gestiona varios LLMs."
+          ],
+          "tags": [
+            "inferencia",
+            "enrutador",
+            "orquestacion"
+          ],
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/chalk-ai/chalk-router-oss"
+            }
+          ]
+        },
+        {
+          "title": "*NeuroStudio*: un estudio de desarrollo de IA autoalojado para entrenar, afinar, evaluar y desplegar modelos localmente",
+          "summary": "El repo *atharvaphadnis-ai/NeuroStudio* es un estudio de desarrollo de IA autoalojado y de código abierto, escrito en Go y sobre motores de ML modulares. Ofrece gestión visual de datasets, entrenamiento en tiempo real y despliegue, pensado para llevar el ciclo completo de un modelo en tu propio servidor.",
+          "body": [
+            "*atharvaphadnis-ai* publica *NeuroStudio*, un estudio de desarrollo de IA autoalojado y de código abierto. Está construido en Go y sobre motores de ML modulares, y ofrece gestión visual de datasets, entrenamiento en tiempo real y despliegue, con la intención de que el ciclo completo (entrenar, afinar, evaluar, desplegar) pueda vivir en tu propio servidor.",
+            "Es una de varias herramientas que intentan empaquetar el flujo de trabajo de desarrollo de modelos en un producto autoalojable, con la idea de no depender de una plataforma en la nube. Para equipos que quieren el control de todo el ciclo, este tipo de «estudio» local empieza a ser una alternativa seria."
+          ],
+          "tags": [
+            "entrenamiento",
+            "autoalojamiento",
+            "mlops",
+            "go"
+          ],
+          "links": [
+            {
+              "label": "GitHub",
+              "url": "https://github.com/atharvaphadnis-ai/NeuroStudio"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "DTCA: asignación de crédito de tokens por denoising para refuerzo en modelos de lenguaje por difusión",
+          "summary": "El paper *DTCA* (*arXiv*, 256 votos) propone una asignación de crédito por denoising para aplicar aprendizaje por refuerzo (RL) a modelos de lenguaje por difusión (DLM). Estos modelos generan texto por desruido iterativo, y *DTCA* mejora cómo se asigna la recompensa a los tokens durante el refuerzo, para afinar el razonamiento.",
+          "body": [
+            "Los modelos de lenguaje por difusión (DLM, de «diffusion language models») generan texto mediante desruido iterativo, lo que permite modelar contexto bidireccional y refinar tokens en paralelo. El trabajo *DTCA* (el más votado del día, con 256 votos) se centra en aplicar aprendizaje por refuerzo (RL) a estos modelos, y propone una «asignación de crédito de tokens por denoising»: una forma de repartir la recompensa entre los tokens durante el proceso de refuerzo, para que la señal de aprendizaje sea más precisa.",
+            "La motivación es que el RL en DLMs ha mejorado el razonamiento, pero la asignación de crédito a cada token sigue siendo un problema abierto. *DTCA* aborda justo ese punto, y es relevante porque los modelos por difusión son una de las arquitecturas alternativas al auto-regresivo clásico que están ganando interés."
+          ],
+          "tags": [
+            "difusion",
+            "refuerzo",
+            "modelos_lenguaje",
+            "razonamiento"
+          ],
+          "links": [
+            {
+              "label": "arXiv",
+              "url": "https://arxiv.org/abs/2610.35201"
+            }
+          ]
+        },
+        {
+          "title": "Extracción eficiente del hablante objetivo en audio-visual en streaming para escenas acústicas reales",
+          "summary": "El paper (142 votos) aborda la extracción del hablante objetivo en audio-visual en streaming (AVTSE, de «streaming audio-visual target speaker extraction»), clave para aplicaciones sensibles a la latencia. Señala dos huecos de los sistemas causales actuales y critica que los benchmarks fjen el número de hablantes a dos.",
+          "body": [
+            "La extracción del hablante objetivo en audio-visual en streaming (AVTSE, de «streaming audio-visual target speaker extraction») es necesaria en aplicaciones sensibles a la latencia: aislar la voz de un hablante concreto en una escena con varios. El trabajo señala que los sistemas causales actuales tienen dos huecos acoplados, y que, además, los benchmarks estándar fijan el número de hablantes a dos, ignorando escenas más densas.",
+            "Es un trabajo de «sistema real»: busca que la extracción del hablante funcione en escenas acústicas del mundo real, en streaming, no solo en condiciones de laboratorio. Encaja en la línea de modelos abiertos de audio, como *Nemotron 3.5 Transcribe*, que integran diarización y extracción del hablante."
+          ],
+          "tags": [
+            "audio",
+            "hablante_objetivo",
+            "streaming",
+            "diarizacion"
+          ],
+          "links": [
+            {
+              "label": "arXiv",
+              "url": "https://arxiv.org/abs/2610.32749"
+            }
+          ]
+        },
+        {
+          "title": "OmniShowcase: video generativo omnidireccional y consistente del sujeto a partir de imágenes multivista",
+          "summary": "El paper (24 votos) aborda la generación de video de un sujeto concreto a partir de unas pocas imágenes de referencia, el problema de que la cámara muestre superficies no visibles en la entrada. *OmniShowcase* propone una aproximación omnidireccional que mantiene la consistencia del sujeto desde todos los ángulos.",
+          "body": [
+            "Generar el video de un sujeto concreto (un objeto, una persona) a partir de unas pocas imágenes de referencia sigue siendo difícil cuando la cámara revela superficies que no eran visibles en la entrada. Los métodos tempranos de «sujeto-a-video» (S2V) se condicional sobre una sola imagen de referencia y se degradan. *OmniShowcase* aborda esto con una aproximación omnidireccional: usa imágenes multivista para mantener la consistencia del sujeto desde todos los ángulos.",
+            "Es un avance para el video generativo «con sujeto», donde lo que se quiere es que un objeto o personaje concreto se mantenga coherente mientras la cámara gira. Se conecta con modelos como *LTX-2.5* que apuestan por la consistencia en la generación de video."
+          ],
+          "tags": [
+            "video",
+            "generacion",
+            "consistencia",
+            "multivista"
+          ],
+          "links": [
+            {
+              "label": "arXiv",
+              "url": "https://arxiv.org/abs/2610.35684"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "En *r/LocalLLaMA*: *Qwen3.5* 27B denso con 170k de contexto y más de 100 tokens por segundo en decodificación",
+          "summary": "Un hilo de *r/LocalLLaMA* documenta cómo un usuario corre *Qwen3.5 27B* (denso) con 170 mil tokens de contexto y una decodificación superior a 100 tokens por segundo. Es el tipo de resultado que muestra hasta dónde llega el autoalojamiento hoy en hardware de consumo.",
+          "body": [
+            "En *r/LocalLLaMA* un usuario cuenta cómo está corriendo *Qwen3.5 27B* en su configuración: el modelo denso (no MoE) con una ventana de 170 mil tokens de contexto y una velocidad de decodificación superior a 100 tokens por segundo. Es un resultado notable, porque combina un contexto muy largo con una velocidad alta, algo que antes parecía antagónico.",
+            "Hilos así son el termómetro de la comunidad: muestran que, con las cuantizaciones y los motores de inferencia actuales, un modelo de 27B puede ser usable en local con un contexto que antes estaba fuera de alcance. Es la prueba de que el self-hosting de modelos medianos-grandes sigue mejorando."
+          ],
+          "tags": [
+            "self_hosting",
+            "r_localllama",
+            "qwen",
+            "contexto_largo"
+          ],
+          "links": [
+            {
+              "label": "Hilo en r/LocalLLaMA",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1rianwb/running_qwen35_27b_dense_with_170k_context_at/"
+            }
+          ]
+        },
+        {
+          "title": "Autoalojar tu propio agregador de noticias con LLMs locales",
+          "summary": "Varios hilos y repos (*NewsGator* en *r/LocalLLM*, *MuckScraper-v2* en GitHub) muestran cómo montar un agregador de noticias autoalojado con LLMs locales. La idea: feeds RSS + un LLM en local que resume y filtra, con presupuesto cero y sin enviar tus feeds a la nube.",
+          "body": [
+            "En *r/LocalLLM* aparece *NewsGator*, un agregador de noticias autoalojado, y en GitHub *starkSV/MuckScraper-v2* hace lo propio. La idea es la misma: tomar feeds RSS y pasarlos por un LLM local que resuma, filtre y organice, de modo que tu «briefing» de noticias se genere en tu propio servidor, con presupuesto cero y sin enviar el contenido a un servicio externo.",
+            "Es un uso muy concreto del autoalojamiento: en lugar de un modelo genérico, un pipeline de RSS + LLM local para tu flujo de información. Encaja en la corriente de herramientas que combinan self-hosting con IA para tareas cotidianas, y es de las más fáciles de montar (un par de repos y un LLM)."
+          ],
+          "tags": [
+            "self_hosting",
+            "rss",
+            "noticias",
+            "llm_local"
+          ],
+          "links": [
+            {
+              "label": "Hilo NewsGator (r/LocalLLM)",
+              "url": "https://www.reddit.com/r/LocalLLM/comments/1w0tp5s/newsgator_a_selfhosted_news_aggregator_that/"
+            },
+            {
+              "label": "MuckScraper-v2 (GitHub)",
+              "url": "https://github.com/starkSV/MuckScraper-v2"
+            }
+          ]
+        },
+        {
+          "title": "Montar un briefing de noticias local me enseñó que mi problema no eran las apps",
+          "summary": "Un artículo de *XDA* cuenta la experiencia de construir un briefing de noticias con un LLM local, y concluye que el problema real no eran las aplicaciones, sino el flujo y la integración. Es un relato útil de lo que pasa cuando intentas montar un pipeline de IA en local de verdad.",
+          "body": [
+            "En *XDA Developers* un desarrollador cuenta cómo intentó montar un briefing de noticias con un LLM local, y qué aprendió en el proceso. Su conclusión: el problema real no eran las apps que probó, sino el flujo completo (cómo llegan los datos, cómo se procesan, cómo se entregan). Es el tipo de aprendizaje que aparece cuando sales de la demo y montas algo que de verdad usas.",
+            "Es un recordatorio de que el autoalojamiento no es solo «correr un modelo»: la integración, el flujo de datos y la confiabilidad son a menudo donde está el trabajo real. Para quien está empezando a montar pipelines de IA en local, es un caso de estudio honesto."
+          ],
+          "tags": [
+            "self_hosting",
+            "experiencia",
+            "pipeline",
+            "noticias"
+          ],
+          "links": [
+            {
+              "label": "Artículo en XDA Developers",
+              "url": "https://www.xda-developers.com/building-local-llm-news-brief-taught-problem-apps/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "aa1143/NamiGPT",
+        "stars": "★ 120",
+        "desc": "Tutorial desde cero: escribe *GPT-2* a mano en PyTorch y entiende cómo funciona un LLM",
+        "meta": "Python",
+        "url": "https://github.com/aa1143/NamiGPT"
+      },
+      {
+        "name": "jmanico/grim-prompter",
+        "stars": "★ 89",
+        "desc": "Modelado de amenazas para agentes de codificación, con trazas de evidencia (36 arquitecturas, *MIT*)",
+        "meta": "MIT",
+        "url": "https://github.com/jmanico/grim-prompter"
+      },
+      {
+        "name": "nsbradley88/talus-public",
+        "stars": "★ 21",
+        "desc": "Motor de inferencia de LLMs en Rust afinado para AMD Strix Halo (cinco modelos en 128 GB)",
+        "meta": "Rust",
+        "url": "https://github.com/nsbradley88/talus-public"
+      },
+      {
+        "name": "KevinChu1110/driftnet",
+        "stars": "★ 19",
+        "desc": "Una «red de deriva» para tus feeds: atrapa herramientas, repos y artículos que comparten tus chats, en local, con *MCP* para agentes",
+        "meta": "local",
+        "url": "https://github.com/KevinChu1110/driftnet"
+      },
+      {
+        "name": "chalk-ai/chalk-router-oss",
+        "stars": "★ 18",
+        "desc": "Enrutador de LLMs, «extremadamente rápido y enfocado», en su versión open source",
+        "meta": "open source",
+        "url": "https://github.com/chalk-ai/chalk-router-oss"
+      }
+    ],
+    "papers": [
+      {
+        "title": "DTCA: Denoising Token Credit Assignment for Reinforcement Learning in Diffusion Language Models",
+        "authors": "256 upvotes",
+        "url": "https://arxiv.org/abs/2610.35201"
+      },
+      {
+        "title": "Efficient Streaming Audio-Visual Target Speaker Extraction for Real-World Acoustic Scenes",
+        "authors": "142 upvotes",
+        "url": "https://arxiv.org/abs/2610.32749"
+      },
+      {
+        "title": "OmniShowcase: Omnidirectional Subject-Consistent Video Generation from Multi-View Images",
+        "authors": "24 upvotes",
+        "url": "https://arxiv.org/abs/2610.35684"
+      },
+      {
+        "title": "Sensorimotor Alignment: A Platonic Proxy for Embodied Policy Success",
+        "authors": "8 upvotes",
+        "url": "https://arxiv.org/abs/2610.31670"
+      },
+      {
+        "title": "TAO: Tool-Aware Joint Scheduling for LLM-Based Agentic Serving",
+        "authors": "2 upvotes",
+        "url": "https://arxiv.org/abs/2610.37230"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLaMA",
+        "title": "Qwen3.5 27B denso con 170k de contexto y 100+ tokens/s",
+        "note": "Autoalojamiento de un modelo denso con contexto muy largo y alta velocidad",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1rianwb/running_qwen35_27b_dense_with_170k_context_at/"
+      },
+      {
+        "src": "r/LocalLLM",
+        "title": "NewsGator, un agregador de noticias autoalojado",
+        "note": "RSS + LLM local para tu briefing, sin nube",
+        "url": "https://www.reddit.com/r/LocalLLM/comments/1w0tp5s/newsgator_a_selfhosted_news_aggregator_that/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "¿Cuál es el siguiente modelo local que te ilusiona?",
+        "note": "Hilo de la comunidad sobre los próximos modelos abiertos",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1whiz3y/whats_the_next_local_model_you_are_excited_about/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "Un leaderboard open source de los mejores modelos",
+        "note": "Un usuario monta un ranking abierto de modelos locales",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x3wp8c/i_made_an_opensource_ai_leaderboard_that_shows/"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

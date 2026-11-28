@@ -1,0 +1,543 @@
+{
+  "date": "viernes, 27 de noviembre de 2026",
+  "weekday_long": "viernes",
+  "edition": "Edición nº 52",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*LTX-2.5*: el modelo de 22B con pesos abiertos que trae vídeo con audio a la ejecución local",
+    "summary": "*LTX-2.5* es el modelo más popular de *Hugging Face* esta mañana: un modelo de vídeo y audio con 22.000 millones de parámetros y pesos abiertos (bajo la licencia comunitaria *LTX 2.x*), que ya suma 3 millones de descargas y 13.600 me gusta. Genera vídeo con audio sincronizado de serie, hasta en 4K y a 50 fotogramas por segundo, y mantiene varios planos encadenados en una sola generación sin perder personaje, estilo, iluminación ni voz. La tarjeta se actualizó ayer, y eso la devolvió a lo alto de la tendencia: se distribuye como *diffusion single file* —un único archivo que se carga sin código—, con variantes cuantizadas INT8 y NVFP4 y una versión destilada, apuntadas sin ambigüedad a las GPU de consumo. El codificador de texto es un *Gemma 4 12B* a medida, *Auto Duration* predice la duración adecuada del clip, y LoRA y ajuste fino sobre tus propios datos van incluidos. En palabras de Lightricks, es un modelo de mundo abierto «construido para ejecución local y ajuste fino».",
+    "tags": [
+      "open-weights",
+      "video",
+      "audio",
+      "diffusion-single-file",
+      "lightricks",
+      "nvfp4",
+      "local",
+      "fine-tuning"
+    ],
+    "links": [
+      {
+        "label": "Lightricks/LTX-2.5 en Hugging Face",
+        "url": "https://huggingface.co/Lightricks/LTX-2.5"
+      },
+      {
+        "label": "Código y licencia en GitHub (LTX-2)",
+        "url": "https://github.com/Lightricks/LTX-2"
+      },
+      {
+        "label": "El paper LTX-2 (arXiv 2601.03233)",
+        "url": "https://arxiv.org/abs/2601.03233"
+      },
+      {
+        "label": "LTX-2.5 en fal.ai",
+        "url": "https://fal.ai/ltx-2.5"
+      }
+    ],
+    "body": [
+      "LTX-2.5 pertenece a la familia LTX, cuyo fundamento es el paper *LTX-2: Efficient Joint Audio-Visual Foundation Model* (arXiv 2601.03233): un modelo fundacional que trata el vídeo y el audio conjuntamente, no dos modelos separados que se pegan después. La versión dev de 22.000 millones de parámetros se publica en bf16, y el mismo repositorio incluye una versión destilada —menos pasos, más velocidad—, una variante INT8 con *convrot* para *ComfyUI*, y NVFP4, el formato de 4 bits que NVIDIA usa en sus GPUs de consumo más recientes: el mismo modelo, servible en hardware muy distinto, sin reentrenar. La licencia es el matiz que conviene decir claro: los pesos son abiertos —se descargan, se ejecutan, se ajustan—, pero no caen bajo una licencia estándar como Apache 2.0: rige el *LTX 2.x Community License Agreement*, publicado en el repositorio, y el acceso en Hugging Face está acotado (se aceptan los términos al pedirlo). La tarjeta declara además soporte para nueve lenguas: inglés, alemán, español, francés, japonés, coreano, chino, italiano y portugués.",
+      "La arquitectura tiene varios puntos que importan al ecosistema local. Primero, el formato: el fichero es *diffusion single file* —un único *safetensors* que el ecosistema carga directamente, sin una base de código con un montón de componentes—; en Hugging Face el modelo va etiquetado con ese pipeline y es compatible con *ComfyUI*. Segundo, el codificador de texto: un *Gemma 4 12B* adaptado para traducir prompts complejos a vídeo, y *Auto Duration*, que predice la duración adecuada del clip a partir del prompt en lugar de imponer una duración fija. Tercero, el multishot: una sola generación produce varios planos conectados que conservan personaje, entorno, iluminación, voz y estilo en cada corte. Y el audio no es una capa añadida a posteriori: se genera junto al vídeo, sincronizado. Según la propia Lightricks, la calidad de salida llega a 4K a 50 fotogramas por segundo —la cifra que publica su página de fal.ai—.",
+      "De ahí que el modelo acumule 3 millones de descargas y 13.600 me gusta en el Hub: es el modelo con pesos abiertos de referencia en vídeo con audio, y es ejecutable en casa. La tarjeta se actualizó ayer, el 26 de noviembre, y es lo que lo ha devuelto a lo más alto de la tendencia del día. La demo oficial corre en ltx.studio (el área de pruebas de imagen a vídeo), también está disponible como servicio en fal.ai, y el checkpoint crudo queda publicado para quien quiera ajustarlo a su propio dominio. Para el lector que self-hostea, la combinación es la que vale: archivo único, pesos cuantizados NVFP4 para GPU de consumo, LoRA para adaptar, y un modelo que genera vídeo con audio de forma nativa. Si cabe o no en tu memoria depende de la variante elegida —bf16, INT8 o NVFP4, las cuatro las publica el repositorio—, pero la dirección es clara: el vídeo con audio con pesos abiertos deja de ser un privilegio de la nube."
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*Inkling 2 Mini* en tu servidor casero: más de 2,4 millones de descargas en *GGUF*",
+          "summary": "El *Inkling 2 Mini* de Thinking Machines —26B en total, 3B activos, *looped MoE*, multimodal, 1 millón de tokens de contexto, Apache 2.0— que ocupó la portada de ayer se multiplica hoy en cuantizaciones: la *GGUF* de *unsloth* con *imatrix* supera los 2,4 millones de descargas, y le siguen la variante sin censura, una *abliterated* con precisión mixta, y una cuantización *Strata* pensada para el transformador con bucles del modelo.",
+          "body": [
+            "Ayer contábamos cómo un agente llevó su inferencia a 190 tokens por segundo en una *RTX PRO 6000*; hoy el mismo modelo ocupa las listas de descargas en otra forma. El repositorio original (Apache 2.0, publicado en 8 bits *modelopt*) ha engendrado una familia de *GGUF* para *llama.cpp* y *Ollama*: la variante de *unsloth* con *imatrix* —la matriz de importancia que afina la cuantización mirando las activaciones reales del modelo— ya pasa de 2,4 millones de descargas, la cifra más alta de todo el material de hoy.",
+            "El ecosistema se ramifica: la sin censura de *AtomicChat* (con su *LoRA* por separado), la *abliterated* de *orcarouter* con precisión mixta y *imatrix*, y *Strata* de *strata-engine*, una cuantización que tiene en cuenta el transformador con bucles —las 12 capas intermedias se ejecutan tres veces— y mantiene el especulador *dspark*. Para quien self-hostea, el mensaje es directo: el modelo local más popular de la semana tiene versiones de 4 bits que funcionan desde el primer momento, y las variantes marcan la diferencia en alineación y calidad."
+          ],
+          "tags": [
+            "inkling",
+            "gguf",
+            "quantization",
+            "llama.cpp",
+            "local"
+          ],
+          "links": [
+            {
+              "label": "thinkingmachines/Inkling-2-Mini",
+              "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"
+            },
+            {
+              "label": "unsloth/Inkling-2-Mini-GGUF",
+              "url": "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF"
+            },
+            {
+              "label": "strata-engine/Inkling-2-Mini-Strata",
+              "url": "https://huggingface.co/strata-engine/Inkling-2-Mini-Strata"
+            }
+          ]
+        },
+        {
+          "title": "*Ternary-Bonsai 2.5 27B*: un 27B con pesos ternarios, 2 bits, y atención híbrida",
+          "summary": "prism-ml publica *Ternary-Bonsai 2.5 27B* en *GGUF*: pesos con solo tres valores (*ternary*), precisión de 2 bits, atención híbrida y soporte para decodificación especulativa —una receta apuntada a correr modelos de 27B en dispositivos personales, con *CUDA* y *Metal*.",
+          "body": [
+            "*Ternary* es el punto extremo de la cuantización: en lugar de pesos con valores continuos, cada peso toma solo tres valores —−1, 0 y 1—, y eso cabe en 2 bits. El *Bonsai 2.5 27B* que prism-ml cuantiza conserva los 27.000 millones de parámetros, pero el peso en 2 bits lo hace viable en hardware personal y de bajo consumo, con respaldos *CUDA* y *Metal* y formato *GGUF* que *llama.cpp* lee directamente.",
+            "Dos detalles técnicos destacan en la tarjeta: la atención híbrida —mezcla de atención completa con atención barata, que reduce el consumo de memoria del contexto— y la decodificación especulativa, para subir el caudal. La tarjeta marca además el modelo como agéntico, con llamada de herramientas: está pensado como un modelo de agente para el dispositivo, no como un chat simple."
+          ],
+          "tags": [
+            "ternary",
+            "2-bit",
+            "hybrid-attention",
+            "on-device",
+            "gguf"
+          ],
+          "links": [
+            {
+              "label": "prism-ml/Ternary-Bonsai-2.5-27B-GGUF",
+              "url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2.5-27B-GGUF"
+            }
+          ]
+        },
+        {
+          "title": "*voice-isolator*: aislamiento de voz en tiempo real a 48 kHz de Inworld",
+          "summary": "Inworld publica un modelo abierto *audio-to-audio* que aísla la voz de una mezcla ruidosa en tiempo real, en banda completa de 48 kHz: streaming, con denoising y supresión de ruido, pensado para conversación en vivo.",
+          "body": [
+            "Extraer voz de una mezcla ruidosa es uno de esos problemas que parecen fáciles y no lo son: música, teclado, eco, viento. El modelo de Inworld trabaja en streaming —no sobre un archivo—, en 48 kHz de banda completa, el formato de referencia del audio profesional, con denoising, supresión de ruido y aislamiento de voz en la misma pasada.",
+            "Es el tipo de pieza que le faltaba al pipeline de voz self-hosted: una capa de limpieza entre el micro y el reconocimiento de voz, o entre la síntesis y el altavoz. La tarjeta lo marca como *realtime*, que es el requisito que separa la demo del producto útil en una conversación en vivo."
+          ],
+          "tags": [
+            "audio",
+            "voice-isolation",
+            "streaming",
+            "inworld"
+          ],
+          "links": [
+            {
+              "label": "inworld/voice-isolator",
+              "url": "https://huggingface.co/inworld/voice-isolator"
+            }
+          ]
+        },
+        {
+          "title": "*OCRia-nano-1*: el OCR de documentos de LlamaIndex que corre en CPU",
+          "summary": "LlamaIndex publica *OCRia-nano-1*, un modelo de documento a *markdown* en *ONNX* que corre en CPU: multilingüe, con lectura de layout y de tablas, y evaluado en *ParseBench*.",
+          "body": [
+            "El parseo de documentos es el cuello de botella de cualquier *RAG* local: un PDF a dos columnas, una tabla rotada, un guion mixto. El modelo *nano* de LlamaIndex hace la lectura imagen a texto en *ONNX* —sin necesidad de GPU— y entrega *markdown* con layout y tablas, en varios idiomas. El nombre *nano* no es casual: es el modelo pequeño de la familia, el que cabe en el pipeline de *LiteParse*.",
+            "La tarjeta cita *ParseBench*, el benchmark de referencia de parseo de documentos, y marca el modelo como *on-device* —corre en CPU—, con la consecuencia de poder procesar documentos locales sin enviarlos a la nube. Es una de esas piezas abiertas que cierran el bucle del documento local."
+          ],
+          "tags": [
+            "ocr",
+            "onnx",
+            "cpu",
+            "document-parsing",
+            "llamaindex"
+          ],
+          "links": [
+            {
+              "label": "llamaindex/OCRia-nano-1",
+              "url": "https://huggingface.co/llamaindex/OCRia-nano-1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*Hermit*: el agente abierto que vive solo en tu teléfono Android",
+          "summary": "DojoCodingLabs publica *Hermit* (Apache 2.0, pre-alpha): un agente de código abierto en TypeScript que corre el modelo en el propio teléfono (*QVAC*, on-device), guarda la memoria cifrada en el dispositivo, no tiene telemetría, y pide la huella dactilar para todo lo que envía, paga o hace *login*.",
+          "body": [
+            "La promesa está en el banner: «el agente de IA que vive en tu teléfono, y en ningún otro sitio». *Hermit* ejecuta el modelo (*QVAC*) en el propio dispositivo Android, y la memoria —el estado del agente— queda cifrada en él. El README es sincero sobre el estado: pre-alpha, con un laboratorio de dispositivos en el que los propios usuarios prueban el agente en sus teléfonos.",
+            "El detalle de diseño que destaca es la compuerta: cualquier acción que envíe, pague o inicie sesión espera la huella. El agente puede leer, redactar y organizar, pero las acciones con efecto externo requieren confirmación biométrica. Habla inglés y español, incluye un script que comprueba la privacidad (telemetría: ninguna), y la licencia es Apache 2.0."
+          ],
+          "tags": [
+            "agent",
+            "on-device",
+            "android",
+            "privacy",
+            "typescript"
+          ],
+          "links": [
+            {
+              "label": "DojoCodingLabs/hermit en GitHub",
+              "url": "https://github.com/DojoCodingLabs/hermit"
+            },
+            {
+              "label": "joinhermit.com",
+              "url": "https://joinhermit.com"
+            }
+          ]
+        },
+        {
+          "title": "*Swarms, Flocks, Gangs*: cómo construir y entrenar sistemas multiagente",
+          "summary": "Hugging Face publicó ayer una guía sobre sistemas multiagente: cuándo usar un enjambre, una bandada o una banda —las tres formas de coordinar agentes—, y cómo construirlos, entrenarlos (incluido refuerzo) y evaluarlos.",
+          "body": [
+            "La taxonomía es el gancho: *swarm*, *flock* y *gang* son las tres formas de sistemas multiagente que la guía distingue, cada una con coordinación y patrones de fallo distintos. El post es una guía práctica: cómo construir cada configuración, cómo entrenarla —incluido el aprendizaje por refuerzo para la coordinación multiagente—, y cómo evaluarla sin caer en métricas que solo quedan bien en papel.",
+            "Llega a su momento, en la misma semana en que el paper *OS-Omni* (en la sección de papers) y los debates sobre seguridad de agentes convierten la evaluación de la coordinación en una disciplina propia: la comunidad pasa de la fase «¿hace la tarea un solo agente?» a la de «¿cómo se coordinan muchos?», y la guía intenta poner orden en la terminología antes de que cada proyecto invente la suya."
+          ],
+          "tags": [
+            "multi-agent",
+            "rl",
+            "evaluation",
+            "hugging-face"
+          ],
+          "links": [
+            {
+              "label": "Swarms, Flocks, Gangs (blog de Hugging Face)",
+              "url": "https://huggingface.co/blog/training-swarms"
+            }
+          ]
+        },
+        {
+          "title": "*root-justice*: escudo defensivo contra los agentes que escanean tu red",
+          "summary": "qanvass publica *root-justice*: un escudo de borde en Python (solo librería estándar) que detecta agentes de IA que escanean redes, los contiene en línea sin responder, atribuye el origen real con RDAP y ASN, y arma evidencia a prueba de manipulación en STIX 2.1, IC3 y CISA. *Zero hack-back*, explícito.",
+          "body": [
+            "El lado atacante de los agentes se ha vuelto un problema de seguridad: agentes que escanean redes automáticamente buscando servicios expuestos. *root-justice* se sienta del lado defensivo: detecta esos agentes en el borde, los contiene sin contraatacar (el *zero hack-back* es una regla explícita del proyecto), y atribuye el origen real usando RDAP y ASN —que importa, porque el origen aparente suele ser un proxy de una red botnet, no el atacante.",
+            "La salida de evidencia está pensada para reportes que de verdad se entregan: STIX 2.1 (el formato estándar de intercambio de incidentes), IC3 de la FBI y CISA, con propiedad de a prueba de manipulación. Todo en Python de librería estándar —sin dependencias—, lo que lo hace desplegable en una caja de borde modesta."
+          ],
+          "tags": [
+            "security",
+            "blue-team",
+            "agents",
+            "python"
+          ],
+          "links": [
+            {
+              "label": "qanvass/root-justice en GitHub",
+              "url": "https://github.com/qanvass/root-justice"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*machine-code-llm-battle*: motores de *Qwen3-0.6B* escritos a mano en código máquina",
+          "summary": "alesha-pro publica un repositorio con motores de inferencia para *Qwen3-0.6B* escritos en código máquina x86-64 puro —un *engine.hex*, sin compilador, ensamblador ni enlazador—, producidos por *Gemini 4 Neon* y *Claude Opus 5.5*, y ambos ganan a *llama.cpp* en CPU.",
+          "body": [
+            "El experimento tiene un aroma raro: en lugar de escribir C o Rust y compilarlo, los modelos de IA emiten directamente el código máquina —un fichero hexadecimal que el sistema operativo carga y ejecuta, sin compilador, sin ensamblador, sin enlazador. Dos modelos —*Gemini 4 Neon* y *Claude Opus 5.5*— compiten, y ambos terminan por delante de *llama.cpp* en CPU.",
+            "Si es un software de producción útil es otra cuestión —mantener código máquina es, por definición, una pesadilla—, pero es un punto de datos que interesa a quien estudia compiladores y a quien estudia modelos: los modelos de frontera ya emiten binarios x86-64 que funcionan, y que además ganan en la comparación de rendimiento a una implementación de referencia con una década de optimización a sus espaldas."
+          ],
+          "tags": [
+            "inference",
+            "x86-64",
+            "assembly",
+            "llm",
+            "experiment"
+          ],
+          "links": [
+            {
+              "label": "alesha-pro/machine-code-llm-battle en GitHub",
+              "url": "https://github.com/alesha-pro/machine-code-llm-battle"
+            }
+          ]
+        },
+        {
+          "title": "*cortex-llm*: un motor de inferencia en Rust sin ninguna dependencia externa",
+          "summary": "0x00ef-team publica *Cortex*: un motor de inferencia de LLM escrito desde cero en Rust, cuyo camino por CPU tiene cero dependencias externas —sin *ndarray*, sin *candle*, sin *llama.cpp*, sin ningún crate de tokenizador. Solo la librería estándar.",
+          "body": [
+            "La rama minimalista del ecosistema tiene su propio brote: *Cortex* reimplementa el camino de inferencia por CPU desde cero, con nada más que la librería estándar de Rust. Sin librería matemática, sin framework de ML, sin tokenizador como dependencia: la carga del modelo y toda la inferencia viven en el código del propio proyecto.",
+            "En un ecosistema donde cada motor depende de un montón de crates, un motor sin dependencias tiene un valor de auditoría propio: la superficie de ataque es lo que se puede leer. El proyecto es pequeño (una estrella, arrancado esta semana), pero apunta a una tendencia que ya se ve en *machine-code-llm-battle*: el motor de inferencia como objeto de diseño mínimo."
+          ],
+          "tags": [
+            "inference",
+            "rust",
+            "zero-dependency",
+            "cpu"
+          ],
+          "links": [
+            {
+              "label": "0x00ef-team/cortex-llm en GitHub",
+              "url": "https://github.com/0x00ef-team/cortex-llm"
+            }
+          ]
+        },
+        {
+          "title": "El panel de benchmarks de *llama.cpp* para AMD Ryzen y Radeon, ya oficial",
+          "summary": "El equipo ggml publicó ayer el panel oficial de benchmarks de *llama.cpp* sobre hardware de AMD: procesadores Ryzen (CPU) y gráficas Radeon (GPU), con comparativas actualizadas sin tener que compilar y medir por tu cuenta.",
+          "body": [
+            "Llega dos semanas después del v1.0.0 de *llama.cpp* y lo complementa: el panel publica benchmarks del motor sobre hardware AMD —los procesadores Ryzen y las gráficas Radeon—, para que quien quiera saber cómo se comportará un modelo en su máquina no tenga que compilar, medir y publicar sus propios números. Es el tipo de infraestructura que hace el ecosistema creíble: cifras públicas, reproducibles, y mantenidas por el propio proyecto.",
+            "Importa para los usuarios de AMD en particular, que durante años quedaron fuera de los benchmarks oficiales (centrados en NVIDIA): que el proyecto mantenga su propio panel sobre el hardware de la otra marca es señal de que el ecosistema madura de los dos lados del mercado de GPUs."
+          ],
+          "tags": [
+            "llama.cpp",
+            "amd",
+            "benchmark",
+            "ggml"
+          ],
+          "links": [
+            {
+              "label": "El post en el blog de Hugging Face",
+              "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench"
+            }
+          ]
+        },
+        {
+          "title": "*pareto-infer*: el agente que optimiza tu motor de inferencia en bucle",
+          "summary": "ToprakG publica *pareto-infer*: un bucle de «investigación automática» para motores de inferencia que perfila el servicio, edita el código, hace el benchmark del resultado, y solo conserva las mejoras verificadas —la versión herramienta del *hill-climbing* de la portada de ayer.",
+          "body": [
+            "La portada de ayer mostraba un agente optimizando *Inkling 2 Mini* en una GPU concreta; *pareto-infer* generaliza el método en una herramienta reutilizable: el agente perfila el motor de inferencia, propone ediciones de código, benchmark de cada candidata, y conserva únicamente las mejoras verificadas frente a la línea de base anterior. El bucle es Pareto: una mejora solo se acepta si no empeora ninguna otra métrica.",
+            "El patrón —medir, editar, verificar, conservar— es el que la comunidad va convergiendo como la forma correcta de optimizar el servicio: sin afirmaciones manuales, solo números. El proyecto es pequeño (dos estrellas), pero es la versión infraestructura de una práctica que ya está dando resultados en producción."
+          ],
+          "tags": [
+            "inference",
+            "optimization",
+            "agents",
+            "benchmark"
+          ],
+          "links": [
+            {
+              "label": "ToprakG/pareto-infer en GitHub",
+              "url": "https://github.com/ToprakG/pareto-infer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*OS-Omni*: el benchmark de agentes de uso de ordenador que cruza plataformas",
+          "summary": "Con 76 votos, el paper más votado del día: *OS-Omni* evalúa agentes generalistas de uso de ordenador en flujos de trabajo de largo horizonte que cruzan web, móvil y escritorio —no acciones aisladas en un solo entorno, que es lo que hacen los benchmarks actuales.",
+          "body": [
+            "Los benchmarks existentes prueban al agente de ordenador en un solo entorno: un navegador web, o la pantalla de un móvil, o un escritorio. *OS-Omni* cambia la pregunta: ¿puede el mismo agente generalista completar un objetivo realista que cruza plataformas —empezar en la web, seguir en la app móvil, terminar en el escritorio? Los flujos son de largo horizonte, es decir, de muchos pasos, que es justo donde los agentes actuales se caen.",
+            "Es el paper más votado del día (76 en Hugging Face), y fija una referencia: en la misma semana en que llega la guía de sistemas multiagente, la evaluación de agentes pasa de las acciones aisladas a los flujos realistas entre plataformas, y el nombre del benchmark empieza a sonar como el que va a ordenar el campo."
+          ],
+          "tags": [
+            "agents",
+            "benchmark",
+            "computer-use",
+            "cross-platform"
+          ],
+          "links": [
+            {
+              "label": "OS-Omni en arXiv",
+              "url": "https://arxiv.org/abs/2611.34232"
+            },
+            {
+              "label": "En Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2611.34232"
+            }
+          ]
+        },
+        {
+          "title": "Qué puede establecer un ranking de predicción: resolución en series temporales",
+          "summary": "Con 25 votos: un paper sobre los modelos fundacionales de series temporales que miden la resolución real de sus puntuaciones —cuánto se puede confiar en un número de un ranking público cuando los datos de prueba son escasos y un puñado de rankings concentra casi todas las comparaciones.",
+          "body": [
+            "Un modelo fundacional de series temporales se pre-entraña una vez, y luego se le pide predecir series que nunca ha visto; la evidencia de su calidad es su puntuación en datasets que quedaron fuera del entrenamiento. El problema: esos datasets son escasos, y unos pocos rankings públicos concentran la mayor parte de las comparaciones, de modo que la posición de un modelo depende de un conjunto reducido de series.",
+            "El paper (25 votos) estudia qué puede establecer de verdad un ranking de predicción —la resolución de su medida— y qué hay que reportar para que la puntuación sea significativa. Es un paper de método, del tipo que la comunidad necesita cuando el benchmark se convierte en la moneda de cambio: no le dice cuál modelo es mejor, le dice cómo leer el número antes de celebrarlo."
+          ],
+          "tags": [
+            "time-series",
+            "benchmark",
+            "evaluation"
+          ],
+          "links": [
+            {
+              "label": "En arXiv",
+              "url": "https://arxiv.org/abs/2611.31619"
+            },
+            {
+              "label": "En Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2611.31619"
+            }
+          ]
+        },
+        {
+          "title": "*DRBench Pro*: el benchmark centrado en el conocimiento de los agentes de investigación profunda",
+          "summary": "22 votos: un benchmark para agentes de investigación profunda que añade la dimensión que a los existentes les falta —una evaluación centrada en el conocimiento: no solo si el informe está bien construido, sino si el conocimiento que el agente reunió y sintetizó es correcto.",
+          "body": [
+            "Un agente de investigación profunda reúne información de varias fuentes y la sintetiza en un informe. Los benchmarks existentes evalúan la calidad del informe a lo largo de varias dimensiones —estructura, citas, cobertura—, pero el paper señala que les falta una evaluación centrada en el conocimiento: si el agente se llevó los hechos bien, no solo si el informe se lee bien.",
+            "Para quien use agentes en investigación profesional —informes de mercado, análisis técnico, revisión de la literatura—, la medida más honesta es el conocimiento, no la forma. *DRBench Pro* (22 votos) es el primer paso serio en esa dirección, y llega en plena temporada de benchmarks de agentes."
+          ],
+          "tags": [
+            "agents",
+            "deep-research",
+            "benchmark"
+          ],
+          "links": [
+            {
+              "label": "DRBench Pro en arXiv",
+              "url": "https://arxiv.org/abs/2611.34852"
+            },
+            {
+              "label": "En Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2611.34852"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*llama.cpp* v1.0.0: la comunidad digiere el cimiento estable",
+          "summary": "El 13 de noviembre el proyecto llegó al v1.0.0: versionado semántico formal para *libllama* y *libggml*, API pública estable (el cambio rompedor de la API es, precisamente, lo que una versión 1.0 significa), y el hilo del lanzamiento sigue en lo más alto de la semana en r/LocalLLaMA.",
+          "body": [
+            "El hito no es un salto de velocidad —el post oficial en Hugging Face es honesto al respecto: la novedad es una promesa. *llama.cpp* y *ggml* empiezan a partir de ahora con versionado semántico formal: la API pública en C (*libllama*) se estabiliza, y de aquí en adelante un cambio que rompe la API significa una versión mayor, no una rotura silenciosa. El titular del 1.0 es que el ecosistema por fin tiene un cimiento estable sobre el que construir.",
+            "La comunidad está digiriendo la noticia en el top de la semana: dos semanas después, el hilo del lanzamiento sigue ahí, con el debate sobre lo que el 1.0 significa para los proyectos que dependen de la librería. Y el panel de benchmarks de AMD publicado ayer completa el cuadro: API estable, benchmarks oficiales del hardware de la otra marca, y un ecosistema que trata la librería como infraestructura, no como experimento."
+          ],
+          "tags": [
+            "llama.cpp",
+            "community",
+            "api",
+            "versioning"
+          ],
+          "links": [
+            {
+              "label": "llama.cpp v1.0.0 (post oficial)",
+              "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+            },
+            {
+              "label": "El hilo en r/LocalLLaMA",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xv8t2e/llamacpp_v10_is_here/"
+            }
+          ]
+        },
+        {
+          "title": "DeepSeek V4.1 Flash en cuatro *DGX Spark*: el top de la semana de r/LocalLLaMA",
+          "summary": "El post del top semanal de r/LocalLLaMA compara *DeepSeek V4.1 Flash* corriendo en un clúster de cuatro *DGX Spark* contra lo mejor que la comunidad había publicado: en un solo flujo, su compilación es 15–45 % más rápida que las mejores pilas de cuatro *Spark* en código, y por delante también en prosa.",
+          "body": [
+            "El *DGX Spark* —la appliance compacta de IA con el chip GB10— se ha convertido en el banco de pruebas del hardware comunitario: el post del top de la semana toma *DeepSeek V4.1 Flash* en un clúster de cuatro *Spark* y lo compara con las mejores configuraciones que la comunidad había publicado antes. Resultado: en un solo flujo, la compilación del autor es un 15–45 % más rápida que las mejores pilas de cuatro *Spark* en código, por delante también en prosa, y con una diferencia mayor en las demás mediciones.",
+            "Es el ejemplo perfecto de la cultura self-hosted: no son cifras de un comunicado, son personas corriendo el modelo en su propio hardware, publicando la configuración, y dejando que otros la reproduzcan. Los hilos sobre el *Spark* —de la unidad suelta al laboratorio casero que escala el clúster— son uno de los ejes activos del subreddit este mes."
+          ],
+          "tags": [
+            "dgx-spark",
+            "deepseek",
+            "community",
+            "benchmark"
+          ],
+          "links": [
+            {
+              "label": "El hilo en r/LocalLLaMA",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x79ijg/deepseek_v41_flash_on_4x_dgx_spark_my_numbers_vs/"
+            }
+          ]
+        },
+        {
+          "title": "El megahilo «Best Audio Models — noviembre 2026» entra en el top del día",
+          "summary": "El megahilo mensual de los mejores modelos abiertos de audio suma 140 votos y 105 comentarios en r/LocalLLaMA: la comunidad actualiza el estado del arte en texto a voz, reconocimiento y aislamiento, con los modelos pequeños del mes ya en el debate.",
+          "body": [
+            "Cada mes, r/LocalLLaMA renueva su megahilo de los mejores modelos abiertos de audio, y la edición de noviembre de 2026 está entre los posts más activos del día (140 votos, 105 comentarios): la comunidad debate el estado del arte en texto a voz, reconocimiento de voz y aislamiento, y los modelos pequeños de los últimos días —como el *Rumble-2-Flash* de 500 millones de parámetros que aparecía en la edición del jueves— ya están en el debate.",
+            "El megahilo mensual es el radar barato de la comunidad: qué hay de nuevo, qué funciona de verdad, qué corre en hardware de consumo. Para quien monta un pipeline de voz self-hosted, es el primer lugar donde mirar antes de adoptar un modelo."
+          ],
+          "tags": [
+            "audio",
+            "community",
+            "reddit",
+            "tts"
+          ],
+          "links": [
+            {
+              "label": "Best Audio Models — Nov 2026 (r/LocalLLaMA)",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xxpxvi/best_audio_models_nov_2026/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "robodeltas/inspect-robots",
+        "stars": "★ 41",
+        "desc": "Evaluaciones abiertas para IA física: cualquier *LLM* o *VLA* en cualquier brazo u humanoide, frente a benchmarks reales o simulados.",
+        "meta": "Python",
+        "url": "https://github.com/robodeltas/inspect-robots"
+      },
+      {
+        "name": "alesha-pro/machine-code-llm-battle",
+        "stars": "★ 32",
+        "desc": "Motores de inferencia de *Qwen3-0.6B* escritos a mano en código máquina x86-64; ambos ganan a *llama.cpp* en CPU.",
+        "meta": "Python",
+        "url": "https://github.com/alesha-pro/machine-code-llm-battle"
+      },
+      {
+        "name": "DojoCodingLabs/hermit",
+        "stars": "★ 13",
+        "desc": "Agente de IA abierto que vive en el teléfono Android: modelo on-device, memoria cifrada, sin telemetría.",
+        "meta": "TypeScript",
+        "url": "https://github.com/DojoCodingLabs/hermit"
+      },
+      {
+        "name": "dsdred/1c-naparnik-admin",
+        "stars": "★ 12",
+        "desc": "Puerta HTTP y administración web para *1C*: API compatible *OpenAI*/*Anthropic*/*Gemini*, claves para IDE, registro de peticiones, un solo binario.",
+        "meta": "Go",
+        "url": "https://github.com/dsdred/1c-naparnik-admin"
+      },
+      {
+        "name": "0x00ef-team/cortex-llm",
+        "stars": "★ 1",
+        "desc": "Motor de inferencia de LLM escrito desde cero en Rust, sin dependencias externas en el camino por CPU.",
+        "meta": "Rust",
+        "url": "https://github.com/0x00ef-team/cortex-llm"
+      }
+    ],
+    "papers": [
+      {
+        "title": "OS-Omni: Benchmarking Generalist Computer-Using Agents on Long-Horizon Workflows Across Platforms",
+        "authors": "76 upvotes",
+        "url": "https://arxiv.org/abs/2611.34232"
+      },
+      {
+        "title": "What a Forecasting Leaderboard Can Establish: Resolution Reporting for Zero-Shot Time-Series Models",
+        "authors": "25 upvotes",
+        "url": "https://arxiv.org/abs/2611.31619"
+      },
+      {
+        "title": "DRBench Pro: A Knowledge-Centric Benchmark for Professional Deep Research Agents",
+        "authors": "22 upvotes",
+        "url": "https://arxiv.org/abs/2611.34852"
+      },
+      {
+        "title": "Boundary-Aware Policy Learning for Agent-Orchestrated Robot Manipulation",
+        "authors": "5 upvotes",
+        "url": "https://arxiv.org/abs/2611.32238"
+      },
+      {
+        "title": "When an AI agent makes a mistake in a database, what decides the damage?",
+        "authors": "3 upvotes",
+        "url": "https://arxiv.org/abs/2611.30483"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLaMA",
+        "title": "*llama.cpp* v1.0.0: el cimiento estable de la IA local",
+        "note": "El hilo del lanzamiento sigue en el top de la semana de la comunidad.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xv8t2e/llamacpp_v10_is_here/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "Best Audio Models — noviembre 2026",
+        "note": "El megahilo mensual de modelos abiertos de audio: 140 votos y 105 comentarios.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xxpxvi/best_audio_models_nov_2026/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "DeepSeek V4.1 Flash en cuatro *DGX Spark*",
+        "note": "Top de la semana: una compilación un 15–45 % más rápida que las mejores pilas de cuatro *Spark* en código.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x79ijg/deepseek_v41_flash_on_4x_dgx_spark_my_numbers_vs/"
+      },
+      {
+        "src": "local-llm.net",
+        "title": "local-llm.net: la guía comunitaria para desplegar IA localmente",
+        "note": "Blog comunitario: todo el ecosistema, despliegues y benchmarks de IA local.",
+        "url": "https://www.local-llm.net/blog/"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

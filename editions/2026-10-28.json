@@ -1,0 +1,580 @@
+{
+  "date": "28 de octubre de 2026",
+  "weekday_long": "miércoles",
+  "edition": "Edición nº 32",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*Flint*: la primera máquina de *Recursive* aterriza en *Hugging Face* — 39,8B de *MoE*, solo 2,5B activos, y licencia *Apache 2.0*",
+    "summary": "*Recursive* ha publicado *Flint*, su primer modelo: una mezcla de expertos de 39.800 millones de parámetros con unas 2.500 millones activos por token, entrenada con la *Eureka Machine* del laboratorio y puesta bajo licencia *Apache 2.0*. Pensada para *agentes de código* que corren en local, la comunidad la ha puesto en *GGUF* en menos de una semana y *Transformers* ya la soporta nativa.",
+    "tags": [
+      "flint",
+      "recursive",
+      "mixture-of-experts",
+      "coding-agents",
+      "open-weights",
+      "gguf"
+    ],
+    "links": [
+      {
+        "label": "Hugging Face — RecursiveSI/flint",
+        "url": "https://huggingface.co/RecursiveSI/flint"
+      },
+      {
+        "label": "Recursive — Introducing Flint",
+        "url": "https://recursive.com/updates/introducing-recursive-flint"
+      },
+      {
+        "label": "Hugging Face — unsloth/flint-GGUF",
+        "url": "https://huggingface.co/unsloth/flint-GGUF"
+      },
+      {
+        "label": "Hugging Face docs — Flint (Transformers)",
+        "url": "https://huggingface.co/docs/transformers/model_doc/flint"
+      }
+    ],
+    "illustration": {
+      "file": "lead-illo-2026-10-28.jpg",
+      "alt": "Un chip cuadrado sobre una mesa de trabajo oscura, con una cuadrícula de celdas donde solo unas pocas brillan en ámbar, símbolo de los expertos activos de la MoE",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: el chip de la MoE de *Flint*, solo unas pocas celdas (los expertos) encendidas mientras el resto descansa"
+    }
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*LFM3*: la familia multimodal de *Liquid AI* llega al *edge* — base *1.7B*, variante *VL* de 2B y *Omni* con audio, vídeo y texto",
+          "summary": "*Liquid AI* ha abierto la familia *LFM3*: una base de *1.7B* y dos derivados de 2B, *VL* (visión y texto) y *Omni* (cualquier modalidad de entrada y de salida), pensados para el *edge*. Hablan más de veinte idiomas, razonan y llaman a herramientas, y el blog del laboratorio explica cómo construir un modelo especializado encima.",
+          "body": [
+            "La familia *LFM3* se apoya en una base de *1.7B* y dos derivados de 2B: *LFM3-VL* (visión y texto) y *LFM3-Omni* (texto, imagen, vídeo y audio de entrada, con salida de texto y de audio). *Liquid AI* la ha liberado bajo una licencia *other* y el blog que acompaña al lanzamiento, publicado el 27 de octubre, muestra cómo partir de la base y obtener un modelo especializado por *fine-tuning*.",
+            "La plantilla de chat soporta razonamiento (*thinking*), llamadas a herramientas y referencias de herramientas *deferred* (el *harness* puede declarar *tools* y el modelo las cita por nombre). *Omni* además emite audio nativo, algo poco común en un modelo de ese tamaño, y soporta más de veinte idiomas. Es la apuesta de *Liquid AI* por la inferencia en el dispositivo: modelos pequeños, multimodales y listos para *edge*.",
+            "La base *1.7B* es la que más se ha descargado (miles de descargas en cinco días). Quien quiera un *VLM* local ligero tiene ahora una tercera opción reciente, junto con *Qwen3.5-VL* y los *InternVL*."
+          ],
+          "tags": [
+            "lfm3",
+            "liquid-ai",
+            "edge",
+            "multimodal",
+            "omni"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face blog — LFM3",
+              "url": "https://huggingface.co/blog/LiquidAI/lfm3"
+            },
+            {
+              "label": "Hugging Face — LiquidAI/LFM3-Omni-2B",
+              "url": "https://huggingface.co/LiquidAI/LFM3-Omni-2B"
+            },
+            {
+              "label": "Hugging Face — LiquidAI/LFM3-VL-2B",
+              "url": "https://huggingface.co/LiquidAI/LFM3-VL-2B"
+            }
+          ]
+        },
+        {
+          "title": "*Unlimited-OCR 2* de *Baidu*: *OCR* como modelo *VLM* con *MoE* interno y página de tamaño ilimitado",
+          "summary": "*Baidu* ha subido la segunda iteración de *Unlimited-OCR*: un modelo de visión-lenguaje con *MoE* interno (6 expertas activas por token) que trata el documento como una secuencia de *tokens* en vez de un recuadro fijo. Licencia *MIT* y código propio, y se puede correr desde *Transformers*.",
+          "body": [
+            "*Unlimited-OCR* parte de una premisa: el *OCR* no debería depender de un recuadro fijo de tamaño, sino de la longitud de la secuencia de *tokens* del documento. La versión 2 añade un *MoE* interno con 6 expertas activas por token, lo que permite escalar la capacidad sin disparar el coste por token.",
+            "La licencia es *MIT* y el modelo se integra en *Transformers* con su propio *auto_map* (configuración, modelo y tokenizador propios). *Baidu* ha publicado también el *arXiv* (2606.23050) con la descripción completa del método. Es de las pocas implementaciones serias de *OCR* con pesos abiertos, y encaja en la misma línea que *Qwen-VL* para documentos pero con la ventaja de tratar la página como secuencia y no como imagen a escala fija."
+          ],
+          "tags": [
+            "ocr",
+            "baidu",
+            "vlm",
+            "moe",
+            "mit"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face — baidu/Unlimited-OCR-2",
+              "url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+            },
+            {
+              "label": "arXiv — Unlimited-OCR",
+              "url": "https://arxiv.org/abs/2606.23050"
+            }
+          ]
+        },
+        {
+          "title": "*Sage-A1.5*: la apuesta de *ISTA-DASLab* por 1,5 bits con precisión variable",
+          "summary": "*ISTA-DASLab* publica *Sage-A1.5*, una variante cuantizada que baja a 1,5 bits con precisión variable tensor a tensor: alta donde importa, baja donde el modelo tolera. La idea: encajar modelos grandes en memoria limitada sin degradar la calidad donde el *benchmark* la mide.",
+          "body": [
+            "*Sage-A1.5* es la tercera iteración de la línea *Sage* del laboratorio. La novedad es la precisión variable: en lugar de un único número de bits para todo el modelo, el *pipeline* decide tensor a tensor si conviene 1 bit, 1,5 bits o más, según la sensibilidad de cada bloque.",
+            "El resultado es un archivo que cabe en la misma RAM que una cuantización *Q2* convencional, con una pérdida menor. Es la misma idea que *GSQ-RCO* aplica a *DeepSeek V4.1-Flash* (ya vimos en la edición del 26 de octubre): la *cuantización* deja de ser un número y pasa a ser un mapa de sensibilidades."
+          ],
+          "tags": [
+            "sage",
+            "quantization",
+            "1.5-bit",
+            "ista-daslab"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face — ISTA-DASLab/Sage-A1.5",
+              "url": "https://huggingface.co/ISTA-DASLab/Sage-A1.5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*capri-ai*: el agente de escritorio «*Edgerunners*» que trabaja con *Claude Code*, *Codex* y *Antigravity*",
+          "summary": "*capri-ai* es un agente de escritorio inspirado en *Edgerunners* que funciona con *Claude Code*, *Codex* y *Antigravity* sobre un *LLM* local. Corre en *Rust*, se integra con *Ollama* y *LM Studio*, y es el *repo* con más estrellas de la semana en *GitHub* entre agentes.",
+          "body": [
+            "El proyecto es un *desktop agent* que llama a un *LLM* local (*Ollama*, *LM Studio* o cualquier API compatible *OpenAI*) y lo viste con herramientas de *Claude Code*, *Codex* y *Antigravity*. Corre en *Rust*, se integra con *Ollama* y *LM Studio*, y se posiciona como el «*Edgerunners* de tu escritorio».",
+            "Es de los pocos agentes que no exige una API en la nube: el *LLM* corre localmente y el agente solo orquesta. Está en una fase temprana (cien y pico de estrellas), pero el enfoque *Rust* + *local* lo pone en la misma línea que *molten* (la semana pasada) y *OpenCode*."
+          ],
+          "tags": [
+            "capri-ai",
+            "desktop-agent",
+            "rust",
+            "local-llm",
+            "claude-code"
+          ],
+          "links": [
+            {
+              "label": "GitHub — ChannelCooperStart/capri-ai",
+              "url": "https://github.com/ChannelCooperStart/capri-ai"
+            }
+          ]
+        },
+        {
+          "title": "*LocalControl*: reglas de uso en inglés simple que un *LLM* local aplica a tu *Mac* y *iPhone*",
+          "summary": "*LocalControl* traduce reglas de uso redactadas en inglés simple («no abrir *Safari* a las 2 de la mañana») a acciones concretas en *Mac* y *iPhone*, validadas por un *LLM* local. *Swift*, *self-hosted*, y la primera tentativa seria de un «*guardrail*» de uso con *LLM* en el dispositivo.",
+          "body": [
+            "El proyecto es un *guardrail* de uso: el usuario escribe reglas en inglés simple (por ejemplo, «no abrir *Safari* entre las 23 y las 6») y *LocalControl* las valida y las aplica con un *LLM* local, sin nube. Corre en *Swift* y soporta *macOS* e *iOS*.",
+            "Es una de las primeras veces que un *LLM* local actúa como intermediario de uso entre el usuario y el sistema operativo, en vez de generar *chat*. La premisa (reglas legibles, validadas localmente) es la misma que la línea *guardrails* de *Cortex*, pero aplicada al consumo de *apps*."
+          ],
+          "tags": [
+            "local-control",
+            "swift",
+            "guardrails",
+            "ios",
+            "macos"
+          ],
+          "links": [
+            {
+              "label": "GitHub — eugenevinitsky/LocalControl",
+              "url": "https://github.com/eugenevinitsky/LocalControl"
+            }
+          ]
+        },
+        {
+          "title": "*sayso*: una habilidad *open source* para que cualquier LLM produzca mejor en cualquier tarea",
+          "summary": "*sayso* es una *skill* *open source* que se instala en un agente y mejora la calidad de su salida en tareas y contextos diferentes. No es un agente en sí, sino una capa de *prompt engineering* portada, en la misma línea que *sayso* de *Cortex*.",
+          "body": [
+            "*sayso* se instala como *skill* (en *Claude*, *Codex* o cualquier agente que soporte *skills*) y aporta una capa de *prompt engineering* que mejora la salida del *LLM* en tareas específicas. No es un agente: es una capa de *prompt* que se apoya en el agente existente.",
+            "La idea es que una misma *skill* pueda usarse con varios agentes y varias tareas, sin reescribir *prompts*. El *repo* es pequeño (pocas estrellas) pero el concepto (portabilidad de *skills* entre agentes) es el que *Claude* y *Codex* han empezado a estandarizar esta semana."
+          ],
+          "tags": [
+            "sayso",
+            "skills",
+            "prompt-engineering",
+            "portability"
+          ],
+          "links": [
+            {
+              "label": "GitHub — Charlsz/sayso",
+              "url": "https://github.com/Charlsz/sayso"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*ouroboros*: un compilador *GPU* en *Rust* de un solo archivo que corre *LLMs* *MoE* en un portátil de 2 GB",
+          "summary": "*ouroboros* es un compilador *GPU* en *Rust* de un solo archivo, sin dependencias, que dice ejecutar *LLMs* *MoE* de varios *billion* en un portátil *MX150* de 2 GB y superar a una *RTX 4060* en decodificación de *tokens*. La promesa es ambiciosa; el *benchmark* está en el *repo*.",
+          "body": [
+            "El *repo* describe un compilador *GPU* en *Rust* de un solo archivo, sin dependencias, que compila el *kernel* de *MoE* en el dispositivo. Dice ejecutar *LLMs* *MoE* de varios *billion* en un portátil *MX150* de 2 GB y superar a una *RTX 4060* en decodificación de *tokens*.",
+            "La promesa es fuerte y el *benchmark* está en el *repo*: 23,35 *TFLOPS* en *A100*. Es de esos proyectos que o son una auténtica novedad en la programación de *kernels* *MoE* o son un *benchmark* mal ajustado — hay que probarlo antes de creerlo, pero es el *repo* con más interés técnico de la semana."
+          ],
+          "tags": [
+            "ouroboros",
+            "rust",
+            "gpu-compiler",
+            "moe",
+            "kernels"
+          ],
+          "links": [
+            {
+              "label": "GitHub — gkjuwon-tech/ouroboros",
+              "url": "https://github.com/gkjuwon-tech/ouroboros"
+            }
+          ]
+        },
+        {
+          "title": "*TagNest*: un escritorio *Linux* real dentro de un *workspace* *local-first* para *IA*",
+          "summary": "*TagNest* es un *workspace* *local-first* con un escritorio *Linux* real dentro: un entorno de trabajo completo, con un *LLM* local y herramientas de *IA*, pensado para *self-hosting*. *Swift*, y el proyecto más «*retro*» de la semana.",
+          "body": [
+            "*TagNest* empaqueta un escritorio *Linux* dentro de un *workspace* *local-first*: el usuario tiene un entorno de trabajo completo, con un *LLM* local y herramientas de *IA*, sin nube. Está escrito en *Swift* y se posiciona como un «*desktop* *AI*» para *self-hosting*.",
+            "Es de los pocos proyectos que no solo empaqueta un *LLM*, sino que entrego un entorno de trabajo. La premisa (todo local, sin nube) es la misma que *OpenClaw* y *OpenWebUI*, pero con la idea de que el *workspace* sea un sistema operativo completo."
+          ],
+          "tags": [
+            "tagnest",
+            "swift",
+            "local-first",
+            "linux-desktop",
+            "self-hosting"
+          ],
+          "links": [
+            {
+              "label": "GitHub — Tagiyevff/TagNest",
+              "url": "https://github.com/Tagiyevff/TagNest"
+            }
+          ]
+        },
+        {
+          "title": "*llms-on-eks*: guías para desplegar LLMs *open source* en *Amazon EKS* con *vLLM* y autoscaling",
+          "summary": "Una serie de guías *hands-on* para correr *LLMs* *open source* en *Amazon EKS* con *vLLM*, *Karpenter* y autoscaling de *GPUs*. El enfoque es producción: observabilidad, *load testing* y *CI/CD* para *inference* de modelos.",
+          "body": [
+            "El *repo* es una serie de guías *hands-on* para desplegar *LLMs* *open source* en *Amazon EKS*: *vLLM* para la inferencia, *Karpenter* para el autoscaling de *GPUs*, y un *pipeline* de observabilidad y *load testing*. Es el tipo de material que faltaba en *Español* y en *English* para quien quiere *self-hosting* de *LLMs* en la nube, no en el portátil.",
+            "La serie cubre desde el *setup* inicial hasta *CI/CD* y *load testing*. Es de lo más práctico que ha salido esta semana para *self-hosting* de *LLMs* en *Kubernetes*."
+          ],
+          "tags": [
+            "llms-on-eks",
+            "vllm",
+            "kubernetes",
+            "eks",
+            "self-hosting"
+          ],
+          "links": [
+            {
+              "label": "GitHub — anveshmuppeda/llms-on-eks",
+              "url": "https://github.com/anveshmuppeda/llms-on-eks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*PDRVLA*: un *VLA* para robótica con representaciones de la dinámica física — el *paper* más votado del día",
+          "summary": "*PDRVLA* añade a un modelo *VLA* (visión-lenguaje-acción) representaciones de la dinámica física del entorno, para que el robot predice cómo reaccionará el mundo al ejecutar una acción. Es el *paper* más votado del día en *Hugging Face* (70 *upvotes*).",
+          "body": [
+            "Los *VLA* actuales toman la imagen y una instrucción de lenguaje y generan una acción. *PDRVLA* añade una tercera pata: representaciones de la dinámica física del entorno, aprendidas de datos de interacción, para que el modelo no solo vea y escuche, sino que prediga el efecto de la acción sobre el mundo.",
+            "La diferencia es importante: un *VLA* clásico puede «saber» que hay un vaso en la mesa, pero *PDRVLA* intenta predecir lo que pasa si lo empuja. Es el *paper* más votado del día en *Hugging Face* (70 *upvotes*) y encaja en la línea de *world models* que *Lightricks* y *NVIDIA* llevan meses empujando."
+          ],
+          "tags": [
+            "pdrvla",
+            "vla",
+            "robotics",
+            "world-models",
+            "dynamics"
+          ],
+          "links": [
+            {
+              "label": "arXiv — PDRVLA",
+              "url": "https://arxiv.org/abs/2610.37381"
+            },
+            {
+              "label": "Hugging Face papers — PDRVLA",
+              "url": "https://huggingface.co/papers/2610.37381"
+            }
+          ]
+        },
+        {
+          "title": "*Trinity*: automejora recursiva para *agentes* multimodales, con co-evolución guiada por el humano",
+          "summary": "*Trinity* propone una automejora recursiva para *agentes* multimodales donde el modelo y su *harness* co-evolucionan por capacidad: el modelo mejora, el *harness* se adapta, y el humano guía el proceso. 60 *upvotes* en *Hugging Face*.",
+          "body": [
+            "*Trinity* toma la línea de *automejora recursiva* (RSI) y la aplica a *agentes* multimodales: en vez de un *pipeline* fijo, el modelo y el *harness* co-evolucionan por capacidad, y el humano guía el proceso. Es la versión más «*operativa*» de la RSI para *agentes* que ha salido esta semana.",
+            "El *paper* (60 *upvotes*) se apoya en la encuesta *Trustworthy RSI* que vimos el 27 de octubre y añade el componente *multimodal*: el *agente* mejora no solo en texto, sino en la interacción con el mundo (visión, audio, acción). Es de los que más cerca está de una RSI *operativa*."
+          ],
+          "tags": [
+            "trinity",
+            "rsi",
+            "recursive-self-improvement",
+            "multimodal",
+            "agents"
+          ],
+          "links": [
+            {
+              "label": "arXiv — Trinity",
+              "url": "https://arxiv.org/abs/2610.36077"
+            },
+            {
+              "label": "Hugging Face papers — Trinity",
+              "url": "https://huggingface.co/papers/2610.36077"
+            }
+          ]
+        },
+        {
+          "title": "*VibeVideoBench*: el *benchmark* que evalúa *agentes* multimodales escribiendo código para generar vídeo",
+          "summary": "*VibeVideoBench* evalúa *agentes* multimodales no por el vídeo que generan, sino por el código que escriben para generar el vídeo. La premisa: el *agente* debe poder producir algo exactamente como el usuario pidió, y no solo «algo parecido».",
+          "body": [
+            "El *benchmark* parte de una crítica: los modelos de vídeo por *difusión* generan clips «bonitos» pero no exactamente lo que el usuario pidió. *VibeVideoBench* evalúa el *agente* por el código que escribe para producir el vídeo, y mide si el resultado coincide con la especificación del usuario.",
+            "Es de los primeros *benchmarks* que toma en serio la «*vibe*» (la intención del usuario) como criterio de evaluación, en vez de la calidad del *pixel*. La premisa (evaluar por la especificación, no por el *pixel*) es la que la comunidad de *agents* lleva meses discutiendo."
+          ],
+          "tags": [
+            "vibevideobench",
+            "benchmark",
+            "multimodal",
+            "agents",
+            "video"
+          ],
+          "links": [
+            {
+              "label": "arXiv — VibeVideoBench",
+              "url": "https://arxiv.org/abs/2610.35864"
+            },
+            {
+              "label": "Hugging Face papers — VibeVideoBench",
+              "url": "https://huggingface.co/papers/2610.35864"
+            }
+          ]
+        },
+        {
+          "title": "«*Rare, Relevant, and Still Wrong*»: cómo la memoria comprimida falla en las decisiones de grupo de LLMs",
+          "summary": "Cuando la discusión de un *grupo* de *LLMs* se comprime en una memoria corta para la siguiente ronda, los hechos relevantes se pierden y las decisiones de la discusión previa se deforman. El *paper* identifica el fallo y lo mide en tres escenarios.",
+          "body": [
+            "El *paper* estudia lo que pasa cuando un *grupo* de *LLMs* tiene que decidir después de una discusión larga: la discusión se comprime en una memoria corta para la siguiente ronda, y el *paper* mide qué se pierde. La respuesta: los hechos relevantes se pierden, y las decisiones de la discusión previa se deforman.",
+            "El resultado es una advertencia para los *harnesses* de *agentes* que usan *memoria* comprimida: la *memoria* no es neutral, y la compresión introduce sesgos. El *paper* (publicado el 26 de octubre) encaja en la línea de *memoria* de *agentes* que *Cortex* y *LangGraph* llevan meses empujando."
+          ],
+          "tags": [
+            "memory",
+            "llm-groups",
+            "agent-groups",
+            "decision-making"
+          ],
+          "links": [
+            {
+              "label": "arXiv — Rare, Relevant, and Still Wrong",
+              "url": "https://arxiv.org/abs/2610.37624"
+            },
+            {
+              "label": "Hugging Face papers",
+              "url": "https://huggingface.co/papers/2610.37624"
+            }
+          ]
+        },
+        {
+          "title": "*RynnWorld-Latent*: un *world model* condicionado en *acciones latentes* universales, entre *embodiments*",
+          "summary": "*RynnWorld-Latent* es un *world model* condicionado en *acciones latentes* universales: en vez de acciones concretas («mover el brazo 3 cm a la izquierda»), el modelo opera en un espacio de *acciones* que sirve para varios *embodiments*. La base para *transferencia* entre *robots*.",
+          "body": [
+            "El *paper* parte de un problema: los *world models* actuales son específicos del *robot* que los entrenó. *RynnWorld-Latent* propone un *world model* condicionado en *acciones latentes* universales, que sirven para varios *embodiments* (un brazo, un dron, un humanoide).",
+            "La idea es la misma que la *acción latente* de *RynnVLA-Latent* (que vimos el 27 de octubre), pero aplicada al *world model*: el modelo no predice una acción concreta, sino una *acción* en un espacio universal que luego se *mapea* a la acción del *robot* concreto. Es la base para *transferencia* entre *robots*."
+          ],
+          "tags": [
+            "rynnworld-latent",
+            "world-models",
+            "latent-actions",
+            "cross-embodiment",
+            "robotics"
+          ],
+          "links": [
+            {
+              "label": "arXiv — RynnWorld-Latent",
+              "url": "https://arxiv.org/abs/2610.36791"
+            },
+            {
+              "label": "Hugging Face papers — RynnWorld-Latent",
+              "url": "https://huggingface.co/papers/2610.36791"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "r/LocalLLaMA: el tablero de *IA* *open source* que muestra el mejor modelo que tu máquina puede correr",
+          "summary": "La comunidad sigue discutiendo el tablero de *IA* *open source* que filtra los modelos por el hardware disponible: un algoritmo que mira la *RAM*, la *GPU* y el *CPU* y muestra qué modelos caben en *tu* máquina, no en la de *Hugging Face*. El *post* lleva días en *top* del *subreddit*.",
+          "body": [
+            "El *tablero* parte de una crítica: los *leaderboards* de *Hugging Face* muestran los mejores modelos, pero no dicen si *tu* máquina puede correrlos. El *proyecto* que la comunidad sigue discutiendo en *r/LocalLLaMA* añade ese filtro: un algoritmo que mira la *RAM*, la *GPU* y el *CPU* y muestra qué modelos caben en *tu* máquina.",
+            "El *post* lleva días en *top* del *subreddit* y la discusión va más allá del *leaderboard*: la comunidad debate qué *métricas* importan (*velocidad* de *decodificación*, *contexto*, *calidad*) y cómo *rank*ear los modelos por *uso* (no solo por *benchmark*)."
+          ],
+          "tags": [
+            "localllama",
+            "leaderboard",
+            "open-source",
+            "local-llm"
+          ],
+          "links": [
+            {
+              "label": "Reddit — r/LocalLLaMA (leaderboard)",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x3wp8c/i_made_an_opensource_ai_leaderboard_that_shows/"
+            },
+            {
+              "label": "Reddit — r/LocalLLaMA",
+              "url": "https://www.reddit.com/r/LocalLLaMA/"
+            }
+          ]
+        },
+        {
+          "title": "*Qwen3.5* de 2B, 4B y 9B en un *Raspberry Pi 5*: *llama.cpp* y *GGUF*, y la discusión sobre *velocidad* de *decodificación*",
+          "summary": "La comunidad de *r/LocalLLaMA* sigue probando *Qwen3.5* de 2B, 4B y 9B en un *Raspberry Pi 5*: *llama.cpp* y *GGUF*, y la discusión sobre *velocidad* de *decodificación* y *latencia* en *ARM*. Es la línea de *self-hosting* más activa de la semana.",
+          "body": [
+            "El *post* muestra *Qwen3.5* de 2B, 4B y 9B corriendo en un *Raspberry Pi 5* con *llama.cpp* y *GGUF*. La *velocidad* de *decodificación* varía con el tamaño del *modelo* y el *quant*, pero todos caben en la *RAM* del *Pi 5*.",
+            "La discusión va más allá de *correr*: la comunidad debate la *latencia* en *ARM* (más alta que en *x86*) y la *calidad* de la *cuantización* a 4 *bits*. Es la línea de *self-hosting* más activa de la semana, y el *Pi 5* se está convirtiendo en el *benchmark* de referencia para *LLMs* pequeños."
+          ],
+          "tags": [
+            "qwen3.5",
+            "raspberry-pi",
+            "llama-cpp",
+            "gguf",
+            "local-llm"
+          ],
+          "links": [
+            {
+              "label": "Reddit — r/LocalLLaMA (Qwen3.5 Pi5)",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1rj0m27/qwen35_2b_4b_and_9b_tested_on_raspberry_pi5/"
+            }
+          ]
+        },
+        {
+          "title": "*NewsGator*: el agregador de noticias *self-hosted* que resuelve con un *LLM* local",
+          "summary": "*NewsGator* es un agregador de noticias *self-hosted* que *clasifica*, *resuelve* y *resume* las noticias con un *LLM* local, sin enviar nada a la nube. El *repo* (en *r/LocalLLM*) lleva días en *top* del *subreddit*.",
+          "body": [
+            "*NewsGator* es un agregador de noticias *self-hosted* que *clasifica*, *resuelve* y *resume* las noticias con un *LLM* local. El *pipeline* es: *RSS* → *LLM* local → *summary* → *email* o *web*. Es de los pocos proyectos que no necesita una *API* en la nube.",
+            "El *repo* lleva días en *top* del *subreddit* *r/LocalLLM* y la discusión va sobre la *calidad* del *resumen* (el *LLM* local no es tan bueno como *GPT-4*) y la *velocidad* (un *resumen* por *noticia* tarda *segundos* en *GPU*, *minutos* en *CPU*). Es la línea de *self-hosting* más práctica de la semana."
+          ],
+          "tags": [
+            "newsgator",
+            "self-hosted",
+            "news",
+            "local-llm"
+          ],
+          "links": [
+            {
+              "label": "Reddit — r/LocalLLM (NewsGator)",
+              "url": "https://www.reddit.com/r/LocalLLM/comments/1w0tp5s/newsgator_a_selfhosted_news_aggregator_that/"
+            }
+          ]
+        },
+        {
+          "title": "«*A Practical Guide to Self-Hosting an Open Model for Cyber Defense*»: el *blog* de *Hugging Face* para defenderse con *open models*",
+          "summary": "El *blog* de *Hugging Face* (publicado el 26 de octubre) explica cómo *self-host*ear un *open model* para *cyber defense*: *vLLM*, *cuantización* y *guardrails* para un *equipo* de *seguridad* que no puede enviar *tráfico* a la nube. Es la guía más completa que ha salido esta semana.",
+          "body": [
+            "El *blog* parte de un problema: un *equipo* de *seguridad* que no puede enviar *tráfico* de *red* a la nube. La solución: *self-host*ear un *open model* (por ejemplo, *Qwen3.8-27B* o *DeepSeek-V4.1*) y usarlo para *clasificar* *tráfico*, *detectar* *anomalias* y *responder* a *incidentes*.",
+            "La guía cubre *vLLM*, *cuantización* (para que el *modelo* quepa en la *GPU* del *equipo*) y *guardrails* (para que el *modelo* no genere *acciones* peligrosas). Es la guía más completa que ha salido esta semana para *self-hosting* de *LLMs* en *seguridad*."
+          ],
+          "tags": [
+            "cyber-defense",
+            "self-hosting",
+            "vllm",
+            "open-models",
+            "hugging-face"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face blog — Open Model Cyber Defense",
+              "url": "https://huggingface.co/blog/jeffboudier/open-model-cyber-defense"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "ChannelCooperStart/capri-ai",
+        "stars": "★ 170",
+        "desc": "Agente de escritorio inspirado en *Edgerunners* que trabaja con *Claude Code*, *Codex* y *Antigravity*.",
+        "meta": "·",
+        "url": "https://github.com/ChannelCooperStart/capri-ai"
+      },
+      {
+        "name": "aa1143/NamiGPT",
+        "stars": "★ 54",
+        "desc": "Tutorial (en chino) para construir *GPT-2* desde cero en *PyTorch*, línea a línea.",
+        "meta": "Python",
+        "url": "https://github.com/aa1143/NamiGPT"
+      },
+      {
+        "name": "gkjuwon-tech/ouroboros",
+        "stars": "★ 21",
+        "desc": "Compilador *GPU* en *Rust* de un solo archivo, sin dependencias, para *LLMs* *MoE* en portátiles.",
+        "meta": "Rust",
+        "url": "https://github.com/gkjuwon-tech/ouroboros"
+      },
+      {
+        "name": "eugenevinitsky/LocalControl",
+        "stars": "★ 7",
+        "desc": "Reglas de uso en inglés simple que un *LLM* local aplica a *Mac* y *iPhone*.",
+        "meta": "Swift",
+        "url": "https://github.com/eugenevinitsky/LocalControl"
+      },
+      {
+        "name": "Tagiyevff/TagNest",
+        "stars": "★ 5",
+        "desc": "Un *workspace* *local-first* con un escritorio *Linux* real dentro y un *LLM* local.",
+        "meta": "·",
+        "url": "https://github.com/Tagiyevff/TagNest"
+      }
+    ],
+    "papers": [
+      {
+        "title": "PDRVLA: A Vision-Language-Action Model with Physical Dynamics Representations",
+        "authors": "70 upvotes",
+        "url": "https://arxiv.org/abs/2610.37381"
+      },
+      {
+        "title": "The Trinity: Capability-Driven Recursive Self-Improvement for Multimodal Agents",
+        "authors": "60 upvotes",
+        "url": "https://arxiv.org/abs/2610.36077"
+      },
+      {
+        "title": "VibeVideoBench: Evaluating Multimodal Agents on Code-Driven Video Generation",
+        "authors": "11 upvotes",
+        "url": "https://arxiv.org/abs/2610.35864"
+      },
+      {
+        "title": "RynnWorld-Latent: A Cross-Embodiment World Model Conditioned on Universal Latent Actions",
+        "authors": "6 upvotes",
+        "url": "https://arxiv.org/abs/2610.36791"
+      },
+      {
+        "title": "Truncate or Not? A Scaling Study of Looped Transformers with Truncated Backpropagation",
+        "authors": "25 upvotes",
+        "url": "https://arxiv.org/abs/2610.26030"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLaMA",
+        "title": "El tablero de *IA* *open source* que muestra el mejor modelo que tu máquina puede correr",
+        "note": "El *leaderboard* que *rank*ea por *hardware* disponible, no por *benchmark*.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x3wp8c/i_made_an_opensource_ai_leaderboard_that_shows/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "*Qwen3.5* de 2B, 4B y 9B en un *Raspberry Pi 5* — *llama.cpp* y *GGUF*",
+        "note": "La *velocidad* de *decodificación* en *ARM* sigue siendo la gran pregunta.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1rj0m27/qwen35_2b_4b_and_9b_tested_on_raspberry_pi5/"
+      },
+      {
+        "src": "r/LocalLLM",
+        "title": "*NewsGator*: el agregador de noticias *self-hosted* que resuelve con un *LLM* local",
+        "note": "El *pipeline* es *RSS* → *LLM* local → *resumen*, sin nube.",
+        "url": "https://www.reddit.com/r/LocalLLM/comments/1w0tp5s/newsgator_a_selfhosted_news_aggregator_that/"
+      },
+      {
+        "src": "Hugging Face blog",
+        "title": "*A Practical Guide to Self-Hosting an Open Model for Cyber Defense*",
+        "note": "Guía completa para *self-host*ear un *open model* para *seguridad*, con *vLLM* y *guardrails*.",
+        "url": "https://huggingface.co/blog/jeffboudier/open-model-cyber-defense"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

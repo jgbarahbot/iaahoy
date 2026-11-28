@@ -1,0 +1,165 @@
+{
+  "date": "16 de octubre de 2026",
+  "weekday_long": "viernes",
+  "edition": "Edición nº 20",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Meta estrena Muse Spark Open: un MoE de 816B con 42B activos y contexto de 1M, multimodal de texto a vídeo, con pesos abiertos",
+    "summary": "Meta ha publicado Muse Spark Open, su modelo frontera de pesos abiertos: una mixture-of-experts de 816B parámetros totales que solo activa 42B por token, con un contexto de un millón de tokens y optimizado para flujos de trabajo agénticos, sobre todo código. Es nativamente multimodal —acepta y genera texto, imágenes, vídeo y audio— lo que lo sitúa en el escalón superior de los modelos abiertos, por delante de la mayoría de MoEs que hoy circulan en la comunidad. Por sus parámetros, correrlo en local requiere hardware serio (los partners como NVIDIA ya lo sirven en GB300 NVL72), pero Meta lo libera con pesos públicos para que cualquiera pueda inspeccionarlo, adaptarlo y desplegarlo. Es la pieza más grande del catálogo abierto del día y el candidato a nuevo punto de referencia para agentes que trabajen con contexto largo y múltiples modalidades.",
+    "tags": ["open-weights", "moe", "multimodal", "1M-context", "agents", "meta"],
+    "links": [
+      {"label": "Blog de Meta (Hugging Face)", "url": "https://huggingface.co/blog/meta-muse-spark-open"},
+      {"label": "Hugging Face", "url": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "EmbeddingGemma 2: embeddings multimodales de 740M para el dispositivo",
+          "summary": "Google DeepMind ha liberado EmbeddingGemma 2, un modelo de embeddings abierto y ligero de unos 740M de parámetros, construido sobre el decoder de Gemma 4. Es el más capaz para embeddings multimodales on-device: mapea de forma unificada texto (incluido código), imágenes, vídeo y audio en el mismo espacio. Muy útil para RAG, búsqueda semántica y recuperación local sin depender de una API de embeddings cerrada.",
+          "tags": ["embeddings", "multimodal", "on-device", "gemma", "open-source"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/google/embeddinggemma-2"},
+            {"label": "Blog de Google", "url": "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/"}
+          ]
+        },
+        {
+          "title": "MiniCPM-V 4.7 (35B-A3B): multimodal de frontera corriendo en tu móvil",
+          "summary": "OpenBMB ha actualizado MiniCPM-V a la versión 4.7, un MoE de visión-lenguaje de 35B totales con solo 3B activos (A3B), bajo licencia Apache 2.0 y pensado para dispositivos. La demo que está dando de qué hablar lo lleva a un teléfono (iOS y Android) con apenas unos 3GB de memoria, lo que lo convierte en una de las formas más prácticas de tener un modelo multimodal potente y privado en el bolsillo.",
+          "tags": ["multimodal", "moe", "on-device", "apache-2.0", "vision"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B"},
+            {"label": "GitHub", "url": "https://github.com/openbmb/MiniCPM-V"}
+          ]
+        },
+        {
+          "title": "Qwen-Image 2.1 Turbo: generación y edición de imagen unificadas, con pesos abiertos",
+          "summary": "La familia Qwen ha añadido Qwen-Image 2.1-Turbo, un checkpoint acelerado sobre su arquitectura de generación visual de 7B que unifica generación de texto-a-imagen y edición de imagen en un solo modelo. Ya está disponible en pesos abiertos, con variantes GGUF y FP8 para *ComfyUI*, *stable-diffusion.cpp* y *diffusers*, así que puede correr en hardware local y en la nube. Es una de las opciones más completas del momento para crear y retocar imágenes sin depender de un servicio cerrado.",
+          "tags": ["image-generation", "image-editing", "open-weights", "gguf", "diffusers"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo"},
+            {"label": "GitHub", "url": "https://github.com/QwenLM/Qwen-Image-2.1"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "Unlimited-OCR: OCR de documentos largos de un solo paso, de Baidu",
+          "summary": "Baidu ha publicado Unlimited-OCR, un modelo de código abierto (con paper en arXiv) que emula la memoria de trabajo del parseo humano para extraer texto de documentos largos de una sola vez, usando DeepSeek-OCR como base. Ya ha superado el millón de descargas, y su propuesta es hacer el OCR de documentos extensos y estructurado práctico donde antes requería trocear y costoso pipeline.",
+          "tags": ["ocr", "vision", "open-source", "documents", "baidu"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/baidu/Unlimited-OCR"},
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2606.23050"}
+          ]
+        },
+        {
+          "title": "humanizer: un Gemma 4 para reescribir texto y quitarle el tono de IA",
+          "summary": "jialinyyzz/humanizer es un modelo basado en Gemma 4 orientado a reescritura y transferencia de estilo: toma un texto y lo «humaniza» para que suene menos como IA. Ya tiene variantes GGUF listas para *llama.cpp*, así que puede correr localmente. Es una de las pocas herramientas abiertas dedicadas a pulir la voz del texto generado, un problema que muchos equipos enfrentan al publicar contenido con modelos.",
+          "tags": ["text-rewriting", "style-transfer", "gemma", "gguf", "llama.cpp"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/jialinyyzz/humanizer"}
+          ]
+        },
+        {
+          "title": "awesome-agent-evals-and-guardrails: el manual de 40+ páginas para agentes que confías",
+          "summary": "Sarangk90/awesome-agent-evals-and-guardrails se presenta como el manual que faltaba para desplegar agentes de IA con confianza: evals, guardrails y observabilidad para agentes y RAG, con árboles de decisión, cuadros de métricas, un modelo de amenazas OWASP y comparativas de herramientas. Un recurso práctico y abierto para quien está pasando de prototipo a producción con agentes.",
+          "tags": ["agents", "evals", "guardrails", "observability", "security"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/Sarangk90/awesome-agent-evals-and-guardrails"}
+          ]
+        },
+        {
+          "title": "llm-inference-bench: benchmark de inferencia local con informes autocontenidos",
+          "summary": "Lowaltitudeflight/llm-inference-bench mide la inferencia de LLMs self-hosted a través de motores (*vLLM*, *Ollama*) y niveles de cuantización (FP16/INT8/AWQ/GPTQ): barridos de concurrencia, TTFT, TPOT, latencia de cola P99 y curvas de VRAM. Integra Prometheus + Grafana y genera informes HTML autocontenidos. Útil para dimensionar tu hardware antes de comprometerte con un motor o una cuantización.",
+          "tags": ["inference", "benchmark", "self-hosting", "vllm", "ollama"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/Lowaltitudeflight/llm-inference-bench"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "Waypoint-OPD: transferir los cambios que induce el RL mediante destilación on-policy",
+          "summary": "El paper más votado del día (78 votos) propone Waypoint-OPD, un esquema de destilación on-policy con compuertas para transferir los cambios de política que induce el refuerzo: en vez de destilar solo el estado final del maestro, utiliza los shifts antes y después del RL como supervisión sobre trayectorias generadas por el estudiante. Es una receta práctica para llevar las ganancias del RL de un modelo grande a uno más pequeño, algo central para hacer agentes más baratos y capaces.",
+          "tags": ["distillation", "reinforcement-learning", "agents", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.21601"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.21601"}
+          ]
+        },
+        {
+          "title": "VLA-Δ: aprender la transición de estado físico en modelos visión-lenguaje-acción",
+          "summary": "VLA-Δ (24 votos) parte de que la mayoría de modelos VLA mapean directamente observaciones a demostraciones, perdiendo la dinámica del mundo. Propone que aprendan la transición de estado físico, es decir, cómo cambia el entorno al actuar, lo que les da una representación más rica para el control de robots. Un paso más hacia agentes que no solo siguen imitaciones, sino que modelan cómo el mundo reacciona.",
+          "tags": ["vla", "robotics", "world-modeling", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.21306"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.21306"}
+          ]
+        },
+        {
+          "title": "MLExpert: un modelo agéntico generalista para ingeniería de ML autónoma",
+          "summary": "MLExpert (20 votos) apunta a la frontera de AI4AI y auto-mejora recursiva: un modelo agéntico generalista capaz de desarrollar e incrementar sistemas de IA de forma autónoma, moviendo los flujos de trabajo desde la asistencia humana hacia la ejecución independiente. Representa la línea de trabajo donde los agentes dejan de ayudar a construir modelos y empiezan a construirlos por su cuenta.",
+          "tags": ["agents", "ai4ai", "self-improvement", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.22344"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.22344"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "NVIDIA + AI4Bharat: un corpus de pre-entrenamiento indicio de 2,8 billones de tokens y pipeline abierto",
+          "summary": "NVIDIA y AI4Bharat han detallado un corpus abierto de pre-entrenamiento en lenguas indias de 2,8 billones de tokens, junto con un pipeline abierto para generar más datos de lenguaje. Cubre unas 22 lenguas indias (incluida la nepalí) y su objetivo es dar a los builders más material para modelos abiertos que hablen bien esas lenguas. Es un ejemplo de cómo el «open data» empieza a incluir lenguas con poca representación histórica en los modelos grandes.",
+          "tags": ["datasets", "indic", "pretraining", "open-data", "nvidia"],
+          "links": [
+            {"label": "Blog de NVIDIA (Hugging Face)", "url": "https://huggingface.co/blog/nvidia/scaling-indic-pretraining"}
+          ]
+        },
+        {
+          "title": "Qwen3.8-27B en una RTX 5070 Ti Laptop: 256K de contexto y agente local, con código",
+          "summary": "CSUNX233/qwen3.8-27b-ninfer-5070tilaptop-kvmem-local-agent documenta, con código y despliegue para Windows, cómo hacer correr Qwen3.8-27B en una RTX 5070 Ti Laptop de 12GB usando *NInfer* y *KVMem*: 256K de contexto lógico, KV en RAM, MTP y continuado rápido de caché, además de un agente local de búsqueda y navegador. Un caso de referencia muy concreto para exprimir un portátil con una GPU de gama media-alta.",
+          "tags": ["local-llm", "qwen", "inference", "nvidia", "self-hosting"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/CSUNX233/qwen3.8-27b-ninfer-5070tilaptop-kvmem-local-agent"}
+          ]
+        },
+        {
+          "title": "StarLight: un nuevo motor de inferencia de alto rendimiento, escrito en Rust",
+          "summary": "SeekStarAI/StarLight es la base de un nuevo motor de inferencia de LLMs orientado a alto rendimiento, escrito en Rust. Es de los proyectos recientes que apuestan por llevar el control del planificador y de los kernels a un lenguaje compilado para exprimir más el hardware. Aún está en fase temprana (pocos stars), pero vale la pena vigilarlo como alternativa en el ecosistema de motores.",
+          "tags": ["inference", "rust", "engine", "open-source"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/SeekStarAI/StarLight"}
+          ]
+        },
+        {
+          "title": "openai-math: un entorno de refuerzo de matemáticas para agentes de código",
+          "summary": "FineEnvs/openai-math (Apache 2.0) es un entorno de refuerzo centrado en matemáticas pensado para agentes de código: se conecta a la familia *harbor* de entornos RL y sirve como terreno de juego para entrenar y evaluar agentes que resuelven problemas matemáticos. Abrir entornos de RL (no solo datos) es cada vez más frecuente y es oro para quien entrena agentes de razonamiento.",
+          "tags": ["reinforcement-learning", "math", "code-agent", "environments", "open-source"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/datasets/FineEnvs/openai-math"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "date": "16 de noviembre de 2026",
+  "weekday_long": "lunes",
+  "edition": "Edición nº 41",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Salesforce libera *SOV-Transcribe-1*: un *ASR* de pesos abiertos que obedece instrucciones y transcribe hasta 30 minutos de audio",
+    "summary": "Salesforce ha publicado *SOV-Transcribe-1*, un modelo de reconocimiento automático de la voz (ASR, de «automatic speech recognition») no en streaming, con pesos abiertos y licencia *Apache 2.0*, una de las pilas de voz más completas que un gran laboratorio ha puesto en abierto recientemente. La arquitectura es un híbrido: el codificador de audio de *Whisper large-v3* alimenta un *MoE* (de «mixture of experts») de *Gemma 4* con 26.600 millones de parámetros en total pero solo 4.600 millones activos por *token* —coste de cómputo de un modelo medio, capacidad de uno grande—. En vez de una caja negra, el modelo acepta instrucciones en lenguaje natural (transcripción literal o limpiada, puntuación, mayúsculas, formato de números) y un sesgo por contexto con nombres y vocabulario de dominio. Trabaja en siete idiomas —entre ellos el español—, admite hasta 30 minutos de audio por solicitud, y en los *benchmarks* públicos figura como el mejor modelo de pesos abiertos para *speech-to-text* no en *streaming* en *Artificial Analysis* (7.º en general) y como el 2.º de 23 sistemas en *VoiceCodeBench*. Corre en *vLLM* y *Transformers*, y llega con un pequeño modelo borrador para decodificación especulativa (*DFlash*) en su propio repositorio.",
+    "illustration": {
+      "file": "lead-illo-2026-11-16.jpg",
+      "alt": "Estudio de grabación doméstico en la noche: a la izquierda, un micrófono de condensador plateado sobre brazo; en el centro de la mesa de madera oscura, una pequeña plaqueta con bordes de cobre que brilla con luz ámbar cálida, y de ella parte una cinta de luz suave que se curva hacia un ordenado montón de hojas en blanco; al fondo, una estantería baja con tres libros cerrados y una planta en la sombra, iluminada por una sola lámpara cálida desde la parte superior izquierda.",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: la voz se convierte en texto escrito por un modelo de pesos abiertos, en un estudio de grabación doméstico."
+    },
+    "body": [
+      "Salesforce ha puesto bajo licencia abierta uno de los pilares de voz más completos que existen: *SOV-Transcribe-1*, un modelo de reconocimiento automático de la voz (ASR, de «automatic speech recognition») no en *streaming*, con pesos abiertos y licencia *Apache 2.0*, publicado esta semana con su ficha y su blog de lanzamiento en *Hugging Face*. No es una recuantización de una receta ya existente: es un modelo construido como un «lenguaje aumentado con voz», con su propio codificador de audio, su propio proyector y un gran modelo de lenguaje al final. En los días que lleva publicado ya ha generado un hilo animado en *r/LocalLLaMA* (lo veremos en la sección de comunidad) y una avalancha de pruebas sobre grabaciones reales.",
+      "La arquitectura es un híbrido que cuenta mucho del diseño. En el lado del audio usa el probado codificador de *Whisper large-v3*. En el lado del lenguaje, un *MoE* (de «mixture of experts», expertos mezclados) de *Gemma 4* con 26.600 millones de parámetros en total, pero solo 4.600 millones activos por *token* (el router corre en FP32, el resto en BF16). La consecuencia es clara: el coste de cómputo por *token* es el de un modelo medio, mientras que la capacidad en el lado del lenguaje es la de su clase. Es justo ese combo el que permite al modelo aceptar hasta 30 minutos de audio por solicitud (probado) y tratar la transcripción como algo que se puede moldear, no solo imprimir.",
+      "Y ahí está la diferencia. En vez de una caja negra, *SOV-Transcribe-1* acepta instrucciones en lenguaje natural: se le puede pedir una transcripción literal (todos los muletillas, todas las vacilaciones) o una versión limpiada en estilo escrito, y se puede controlar la puntuación, las mayúsculas y el formato de los números. A eso se suma el sesgo por contexto: antes de la llamada se le pueden pasar una lista de nombres, vocabulario técnico de un dominio o una descripción breve del tema, y el modelo los usa para acertar con las palabras difíciles —la característica que decide si una reunión con nombres propios sale usable o no—. Todo ello en siete idiomas: inglés, francés, alemán, español, italiano, portugués y neerlandés.",
+      "Los *benchmarks* publicados son fuertes. *Artificial Analysis* lo sitúa como el mejor modelo de pesos abiertos para *speech-to-text* no en *streaming* (7.º en la lista completa, que incluye sistemas propietarios), y *VoiceCodeBench* —de besimple AI— lo pone como el 2.º de 23 sistemas en precisión de entidades y éxito de tarea, el tipo de errores (un nombre mal escrito, un teléfono incorrecto) que no se pueden pagar en una aplicación real. El lanzamiento además anuncia una tasa de error de palabra (WER, de «word error rate») de 2,28 % en su prueba principal de inglés, un número que lo sitúa cara a cara con la mejor del campo, incluidas las *API* comerciales.",
+      "La vía de despliegue es la de cualquiera que ya corra *vLLM*: un *plugin* nativo para *vLLM* 0.32.0 viaja con el repositorio (el *upstream* en *vLLM* y *Transformers* está en curso), y hay además una implementación autocontenida para *Transformers*, con un procesador que toma el audio y el *prompt*. Para quien quiera velocidad, Salesforce publica en un repositorio aparte un pequeño modelo borrador, *DFlash*, para decodificación especulativa: el borrador propone bloques de *tokens* y el modelo principal los valida. En resumen: un modelo abierto con licencia, *benchmarks* y una vía de producción —uno de los pocos casos en que «abierto» no es un *slogan* sino un *stack* que funciona.",
+      "Las salvedades, para que queden claras: es un modelo no en *streaming* (un lote de archivos, no la transcripción en tiempo real de una llamada viva), y la descarga sin cuantizar en BF16 pesa —26.600 millones de parámetros en BF16 son unos 53 gigabytes en disco—. La comunidad hará lo de siempre: las cuantizaciones, los adaptadores y las primeras integraciones ya están en marcha. Pero para el caso de uso «grabé una reunión y quiero la transcripción en mis manos, en mi infraestructura», es el candidato de pesos abiertos más fuerte del mercado ahora mismo —y la primera vez que un gran laboratorio entrega la pila de voz completa (codificador, proyector, LLM, decodificación especulativa) con licencia abierta de una sola vez."
+    ],
+    "tags": ["asr", "speech-to-text", "open-weights", "salesforce", "gemma-4", "moe", "self-hosting"],
+    "links": [
+      {"label": "Ficha del modelo (Hugging Face)", "url": "https://huggingface.co/salesforce-sovereign-intelligence/SOV-Transcribe-1"},
+      {"label": "Blog de lanzamiento", "url": "https://huggingface.co/blog/salesforce-sovereign-intelligence/sov-transcribe-1"},
+      {"label": "Debate en r/LocalLLaMA", "url": "https://www.reddit.com/r/LocalLLaMA/comments/1t70jz2/salesforce_sovtranscribe1_openweight_asr_model_30/"},
+      {"label": "Nota de prensa (af.net)", "url": "https://af.net.uy/2026-11-16/salesforce-missionforce-lanza-sov-transcribe-1-con-2-28-word-error-rate/"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*Edge0-145B-NVFP4*: un *MoE* de 145.000 millones de parámetros, cuantizado a 4 bits para el *edge*",
+          "summary": "La familia *Qwen3.8-Flash-Next* se amplía: una versión de 145.000 millones de parámetros (22.000 millones activos) reempaquetada en *NVFP4* para inferencia a 4 bits en hardware de *edge*, con *tags* de agentes y código. 41.000 descargas en pocos días —señal de que el nicho «145B en una sola máquina» se está construyendo.",
+          "body": [
+            "La familia *Qwen3.8-Flash-Next* sigue creciendo: *Edge0-145B-NVFP4* es una versión de 145.000 millones de parámetros en total (22.000 millones activos) reempaquetada en *NVFP4* —el formato de 4 bits que el *stack* de *NVIDIA* está empujando— para una inferencia eficiente en lo que sus autores llaman «*edge*» (en la práctica, cajas del tipo *DGX Spark*, con 128 GB de memoria unificada). Los *tags* prometen trabajo de agentes y de código, que es justo donde un modelo de 145B con huella activa pequeña tiene sentido: el router deja pagar por los 22B que trabajan en cada *token*, con los 145B de reserva.",
+            "El interés es concreto: unas 41.000 descargas y 312 *likes* en sus primeros días, y entrada en el *top* de tendencias del *Hub*. No es la primera pista de la semana: la receta *pico-dgx-qwen38* (sección de software) hace trabajo similar con el *Qwen3.8-Flash-Next* oficial de 125B en un *DGX Spark*. Juntas marcan una tendencia: la familia 145B se está convirtiendo en ejecutable en una sola máquina, y la comunidad estandariza el formato."
+          ],
+          "tags": ["moe", "nvfp4", "edge", "qwen", "quantization"],
+          "links": [
+            {"label": "Hugging Face — Edge0/Edge0-145B-NVFP4", "url": "https://huggingface.co/Edge0/Edge0-145B-NVFP4"}
+          ]
+        },
+        {
+          "title": "*Haru-4B*: voz conversacional *full-duplex* en seis idiomas",
+          "summary": "Un modelo de 4B para *speech-to-speech* en *full-duplex*: no espera a que termines de hablar, solapa sus turnos como en una conversación real, y lo hace en seis idiomas —entre ellos el español—. Un paso más hacia asistentes de voz que se pueden autoalojar sin sonar a central telefónica.",
+          "body": [
+            "El laboratorio higurashi-ai publica *Haru-4B*, un modelo de *speech-to-speech* (voz a voz) en modo *full-duplex*: el modelo sigue escuchando mientras el humano habla y puede solapar su propia réplica, el «toma-turno» de una conversación real, frente al patrón clásico de «hablas, cuelgas, esperas». Funciona en inglés, español, portugués, alemán, francés y chino.",
+            "Con 4B de parámetros cabe en la clase de GPU que ya corre los 8B locales, y el modo *full-duplex* es la diferencia: es justo la pieza que hace que un asistente de voz autoalojado se sienta vivo en vez de una central. Los 333 *likes* de sus primeros días dicen que la comunidad está mirando esta línea de desarrollo con atención."
+          ],
+          "tags": ["speech-to-speech", "full-duplex", "voice", "multilingual"],
+          "links": [
+            {"label": "Hugging Face — higurashi-ai/Haru-4B", "url": "https://huggingface.co/higurashi-ai/Haru-4B"}
+          ]
+        },
+        {
+          "title": "La comunidad destila *DeepSeek-V4-Pro* en un 9B «sin censuras»",
+          "summary": "El modelo más *likeado* del *Hugging Face* de la semana es un ajuste fino comunitario: la destilación de *DeepSeek V4 Pro* en un 9B basado en *Qwen3.5-9B*, con alineamiento (SFT + refuerzo + GSPO) y su versión abliterada. 7.600 *likes* y 27.000 descargas en pocos días.",
+          "body": [
+            "Cuando *DeepSeek* publicó *V4 Pro*, la comunidad hizo lo que siempre hace: lo destiló en cuerpos más pequeños. Este, publicado bajo el alias *heretic*, toma *Qwen3.5-9B* como base y vuelca en él el comportamiento del modelo grande —la ficha de *unsloth* lista ajuste fino supervisado (SFT, de «supervised fine-tuning»), refuerzo y GSPO como etapas de alineamiento—, y el «*heretic*» del nombre apunta a la versión abliterada, la que retira el circuito de rechazo.",
+            "Los números dicen que es de los favoritos del mes: unas 7.600 *likes* y 27.000 descargas, *top* del *Hub*. Un 9B con el estilo de un modelo frontera es el tipo de cosa que corre en una sola GPU de consumo, y eso es lo que lo hace relevante: calidad de un modelo muy grande al alcance del ámbito local, con la salvedad obvia de haber retirado las barandillas —una herramienta que conviene usar sabiendo exactamente qué se está haciendo."
+          ],
+          "tags": ["deepseek", "distillation", "finetune", "abliterated", "unsloth"],
+          "links": [
+            {"label": "Hugging Face — DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic", "url": "https://huggingface.co/unsloth/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*agent-harness*: un agente de código en 400 líneas que sabe ponerse límites",
+          "summary": "Un agente de *coding* con *sandbox* en unas 400 líneas de Python puro: un bucle de herramientas clásico, una cárcel de rutas, un *sandbox* a nivel de sistema y una puerta de parada. Y un *benchmark* de corrección de errores con pruebas ocultas para medir modelos locales. El contraprograma a los marcos de agentes hinchados.",
+          "body": [
+            "*agent-harness* (de rkparikh77) es la respuesta minimalista a los marcos de agentes que crecen sin control: un agente de *coding* completo en unas 400 líneas de Python puro. El bucle es el de siempre —razona, llama una herramienta, observa, repite—, pero lo envuelve en la disciplina que a los marcos grandes les falta: una cárcel de rutas que limita al agente al directorio del proyecto, un *sandbox* real a nivel de sistema operativo, y una puerta de parada para cuando el modelo empieza a desbordarse.",
+            "La otra mitad es la que más interesa a la comunidad que se autoaloja: un *benchmark* pequeño de corrección de errores con pruebas ocultas, pensado para medir cómo repara un repositorio un LLM local de verdad —no cómo supera un examen de opción múltiple. Con 143 estrellas en pocos días, es el tipo de proyecto que permite saber qué puede tu modelo local cuando de verdad importa."
+          ],
+          "tags": ["agents", "coding", "sandbox", "benchmark"],
+          "links": [
+            {"label": "GitHub — rkparikh77/agent-harness", "url": "https://github.com/rkparikh77/agent-harness"}
+          ]
+        },
+        {
+          "title": "*trajcheck*: pruebas de regresión para agentes, separando el ruido de la rotura",
+          "summary": "Evaluar agentes es ruidoso: la misma ejecución nunca es la misma. *trajcheck* graba, reproduce y compara estadísticamente las ejecuciones de un agente con intervalos de confianza, para decirte qué cambio rotó algo de verdad y qué fue varianza.",
+          "body": [
+            "Uno de los problemas abiertos del desarrollo de agentes es la prueba de regresión: el mismo *prompt*, con el mismo modelo, produce trayectorias distintas en cada ejecución. *trajcheck* (48 estrellas) ataca justo eso: graba las ejecuciones de un agente (con sus herramientas, sus archivos, su estado externo), las reproduce, y compara las ejecuciones nuevas contra las antiguas con estadística —intervalos de confianza, no impresiones—.",
+            "El objetivo es sencillo: después de un cambio (una versión nueva del modelo, un ajuste de *prompt*, una herramienta añadida), la herramienta te diga qué rotó de verdad, no solo que «los números bajaron», que con un agente puede ser varianza. Es una de las pocas herramientas abiertas para el espacio de pruebas de agentes, donde todavía no hay estándares."
+          ],
+          "tags": ["agents", "testing", "regression", "evaluation"],
+          "links": [
+            {"label": "GitHub — xiaohong1999/trajcheck", "url": "https://github.com/xiaohong1999/trajcheck"}
+          ]
+        },
+        {
+          "title": "*ZeroX*: arreglo de programas con agentes, sin explosión del contexto",
+          "summary": "Un agente ligero de arreglo automático de programas (APR, de «automated program repair») basado en *MCP* y *Nanobot*, construido para evitar las dos enfermedades crónicas de la reparación por LLM: la explosión del contexto y el desperdicio de *tokens*. Meta: arreglar el error, no quemar la ventana.",
+          "body": [
+            "*ZeroX* (155 estrellas) es un agente de arreglo automático de programas (APR, de «automated program repair»): toma un repositorio con un fallo, reproduce el error, propone un arreglo y itera. Su diferencia está en la disciplina de ingeniería: sus autores identifican las dos enfermedades crónicas de la reparación por LLM —la explosión del contexto (el reposorio se come la ventana) y el desperdicio de *tokens* (el modelo vuelve a leer los mismos archivos una y otra vez)— y construyen el agente alrededor de evitarlas.",
+            "Se integra con *MCP* y *Nanobot*, y las 155 estrellas de sus primeros días dicen que hay un nicho real para el «LLM que repara, no solo explica». Para cualquiera que haya probado a hacer que un modelo local arregle una batería de pruebas, este es el siguiente paso: un agente con la disciplina de hacerlo sin desperdiciar el contexto."
+          ],
+          "tags": ["agents", "apr", "mcp", "bug-fixing"],
+          "links": [
+            {"label": "GitHub — jiaz0n/ZeroX", "url": "https://github.com/jiaz0n/ZeroX"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*inside-llm*: ver adentro de un *GGUF*, *token* a *token*",
+          "summary": "Una herramienta que corre en el navegador y abre cualquier *GGUF*: permite comparar dos cuantizaciones *token* a *token* —dónde divergen, qué descarta cada muestreador—. Corre sobre *llama.cpp* (*CUDA* o *Vulkan*), sin servidor. El microscopio de las cuantizaciones.",
+          "body": [
+            "*inside-llm* (49 estrellas) es de las mejores respuestas al problema «la cuantización es una caja negra»: abre un *GGUF* y permite mirar por dentro. Se pueden comparar dos cuantizaciones del mismo modelo *token* a *token*, ver exactamente dónde divergen, y ver qué es lo que cada método de muestreo (*top-k*, *top-p*, *min-P*…) descarta. Sin nube y sin *API*: corre en el navegador sobre *llama.cpp*, con *CUDA* o *Vulkan*.",
+            "Aparece en el momento exacto, justo después de que *llama.cpp* alcanzara la v1.0 (el hito del mes, que ya publicamos la semana pasada), y las 49 estrellas en pocos días dicen que toca una necesidad. Para cualquiera que cuantiza o ajusta modelos localmente, es la herramienta que permite decidir con evidencia y no con sensación: si dos cuantizaciones «suenan igual», esta dice en qué dos por ciento de los *tokens* vive la diferencia."
+          ],
+          "tags": ["gguf", "quantization", "llama.cpp", "introspection"],
+          "links": [
+            {"label": "GitHub — manuelgscom/inside-llm", "url": "https://github.com/manuelgscom/inside-llm"}
+          ]
+        },
+        {
+          "title": "*herbert-jit-q4*: cuantización a 4 bits al vuelo, en el CPU",
+          "summary": "Un motor de inferencia para CPU donde los pesos se cuantizan a 4 bits en el momento de la carga y cada kernel se emite en tiempo de ejecución —el todo detrás de la *API* de *llama-server*. En Rust, y sin depender de un *GGUF* fijo: la precisión es un parámetro, no un formato.",
+          "body": [
+            "*herbert-jit-q4* (8 estrellas, Rust) toma una idea que en GPU ya es de serie —cargar los pesos y cuantizarlos sobre la marcha— y la aplica al CPU: el modelo se carga, los pesos se cuantizan a 4 bits en el momento de la carga, y todos los kernels de inferencia se emiten en tiempo de ejecución, adaptados al procesador. Todo se enchufa a la *API* de *llama-server*: para el cliente es un endpoint más, compatible con el protocolo de siempre.",
+            "Lo interesante es que no depende de un formato de cuantización fijo como *GGUF*: la precisión es un parámetro de ejecución, no una propiedad del archivo. Para quien corre modelos en un portátil o en una máquina vieja sin GPU, es una marcha más de optimización —y un ejemplo del tipo de proyecto de infraestructura que el ecosistema de *llama.cpp* está produciendo ahora mismo."
+          ],
+          "tags": ["cpu", "inference", "jit", "quantization", "rust"],
+          "links": [
+            {"label": "GitHub — huiyidejiushi/herbert-jit-q4", "url": "https://github.com/huiyidejiushi/herbert-jit-q4"}
+          ]
+        },
+        {
+          "title": "*pico-dgx-qwen38*: *Qwen3.8-Flash-Next* en un *DGX Spark*, a 54–88 *tokens/s*",
+          "summary": "Una receta pública para correr el *Qwen3.8-Flash-Next* de 125B (en *NVFP4*) en una única *DGX Spark*: 54–88 *tokens/s* para un usuario, y hasta 288 *tokens/s* con 16 usuarios en paralelo, con la caché KV ajustada. La receta del momento «145B en una sola caja».",
+          "body": [
+            "El *DGX Spark* se ha convertido en el banco de pruebas de la comunidad, y *pico-dgx-qwen38* (9 estrellas) es una receta completa: cómo correr el *Qwen3.8-Flash-Next* de 125B en *NVFP4* sobre una unidad (128 GB de memoria unificada), con la caché KV ajustada. Los números publicados: 54–88 *tokens/s* para un usuario, y hasta 288 *tokens/s* en total con 16 usuarios en paralelo.",
+            "El valor está en la reproducibilidad: no una captura de «a mí me funciona», sino una receta con la configuración. Junto al *Edge0-145B-NVFP4* de la sección de modelos, marca la tendencia de la semana: la familia de 145B se está volviendo ejecutable en una sola máquina, y la comunidad está produciendo las primeras recetas con números reales."
+          ],
+          "tags": ["dgx-spark", "nvfp4", "self-hosting", "inference", "recipe"],
+          "links": [
+            {"label": "GitHub — mao-guoqing/pico-dgx-qwen38", "url": "https://github.com/mao-guoqing/pico-dgx-qwen38"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*Gamer*: el VLA generalista para agentes que juegan en tiempo real",
+          "summary": "El *paper* con más *upvotes* del día en *Hugging Face* (49): un modelo de fundación *VLA* (visión-lenguaje-acción) generalista para agentes que juegan juegos de horizonte largo en tiempo real, con percepción, memoria y razonamiento a varios pasos entrenados de forma unificada —y un solo despliegue para todos los juegos.",
+          "body": [
+            "El *top* de la lista de *papers* del día se lo lleva *Gamer*, un modelo de fundación *VLA* (visión-lenguaje-acción, de «vision-language-action») para agentes de juego. El problema que ataca no es «jugar a un juego concreto», sino «jugar a cualquiera»: tareas de horizonte largo, en tiempo real (no se puede pensar diez segundos entre decisiones), con la percepción, la memoria y el razonamiento a varios pasos entrenados juntos.",
+            "Lo interesante es la apuesta arquitectónica: en vez de un pipeline especializado por juego, un solo modelo entrenado sobre muchos y desplegado sobre todos —el «fundación» del título. Es la línea *VLA* (nacida en robótica) aplicada al mundo de los juegos interactivos, donde la velocidad del bucle de acción es la restricción más dura. Para quien trabaje con agentes locales, es una lectura útil sobre cómo estructurar la memoria y el razonamiento bajo tiempo real."
+          ],
+          "tags": ["vla", "foundation-model", "agents", "games", "real-time"],
+          "links": [
+            {"label": "Hugging Face Papers — Gamer", "url": "https://huggingface.co/papers/2611.11643"}
+          ]
+        },
+        {
+          "title": "*MMFlash*: decodificación especulativa para modelos visuales-lenguaje",
+          "summary": "Inferencia más rápida en *VLMs*: un modelo de difusión que propone bloques enteros de *tokens* de imagen de una vez, y el modelo principal los valida en un solo paso. El truco clásico de la decodificación especulativa, aplicado al mundo multimodal (21 *upvotes*).",
+          "body": [
+            "El truco clásico de aceleración de LLMs es la decodificación especulativa: un modelo pequeño propone un bloque de *tokens*, y el grande los valida en un solo paso. *MMFlash* aplica eso a los modelos visuales-lenguaje (*VLM*) con un giro: el «modelo pequeño» es una red de difusión que propone bloques enteros de *tokens* de imagen de una vez, y el *VLM* principal valida el bloque sin coste *token* a *token*.",
+            "Con 21 *upvotes*, es el *paper* del día para quien corra modelos de imagen en producción: la ganancia potencial en la fase de *decode* de los *VLMs* es del mismo orden de la que la decodificación especulativa dio a los LLMs de texto, pero para una modalidad donde aplicarla es más difícil (una imagen no es una secuencia de *tokens* independientes)."
+          ],
+          "tags": ["vlm", "speculative-decoding", "diffusion", "inference"],
+          "links": [
+            {"label": "Hugging Face Papers — MMFlash", "url": "https://huggingface.co/papers/2611.06627"}
+          ]
+        },
+        {
+          "title": "*JVT*: difusión de vídeo en espacio de píxeles, sin latentes",
+          "summary": "Un «*Just Video Transformer*» que hace difusión de vídeo directamente en espacio de píxeles, con un *DiT* simple de parches grandes. La apuesta contra el latente del VAE: menos piezas, y el modelo trabaja sobre la misma imagen que verá el usuario (12 *upvotes*).",
+          "body": [
+            "*JVT* (Just Video Transformer) hace una apuesta contra la arquitectura dominante del vídeo generativo: en vez de difundir en el espacio latente de un VAE, trabaja directamente en espacio de píxeles con un *DiT* (transformador de difusión, de «diffusion transformer») simple de parches grandes. Menos piezas en movimiento: ni codificador-decodificador que entrenar, ni un espacio intermedio que optimizar; el modelo trabaja sobre los píxeles que va a generar.",
+            "Con 12 *upvotes*, es uno de los *papers* de la semana en la línea de «simplificar»: la comunidad está cuestionando si el latente del VAE merece su complejidad en vídeo, y este es un test limpio de la pregunta. Lectura útil para cualquiera que trabaje con generación de vídeo autoalojada."
+          ],
+          "tags": ["video", "diffusion", "dit", "pixel-space"],
+          "links": [
+            {"label": "Hugging Face Papers — JVT", "url": "https://huggingface.co/papers/2611.10750"}
+          ]
+        },
+        {
+          "title": "*MEM-SQL*: *text-to-SQL* que recuerda lo que le preguntaste antes",
+          "summary": "Un modelo *text-to-SQL* basado en memoria: cuando se consulta la misma base de datos, el modelo sabe qué se le pidió antes y lo usa. Un paso hacia el análisis de datos conversacional (11 *upvotes*).",
+          "body": [
+            "La debilidad clásica del *text-to-SQL* es que cada consulta es un huérfano: el modelo no sabe qué le pidió el analista antes, y la conversación se pierde. *MEM-SQL* añade memoria a la ecuación: cuando se consulta la misma base de datos, el modelo incorpora las preguntas previas y produce consultas coherentes con lo que el usuario está haciendo.",
+            "Es una pieza pequeña, pero un paso hacia lo que todo el que usa un LLM local con una base de datos quiere: un analista que recuerda. El enfoque por memoria (guardar el contexto relevante de la sesión, no el historial completo) es el práctico para un entorno de producción, donde la ventana de contexto es el recurso escaso."
+          ],
+          "tags": ["text-to-sql", "memory", "llm", "data-analysis"],
+          "links": [
+            {"label": "Hugging Face Papers — MEM-SQL", "url": "https://huggingface.co/papers/2611.05615"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*r/LocalLLaMA* pone *SOV-Transcribe-1* a prueba en sus grabaciones",
+          "summary": "El hilo de la semana: la comunidad está probando el nuevo *ASR* de Salesforce sobre grabaciones reales —reuniones, *podcasts*, llamadas con acento— y compartiendo sus primeras configuraciones y resultados. El hilo funciona como la guía más actualizada de cómo correrlo.",
+          "body": [
+            "El lanzamiento de *SOV-Transcribe-1* (la portada) ha generado un hilo activo en *r/LocalLLaMA*, de hace dos días y aún creciendo. Los usuarios lo están corriendo sobre grabaciones reales —reuniones, *podcasts*, llamadas con acento— y comparando resultados con lo que usan hoy (el *Whisper* large, las *API* comerciales). El hallazgo más repetido: el sesgo por contexto con nombres propios es la característica que lo cambia todo para quien transcribe reuniones.",
+            "El hilo también hace de guía práctica: los primeros que lo han conseguido en marcha comparten la configuración en *vLLM*, la memoria que consume, y las cuantizaciones que la comunidad ya está preparando. Para quien esté leyendo esta edición, el hilo es la forma más rápida de ver qué están sacando otros antes de comprometerse con la descarga de 53 gigabytes."
+          ],
+          "tags": ["community", "asr", "reddit", "self-hosting"],
+          "links": [
+            {"label": "r/LocalLLaMA — hilo de SOV-Transcribe-1", "url": "https://www.reddit.com/r/LocalLLaMA/comments/1t70jz2/salesforce_sovtranscribe1_openweight_asr_model_30/"}
+          ]
+        },
+        {
+          "title": "*r/LocalLLM*: cuánto «pensamiento» conviene, de verdad, para el código",
+          "summary": "El debate de siempre vuelve con datos: un hilo en *r/LocalLLM* demuestra que poner el razonamiento al máximo no es automáticamente la mejor configuración para *coding* —a veces, menos «pensamiento» es tan preciso y muy rápido.",
+          "body": [
+            "En un hilo de *r/LocalLLM* se reabre uno de los debates más persistentes de la escena local: cuánta «tasa de pensamiento» conviene para tareas de código. El usuario que lo publicó lo midió: en vez de la creencia de que «siempre al máximo», probó distintos niveles de esfuerzo de razonamiento, y sus datos muestran que para muchas tareas de *coding* la configuración media es tan precisa como la máxima, a una fracción de la latencia.",
+            "Es un buen recordatorio de que la regla «cuánto más piense, mejor» de los modelos de razonamiento no es una línea recta, y depende de la tarea. Para quien corra un modelo local con recursos limitados, el hilo es un mapa práctico de dónde el esfuerzo extra merece la pena y dónde es puro coste."
+          ],
+          "tags": ["community", "reasoning", "coding", "reddit", "local-llm"],
+          "links": [
+            {"label": "r/LocalLLM — hilo sobre razonamiento en coding", "url": "https://www.reddit.com/r/LocalLLM/comments/1tsq93k/but_they_demonstrate_why_turning_thinking_all_the_way/"}
+          ]
+        },
+        {
+          "title": "*NVIDIA Cosmos 3*: checkpoints abiertos para simulación del mundo interactiva",
+          "summary": "El blog de *Hugging Face* del 6 de este mes repasa los nuevos *checkpoints* de pesos abiertos de *Cosmos 3*: modelos del mundo para simulación interactiva, la línea que *NVIDIA* empuja junto a *Omniverse*. Un paso más para los «modelos del mundo» con licencia abierta.",
+          "body": [
+            "El blog de *Hugging Face* del 6 de este mes resume la publicación de *NVIDIA Cosmos 3*: los nuevos *checkpoints* de pesos abiertos de sus «modelos del mundo» para simulación interactiva —modelos que aprenden cómo se comporta un mundo para poder simularlo, la línea que *NVIDIA* viene empujando junto a *Omniverse*. El post repasa los nuevos *checkpoints* y cómo usarlos.",
+            "Lo relevante para esta audiencia: los pesos son abiertos (con la salvedad de siempre de leer la licencia de cada *checkpoint* del catálogo de *NVIDIA*), y la línea de los modelos del mundo es de las que más espacio tienen para el autoalojamiento: simuladores, *playgrounds* de agentes, pruebas de sistemas autónomos. Un buen momento para mirarlos antes de que la ola de ajustes finos los convierta en un catálogo enorme."
+          ],
+          "tags": ["world-model", "nvidia", "simulation", "open-weights"],
+          "links": [
+            {"label": "Hugging Face Blog — New NVIDIA Cosmos 3 Open Models for Interactive World Simulation", "url": "https://huggingface.co/blog/nvidia/new-nvidia-cosmos-3-open-models-for-interactive-world-simulation"}
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "mao-guoqing/pico-dgx-qwen38",
+        "stars": "★ 9",
+        "desc": "Receta: *Qwen3.8-Flash-Next* (125B, *NVFP4*) en una *DGX Spark*, con caché KV ajustada y hasta 288 *tokens/s* con 16 usuarios.",
+        "meta": "Python · MIT",
+        "url": "https://github.com/mao-guoqing/pico-dgx-qwen38"
+      },
+      {
+        "name": "codyoss/jobfit",
+        "stars": "★ 3",
+        "desc": "Empareja una oferta de trabajo con un *CV* usando el LLM y el marco de agentes que ya tengas: una capa de *prompts* portables.",
+        "meta": "Python · MIT",
+        "url": "https://github.com/codyoss/jobfit"
+      },
+      {
+        "name": "kianmeng/colab-maya-ds4-256g",
+        "stars": "★ 2",
+        "desc": "Correr el *DeepSeek-V4.1-Flash* (748B, *MoE* de 61B activos) en *Colab* G4/*A100* con la receta de *Project Maya*.",
+        "meta": "Python · MIT",
+        "url": "https://github.com/kianmeng/colab-maya-ds4-256g"
+      },
+      {
+        "name": "yueycc/navvied-agent",
+        "stars": "★ 1",
+        "desc": "Agente de *coding* agnóstico de proveedor: un único motor y un protocolo de eventos, con frentes de *CLI*, web y escritorio.",
+        "meta": "TypeScript",
+        "url": "https://github.com/yueycc/navvied-agent"
+      },
+      {
+        "name": "cybermaksx/ai-security-resources",
+        "stars": "★ 2",
+        "desc": "Recorrido curado por la seguridad de la IA: ataques a apps LLM, agentes y *MCP*, y laboratorios prácticos de *PortSwigger*.",
+        "meta": "Python · Other",
+        "url": "https://github.com/cybermaksx/ai-security-resources"
+      }
+    ],
+    "papers": [
+      {
+        "title": "Gamer: A Generalist Vision-Language-Action Foundation Model for Long-Horizon Real-Time Game Agents",
+        "authors": "49 upvotes",
+        "url": "https://huggingface.co/papers/2611.11643"
+      },
+      {
+        "title": "MMFlash: Accelerating Vision-Language Models via Speculative Decoding",
+        "authors": "21 upvotes",
+        "url": "https://huggingface.co/papers/2611.06627"
+      },
+      {
+        "title": "JVT: Just Video Transformer with Pixel-space Diffusion",
+        "authors": "12 upvotes",
+        "url": "https://huggingface.co/papers/2611.10750"
+      },
+      {
+        "title": "MEM-SQL: A Memory-Based LLM for Text-to-SQL",
+        "authors": "11 upvotes",
+        "url": "https://huggingface.co/papers/2611.05615"
+      },
+      {
+        "title": "eDIAR: Training-Free Streaming Speaker Diarization with Whisper Encoder Features",
+        "authors": "4 upvotes",
+        "url": "https://huggingface.co/papers/2611.12143"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLaMA",
+        "title": "¿Qué es el próximo modelo local que te ilusiona?",
+        "note": "El hilo clásico de la escena: *Ernie 5.5 Flash*, y lo que viene después.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1l85k4o/whats_the_next_local_model_you_are_excited_about/"
+      },
+      {
+        "src": "XDA",
+        "title": "Montar un resumen de noticias local me enseñó que el problema no eran las apps",
+        "note": "Cronista de lo que de verdad se rompe al armar la cadena *RSS* → LLM en casa.",
+        "url": "https://www.xda-developers.com/building-a-local-llm-news-brief-taught-me-that-my-real-problem-wasnt-the-apps/"
+      },
+      {
+        "src": "onyx.app",
+        "title": "Una tabla de clasificación de *self-hosting*, abierta",
+        "note": "Un *leaderboard* de los modelos que de verdad corren en tu hardware, sin nube.",
+        "url": "https://onyx.app/self-hosted-llm-leaderboard/"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "*LocalLLaMA*, la sala de espera de la IA local",
+        "note": "Un hilo sobre por qué ese subreddit sigue siendo el mejor sitio para estar al día con los modelos locales.",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1lsq623/localllama_is_unironically_one_of_the_best_places_to/"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

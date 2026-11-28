@@ -1,0 +1,454 @@
+{
+  "date": "13 de noviembre de 2026",
+  "weekday_long": "viernes",
+  "edition": "Edición nº 38",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*llama.cpp* llega a la versión 1.0: la piedra sobre la que se construye la IA local, tras tres años y medio",
+    "summary": "Tras tres años y medio de desarrollo, *ggml-org* ha publicado *llama.cpp v1.0.0* y *ggml v1.0.0*, la primera versión estable del motor que convirtió en viable la inferencia local de modelos de lenguaje en prácticamente cualquier hardware. El anuncio, publicado hoy en el blog de *Hugging Face*, introduce el compromiso de versionado semántico que la comunidad llevaba tiempo pidiendo: de ahora en adelante, solo un salto de versión mayor romperá la API pública, mientras los menores incorporan funcionalidades compatibles y los parches, correcciones. El proyecto, con más de 134.000 estrellas en *GitHub* y soporte para más de 150 variantes de arquitectura, expande además su distribución a ocho canales, desde artefactos de pre-lanzamiento para cinco sistemas operativos hasta *Docker*, *Debian*, *Homebrew* y *conda-forge*. Es, a todas luces, el momento en que el ecosistema local de IA deja de ser experimental y empieza a funcionar como una infraestructura madura.",
+    "body": [
+      "El camino de *llama.cpp* hasta la 1.0 es, en miniatura, la historia de la IA local. Nacido en marzo de 2023 como un motor de inferencia en C/C++ capaz de correr modelos cuantizados en CPU, el proyecto creado por *ggerganov* y su comunidad evolucionó hasta convertirse en el estándar de facto del self-hosting: cuantización, backends optimizados por plataforma y una implementación lo bastante portátil para ir de un portátil a un servidor de empresa. Tres años y medio después, el equipo de *ggml-org* —que hoy trabaja dentro de *Hugging Face*— publica las versiones 1.0.0 de las dos librerías que lo componen: *libllama*, la capa de inferencia de modelos, y *libggml*, la librería de tensores sobre la que descansa todo, cada una con sus cabeceras públicas estables. El propio anuncio se presenta como «la plataforma más ligera, versátil y sensata para construir productos de IA cross-platform y privados», y subraya, palabra a palabra, que la nueva versión es una responsabilidad hacia los miles de desarrolladores que dependen de ella.",
+      "En la práctica, la versión 1.0 cambia una cosa concreta y muy importante: el significado de los números. La tabla que *ggml-org* publicó con el anuncio establece que el salto de MAJOR se reservará, desde ahora, a los cambios que rompan la API pública C; el MINOR corresponderá a funcionalidades compatibles, nuevas backends y soporte de modelos; y el PATCH, a correcciones sin cambio de API. No es un detalle burocrático. Durante años, cualquier dependiente de *libllama* —desde un servidor de inferencia casero hasta las aplicaciones de escritorio *Llama* para macOS y Windows que el propio equipo distribuye junto a *Hugging Face*— tuvo que asumir que la API podía cambiar sin previo aviso y reconstruir sus integraciones. Con la versión estable, los ciclos de integración dejan de ser una lotería, y el equipo anuncia que será «más estricto» para que esas fronteras entre versiones sean visibles para quien construye sobre ellas.",
+      "La otra mitad del hito es la distribución. *ggml-org* confirma ocho canales de publicación: artefactos de pre-lanzamiento para Linux, macOS, Windows, Android e iOS; imagen *Docker*; paquetes *Debian*; fórmulas *Homebrew*; canal *conda-forge*; *MacPorts*; *Winget* para Windows y *XCFramework* para iOS y macOS. Para el usuario no técnico, que el motor de inferencia aparezca empaquetado en el repositorio oficial de su sistema operativo es la diferencia entre instalarlo y compilarlo a mano. En el otro extremo, los backends de *ggml* siguen compilándose como librerías dinámicas que se cargan en tiempo de ejecución, la lista de arquitecturas de modelo soportadas supera las 150, y todos los métodos principales de decodificación especulativa están cubiertos.",
+      "El desarrollo se apoya, cada vez más, en infraestructura a escala: el equipo usa *Hugging Face Buckets* y *Hugging Face Jobs* para garantizar la corrección de cada cambio que entra en la rama principal, y una red de máquinas de CI autoalojadas con hardware de NVIDIA, AMD, Qualcomm, Arm, IBM e Intel cubre las plataformas principales. La comunidad también responde al hito: el proyecto supera hoy las 134.000 estrellas en *GitHub* bajo licencia *MIT*, y el anuncio se ha convertido en la conversación del día en *r/LocalLLaMA*, donde la celebración del cambio de era convive con los viejos reproches de que la versión estable se merecía hacía años.",
+      "Visto desde fuera, una versión 1.0 puede parecer una formalidad. Para un ecosistema, es un contrato. La mayor parte de los productos de IA privada —clientes, servidores, herramientas de cuantización, integraciones con *Hugging Face* y *ComfyUI*— depende, de una u otra forma, de *llama.cpp*; que su equipo se comprometa a no romper interfaces sin versión mayor, y a repartir el motor por todos los almacenes oficiales del mundo, reduce el riesgo para cualquiera que apueste por la inferencia local. Es el hito que el self-hosting llevaba esperando desde 2023: dejar de ser un campo de pruebas y convertirse, por fin, en un cimiento."
+    ],
+    "tags": [
+      "llama_cpp",
+      "versionado_semantico",
+      "ia_local",
+      "ecosistema"
+    ],
+    "links": [
+      {
+        "label": "Blog de Hugging Face: llama.cpp v1.0.0",
+        "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+      },
+      {
+        "label": "GitHub: lanzamientos de llama.cpp",
+        "url": "https://github.com/ggml-org/llama.cpp/releases"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*MiniMax* libera *H3-Image*: imágenes de 16 megapíxeles en seis pasos, con pesos abiertos",
+          "summary": "El laboratorio chino *MiniMax* ha abierto los pesos de *H3-Image*, su nuevo modelo de generación y edición de imágenes basado en la arquitectura de vídeo *H3*. Genera y edita imágenes de hasta 4096×4096 píxeles —16 megapíxeles— en apenas seis pasos de muestreo, y un solo modelo cubre tanto la generación desde texto como la edición a partir de una imagen de referencia. Está en *Hugging Face* desde hace una semana (ya con más de 430.000 descargas) y tiene soporte nativo en *ComfyUI*; la letra pequeña: la licencia es «other», sin cobertura para la Unión Europea.",
+          "body": [
+            "MiniMax no es nuevo en modelos multimodales de gran formato, pero *H3-Image* marca una línea: el laboratorio reutiliza la arquitectura de su modelo de vídeo *H3* para la imagen y la abre al público con los pesos disponibles. La apuesta técnica es la velocidad: seis pasos de muestreo para llegar a 16 megapíxeles, una combinación que hasta ahora solo ofrecían los modelos cerrados de máxima gama, y la conveniencia de que un único checkpoint haga las dos cosas, generar desde el texto y editar con una imagen de referencia. El ecosistema reaccionó al instante: *Comfy-Org* publicó un nodo para *ComfyUI* en cuestión de días, y el hilo de *r/LocalLLaMA* donde se presentó el modelo convirtió en debate el punto débil del lanzamiento.",
+            "Ese punto es la licencia. *MiniMax* la define como «other» en la tarjeta de *Hugging Face*: los pesos son descargables y se pueden usar, pero el contrato no es una licencia libre al uso, y los análisis del lanzamiento —por ejemplo, el de *datanorth*— subrayan que el texto no da cobertura a usuarios en la Unión Europea. Para el usuario casero que lo va a correr en casa la diferencia es casi cosmética; para quien quiera integrar el modelo en un producto, el matiz importa. De momento, el modelo ya acumula casi un millar de «me gusta» y más de 430.000 descargas en pocos días, lo que dice bastante sobre el hambre de alternativas abiertas en el terreno de la imagen.",
+            "El contexto del resto de la semana refuerza la lectura: la imagen generativa es el frente donde la diferencia entre modelos cerrados y abiertos se ha acortado más rápido, y un modelo de 16 megapíxeles con pesos abiertos, aunque sea con licencia restrictiva, sigue siendo una pieza importante para quien quiere producir sin depender de la nube."
+          ],
+          "tags": [
+            "minimax",
+            "generacion_de_imagen",
+            "pesos_abiertos"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face: MiniMaxAI/MiniMax-H3-Image",
+              "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image"
+            },
+            {
+              "label": "GitHub: Comfy-Org/MiniMax-H3-Image-ComfyUI",
+              "url": "https://github.com/Comfy-Org/MiniMax-H3-Image-ComfyUI"
+            },
+            {
+              "label": "r/LocalLLaMA: MiniMax H3-Image Released",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xso1ie/minimax_h3image_released_an_openweight_image/"
+            }
+          ]
+        },
+        {
+          "title": "*ZONOS3-Mini* de *Zyphra*: clonación de voz en tiempo real, en tu teléfono",
+          "summary": "*Zyphra* ha publicado *ZONOS3-Mini*, un modelo de síntesis de voz con licencia *Apache-2.0* y unos 100 millones de parámetros activos, pequeño lo bastante para clonar una voz en tiempo real directamente sobre el dispositivo: en un teléfono o en una pestaña del navegador. Además de la clonación zero-shot desde una muestra de audio, incorpora diseño de voz por descripción y control de la entrega a nivel de palabra. Habla inglés y francés, y cuatro días después de su lanzamiento ya supera las 13.000 descargas en *Hugging Face*.",
+          "body": [
+            "La síntesis de voz local ha estado históricamente atrapada en un dilema: o modelos grandes y realistas que exigen una GPU, o modelos ligeros que suenan a autómata. *ZONOS3-Mini* ataca el dilema por el tamaño: con unos 100 millones de parámetros activos, *Zyphra* lo diseña para correr sobre el propio dispositivo, en el teléfono o en el navegador, con clonación de voz en tiempo real. La tarjeta de *Hugging Face* lo anuncia con licencia *Apache-2.0*, soporte para inglés y francés, y la capacidad de clonar una voz a partir de un clip corto, diseñar una voz nueva desde una descripción, y controlar la entonación y la entrega palabra a palabra.",
+            "Que el clonado de voz queje suene natural con un modelo tan pequeño, y sin salir del dispositivo, cambia el cálculo de la privacidad: la voz, como dato biométrico, deja de cruzar la red. En la comunidad, el modelo se está instalando ya como la opción abierta por defecto para demos y productos que necesitan voz personal sin nube, y los casi 300 «me gusta» acumulados en cuatro días sugieren que la adopción será rápida."
+          ],
+          "tags": [
+            "tts",
+            "clonacion_de_voz",
+            "on_device"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face: Zyphra/ZONOS3-Mini",
+              "url": "https://huggingface.co/Zyphra/ZONOS3-Mini"
+            },
+            {
+              "label": "Zyphra: ZONOS3-Mini",
+              "url": "https://www.zyphra.com/models/zonos3-mini"
+            }
+          ]
+        },
+        {
+          "title": "*Arete-27B* de *Nous Research*: alineamiento por valores, con ajuste fino supervisado",
+          "summary": "En un momento en que el alineamiento por refuerzo (*RLHF*) ocupa las portadas, *Nous Research* publica *Arete-27B*: un ajuste fino supervisado (SFT) sobre *Qwen3.8-27B* orientado al alineamiento por valores, con licencia *Apache-2.0*. El modelo, del pasado 6 de noviembre, se entrena con pares de datos propios que *Nous* también publica en *Hugging Face*, y se dirige a quienes quieren un 27B multimodal abierto que responda «decentemente» sin depender de un pipeline de refuerzo.",
+          "body": [
+            "La alineación de los modelos abiertos tiene dos caminos: el costoso y opaco, que entrena con refuerzo a partir de preferencias humanas, y el transparente, que ajusta el modelo con pares de datos de ejemplo. *Nous Research* acaba de recorrer el segundo con *Arete-27B*, un derivado del *Qwen3.8-27B* —el 27B multimodal que este mes lleva dominando las listas de *Hugging Face*— al que han aplicado un ajuste fino supervisado centrado en lo que el propio proyecto llama alineamiento por valores: que el modelo responda de forma honesta y útil sin el disfraz de la evasiva, y sin las sorpresas del refuerzo.",
+            "Lo notable no es solo el modelo, sino el método: *Nous* publica también el dataset de pares con el que lo entrenó, de modo que cualquiera puede inspeccionar qué se pidió y qué se premió, e incluso replicar el ajuste sobre otra base. Para la comunidad que desconfía de las cajas negras del alineamiento, este es el tipo de transparencia que la diferencia de los laboratorios que solo publican el resultado."
+          ],
+          "tags": [
+            "nous_research",
+            "alineacion",
+            "sft"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face: NousResearch/Arete-27B",
+              "url": "https://huggingface.co/NousResearch/Arete-27B"
+            },
+            {
+              "label": "Hugging Face: dataset arete-data-pairs",
+              "url": "https://huggingface.co/datasets/NousResearch/arete-data-pairs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*risk-aware-trading-agents*: agentes de trading que no pueden ver el futuro",
+          "summary": "El proyecto que más creció en GitHub esta semana (107 estrellas desde ayer) ataca el fallo que la mayoría de las demos de trading con LLMs esconde: la visión hacia adelante. El repositorio trae un dataset de 2026 en el punto en el tiempo (precios, VIX y noticias), una verificación de look-ahead que se ejecuta en cada corrida, agentes LLM conectados por *MCP*, regímenes sensibles a FOMC, CPI y VIX, y trading en papel y en vivo sobre diez brókers.",
+          "body": [
+            "La mayoría de los sistemas de trading con LLMs que circulan por las redes tienen un problema estructural: sus backtests se alimentan de datos que, vistos desde el pasado, ya incluyen la respuesta. El proyecto *risk-aware-trading-agents*, publicado ayer y con centenario de estrellas al día siguiente, lo resuelve por construcción: su dataset de 2026 es «punto en el tiempo» —precios, VIX y noticias tal como eran en cada fecha— y una verificación de look-ahead corre en cada ejecución para detectar que el agente no esté usando información que aún no existía.",
+            "Sobre esa base, el sistema orquesta agentes LLM a través de *MCP*, con regímenes de mercado sensibles a FOMC, CPI y VIX, y puede operar en papel o en vivo a través de diez brókers de acciones de EE. UU. La licencia es *MIT*, el lenguaje, Python, y el repositorio combina un componente en chino y uno en inglés, seña de la comunidad que lo construye. Para quien toma en serio a los agentes financieros, este es el tipo de proyecto que fija el estándar mínimo: si tu backtest puede ver el futuro, no es un backtest."
+          ],
+          "tags": [
+            "agentes",
+            "trading",
+            "mcp"
+          ],
+          "links": [
+            {
+              "label": "GitHub: jackson-cmd/risk-aware-trading-agents",
+              "url": "https://github.com/jackson-cmd/risk-aware-trading-agents"
+            }
+          ]
+        },
+        {
+          "title": "*websec-lab-agent*: un agente que resuelve los laboratorios de seguridad de *PortSwigger*",
+          "summary": "Un caso de uso concreto y verificable: un agente LLM que resuelve por sí mismo los laboratorios de *PortSwigger Web Security Academy*. Corre un bucle *ReAct* con seguridad por lista blanca y límite de tasa, mide su tasa de resolución con y sin pistas, y trae una interfaz *Streamlit* que permite reproducir cada paso como «tarjetas de conocimiento».",
+          "body": [
+            "Los laboratorios de *PortSwigger* son el gimnasio estándar para aprender seguridad web: cientos de escenarios, desde inyecciones SQL a fallos de autorización, con una única forma de saber si los has resuelto bien —acertar—. *websec-lab-agent* pone un agente LLM a resolverlos de forma autónoma, y lo interesante no es la hazaña sino el diseño: el bucle de razonamiento es un *ReAct* clásico, la seguridad se resuelve con una lista blanca de acciones y un límite de tasa, y la evaluación compara la tasa de resolución del agente con pistas frente a la que obtiene sin ellas, un medidor honesto de cuánto se apoya en el contexto y cuánto lo resuelve de verdad.",
+            "Sobre la evaluación, la interfaz *Streamlit* permite reproducir cada resolución como tarjetas de conocimiento: qué intentó el agente, qué falló, qué descubrió. Ocho estrellas por ahora, licencia *MIT*, y un uso que va más allá del juguete: un simulador barato para evaluar cómo de capaz es cualquier LLM para razonar sobre seguridad, sin tocar un sistema real."
+          ],
+          "tags": [
+            "seguridad",
+            "react",
+            "evaluacion"
+          ],
+          "links": [
+            {
+              "label": "GitHub: gritant/websec-lab-agent",
+              "url": "https://github.com/gritant/websec-lab-agent"
+            }
+          ]
+        },
+        {
+          "title": "*one-prompt-video*: de una frase a un MP4, sin modelos de vídeo",
+          "summary": "Un skill de agente que invierte el flujo de producción de vídeo: en lugar de pedir a un LLM que genere vídeo, le pide que rellene un único *video.json*, y una sola orden renderiza el *MP4* con música y subtítulos. Sin modelo de generación de vídeo, sin navegador, y pensado para que funcione incluso con modelos pequeños; corre en Windows, macOS y Linux.",
+          "body": [
+            "La producción de vídeo con IA se ha identificado casi siempre con los modelos de generación: pedirles un clip de segundos y esperar. *one-prompt-video* propone el camino contrario, y es el que ya usan muchos editores: el LLM no genera vídeo, lo describe. El skill le pide al modelo que rellene un único archivo *video.json* —escenas, textos, música, ritmo— y una sola orden renderiza el *MP4* final con la música y los subtítulos puestos. La diferencia no es cosmética: el resultado no depende de un modelo de vídeo de varios gigabytes, sino de cualquier LLM que sepa escribir bien, por pequeño que sea.",
+            "Publicado ayer, en JavaScript, con licencia *MIT*, y pensado explícitamente para los tres sistemas operativos de escritorio, es de esos proyectos pequeños que resumen una tendencia de fondo: la mejor forma de aprovechar un LLM no es siempre pedirle que haga la parte más cara del trabajo, sino que la planifique."
+          ],
+          "tags": [
+            "agentes",
+            "video",
+            "skills"
+          ],
+          "links": [
+            {
+              "label": "GitHub: li2092/one-prompt-video",
+              "url": "https://github.com/li2092/one-prompt-video"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*yasakani*: motor local para Windows y una *RTX 5090*, afinado para *Qwen3.8-27B*",
+          "summary": "Mientras *llama.cpp* persigue la portabilidad universal, *yasakani* persigue lo contrario: la velocidad máxima en un caso concreto. Es un motor de LLM local para Windows sobre una única GPU *RTX 5090*, construido específicamente para *Qwen3.8-27B*, y publicado ayer con la intención de exprimir la tarjeta hasta el fondo.",
+          "body": [
+            "Hay dos filosofías de motor de inferencia local. Una, la de *llama.cpp*, optimiza la portabilidad: compilar en cualquier plataforma, correr en cualquier cosa. La otra, la de *yasakani*, optimiza el caso concreto: Windows, una *RTX 5090*, un modelo, *Qwen3.8-27B*, y nada más. El proyecto, publicado ayer bajo licencia *Apache-2.0* y escrito en Python, se declara desde el primer commit: no pretende ser un motor universal, pretende que el 27B que domina *Hugging Face* corra en una sola tarjeta de sobremesa a la máxima velocidad posible.",
+            "Veinte y cinco estrellas en un día, y un mensaje claro para la comunidad: la era en que «un motor lo corre todo» no es incompatible con la era en que «un motor lo corre todo bien en tu máquina». Con *RTX 5090*s llenando los escritorios, los motores afinados por hardware van a multiplicarse, y este es el primero de la semana en hacerlo público."
+          ],
+          "tags": [
+            "ia_local",
+            "windows",
+            "inferencia"
+          ],
+          "links": [
+            {
+              "label": "GitHub: yasakani-dev/yasakani",
+              "url": "https://github.com/yasakani-dev/yasakani"
+            }
+          ]
+        },
+        {
+          "title": "*lorasmith*: ajuste fino LoRA y QLoRA en Rust, sin Python",
+          "summary": "Ajustar un LLM abierto sobre tus propios datos con un solo comando: eso promete *lorasmith*, escrito íntegramente en Rust, con soporte para LoRA y QLoRA, y que corre «en cualquier GPU o ninguna». La apuesta es romper la dependencia del ecosistema Python en las tareas de ajuste fino, sin renunciar a la calidad del resultado.",
+          "body": [
+            "El ajuste fino de modelos abiertos tiene hoy un problema de dependencia: todo el stack, desde *Hugging Face Transformers* hasta los optimizadores, respira Python, y quien no vive de ese lenguaje tiene que aceptarlo como coste de entrada. *lorasmith* intenta romper esa dependencia: LoRA y QLoRA reimplementados en Rust, con una sola orden que pasa de tus datos a un adapter, y sin necesidad de una GPU («en cualquier GPU o ninguna», dice su lema, aunque la velocidad diga lo contrario)."
+          ],
+          "tags": [
+            "rust",
+            "lora",
+            "ajuste_fino"
+          ],
+          "links": [
+            {
+              "label": "GitHub: RegaLabs/lorasmith",
+              "url": "https://github.com/RegaLabs/lorasmith"
+            }
+          ]
+        },
+        {
+          "title": "*zigferencer*: un motor de inferencia de LLMs en Zig, publicado hoy",
+          "summary": "El más joven de la semana: *zigferencer* es «un motor de inferencia de LLMs pequeño» escrito en Zig, el lenguaje que empieza a aparecer en la infraestructura local, publicado hoy por la tarde. Dos estrellas por ahora, pero la lista de lenguajes del ecosistema de inferencia —C, C++, Python, Rust— acaba de crecer.",
+          "body": [
+            "El ecosistema de inferencia local se ha asentado, prácticamente, en cuatro lenguajes: C y C++ para *llama.cpp* y compañía, Python para el ecosistema *Hugging Face*, y Rust para la generación de proyectos que no quieren pagar en runtime lo que Python cobra. Hoy se ha sumado un quinto, y no cualquiera: *zigferencer*, un motor de inferencia de LLMs «pequeño» escrito en Zig, publicado esta misma tarde en *GitHub* (licencia *MIT*).",
+            "Zig tiene argumentos de sobra para estar aquí: sin recolector de basura, control explícito de memoria, y un compilador que enlaza sin fricción con C, es el candidato natural para motores de inferencia que quieren rendimiento sin el peso de un runtime. Dos estrellas y un README son poco para juzgar, pero el patrón de las últimas semanas —un motor nuevo en Rust, otro en Zig, uno más por hardware— sugiere que la infraestructura local está pasando de la era de «cualquiera que compile» a la de «el lenguaje que mejor encaja»."
+          ],
+          "tags": [
+            "zig",
+            "inferencia",
+            "lenguajes"
+          ],
+          "links": [
+            {
+              "label": "GitHub: JoshPuerta/zigferencer",
+              "url": "https://github.com/JoshPuerta/zigferencer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*Open Vision Banana*: la receta completamente abierta para la percepción visual generativa",
+          "summary": "El paper más votado de la semana (25 votos en *Hugging Face*) parte de una observación que se ha consolidado en los últimos meses: los generadores de imagen preentrenados codifican una comprensión del mundo que va más allá de la síntesis. El trabajo enmarca las tareas de visión como edición condicional de imagen y publica, por fin, la receta completa: datos, pesos, código e implementación.",
+          "body": [
+            "La línea que empieza con la idea de «Vision Banana» —usar un generador de imagen preentrenado como cerebro visual, formulando las tareas de percepción como edición condicional de imágenes— tenía un problema: funcionaba, pero sus ingredientes no eran públicos. *Open Vision Banana* resuelve el problema: el paper documenta y libera la receta completa, datos, pesos, código e implementación, para que cualquiera pueda reproducir la pipeline, no solo citarla.",
+            "La apuesta de fondo es que los modelos de generación, entrenados a recrear el mundo visual, almacenan de paso una representación del mundo que sirve para razonar sobre él. Que la receta quede abierta convierte esa intuición en un resultado replicable, y en una herramienta: percepción visual sin el coste de un modelo de visión dedicado, sobre pesos que ya existen."
+          ],
+          "tags": [
+            "vision",
+            "generativo",
+            "receta_abierta"
+          ],
+          "links": [
+            {
+              "label": "arXiv: 2611.15844",
+              "url": "https://arxiv.org/abs/2611.15844"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2611.15844"
+            }
+          ]
+        },
+        {
+          "title": "*DeepStress*: poner a los agentes de búsqueda profunda bajo fuego de artillería",
+          "summary": "Los agentes de búsqueda profunda brillan en preguntas de varias etapas, pero su robustez ante evidencias de baja calidad se ha explorado poco: ese tipo de material escasea en los corpus de benchmark, y los fallos que produce son difíciles de reproducir. *DeepStress* construye, para encontrarlos, un banco de pruebas de estrés con ese tipo de evidencia.",
+          "body": [
+            "Un agente de búsqueda profunda responde a una pregunta haciendo preguntas: busca, lee, descarta, vuelve a buscar. Los benchmarks le ponen preguntas limpias, con fuentes limpias, y ahí los agentes rinden de maravilla. El problema aparece cuando la evidencia es sucia —confusa, contradictoria, de baja calidad—, y ahí es donde los benchmarks fallan, porque ese material rara vez se encuentra en los corpus y, cuando el agente falla, el fallo es casi imposible de reproducir.",
+            "*DeepStress* aborda ese vacío: su banco de pruebas inyecta deliberadamente evidencia de baja calidad en el camino del agente, para medir cuánto aguanta antes de dar por buena una respuesta equivocada. Cuatro votos en *Hugging Face*, pero es el tipo de trabajo que va a definir la siguiente generación de evaluaciones de agentes: no cuánto saben responder, sino cuánto saben dudar."
+          ],
+          "tags": [
+            "agentes",
+            "robustez",
+            "evaluacion"
+          ],
+          "links": [
+            {
+              "label": "arXiv: 2607.13920",
+              "url": "https://arxiv.org/abs/2607.13920"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2607.13920"
+            }
+          ]
+        },
+        {
+          "title": "¿Aprende la tarea o aprende al verificador? El dilema de la exposición de criterios",
+          "summary": "Varios trabajos recientes exponen los criterios de éxito del benchmark al agente que se auto-mejora, una práctica que este paper llama exposición de criterios. La pregunta que plantea es la que debería preocupar a cualquiera que evalúe la auto-mejora: al final, ¿el agente aprende la tarea, o aprende a contentar al verificador?",
+          "body": [
+            "La auto-mejora de agentes encarnados —los que actúan en simulaciones robóticas— se compara cada vez más con los mismos benchmarks, y una práctica reciente ha pasado a ser habitual: mostrarle al agente que aprende los criterios de éxito del benchmark, de modo que sepa hacia dónde dirigirse. *Learning the Task or Learning the Verifier* estudia esa práctica —a la que llama exposición de criterios— y pone sobre la mesa la duda: si el agente sabe cómo se mide el éxito, ¿aprende a tener éxito, o aprende a parecer que lo tiene?",
+            "Cinco votos en *Hugging Face*, y una lección de método que trasciende el ámbito robótico: cuando se expone el verificador al que se aprende, la métrica deja de medir la tarea y empieza a medir la complacencia del verificador. Un recordativo para todo el que diseñe un sistema de auto-mejora, agente o no."
+          ],
+          "tags": [
+            "auto_mejora",
+            "evaluacion",
+            "agentes_encarnados"
+          ],
+          "links": [
+            {
+              "label": "arXiv: 2611.08318",
+              "url": "https://arxiv.org/abs/2611.08318"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2611.08318"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "La comunidad de *r/LocalLLaMA* celebra el cambio de era de *llama.cpp*",
+          "summary": "La 1.0 de *llama.cpp* se ha convertido en el termómetro del momento: un hito técnico que la comunidad de *r/LocalLLaMA* celebra como un cambio de era para el self-hosting, no como una simple actualización de número.",
+          "body": [
+            "Los hitos de *llama.cpp* suelen generar dos reacciones: los que celebran y los que recuerdan que la 1.0 ya «se merecía hace dos años». Las reacciones en *r/LocalLLaMA* muestran un equilibrio inusual entre ambas: se leen como celebración, pero también como el cierre de una etapa. Destacan, sobre todo, el compromiso de versionado semántico y la expansión de la distribución a los repositorios oficiales, lo que para muchos usuarios no técnicos significa que *llama.cpp* por fin deja de ser «ese proyecto que hay que compilar».",
+            "El dato que da la escala: el proyecto supera hoy las 134.000 estrellas en *GitHub*, una cifra que sigue creciendo casi a diario. Cuando el motor sobre el que descansa el self-hosting crece a este ritmo, el ecosistema no está estabilizándose: está entrando en corriente principal."
+          ],
+          "tags": [
+            "comunidad",
+            "llama_cpp",
+            "adopcion"
+          ],
+          "links": [
+            {
+              "label": "Blog de Hugging Face: llama.cpp v1.0.0",
+              "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+            },
+            {
+              "label": "GitHub: lanzamientos de llama.cpp",
+              "url": "https://github.com/ggml-org/llama.cpp/releases"
+            }
+          ]
+        },
+        {
+          "title": "Guía práctica: autoalojar un modelo abierto para la ciberdefensa",
+          "summary": "En el blog de *Hugging Face*, *Jeff Boudier* publica una guía práctica para autoalojar un modelo abierto con fines de ciberdefensa: qué modelo, cómo servirlo, y cómo integrarlo en un flujo de análisis sin enviar el dato sensible a la nube. Un caso de uso donde la privacidad no es negociable, y el self-hosting deja de ser una preferencia y pasa a ser un requisito.",
+          "body": [
+            "La ciberdefensa es de los pocos ámbitos en que el self-hosting no es un capricho de privacidad sino una restricción operativa: los datos que se analizan (incidentes, logs, malware, tráfico) no pueden salir de la red. *A Practical Guide to Self-Hosting an Open Model for Cyber Defense* es la guía que el blog de *Hugging Face* dedica a ese escenario: cómo montar un modelo abierto local para el trabajo diario de análisis defensivo, con el pragmatismo de quien ha montado este tipo de pipelines antes.",
+            "El artículo encaja en la corriente de la semana: la infraestructura local de IA madura, y con ella, los casos de uso que antes solo tenían sentido en la nube. Cuando una guía práctica de *Hugging Face* trata el self-hosting como lo que es —una decisión de ingeniería con criterios de elección—, el mensaje para la comunidad no puede ser más claro."
+          ],
+          "tags": [
+            "self_hosting",
+            "ciberdefensa",
+            "guia_practica"
+          ],
+          "links": [
+            {
+              "label": "Blog de Hugging Face: la guía",
+              "url": "https://huggingface.co/blog/jeffboudier/open-model-cyber-defense"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "jackson-cmd/risk-aware-trading-agents",
+        "stars": "★ 107",
+        "desc": "Agentes LLM de trading para EE. UU. con backtesting punto en el tiempo y verificación de look-ahead en cada corrida",
+        "meta": "Python · MIT",
+        "url": "https://github.com/jackson-cmd/risk-aware-trading-agents"
+      },
+      {
+        "name": "yasakani-dev/yasakani",
+        "stars": "★ 25",
+        "desc": "Motor de LLM local para Windows sobre una única RTX 5090, afinado para Qwen3.8-27B",
+        "meta": "Python · Apache-2.0",
+        "url": "https://github.com/yasakani-dev/yasakani"
+      },
+      {
+        "name": "gritant/websec-lab-agent",
+        "stars": "★ 8",
+        "desc": "Agente que resuelve autónomamente los laboratorios de seguridad de PortSwigger (ReAct, Streamlit)",
+        "meta": "Python · MIT",
+        "url": "https://github.com/gritant/websec-lab-agent"
+      },
+      {
+        "name": "li2092/one-prompt-video",
+        "stars": "★ 4",
+        "desc": "Skill de agente: una frase en, un MP4 con música y subtítulos fuera, sin modelo de generación de vídeo",
+        "meta": "JavaScript · MIT",
+        "url": "https://github.com/li2092/one-prompt-video"
+      },
+      {
+        "name": "RegaLabs/lorasmith",
+        "stars": "★ 2",
+        "desc": "Ajuste fino LoRA y QLoRA en Rust, sin Python, en un solo comando",
+        "meta": "Rust · Apache-2.0",
+        "url": "https://github.com/RegaLabs/lorasmith"
+      }
+    ],
+    "papers": [
+      {
+        "title": "Open Vision Banana: A Fully Open Recipe for Generative Visual Perception",
+        "authors": "25 upvotes",
+        "url": "https://arxiv.org/abs/2611.15844"
+      },
+      {
+        "title": "Learning the Task or Learning the Verifier? Rethinking Criteria Exposure in Embodied Self-Improvement",
+        "authors": "5 upvotes",
+        "url": "https://arxiv.org/abs/2611.08318"
+      },
+      {
+        "title": "DeepStress: Stress-Testing Deep Search Agents",
+        "authors": "4 upvotes",
+        "url": "https://arxiv.org/abs/2607.13920"
+      },
+      {
+        "title": "JustRUA: A Controlled Study of GPT-6 Robot-Use Agents",
+        "authors": "3 upvotes",
+        "url": "https://arxiv.org/abs/2611.16009"
+      },
+      {
+        "title": "Unbundling Multimodal Vision Encoding",
+        "authors": "2 upvotes",
+        "url": "https://arxiv.org/abs/2611.17334"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLaMA",
+        "title": "MiniMax publica H3-Image: imagen abierta sobre la arquitectura de vídeo",
+        "note": "el debate de la semana: 16 megapíxeles en seis pasos, y una licencia que no cubre la UE",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xso1ie/minimax_h3image_released_an_openweight_image/"
+      },
+      {
+        "src": "Hugging Face",
+        "title": "mlx-community: ZONOS3-Mini para Apple Silicon",
+        "note": "la versión de la comunidad para correr el clonador de voz en un Mac",
+        "url": "https://huggingface.co/mlx-community/ZONOS3-Mini"
+      },
+      {
+        "src": "GitHub",
+        "title": "cruxwire: el agregador de noticias autoalojado con LLM",
+        "note": "clasifica, deduplica y resume tus feeds RSS en tu propio hardware",
+        "url": "https://github.com/philoking/cruxwire"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por *Hermes*, usando *Qwen3.8-27B* (vLLM), para que lo disfrutes y te sea útil."
+  }
+}

@@ -1,0 +1,347 @@
+{
+  "date": "23 de noviembre de 2026",
+  "weekday_long": "lunes",
+  "edition": "Edición nº 48",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*Inkling 2 Mini*: el multimodal de 26B de *Thinking Machines* que compite con modelos diez veces mayores",
+    "summary": "*Thinking Machines*, el laboratorio fundado por *Mira Murati* tras su paso por *OpenAI*, ha publicado *Inkling 2 Mini*, un modelo multimodal de pesos abiertos con 26.000 millones de parámetros en total y solo 3.000 millones activos por token, una red de expertos con mezcla (*MoE*, de «mixture of experts»). Acepta imagen y texto como entrada, soporta un contexto de un millón de tokens, y su formato de precisión mixta, ya disponible en *GGUF* vía *Unsloth* y *llama.cpp*, lo vuelve viable en hardware de consumo. En las tablas públicas encabeza entre los modelos de pesos abiertos de menos de 100B en *DeepSWE v1.1* (48,2%) y en el índice *Vals Index v2*. El hilo en *r/LocalLLaMA* arrancó con más de 1.700 votos y casi 500 comentarios, y la comunidad ya está cuantizando y ajustándolo en cuestión de horas.",
+    "body": [
+      "El nombre suena modesto, pero detrás hay el laboratorio fundado por *Mira Murati* y *Inkling 2 Mini* es su apuesta por un modelo que quepa en la máquina de un desarrollador sin renunciar a capacidad. La clave está en la arquitectura: es una red de expertos con mezcla (*MoE*) con 26B de parámetros en total, de los que solo 3B se activan por token. Ese truco de activar en cada paso una fracción pequeña del modelo es lo que permite que, pese a los 26B totales, la inferencia en un portátil o en una GPU de consumo sea razonablemente rápida. El modelo acepta entrada de imagen y de texto — es un modelo de imagen y texto a texto — y soporta un contexto de un millón de tokens, una cifra que lo sitúa en la misma liga de memoria de trabajo que los modelos grandes.",
+      "Lo que más ha movido a la comunidad es lo fácil que resulta meterlo en casa. *Thinking Machines* publica el modelo en un formato de precisión mixta, y los *GGUF* ya están disponibles a través de *Unsloth* y de *llama.cpp*, de modo que basta con un conversor de pesos y un servidor local para tenerlo funcionando. No hace falta un clúster: el punto de partida es un portátil o una sola GPU. Para quienes quieren ajustarlo con aprendizaje por refuerzo (*RL*), el informe técnico señala como vías de *fine-tuning* herramientas como *Miles*, *SkyRL* y *NVIDIA NeMo AutoModel*, y en el ecosistema ya han aparecido variantes *uncensored* que muestran cómo se ha movilizado la cuantización en cuestión de horas.",
+      "En números, el posicionamiento es ambicioso y concreto: *Inkling 2 Mini* lidera entre todos los modelos de pesos abiertos con menos de 100B de parámetros en *DeepSWE v1.1* con un 48,2%, y también encabeza el índice *Vals Index v2*. Son benchmarks de razonamiento y de código, justo donde se espera que brille. El propio laboratorio lo describe como un modelo de propósito general orientado a desarrolladores: agentes, uso de herramientas y asistentes de programación son los casos de uso que pone al frente. No compite en tamaño con los *frontier* de cientos de miles de millones de parámetros; su objetivo es otro, que la capacidad que hasta ahora pedía hardware de *datacenter* quepa en una máquina que cabe en la mochila.",
+      "Que un multimodal con un millón de tokens de contexto y esta puntuación corra en local cambia la ecuación del *self-hosting*. Un modelo pequeño, abierto y ya cuantizado es lo que permite montar un asistente privado que no envía una sola petición fuera de la red. Y al venir de un laboratorio con nombre propio, la conversación en *r/LocalLLaMA* no es «¿va bien?» sino «qué *GGUF* de *Unsloth* me deja correr y cuánta RAM me pide» — el hilo arrancó con más de 1.700 votos y cerca de 500 comentarios, la señal de que este es el modelo que la comunidad va a meter en el portátil esta semana."
+    ],
+    "tags": ["inkling-2-mini", "thinking-machines", "moe", "multimodal", "local-llm", "open-weights"],
+    "links": [
+      {"label": "Thinking Machines", "url": "https://thinkingmachines.ai/news/inkling-2-mini/"},
+      {"label": "Model card", "url": "https://thinkingmachines.ai/model-card/inkling-2-mini/"},
+      {"label": "Hugging Face", "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"},
+      {"label": "GGUF (Unsloth)", "url": "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF"},
+      {"label": "r/LocalLLaMA", "url": "https://www.reddit.com/r/LocalLLaMA/comments/1y1diuk/thinkingmachinesinkling2mini_moe_26b_a3b/"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*Clover-35B-A3B*: el primer modelo de difusión de *DiffuSpace*, 35B con 3B activos",
+          "summary": "*DiffuSpace* estrena *Clover-35B-A3B-Preview*, el primer modelo que publica el laboratorio: una red *MoE* de unos 35B parámetros en total y 3B activos, con una novedad de fondo — no es un *transformer* autorregresivo, sino un *block diffusion language model* que genera bloques de tokens en paralelo. Con 128K de contexto, el informe técnico lo presenta como el mejor entre los modelos de difusión de pesos abiertos, y los pesos y una implementación en *Hugging Face* ya están disponibles.",
+          "body": [
+            "*Clover-35B-A3B* toma un *MoE* de unos 35B parámetros y lo reordena como modelo de difusión por bloques: en lugar de predecir un token a la vez, genera grupos de tokens por paso, lo que reduce el número de pasos de inferencia y abre la puerta a una generación más rápida. El informe técnico (publicado en *arXiv* y con los pesos liberados) lo posiciona como el mejor entre los modelos de lenguaje de difusión de pesos abiertos, con 128K de contexto.",
+            "La relevancia no está tanto en la escala — 3B activos, comparable a otros modelos compactos — sino en la apuesta por una familia de generación alternativa al *transformer* clásico. Para quien trabaja con modelos locales, es una vía a seguir de cerca: la difusión por bloques puede cambiar el coste y la latencia de la inferencia sin renunciar a la calidad."
+          ],
+          "tags": ["diffusion-lm", "moe", "diffuspace", "block-diffusion"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2611.24636"},
+            {"label": "GitHub", "url": "https://github.com/AmesianX/clover-35b-a3b-preview"}
+          ]
+        },
+        {
+          "title": "*Rumble-2-Flash*: reconocimiento de voz abierto de 0,5B para 40 idiomas, apto para el móvil",
+          "summary": "*Reson8*, un estudio de Ámsterdam, ha liberado *Rumble-2-Flash*, un modelo abierto de reconocimiento de voz (*ASR*, de «automatic speech recognition») de apenas 0,5B de parámetros que soporta más de 40 idiomas con detección automática de idioma. Bajo licencia *Apache 2.0*, es pequeño y ligero lo bastante para correr en un teléfono, y se apunta a despliegues en el *edge*.",
+          "body": [
+            "El punto fuerte es la combinación de tamaño y alcance: 0,5B de parámetros y más de 40 idiomas con detección automática, con licencia *Apache 2.0*. Eso lo hace práctico para transcripción local, en el móvil o en dispositivos de *edge*, donde un modelo grande de voz no cabe o no responde a tiempo.",
+            "Para la comunidad del *self-hosting* es una alternativa seria a los transcritores grandes: un modelo de voz que puedes correr en casa, sin enviar el audio a una nube, y con un coste computacional asumible. Es el tipo de pieza que encaja bien en un pipeline local de notas de voz, pequeño lo bastante como para ir a donde va la red."
+          ],
+          "tags": ["speech", "asr", "open-weights", "edge"],
+          "links": [
+            {"label": "HyperAI", "url": "https://hyper.ai/en/stories/f21a02eb186bc1fb5f61f479e3db7f16"},
+            {"label": "daily.dev", "url": "https://daily.dev/posts/rumble-2-flash-an-open-speech-to-text-model-small-enough-for-a-phone-8lcq8vkco"}
+          ]
+        },
+        {
+          "title": "*LTX-2.5*: el modelo de video de *Lightricks* pasa de los 13.000 me gusta",
+          "summary": "La familia *LTX* de *Lightricks* sigue creciendo: *LTX-2.5*, su modelo de generación de video de pesos abiertos, ya supera los 13.000 me gusta en *Hugging Face*, un hito de adopción que lo sitúa entre los más descargados de su clase. Es la referencia con más tracción para quien quiere generar video localmente.",
+          "body": [
+            "*Lightricks* lleva tiempo en la delantera de los modelos de video de pesos abiertos, y *LTX-2.5* consolida esa posición: más de 13.000 me gusta en *Hugging Face* en muy poco tiempo. Para el flujo de *self-hosting* de video, es hoy la opción con más usuarios de las que hay.",
+            "La cifra de adopción, más que los benchmarks, es la señal útil aquí: cuanto más grande es la base de usuarios y contribuyentes alrededor de un modelo de video, antes maduran las versiones ligeras y las integraciones locales, y antes cae el coste de usarlo en casa."
+          ],
+          "tags": ["video", "diffusion", "lightricks", "local-llm"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/Lightricks/LTX-2.5"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*project-docs*: memoria de proyecto para agentes de código, como documentos del repositorio",
+          "summary": "*project-docs* guarda la memoria de un proyecto como documentos del propio repositorio que se reescriben in situ: los hechos convergen y se actualizan en lugar de acumularse en un log. Pensado para agentes de código que necesitan recordar qué se decidió y por qué, sin re-inflar el contexto en cada turno.",
+          "body": [
+            "La idea es tratar la memoria de un proyecto como un set de documentos del repositorio que se reescribe por convergencia: cuando un hecho cambia, el documento se actualiza in situ en vez de añadir una nueva entrada. Para un agente de código que trabaja a lo largo de muchas sesiones, esto mantiene el conocimiento compacto y actualizado, sin volver a cargar todo el historial cada turno.",
+            "Es un patrón útil para cualquier agente que trabaje en repositorios reales: en vez de volcar todo el historial, el agente lee un par de documentos consolidados que resumen el estado. Bajo licencia *MIT*, es un bloque de construcción para agentes de mantenimiento de código."
+          ],
+          "tags": ["agents", "memory", "coding-agents"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/mq-yuan/project-docs"}
+          ]
+        },
+        {
+          "title": "Un agente *GIS* que traduce subtareas en llamadas a *arcpy* sobre *ArcGIS Pro*",
+          "summary": "*arcgis-pro-mcp-demo* es el worker de un «Super-Agent» de cartografía: recibe subtareas en lenguaje natural, las traduce en llamadas a *arcpy* y las ejecuta sobre *ArcGIS Pro* a través de 16 herramientas *MCP* para análisis espacial y cartografía. Un ejemplo concreto de agente de dominio con un set de herramientas muy específico.",
+          "body": [
+            "El demo conecta un agente de dominio al mundo *GIS*: el worker recibe una subtarea, la traduce en llamadas *arcpy* y las ejecuta contra *ArcGIS Pro*, exponiendo 16 herramientas *MCP* para análisis espacial y cartografía. Es el caso de un agente con un conjunto de herramientas muy concreto, del tipo «llama al software de escritorio y haz el trabajo».",
+            "Interesa a quien quiere dar a un agente acceso a software de sobremesa pesado: el patrón de traducir lenguaje natural a llamadas a la API de un programa de escritorio, y ejecutarlo de forma controlada, es reutilizable mucho más allá de la cartografía."
+          ],
+          "tags": ["agents", "mcp", "gis", "tool-use"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/xiaohuajia2005/arcgis-pro-mcp-demo"}
+          ]
+        },
+        {
+          "title": "*agent-tool-result-reducer*: comprime resultados *JSON* grandes sin perder datos",
+          "summary": "Este proyecto reduce los resultados *JSON* grandes que devuelven las herramientas antes de pasarlos al LLM, de modo que el agente no gaste contexto en ruido sin perder información útil. Un pequeño pero práctico truco para agentes que trabajan con *MCP* y *APIs* verbosas.",
+          "body": [
+            "Cuando un agente llama a una herramienta o a una *API*, la respuesta puede ser un *JSON* enorme lleno de campos que no importan. *agent-tool-result-reducer* comprime ese resultado antes de inyectarlo en el contexto, eliminando el ruido pero conservando los datos que de verdad importan, de forma determinista y sin pérdida silenciosa.",
+            "Es el tipo de micro-optimización que separa a un agente que cabe en la ventana de uno que no: con menos tokens por respuesta, el mismo presupuesto de contexto rinde para más pasos. Sin dependencias, es fácil de integrar en cualquier pipeline de agentes."
+          ],
+          "tags": ["agents", "context", "tool-use", "mcp"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/AryabhattaLabs/agent-tool-result-reducer"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*FREELLM_INSTALL*: un solo extremo *OpenAI*-compatible para muchas capas de LLMs gratis",
+          "summary": "El repositorio más en tendencia del día ofrece un solo punto de acceso compatible con *OpenAI* frente a varias capas gratuitas de modelos: añades tus propias claves de proveedor y el enrutador elige automáticamente el proveedor más fiable y disponible. Orientado a meter varios modelos gratuitos detrás de la misma *API*, sin cambiar el cliente.",
+          "body": [
+            "La propuesta es un enrutador que expone un único extremo compatible con *OpenAI* ante un conjunto de proveedores y modelos gratuitos. El usuario aporta sus propias claves y el sistema elige el proveedor más fiable y disponible, de modo que puedes alternar entre varios modelos gratis sin tocar el cliente. Bajo licencia *MIT*.",
+            "Con más de 250 estrellas en una jornada, es una de las formas más prácticas de exprimir el ecosistema de modelos gratuitos y *serverless*: un extremo estable, y detrás, una rotación de proveedores que se gestiona sola."
+          ],
+          "tags": ["inference", "router", "openai-compatible", "free-llm"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/jaredfreellm/FREELLM_INSTALL"}
+          ]
+        },
+        {
+          "title": "*Hugging Face* presenta *harness adapters*: adapta tu modelo a tu *harness*",
+          "summary": "*Hugging Face* anuncia *harness adapters*, una forma de adaptar un modelo a un *harness* — el marco de agentes o de inferencia donde lo ejecutas — para mejorar rendimiento y coste. La idea: ajustar cómo se integra un modelo con el pipeline que lo usa, en vez de reentrenar el modelo entero.",
+          "body": [
+            "Un *harness* es el envoltorio que rodea a un modelo: el orquestador de agentes, el *system prompt*, las herramientas, el enrutado. *Hugging Face* propone *harness adapters*, adaptadores que ajustan cómo se comporta un modelo dado dentro de un *harness* concreto, para sacarle más rendimiento y menos coste, sin retrenar el modelo de fondo.",
+            "Es una capa intermedia interesante: separa el modelo (que puedes reutilizar) del *harness* (que varía con la aplicación). Si funciona como promete, permite a un equipo usar el mismo modelo en varios *harness* y afinar cada integración por separado, algo que el propio laboratorio demostró con un modelo abierto de 27B."
+          ],
+          "tags": ["harness", "hugging-face", "agents", "adapters"],
+          "links": [
+            {"label": "Hugging Face blog", "url": "https://huggingface.co/blog/harness-adapters-at-scale"}
+          ]
+        },
+        {
+          "title": "*awesome-free-search-apis*: llaves de búsqueda para AIs que no pueden buscar",
+          "summary": "Este repositorio reúne claves de *APIs* gratuitas de búsqueda, recuperación y *embedding* para los modelos que no pueden buscar por sí solos, reclamadas y verificadas por la comunidad. Un listado práctico para dar capacidad de búsqueda a un agente local sin coste.",
+          "body": [
+            "Muchos modelos locales no tienen búsqueda integrada, y un agente que no puede buscar está a medio camino. *awesome-free-search-apis* reúne *APIs* gratuitas de búsqueda, *fetch* y *embedding*, con las claves reclamadas y verificadas, de modo que un agente local pueda consultar *web* sin pagar.",
+            "Es el tipo de recurso que resuelve un hueco muy concreto del *self-hosting*: el acceso a información externa. Mantenerlo al día es el trabajo de la comunidad, y encaja con la corriente de dar capacidades reales a modelos que corren en casa."
+          ],
+          "tags": ["search", "agents", "apis", "free-llm"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/waw666waw666/awesome-free-search-apis"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*cmHC*: mezcla de flujos en hiperconexiones con contracción geométrica",
+          "summary": "El paper más votado del día, *cmHC*, estudia la mezcla de flujos residuales en las «hiperconexiones» y la acota dentro del polígono de Birkhoff mediante contracción geométrica, lo que mejora la estabilidad y la escalabilidad del entrenamiento. Una pieza de investigación de fondo sobre cómo mezclar las señales entre capas, no sobre modelos concretos.",
+          "body": [
+            "Las hiperconexiones generalizan la conexión residual clásica dejando que cada capa se mezcle con varias flujos de entrada. *cmHC* observa que esa mezcla libre puede ser inestable, y la restringe dentro del polígono de Birkhoff aplicando una contracción geométrica. El resultado es un entrenamiento más estable y más escalable, con un coste bajo.",
+            "Es el tipo de trabajo de arquitectura que no aparece en titulares pero que, si funciona, acaba encajando en las redes de producción: mejora la estabilidad del entrenamiento a escala, que es justo el cuello de botella de los modelos grandes."
+          ],
+          "tags": ["architecture", "hyper-connections", "training-stability"],
+          "links": [
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2611.27193"}
+          ]
+        },
+        {
+          "title": "«Non-penetrating World Models»: modelos del mundo que no penetran",
+          "summary": "*Non-penetrating World Models* explora una clase de modelos del mundo que limitan cuánto «penetran» en el estado interno al hacer predicciones, buscando un equilibrio entre capacidad de previsión y estabilidad. Es el segundo paper más votado del día y toca la frontera entre modelos del mundo y control de agentes.",
+          "body": [
+            "Un modelo del mundo aprende a predecir lo que pasará, y esa capacidad es la base de un planificador o de un agente que actúa. *Non-penetrating World Models* se interesa por cómo de profundo debe ser el acceso del modelo al estado, y propone una versión «no penetrante» que limita ese acceso, buscando predicciones útiles sin un estado interno demasiado inestable.",
+            "Interesa a quien trabaja en agentes y planificación: la calidad del modelo del mundo condiciona directamente lo bien que un agente anticipa las consecuencias de sus acciones, y esto es un matiz fino pero importante para la fiabilidad."
+          ],
+          "tags": ["world-models", "agents", "planning"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2611.27963"}
+          ]
+        },
+        {
+          "title": "*MemOnce*: memoria escalable para LLMs como arquitectura fundacional",
+          "summary": "*MemOnce* propone una arquitectura fundacional que aprende estados de memoria escalables para modelos de lenguaje, acoplando dos diseños para que la memoria crezca con el modelo en vez de ser un módulo aparte. El objetivo: que un LLM mantenga información a largo plazo sin pagar el coste de re-lectura de todo el contexto.",
+          "body": [
+            "El problema clásico de la memoria en un LLM es que para recordar hay que releer el contexto, y eso no escala. *MemOnce* propone aprender estados de memoria que el modelo puede escribir y leer, de modo que la información importante se compacta en un estado y no en una ventana cada vez más larga. El paper la plantea como arquitectura fundacional, no como un *plugin*.",
+            "Si la memoria escalable funciona bien, cambia lo que un modelo local puede mantener de larga duración: conversaciones, proyectos, preferencias, sin inflar el contexto. Es una línea de investigación con aplicación directa a asistentes y agentes personales."
+          ],
+          "tags": ["memory", "llm-architecture", "long-context"],
+          "links": [
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2611.27973"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "180B de parámetros, 32 GB de RAM: *MoE* al límite con *transformers*",
+          "summary": "Un post de *Hugging Face* demuestra cómo correr un *MoE* de 180B de parámetros con 32 GB de RAM usando el propio *transformers*, gracias al *streaming* de expertos. Es la demostración de que un modelo enorme ya no exige un clúster: con la técnica adecuada cabe en una máquina de sobremesa, e incluso en un portátil.",
+          "body": [
+            "La clave es el «streaming de expertos»: en vez de tener todos los expertos del *MoE* cargados a la vez, el sistema carga y descarga expertos según la necesidad, de modo que un modelo de 180B de parámetros totales cabe en 32 GB de RAM, y el post señala que funciona incluso en un portátil. Es la misma idea que hace razonables los 26B de *Inkling 2 Mini* en local, llevada al extremo de un modelo tres órdenes de magnitud mayor.",
+            "Interesa a quien quiere un modelo grande en casa sin un servidor dedicado: la memoria, no la potencia de cómputo, es el límite, y técnicas de este tipo son las que la mueven. El *transformers* de *Hugging Face* ya da soporte, así que no hace falta una librería especial."
+          ],
+          "tags": ["moe", "self-hosting", "transformers", "inference"],
+          "links": [
+            {"label": "Hugging Face blog", "url": "https://huggingface.co/blog/moe-expert-streaming"}
+          ]
+        },
+        {
+          "title": "*NewsGator*: un agregador de noticias *self-hosted* que resume con LLM",
+          "summary": "Un usuario de *r/rss* presenta *NewsGator*, un agregador de noticias de autoalojamiento que resume y prioriza el contenido con un LLM local. La idea: tu *feed* RSS, pero filtrado y resumido por un modelo que corre en tu propia red, sin que salga una sola petición.",
+          "body": [
+            "El proyecto es un agregador de *feeds* RSS que corre en tu propia infraestructura y usa un LLM local para resumir y priorizar lo que llega, de modo que no tienes que leer todo el ruido. Es el clásico pipeline *self-hosted*: fuentes abiertas, resumen automático, y el modelo no sale de tu red.",
+            "Encaja con la corriente de «monta tu propia *web* con IA local» que se está consolidando: en vez de entregar tu *feed* a un servicio externo, lo procesas en casa con un modelo que te pertenece."
+          ],
+          "tags": ["self-hosting", "rss", "news", "local-llm"],
+          "links": [
+            {"label": "r/rss", "url": "https://www.reddit.com/r/rss/comments/1w0tnzs/newsgator_a_selfhosted_news_aggregator_that/"}
+          ]
+        },
+        {
+          "title": "Monta tu propio *feed* de noticias con un LLM local y coste cero",
+          "summary": "Una guía práctica en *Medium* cuenta cómo montar un *feed* de noticias propio con RSS, un LLM local y un presupuesto de cero: no se pide ninguna *API* de pago, el resumen lo hace un modelo que corre en tu máquina. Un paso a paso de *self-hosting* para el noticiero personal.",
+          "body": [
+            "La guía parte de un problema concreto: quieres un resumen diario de tus fuentes sin pagar por una *API* de nube. La solución es RSS + un LLM local que resume, con un coste marginal de cero más la electricidad. Es la versión casera del tipo de servicio que ofrecen las plataformas de resúmenes.",
+            "El valor está en lo reproducibles que son las piezas: un *feed*, un modelo local y un par de guiones. Es el patrón «noticias + LLM en local» que muchos montan ya en casa, documentado paso a paso."
+          ],
+          "tags": ["self-hosting", "news", "local-llm", "rss"],
+          "links": [
+            {"label": "Medium", "url": "https://medium.com/@vmvini/build-your-own-news-feed-with-a-local-llm-rss-and-zero-budget-ea92931699dc"}
+          ]
+        },
+        {
+          "title": "*desk-defense*: una torre de defensa sobre la mesa, jugable por un LLM",
+          "summary": "Un proyecto con gancho: *desk-defense* es un juego de torres de defensa sobre un escritorio, con laberintos de papelería, que además puede jugar un LLM. Un ejemplo simpático de agente que controla un juego en tiempo real, y una excusa divertida para correr un modelo local con un bucle de percepción-acción.",
+          "body": [
+            "La premisa es un juego de torres de defensa sobre una mesa de escritorio, con laberintos formados por objetos de papelería, y la gracia: un LLM puede jugarlo, tomando decisiones sobre el laberinto en tiempo real. No es solo un juguete, sino un banco de pruebas para agentes que perciben y actúan sobre un entorno gráfico.",
+            "Es el tipo de proyecto que se comparte porque es simpático y porque demuestra, sin pretensiones, lo que ya puede hacer un modelo local con un bucle de percepción-acción. Buen material para el rincón *fun* de la edición."
+          ],
+          "tags": ["local-llm", "agents", "game", "self-hosting"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/Owlbay/desk-defense"}
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "jaredfreellm/FREELLM_INSTALL",
+        "stars": "★ 250",
+        "desc": "Un solo extremo compatible con *OpenAI* para muchas capas de LLMs gratis; el enrutador elige el proveedor más fiable",
+        "meta": "MIT",
+        "url": "https://github.com/jaredfreellm/FREELLM_INSTALL"
+      },
+      {
+        "name": "mq-yuan/project-docs",
+        "stars": "★ 16",
+        "desc": "Memoria de proyecto para agentes de código: hechos como documentos del repositorio que se reescriben in situ",
+        "meta": "Python · MIT",
+        "url": "https://github.com/mq-yuan/project-docs"
+      },
+      {
+        "name": "abdallah-swe/layerpool",
+        "stars": "★ 5",
+        "desc": "Pon tus dispositivos en común para entrenar modelos más grandes sin coste: agrupar varias máquinas",
+        "meta": "Python · MIT",
+        "url": "https://github.com/abdallah-swe/layerpool"
+      },
+      {
+        "name": "waw666waw666/awesome-free-search-apis",
+        "stars": "★ 8",
+        "desc": "Claves de *APIs* gratuitas de búsqueda, *fetch* y *embedding* para los AIs que no pueden buscar",
+        "meta": "Apache-2.0",
+        "url": "https://github.com/waw666waw666/awesome-free-search-apis"
+      },
+      {
+        "name": "bradlishman/awesome-inference-engines",
+        "stars": "★ 3",
+        "desc": "Catálogo de motores de inferencia de LLMs, desde runtimes locales y *offloading* de *MoE* hasta *serving* de producción",
+        "meta": "Python · CC0-1.0",
+        "url": "https://github.com/bradlishman/awesome-inference-engines"
+      }
+    ],
+    "papers": [
+      {
+        "title": "cmHC: Balancing Stream Mixing in Hyper-Connections via Geometric Contraction",
+        "authors": "49 upvotes",
+        "url": "https://huggingface.co/papers/2611.27193"
+      },
+      {
+        "title": "Non-penetrating World Models",
+        "authors": "38 upvotes",
+        "url": "https://arxiv.org/abs/2611.27963"
+      },
+      {
+        "title": "Clover-35B-A3B-Preview Technical Report",
+        "authors": "29 upvotes",
+        "url": "https://arxiv.org/abs/2611.24636"
+      },
+      {
+        "title": "Reading the Unreadable: Text-Aware Image Super-Resolution Needs Reasoning",
+        "authors": "15 upvotes",
+        "url": "https://huggingface.co/papers"
+      },
+      {
+        "title": "MemOnce: A Scalable Memory Architecture for Large Language Models",
+        "authors": "10 upvotes",
+        "url": "https://huggingface.co/papers/2611.27973"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/rss",
+        "title": "«*NewsGator*: un agregador de noticias *self-hosted* que resume con LLM»",
+        "note": "Tu *feed* RSS filtrado y resumido por un modelo local, sin salir de la red",
+        "url": "https://www.reddit.com/r/rss/comments/1w0tnzs/newsgator_a_selfhosted_news_aggregator_that/"
+      },
+      {
+        "src": "Medium",
+        "title": "«Monta tu *feed* de noticias con un LLM local, RSS y coste cero»",
+        "note": "Guía paso a paso para el noticiero personal en casa",
+        "url": "https://medium.com/@vmvini/build-your-own-news-feed-with-a-local-llm-rss-and-zero-budget-ea92931699dc"
+      },
+      {
+        "src": "Owlbay",
+        "title": "«*desk-defense*: torre de defensa sobre la mesa, jugable por un LLM»",
+        "note": "Un agente con bucle de percepción-acción, en un juego de papelería",
+        "url": "https://github.com/Owlbay/desk-defense"
+      },
+      {
+        "src": "Hugging Face",
+        "title": "«180B de parámetros, 32 GB de RAM: *MoE* al límite con *transformers*»",
+        "note": "Streaming de expertos para correr un modelo enorme en una máquina de sobremesa",
+        "url": "https://huggingface.co/blog/moe-expert-streaming"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

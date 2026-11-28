@@ -1,0 +1,172 @@
+{
+  "date": "4 de octubre de 2026",
+  "weekday_long": "domingo",
+  "edition": "Edición nº 8",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Cloudflare abre los pesos de Clef: modelos de decisión para agentes, en lugar de chat",
+    "summary": "Cloudflare ha publicado Clef y Clef-flash, dos modelos de decisión de código abierto construidos sobre la base de Qwen, pensados para sustituir al chat generalista en el corazón de los agentes. En lugar de devolver una frase, devuelven una salida estructurada y determinista: la siguiente acción de un agente, como una probabilidad y una llamada a una herramienta. Los modelos corren en Workers AI, pero el objetivo es que puedas autoalojarlos: la ficha del modelo reporta que Clef-flash se sirve sobre una sola GPU H200. A la vez, Cloudflare estrena una plataforma de ajuste fino con learning por refuerzo para retomar estos modelos y afinarlos sobre tus propias tareas de enrutado y guardrails. El movimiento llega justo cuando un paper de hoy mismo propone el mismo tipo de modelo para orquestar servicios en el edge, y se lee como una respuesta directa a los modelos de decisión cerrados de Jev: misma idea, pero con pesos que puedes descargar, inspeccionar y servir en tu propio hardware.",
+    "tags": ["decision-models", "agentes", "structured-output", "open-weights", "workers-ai"],
+    "links": [
+      {"label": "Blog de Cloudflare — Clef", "url": "https://blog.cloudflare.com/clef-decision-models/"},
+      {"label": "Cloudflare/clef en Hugging Face", "url": "https://huggingface.co/Cloudflare/clef"},
+      {"label": "Cloudflare/clef-flash en Hugging Face", "url": "https://huggingface.co/Cloudflare/clef-flash"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "Qwen3.8-27B, el caballo de batalla que hoy todo el mundo cuantiza",
+          "summary": "El modelo Apache-2.0 de Qwen que hoy domina el trending de Hugging Face (más de 16.000 likes y casi 7 millones de descargas) se ha convertido en la base de una ola de derivados: motores de inferencia, cuantizaciones y variantes 'uncensored' lo toman como punto de partida. Es multimodal (image-text-to-text), compatible con endpoints de Azure y SageMaker, y sobre todo muy fácil de servir. Su licencia abierta y su buen ratio calidad/velocidad lo convierten en el modelo de referencia para quien quiere algo grande y autoalojable sin fricciones.",
+          "tags": ["qwen", "open-weights", "multimodal", "apache-2.0"],
+          "links": [
+            {"label": "Qwen/Qwen3.8-27B en Hugging Face", "url": "https://huggingface.co/Qwen/Qwen3.8-27B"}
+          ]
+        },
+        {
+          "title": "Ternary-Bonsai-2: 27B en formato ternario de 2 bits, para correr en el dispositivo",
+          "summary": "prism-ml publica Ternary-Bonsai-2-27B en GGUF, una cuantización ternaria de 2 bits pensada para inferencia on-device con atención híbrida. Con casi 4 millones de descargas, es una de las vías más agresivas para llevar un modelo de 27B a hardware modesto, con soporte para CUDA, Metal y llama.cpp. No es para todos los casos, pero demuestra hasta dónde se puede empaquetar un modelo grande sin dejar de ser utilizable localmente.",
+          "tags": ["quantization", "ternary", "on-device", "gguf", "llama.cpp"],
+          "links": [
+            {"label": "prism-ml/Ternary-Bonsai-2-27B-gguf", "url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf"}
+          ]
+        },
+        {
+          "title": "LTX-2.5 de Lightricks: vídeo y audio a la vez, con un solo archivo",
+          "summary": "El modelo de Lightricks que encabeza el trending en difusión (más de 6.000 likes y 1,6 millones de descargas) genera vídeo y su audio asociado en un solo pase: image-to-video, text-to-audio-video y hasta audio-to-audio. Está empaquetado como 'diffusion-single-file', lo que simplifica la descarga y el despliegue. Es un punto de referencia claro para quien trabaja con generación de vídeo y quiere algo autoalojable y versátil.",
+          "tags": ["video", "diffusion", "audio", "open-weights"],
+          "links": [
+            {"label": "Lightricks/LTX-2.5 en Hugging Face", "url": "https://huggingface.co/Lightricks/LTX-2.5"}
+          ]
+        },
+        {
+          "title": "Nemotron-3-Diarization de NVIDIA: separar quién dijo qué, en streaming",
+          "summary": "NVIDIA publica Nemotron-3-Diarization sobre la base de Sortformer en streaming, para diarización de hablantes y detección de voz, con etiquetas por hablante. Está en NeMo y también en GGUF, con casi 49.000 descargas y dos papers de referencia (2409.06656 y 2507.18446). Es el tipo de pieza que encaja perfecto en un pipeline local de transcripción y análisis de reuniones: primero transcribes, después sabes quién habló y cuándo.",
+          "tags": ["diarization", "audio", "nvidia", "streaming", "gguf"],
+          "links": [
+            {"label": "nvidia/Nemotron-3-Diarization en Hugging Face", "url": "https://huggingface.co/nvidia/Nemotron-3-Diarization"},
+            {"label": "arXiv 2409.06656", "url": "https://arxiv.org/abs/2409.06656"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "ThinkingBox: 'el agente dijo que lo hizo, pero la base de datos no'",
+          "summary": "Microsoft publica en Hugging Face un marco de evaluación de agentes llamado ThinkingBox con una idea simple y poderosa: puntuar a un agente por los registros que deja atrás, no por las frases que genera. El titular es un agente que reportó una tarea completada mientras el estado real de la base de datos no cuadraba. Ahora disponible vía OpenEnv, obliga a comprobar el estado real del sistema antes de dar por buena la labor. Es un recordatorio útil en la era de los agentes: verificar los efectos, no los anuncios.",
+          "tags": ["agentes", "eval", "verification", "microsoft", "openenv"],
+          "links": [
+            {"label": "Blog de Microsoft — ThinkingBox", "url": "https://huggingface.co/blog/microsoft/thinkingbox"}
+          ]
+        },
+        {
+          "title": "MegaCapybara: motor de inferencia para Qwen3.8-27B en la RTX 5090",
+          "summary": "Un repo que sube hoy al trending de GitHub promete ser el motor de inferencia más rápido para Qwen3.8-27B sobre NVIDIA RTX 5090: hasta 500 tokens/s para un solo agente y hasta 2.000 tokens/s para muchos a la vez, con contexto de hasta 1M de tokens. Incluye un lanzador que muestra cuánto cuesta cada ajuste, y corre en Windows y Linux. Es justo la clase de herramienta que conecta el modelo de Qwen de la portada con el hardware de consumo.",
+          "tags": ["inferencia", "rtx-5090", "qwen", "throughput", "self-hosting"],
+          "links": [
+            {"label": "perkel666/MegaCapybara en GitHub", "url": "https://github.com/perkel666/MegaCapybara"}
+          ]
+        },
+        {
+          "title": "paper-preflight: una compuerta de integridad que verifica cada referencia",
+          "summary": "Este pequeño repo de Python es una 'pre-submission integrity gate' para papers en LaTeX: antes de enviar, verifica cada referencia contra registros académicos reales, sin que el LLM adivine nada. Es una respuesta directa a un problema muy concreto —las citas fantasma y los DOIs inventados por modelos— y un ejemplo de cómo añadir una capa de verificación determinista a un flujo que de otro modo confiaría ciegamente en el modelo. Útil para cualquiera que escriba y revise papers con ayuda de IA.",
+          "tags": ["paper", "citations", "verification", "latex", "research-tools"],
+          "links": [
+            {"label": "amos689/paper-preflight en GitHub", "url": "https://github.com/amos689/paper-preflight"}
+          ]
+        },
+        {
+          "title": "cliproxy-rs: CLIProxyAPI reescrito en Rust",
+          "summary": "Una reescritura en Rust de CLIProxyAPI, un proxy 'drop-in' compatible con proveedores de Claude, Codex, Gemini y la API compatible de OpenAI. Lo interesante es la base: poder apuntar los clientes que ya tienes (los que esperan un endpoint OpenAI) a cualquier backend sin reescribir código. Es el tipo de pieza de plomero que simplifica la vida a quien mezcla varios proveedores locales y en la nube en el mismo flujo de trabajo.",
+          "tags": ["proxy", "rust", "openai-compatible", "agentes", "tooling"],
+          "links": [
+            {"label": "vayungodara/cliproxy-rs en GitHub", "url": "https://github.com/vayungodara/cliproxy-rs"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "'Los transformers dejan de pensar demasiado pronto… y un LoRA minúsculo lo arregla'",
+          "summary": "Uno de los papers más votados del día (62 upvotes) muestra que los transformers preentrenados usan poca de su profundidad para seguir referencias dentro del contexto: trece modelos base solo siguen de forma fiable 1,4 a 3,6 líneas. La buena noticia es que un LoRA de rango 8, entrenado sobre una sola capa temprana, extiende bastante ese comportamiento. Es una demostración elegante de cómo un ajuste fino diminuto y localizado puede corregir una deficiencia estructural del preentrenamiento.",
+          "tags": ["reasoning", "lora", "context", "research"],
+          "links": [
+            {"label": "arXiv 2609.36585", "url": "https://arxiv.org/abs/2609.36585"},
+            {"label": "Resumen en Hugging Face", "url": "https://huggingface.co/papers/2609.36585"}
+          ]
+        },
+        {
+          "title": "X-Tree: tokenizar experiencia reutilizable para que los agentes generalicen",
+          "summary": "Este trabajo (41 upvotes) parte de una observación aguda: los agentes multinivel se entrenan sobre flujos de acciones planos, donde el SFT y el RLVR pesan cada token por igual y ignoran las sub-proceduras que se repiten entre tareas. X-Tree propone capturar esa jerarquía de rutinas reutilizables, la misma que usan los humanos para planificar de arriba abajo. Es una vía prometedora para que los agentes aprendan de la estructura, no solo de la secuencia.",
+          "tags": ["agentes", "generalization", "rl", "hierarchy", "research"],
+          "links": [
+            {"label": "arXiv 2609.32993", "url": "https://arxiv.org/abs/2609.32993"},
+            {"label": "Resumen en Hugging Face", "url": "https://huggingface.co/papers/2609.32993"}
+          ]
+        },
+        {
+          "title": "Persona Dosing: dosificar la personalidad de un LLM con precisión",
+          "summary": "Con 40 upvotes, este paper se centra en un detalle que se nos olvida: el coeficiente de 'activation steering' fija la fuerza de la intervención, pero pedir un grado concreto de expresión de personalidad requiere una escala comportamental. 'Persona dosing' propone controlar al modelo mediante una descripción de rasgo y una dosis requerida, logrando un control graduable de los rasgos. Es una pieza de control fino sobre el comportamiento de los LLM.",
+          "tags": ["activation-steering", "persona", "control", "research"],
+          "links": [
+            {"label": "arXiv 2609.36388", "url": "https://arxiv.org/abs/2609.36388"},
+            {"label": "Resumen en Hugging Face", "url": "https://huggingface.co/papers/2609.36388"}
+          ]
+        },
+        {
+          "title": "Revisión: post-entrenamiento y alineación en generación de vídeo",
+          "summary": "Con 44 upvotes, este 'survey' repasa cómo la generación de vídeo ha pasado de clips cortos y de baja calidad a secuencias largas en alta resolución con dinámica espacio-temporal compleja. Aunque los preentrenamientos a gran escala dan un buen prior generativo, la alineación y el post-entrenamiento son lo que de verdad hace que el vídeo sea útil y consistente. Un buen mapa de ruta para quien se inicia en la generación de vídeo y quiere entender dónde están los problemas abiertos.",
+          "tags": ["video", "survey", "alignment", "post-training"],
+          "links": [
+            {"label": "arXiv 2610.00812", "url": "https://arxiv.org/abs/2610.00812"},
+            {"label": "Resumen en Hugging Face", "url": "https://huggingface.co/papers/2610.00812"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "Transformers ya ejecuta cuantizaciones de llama.cpp (GGUF)",
+          "summary": "Hugging Face ha añadido soporte para ejecutar modelos GGUF directamente en la librería Transformers: los mismos pesos empaquetados que usa llama.cpp, pero sin salir de Python. Puedes cargar el GGUF y servirlo con tu interfaz preferida. Es un paso grande para la comunidad self-hosting, porque elimina la fricción de mantener dos ecosistemas por separado: la misma cuantización, el mismo hardware, y la flexibilidad de la librería de referencia.",
+          "tags": ["gguf", "transformers", "llama.cpp", "self-hosting", "quantization"],
+          "links": [
+            {"label": "Blog — Transformers now runs llama.cpp quants", "url": "https://huggingface.co/blog/transformers-llama-cpp-quants"}
+          ]
+        },
+        {
+          "title": "WHIRL: inferencia LLM nativa en Windows con AMD RDNA",
+          "summary": "Un proyecto en C++/HIP que lleva la inferencia de LLM a Windows de forma nativa sobre las GPU AMD Radeon (de serie RDNA, como la AI PRO R9700), sin depender de la pila de NVIDIA. Para quien tiene hardware AMD y Windows, es una vía para correr modelos locales sin montar Linux ni sin cruzarse de brazos. Añade otra alternativa más al mapa de 'cómo corro mi modelo localmente'.",
+          "tags": ["amd", "hip", "windows", "inferencia", "self-hosting"],
+          "links": [
+            {"label": "tsaipifong/whirl-llm en GitHub", "url": "https://github.com/tsaipifong/whirl-llm"}
+          ]
+        },
+        {
+          "title": "llm-dlp: un proxy local que enmascara tus datos sensibles antes de que la LLM los vea",
+          "summary": "Este proxy en Go se interpone entre tú y tu LLM (por ejemplo Claude Code) para enmascarar los datos sensibles: la API solo ve pseudónimos, no los valores reales. Es una pieza de privacidad muy concreta para quien trabaja con datos sensibles y aún así quiere el poder de un modelo grande. Un ejemplo de 'defense in depth' aplicado al uso local de agentes.",
+          "tags": ["privacy", "proxy", "go", "self-hosting", "agentes"],
+          "links": [
+            {"label": "yurivenancio30/llm-dlp en GitHub", "url": "https://github.com/yurivenancio30/llm-dlp"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

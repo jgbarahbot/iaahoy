@@ -1,0 +1,546 @@
+{
+  "date": "25 de noviembre de 2026",
+  "weekday_long": "miércoles",
+  "edition": "Edición nº 50",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*Qwen-Image-HD*: el lienzo de 4K, tejido mosaico a mosaico",
+    "summary": "El lienzo de 4K es una de las pocas barreras que quedan para los *transformers* de difusión: entrenar sobre un lienzo entero exige una secuencia larga de *tokens* de alta resolución, y el coste crece de forma sustancial con el área, y aun así las regiones locales terminan con patrones repetitivos que delatan al modelo. El 24 de noviembre *Qwen* publicó *Qwen-Image-HD*, que adapta el generador *Qwen-Image 2.0* sin agrandar el lienzo: entrena el modelo sobre mosaicos de escala 1K y genera la imagen bloque a bloque, condicionando cada mosaico sobre los vecinos de arriba y de la izquierda (la estructura fina) y sobre una miniatura comprimida y de tamaño fijo de la parte ya completada (la visión global, con un coste de *tokens* que no crece). Para mezclar esos ingredientes, el informe mapea vecinos, miniatura y mosaico objetivo a un sistema de coordenadas común del lienzo que conserva la posición y la escala relativas. En *Qwen-Image-Bench* a 4K, supera la generación directa a 4K de *FLUX-3-Image-Klein* y el ajuste fino a imagen completa del mismo *backbone*: mejor calidad, menos computación de entrenamiento, más eficiencia de inferencia y menos bandas repetitivas — y un paralelismo *wavefront* de mosaicos entre varias GPUs baja la latencia sin reentrenar.",
+    "illustration": {
+      "file": "lead-illo-2026-11-25.jpg",
+      "alt": "Un gran muro de lienzo dentro de un estudio oscuro, construido con una rejilla de azulejos pequeños; casi toda la rejilla está rellena por un único paisaje continuo de montañas, un río y un pueblo, y tres casillas de la esquina inferior derecha quedan vacías, junto a un monitor que muestra una miniatura del lienzo con una zona en blanco.",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: el lienzo de 4K tejido mosaico a mosaico, con una miniatura de la parte ya completada."
+    },
+    "body": [
+      "La resolución alta es de lo último que resuelven los *transformers* de difusión: para entrenar sobre un lienzo de 4K hay que procesar una secuencia larga de *tokens* de alta resolución, y el coste crece de forma sustancial con el área. Y aunque se aumente el entrenamiento, las regiones locales de la imagen terminan con patrones repetitivos que delatan al modelo — esas finas bandas que el informe llega a medir con una herramienta espectral. El 24 de noviembre, *Qwen* publicó el informe técnico que ataca los dos problemas a la vez sin agrandar el lienzo: *Qwen-Image-HD* adapta el generador de la familia *Qwen-Image 2.0* a la síntesis de alta definición mediante un entrenamiento local sobre mosaicos de escala 1K y una generación autoregresiva por bloques.",
+      "La receta tiene dos mitades. En el entrenamiento, en lugar de mostrarle a la red una imagen de 4K, se le ajusta sobre mosaicos de 1K. En la generación, cada nuevo mosaico se predice condicionado por dos entradas: los vecinos de alta resolución de arriba y de la izquierda — que aportan la estructura fina que una miniatura pequeña pierde — y una miniatura comprimida de tamaño fijo de la parte del lienzo ya completada, con las áreas sin rellenar en blanco. Esa segunda entrada es la que da al modelo la visión global de la escena a coste fijo: el número de *tokens* que ocupa la miniatura no crece a medida que se llena el lienzo, así que el modelo puede ampliar su panorama sin acumular un historial de alta resolución.",
+      "El problema de mezclar ingredientes de tamaño y resolución distintos es que el modelo tiene que saber dónde está cada cosa: no es lo mismo un mosaico de la esquina superior izquierda que otro de la inferior derecha, ni una miniatura que cubre la mitad del lienzo que otra que lo cubre entero. El informe lo resuelve con una idea simple pero decisiva: mapea los vecinos, la miniatura y el mosaico objetivo a un sistema de coordenadas común del lienzo que conserva la posición y la escala relativas entre ellos. Así, la red razona a dos escalas a la vez, y dentro de un presupuesto de contexto acotado.",
+      "La inferencia tiene dos modos. El básico — al que llaman *Serial-AutoRegressive* — ensambla la imagen mosaico a mosaico, actualizando el historial después de cada generación. El que baja la latencia es el *Wavefront-AutoRegressive*: aprovecha que los mosaicos de la misma antidiagonal del lienzo no dependen entre sí y se pueden generar a la vez, respetando la restricción de arriba-izquierda; y encima combina el paralelismo dentro del mosaico con una asignación dinámica de GPUs a las rondas con menos mosaicos activos. El esquema *wavefront* se aplica directamente sobre el modelo entrenado en modo serie, sin reentrenarlo, y en una configuración de 4 GPUs reduce la latencia de una imagen completa, con el precio de un *tradeoff* de calidad frente al modo serie.",
+      "Los números, en la evaluación del propio laboratorio sobre *Qwen-Image-Bench* a 4K, dejan claro quién gana en la carrera de la resolución alta: *Qwen-Image-HD* supera a la generación directa a 4K de *FLUX-3-Image-Klein*, y frente a un ajuste fino a imagen completa del mismo *backbone* logra mejor calidad con menos coste de entrenamiento en *FLOPs* — la receta por mosaicos converge más rápido — y con más eficiencia en la inferencia. En la pelea contra las bandas repetitivas miden el *Narrowband Spectral Excess* sobre el conjunto *Nature-384*, y la receta local destaca. El informe incluye también comparaciones controladas del diseño de la miniatura frente a otras alternativas de historial compacto, para aislar su aporte.",
+      "Las salvedades son las que siempre acompañan a la familia: la evaluación es del propio laboratorio, *FLUX-3-Image-Klein* es un competidor directo en el frente de la 4K, y a día de hoy el informe — publicado bajo la licencia *CC BY 4.0* — no incluye pesos: la búsqueda en *Hugging Face* no desentierra un *Qwen-Image-HD* oficial, y el patrón de la familia es soltar la descarga poco después del informe. La tendencia que el trabajo señala es clara: para la resolución muy alta, la composición autoregresiva sobre mosaicos locales — con una visión global barata y un sistema de coordenadas común — gana tanto a la fuerza bruta del lienzo entero como al ajuste fino de imagen completa. Si los pesos llegan, la pregunta de la 4K pasará del laboratorio a la mesa de trabajo local."
+    ],
+    "tags": [
+      "qwen-image-hd",
+      "qwen",
+      "autoregressive-diffusion",
+      "high-resolution",
+      "tiled-generation",
+      "image-generation"
+    ],
+    "links": [
+      {
+        "label": "Informe técnico (arXiv 2611.32736)",
+        "url": "https://arxiv.org/abs/2611.32736"
+      },
+      {
+        "label": "Repositorio Qwen-Image",
+        "url": "https://github.com/QwenLM/Qwen-Image"
+      },
+      {
+        "label": "Informe Qwen-Image 2.0 (arXiv 2605.10730)",
+        "url": "https://arxiv.org/abs/2605.10730"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*Depth Pro 2* de *Apple*: profundidad métrica en una sola red, para imagen y vídeo",
+          "summary": "*Apple* publicó la segunda generación de *Depth Pro* (el *paper* del 19 de noviembre): una sola red escalable que procesa imagen y vídeo y predice la profundidad métrica densa a resolución nativa, rompiendo el *tradeoff* entre los métodos de un solo fotograma (nítidos pero incoherentes) y los de varios (coherentes pero borrosos). En el *Hub* ya hay el modelo *apple/DepthPro2* — más de 1.200 me gusta — y un *Space* con demostración en vivo; el *paper* afirma un nuevo frente de Pareto en precisión métrica, nitidez, consistencia temporal y velocidad. Ojo: los pesos salen bajo una licencia de investigación (*apple-amlr*), no una licencia libre.",
+          "body": [
+            "Quien ha trabajado con profundidad métrica conoce el *tradeoff*: se predice con un solo fotograma y se gana nitidez pero se pierde consistencia entre fotogramas; se explotan varios fotogramas y la consistencia llega al precio de perder definición. La red nueva de *Apple* se apunta los dos lados: procesa tanto imagen como vídeo, a resolución nativa y con una sola red escalable, y predice la profundidad métrica densa — en unidades reales, no en una escala normalizada — a resolución completa, sin los mosaicos que obligaba la generación anterior.",
+            "El *paper* afirma un nuevo frente de Pareto en cuatro ejes: precisión métrica, nitidez, consistencia temporal y tiempo de ejecución. En el *Hub*, el modelo *apple/DepthPro2* ya acumula más de 1.200 me gusta en pocos días, y hay un *Space* con una demostración rápida para quien quiera probarlo. Para la comunidad del *self-hosting*, la letra pequeña importa: la licencia es *apple-amlr*, la licencia de investigación de *Apple* — no es una licencia libre —, así que los pesos se pueden estudiar y reproducir en investigación, pero no integrar libremente en un producto."
+          ],
+          "tags": [
+            "apple",
+            "depth-pro",
+            "metric-depth",
+            "video-depth",
+            "depth-estimation"
+          ],
+          "links": [
+            {
+              "label": "Model apple/DepthPro2",
+              "url": "https://huggingface.co/apple/DepthPro2"
+            },
+            {
+              "label": "Paper (arXiv 2611.26603)",
+              "url": "https://arxiv.org/abs/2611.26603"
+            },
+            {
+              "label": "Space con demo",
+              "url": "https://huggingface.co/spaces/akhaliq/DepthPro2"
+            }
+          ]
+        },
+        {
+          "title": "*Sulphur-3*: la ola *uncensored* llega a la generación de vídeo",
+          "summary": "*SulphurAI* publicó *Sulphur-3*: un ajuste fino del modelo de vídeo *MiniMax H3* en el estilo *uncensored* — levantando las restricciones de contenido — con soporte oficial de *ComfyUI* y una licencia comunitaria. Unos días después de salir, ya pasa de 160.000 descargas y ronda los 960 me gusta. Es la misma ola que ya golpeó a los modelos de texto *abliterated*: la comunidad le quita el filtro a los modelos abiertos, y el ecosistema los absorbe el mismo día.",
+          "body": [
+            "El patrón ya lo conocemos del mundo del texto: un laboratorio publica un modelo abierto con restricciones de contenido, y la comunidad lo ajusta para levantar esas restricciones (los llamados modelos *abliterated*). Esta semana el patrón se ha metido en el vídeo: *Sulphur-3* toma a *MiniMax H3* — el modelo de vídeo de *MiniMax* — y le aplica el tratamiento *uncensored*, y el paquete incluye una integración de *ComfyUI* — el archivo *S3_ComfyUI* que se menciona en la ficha — para que quien tenga ya una *pipeline* de vídeo pueda cargarlo sin conversión intermedia.",
+            "Los números cuentan la recepción de siempre: más de 160.000 descargas y unos 960 me gusta en pocos días, bajo la etiqueta *S3*. La letra pequeña está en la licencia: *minimax-h3-community-license*, la licencia comunitaria del modelo base, no una licencia libre. Es, por tanto, una obra en zona gris — derivada legalmente, técnica y culturalmente interesante —, y conviene seguirla como indicador de lo que viene: la ola *uncensored* está cruzando del texto a la generación de vídeo."
+          ],
+          "tags": [
+            "sulphur-3",
+            "minimax-h3",
+            "uncensored",
+            "video-generation",
+            "comfyui"
+          ],
+          "links": [
+            {
+              "label": "Model SulphurAI/Sulphur-3",
+              "url": "https://huggingface.co/SulphurAI/Sulphur-3"
+            }
+          ]
+        },
+        {
+          "title": "*Ling-3.2-air*: el *MoE* multimodal de *Bailing MoE V3*, en *fp8* y bajo *MIT*",
+          "summary": "*inclusionAI* (el laboratorio detrás de la familia *Ling*) mantiene en el *Hub* la variante *Ling-3.2-air*: un *MoE* multimodal de la arquitectura *Bailing MoE V3* (variante *VL*) servido en *fp8* y bajo licencia *MIT*. Se actualizó esta semana, acumula 188 me gusta y unas 730 descargas. En pleno año de *MoE* abiertas, un *MoE* multimodal bajo *MIT* destaca por la licencia: se puede hacer de todo con él, incluido el uso comercial, sin leer letra pequeña.",
+          "body": [
+            "La familia *Ling*, de *inclusionAI*, es de las pocas familias *MoE* abiertas con visión multimodal en el *ADN*: la variante *air* es la edición más ligera de *Ling-3.2*, y la ficha de esta semana especifica la arquitectura *Bailing MoE V3* en su variante *VL* — la *vision-language* — servida en formato *fp8*, con su propio código para ejecutarla. Se actualizó el 24 de noviembre, y ya acumula 188 me gusta y unas 730 descargas.",
+            "Lo que destaca es la licencia: *MIT*, la más libre de las licencias libres. En plena semana en que el debate está en lo que se puede hacer con *Inkling 2 Mini* (*Apache 2.0*), *FLUX* (no comercial) o *Sulphur* (licencia comunitaria), un *MoE* multimodal bajo *MIT* es una proposición sencilla para quien quiera construir producto sobre visión-lingüística sin leer letra pequeña. Los 188 me gusta dicen que empieza a llamar la atención; con el *fp8* servido de serie, también empieza a ser práctico."
+          ],
+          "tags": [
+            "ling-3-2-air",
+            "inclusionai",
+            "bailing-moe",
+            "moe",
+            "multimodal",
+            "mit"
+          ],
+          "links": [
+            {
+              "label": "Model inclusionAI/Ling-3.2-air",
+              "url": "https://huggingface.co/inclusionAI/Ling-3.2-air"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*Microduck* aprende a esquivar: *sim-to-real* con *Isaac Lab* y *Newton*",
+          "summary": "La serie del blog de *NVIDIA* sobre *Microduck*, el pequeño robot que camina, sigue: esta semana toca la evasión de obstáculos local, con la política de caminar intacta — no se reentrena cómo camina. *Newton* simula el sensor de tiempo de vuelo (ToF) del robot con un *raycaster*, *Isaac Lab* entrena un controlador que ajusta el comando de velocidad del mando virtual cuando aparece un obstáculo, y el circuito se construye como un activo *SimReady* reutilizable. El tutorial cubre el ciclo completo: simular, evaluar, exportar y desplegar en el robot físico.",
+          "body": [
+            "La serie ya enseñó a *Microduck* a caminar; ahora le toca esquivar. La decisión de diseño clave es no tocar la política de caminar: el robot sigue moviéndose como siempre, y lo que cambia es la capa que traduce el comando de velocidad del mando en un movimiento que evita. La simulación es honesta en los detalles: *Newton* — el motor de física abierto de *NVIDIA* — modela el sensor ToF del robot con un *raycaster*, en lugar de un sensor omnisciente perfecto, y el circuito de obstáculos se construye como un activo *SimReady* reutilizable, que se puede compartir entre experimentos y equipos.",
+            "El tutorial recorre el ciclo *sim-to-real* completo: entrenar el controlador en *Isaac Lab*, evaluarlo contra el sensor simulado, exportar la política y desplegarla en el robot físico. La literatura de *sim-to-real* está llena de sistemas que funcionan en el laboratorio y se rompen sobre el suelo real; el valor de este tipo de trabajo, cuando es abierto, es que cada paso es reproducible: el activo, el *raycaster*, el controlador. Y que el activo sea *SimReady* y reutilizable significa que el circuito puede convertirse en un banco de pruebas comunitario para la evasión de robots pequeños."
+          ],
+          "tags": [
+            "microduck",
+            "nvidia",
+            "isaac-lab",
+            "newton",
+            "sim-to-real",
+            "obstacle-avoidance"
+          ],
+          "links": [
+            {
+              "label": "Blog Hugging Face: Microduck",
+              "url": "https://huggingface.co/blog/nvidia/microduck-obstacle-avoidance"
+            },
+            {
+              "label": "Documentación de Isaac Lab",
+              "url": "https://isaac-sim.github.io/IsaacLab/"
+            }
+          ]
+        },
+        {
+          "title": "*agent-orchestra*: un orquestador de agentes de código con jerarquía de coste",
+          "summary": "Uno de los repositorios pequeños de la semana: un orquestador que reparte el trabajo de código entre agentes de distintos precios — el modelo más caro planifica y revisa, y trabajadores baratos lo implementan en la *worktree*. La apuesta es pagar la calidad de frontera solo donde importa, y mantener bajo el coste donde solo se ejecuta.",
+          "body": [
+            "El repositorio que está dando vueltas en la lista de tendencias es un orquestador de agentes de código con una idea económica clara: una jerarquía de costes. La planificación y la revisión van al modelo más capaz de la pila — el que más cobra por *token* —, y la ejecución en la *worktree* va a trabajadores baratos. Es la misma lógica que la *MoE* aplica a los expertos, pero a nivel de agente: la capacidad cara se gasta solo en la parte de la tarea que la justifica.",
+            "Continúa la tendencia de la semana de *harness* y equipos de agentes: el recurso escaso ya no es la capacidad de programar, sino el coste de hacerlo bien. Una herramienta que formaliza la división entre «pensar» y «ejecutar» le interesa a cualquiera que ejecute una camada de agentes en su propia infraestructura; el código está abierto, con licencia *MIT*, y se adapta a otros modelos."
+          ],
+          "tags": [
+            "agent-orchestra",
+            "coding-agents",
+            "cost-hierarchy",
+            "orchestration"
+          ],
+          "links": [
+            {
+              "label": "GitHub: agent-orchestra",
+              "url": "https://github.com/GrzegorzSzczepanek/agent-orchestra"
+            }
+          ]
+        },
+        {
+          "title": "*RCI*: inteligencia colectiva recursiva, medida con presupuesto igual",
+          "summary": "El código oficial de *Recursive Collective Intelligence*: un sistema multiagente en el que los agentes razonan recursivamente — cada nivel llama al anterior —, y lo interesante es cómo se mide: una escalera de presupuesto igual, donde cada nivel de recursión se compara bajo el mismo coste, para aislar lo que la recursión aporta más allá de gastar más computación.",
+          "body": [
+            "«Emergencia colectiva» es una frase que en sistemas multiagente ha servido a menudo para comparar sistemas con presupuestos distintos. *RCI* da la vuelta al método: construye una escalera de niveles de recursión en la que cada nivel recibe el mismo presupuesto, y mide lo que realmente emerge a medida que la recursión se hunde. El código oficial del *paper* ya está abierto, con licencia *MIT*.",
+            "Es un repositorio pequeño (aún unos cuantos estrellas), pero el diseño es sanísimo: si quieres afirmar que un sistema multiagente es más inteligente que un agente solo, debería compararse a igual coste. Es la misma disciplina que este periódico aplica al leer las evaluaciones de la semana: el presupuesto hay que controlarlo, o la «emergencia» es solo una máquina más grande."
+          ],
+          "tags": [
+            "recursive-collective-intelligence",
+            "multi-agent",
+            "evaluation",
+            "equal-budget"
+          ],
+          "links": [
+            {
+              "label": "GitHub: RCI-official",
+              "url": "https://github.com/lixuan27/RCI-official"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*nib*: inferencia nativa en *AMD RDNA3* para *Inkling 2 Mini*, sin *PyTorch*",
+          "summary": "Uno de los repositorios nuevos más interesantes de la semana: un motor de inferencia escrito en *HIP* para los chips *gfx1100* (*AMD RDNA3*), sin ningún *framework* — ni *PyTorch*, ni *CUDA*, ni *BLAS*, ni siquiera *llama.cpp*. Corre *Inkling 2 Mini* con contexto de 262.000 y caché *KV* *Q8_0*, justo a tiempo para la semana del 26B.",
+          "body": [
+            "El ecosistema de modelos abiertos se ha vuelto cada vez más centrado en *llama.cpp*, y cada semana aparece una alternativa que intenta hacer lo mismo con menos capas intermedias. *nib* va más lejos: está escrito en *HIP*, el lenguaje nativo de *AMD* para sus GPUs, y apunta a *RDNA3* — los chips de consumo *gfx1100* —, sin depender de *PyTorch*, *CUDA*, *BLAS* o *llama.cpp*. Implementa la inferencia de *Inkling 2 Mini* directamente sobre el silicio, con contexto de 262.000, caché *KV* *Q8_0*, *DSpark MTP* sin pérdida y soporte de visión, con *batch* de 8 huecos.",
+            "El proyecto es joven y el alcance, específico — un modelo, una arquitectura de GPU —, que es justo lo que al ecosistema *local* le falta: caminos nativos que no pasen por el emulador universal. Si el patrón se mantiene, *nib* es el prototipo de lo que será la generación *RDNA3* cuando cada fabricante optimice para su silicio, sin la capa intermedia que cuesta rendimiento."
+          ],
+          "tags": [
+            "nib",
+            "amd",
+            "rdna3",
+            "hip",
+            "inference",
+            "inkling-2-mini"
+          ],
+          "links": [
+            {
+              "label": "GitHub: nib",
+              "url": "https://github.com/Chromadera/nib"
+            }
+          ]
+        },
+        {
+          "title": "*TrustGate*: pasarela *AI* abierta para el tráfico de agentes, con *guardrails* y *MCP*",
+          "summary": "Una pasarela de *IA* de código abierto, escrita en *Go* bajo *Apache 2.0*, para el tráfico de *LLM* y agentes: *routing* multiproveedor, *guardrails*, caché semántica y soporte de *MCP*, con acceso a más de 5.900 modelos. La idea es la de la seguridad de red aplicada a los agentes: inspeccionar, filtrar y enrutar antes de que la petición llegue al modelo.",
+          "body": [
+            "Todo agente que habla con varios modelos necesita una capa entre el código y el *LLM*: *routing*, registro, seguridad. *TrustGate* es esa capa en forma abierta: escrita en *Go* bajo *Apache 2.0*, ofrece *routing* multiproveedor, *guardrails* que filtran lo que entra y lo que sale, una caché semántica para no pagar dos veces por peticiones repetidas, y soporte de *MCP* para enchufar las herramientas del momento. El repositorio anuncia más de 5.900 modelos accesibles a través de la pasarela.",
+            "La «confianza» del nombre es la apuesta: un agente que actúa — llama herramientas, escribe código, envía mensajes — necesita un punto de control que audite y bloquee, no solo un *proxy* que reenvía. *Guardrails* y *MCP* juntos significan que no es un simple enrutador, sino una capa de gobierno. Para quien *self-hostea* agentes, esta pieza empieza a ser tan estándar como el *proxy* inverso lo fue para la web."
+          ],
+          "tags": [
+            "trustgate",
+            "ai-gateway",
+            "guardrails",
+            "mcp",
+            "routing"
+          ],
+          "links": [
+            {
+              "label": "GitHub: TrustGate",
+              "url": "https://github.com/NeuralTrust/TrustGate"
+            }
+          ]
+        },
+        {
+          "title": "*VirtualGPU*: simular la GPU antes de comprarla",
+          "summary": "Un simulador de GPU de código abierto (*Apache 2.0*) que ejecuta kernels de inferencia de *LLM* sobre hardware simulado y predice el rendimiento real: antes de comprar una GPU — o de elegir entre varias —, se pueden probar kernels, *batches* y esquemas de atención sobre una réplica virtual del chip.",
+          "body": [
+            "El coste de un error en hardware de inferencia se mide en miles de euros y en meses: se compra la GPU, se despliega el motor y se descubre que el kernel que era el rey en la generación anterior es el cuello de botella en la nueva. *VirtualGPU* intenta mover esa discovery hacia antes de la compra: es un simulador de GPU abierto que ejecuta kernels reales de inferencia — los que ya se tienen — sobre hardware simulado y predice el rendimiento.",
+            "Es una herramienta en la línea *sim-to-real*, pero aplicada al chip: la simulación no tiene que ser perfecta, solo suficiente para descartar las malas opciones. En una semana en la que la comunidad compara *llama.cpp* contra *Strata*, un simulador que permite probar kernels sobre hardware virtual antes de comprar es útil para quien *self-hostea* — y es también una pieza del puzle de un ecosistema de *benchmarks* abierto."
+          ],
+          "tags": [
+            "virtualgpu",
+            "gpu-simulator",
+            "inference",
+            "kernels",
+            "benchmarking"
+          ],
+          "links": [
+            {
+              "label": "GitHub: VirtualGPU",
+              "url": "https://github.com/VirtualGPU/VirtualGPU"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*LingSante MedGuard*: un guardián clínico de 4 a 27B que audita las respuestas de *LLM* médicos",
+          "summary": "Informe técnico (19 de noviembre, actualizado el 24) de un modelo de guarda que audita las respuestas de *LLM* clínicos: integra la supervisión de un maestro de *guardrails* médicos con seis expertos especializados — comprensión de reglas médicas, razonamiento numérico, detección de alucinación multimodal, verificación por agentes, localización de riesgo y comprensión de entidades —, y se entrena con *SFT* offline más destilación *on-policy* de varios maestros. Alcanza un *F1* del 82,3%, el 82,4% y el 87,4% a 4B, 9B y 27B en el *LingSante MedGuardBench*.",
+          "body": [
+            "Los *guardrails* médicos son la última capa de defensa antes del paciente: un modelo que audita la respuesta del *LLM* clínico y bloquea la peligrosa. *LingSante MedGuard* es una familia de 4B, 9B y 27B entrenada con una mezcla de seis tipos de supervisión — entre ellos un experto específico de detección de alucinación multimodal y otro que localiza la parte exacta de la respuesta donde está el riesgo —, y la receta combina *SFT* offline con destilación *on-policy* de varios maestros: el alumno aprende viendo a los maestros sobre sus propias salidas, no solo sobre ejemplos etiquetados.",
+            "Los números en el *bench* propio (*LingSante MedGuardBench*, once subconjuntos de detección de riesgo) son un *F1* del 82,3% a 4B, del 82,4% a 9B y del 87,4% a 27B, y el modelo de 4B, con *retrieval* sobre la base médica, llega también al 73,9% en los *benchmarks* *MedHallu* y *MedHALT-NOTA*. La letra pequeña, como siempre: el *bench* es del propio equipo, y el 27B es el que domina la tabla; el 4B es el interesante para quien quiera desplegar el guardián en la misma máquina que el modelo clínico."
+          ],
+          "tags": [
+            "ling-sante",
+            "medguard",
+            "medical-ai",
+            "guardrails",
+            "distillation"
+          ],
+          "links": [
+            {
+              "label": "Paper (arXiv 2611.25509)",
+              "url": "https://arxiv.org/abs/2611.25509"
+            }
+          ]
+        },
+        {
+          "title": "La IA encarnada suspende la prueba del espejo: los robots confunden su reflejo con el objeto",
+          "summary": "*RoboDojo-Mirror* toma la clásica prueba de reconocimiento especular de la cognición animal y la aplica a políticas de manipulación: cinco políticas abiertas (*VLA*, *world action models*, agénticas) pierden de media entre 10,8 y 56,7 puntos cuando la escena contiene un espejo, hasta 62,5 en la mesa de trabajo espejada. La mayoría de los fallos (del 50% al 88%) no tiene contacto registrado: el robot «apunta» al reflejo — *phantom targeting* — y mallocaliza el objeto real, y el patrón se confirma en dos robots físicos.",
+          "body": [
+            "La prueba del espejo es el clásico de la autopercepción: pasa el animal que toca la marca que ve en el espejo, y falla el que toca el espejo. El *benchmark* aplica la misma lógica a políticas de robots: cuando la escena contiene una superficie reflejante, la política debe distinguir el reflejo del objeto real. El resultado de las cinco políticas abiertas — desde *VLA* hasta *world action models* — es un descenso de entre 10,8 y 56,7 puntos de media en las tres condiciones de espejo, con la mesa de trabajo espejada como caso peor (hasta 62,5).",
+            "Lo más revelador es cómo fallan: en el 50–88% de los fallos no hay contacto registrado, es decir, el robot no choca con el espejo, apunta al reflejo — el *phantom targeting* — y mallocaliza el objeto real. El patrón se reproduce en los robots físicos *π0.5* y *FastWAM*, lo que descarta que sea un artefacto de la simulación. Para quien entrena políticas sobre imágenes, la lección es directa: el espejo es un *adversario* incalibrable del entorno cotidiano, y el *benchmark* queda abierto para quien quiera probar la corrección."
+          ],
+          "tags": [
+            "mirror-test",
+            "embodied-ai",
+            "vla",
+            "benchmarking",
+            "self-recognition"
+          ],
+          "links": [
+            {
+              "label": "Paper (arXiv 2611.33010)",
+              "url": "https://arxiv.org/abs/2611.33010"
+            }
+          ]
+        },
+        {
+          "title": "*ThinkMorph-SSL*: razonamiento multimodal a medio camino, supervisado por las propias imágenes",
+          "summary": "Una receta de dos fases para entrenar razonamiento multimodal entrelazado sin demostraciones específicas de la tarea: primero, razonamiento *pretexto*, donde tareas de coloreado y *denoising* se convierten en trazas entrelazadas de instrucciones — describe la imagen dañada, genera la restaurada, interprétala — sin *demo* humana; después, ajuste de instrucciones dirigido por preguntas con demostraciones autoconstruidas. A igual presupuesto, supera al ajuste de instrucciones solo, y mejora al modelo base en 12 *benchmarks* con una media de 11,33 puntos.",
+          "body": [
+            "El cuello de botella del razonamiento multimodal entrelazado — el modelo que alterna texto e imagen a mitad de la cadena — es el dato: no existen *demos* de un modelo que piense con imágenes en el medio, como sí existen las *chain-of-thought* de texto. *ThinkMorph-SSL* las fabrica: la primera fase es un *pretexto*, en el que el modelo recibe una imagen dañada (coloreada o con *ruido*), la describe, genera la versión restaurada y la interpreta — las trazas son de instrucciones, pero la supervisión la da la imagen, sin humano.",
+            "La segunda fase es el ajuste de instrucciones que consume esas trazas, con *demos* construidas automáticamente. El resultado: a igual presupuesto de cómputo, supera al ajuste de instrucciones solo en 12 *benchmarks*, con una mejora media de 11,33 puntos sobre el modelo base. El valor de la receta es metodológico: si la supervisión se puede extraer de la propia imagen, el cuello de botella del dato en el razonamiento entrelazado deja de ser la anotación humana y pasa a ser el diseño del *pretexto*."
+          ],
+          "tags": [
+            "think-morph",
+            "multimodal-reasoning",
+            "interleaved",
+            "pretext",
+            "instruction-tuning"
+          ],
+          "links": [
+            {
+              "label": "Paper (arXiv 2611.32183)",
+              "url": "https://arxiv.org/abs/2611.32183"
+            }
+          ]
+        },
+        {
+          "title": "*VenusOCR 2.0*: un reconocedor de documentos de 1B que se auto-mejora, con decodificación paralela",
+          "summary": "Un modelo *vision-language* compacto de 1.000 millones de parámetros para el análisis de documentos — texto, tablas y fórmulas — con el doble objetivo de precisión alta y alto *throughput*. La novedad está en el dato: un motor de *self-improvement* recursivo acotado, en el que el modelo actúa como sonda de debilidades y la supervisión la dan un consenso externo multiexperto, la verificación visual por *VLM* y una síntesis factorizada. Con un *decoder* *Qwen3-0.6B* y un módulo paralelo de unos 67 millones de parámetros (*PTPv2*), llega a 96,45 en *OmniDocBench v1.6*.",
+          "body": [
+            "El análisis de documentos es el esqueleto menos glamoroso de la automatización, y *VenusOCR 2.0* ataca sus dos clásicos problemas: la precisión (las tablas y las fórmulas es donde se concentran los errores) y el *throughput* (la decodificación autoregresiva de *tokens* es lenta). El primero se resuelve con un motor de datos: el modelo se usa como sonda de sus propias debilidades, y la supervisión que las corrige llega de tres fuentes externas — el consenso multiexperto por *medoides*, la verificación visual por un *VLM* y una síntesis factorizada —, de modo que el *auto-entrenamiento* no se desmorone sobre sus propios errores.",
+            "La arquitectura acopla un codificador *SigLIP2* de resolución dinámica con fusiones espaciales 2×2 y un *decoder* *Qwen3-0.6B*, con *tokens* atómicos *OTSL* que acortan la secuencia de las tablas y reducen los errores de estructura. Para cortar el cuello de botella autoregresivo, el *paper* añade *PTPv2*, un módulo paralelo desacoplado de unos 67 millones de parámetros que predice *tokens* de varias posiciones a la vez. El resultado es un 96,45 en *OmniDocBench v1.6* — el *state of the art* de su clase de tamaño —, y una receta que se puede leer como el mapa de lo que debería ser un OCR local de la próxima generación."
+          ],
+          "tags": [
+            "venusocr",
+            "document-parsing",
+            "ocr",
+            "self-improvement",
+            "parallel-decoding"
+          ],
+          "links": [
+            {
+              "label": "Paper (arXiv 2611.32617)",
+              "url": "https://arxiv.org/abs/2611.32617"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*Atomic Engine*: *Inkling 2 Mini* a 122 *tokens* por segundo en *M5 Max*, triple velocidad",
+          "summary": "El cofundador de *Atomic Engine* documentó en *r/LocalLLaMA* (el 23 de noviembre) una triple aceleración sobre el 26B: el motor lleva a *Inkling 2 Mini* a 122 *tokens* por segundo en un *M5 Max*, frente a la línea de base de referencia de unos 40. El *post* incluye el análisis completo, el código fuente del motor en *GitHub* y los *GGUF* en *Hugging Face*.",
+          "body": [
+            "Dos semanas después de la salida de *Inkling 2 Mini*, la conversación de la comunidad pasó de «arranca» a «cuánto de rápido». El dato de la semana: *Atomic Engine*, un motor de inferencia local nuevo, llega a 122 *tokens* por segundo sobre el 26B en un *M5 Max* — tres veces la línea de base de unos 40 —, y lo documenta en un *post* que repasa el análisis de la optimización y el entorno completo.",
+            "El *post* es el paquete completo: el razonamiento de la optimización, el código fuente del motor en *GitHub* y los *GGUF* en *Hugging Face*. Es el patrón de la semana de *llama.cpp* contra *Strata*: el ecosistema *local* está en fase de carrera de motores, y el *Mac* de 32 GB que hacía andar el 26B a velocidad decente hace dos semanas ahora lo hace ir al triple."
+          ],
+          "tags": [
+            "atomic-engine",
+            "inkling-2-mini",
+            "m5-max",
+            "inference",
+            "local-llm"
+          ],
+          "links": [
+            {
+              "label": "Análisis: Atomic Engine (explainx.ai)",
+              "url": "https://www.explainx.ai/blog/atomic-engine-inkling-2-mini-3x-speed-memory-budget-november-2026"
+            },
+            {
+              "label": "Hugging Face: Inkling-2-Mini",
+              "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"
+            }
+          ]
+        },
+        {
+          "title": "El duelo local de la semana: *Inkling 2 Mini* frente a *Qwen3.8-Flash-Next*",
+          "summary": "El *post* que está dando vueltas en las últimas 24 horas compara los dos modelos *local* del momento en la misma máquina: *Inkling 2 Mini* (26B, 3,4B activos, *NVFP4* nativo) con una cuantización *UD-Q8_K_XL*, casi todo en *VRAM*, contra el «modesto» *Qwen3.8-Flash-Next*. La comparativa es «todo verificado» en un solo equipo, en el mismo espíritu que *Strata* contra *llama.cpp*.",
+          "body": [
+            "El duelo de la semana tiene un protagonista claro y un rival que sorprende: *Inkling 2 Mini*, el 26B de *Thinking Machines* que encabezó este periódico el martes, contra *Qwen3.8-Flash-Next*, el *Qwen* pequeño que la comunidad ha ido manteniendo como la opción práctica. El *post* — *r/LocalLLM*, últimas 24 horas — es una comparación controlada: misma máquina, *Inkling* con una cuantización *UD-Q8_K_XL* y casi todos los pesos en *VRAM*, y el *Qwen* como referencia.",
+            "Lo que compara el *post* no es solo la velocidad, sino la calidad en las tareas del momento. Es la misma dinámica que *llama.cpp* contra *Strata*: la comunidad como juez, con la máquina como única variable controlada. El *post* es una instantánea útil de cómo se ve «el modelo del momento» en una máquina *local* real, sin el *marketing* de los *bench* oficiales."
+          ],
+          "tags": [
+            "inkling-2-mini",
+            "qwen3-8-flash-next",
+            "local-llm",
+            "benchmarking",
+            "community"
+          ],
+          "links": [
+            {
+              "label": "r/LocalLLM: el duelo",
+              "url": "https://www.reddit.com/r/LocalLLM/comments/1y3w0x5/inkling_2_mini_vs_the_humble_qwen_38_flashnext/"
+            }
+          ]
+        },
+        {
+          "title": "*llama.cpp* 1.0 y *Strata*: la carrera de motores *local* sigue con *benchmarks* comunitarios",
+          "summary": "Desde que *ggml-org* etiquetó la *v1.0.0* el 13 de noviembre — *API C* establecida bajo *semver*, *llama-server* endurecido, caché *KV* *FP8* —, la comunidad sigue midiendo: la comparativa de *llama.cpp* contra *Strata*, el motor en *Rust* de *RustingStrata*, es el tema de la semana en *r/LocalLLaMA*, con vídeos y hilos de comparación directa.",
+          "body": [
+            "El hito de *llama.cpp* ya tiene unos días, pero el ecosistema sigue midiendo: la *v1.0* estableció la *API C* con un *semver* de verdad, endureció *llama-server* y añadió la caché *KV* *FP8*, y la consecuencia es que la comparación con las alternativas ahora tiene una referencia estable. *Strata*, el motor en *Rust* de *RustingStrata* que viene retando a *llama.cpp* desde el medio del año, es el rival de la semana.",
+            "Los vídeos y *posts* de los últimos días van al formato clásico: mismo modelo, misma máquina, ambos motores, *tokens* por segundo en el gráfico. El ecosistema *local* ha entrado en la fase en que el coste del motor se mide al céntimo, y el *benchmark* comunitario es, de momento, un juez mejor que el *bench* oficial: porque se hace sobre el hardware real del lector."
+          ],
+          "tags": [
+            "llama-cpp",
+            "strata",
+            "inference",
+            "benchmarking",
+            "local-llm"
+          ],
+          "links": [
+            {
+              "label": "Blog Hugging Face: llama.cpp v1.0.0",
+              "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+            },
+            {
+              "label": "Vídeo: llama.cpp 1.0 vs Strata",
+              "url": "https://www.youtube.com/watch?v=1IxyDY94vLE"
+            }
+          ]
+        },
+        {
+          "title": "El equipo de *Tencent Hy* hace su primer *AMA* en *r/LocalLLaMA*",
+          "summary": "El 20 de noviembre, el equipo de *Hy4* y *Hy4-flash* de *Tencent* — *Shunyu Yao* y colegas — celebró el primer *AMA* del equipo chino en el subreddit, entre las 8 y las 10 de la mañana (*PT*). La toma de nota que circuló en los resúmenes: los *benchmarks* públicos son cada vez peor guía, y lo que realmente distingue a los modelos es el uso real; las preguntas sobre el *harness* y el uso en la práctica fueron las más frecuentes.",
+          "body": [
+            "El *AMA* del equipo de *Tencent* sobre *Hy* es el último ejemplo del canal directo que los laboratorios de modelos abiertos tienen con la comunidad *local*: el 20 de noviembre, *Shunyu Yao* y colegas atendieron en *r/LocalLLaMA* las preguntas sobre *Hy4* y *Hy4-flash*, el *MoE* de 106B que el equipo ha ido publicando. El formato es el clásico — una ventana horaria fijada, y la cuenta del equipo con las respuestas.",
+            "El resumen más repetido del hilo es una lección que este periódico lleva un año repitiendo: los *benchmarks* públicos son cada vez peor guía para elegir modelo, y lo que de verdad los distingue es el uso real sobre tareas reales. Para quien *self-hostea*, el *AMA* es un canal de dos vías: las preguntas de la comunidad le dicen al laboratorio dónde le falla el modelo en la práctica, y eso vale más que cualquier *benchmark*."
+          ],
+          "tags": [
+            "tencent",
+            "hy4",
+            "ama",
+            "local-llama",
+            "community"
+          ],
+          "links": [
+            {
+              "label": "Resumen del AMA (ME News)",
+              "url": "https://www.me.news/news/329893"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "brainintelli/BioSignal-Guided-LLM-Reinforcement-Learning",
+        "stars": "★ 142",
+        "desc": "refuerzo de agentes *LLM* guiado por biosignales: grabaciones neuronales de *organoides* como entrada a la política de un juego de supervivencia en *Godot*",
+        "meta": "Python · MIT",
+        "url": "https://github.com/brainintelli/BioSignal-Guided-LLM-Reinforcement-Learning"
+      },
+      {
+        "name": "YHD-yhd-coder/nl2tex",
+        "stars": "★ 8",
+        "desc": "agente que convierte descripciones o capturas de fórmulas en *LaTeX* compilable, con verificación *KaTeX* y exportación a *MathML* y *Word*",
+        "meta": "JavaScript · MIT",
+        "url": "https://github.com/YHD-yhd-coder/nl2tex"
+      },
+      {
+        "name": "ashhart/tf-rewind",
+        "stars": "★ 4",
+        "desc": "rebobinado exacto de estado sin puntos de control en modelos híbridos de atención lineal (*Qwen3.5/3.8*, *Gated DeltaNet*)",
+        "meta": "Zig · MIT",
+        "url": "https://github.com/ashhart/tf-rewind"
+      },
+      {
+        "name": "metaspartan/RAD",
+        "stars": "★ 2",
+        "desc": "motor de inferencia de *LLM* en *Rust* + *ROCm/HIP* para centros de datos en *AMD*",
+        "meta": "HIP · MIT",
+        "url": "https://github.com/metaspartan/RAD"
+      },
+      {
+        "name": "frontiereval/AIChipBench",
+        "stars": "★ 2",
+        "desc": "benchmark de agentes *LLM* para el diseño automático de aceleradores de *IA*",
+        "meta": "HTML",
+        "url": "https://github.com/frontiereval/AIChipBench"
+      }
+    ],
+    "papers": [
+      {
+        "title": "LingSante MedGuard: Towards Clinical Guardrails via Expert-Grounded Distillation",
+        "authors": "26 upvotes",
+        "url": "https://arxiv.org/abs/2611.25509"
+      },
+      {
+        "title": "RoboDojo-Mirror: When Embodied AI Fails the Mirror Test",
+        "authors": "22 upvotes",
+        "url": "https://arxiv.org/abs/2611.33010"
+      },
+      {
+        "title": "ThinkMorph-SSL: Interleaved Multimodal Reasoning with Self-Supervised Pretext Reasoning",
+        "authors": "13 upvotes",
+        "url": "https://arxiv.org/abs/2611.32183"
+      },
+      {
+        "title": "Qwen-Image-HD: Block-wise Autoregressive Generation for High-Definition Image Synthesis",
+        "authors": "11 upvotes",
+        "url": "https://arxiv.org/abs/2611.32736"
+      },
+      {
+        "title": "VenusOCR2.0: Towards Efficient and Effective Document Parsing",
+        "authors": "6 upvotes",
+        "url": "https://arxiv.org/abs/2611.32617"
+      }
+    ],
+    "community": [
+      {
+        "src": "r/LocalLLaMA",
+        "title": "*Pika Enact*: la comunidad debate el nuevo modo «director» del vídeo",
+        "note": "el hilo sobre el nuevo enfoque de generación de *Pika* (*Pika H3 Flex*) es de los más comentados de la semana",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xzrpa5/pika_enact/"
+      },
+      {
+        "src": "agihunt",
+        "title": "El comentarioer del 1% de *r/LocalLLaMA* sale al paso: ¿68% de los comentarios son *IA*?",
+        "note": "el hilo que encendió la autocomprobación de la comunidad sobre los comentarios generados por *IA*",
+        "url": "https://agihunt.info/en/p/1a206b46993189589d5165bfa58"
+      },
+      {
+        "src": "web",
+        "title": "*llmspeed.dev*: cuánto corre de verdad tu hardware, antes de comprarlo",
+        "note": "un sitio que mide el rendimiento real de *LLM* *local* para comparar hardware antes de la compra",
+        "url": "https://llmspeed.dev/"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

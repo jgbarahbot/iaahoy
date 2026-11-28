@@ -1,0 +1,477 @@
+{
+  "date": "27 de octubre de 2026",
+  "weekday_long": "martes",
+  "edition": "Edición nº 31",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "La *automejora recursiva* toma forma: una encuesta, un agente que optimiza sus propias *skills*, y un juego de cartas que un sistema de *agentes LLM* construyó desde cero",
+    "summary": "Tres trabajos publicados entre el 24 y el 26 de octubre dan, por primera vez, un marco operativo a lo que la comunidad llama *automejora recursiva* (RSI, de «recursive self-improvement»). Una encuesta de la USTC y sus coautores define por qué la automejora por sí sola no garantiza mejora fiable, y organiza el problema en cuatro temas (mejora genuina, preservación de restricciones, seguridad y privacidad, transparencia) y tres perspectivas (validez, preservación, supervisión). Un segundo trabajo, *Skill∞* (NTU), convierte la optimización de *skills* de *agentes* en un procedimiento recursivo: un *agente meta* optimiza *skills* de tarea con una *meta-skill*… y optimiza la *meta-skill* con el mismo procedimiento. Y el tercero, *AutoTavern* (Nanjing), es una historia concreta de 20 días en la que un sistema de *agentes LLM* especializados construyó —desde datos en bruto— un simulador fiel de *Hearthstone Battlegrounds*, un *agente* que entrena contra oponentes calibrados al juego en vivo, y un *benchmark* de 960 tareas. En los tres casos, el «mejor sistema que se pueda construir con los mismos datos» es el que construye el *agente*, no el que programa un humano.",
+    "tags": [
+      "rsi",
+      "agentes",
+      "auto-mejora",
+      "survey",
+      "skills",
+      "rl",
+      "hearthstone"
+    ],
+    "links": [
+      {
+        "label": "arXiv — Trustworthy RSI (survey)",
+        "url": "https://arxiv.org/abs/2610.35193"
+      },
+      {
+        "label": "arXiv — Skill∞",
+        "url": "https://arxiv.org/abs/2610.35434"
+      },
+      {
+        "label": "arXiv — AutoTavern (Build, Don't Play)",
+        "url": "https://arxiv.org/abs/2610.33845"
+      },
+      {
+        "label": "GitHub — MCG-NJU/AutoTavern (TavernGym + TavernBench, MIT)",
+        "url": "https://github.com/MCG-NJU/AutoTavern"
+      }
+    ],
+    "body": [
+      "La pregunta que la encuesta «Trustworthy Recursive Self-Improvement» (arXiv 2610.35193, Pu et al., USTC) se hace primero es la buena: *¿qué significa, exactamente, que un sistema se auto-mejore recursivamente?* Y la respuesta es un marco operativo, no una definición literaria. La *automejora recursiva* (RSI) extiende el proceso habitual —un modelo que usa experiencia y retroalimentación para hacer cambios persistentes en sus *prompts*, memorias, *tools* y *workflows* — a las *inducciones* y a los propios *mecanismos* que gobiernan futuras actualizaciones; esos mecanismos, a su vez, pueden ser revisados y reutilizados entre ciclos de mejora. En otras palabras, el sistema no solo se vuelve mejor: mejora la forma en que mejora.",
+      "La parte importante de la encuesta, y la razón por la que merece la portada, es su tesis: *la automejora por sí sola no garantiza mejora fiable*. Los autores enumeran, con calma, los modos en que un sistema que se auto-mejora puede empeorar: mejoras reportadas que en realidad reflejan evaluaciones defectuosas, capacidades adquiridas antes que se erosionan, cumplimiento de restricciones conductuales que se debilita, artefactos comprometidos o información sensible que persiste en los sucesores, y —el punto más sutil— que *los cambios en el propio mecanismo de mejora invalidan verificaciones previas* y hacen la supervisión humana menos eficaz. A partir de ahí organizan los requisitos de RSI fiable en cuatro temas conectados —mejora genuina y sostenida; restricciones conductuales, alineación y equidad; seguridad y privacidad del sistema; transparencia y controlabilidad— y los examinan desde tres perspectivas: *validez de la mejora*, *preservación de restricciones* y *supervisión eficaz*. El mapa cubre las cuatro fases de una actualización (diagnóstico, propuesta, evaluación, implementación, S1–S4) y su aplicación recursiva al mecanismo (RI). Es el primer intento serio de convertir «RSI» en algo que se pueda *auditar*, no solo algo que se pueda *publicar*.",
+      "El segundo trabajo, *Skill∞* (arXiv 2610.35434, Tao et al., NTU), toma una consecuencia concreta de esa definición: los *agentes de lenguaje* guardan su conocimiento procedimental en *skills* reutilizables, y *optimizar* esas *skills* es una vía directa hacia la RSI, porque el procedimiento de optimización puede codificarse *como una *skill* en sí mismo*. Los optimizadores de *skills* existentes, sin embargo, siguen un procedimiento diseñado a mano; incluso los que evolucionan una *meta-skill* la confinan a un *pipeline* fijo y la reaprenden para cada tarea. *Skill∞* rompe esa asimetría: un *agente meta* sigue una *meta-skill* para optimizar *skills* de tarea, y usa el mismo procedimiento para optimizar la *meta-skill*. La optimización es *dirigida por el agente*: el *agente meta* diagnostica trazas de ejecución, propone candidatos, pide revisiones independientes y asigna el presupuesto de búsqueda; la *meta-skill* define estos pasos, y por tanto la automejora puede reescribirlos. La *meta-skill* además queda desacoplada de las *skills* de tarea: se refina en varias tareas de optimización de *skills* y luego se reutiliza en dominios diversos. En *SkillsBench* (83 tareas), *Skill∞* llega a una tasa de acierto del 60,7 %, frente al 56,4 % de *skills* curadas a mano y el 54,5 % de *SkillEvolver*.",
+      "El tercer trabajo, *AutoTavern* (arXiv 2610.33845, Ma y Wang, Nanjing; repositorio *MCG-NJU/AutoTavern*, MIT), es la demostración empírica de que el marco no es decorativo. *Hearthstone Battlegrounds* es un *auto-battler* de ocho jugadores con tiendas estocásticas, combates, información oculta y casi un millar de cartas que interactúan —un problema duro del mundo real, con reglas ambiguas y retroalimentación costosa. *AutoTavern* es un sistema de investigación auto-mejorable: *agentes LLM* especializados comparten una *memoria de investigación* con tipos, cada afirmación pasa por *puertas de verificación*, y las partidas en vivo cierran el circuito: los *agentes* mejoran el simulador, los oponentes y la política, y a partir de la misma retroalimentación, su propio proceso de investigación. Un humano fija metas y resuelve ambigüedades de mecánicas. En 20 días, *AutoTavern* construyó *TavernGym*, la primera reproducción fiel de contenido completo del juego en vivo, y entregó 23 versiones de *TavernAgent*, entrenadas con *PPO* contra oponentes calibrados a partidas reales. *TavernAgent* juega partidas completas en la escalera en vivo sin supervisión: su puntuación subió de 6.000 a ~15.000, y en la medida del *leaderboard* público sus últimas 20 partidas promedian posición 1,60 con 80 % de primeros, mejor que los diez jugadores mejor puntuados del servidor en todas las estadísticas (2,34 y 59 %). El *benchmark* *TavernBench* (960 tareas en 40 escenarios) muestra que el sistema construido por los *agentes* es el mejor jugador: *TavernAgent* resuelve el 91 % de las tareas de juego frente a como mucho el 63 % de los *LLMs* frontera, y decide en 0,03 s donde los *LLMs* necesitan hasta 26 s; dentro del segundo que permite un turno en vivo, conserva el 90 % y ningún *LLM* más del 26 %.",
+      "¿Qué tienen en común los tres? No es que sean «IA que se mejora a sí misma» —eso ya se dice de todo—. Es que *la mejora se aplica al propio proceso de mejora*: la encuesta define el marco y las grietas, *Skill∞* lo implementa en el nivel de *skills* de *agentes*, y *AutoTavern* lo demuestra a escala en un dominio donde el «jugar» no basta: como dice el título del paper, *build, don't play* —*construye, no juegues*. Los *agentes LLM* construyen mejor de lo que juegan, y la pregunta que la RSI plantea es si pueden construir *el proceso de mejora* mejor de lo que lo haría un equipo de humanos. Por ahora, al menos, la comunidad tiene un mapa, una receta y una primera prueba."
+    ],
+    "illustration": {
+      "file": "lead-illo-2026-10-27.jpg",
+      "alt": "Un gran chip de silicio en pie sobre una mesa de laboratorio, con un espiral grabado en su superficie y un hilo de luz dorada que lo rodea en círculo",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: el circuito de la automejora recursiva"
+    }
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*MiniMax M3.1-Flash*: MoE multimodal nativo de ~428B (23B activos) con 1M de contexto",
+          "summary": "MiniMax M3.1-Flash es la actualización de su modelo MoE nativo multimodal, optimizada para tareas de *agente*, *código* y ciberseguridad, con texto, imagen y vídeo como entrada y 1M de *tokens* de contexto. Sparse *attention*, *quantization-aware training* y *DSpark speculative decoding* la convierten en una de las más eficientes de su clase; *Hugging Face* la lista ya en *trending*.",
+          "body": [
+            "*MiniMax M3.1-Flash* es un *mixture-of-experts* nativo multimodal de ~428B parámetros totales, con 23B activos por *token*, y texto, imagen y vídeo como entradas. La actualización respecto a *MiniMax-M3* trae mejoras en *tareas de agente*, *código* y ciberseguridad, y tres cambios de eficiencia: *MiniMax Sparse Attention* (MSA, arXiv 2606.13392) a lo largo de todo el modelo, *quantization-aware training*, y un *draft head* de *DSpark speculative decoding* incluido en el checkpoint.",
+            "Los números de *MiniMax* en su *technical report* la sitúan por encima de *DeepSeek V4.1-Flash-1017* en varios *benchmarks* de agente: 76,2 en *BankerToolBench* (vs 73,7), 73,7 % en *DeepSWE v1.1* (vs 77,0 en *DeepSeek*), 61,7 en *OSWorld V2*, 29,6 en *Agents' Last Exam* y 82,2 en *CyberGym*. La ventana de contexto de hasta 1.000.000 *tokens* es el dato más llamativo para despliegues de largo recorrido. El modelo está en *Hugging Face* con *endpoints* compatibles y cuantizaciones *8-bit*/*mxfp8* ya disponibles."
+          ],
+          "tags": [
+            "minimax",
+            "moe",
+            "multimodal",
+            "agent",
+            "context-1m"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face — MiniMaxAI/MiniMax-M3.1-Flash",
+              "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+            },
+            {
+              "label": "arXiv — MiniMax Sparse Attention",
+              "url": "https://arxiv.org/abs/2606.13392"
+            }
+          ]
+        },
+        {
+          "title": "*DeepSeek V4.1-Flash-1017*: la variante «Flash» actualiza *código*, *agente* y visión, y reduce la salida",
+          "summary": "El 17 de octubre *DeepSeek* publicaba *V4.1-Flash-1017*, una actualización menor de *V4.1-Flash* con mejoras medibles en razonamiento, *código*, tareas de *agente* y *benchmarks* visuales, y —lo más interesante para quien la autoaloja— una reducción en el tiempo de ejecución y la longitud de salida. La *cuantización GSQ+RCO* de *ISTA-DASLab* ya está disponible en *GGUF* con licencia *MIT*.",
+          "body": [
+            "*DeepSeek-V4.1-Flash-1017* es una actualización menor de *DeepSeek-V4.1-Flash*: el *technical report* reporta mejoras en razonamiento, *código*, tareas de *agente* y *benchmarks* visuales, y una reducción en el tiempo de ejecución y la longitud de salida de las respuestas. Eso avanza, según *DeepSeek*, la frontera *pareto* de rendimiento–coste en varios *harness* de agente. En el *benchmark* *HLE* (sin herramientas) sube de 36,8 a 42,6 (44,0 con herramientas), *Terminal-Bench 4.0* de 31,2 a 42,3, y *DeepSWE v1.1* de 74,2 a 77,0.",
+            "Lo relevante para la comunidad de *self-hosting*: la *cuantización* *GSQ+RCO* de *ISTA-DASLab* (arXiv 2604.18556 y 2605.00649) ya está en *Hugging Face* como *GGUF* con licencia *MIT* — *ISTA-DASLab/DeepSeek-V4.1-Flash-1017-GSQ-RCO-GGUF* —, lo que abre la puerta a ejecutar la variante *Flash* en hardware modesto. El *release* original no incluye *template* *Jinja*, algo que *DeepSeek* documenta en su *technical report*."
+          ],
+          "tags": [
+            "deepseek",
+            "moe",
+            "agent",
+            "quantization",
+            "gguf"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face — DeepSeek-V4.1-Flash-1017",
+              "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+            },
+            {
+              "label": "Hugging Face — ISTA-DASLab GSQ+RCO GGUF",
+              "url": "https://huggingface.co/ISTA-DASLab/DeepSeek-V4.1-Flash-1017-GSQ-RCO-GGUF"
+            }
+          ]
+        },
+        {
+          "title": "*FLUX 3 Klein* aterriza en *ComfyUI* oficial: el *checkpoint* «comfy» de *Black Forest Labs* ya en *Hugging Face*",
+          "summary": "*Black Forest Labs* publicó *black-forest-labs/flux-3-image-klein-comfy* el 14 de octubre y en 13 días ya acumula 1.720 *likes* y 700.000 descargas en *Hugging Face*: es el *checkpoint* oficial de *FLUX 3 Klein* empaquetado para *ComfyUI*, con *image-to-image* y *image editing* integrados. El «comfy» es la señal de que el *pipeline* se usa tal y como se usa *Stable Diffusion*.",
+          "body": [
+            "*FLUX 3* es la nueva familia de generación de imágenes de *Black Forest Labs*, y el *checkpoint* *Klein* es la variante orientada a calidad alta en menos *steps*. El *release* «comfy» (*black-forest-labs/flux-3-image-klein-comfy*) es el *ckpt* empaquetado con la estructura de archivos y el *pipeline* que *ComfyUI* espera: *diffusion-single-file* con *ComfyUI* en las *tags*, *image-to-image* y *image editing* integrados, y *base_model* *flux-3-image-klein* de referencia.",
+            "En 13 días, el *release* acumula 1.720 *likes* y 700.000 descargas en *Hugging Face*, un ritmo que lo sitúa en *trending* y que sugiere que la comunidad lo está adoptando como *pipeline* por defecto de *ComfyUI* para *FLUX 3*. No hay todavía *cuantizaciones* *GGUF* de *Comfy-Org* ni *unsloth* para *Klein* en *trending*, pero el patrón que se vio con *MOSS-Image* y *Qwen-Image 2.1* apunta a que las *GGUF* llegarán en las próximas semanas."
+          ],
+          "tags": [
+            "flux",
+            "image-gen",
+            "comfyui",
+            "black-forest-labs"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face — black-forest-labs/flux-3-image-klein-comfy",
+              "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*AutoTavern*: el «construye, no juegues» de la RSI — un *agente* que gana a los top de *Hearthstone BG*",
+          "summary": "Ya en portada como el tercer pilar de la RSI, *AutoTavern* (Nanjing) merece su propio lugar en *agentes*: es un sistema de investigación auto-mejorable donde *agentes LLM* especializados comparten una *memoria de investigación* con tipos, sus partidas en vivo cierran el circuito, y el resultado final —*TavernAgent*— juega partidas completas en el *leaderboard* en vivo de *Hearthstone Battlegrounds* mejor que los diez jugadores mejor puntuados del servidor.",
+          "body": [
+            "El repositorio *MCG-NJU/AutoTavern* (MIT) incluye *TavernGym*, la primera reproducción fiel de contenido completo de *Hearthstone Battlegrounds* con *interfaz de RL*, y *TavernBench*, un *benchmark* de 960 tareas en 40 escenarios, ambos *open-source* según el *paper*. El *agente* final, *TavernAgent*, se entrena con *PPO* contra oponentes calibrados a partidas reales, y en el *leaderboard* público del juego su última racha de 20 partidas promedia posición 1,60 con 80 % de primeros —mejor que los diez jugadores con mayor *rating* del servidor, que promedian 2,34 y 59 %—.",
+            "El *timing* de las decisiones es la otra cifra que vale la pena retener: *TavernAgent* decide en 0,03 segundos, donde los *LLMs* frontera necesitan hasta 26 segundos; dentro del segundo que el juego permite por turno, conserva el 90 % de sus decisiones y ningún *LLM* más del 26 %. Es la primera vez que se muestra, con datos, que un sistema que se auto-mejora puede *construir* un *agente* mejor que el que un equipo humano habría podido programar con los mismos datos y el mismo *compute*."
+          ],
+          "tags": [
+            "agentes",
+            "rsi",
+            "rl",
+            "poker",
+            "hearthstone",
+            "benchmark"
+          ],
+          "links": [
+            {
+              "label": "GitHub — MCG-NJU/AutoTavern (TavernGym + TavernBench, MIT)",
+              "url": "https://github.com/MCG-NJU/AutoTavern"
+            },
+            {
+              "label": "arXiv — Build, Don't Play",
+              "url": "https://arxiv.org/abs/2610.33845"
+            }
+          ]
+        },
+        {
+          "title": "*Skill∞*: la *meta-skill* que optimiza *skills*… y que se optimiza a sí misma",
+          "summary": "*Skill∞* (NTU) convierte la optimización de *skills* de *agentes* en un procedimiento recursivo: un *agente meta* sigue una *meta-skill* para optimizar *skills* de tarea, y usa el mismo procedimiento para optimizar la *meta-skill*. En *SkillsBench* (83 tareas) llega al 60,7 % de acierto, por encima de *skills* curadas a mano (56,4 %) y de *SkillEvolver* (54,5 %).",
+          "body": [
+            "La apuesta de *Skill∞* es de arquitectura, no de *compute*: los optimizadores de *skills* existentes siguen un *pipeline* diseñado a mano, y *Skill∞* reescribe ese *pipeline* como una *meta-skill* que el propio *agente meta* puede editar. La optimización es *dirigida por el agente*: el *agente meta* diagnostica trazas de ejecución, propone candidatos, pide *reviews* independientes y asigna el presupuesto de búsqueda, y la *meta-skill* define esos pasos, de modo que la automejora puede reescribirlos. La *meta-skill* queda además desacoplada de las *skills* de tarea: se refina en varias tareas de optimización de *skills* y luego se reutiliza en dominios diversos, como en *despliegue* las *skills* de ambos niveles se cargan a través del *descubrimiento* nativo de *skills*.",
+            "El resultado en *SkillsBench* (83 tareas) es 60,7 % de acierto para *Skill∞*, frente al 56,4 % de *skills* curadas a mano y el 54,5 % de *SkillEvolver*. No es una gran diferencia, pero es la primera medida concreta de que la optimización *recursiva* de *skills* supera a la optimización *de un solo paso*, y el *paper* (arXiv 2610.35434) está entre los dos más leídos del día en *Hugging Face Papers*."
+          ],
+          "tags": [
+            "agentes",
+            "skills",
+            "rsi",
+            "meta-learning"
+          ],
+          "links": [
+            {
+              "label": "arXiv — Skill∞ (Recursive Self-Improvement for Agent Skill Optimization)",
+              "url": "https://arxiv.org/abs/2610.35434"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2610.35434"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*mistrial*: una «tarjeta de fiabilidad» para tu *juez LLM* — repite el evaluador y mide la varianza",
+          "summary": "*mistrial* (GitHub, MIT, 7 estrellas) responde a una pregunta incómoda: ¿es fiable tu *juez LLM*? La herramienta re-ejecuta cualquier evaluador a lo largo de ejecuciones, modelos de *juez* y redacciones de *rúbrica*, y produce una *tarjeta de fiabilidad* con la varianza de las puntuaciones. Es la pieza que faltaba para tratar a los *LLM-as-judge* como lo que son: instrumentos de medición, no oráculos.",
+          "body": [
+            "Los *LLM-as-judge* son la práctica estándar para evaluar *outputs* de *LLMs* cuando no hay respuesta de referencia, y el *paper* *FORK* (arXiv 2610.33512) que publica hoy la comunidad lo ilustra bien: los *rewards* basados en *rúbricas* tienden a producir respuestas más largas y con más contenido no necesario, porque el modelo optimiza la *recall* de la *rúbrica* y no la *precisión*. *mistrial* se apunta a ese problema desde la otra punta: en lugar de mejorar el *juez*, mide *cuán fiable es*.",
+            "El repositorio *hemanth1999k/mistrial* (MIT) permite re-ejecutar cualquier evaluador a lo largo de múltiples *runs*, con diferentes modelos de *juez* y redacciones de *rúbrica*, y produce una *tarjeta de fiabilidad* con la varianza de las puntuaciones, los *outliers* y la correlación entre *rúbricas*. Es una herramienta pequeña —7 estrellas, pero el *timing* la hace interesante— que llega justo cuando la comunidad empieza a tratar a los *jueces LLM* como instrumentos de medición con error, no como oráculos."
+          ],
+          "tags": [
+            "evaluacion",
+            "llm-as-judge",
+            "fiabilidad",
+            "mit"
+          ],
+          "links": [
+            {
+              "label": "GitHub — hemanth1999k/mistrial (MIT)",
+              "url": "https://github.com/hemanth1999k/mistrial"
+            }
+          ]
+        },
+        {
+          "title": "*cruxwire*: un lector de *RSS* privado con *LLM* local para *self-hosting* — *ranking*, *dedup* y resumen en tu hardware",
+          "summary": "*cruxwire* (GitHub, MIT, 13 estrellas) es un lector de noticias *self-hosted* que usa un *LLM* local para clasificar, *deduplicar* y resumir tus *feeds* *RSS*/*Atom* de forma privada, en tu propio hardware. Es la respuesta de *código abierto* a los lectores de IA cerrados, y encaja directamente en la audiencia de esta edición: gente que ya *self-hosts* su IA.",
+          "body": [
+            "*cruxwire* (*philoking/cruxwire*, MIT) es un lector de noticias *self-hosted* que se alimenta de tus *feeds* *RSS*/*Atom* y usa un *LLM* local para clasificar por relevancia, *deduplicar* (agrupar noticias repetidas de varias *feeds*) y resumir (un resumen por noticia y un resumen diario). El *LLM* se ejecuta localmente vía *Ollama* o *llama.cpp*, de modo que ninguna noticia sale de tu máquina, y la configuración es un *YAML* con tus *feeds*, tu modelo y tus parámetros de *ranking*.",
+            "Con 13 estrellas es un *proyecto* pequeño, pero es exactamente la clase de pieza que encaja en la audiencia de *IA·A·Hoy*: alguien que ya tiene un *LLM* local y quiere que le lea el correo, no que le genere noticias. El *ranking* y el *dedup* son las piezas útiles, porque la limitación real de un lector de *RSS* no es la cantidad de *feeds* sino la capacidad de filtrar. *cruxwire* deja el *LLM* como el filtro, no como el *generador* de noticias, y eso es una decisión de diseño correcta."
+          ],
+          "tags": [
+            "self-hosting",
+            "rss",
+            "llm-local",
+            "mit",
+            "privacidad"
+          ],
+          "links": [
+            {
+              "label": "GitHub — philoking/cruxwire (MIT)",
+              "url": "https://github.com/philoking/cruxwire"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*S3AC*: un *actor-critic* *stabilized* para razonamiento *long-CoT* — supera a *GRPO* del 1,5B al 397B",
+          "summary": "*S3AC* (arXiv 2610.35518, Shen et al.) propone una receta práctica para entrenar un *crítico* en razonamiento *long-CoT* —el paso que los métodos *crític-free* evitan por su coste— que da *advantages* a nivel de *token* y *baselines* por *prompt*. Combinado con *Difficulty-Aware Prompt Sampling*, mejora *GRPO-X* del 1,5B al 397B, y a 35B soporta *single-rollout training* donde los *baselines* *crític-free* se degradan.",
+          "body": [
+            "Los métodos *crític-free* como *GRPO* son la vía dominante para *RLVR* (refuerzo con *rewards* verificables) en razonamiento *long-CoT*, porque entrenar un *crítico* para *long-CoT* es difícil y caro. *S3AC* (*Stabilized, Selective, Scalable Actor-Critic*) ataca el problema con una receta práctica de entrenamiento de *crítico* que supera dos de sus limitaciones: *insuficiente coverage* de trayectorias de longitud diversa, y *gradientes* iniciales dominados por la *value head* recién inicializada. El *crítico* entrenado aporta *advantages* específicos por *token* y *baselines* específicas por *prompt*.",
+            "La segunda pieza, *Difficulty-Aware Prompt Sampling* (*DAPS*), usa el *baseline* de *prompt* para estimar la dificultad y selecciona *prompts* antes de la generación, reduciendo *rollouts* desperdiciados sin inicialización *offline* de dificultad. El resultado: *S3AC* mejora el rendimiento de *group-rollout* en modelos *dense* y *MoE* de 1,5B a 397B, superando a *GRPO-X*, y a 35B sostiene *single-rollout training* mientras que los *baselines* *crític-free* se degradan tras las ganancias iniciales. Es un *paper* técnico, de la clase que no sale en titulares, pero es la pieza que falta para que el *RL* con *crítico* vuelva a ser competitivo en el *long-CoT*."
+          ],
+          "tags": [
+            "rl",
+            "actor-critic",
+            "long-cot",
+            "grpo",
+            "reasoning"
+          ],
+          "links": [
+            {
+              "label": "arXiv — S3AC",
+              "url": "https://arxiv.org/abs/2610.35518"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2610.35518"
+            }
+          ]
+        },
+        {
+          "title": "*AMBIT*: audio espacial nativo *FOA* con *ScenePlans* ejecutables y *self-distillation* — generación y *edición* con un solo *backbone*",
+          "summary": "*AMBIT* (arXiv 2610.34415) unifica generación y *edición* de audio espacial nativo *FOA* (*First-Order Ambisonics*) con un *backbone* *Transfusion* compartido: un plan de escenas ejecutable que especifica *content*, actividad y trayectorias 3D de las fuentes, un *VAE* *FOA-aware*, y *self-distillation* *on-policy* conjunta del *planning* y el *rendering*. Mejora *content* y calidad espacial en habla, música y sonido, y preserva las fuentes sin *editar* en *ediciones* guiadas por instrucciones.",
+          "body": [
+            "*AMBIT* (*wjm-george/AMBIT*, arXiv 2610.34415) ataca el problema de autoría de audio espacial —que no es generar un sonido bonito, sino *colocar* fuentes en el espacio 3D y *editarlas* preservando lo que no se toca— con tres piezas conectadas. Primero, un *backbone* *Transfusion* compartido que acopla *planning* *autoregressive* con *rendering* *rectified-flow* a través de *ScenePlans* ejecutables que especifican *content* de fuente, actividad y trayectorias 3D; para *edición*, el plan describe la escena *objetivo* completa, incluyendo las fuentes que se conservan, con *features* contrastivas que anclan el cambio pedido y *latents* de referencia completos que aportan el detalle acústico residual a preservar.",
+            "Segundo, un *VAE* *FOA-aware* continuo que combina recuperación omnidireccional con decodificador compartido, *KL* asimétrico agrupado y *matching* de covarianza espacial, para preservar *content* y estructura inter-canal. Tercero, *self-distillation* *on-policy* conjunta (*OPSD*) que refina el *planning* sobre prefijos generados por el *student* y el *rendering* en estados de muestreo alcanzados bajo *plans* del *student*, con *teachers* condicionalizados por objetivo que supervisan ambos modos del *student* compartido. En evaluaciones de habla, música y sonido, *AMBIT* mejora la calidad de *content* y espacial, la fidelidad acústica en *edición* guiada por instrucciones, y la preservación de fuentes sin *editar*, frente a los *baselines* comparadas."
+          ],
+          "tags": [
+            "audio-espacial",
+            "foa",
+            "transfusion",
+            "vae",
+            "self-distillation"
+          ],
+          "links": [
+            {
+              "label": "arXiv — AMBIT",
+              "url": "https://arxiv.org/abs/2610.34415"
+            },
+            {
+              "label": "Página del proyecto",
+              "url": "https://wjm-george.github.io/AMBIT/"
+            }
+          ]
+        },
+        {
+          "title": "*RynnVLA-Latent*: escalar *VLA* de robótica con *acciones latentes* ancladas en 3D — el *foundation model* de manipulación que no depende de demos",
+          "summary": "*RynnVLA-Latent* (arXiv, 2026) propone escalar modelos *vision-language-action* (VLA) de robótica usando *acciones latentes* ancladas en 3D, para superar las dos limitaciones clásicas: la escasez de demos etiquetadas y los *espacios de control* incompatibles entre *embodiments*. Es el intento de dar a la robótica un *foundation model* de manipulación con la misma receta que se dio al lenguaje.",
+          "body": [
+            "Escalar *VLA* de robótica está limitado por dos problemas: la escasez de demos etiquetadas de acción, y los *espacios de control* incompatibles entre *embodiments* (un brazo de 7 *DOF* y un humanoide no comparten el mismo *action space*). *RynnVLA-Latent* ataca ambos con *acciones latentes* ancladas en 3D: en lugar de predecir acciones en el *espacio de control* nativo de cada robot, predice *tokens* latentes que se mapean al *espacio* 3D, de modo que el *foundation model* puede compartir *weights* entre *embodiments* y aprovechar datos de *visión* no etiquetados.",
+            "Es, en la práctica, la receta *foundation-model* aplicada a la robótica: un *pre-training* grande en datos *multimodal*, *fine-tuning* por *embodiment*, y una *acción* que vive en un *espacio* común 3D. *RynnVLA-Latent* llega en un momento en que la comunidad está buscando el equivalente robótico de *GPT* en el lenguaje, y la apuesta por *acciones latentes* ancladas en 3D es la más seria hasta la fecha para que el *scaling* funcione."
+          ],
+          "tags": [
+            "vla",
+            "robotics",
+            "foundation-model",
+            "latent-actions",
+            "manipulation"
+          ],
+          "links": [
+            {
+              "label": "arXiv — RynnVLA-Latent",
+              "url": "https://arxiv.org/abs/2610.34356"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2610.34356"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*sfnx*: un MoE «de producción» en tres *V100* *PCIe* usadas — 382 *tok/s* en una caja de ~1.800 $",
+          "summary": "*sfnx* (*johnfink8/sfnx*, MIT, 9 estrellas) es un *engine* *CUDA* que reparte *cada capa* de un *MoE* de calidad de producción a lo largo de tres tarjetas *V100* *PCIe*, entregando 382 *tokens/s* en una caja usada de ~1.800 $. Es la clase de *hack* que encaja en la audiencia: *hardware* modesto, *throughput* real, *código abierto*.",
+          "body": [
+            "*sfnx* parte de una observación práctica: las *V100* *PCIe* usadas son baratas (~600 $ cada una en el mercado de segunda mano), tienen 32 GB de *HBM2*, y aunque no tienen *NVLink* entre sí, el *throughput* de *PCIe* 3.0/4.0 es suficiente para un *MoE* donde la *explosión* de *experts* se hace por *batch* y el *all-reduce* entre *cards* puede solaparse con el *compute*. El *engine* reparte *cada capa* del *MoE* a lo largo de las tres *V100* y entrega 382 *tokens/s* en una caja de ~1.800 $ —un *throughput* que solo se alcanzaba, hasta ahora, con *H100* o *H200*.",
+            "El *repo* *johnfink8/sfnx* (MIT) documenta la topología, el *sharding* de *experts* y los *benchmarks* por modelo, y es la clase de pieza que la audiencia de *IA·A·Hoy* disfruta: *hardware* que ya tienes, *código abierto*, y un *throughput* que compite con tarjetas de 30.000 $. No es un *framework* nuevo, es una receta *CUDA* que funciona, y eso, en *self-hosting*, vale oro."
+          ],
+          "tags": [
+            "self-hosting",
+            "cua",
+            "moe",
+            "v100",
+            "throughput"
+          ],
+          "links": [
+            {
+              "label": "GitHub — johnfink8/sfnx (MIT)",
+              "url": "https://github.com/johnfink8/sfnx"
+            }
+          ]
+        },
+        {
+          "title": "*vram-switcher*: un *companion* *local* (LLM + voz + *ComfyUI*) turnándose en una *GPU* de 12 GB",
+          "summary": "*vram-switcher* (*xiaoxiao150/vram-switcher*, MIT, 17 estrellas) coordina *tres* *servicios* de IA *local* —un *LLM* de *persona*, *IndexTTS* para voz, y *ComfyUI* para *selfies*— turnándose en una única *GPU* de 12 GB, sin *proxy*. Es el *pattern* para quien quiere un *companion* de voz en casa sin una *GPU* de 24 GB.",
+          "body": [
+            "El problema que *vram-switcher* resuelve es el clásico del *companion* *local*: quieres un *LLM* para *persona*, un TTS (*IndexTTS*) para voz, y *ComfyUI* para *selfies* o imágenes, y todos quieren la *GPU* al mismo tiempo. En una *GPU* de 24 GB podrías correr los tres a la vez; en una de 12 GB, no. *vram-switcher* (*xiaoxiao150/vram-switcher*, MIT) lo resuelve con *arbitraje*: detecta qué *servicio* está activo, *unload*a los demás, y *reload*a el que se necesita, sin *proxy* ni *configuración* compleja.",
+            "Es una pieza pequeña —17 estrellas— pero es el *pattern* que la comunidad de *companion* *local* necesita: *arbitraje* de *VRAM* entre *servicios* *heterogéneos*. El *repo* documenta la *matriz* de *VRAM* por *servicio*, el *timeout* de *unload* y la *heurística* de *reload*, y encaja directamente en la audiencia de *IA·A·Hoy*: gente que quiere un *companion* de voz en casa, en *hardware* modesto, sin *cloud*."
+          ],
+          "tags": [
+            "self-hosting",
+            "vram",
+            "companion",
+            "comfyui",
+            "tts"
+          ],
+          "links": [
+            {
+              "label": "GitHub — xiaoxiao150/vram-switcher (MIT)",
+              "url": "https://github.com/xiaoxiao150/vram-switcher"
+            }
+          ]
+        },
+        {
+          "title": "*mesh-deck*: un *deck* de control para correr *muchos* modelos en *GPUs* compartidas, sin *OOM*",
+          "summary": "*mesh-deck* (*mrahmedromman/mesh-deck*, MIT, 2 estrellas) es un *deck* de control para correr *muchos* modelos de IA en *GPUs* compartidas sin *out-of-memory* crashes. Es el *pattern* para *labs* y *equipos* que comparten *GPU* y quieren *fairness* y *throughput* a la vez, sin *Kubernetes* ni *Orion*.",
+          "body": [
+            "*mesh-deck* parte de un problema muy concreto: en un *lab* o *equipo* con *GPUs* compartidas, los *modelos* de distintos *usuarios* compiten por *VRAM*, y el *pattern* habitual —*FIFO* con *preemption*— genera *OOM* *crashes* cuando un *modelo* grande se carga mientras otro está en *inference*. *mesh-deck* (*mrahmedromman/mesh-deck*, MIT) lo resuelve con un *deck* de control que *arbitra* la carga de *modelos* por *prioridad*, *VRAM* disponible y *time-slice*, y *preempt*a de forma *graceful* (guardando *state* si es posible) en lugar de *OOM*.",
+            "Es una pieza pequeña —2 estrellas— pero ataca un problema que *Kubernetes* y *Orion* no resuelven bien para *GPUs* *shared*: el *arbitraje* de *VRAM* entre *modelos* de distintos *usuarios*, con *preemption* *graceful*. El *repo* documenta la *API* del *deck*, la *matriz* de *prioridades* y el *protocolo* de *preemption*, y es la clase de pieza que encaja en la audiencia: *infraestructura* *open-source* para *GPUs* *shared*, sin *cloud*."
+          ],
+          "tags": [
+            "self-hosting",
+            "gpu-shared",
+            "arbitraje",
+            "oom",
+            "mit"
+          ],
+          "links": [
+            {
+              "label": "GitHub — mrahmedromman/mesh-deck (MIT)",
+              "url": "https://github.com/mrahmedromman/mesh-deck"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  },
+  "aside": {
+    "trending": [
+      {
+        "name": "xiaoxiao150/vram-switcher",
+        "stars": "★ 17",
+        "desc": "Coordina por turnos un LLM de persona, una voz *IndexTTS* y selfies de *ComfyUI* en una sola tarjeta de 12 GB, sin proxy.",
+        "meta": "Python",
+        "url": "https://github.com/xiaoxiao150/vram-switcher"
+      },
+      {
+        "name": "johnfink8/sfnx",
+        "stars": "★ 9",
+        "desc": "Motor CUDA que reparte cada capa de un MoE de calidad de producción entre tres V100, logrando 382 tok/s en un equipo de segunda mano de ~1.800 $.",
+        "meta": "C++ · CUDA",
+        "url": "https://github.com/johnfink8/sfnx"
+      },
+      {
+        "name": "xzyy03/Lintu",
+        "stars": "★ 8",
+        "desc": "Cliente LLM para Android basado en *RikkaHub*, con interfaz *miuix*.",
+        "meta": "Kotlin",
+        "url": "https://github.com/xzyy03/Lintu"
+      },
+      {
+        "name": "hemanth1999k/mistrial",
+        "stars": "★ 7",
+        "desc": "¿Tu juez LLM es inestable? Reejecuta cualquier evaluador entre ejecuciones, modelos y redacción de rúbrica, y obtén una tarjeta de fiabilidad.",
+        "meta": "Python",
+        "url": "https://github.com/hemanth1999k/mistrial"
+      },
+      {
+        "name": "ashishpatel26/Agent-harness-using-Agno",
+        "stars": "★ 7",
+        "desc": "Un *harness* de agentes a mano con *Agno*: herramientas, I/O estructurado, memoria, RAG, guardarrails y equipos multiagente, corriendo modelos locales de *Ollama*.",
+        "meta": "Python",
+        "url": "https://github.com/ashishpatel26/Agent-harness-using-Agno"
+      }
+    ],
+    "papers": [
+      {
+        "title": "Spatial Audio Generation and Editing with Executable Plans and Self-Distilling Transfusion",
+        "authors": "29 upvotes",
+        "url": "https://arxiv.org/abs/2610.34415"
+      },
+      {
+        "title": "Eat Your Precision: Precision Objective Mitigates Reward Hacking in Rubric-based RL",
+        "authors": "20 upvotes",
+        "url": "https://arxiv.org/abs/2610.33512"
+      },
+      {
+        "title": "Trustworthy Recursive Self-Improvement in the Era of Large Models: Foundation, Risks, Evaluation and Open Challenges",
+        "authors": "10 upvotes",
+        "url": "https://arxiv.org/abs/2610.35193"
+      },
+      {
+        "title": "RynnVLA-Latent: Scaling Robotic Manipulation Foundation Models with 3D-Grounded Latent Actions",
+        "authors": "9 upvotes",
+        "url": "https://arxiv.org/abs/2610.34356"
+      },
+      {
+        "title": "S3AC: Stabilized, Selective, and Scalable Actor-Critic for LLM Reasoning",
+        "authors": "8 upvotes",
+        "url": "https://arxiv.org/abs/2610.35518"
+      }
+    ],
+    "community": [
+      {
+        "src": "GitHub",
+        "url": "https://github.com/philoking/cruxwire",
+        "title": "*cruxwire*: lector de noticias con *LLM* local y autoalojado, en un solo repo",
+        "note": "Un *boletín* diario generado por tu propio modelo, sin nube de por medio."
+      },
+      {
+        "src": "r/rss",
+        "url": "https://www.reddit.com/r/rss/comments/1w0tnzs/newsgator_a_selfhosted_news_aggregator_that/",
+        "title": "*NewsGator*, un agregador de noticias autoalojado que resume con un *LLM* local",
+        "note": "Agnóstico de proveedor: reúne tus *feeds* y deja que un modelo local los condense."
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x3wp8c/i_made_an_opensource_ai_leaderboard_that_shows/",
+        "title": "Un clasificador de modelos en *open source* que ordena los mejores para uso local",
+        "note": "Hecho por la comunidad: compara rendimiento real de modelos abiertos en tu propia máquina."
+      },
+      {
+        "src": "Hugging Face",
+        "url": "https://huggingface.co/blog/state-of-open-models-summer-2026",
+        "title": "El estado de los modelos abiertos: las observaciones del verano",
+        "note": "El informe de *Hugging Face* sobre cómo está evolucionando el modelo abierto."
+      }
+    ]
+  }
+}

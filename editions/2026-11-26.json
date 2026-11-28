@@ -1,0 +1,506 @@
+{
+  "date": "jueves, 26 de noviembre de 2026",
+  "weekday_long": "jueves",
+  "edition": "Edición nº 51",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Un agente subió la curva: *Inkling 2 Mini* pasa de 136 a 190 tokens por segundo en una sola *RTX PRO 6000*",
+    "summary": "Niels Rogge, de Hugging Face, dejó que un agente de código (*Opus 5.5*) optimizara el servicio de inferencia de *Inkling 2 Mini* —el nuevo modelo de 26B de Thinking Machines— en un endpoint con una sola *RTX PRO 6000* de 96 GB. Dotado de un skill de optimización de inferencia, la CLI *hf* y acceso a *Hugging Face Jobs*, el agente corrió 46 experimentos con un protocolo estricto: una variable a la vez, cada candidato entre dos ejecuciones de control, y todo registrado, incluidos los callejones sin salida. El resultado: decodificación de un usuario de 136 a 190,6 tokens por segundo (+40%) con *vLLM* y decodificación especulativa *DSpark*, y 716 tokens por segundo con 8 usuarios. La configuración ganadora ya está en producción como endpoint público, y el repositorio del experimento publica todos los logs, scripts y mediciones. Es la versión documentada y repetible de la optimización por *hill-climbing* que la comunidad ya había esbozado en *SGLang* —ahora, el agente la supera y explica por qué la curva se detiene donde se detiene.",
+    "illustration": {
+      "file": "lead-illo-2026-11-26.jpg",
+      "alt": "Una tarjeta gráfica profesional sobre una repisa iluminada, con tres monitores que muestran curvas de rendimiento ascendentes y un portátil en primer plano, en una habitación oscura",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: el banco de pruebas de Inkling 2 Mini — la GPU, las curvas que suben y el punto donde la curva se detiene."
+    },
+    "tags": [
+      "open-weights",
+      "inference",
+      "vllm",
+      "speculative-decoding",
+      "agents",
+      "hugging-face-jobs"
+    ],
+    "links": [
+      {
+        "label": "El post de Niels Rogge en Hugging Face",
+        "url": "https://huggingface.co/blog/inkling-2-mini-inference-hillclimb"
+      },
+      {
+        "label": "Repositorio: logs, scripts y mediciones",
+        "url": "https://github.com/NielsRogge/inkling-2-mini-hillclimb"
+      },
+      {
+        "label": "thinkingmachines/Inkling-2-Mini",
+        "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"
+      },
+      {
+        "label": "El hilo de Rogge en X",
+        "url": "https://x.com/nielsrogge/status/2025332348804937928"
+      }
+    ],
+    "body": [
+      "Thinking Machines publicó *Inkling 2 Mini* el mes pasado: un modelo de 26.000 millones de parámetros en total, de los cuales 3.000 millones se activan por token, gracias a un *looped Mixture of Experts*: 24 capas físicas, de las que las 12 intermedias se ejecutan tres veces, dando 48 pasadas por token. Es multimodal (texto, imagen y audio), con un millón de tokens de contexto, precisión mixta NVFP4/MXFP8, y un *draftor* *DSpark* para decodificación especulativa. En el Artificial Analysis Intelligence Index v5 es el mejor de su clase, superando a Gemma 4 31B y a *Qwen3.8-27B* en 32 de 48 benchmarks. El problema práctico: la receta de servicio que Thinking Machines publica apunta a *sm100* (B200, GB300); las tarjetas *sm120* de 96 GB, como la *RTX PRO 6000*, quedaban fuera, y el único resultado conocido de la comunidad en esa tarjeta eran los 137-167 tokens por segundo de un benchmark en *SGLang* con *DSpark*.",
+      "El experimento de Rogge parte de la premisa de que servir un modelo es un problema de ingeniería medible, no de arte. Su agente trabajó con el skill de optimización de inferencia de 0xSero, que fija el método: primero medir la GPU y estimar el techo teórico de rendimiento; después, una variable a la vez; cada candidato se sandwicha entre dos ejecuciones de control (control, candidato, control) y solo se adopta si supera a ambos controles sin regredir el resto de métricas; cada ejecución —éxito o fracaso— se registra en el PLAN.md del proyecto; y antes de declarar un ganador, pruebas de contexto largo, concurrencia y equivalencia *greedy*. Rogge adaptó el método a la infraestructura de Hugging Face: Jobs con GPU *rtx-pro-6000* (2,75 dólares por hora, la misma tarjeta que el endpoint) para los benchmarks costosos; Jobs CPU baratos para buscar en el código fuente de *vLLM* y *SGLang* —así encontró las variables de entorno SGLANG_OPT de *SGLang* y los campos *speculative-config* de *vLLM*; y *Inference Endpoints* con digest de imagen fijado para desplegar cada candidato y medirlo por la red.",
+      "46 ejecuciones válidas. La línea base *SGLang* sin especulación: 134-139 tokens por segundo (1 usuario) y 543-598 (8 usuarios). *vLLM* nightly sin especulación: 157,0 —cambiar de motor ya daba un +15%. Añadiendo *DSpark* con 7 borradores y muestreo probabilista de borradores: 190,6 (+40% respecto a la línea base) y 716 con 8 usuarios (+26%), por encima del benchmark de la comunidad en la misma GPU (167,7). Toda la ganancia viene de esos dos cambios más dos banderas de memoria para que el modelo quepa en 96 GB. ¿Por qué se detiene en 190? El servicio gana un +22% de throughput por cada borrador aceptado, pero el tiempo a primer token crece un +31% por borrador; con 7 borradores, el punto óptimo es el que toca aproximadamente el 95% del techo de ancho de banda medido con esa tasa de aceptación. Las validaciones: la salida *greedy* es idéntica byte a byte con y sin especulación, y una aguja de 64 tokens se encuentra 3/3 hasta 250K de contexto. El repositorio NielsRogge/inkling-2-mini-hillclimb lo publica todo: logs, scripts, mediciones crudas, y el *deploy.sh* que reconstruye el endpoint ganador (huggingface/inkling2mini-tuned-dspark) con digest de imagen fijado —*vllm* 0.34.0rc1— y escala a cero tras 60 minutos de inactividad; el endpoint responde en 198 ms a primer token, de los que unos 160 ms es latencia de red."
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*Nemotron 3.5 Parse*: datos sintéticos, *RLVR* y una receta para leer tus documentos",
+          "summary": "NVIDIA publicó hoy cómo entrenó *Nemotron 3.5 Parse*, su modelo compacto de documentos que convierte imágenes de páginas en datos estructurados —orden de lectura, clases, bounding boxes, tablas y gráficos convertidos en registros, con valores numéricos inferidos de gráficos sin etiquetas—, junto con tres conjuntos de datos sintéticos abiertos, una receta de ajuste fino para tus propios documentos y un *speculator* *DFlash2* para inferencia más rápida.",
+          "body": [
+            "Parse 3.5 es un modelo de documentos compacto pensado para *RAG*: extrae el contenido de una página en orden de lectura, asigna clases (títulos, párrafos, tablas, gráficos) y bounding boxes a cada elemento, y convierte tablas y gráficos en registros estructurados. La novedad de esta versión: infiere valores numéricos en gráficos sin etiquetas usando los ejes y la altura de las barras, no solo los rótulos.",
+            "El entrenamiento va por fases: primero ajuste fino supervisado (SFT, de «supervised fine-tuning») sobre texto, layout, tablas, gráficos y multilingüe, después *RLVR* para mejorar la precisión, la consistencia y las finalizaciones confiables. Para generar los datos, NVIDIA renderiza gráficos y tablas sintéticos con la respuesta exacta conocida y entrena el modelo a invertir el proceso. Tres conjuntos quedan abiertos: Synthetic Charts V1 (9,98 millones de ejemplos), Synthetic Tables V1 (1 millón) y OCR Synthetic Multilingual v2 (7,9 millones); cada uno incluye las imágenes, las anotaciones, la documentación de cómo se generaron y el formato de entrenamiento, y sirve tanto para ajustar modelos de documentos como para generar variantes de documentos para tipos o idiomas concretos.",
+            "En inferencia, NVIDIA combina la arquitectura del modelo con un *speculator* *DFlash2* —el mismo principio de decodificación especulativa que aparece en la portada, aplicado aquí a OCR— para hacer el pipeline más rápido, y cierra el post con la receta para aplicar el mismo enfoque SFT/RLVR a tus propios documentos."
+          ],
+          "tags": [
+            "nemotron",
+            "ocr",
+            "rag",
+            "rlvr",
+            "synthetic-data"
+          ],
+          "links": [
+            {
+              "label": "El post de NVIDIA en Hugging Face",
+              "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin"
+            },
+            {
+              "label": "nvidia/Nemotron-3.5-Parse",
+              "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse"
+            },
+            {
+              "label": "Synthetic Charts V1 (dataset)",
+              "url": "https://huggingface.co/datasets/nvidia/Synthetic-Charts-V1"
+            }
+          ]
+        },
+        {
+          "title": "*Rumble-2-Flash*: reconocimiento de voz para más de 40 lenguas en 0.5B parámetros",
+          "summary": "Reson8 abrió bajo Apache 2.0 *Rumble-2-Flash*: un modelo de reconocimiento de voz de 0.5B parámetros para más de 40 lenguas, con detección automática de lengua, audio local, URL o NumPy, y control de cómo salen los números; corre en *Transformers* y *vLLM*, procesa una hora de audio en medio segundo y en un benchmark de llamadas de 302 horas iguala a *Nemotron 3.5 Transcribe* (30B) de NVIDIA.",
+          "body": [
+            "El *quickstart* es de manual: instalar *torch*, *transformers* y *accelerate*, cargar el modelo con *AutoProcessor* y *AutoModelForMultimodalLM*, y pasar el audio (ruta local, URL o NumPy) con la lengua auto-detectada o forzada. El output es controlable: números como dígitos o como palabras, palabras de relleno o sin ellas, y transcripción literal o normalizada.",
+            "*Rumble-2-Flash* se construyó sobre la arquitectura *Qwen3-ASR* para tener soporte desde el primer día, y Reson8 destiló en él su modelo de producción más grande, Rumble-2, mediante destilación *on-policy*: el modelo pequeño (el *student*) transcribe el audio él mismo, y el grande (el *teacher*) puntúa el output exacto que el *student* generó, token a token —el *student* se corrige de sus propios errores, no con una única puntuación por audio. Para ello añadieron *GOLD*, que elimina la restricción de que *teacher* y *student* compartan *tokenizer*: cuando los dos cortan el texto de formas distintas, *GOLD* fusiona los tokens correspondientes.",
+            "El resultado corre a velocidad real: una hora de audio se procesa en medio segundo, más de 7000 RTFx en lotes completos. En llamadas telefónicas reales del benchmark de 302 horas (2499 muestras), *Rumble-2-Flash* queda igualado a *Nemotron 3.5 Transcribe* (30B) de NVIDIA."
+          ],
+          "tags": [
+            "speech-recognition",
+            "asr",
+            "distillation",
+            "open-weights"
+          ],
+          "links": [
+            {
+              "label": "El post de Reson8 en Hugging Face",
+              "url": "https://huggingface.co/blog/rumble-2-flash"
+            },
+            {
+              "label": "Reson8/Rumble-2-Flash (modelo)",
+              "url": "https://huggingface.co/Reson8/Rumble-2-Flash"
+            }
+          ]
+        },
+        {
+          "title": "Adaptadores por *harness*: ajusta un modelo al agente que lo use (con *Qwen3.8-27B-pi-adapted* de ejemplo)",
+          "summary": "El equipo central de Hugging Face (Younes Belkada, Lysandre Debut, Lewis Tunstall, entre otros) publicó su receta de «adaptadores de *harness*»: pesos que adaptan un modelo al *harness* concreto de un agente —el formato de sus llamadas a herramientas y su bucle de ejecución—, entrenados con *RL* (GRPO) sobre tareas generadas en Hugging Face, y fusionados al final en un «*super-adapter*» único.",
+          "body": [
+            "El problema: un mismo modelo se comporta distinto en cada *harness* de agente, porque cada *harness* habla un dialecto distinto de llamadas a herramientas. El post presenta la receta completa: generar tareas de *RL* personalizadas en Hugging Face, validarlas (con *openenv validate*), hacer un chequeo de dificultad con el modelo base, filtrar, y —cuando falta capacidad de cómputo— entrenar con *AsyncGRPOTrainer*, el *trainer* asíncrono de GRPO de *TRL*.",
+            "El punto final es el «*super-adapter*»: la fusión de todos los adaptadores por *harness* en uno solo, con sus resultados de evaluación, y la pregunta abierta que cierra el post: ¿qué es lo que el modelo realmente aprendió a hacer? Como ejemplo concreto, el post señala a harness-hub/Qwen3.8-27B-pi-adapted, un *Qwen3.8-27B* adaptado al *harness* «pi», ya publicado en el Hub con más de 1.100 me gusta."
+          ],
+          "tags": [
+            "agents",
+            "fine-tuning",
+            "grpo",
+            "harness",
+            "qwen3-8-27b"
+          ],
+          "links": [
+            {
+              "label": "El post de Hugging Face",
+              "url": "https://huggingface.co/blog/harness-adapters-at-scale"
+            },
+            {
+              "label": "harness-hub/Qwen3.8-27B-pi-adapted",
+              "url": "https://huggingface.co/harness-hub/Qwen3.8-27B-pi-adapted"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "CUGA: un agente de voz en lenguas índicas sobre un manual de 154 páginas",
+          "summary": "IBM Research publicó cómo construyó, sobre su *harness* de agentes abierto CUGA, un asistente de voz agrícola: escucha una pregunta en hindi, tamil, telugu, gujarati o marathi, la resuelve consultando un manual de agricultura de 154 páginas en inglés, y responde en dos o cuatro frases habladas en la lengua de la pregunta, mostrando la fuente.",
+          "body": [
+            "El caso que resuelven: un agricultor pregunta cómo distinguir una semilla buena de una mala. El pipeline: el audio entra, una API de STT lo transcribe, un motor de conocimiento (PDF → fragmentos → *embeddings* → búsqueda local) encuentra el párrafo del manual, CUGA genera la respuesta, y una API de TTS la habla en la lengua pedida; la interfaz muestra también la fuente y el párrafo de referencia. Si el usuario se desvía al críquet o al código, el agente redirige la conversación con educación: la instrucción de sistema solo acepta preguntas agrícolas, pero no rechaza las demás —las responde, para que el agricultor pueda aprender—.",
+            "CUGA (ConfigUrable Generalist Agent) es el *harness* de agentes de IBM Research: una capa de modelos, herramientas, estado y guardas sobre la que el usuario escribe sus herramientas y su instrucción de sistema, sin reescribir el bucle del agente; funciona como SDK embebido en la aplicación, y es «un agente, cualquier modelo» —se cambia entre watsonx y OpenAI con una sola configuración—. La parte difícil no es el audio sino la recuperación cruzada de idiomas: una pregunta en tamil debe encontrar un párrafo en inglés. Para el audio usan la API de Sarvam AI (STT+TTS en lenguas índicas) desde el navegador, o las alternativas de código abierto SraVaani (STT) y Svara (TTS) autoalojadas, y cada pregunta corre en un *thread* fresco para que el contexto de un usuario no se mezcle con el de otro. El asistente se puede probar en CUGA Apps."
+          ],
+          "tags": [
+            "cuga",
+            "ibm-research",
+            "voice-agent",
+            "multilingual",
+            "rag"
+          ],
+          "links": [
+            {
+              "label": "El post de IBM Research en Hugging Face",
+              "url": "https://huggingface.co/blog/ibm-research/an-indic-voice-agent-with-cuga"
+            }
+          ]
+        },
+        {
+          "title": "*iterative-debate*: una skill de *Hermes* para que varias familias de LLM debatan una decisión",
+          "summary": "Una skill para *Hermes* Agent, escrita solo con la librería estándar de Python, que verifica decisiones con un debate entre varios LLM de familias distintas: el output es la lista de ideas descartadas, un veredicto por cada punto en disputa (confirmado, refutado o sin verificar) y una única acción elegida, con fecha límite y dueño.",
+          "body": [
+            "El método vive en el SKILL.md: modos, ocho invariantes, formato de respuesta, condición de parada, «las trampas (todas ellas, observadas)» y un criterio de «¿funcionó?». El *driver* (scripts/iterative_debate.py) orquesta las rondas: ventana de contexto, parada por convergencia, transcripción por ronda, --probe para comprobar la red, --dry-run, una escalera de presupuesto para modelos de razonamiento y fallo rápido si un participante falla. Cada participante es de una familia distinta, para que el debate no sea una cámara de eco.",
+            "El README incluye un caso de uso estudiado: 20 rondas, 60 respuestas, y un script (mine_debate.py) que analiza la repetición de acciones, la fracción de intervenciones, la similitud de argumentos con retardo y el voto final. El README está en ruso —es una skill comunitaria—, pero el mecanismo es agnóstico al modelo."
+          ],
+          "tags": [
+            "hermes",
+            "skills",
+            "llm-families",
+            "decision-making"
+          ],
+          "links": [
+            {
+              "label": "Repositorio en GitHub",
+              "url": "https://github.com/mercael91/iterative-debate"
+            }
+          ]
+        },
+        {
+          "title": "*Xiaoxiaobai*: un robot humanoide de sobremesa de 30 cm que camina, patina y te recuerda",
+          "summary": "Un robot humanoide de sobremesa, de unos 30 centímetros, imprimible en 3D y construido sobre microban y microduck: 20 servos de bus, una política de *RL* a 50 Hz en la placa de control principal, pantalla de expresiones, cámara y altavoz; cámbiale los zapatos por patines y pasa a una política de deslizamiento, y chatea con un LLM que te recuerda.",
+          "body": [
+            "El hardware: un torso con la placa de control principal y el IMU, la batería en el centro, un esqueleto impreso en 3D, una pantalla de expresiones, un altavoz y una cámara, y una interfaz web y una app para Android. Son 20 servos de bus, y las políticas —dos andaduras, con modo de batería baja— permiten caminar hacia delante y hacia atrás y girar en el sitio.",
+            "Lo interesante: el mismo hardware, con zapatos de patines, pasa a patinar —deslizamiento a dos pies o patinaje a un pie—, con políticas aprendidas en simulación (*MuJoCo*/*MjLab*, con BAM y rustypot); se exportan a ONNX y corren en tiempo real a 50 Hz en la placa principal, y el robot se puede enseñar nuevos movimientos por demostración. La capa de conversación usa un LLM, y el robot «te recuerda».",
+            "Está construido sobre microban (Marc Duclusaud / Rhoban, LaBRI de Burdeos) y microduck (Pollen Robotics). Ojo con la licencia: el repositorio no lleva una licencia OSI estándar (GitHub lo marca como «no assertion»), así que si quieres reutilizarlo, léela antes."
+          ],
+          "tags": [
+            "robotics",
+            "rl",
+            "llm",
+            "3d-printing",
+            "open-hardware"
+          ],
+          "links": [
+            {
+              "label": "Repositorio en GitHub",
+              "url": "https://github.com/AI-FanGe/A-MicroRobot-that-can-Rollerskate"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*llm.asm*: *Qwen3-0.6B* en 14,7 KB de ensamblado, con un sistema operativo arrancable incluido",
+          "summary": "Tres proyectos LLM completos en ensamblado x86-64 NASM 100% puro —sin C, sin libc, sin dependencias: un binario estático de 14.712 bytes que corre *Qwen3-0.6B* en Q8_0 (126,8 tokens por segundo, un 18-36% más rápido que *llama.cpp* en CPU), un sistema operativo *bare-metal* de 24 KB que arranca en un modelo de lenguaje, y un *Mini-GPT* desde cero con interfaz en braile.",
+          "body": [
+            "El proyecto «Trilogy» lleva 17.252 líneas de ensamblado escrito a mano. El primero, 01-qwen3-inference, es un ELF Linux estático de 14.712 bytes con el *tokenizer* BPE embebido, GQA + QK-Norm + RoPE + SwiGLU, modo de un solo turno y un REPL multi-turno con caché KV; con la flag FAST_Q8, 126,8 tokens por segundo en decodificación con contexto 40 (20,7 con 1), un 18-36% por encima de *llama.cpp* CPU Q8_0, 0,99965 de coseno frente a *PyTorch* FP32 y 64/64 de coincidencia *greedy* exacta.",
+            "El segundo, 02-baremetal-os, es un sistema operativo *bare-metal* arrancable de 24.252 bytes con el mismo *Qwen3-0.6B* —un kernel SMP *bare-metal* con un *shell*—, y el tercero es un *Mini-GPT* de 32 KB con retropropagación analítica, AdamW y una interfaz TUI en vivo en braile unicode. Todo lo que normalmente sale de una librería se hizo a mano: expf/sincosf, RMSNorm, RoPE, SiLU, Softmax, un motor GEMM/GEMV en AVX2+FMA+F16C, y un *thread pool* con clone()/futex(). El README incluye el mapa de cada pieza de ensamblado y cómo compilarlo."
+          ],
+          "tags": [
+            "assembly",
+            "bare-metal",
+            "qwen3",
+            "inference",
+            "llm.asm"
+          ],
+          "links": [
+            {
+              "label": "Repositorio en GitHub",
+              "url": "https://github.com/alesha-pro/llm.asm"
+            }
+          ]
+        },
+        {
+          "title": "*speculative-encoding*: el *KV cache* de un LLM como traducción de otro",
+          "summary": "Un LLM fuente lee un documento una vez; un traductor pequeño y compartido convierte sus estados ocultos por capa en el *KV cache* del LLM destino —con una compresión opcional consciente de la consulta que reduce la caché 16x, 64x o 128x—; *vLLM* o Hugging Face responden entonces desde la caché inyectada. Un solo traductor cubre 7 modelos en las 42 direcciones.",
+          "body": [
+            "La idea: en lugar de re-leer el documento, se «traduce» el estado del LLM fuente (sus estados ocultos por capa) al *KV cache* del modelo destino, de modo que el destino pueda responder sobre ese documento sin haberlo leído. El traductor es pequeño, se comparte entre pares, y es consciente de la consulta: la compresión opcional condensa la caché en 16x, 64x o 128x según qué vas a preguntar. Cubre *Qwen3* 14B, *Qwen3.5* 9B, Llama 3.1 8B, Gemma 3 12B, Gemma 4 12B, y *Ministral 3* 8B y 14B —las 42 combinaciones dirigidas.",
+            "Se puede probar en un portátil en segundos, sin descargas (modelos aleatorios pequeños a través de la API real —las respuestas son ruido, pero el flujo completo es real); en un Linux con GPU, el repositorio instala un solo entorno con el traductor y *vLLM* 0.24."
+          ],
+          "tags": [
+            "kv-cache",
+            "vllm",
+            "cross-model",
+            "context"
+          ],
+          "links": [
+            {
+              "label": "Repositorio en GitHub",
+              "url": "https://github.com/b10-tv/speculative-encoding"
+            }
+          ]
+        },
+        {
+          "title": "*flawrence*: caza vulnerabilidades con agentes, y solo sube lo que se ha reproducido",
+          "summary": "Una herramienta en Rust que usa agentes LLM para buscar vulnerabilidades de seguridad en código fuente: lee el repositorio, construye un modelo de amenazas, mapea la superficie de ataque y dedica un agente de investigación a cada punto de entrada; un segundo agente verifica y reproduce cada hallazgo, y solo los que tienen un reproductor verificado se publican, cada uno con su prueba de concepto.",
+          "body": [
+            "El protocolo: los agentes de investigación trabajan sobre el código, un agente de verificación reproduce el fallo, y solo los hallazgos con reproductor verificado pasan al output. *flawrence* corre comandos *shell*, construye el objetivo y ejecuta las pruebas de concepto, así que el README lo dice sin rodeos: no lo corras en una máquina que te importe —un contenedor o una máquina virtual—. Funciona con Anthropic, OpenAI, Cloudflare Workers AI y cualquier endpoint compatible con OpenAI, y el README recomienda usar un modelo de pesos abiertos autoalojado «para sacarle el máximo».",
+            "Una revisión completa se dispara con muchos agentes y puede costar muchos *tokens*: se fija MAX_COST_USD para tener el gasto a raya. El repositorio incluye un FINDINGS.md con los bugs que ha encontrado."
+          ],
+          "tags": [
+            "security",
+            "agents",
+            "rust",
+            "llm"
+          ],
+          "links": [
+            {
+              "label": "Repositorio en GitHub",
+              "url": "https://github.com/mschwarzl/flawrence"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*Mixture-of-Loops Transformer*: la memoria entre bucles, no el stream",
+          "summary": "El paper más votado del día (15 *upvotes*) propone MoLT, un *looped transformer* que usa pares *KV* como memoria para reutilizar selectivamente entre profundidades y bucles: en pre-entrenamiento de 400B de tokens, la variante U-MoLT supera a OLMo3 en modelos densos de 700M/1.5B y MoE de 3B, con 1,7x de eficiencia en *cross-entropy* de validación a 700M.",
+          "body": [
+            "Los *looped transformers* aumentan la expresividad reutilizando capas compartidas a través de bucles, pero pagan en eficiencia; la pregunta del paper es qué debe pasar como memoria cuando el transformer buclea. MoLT responde con *Mixture-of-Loops Attention* (MoLA): claves y valores como memoria de reutilización selectiva entre profundidades y bucles. Con *loop residual*, MoLT-R mantiene el *residual stream* y lee *KV* local entre bucles; con *loop KV*, MoLT-KV reinicia desde embeddings y lee el *KV* local del bucle actual con la memoria *KV* de bucles previos en posiciones anteriores —elimina la dependencia cruzada entre bucles en la misma posición y, emparejado con *loop forcing* para un entrenamiento paralelo, desbloquea una decodificación de un solo pase más allá del horizonte de entrenamiento.",
+            "U-MoLT separa la construcción de la memoria de la lectura de predicción y salta los pases del decodificador que no se usan, sin cambiar la predicción. A 400B de tokens, U-MoLT supera a OLMo3 en 700M/1.5B densos y 3B MoE: 1,7x de eficiencia en *cross-entropy* de validación a 700M, y a 3B MoE mejora el *perplexity* en 10 dominios en 0,75 y la precisión en 10 tareas en 2,1 puntos porcentuales. (Zhu, Wang, Wang, Bai, Wang, Bai et al.)"
+          ],
+          "tags": [
+            "architecture",
+            "looped-transformers",
+            "moe",
+            "pretraining"
+          ],
+          "links": [
+            {
+              "label": "arXiv: 2611.34923",
+              "url": "https://arxiv.org/abs/2611.34923"
+            }
+          ]
+        },
+        {
+          "title": "*PixelMatte*: *matting* de alta fidelidad con un *DiT* en espacio de píxeles",
+          "summary": "PixelMatte adapta un *diffusion transformer* pre-entrenado en espacio de píxeles (no latente) al *matting* de imágenes: reutiliza el *patch embedding* nativo del backbone para procesar imagen, *trimap* y máscara *alpha* ruidosa como tokens alineados espacialmente, y predice la máscara en un solo pase, con mejoras del 24-44% en *SAD* y error de gradiente frente a RenderMatte.",
+          "body": [
+            "Los modelos de difusión latente introducen un inconveniente para el *matting*: la representación comprimida y la reconstrucción por VAE no dan la precisión de alta frecuencia que necesita una máscara *alpha* de borde fino. PixelMatte adapta un *DiT* pre-entrenado en espacio de píxeles, y demuestra que la capacidad de *matting* fuerte condicionada en imagen se puede conseguir desde un modelo texto-imagen puro, sin pre-entrenamiento emparejado imagen-imagen: reutiliza el *patch embedding* nativo del backbone para procesar imagen, *trimap* y máscara ruidosa como tokens alineados espacialmente, sin codificadores de condición ni adaptadores.",
+            "La supervisión sintética *pixel-accurate* más el ajuste fino en imágenes reales llevan a una predicción en un solo pase, y dos módulos ligeros (LayerShift y High-Pass Refiner) mejoran la opacidad regional y la fidelidad del borde. En cuatro benchmarks y dos backbones de difusión en píxeles, reduce el *SAD* y el error de gradiente un 24-44% respecto a RenderMatte en P3M-500-NP y AM-2K. (Yang, Lin, Wei, Li, Liu, Tian et al.)"
+          ],
+          "tags": [
+            "matting",
+            "diffusion",
+            "dit",
+            "image-segmentation"
+          ],
+          "links": [
+            {
+              "label": "arXiv: 2611.34929",
+              "url": "https://arxiv.org/abs/2611.34929"
+            }
+          ]
+        },
+        {
+          "title": "*EgoUseBench*: agentes de ordenador en primera persona, cuando el contexto físico evoluciona",
+          "summary": "Un nuevo benchmark para agentes de *computer-use* en el paradigma «Ego Use»: el agente ve el mundo a través del dispositivo de su usuario (gafas inteligentes) y debe revisar su comprensión del contexto físico y de la intención del usuario cuando llegan nuevas observaciones. 693 tareas construidas sobre más de 74 horas de grabaciones reales en primera persona.",
+          "body": [
+            "Los dispositivos vestibles, como las gafas inteligentes, extienden el contexto del agente más allá del mundo digital, al entorno físico del usuario: las tareas de ordenador pueden nacer de lo que el usuario está haciendo, no solo de instrucciones explícitas. Las observaciones en primera persona están limitadas por el punto de vista de quien las lleva y pueden ser incompletas o ambiguas; cuando llegan nuevas, el agente puede necesitar revisar su comprensión del contexto y de la intención, y reevaluar si sus acciones digitales previas siguen siendo válidas. EgoUseBench evalúa eso en tres escenarios: Computer-Use (instrucciones explícitas), Offline Ego Use (contexto en primera persona pregrabado antes de ejecutar) y Online Ego Use (observaciones continuas mientras la intención evoluciona).",
+            "Las 693 tareas se construyeron sobre más de 74 horas de grabaciones reales en primera persona, y para capturar la evolución de las tareas el benchmark rastrea las observaciones, las acciones y los estados de la intención a lo largo del tiempo. (Chen, Yi, Yu, Yin, Zhang et al.)"
+          ],
+          "tags": [
+            "benchmark",
+            "computer-use",
+            "egocentric",
+            "wearables"
+          ],
+          "links": [
+            {
+              "label": "arXiv: 2611.34466",
+              "url": "https://arxiv.org/abs/2611.34466"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "Hugging Face cambia sus *Inference Providers* al router de *OpenRouter*: el 71,7% de los *tokens* son de modelos abiertos",
+          "summary": "Hugging Face y OpenRouter anunciaron que el router de OpenRouter se convierte en el sistema de *inference providers* de Hugging Face, con la intención de que sea «el sistema de proveedores por defecto para modelos abiertos». Las cifras del post: el 71,7% de los *tokens* servidos por OpenRouter son de modelos abiertos (26,8% en octubre de 2025, pico del 77,5% en julio), el volumen semanal de modelos abiertos creció 60x, y el coste medio por *token* de los abiertos es unos cuatro veces menor que el de los cerrados.",
+          "body": [
+            "La razón declarada del cambio: la calidad de los modelos abiertos «ya no es la cuestión» —el coste y el *routing* sí—. Lo que el post documenta: cada *harness* (*Claude Code*, *Codex CLI*, *OpenCode*, Pi, *Hermes Agent*) tiene su propio formato de llamadas a herramientas y su instrucción de sistema; cuando el *harness* llama a un modelo cerrado, el proveedor inyecta la instrucción que el *harness* espera, el modelo la ve, y las respuestas siguen su formato sin configuración. El problema con los modelos abiertos: esa instrucción nunca estuvo en su entrenamiento, así que su manejo de herramientas dependía de la calidad de su ajuste fino.",
+            "OpenRouter resuelve eso con su «Model API»: una instrucción de sistema por *harness* generada por una API dedicada, un modelo de 30B entrenado con *RL* para las preferencias de cada *harness*, y una ruta de sin-RL de respaldo (que añade una instrucción de compatibilidad al final, respetando la original). La API también normaliza formatos: los modelos que hablan dialectos distintos de llamadas a herramientas —XML en GPT-5, JSON en Kimi K2, *SFT*-style en DeepSeek— salen en el formato estándar de OpenAI.",
+            "El resultado, medido: el 71,7% de los *tokens* servidos por OpenRouter son de modelos abiertos (26,8% en octubre de 2025; pico del 77,5% en julio). El volumen de modelos abiertos creció unos 60x en un año, mientras el de cerrados apenas crecía. El coste medio: 0,28 dólares por millón de *tokens* de entrada y 1,62 de salida para un modelo abierto, frente a 1,27 y 6,36 para los cerrados. El modelo más usado la semana pasada: DeepSeek V4.1 Flash 1017 (59,2 billones de *tokens*). Y la comparativa de calidad: el mejor abierto, Kimi K3.1 Pro, puntuaba 46 en el Artificial Analysis Index, frente a 65 de Claude Fable 5.2 —con un coste de 3,68 dólares por tarea frente a 26,54. El post incluye guías de configuración para *Claude Code*, *Codex*, *OpenCode*, Pi y *Hermes Agent*, y una advertencia: si usas claves de proveedor personalizadas en Hugging Face, este es un cambio que rompe, hay que migrar a OpenRouter."
+          ],
+          "tags": [
+            "open-weights",
+            "inference-providers",
+            "openrouter",
+            "harness",
+            "routing"
+          ],
+          "links": [
+            {
+              "label": "El post de Hugging Face",
+              "url": "https://huggingface.co/blog/openrouter"
+            }
+          ]
+        },
+        {
+          "title": "*Inkling 2 Mini* en las *CMP 170HX* de minado: un motor *Rust*+*CUDA* a 323 tokens por segundo por tarjeta",
+          "summary": "Un motor de inferencia en Rust puro + *CUDA* sm_80 sirve el *Inkling 2 Mini* de Thinking Machines en 1-8 NVIDIA CMP 170HX (64 GB, tope de 140 W) sin modificar ni re-cuantizar los pesos: API OpenAI-compatible en Rust puro con *tool calls* en streaming, parsing de razonamiento, reuso de caché KV y *DSpark*; +25% sobre *vLLM* en una secuencia de 343 peticiones de un agente multi-turno.",
+          "body": [
+            "Las NVIDIA CMP 170HX son las GPUs GA100 que salieron del minado: 64 GB de HBM2e, y este repo les pone a servir un modelo frontera local. El motor corre *CUDA* sm_80 sobre *cuBLAS*+*cuDNN*, y sirve *Inkling 2 Mini* (MoE en bucle: 128 expertos, top-8, NVFP4/MXFP8, GQA + SWA-1024 + 4 capas globales) tal cual, sin tocar los pesos ni re-cuantizarlos.",
+            "La API OpenAI-compatible es 100% Rust puro: *tool calls* en streaming, parsing de razonamiento, reuso de caché KV por *checkpoint* de prefijo, y el *DSpark* con decodificación especulativa Leviathan filtrada por *top_p* de vocabulario completo más un borrador *verbatim* sin pérdida (con *DFlash2* opcional y la flag --kv-fp8 para caché comprimida). Es 100% sin pérdida por defecto.",
+            "Los números: medido con un tope de 140 W por tarjeta a nivel de host (el motor no aplica el limitador), en la secuencia canónica de 343 peticiones/118.056 *tokens* de un agente multi-turno, una sola tarjeta da 323,8-333,7 tokens por segundo —un +25,2-25,6% sobre la configuración B de *vLLM* en la misma carga."
+          ],
+          "tags": [
+            "rust",
+            "cuda",
+            "inference",
+            "self-hosting",
+            "inkling"
+          ],
+          "links": [
+            {
+              "label": "Repositorio en GitHub",
+              "url": "https://github.com/shanedertrain/inkling-cmp-engine"
+            },
+            {
+              "label": "thinkingmachines/Inkling-2-Mini",
+              "url": "https://huggingface.co/thinkingmachines/Inkling-2-Mini"
+            }
+          ]
+        },
+        {
+          "title": "17 científicos dicen dónde la IA *agente* puede entrar en su laboratorio",
+          "summary": "El Allen Institute for AI entrevistó a 17 científicos de ciencias naturales, aplicadas y sociales sobre el desarrollo responsable de agentes de IA: cinco dimensiones de confianza científica (validación, privacidad, objetividad, rendición de cuentas, transparencia), y el consenso de que los científicos deberían decidir qué tareas asumen los agentes, cómo operan y cómo se evalúan.",
+          "body": [
+            "El interés nace del trabajo de Ai2 evaluando la seguridad de sus modelos: mucha de la seguridad para ciencia se centra en riesgos catastróficos (biología, física nuclear), pero falta evaluar si un agente sigue los estándares de conducta responsable de investigación en el campo donde se usa. De las entrevistas salen cinco dimensiones de confianza científica: validación, privacidad, objetividad, responsabilidad (quién verifica y responde de un hallazgo asistido por IA) y transparencia (cómo se llegó a la respuesta). Un resultado técnico y correcto puede no servir si el investigador no puede inspeccionar cómo se produjo, o si el agente accede a datos confidenciales más allá de lo autorizado.",
+            "Sobre el futuro, los entrevistados se dividían entre la emoción por el progreso y la preocupación existencial por el papel del científico; proponen formación en uso de IA, y llaman crítico desarrollar y hacer cumplir guías. El post enlaza un informe técnico en allenai.org. (Kyle Wiggers, Ai2Comms.)"
+          ],
+          "tags": [
+            "ai-safety",
+            "research",
+            "allenai",
+            "agents",
+            "ethics"
+          ],
+          "links": [
+            {
+              "label": "El post de AllenAI en Hugging Face",
+              "url": "https://huggingface.co/blog/allenai/where-scientists-draw-the-line-on-ai-agents"
+            },
+            {
+              "label": "Informe técnico de Ai2",
+              "url": "https://allenai.org/papers/responsible-ai-survey"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "alesha-pro/llm.asm",
+        "stars": "★ 685",
+        "desc": "*Qwen3-0.6B*, un sistema operativo arrancable y un *trainer*, en ensamblado x86-64 puro",
+        "meta": "Assembly · MIT",
+        "url": "https://github.com/alesha-pro/llm.asm"
+      },
+      {
+        "name": "AI-FanGe/A-MicroRobot-that-can-Rollerskate",
+        "stars": "★ 128",
+        "desc": "Robot humanoide de sobremesa de 30 cm que camina, patina y chatea con LLM",
+        "meta": "Python · licencia propia",
+        "url": "https://github.com/AI-FanGe/A-MicroRobot-that-can-Rollerskate"
+      },
+      {
+        "name": "b10-tv/speculative-encoding",
+        "stars": "★ 33",
+        "desc": "Traduce el estado de un LLM al *KV cache* de otro, para responder con *vLLM* sin re-leer",
+        "meta": "Python · Apache-2.0",
+        "url": "https://github.com/b10-tv/speculative-encoding"
+      },
+      {
+        "name": "mschwarzl/flawrence",
+        "stars": "★ 32",
+        "desc": "Caza vulnerabilidades con agentes LLM, solo con prueba de concepto verificado",
+        "meta": "Rust · MIT",
+        "url": "https://github.com/mschwarzl/flawrence"
+      },
+      {
+        "name": "ABCastor/kefir-1",
+        "stars": "★ 3",
+        "desc": "Pequeño MoE en inglés (10M parámetros activos) con todo el código de pre-entrenamiento",
+        "meta": "Python · MIT",
+        "url": "https://github.com/ABCastor/kefir-1"
+      }
+    ],
+    "papers": [
+      {
+        "title": "Mixture-of-Loops Transformer",
+        "authors": "15 upvotes",
+        "url": "https://arxiv.org/abs/2611.34923"
+      },
+      {
+        "title": "High-Fidelity Image Matting with Pixel-Space Diffusion Transformers",
+        "authors": "9 upvotes",
+        "url": "https://arxiv.org/abs/2611.34929"
+      },
+      {
+        "title": "EgoUseBench: Benchmarking Computer-Use Agents under Evolving First-Person Contexts",
+        "authors": "7 upvotes",
+        "url": "https://arxiv.org/abs/2611.34466"
+      },
+      {
+        "title": "Playfulness as Feedback for Agentic Game Development",
+        "authors": "5 upvotes",
+        "url": "https://arxiv.org/abs/2611.33457"
+      },
+      {
+        "title": "Beyond the Happy Path: Generalizing Robot World Models from Simulated Failures",
+        "authors": "5 upvotes",
+        "url": "https://arxiv.org/abs/2611.33925"
+      }
+    ],
+    "community": [
+      {
+        "src": "Hugging Face Blog (IBM Research)",
+        "title": "Un agente de voz en lenguas índicas con CUGA",
+        "note": "Asistente agrícola en hindi, tamil, telugu, gujarati y marathi, sobre un manual en inglés",
+        "url": "https://huggingface.co/blog/ibm-research/an-indic-voice-agent-with-cuga"
+      },
+      {
+        "src": "mausbot.com",
+        "title": "16 agentes de código abierto, comparados",
+        "note": "Licencia, «*gate* por defecto» e instalación; actualizado el 15 de noviembre",
+        "url": "https://mausbot.com/blog/open-source-ai-agent-apps-compared"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "Lo mejor de la semana",
+        "note": "El resumen semanal clásico de la comunidad de modelos locales",
+        "url": "https://www.reddit.com/r/LocalLLaMA/top/?t=week"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

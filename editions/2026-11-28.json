@@ -1,0 +1,520 @@
+{
+  "date": "sábado, 28 de noviembre de 2026",
+  "weekday_long": "sábado",
+  "edition": "Edición nº 53",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*Nemotron-Labs-Image-30B-A3B*: NVIDIA pone pesos abiertos en la generación de imágenes y compite con *GPT Image 2*",
+    "summary": "NVIDIA ha publicado *Nemotron-Labs-Image-30B-A3B*, el primer modelo de la familia *Nemotron* de generación de imágenes con pesos abiertos: un generador autoregresivo de 30B parámetros, con 3B activos, inicializado desde *Nemotron 3 Nano*, con su propio tokenizador visual de 642M de parámetros y un codebook fijo de 196.560 vectores. El paper que lo acompaña (*Nemotron-Labs-VisualCreation*: «Pixel as Code for Agentic Visual Creation») lo enmarca como un paso hacia la creación visual agéntica: el modelo «escribe» la imagen token a token, como un LLM de lenguaje. En sus benchmarks oficiales gana a *GPT Image 2* en *BizGenEval* (86,0 frente a 83,2), aunque *GPT Image 2* sigue por delante en *GenEval2* y *Qwen-Image-Bench*. Los pesos se publican bajo la propia licencia de NVIDIA (libre de regalías y de ámbito mundial, pero no una licencia estándar tipo Apache 2.0), y la primera entrega incluye el generador y el tokenizador: el marco agéntico (*VisionCode*) llegará cuando se complete el visto bueno legal. La comunidad ya lo está ejecutando en una *RTX 3090* de 24 GB con versiones cuantizadas, y existe soporte de *ComfyUI*.",
+    "tags": [
+      "nemotron-labs-image",
+      "nvidia",
+      "image-generation",
+      "open-weights",
+      "moe",
+      "visual-tokenizer",
+      "vllm",
+      "comfyui"
+    ],
+    "links": [
+      {
+        "label": "Model card (Hugging Face)",
+        "url": "https://huggingface.co/nvidia/Nemotron-Labs-Image-30B-A3B"
+      },
+      {
+        "label": "Paper: Nemotron-Labs-VisualCreation (arXiv)",
+        "url": "https://arxiv.org/abs/2611.31358"
+      },
+      {
+        "label": "wccftech: el anuncio",
+        "url": "https://www.wccftech.com/nvidia-announces-open-source-nemotron-labs-30b-image-generation-model-that-rivals-gpt-image-2/"
+      },
+      {
+        "label": "dataconomy: NVIDIA open-sources Nemotron-Labs-Image",
+        "url": "https://www.dataconomy.com/2026/11/nvidia-open-sources-nemotron-labs-image-30b.html"
+      }
+    ],
+    "body": [
+      "El anuncio llegó con la discreción típica de los laboratorios que prefieren que hable el modelo: el 25 de noviembre, NVIDIA subió a Hugging Face el primer modelo de la familia *Nemotron* de generación de imágenes con pesos públicos, sin keynote y con la tarjeta de modelo y el paper como único material oficial. Unos días después la prensa tecnológica recogió la noticia, y el modelo ha escalado hasta el top de la lista de tendencias de Hugging Face, en el medio de una oleada de lanzamientos abiertos —*Inkling 2 Mini* y *Small*, *LTX-2.5*, el *ERNIE 5.5* de Baidu— que ha dominado las últimas semanas. NVIDIA entra así, por fin, en el club de los que publican pesos de imagen.",
+      "La arquitectura es la de la familia: un Mixture-of-Experts de 30B parámetros totales y 3B activos por token (de ahí el «A3B»), esta vez un generador autoregresivo inicializado desde *Nemotron 3 Nano*, el modelo pequeño de la última línea de NVIDIA. En lugar de un modelo de difusión, *Nemotron-Labs-Image* genera la imagen token a token, igual que un LLM escribe un texto: un tokenizador visual propio —el *Nemotron-Labs-Image-Tokenizer*, con un codificador-decodificador de unos 642M de parámetros, parches de 16×16 píxeles y un codebook fijo de 196.560 vectores de la retícula de Leech— convierte la imagen en una secuencia de tokens visuales que el MoE aprende a «escribir». Se entrega todo junto en un mismo repositorio: definición del modelo, código de inferencia y tokenizador.",
+      "El paper, *Nemotron-Labs-VisualCreation* («Pixel as Code for Agentic Visual Creation»), enmarca la apuesta como creación visual agéntica: tratar la imagen como un código estructurado que se puede componer, revisar y editar paso a paso. El objetivo declarado no es solo «generar una imagen bonita», sino un agente capaz de producir y corregir salida visual de forma programática. La entrega inicial, eso sí, se limita al generador y su tokenizador: el marco *VisionCode* y el resto de piezas agénticas se publicarán cuando se complete el visto bueno legal, de modo que la parte más ambiciosa del proyecto sigue pendiente.",
+      "En números, la tarjeta de modelo reporta resultados frente a *GPT Image 2*: en *BizGenEval*, *Nemotron-Labs-Image* gana por 86,0 frente a 83,2, pero en *GenEval2* y *Qwen-Image-Bench* es *GPT Image 2* quien sigue por delante. El paper reporta, además, el mejor resultado por benchmark entre distintas configuraciones, así que falta la evaluación independiente: los números de primera parte son una referencia, no una sentencia. Aun así, para un modelo que apenas lleva días en público, es un punto de partida que llama la atención.",
+      "El detalle de la licencia merece atención para el público de self-hosting: los pesos son públicos bajo la «NVIDIA License» —un contrato de copyright libre de regalías, de ámbito mundial y perpetuo, que obliga a incluir la licencia en las redistribuciones, pero no es el Apache 2.0 al que estamos acostumbrados. Quien quiera construir encima debería leer las condiciones. En la práctica, el quickstart oficial usa *vLLM* (con *transformers* y *trust_remote_code* como alternativa) para generar imágenes de 1024×1024: con 3B parámetros activos, el modelo es candidato a los mismos flujos de serving y cuantización que ya usamos con los LLM, y la comunidad ha publicado versiones cuantizadas que corren en una *RTX 3090* de 24 GB, además de flujos en *ComfyUI*.",
+      "En resumen, *Nemotron-Labs-Image-30B-A3B* es el primer paso concreto de una segunda familia de modelos de imagen con pesos abiertos: no gana todos los benchmarks hoy, pero aporta una receta autoregresiva (la imagen como secuencia de tokens), un tokenizador rápido y una hoja de ruta agéntica que, si *VisionCode* aterriza, podría cambiar cómo se genera y edita la salida visual. Las próximas semanas dirán si la idea de «píxeles como código» resiste en manos independientes."
+    ],
+    "illustration": {
+      "file": "lead-illo-2026-11-28.jpg",
+      "alt": "Sobre un escritorio de madera oscura, una gran fotografía brillante aparece fichas a fichas: la mitad izquierda, un faro en la costa al atardecer, está ya montada y nítida, y la mitad derecha es todavía una retícula de pequeñas fichas cuadradas de colores distintos que flotan sobre la mesa. Detrás, en una repisa baja, una placa negra con conectores dorados junto a un panel cubierto de cuadritos pintados, todo bajo la luz cálida de una lámpara.",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: la imagen se «escribe» pieza a pieza, token a token, como la produce el modelo de NVIDIA."
+    }
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*ERNIE 5.5 Flash Preview*: Baidu abre el MoE de 280B con 14B activos y contexto de un millón",
+          "summary": "Baidu ha publicado los pesos abiertos de *ERNIE 5.5 Flash Preview*: un Mixture-of-Experts de 280B parámetros totales y 14B activos por token, con una ventana de contexto de un millón de *tokens*, entrenado con 33,5T de *tokens* y orientado a agentes. Está en Hugging Face bajo Apache 2.0 (ya suma 11.000 *me gusta* y 383.000 descargas), con checkpoints intermedios de post-entrenamiento para seguir el modelo antes de la versión final.",
+          "body": [
+            "La familia *ERNIE* —la línea de modelos de Baidu— da por fin el salto a los pesos abiertos con un modelo serio: *ERNIE 5.5 Flash Preview* es un MoE de 280B parámetros con 14B activos por token, el perfil de un modelo pensado para servir barato: mucha capacidad de conocimiento, pero pocos parámetros en juego en cada paso. Añade una ventana de contexto de un millón de *tokens* y reporta 33,5 billones de *tokens* de pre-entrenamiento, y el proyecto lo describe como orientado a agentes, algo ya anticipado en la hoja de ruta de la serie.",
+            "La publicación es en modo «preview»: el repositorio de Hugging Face incluye ya checkpoints intermedios del post-entrenamiento, de modo que la comunidad puede ir probando cómo evoluciona el modelo antes de la versión final. En pocos días es de los modelos chinos abiertos más descargados de la semana (383.000 descargas, 11.000 *me gusta*), y llega con Apache 2.0 —licencia completa—, lo que lo distingue del lanzamiento bajo la «NVIDIA License» de la portada de hoy.",
+            "Para el ecosistema abierto, la jugada tiene dos lecturas: suma un MoE de 280B al rango de modelos que pueden autoalojarse (cuantizado, con serving esparcido) y confirma que los grandes laboratorios asiáticos apuestan por los pesos abiertos como canal de primer nivel, no como complemento de sus APIs."
+          ],
+          "tags": [
+            "ernie-5-5-flash",
+            "baidu",
+            "moe",
+            "open-weights",
+            "agents"
+          ],
+          "links": [
+            {
+              "label": "Modelo (Hugging Face)",
+              "url": "https://huggingface.co/Baidu/ERNIE-5.5-Flash-Preview-MoE-280B-A14B"
+            },
+            {
+              "label": "Blog: ERNIE 5.5 Flash (Hugging Face)",
+              "url": "https://huggingface.co/blog/ernie-5-5-flash"
+            }
+          ]
+        },
+        {
+          "title": "*MAGI-2*: Sand AI pasa a 90B con un MoE para vídeo y audio juntos",
+          "summary": "Sand AI ha publicado la preview de *MAGI-2*, un Mixture-of-Experts de 90B parámetros totales y 7B activos por token para la generación conjunta de vídeo con audio. Ya está en las tendencias de Hugging Face, con 1.600 *me gusta* y 85.000 descargas.",
+          "body": [
+            "*MAGI* es la línea de modelos de vídeo de Sand AI, y la nueva preview da un salto: 90B parámetros totales con 7B activos por token, orientada a la generación conjunta de vídeo y audio. El repositorio se etiqueta multimodal (texto, vídeo, audio), y llega en el formato «preview» típico de la compañía: la primera versión pública, con margen de mejora anunciado.",
+            "Se suma a la carrera de modelos «vídeo + sonido» —hace días cubríamos *LTX-2.5*, el de Lightricks, que genera clips de 10 segundos con audio y ya corre en los *Trainium3* de AWS—, y es señal de que la generación unimodal empieza a considerarse el estado básico. Con 85.000 descargas en pocos días, es de los más descargados de la oleada actual."
+          ],
+          "tags": [
+            "magi-2",
+            "sand-ai",
+            "moe",
+            "video",
+            "audio",
+            "open-weights"
+          ],
+          "links": [
+            {
+              "label": "MAGI-2-preview (Hugging Face)",
+              "url": "https://huggingface.co/sand-ai/MAGI-2-preview"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*mare*: un *harness* de agentes extensible, en Rust y con plugins *Lua* recargables en caliente",
+          "summary": "El *harness* *mare* (de signalridge) va en contra de la corriente de los SDK cerrados: un núcleo en Rust con una capa de extensión en *Lua 5.5* que se recarga sin reiniciar, *TUI*, *RPC* y protocolo *ACP*. Cinco estrellas en GitHub y un enfoque distinto sobre cómo construir un agente.",
+          "body": [
+            "La mayoría de los marcos de agentes llegan con un sistema de plugins fijado: un lenguaje, una API concreta. *mare* toma el camino inverso: el núcleo se escribe en Rust por rendimiento y seguridad, y la capa de extensión es *Lua 5.5* —un lenguaje pequeño, embebible y recargable en caliente: se cambia el comportamiento del agente sin reiniciar el proceso, como hacían los viejos modding de juegos.",
+            "El *harness* expone una *TUI* (interfaz en terminal), *RPC* para control remoto y el protocolo *ACP* para conectarse con otras herramientas. Para quien quiere construir su propio agente sobre cualquier LLM sin depender de un SDK cerrado, es una buena referencia de «*harness* como plataforma»."
+          ],
+          "tags": [
+            "mare",
+            "agents",
+            "harness",
+            "rust",
+            "lua"
+          ],
+          "links": [
+            {
+              "label": "GitHub: signalridge/mare",
+              "url": "https://github.com/signalridge/mare"
+            }
+          ]
+        },
+        {
+          "title": "*ContractGraph*: del PDF de un contrato a un grafo de conocimiento validado",
+          "summary": "El agente *ContractGraph* lee un PDF de contrato y produce un grafo de conocimiento con validación *SHACL*, procedencia de cada triple extraído y búsqueda semántica: un pipeline de LLM para documentos legales que no deja la verificación en manos del modelo.",
+          "body": [
+            "La extracción de documentos con LLMs tiene un problema clásico: el modelo puede «inventarse» una cláusula. *ContractGraph* ataca el problema desde la estructura: un agente que parsea el PDF y produce un grafo de conocimiento (entidades, cláusulas, obligaciones), y ese grafo se valida con *SHACL* —el estándar del W3C para validar formas de grafos RDF— antes de usarse.",
+            "Cada triple lleva su procedencia (dónde en el documento de donde sale), y el resultado se puede consultar con búsqueda semántica. Apache 2.0, escrito en Python, y un ejemplo concreto del patrón que se está haciendo habitual en el procesamiento documental basado en agentes: el modelo propone, y el grafo y su validación deciden."
+          ],
+          "tags": [
+            "contractgraph",
+            "knowledge-graph",
+            "shacl",
+            "pdf",
+            "legal"
+          ],
+          "links": [
+            {
+              "label": "GitHub: GaborOrbanDev/ContractGraph",
+              "url": "https://github.com/GaborOrbanDev/ContractGraph"
+            }
+          ]
+        },
+        {
+          "title": "Un enjambre de agentes de trading cuantitativo con gestión de riesgo y *backtesting*",
+          "summary": "El proyecto *ai-trading-strategy-agents* coordina un enjambre de agentes cuantitativos: cada uno atiende una fase del proceso (señales, gestión de riesgo, *backtesting*), escrito en Rust, con diez estrellas en GitHub.",
+          "body": [
+            "El trading es el banco de pruebas clásico de los sistemas multiagente: muchas decisiones, restricciones duras (el riesgo) y un entorno de simulación (el *backtesting*) que permite medir resultados sin perder dinero. Este proyecto organiza todo eso como un enjambre de agentes en Rust que se comunican, y donde el módulo de gestión de riesgo funciona como una compuerta de primer nivel, no como una sugerencia.",
+            "Es una herramienta de investigación, no asesoramiento financiero —y hay que tratarla como tal. Pero como referencia de arquitectura de «enjambres con restricciones duras», es una lectura útil: la separación entre estrategia, riesgo y evaluación es lo que hace el conjunto testeable."
+          ],
+          "tags": [
+            "ai-trading",
+            "swarm",
+            "multi-agent",
+            "risk-management",
+            "backtesting"
+          ],
+          "links": [
+            {
+              "label": "GitHub: roan-maverick/ai-trading-strategy-agents",
+              "url": "https://github.com/roan-maverick/ai-trading-strategy-agents"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*gguf-radar*: un radar contra *GGUF* y *Safetensors* envenenados",
+          "summary": "Con la avalancha de modelos comunitarios, el riesgo de cadena de suministro es real: *gguf-radar* (de Root0one) escanea archivos *GGUF* y *Safetensors* para detectar *templates* de chat comprometidos y cargas ocultas sin ejecutar nada, y reconstruye el *GGUF* con el contenido limpio. Python, MIT.",
+          "body": [
+            "El formato *GGUF* es el canal comunitario de los modelos cuantizados, y es precisamente lo que lo convierte en superficie de ataque: el archivo contiene no solo los pesos, también metadatos y *templates* de chat —instrucciones que el cliente va a ejecutar o mostrar. Un *GGUF* malicioso puede esconder una carga en los metadatos, y *gguf-radar* existe para eso: parsea el archivo sin ejecutarlo, detecta patrones sospechosos (*templates* comprometidos, contenido oculto) y puede reconstruir un *GGUF* limpio con solo los pesos.",
+            "El momento no es casual: esta semana sola han aparecido las cuantizaciones de *Inkling*, el *ERNIE 5.5* y *MAGI-2*… y todas pasan por *GGUF* comunitarios. Licencia MIT, escrito en Python, y seis estrellas que ya crecen."
+          ],
+          "tags": [
+            "gguf-radar",
+            "security",
+            "gguf",
+            "supply-chain",
+            "safetensors"
+          ],
+          "links": [
+            {
+              "label": "GitHub: Root0one/gguf-radar",
+              "url": "https://github.com/Root0one/gguf-radar"
+            }
+          ]
+        },
+        {
+          "title": "*token-defrag*: cuánto gasta tu agente releiendo su propio contexto",
+          "summary": "*token-defrag* mide y reduce lo que los agentes de código como *Claude Code* o *OpenCode* gastan en releer su propio contexto: un binario único en Go, sin telemetría.",
+          "body": [
+            "El coste de contexto se está convirtiendo en una partida de gasto de primera: cuanto más relee el agente su propia historia, más *tokens* (y dinero) se queman. *token-defrag* analiza la sesión, mide qué se está releendo y qué es realmente nuevo, y ofrece formas de «defragmentar» ese contexto —un limpiador de disco, pero para la conversación.",
+            "Es un binario único en Go, sin telemetría: el análisis ocurre 100 % en local. Lo escribe yuseferi, licencia MIT, seis estrellas en GitHub."
+          ],
+          "tags": [
+            "token-defrag",
+            "context",
+            "agents",
+            "cost",
+            "go"
+          ],
+          "links": [
+            {
+              "label": "GitHub: yuseferi/token-defrag",
+              "url": "https://github.com/yuseferi/token-defrag"
+            }
+          ]
+        },
+        {
+          "title": "*BlabberLLM*: un cliente de chat nativo para GNOME",
+          "summary": "*BlabberLLM* es un cliente de chat escrito en Rust sobre *GTK4*/*Libadwaita*, pensado para sentirse nativo en GNOME: se conecta a modelos en la nube y a modelos locales vía *Ollama*. Rust, MIT.",
+          "body": [
+            "El ecosistema de clientes de IA para Linux se fragmenta entre aplicaciones Electron y CLIs de terminal. *BlabberLLM* apuesta por el tercer camino: un cliente de escritorio nativo sobre *GTK4*/*Libadwaita* (la librería de diseño de GNOME), que se integra con el escritorio como cualquier otra app, y que puede hablar tanto con APIs en la nube como con modelos locales a través de *Ollama*.",
+            "Dos estrellas, MIT, y una apuesta clara: local, nativo y sin navegador dentro."
+          ],
+          "tags": [
+            "blabllm",
+            "gnome",
+            "gtk4",
+            "ollama",
+            "rust"
+          ],
+          "links": [
+            {
+              "label": "GitHub: jankammerath/BlabberLLM",
+              "url": "https://github.com/jankammerath/BlabberLLM"
+            }
+          ]
+        },
+        {
+          "title": "*machllm*: inferencia de LLMs en una FPGA, en Verilog",
+          "summary": "*machllm* (el proyecto LITE, de machdyne) es un proyecto en Verilog para ejecutar inferencia de LLMs en una FPGA: el ala hardware del self-hosting. Apache 2.0.",
+          "body": [
+            "Fuera de las GPU, el edge tiene otra plataforma: las FPGA, circuitos reconfigurables que se pueden diseñar para ejecutar las operaciones de matriz de un LLM con un consumo bajo. *machllm* va en esa dirección: inferencia de LLMs sobre hardware FPGA, sin depender del stack cerrado de ningún fabricante.",
+            "Está en sus inicios (una estrella), pero es una línea a vigilar: cuando el self-hosting migre a dispositivos que no pueden pagar una GPU de 300 vatios, el hardware reconfigurable será uno de los pocos caminos que de verdad se pueda ejecutar."
+          ],
+          "tags": [
+            "machllm",
+            "fpga",
+            "verilog",
+            "hardware",
+            "edge"
+          ],
+          "links": [
+            {
+              "label": "GitHub: machdyne/machllm",
+              "url": "https://github.com/machdyne/machllm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*Markdown is not a firewall*: cuatro agentes, un archivo de reglas, cuatro fronteras",
+          "summary": "El estudio registrado *Markdown Is Not a Firewall* mide cómo interpretan un mismo archivo de reglas en Markdown cuatro agentes de código populares: cada uno construye una «frontera» de comportamiento distinta, y la lección es que las reglas son una sugerencia, no un contrato —la seguridad no se puede construir sobre la buena voluntad del modelo.",
+          "body": [
+            "La mayoría de los agentes de código se limitan con archivos de reglas en Markdown: «no toques esto», «solo modifica este directorio». El estudio toma cuatro agentes populares, les entrega el mismo archivo y mide lo que hacen de verdad: la respuesta son cuatro fronteras distintas, algunas muy por encima de lo que el texto dice. Las reglas se leen con la interpretación del modelo, no con un parser.",
+            "La conclusión es una advertencia para quien construya seguridad de agentes sobre prompts: el archivo de Markdown no es un firewall. Las restricciones reales tienen que aplicarse en la capa de ejecución (permisos, *sandbox*, validación), no en las instrucciones del modelo."
+          ],
+          "tags": [
+            "agents",
+            "security",
+            "prompting",
+            "rules",
+            "registered-study"
+          ],
+          "links": [
+            {
+              "label": "arXiv: Markdown Is Not a Firewall",
+              "url": "https://arxiv.org/abs/2611.27112"
+            }
+          ]
+        },
+        {
+          "title": "Los LLMs como ingenieros de contexto: del *prompting* a la orquestación",
+          "summary": "*Revisiting LLMs as Context Engineers* reencuadra el «*prompting*» clásico como una parte de algo mayor: el diseño y la orquestación de cómo se construye el contexto se está convirtiendo en la disciplina central del trabajo con LLMs, y el paper mapa el estado del arte en esa dirección.",
+          "body": [
+            "El término «ingeniería de prompts» empieza a quedarse pequeño: lo que un modelo hace con el *prompt* es la punta del iceberg, y el resto es cómo se construye el contexto —qué documentos entran, en qué orden, qué herramientas son visibles, cómo se resume la historia. El paper toma eso como objeto de estudio: el LLM como ingeniero de contexto, que orquesta sus propias entradas.",
+            "Es una lectura útil para quien construya agentes: organiza las técnicas existentes en una taxonomía de orquestación y ayuda a separar lo demostrado del marketing."
+          ],
+          "tags": [
+            "context-engineering",
+            "orchestration",
+            "prompts",
+            "agents"
+          ],
+          "links": [
+            {
+              "label": "arXiv: Revisiting LLMs as Context Engineers",
+              "url": "https://arxiv.org/abs/2611.30494"
+            }
+          ]
+        },
+        {
+          "title": "*LayoutRecall*: editar imágenes con control 3D sin perder la apariencia",
+          "summary": "*LayoutRecall* ataca un fallo clásico del editado de imágenes con control de disposición 3D: cuando un objeto se oculta o sale del encuadre en una secuencia de ediciones, la imagen final puede perder su apariencia. El método preserva cómo se ve el objeto a lo largo de las rondas.",
+          "body": [
+            "El editado de imágenes con control de *layout* 3D da al usuario control explícito sobre la colocación de objetos y el punto de cámara. El problema aparece en la secuencia: después de varias ediciones, el objeto «recuerda» su posición, pero no su aspecto. *LayoutRecall* añade un mecanismo que conserva la apariencia del objeto aunque esté oculto o fuera de vista en una ronda intermedia.",
+            "Publicado la semana pasada y con el viento de la portada a favor —los modelos de imagen abiertos de esta semana son exactamente los que se beneficiarán de mecanismos como este—, es de los papers de editado visual más citables del día."
+          ],
+          "tags": [
+            "layoutrecall",
+            "image-editing",
+            "3d-layout",
+            "diffusion"
+          ],
+          "links": [
+            {
+              "label": "arXiv: LayoutRecall",
+              "url": "https://arxiv.org/abs/2611.33885"
+            }
+          ]
+        },
+        {
+          "title": "*BiSAT*: tokenización semántico-acústica bidireccional para LLMs de voz",
+          "summary": "*BiSAT* es una tokenización para modelos de lenguaje de voz que alinea de forma bidireccional las vistas semántica y acústica del habla: en lugar de elegir una o la otra, la propuesta las acopla en las dos direcciones para no perder ni el detalle acústico ni el contenido lingüístico a bajo bitrate.",
+          "body": [
+            "Los LLMs de voz se enfrentan al clásico dilema: la tokenización semántica (significado, robusta) o la acústica (fiel, pero frágil). *BiSAT* juega entre ambas: una tokenización alineada bidireccionalmente, en la que las representaciones semántica y acústica se construyen mutuamente, de modo que ninguna pierde la información de la otra.",
+            "Con la ola de modelos de audio (el mega-hilo de «los mejores modelos de audio» sigue en el top de *r/LocalLLaMA*), las mejoras en la tokenización del habla se traducen directamente en *TTS* y *ASR* locales mejores. Dos *me gusta* en Hugging Face, y merece seguimiento."
+          ],
+          "tags": [
+            "bisan",
+            "speech",
+            "tokenization",
+            "tts",
+            "asr"
+          ],
+          "links": [
+            {
+              "label": "arXiv: BiSAT",
+              "url": "https://arxiv.org/abs/2611.30723"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*LTX-2.5* en los *Trainium3* de AWS: 10 segundos de vídeo con sonido en 22 segundos",
+          "summary": "David Corvoysier y un equipo de voluntarios llevaron *LTX-2.5* (Lightricks) a una máquina AWS *Trainium3* de 64 *NeuronCores*: con un paralelismo de tensor y secuencia a medida (TP-4×SP-8) sobre *diffusers* y unas 160 líneas de Python, pasaron de 5:20 por clip a 22-23 segundos para un vídeo de 10 segundos y 2048×1024 con audio, igualando los 23,7 s de la API oficial de *LTX*.",
+          "body": [
+            "Es la clase de historia que define al ecosistema: la primera versión del pipeline hacía cada clip en 5 minutos y 20 segundos, y la final produce un clip de 10 segundos en 2048×1024, con audio, en 22-23 segundos usando la mitad de la máquina. La clave no estaba en el modelo, sino en el paralelismo: procesadores de atención a medida que combinan paralelismo de tensor y de secuencia sobre el hardware *Neuron* de AWS, con el codificador de texto en la CPU.",
+            "Los autores publican todo: el código sobre *diffusers*, el «guión» en JSON (un storyboard de escenas y audio) que dirige la generación, y tres pequeños «pelis» (un sello, un zorro y un cabrito) generados en los *Trainium3*. Es una demostración pública de que la generación de vídeo fuera de NVIDIA ya está en el rango de segundos, no de minutos."
+          ],
+          "tags": [
+            "ltx-2-5",
+            "trainium3",
+            "neuron",
+            "diffusers",
+            "video",
+            "aws"
+          ],
+          "links": [
+            {
+              "label": "Blog: Taking Trainium3 to the Track (Hugging Face)",
+              "url": "https://huggingface.co/blog/video-trainium3"
+            },
+            {
+              "label": "GitHub: dacorvo/video-generation",
+              "url": "https://github.com/dacorvo/video-generation"
+            }
+          ]
+        },
+        {
+          "title": "24 GB sobran si los motores se turnan",
+          "summary": "En *r/LocalLLaMA* circula un flujo que funciona: varios motores de inferencia (*vLLM*, *llama.cpp*…) corriendo en la misma tarjeta de 24 GB, pero uno a la vez —cada motor libera la memoria de vídeo cuando no está en uso, y la comunidad orquesta el flujo para que «parezca» que se tienen varios equipos.",
+          "body": [
+            "El truco es simple y potente: el cuello de botella de una tarjeta de 24 GB no es el modelo que cabe en memoria, sino que varios motores convivan, cada uno con su *KV cache* y sus pesos cargados. Si los motores «se turnan» —uno activo, los demás dormidos—, la misma tarjeta sirve a varios modelos en distintos momentos.",
+            "El hilo incluye scripts para orquestar el relevo y las advertencias prácticas (tiempos de recarga, qué motores conviven bien). Para quien autoaloja con hardware de consumo, es uno de los flujos más útiles de la semana."
+          ],
+          "tags": [
+            "self-hosting",
+            "rtx-3090",
+            "vllm",
+            "llama-cpp",
+            "kv-cache"
+          ],
+          "links": [
+            {
+              "label": "r/LocalLLaMA: 24GB is plenty if your engines take turns",
+              "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xahi82/24gb_is_plenty_if_your_engines_take_turns/"
+            }
+          ]
+        },
+        {
+          "title": "*llama.cpp* en una Radeon 9700: *ROCm* vs *Vulkan*, decodificación y prefill",
+          "summary": "La comunidad ha estado haciendo benchmarks de la nueva Radeon 9700 de AMD con *llama.cpp*, comparando los dos stacks disponibles: *ROCm* y *Vulkan*. El top semanal de *r/LocalLLaMA* trae los números de decodificación y prefill —datos útiles para decidir entre los dos backends.",
+          "body": [
+            "AMD no deja de ganar terreno en la inferencia local, y esta semana toca a una de sus tarjetas nuevas: *llama.cpp* sobre la Radeon 9700, con *ROCm* (el stack oficial de AMD) y *Vulkan* (el stack portátil multivendedor) como los dos backends que se comparan.",
+            "Los resultados de decodificación y prefill suman a los datos reales crecientes del mundo AMD (la semana pasada pasamos por aquí el panel de pruebas AMD publicado por *llama.cpp*). El mensaje no cambia: la distancia con NVIDIA se estrecha, pero sigue dependiendo del modelo y del tamaño del *KV cache*."
+          ],
+          "tags": [
+            "llama-cpp",
+            "amd",
+            "rocm",
+            "vulkan",
+            "radeon",
+            "benchmarks"
+          ],
+          "links": [
+            {
+              "label": "r/LocalLLaMA: top semanal (llama.cpp on a Radeon 9700)",
+              "url": "https://www.reddit.com/r/LocalLLaMA/top/?after=dDNfMXh4bXI2OA%3D%3D&sort=top&t=WEEK"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "mario-and-rebels/cherry-studio-llm",
+        "stars": "★ 218",
+        "desc": "Cherry Studio LLM: la versión portable de Cherry Studio, el cliente de charla IA, para Windows",
+        "meta": "Go",
+        "url": "https://github.com/mario-and-rebels/cherry-studio-llm"
+      },
+      {
+        "name": "Root0one/gguf-radar",
+        "stars": "★ 6",
+        "desc": "Detecta *GGUF*/*Safetensors* envenenados: *templates* de chat comprometidos y cargas ocultas, sin ejecutar nada",
+        "meta": "Python · MIT",
+        "url": "https://github.com/Root0one/gguf-radar"
+      },
+      {
+        "name": "yuseferi/token-defrag",
+        "stars": "★ 6",
+        "desc": "Mide y reduce lo que *Claude Code*/*OpenCode* gastan releiendo su propio contexto",
+        "meta": "Go · MIT",
+        "url": "https://github.com/yuseferi/token-defrag"
+      },
+      {
+        "name": "signalridge/mare",
+        "stars": "★ 5",
+        "desc": "Harness de agentes de código: núcleo Rust + plugins *Lua 5.5* recargables en caliente; *TUI*, *RPC*, *ACP*",
+        "meta": "Rust · MIT",
+        "url": "https://github.com/signalridge/mare"
+      },
+      {
+        "name": "jankammerath/BlabberLLM",
+        "stars": "★ 2",
+        "desc": "Cliente de chat nativo para GNOME (*GTK4*/*Libadwaita*): nube y *Ollama*",
+        "meta": "Rust · MIT",
+        "url": "https://github.com/jankammerath/BlabberLLM"
+      }
+    ],
+    "papers": [
+      {
+        "title": "What a Forecasting Leaderboard Can Establish: Resolution Reporting for Zero-Shot Time-Series Models",
+        "authors": "58 upvotes",
+        "url": "https://arxiv.org/abs/2611.31619"
+      },
+      {
+        "title": "Revisiting LLMs as Context Engineers: From Prompting to Orchestration",
+        "authors": "4 upvotes",
+        "url": "https://arxiv.org/abs/2611.30494"
+      },
+      {
+        "title": "*LayoutRecall*: Preserving Appearance in Multi-Round 3D Layout-Controlled Image Editing",
+        "authors": "3 upvotes",
+        "url": "https://arxiv.org/abs/2611.33885"
+      },
+      {
+        "title": "*BiSAT*: Bidirectionally Aligned Semantic-Acoustic Tokenization for Speech Language Models",
+        "authors": "2 upvotes",
+        "url": "https://arxiv.org/abs/2611.30723"
+      },
+      {
+        "title": "Guarding with Judgment: Learning to Intervene for Multimodal Safety",
+        "authors": "2 upvotes",
+        "url": "https://arxiv.org/abs/2611.28849"
+      }
+    ],
+    "community": [
+      {
+        "src": "Hugging Face",
+        "title": "Donde los científicos trizan la línea con los agentes IA",
+        "note": "AllenAI: qué aceptan (y qué no) los investigadores al usar agentes en su trabajo",
+        "url": "https://huggingface.co/blog/allenai/where-scientists-draw-the-line-on-ai-agents"
+      },
+      {
+        "src": "r/LocalLLaMA",
+        "title": "La semana pasada en IA multimodal local",
+        "note": "El resumen semanal de la comunidad: lo que corre en las tarjetas de consumo",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1sfk3ml/last_week_in_multimodal_ai_local_edition/"
+      },
+      {
+        "src": "r/LocalLLM",
+        "title": "NewsGator: un agregador de noticias self-hosted",
+        "note": "Se autoaloja, ingiere tus fuentes y las deja listas para leer (o para alimentar a un LLM)",
+        "url": "https://www.reddit.com/r/LocalLLM/comments/1w0tp5s/newsgator_a_selfhosted_news_aggregator_that/"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

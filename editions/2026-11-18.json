@@ -1,0 +1,513 @@
+{
+  "date": "18 de noviembre de 2026",
+  "weekday_long": "miércoles",
+  "edition": "Edición nº 43",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "*Xing 4*: el modelo frontera de *China Telecom* entrenado de principio a fin en 8.192 chips *Ascend 910C*",
+    "summary": "El *Xingchen AGI Lab*, el laboratorio de inteligencia de *China Telecom*, ha publicado el informe técnico de *Xing 4*, la serie de modelos de lenguaje que continúa la familia *TeleChat* y que se entrena de principio a fin sobre la pila doméstica de *Huawei*: 8.192 aceleradores *Ascend 910C* para el pre-entrenamiento del modelo insignia, de 285 mil millones de parámetros. El documento detalla, con un nivel de detalle poco habitual, cómo el framework *MindSpore HyperParallel* gestiona el paralelismo, la memoria de activaciones y la afinidad de núcleos a esa escala. Para el post-entrenamiento, el laboratorio describe *TeleGym*, una plataforma unificada de ejecución agéntica que integra ejecución, evaluación, construcción de trayectorias y optimización de la política, y con la que la serie destaca en tareas de agente de largo horizonte y en el uso de herramientas. La familia ya publica modelos de pesos abiertos, como *Xing 4.0-29B-A4B* (septiembre), y este informe convierte a *Ascend* en el segundo ecosistema, después de *NVIDIA*, donde se documenta un entrenamiento frontera completo.",
+    "illustration": {
+      "file": "lead-illo-2026-11-18.jpg",
+      "alt": "Sala de centro de datos de noche: hileras de estantes de servidores negros que se pierden en la lejanía, con pequeñas luces ámbar de estado, cables sobre el suelo de hormigón pulido y luz azul fría desde el techo",
+      "caption": "Ilustración de la portada, generada con MOSS-Image: la sala del clúster donde se entrenó *Xing 4* en 8.192 chips *Ascend 910C*."
+    },
+    "body": [
+      "El 16 de noviembre apareció en *arXiv* (2611.22115) el informe técnico de *Xing 4*, la serie de modelos de lenguaje del *Xingchen AGI Lab*, el laboratorio de inteligencia artificial que *China Telecom* mantiene bajo su paraguas tecnológico. El nombre es la continuación natural de *TeleChat*, la familia de modelos bilingües (chino e inglés) que el laboratorio llevaba publicando, y el documento que la acompaña es el más extenso que se ha visto del ecosistema *Ascend* hasta la fecha. El papel principal lo juega la versión insignia: un modelo de 285 mil millones de parámetros (285B en la nomenclatura del informe), pre-entrenado de extremo a extremo en un clúster de 8.192 *Ascend 910C*, las unidades de procesamiento neuronal de *Huawei*. El paper acumula 131 votos en la página de papers del día de *Hugging Face*, pero lo que de verdad mueve la conversación no es el tamaño: es que todo el entrenamiento, sin una sola fase delegada a *NVIDIA*, está documentado como si fuera una receta repetible.",
+      "La arquitectura combina las apuestas ya conocidas de la serie: activación escasa —una mixtura de expertos (MoE) que solo activa una fracción de los pesos por token—, un diseño de atención propio, escalado en profundidad y anchura, y decodificación especulativa para el despliegue. Pero la parte más larga del informe es la de sistemas. *MindSpore HyperParallel*, el framework de *Huawei*, aporta el paralelismo híbrido consciente de la topología del clúster, optimizadores distribuidos, tratamiento de las secuencias largas y un control fino de la memoria de activaciones, junto con afinidad de CPU e aislamiento de núcleos; el stack *CANN* contribuye con optimizaciones a nivel de núcleo. Cada una de esas piezas se describe como una decisión de ingeniería tomada para que 8.192 chips trabajen sin desperdiciar cómputo durante semanas de pre-entrenamiento, y el resultado convierte el texto en el documento de referencia sobre lo que cuesta, realmente, entrenar un modelo frontera fuera del ecosistema *NVIDIA*.",
+      "El post-entrenamiento se apoya en *TeleGym*, una plataforma unificada de ejecución agéntica que integra en un mismo sistema la ejecución de las tareas, la evaluación, la construcción de trayectorias y la optimización de la política. El diseño es asíncrono y desacoplado, con muestreo limitado y *rollout* parcial, una combinación pensada para exprimir el cómputo cuando la tarea de un agente no termina cuando uno quiere. Según el informe, la combinación da su fruto: la serie *Xing 4* se sitúa en la primera línea en *benchmarks* de agentes de largo horizonte y en el uso de herramientas, el mismo nicho que ocupan los modelos frontier occidentales. En otras palabras, no es un LLM grande genérico: es una línea de producto explícitamente agéntica, entrenada en hardware doméstico.",
+      "Para la comunidad de pesos abiertos, el dato relevante no es el 285B —cuyos pesos no se han liberado, al menos a fecha del informe—, sino su hermano menor: *Xing 4.0-29B-A4B*, publicado en septiembre con pesos abiertos en *Hugging Face* y *ModelScope* (BF16 y FP8), un MoE de 29B totales y 4B activos por token, bilingüe y orientado a agentes. Si el laboratorio mantiene ese ritmo, cada generación frontera llegará acompañada de un modelo local y usable. El segundo frente, menos visible, es el estratégico: *Ascend* se consolida como el segundo ecosistema, después de *NVIDIA*, donde se documenta un entrenamiento frontera completo, del kernel al *rollout* agéntico. Y este mismo día ha llegado el complemento de la noticia, *AscendGYM*, el banco de pruebas para medir la optimización de núcleos en *Ascend NPU*: el stack ya no solo entrena, también se mide."
+    ],
+    "tags": [
+      "xing-4",
+      "telechat",
+      "ascend",
+      "china-telecom",
+      "post-entrenamiento-agente"
+    ],
+    "links": [
+      {
+        "label": "Informe técnico (arXiv)",
+        "url": "https://arxiv.org/abs/2611.22115"
+      },
+      {
+        "label": "Paper en Hugging Face",
+        "url": "https://huggingface.co/papers/2611.22115"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*SenseNova-Loop-9B*: *Baidu* estrena un multimodal de 9B con transformador «en bucle»",
+          "summary": "El equipo *SenseNova* de *Baidu* ha publicado *SenseNova-Loop-9B*, un modelo multimodal de imagen y texto con 9.000 millones de parámetros y licencia *Apache 2.0*, estrenado el 17 de noviembre y ya entre los más queridos de la plataforma en su primer día. Su rasgo distintivo es la arquitectura de «transformador en bucle»: en lugar de sumar cientos de capas, reaplica un bloque compacto de capas en pasadas sucesivas para ganar profundidad efectiva sin multiplicar pesos. El modelo, bilingüe (inglés y chino), está orientado a contextos largos y a flujos de trabajo agénticos, y superó los 240 me gusta en *Hugging Face* en veinticuatro horas.",
+          "body": [
+            "La idea del «transformador en bucle» no es nueva —lleva años circulando en la investigación como alternativa a los modelos muy profudos—, pero es raro verla como rasgo principal de un modelo multimodal publicado: la mayoría de los que llegan a *Hugging Face* son profundizaciones directas de la receta *Llama* o *Qwen* de turno. *SenseNova-Loop-9B* la adopta de frente: un pequeño conjunto de bloques se ejecuta varias veces sobre la misma secuencia, de modo que la profundidad efectiva crece sin crecer la memoria de parámetros, y a ello se suma un mecanismo de atención cruzada (*MHC*) y una optimización explícita para contexto largo. La comunidad, que cita reportes de ventanas de hasta un millón de tokens, lo sitúa entre los pocos modelos abiertos que apuntan a ese rango.",
+            "El lanzamiento cae en plena renovación de marca de *Baidu*: la familia *ERNIE* se reconvirtió en *SenseNova*, y *Loop-9B* es la primera entrega multimodal de la nueva era, con pesos abiertos bajo *Apache 2.0*. La tarjeta de modelo sigue acotada —pide registro en la plataforma—, así que los detalles completos del informe técnico aún no son públicos. Para quien busca un modelo compacto de imagen y texto para servir en casa, es la opción más fresca de la semana; la duda que deja abierta es si el «bucle» se sostendrá en la práctica tan bien como en el papel."
+          ],
+          "tags": [
+            "sensenova-loop-9b",
+            "baidu",
+            "transformador-en-bucle",
+            "multimodal"
+          ],
+          "links": [
+            {
+              "label": "Tarjeta de modelo (Hugging Face)",
+              "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B"
+            },
+            {
+              "label": "Análisis de la comunidad",
+              "url": "https://theresanaiforthat.themerkle.dev/q/sensenova-loop-9b"
+            }
+          ]
+        },
+        {
+          "title": "*LongCat-Video-Avatar 1.6*: los avatares de *Meituan* aprenden a hablar más de diez minutos sin romperse",
+          "summary": "*Meituan* ha actualizado su framework de vídeo con avatares por audio a la versión 1.6, y el salto es de robustez: la continuidad autoregresiva ahora mantiene la consistencia visual más allá de diez minutos de generación, un límite que las versiones anteriores no alcanzaban. El proyecto, de código abierto bajo *MIT*, genera vídeo de personas a partir de audio y una imagen, y en esta versión mejora el movimiento de labios, coordina rostro y cuerpo y optimiza la inferencia. Los pesos (*safetensors* y *ONNX*) y el informe técnico están disponibles en *Hugging Face* y *GitHub*.",
+          "body": [
+            "La familia *LongCat* de *Meituan* —conocida sobre todo por sus modelos de lenguaje abiertos— lleva meses puliendo su rama de vídeo con avatares, y esta 1.6 ataca el problema más moleso de los generadores de avatares: la deriva. Generar unos segundos es fácil; mantener la misma cara, el mismo gesto y la misma iluminación durante diez minutos de conversación autoregresiva, no. El modelo nuevo lo resuelve con una estrategia de continuidad que reutiliza el contexto visual por tramos, y suma además un movimiento de labios más fino y una coordinación cuerpo-rostro que el informe técnico documenta con comparativas.",
+            "Lo interesante para quien autoaloja: todo corre local. El framework se entrega como pesos (*safetensors* y export *ONNX*) junto con el repositorio del informe, y el proyecto mantiene una página dedicada con ejemplos. El caso de uso que ya se perfila es el habitual: presentadores virtuales, doblado, avatares para productos y soportes, con la voz y la imagen sin salir de casa."
+          ],
+          "tags": [
+            "longcat-video-avatar",
+            "meituan",
+            "generacion-de-video",
+            "avatares"
+          ],
+          "links": [
+            {
+              "label": "Modelo (Hugging Face)",
+              "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6"
+            },
+            {
+              "label": "Página del proyecto",
+              "url": "https://meigen-ai.github.io/"
+            },
+            {
+              "label": "Informe técnico (GitHub)",
+              "url": "https://github.com/meituan-longcat/LongCat-Video"
+            }
+          ]
+        },
+        {
+          "title": "*tiny-voca*: una TTS de 4,5 millones de parámetros que va a 70 veces la velocidad real en cuatro núcleos",
+          "summary": "Bajo el nombre *tiny-voca* se esconde un sintetizador de voz inglés de 4,5 millones de parámetros que, según su autor, corre a unas 70 veces la velocidad real en cuatro hilos de CPU: un minuto de audio en poco más de un segundo. El modelo se entrenó desde cero —sin pesos preexistentes— con unas 18 horas de voz sintética, genera a 24 kHz y mono, y se entrega con export a *ONNX* de 21,4 MB, dos voces (femenina y masculina, inglés americano) y una demo en el navegador. El código y los pesos son *Apache 2.0*.",
+          "body": [
+            "El autor, *n4ze3m*, lo describe como una exploración: ¿qué tamaño mínimo necesita una TTS para sonar aceptable si se entrena limpia, sin apoyarse en un modelo grande? La respuesta que publica: 4,5 millones de parámetros, una arquitectura ligera y un fonemizador propio (*dizione*). El resultado no compite con las TTS de frontera, pero cumple: voz inteligible, acento americano, y una velocidad que en un portátil cualquiera sobra incluso para síntesis interactiva en tiempo real.",
+            "El paquete incluye todo lo necesario para autoalojarlo: pesos en *ONNX* de 21,4 MB, dos voces y una demo web para escuchar sin instalar nada. Es de esos proyectos que no van a cambiar la industria, pero que recuerdan que «voz local» ya no exige GPU ni 10 GB de RAM: cuatro hilos de CPU y un archivo pequeño."
+          ],
+          "tags": [
+            "tiny-voca",
+            "tts",
+            "voz-local",
+            "onnx"
+          ],
+          "links": [
+            {
+              "label": "Modelo (Hugging Face)",
+              "url": "https://huggingface.co/n4ze3m/tiny-voca"
+            },
+            {
+              "label": "Código (GitHub)",
+              "url": "https://github.com/n4ze3m/tiny-voca"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*runwright*: un runtime para agentes con aprobaciones, presupuestos y un solo archivo *SQLite*",
+          "summary": "*runwright* es un runtime de agentes de autoalojamiento, escrito sin dependencias externas, en el que cada ejecución es persistente: puede pausarse, reanudarse y recuperarse tras un fallo. Antes de que el agente actúe sobre el mundo real, el sistema pide aprobaciones explícitas, impone presupuestos de gasto y registra todo en un único archivo *SQLite*. Corre en escritorio, móvil o servidor, y su promesa es simple: autonomía real, pero con los límites puestos por delante, no como parche a posteriori.",
+          "body": [
+            "La mayoría de los runtimes de agentes que se publican apuestan por el revés: máxima autonomía, y luego ver. *runwright* lo plantea al contrario, como un «runtime de ejecución duradera y fiable» donde la seguridad se construye antes que la libertad: cada acción sensible pasa por un control de aprobación, el gasto tiene tope, y el estado completo de la ejecución vive en un archivo *SQLite*, sin base de datos externa ni servicio de colas. Si el proceso muere, el trabajo no se pierde: se reanuda donde estaba.",
+            "Esa apuesta por el estado persistente y las dependencias mínimas —todo en un solo archivo— lo hace apto para correr en un portátil o en una pequeña placa, no solo en un servidor. El repositorio (*win4r/runwright*) es nuevo y pequeño, pero encierra la filosofía que la comunidad lleva meses discutiendo: que la autonomía de un agente no debería significar ausencia de control, y que el «hacer» de un agente necesita la misma seriedad que el «pensar»."
+          ],
+          "tags": [
+            "runwright",
+            "runtime-de-agentes",
+            "autoalojamiento",
+            "aprobaciones"
+          ],
+          "links": [
+            {
+              "label": "Código (GitHub)",
+              "url": "https://github.com/win4r/runwright"
+            }
+          ]
+        },
+        {
+          "title": "*agent-egress-firewall*: un cortafuegos local que vigila lo que tus agentes envían a la red",
+          "summary": "Un agente con acceso a la web es, por diseño, una vía de fuga: puede arrastrar credenciales, datos personales o secretos de la máquina a cualquier destino externo. *agent-egress-firewall* se interpone en esa salida: es un proxy de egress de autoalojamiento que analiza cada petición saliente con inferencia local de NLP (*GLiNER* en *ONNX*, sin servicios externos) y decide detectar, enmascarar o bloquear los datos sensibles antes de que salgan. Todo en un solo binario, sin *API key*.",
+          "body": [
+            "La premisa viene de un dolor conocido de quien corre agentes: una *prompt* inyectada o una herramienta maliciosa puede hacer que el agente «envíe» el contenido de un archivo de credenciales a un servidor cualquiera, y pocas capas de defensa lo interceptan. Este proyecto añade una de esas capas sin que el texto salga de la máquina: el análisis se ejecuta localmente con *GLiNER* exportado a *ONNX*, de modo que ni el contenido ni las metadatos viajan a un servicio de NLP de terceros.",
+            "El proxy clasifica cada salida y, según la política del usuario, enmascara el dato (una contraseña sustituida por un marcador) o bloquea la petición entera. El repositorio (*ranajahanzaib/agent-egress-firewall*) es reciente, pero plantea el patrón que los agentes «con manos» van a necesitar: un cortafuegos de egress como pieza de primera clase de la pila, no como afterthought."
+          ],
+          "tags": [
+            "agent-egress-firewall",
+            "seguridad-de-agentes",
+            "gliner",
+            "onnx"
+          ],
+          "links": [
+            {
+              "label": "Código (GitHub)",
+              "url": "https://github.com/ranajahanzaib/agent-egress-firewall"
+            }
+          ]
+        },
+        {
+          "title": "*sanity*: un chequeo matemático multiagente con álgebra por computadora y *Lean*",
+          "summary": "Cuando una cadena de razonamiento larga produce un resultado numérico, ¿cómo saber que no lleva un error escondido en el kilómetro tres? *sanity* es un pipeline multiagente que lo revisa con dos herramientas duras: un sistema de álgebra por computadora (CAS) determinista y el verificador formal *Lean*. El sistema tiene seis etapas, es paralelizable y corre local, de modo que la matemática de un *LLM* se comprueba con métodos que no dependen de la intuición de otro *LLM*.",
+          "body": [
+            "La idea nace de una limitación clásica: los grandes modelos cometen errores aritméticos y de manipulación simbólica con una frecuencia que ninguna dosis de «piénsalo con cuidado» elimina. *sanity* no pregunta a otro modelo si la cuenta está bien: la recalcula. La primera línea de defensa es el CAS, que expande y simplifica las expresiones de forma determinista; la segunda es *Lean*, que puede formalizar el resultado y verificarlo con reglas estrictas. Los agentes orquestan ese flujo en seis etapas, y como cada etapa es independiente, el chequeo se puede paralelizar a gusto.",
+            "El repositorio (*IlkhamFY/sanity*) apunta a un nicho claro: validar demostraciones, cálculos y derivaciones que los *LLM* generan en tareas de ciencia e ingeniería antes de que se usen. Es de las pocas propuestas que mezclan verificación formal y razonamiento agéntico sin delegar la comprobación final a la intuición de otro modelo."
+          ],
+          "tags": [
+            "sanity",
+            "verificacion-formal",
+            "lean",
+            "multiagente"
+          ],
+          "links": [
+            {
+              "label": "Código (GitHub)",
+              "url": "https://github.com/IlkhamFY/sanity"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*llm-api-benchmark*: latencia, tiempo al primer token y coste de tus *endpoints* compatibles *OpenAI*",
+          "summary": "Un *benchmark* de código abierto para cualquier *endpoint* compatible con la *API* de *OpenAI*: latencia, tiempo al primer token (*TTFT*), tokens por segundo y coste por consulta, con carga configurable. No pide *API key*: se apunta a un servidor local (*vLLM*, *llama.cpp*, lo que sea) y mide. Corre cuatro o más modelos en una sola GPU, y su autor lo enmarca como herramienta de autoalojamiento: comparar qué modelo exprime mejor el propio hardware, con números y no con coros.",
+          "body": [
+            "Comparar modelos en el servidor propio es el paso que casi nadie da: los *leaderboard* públicos miden en la nube, y tu *endpoint* local no es la nube. *llm-api-benchmark* (*Moloch-AI*) se ocupa de ese paso: lanza peticiones en carga, mide el *TTFT* —el tiempo hasta el primer token, el que se nota al escribir en el chat—, el ritmo de tokens por segundo y la latencia total, y calcula el coste de cada consulta según el precio que se le ponga al token.",
+            "El diseño es deliberadamente simple: la compatibilidad con la *API* de *OpenAI* como único requisito, sin *API key* y sin dependencia de la nube, de modo que sirve tanto para un *vLLM* en un servidor casero como para un *llama.cpp* en un portátil. La herramienta se instala desde *PyPI*, y el repositorio documenta cómo montar baterías de prueba con varios modelos en la misma GPU."
+          ],
+          "tags": [
+            "llm-api-benchmark",
+            "benchmarks",
+            "vllm",
+            "autoalojamiento"
+          ],
+          "links": [
+            {
+              "label": "Código (GitHub)",
+              "url": "https://github.com/Moloch-AI/llm-api-benchmark"
+            },
+            {
+              "label": "Paquete (PyPI)",
+              "url": "https://pypi.org/project/llm-api-benchmark/"
+            }
+          ]
+        },
+        {
+          "title": "*llm-mini-infer*: un servidor de inferencia minimalista para modelos recién salidos en *NVIDIA GPU*",
+          "summary": "*definfer/llm-mini-infer* es un servidor de inferencia minimalista pensado para poner en servicio, en una máquina propia, los modelos abiertos recién salidos en hardware *NVIDIA*: carga el modelo, expone una *API* compatible con *OpenAI* y se queda quieto. La propuesta no compite con los stacks completos (*vLLM*, *TGI*): busca ser la vía rápida para servir un *checkpoint* nuevo antes de que los servidores grandes lo soporten bien.",
+          "body": [
+            "Hay un hueco entre «acabo de descargar un *checkpoint* de un modelo nuevo» y «tengo un servidor que lo sirve»: los stacks grandes tardan semanas en soportar las arquitecturas recién salidas, y montar un *vLLM* solo para probar no siempre es la vía. *llm-mini-infer* ataca ese hueco: despliegue local-first, con la interfaz estándar de *OpenAI* para que el resto de las herramientas del taller (clientes, flujos de *RAG*, proxies) funcionen sin cambios.",
+            "El repositorio es pequeño y directo: si la GPU es *NVIDIA* y se quiere servir un modelo reciente hoy, sin esperar al *upstream*, es la opción más corta del mercado. Como todo servidor minimalista, su techo de rendimiento no será el de un stack optimizado, pero para el ochenta por ciento de los casos de autoalojamiento sobra."
+          ],
+          "tags": [
+            "llm-mini-infer",
+            "inferencia",
+            "nvidia-gpu",
+            "api-openai"
+          ],
+          "links": [
+            {
+              "label": "Código (GitHub)",
+              "url": "https://github.com/definfer/llm-mini-infer"
+            }
+          ]
+        },
+        {
+          "title": "*pcb-layout-llm*: *Qwen2.5-Coder-32B* afinado para trazas, vias y despejes en *KiCad*",
+          "summary": "*Ssbullock/pcb-layout-llm* toma *Qwen2.5-Coder-32B* y lo afina (ajuste fino supervisado, SFT, más *GRPO*) en un oficio muy concreto: el layout de circuitos impresos (PCB) en *KiCad* —rutar trazas, colocar vias y respetar los despejes entre componentes. El proyecto incluye un banco de prueba de 23 placas y licencia *MIT*. Es, hasta la fecha, el ejemplo más claro de la ola de «modelos agénticos para oficios de ingeniería» aplicada a un flujo con reglas duras y medibles.",
+          "body": [
+            "El diseño de una placa tiene una parte repetitiva y punitiva: despejes, cruces, vias. Quien lo ha hecho sabe que la hora se va en mover trazas. Este proyecto toma un modelo de código de 32B y lo especializa con afinación supervisada y refuerzo precisamente en ese oficio, de modo que el modelo no solo escribe, sino que «respete» el esquema: trazando rutas válidas y colocando componentes sin violar las reglas de diseño.",
+            "El diferencial del repositorio es el banco de prueba: 23 placas de *KiCad* contra las que evaluar al modelo, algo raro de ver en proyectos de afinación de este tipo. El resultado, publicado bajo *MIT*, encaja en la línea de «agentes con oficio» que se está llenando de propuestas: menos chat, y más trabajo que se puede medir contra un estándar."
+          ],
+          "tags": [
+            "pcb-layout-llm",
+            "kicad",
+            "grpo",
+            "ingenieria"
+          ],
+          "links": [
+            {
+              "label": "Código (GitHub)",
+              "url": "https://github.com/Ssbullock/pcb-layout-llm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*AscendGYM*: el banco de pruebas que mide si los agentes saben optimizar núcleos en *Ascend NPU*",
+          "summary": "Con 83 votos, *AscendGYM* es el segundo trabajo más visto de la semana del ecosistema *Ascend*, y cierra el círculo de la portada: un banco de pruebas de 48 núcleos en tres niveles de dificultad, cuyos casos (tipos de dato y formas de tensor) salen de cargas de entrenamiento e inferencia reales. Admite dos modos de evaluación: el modelo solo, o el modelo con su *harness*. El mensaje, junto al informe de *Xing 4*: el stack *Ascend* ya cuenta con herramientas de medida, no solo de entrenamiento.",
+          "body": [
+            "Optimizar un núcleo para un *NPU* es, según los autores, «notoriamente difícil», y los bancos de prueba existentes se centran en la generación de núcleos, no en la optimización de lo que ya existe. *AscendGYM* cambia el foco: 48 núcleos con casos de prueba tomados de trabajo real, de modo que mejorar en el banco se traduce directamente en mejorar en la carga. Los dos modos de evaluación (modelo solo, modelo con *harness*) permiten separar el talento del modelo de la habilidad del arnés que lo rodea.",
+            "El par *Xing 4*/*AscendGYM* publicándose el mismo día no es casualidad: es la diferencia entre un ecosistema que entrena y un ecosistema que además se mide. Para quien sigue la guerra de stacks, es el primer banco serio de optimización de núcleos en hardware chino, y la puerta para reproducir en *Ascend* lo que la comunidad lleva años haciendo en *CUDA*."
+          ],
+          "tags": [
+            "ascendgym",
+            "ascend-npu",
+            "optimizacion-de-nucleos",
+            "benchmarks"
+          ],
+          "links": [
+            {
+              "label": "Paper (arXiv)",
+              "url": "https://arxiv.org/abs/2611.17621"
+            },
+            {
+              "label": "Página en Hugging Face",
+              "url": "https://huggingface.co/papers/2611.17621"
+            }
+          ]
+        },
+        {
+          "title": "*FastFrames*: vídeo autoregresivo a latencia interactiva, 36 ms por frame",
+          "summary": "Los modelos autoregresivos de vídeo son, sobre el papel, el medio ideal para experiencias visuales interactivas: generan cada frame a partir de lo que van observando. En la práctica, son órdenes de magnitud más lentos. *FastFrames* (17 votos) ataca ese cuello: al perfilear los modelos del estado del arte, los autores encuentran que la decodificación del VAE y la actualización del *KV cache* consumen más de la mitad de la latencia total, y los sustituye por alternativas ligeras. Su variante de 1.300 millones de parámetros corre a 36 ms por frame, latencia de interacción real, sin comprometer la calidad.",
+          "body": [
+            "La lección del paper es de ingeniería: lo que se daba por «coste fijo» de un video difusor —decodificar el VAE, actualizar el *KV cache*— se reveló como la mayor parte del gasto, y sus alternativas ligeras no degradan el resultado de forma apreciable. El resultado, la familia *FastFrames*, genera vídeo autoregresivo a 36 ms por frame con su modelo de 1.300 millones, lo que la lleva al territorio de la interacción en tiempo real: jugar, conversar, reaccionar.",
+            "El trabajo importa porque el vídeo autoregresivo interactivo es, según sus autores, un medio prometedor para experiencias visuales interactivas —un «mundo» que responde a las entradas del usuario—, y la latencia era el muro. Al derribarlo, el campo se acerca un paso más a lo que lleva años existiendo solo en los papers."
+          ],
+          "tags": [
+            "fastframes",
+            "video-autoregresivo",
+            "latencia",
+            "generacion-de-video"
+          ],
+          "links": [
+            {
+              "label": "Paper (arXiv)",
+              "url": "https://arxiv.org/abs/2611.23226"
+            },
+            {
+              "label": "Página en Hugging Face",
+              "url": "https://huggingface.co/papers/2611.23226"
+            }
+          ]
+        },
+        {
+          "title": "¿Hacen falta instrucciones para que un *LLM* se auto-mejore? Un agente congelado diseña su propio aprendizaje",
+          "summary": "Pregunta incómoda para quien escribe loops de auto-mejora: ¿de verdad hay que decirle al modelo *cómo* mejorar, o solo darle presupuesto y herramientas? El paper (2611.23219) lo prueba: un agente *LLM* congelado recibe un presupuesto de cómputo, herramientas para recoger experiencia y actualizar documentos de texto, y un objetivo general; nada más —ni un loop impuesto desde fuera, ni acceso a datos del mundo real. Hallazgo: los modelos lo bastante capaces se auto-mejoran, y las estrategias que inventan se parecen a las de la optimización clásica.",
+          "body": [
+            "El set-up es minimalista y, por eso, elocuente: no hay loop de optimización escrito por humanos, no hay datos reales, solo un presupuesto, unos primitivas y una meta. Bajo esas condiciones, los modelos más capaces construyen su propio algoritmo de aprendizaje sobre contexto, y el paper documenta que las estrategias que descubren convergen con las de la optimización clásica, en un *testbed* de juego como escenario de prueba.",
+            "Para la comunidad de agentes, el resultado tiene dos lecturas. La cómoda: a medida que los modelos maduran, el andamiaje de auto-mejora que hoy se escribe a mano puede ser prescindible. La incómoda: si un modelo puede diseñar su propio bucle de aprendizaje con un presupuesto, la frontera entre «usar» un agente y «ser» uno se está haciendo fina."
+          ],
+          "tags": [
+            "auto-mejora",
+            "agentes",
+            "optimizacion",
+            "llm"
+          ],
+          "links": [
+            {
+              "label": "Paper (arXiv)",
+              "url": "https://arxiv.org/abs/2611.23219"
+            },
+            {
+              "label": "Página en Hugging Face",
+              "url": "https://huggingface.co/papers/2611.23219"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*Ensu*: el chat local y privado de *Ente*, el equipo de las apps cifradas, llega a móvil y escritorio",
+          "summary": "*Ente Labs* —el equipo detrás de las apps de cifrado extremo a extremo *Ente Photos* y *Ente Files*— ha lanzado *Ensu*, una app de chat con IA que corre por completo en el dispositivo: nada de lo que se escribe sale del móvil o del portátil. *Ensu* funciona con modelos locales cuantizados (se citan *LFM2.5-1.6B-4bit* y *Qwen3.5-2B/4B*), es de código abierto, y está disponible para móvil y escritorio. La promesa es la de toda su familia: tu IA, tu dispositivo, tu control.",
+          "body": [
+            "La línea de *Ente* es coherente: la empresa se hizo conocida con el cifrado extremo a extremo de fotos y archivos, y ahora extiende esa postura a la IA local. *Ensu* no envía mensajes a la nube, no tiene *API key* ni cuenta de servicio externo: el modelo corre en el dispositivo y el chat se queda ahí. En el debate de *Hacker News*, la comunidad repasaba las opciones de modelo del equipo —*LFM2.5-1.6B-4bit*, *Qwen3.5-2B-8bit*, *Qwen3.5-4B-4bit*—, tamaños razonables para un móvil moderno.",
+            "Que un producto de consumo, con apps en *Google Play* y *App Store*, traiga el autoalojamiento de serie —en el sentido de «corre donde tú lo tengas»— sigue siendo una anomalía, y *Ensu* es de los pocos que la materializa. El blog de *Ente* explica el diseño, y el código vive en el repositorio público *ente-io/ente*."
+          ],
+          "tags": [
+            "ensu",
+            "ente",
+            "ia-local",
+            "privacidad"
+          ],
+          "links": [
+            {
+              "label": "Anuncio (ente.com)",
+              "url": "https://ente.com/blog/ensu"
+            },
+            {
+              "label": "Debate (Hacker News)",
+              "url": "https://news.ycombinator.com/item?id=47516650"
+            },
+            {
+              "label": "Código (GitHub)",
+              "url": "https://github.com/ente-io/ente"
+            }
+          ]
+        },
+        {
+          "title": "*NVIDIA*, *Tencent* y *Google* inundan *Hugging Face* de datos abiertos para *robotics* y simulación",
+          "summary": "La tendencia de *Hugging Face* de esta semana la dominan los datos, no los modelos: un conjunto de *datasets* de IA física creciendo a la vez —*nvidia/simready-assets* (casi 1.600 me gusta y 110.000 descargas), *nvidia/PhysicalAI-Human-1M-100K*, *nvidia/USDCraft-10K*, *tencent/TailorRig*, *HubLabs/HubEgo-100K* y *google/physical-engineerings-last-exam*. Son los cimientos del *robotics* y la simulación: movimiento humano, manufactura, *rigging* y visión egocéntrica, abiertos para quien tenga GPU y paciencia.",
+          "body": [
+            "El patrón es el de los años de los LLM, pero en *embodied*: los grandes publican volúmenes enormes de datos etiquetados y dejan que el mundo construya encima. *simready-assets* (los activos de simulación para *pick-and-place* que ya repasamos en la edición del 15 de noviembre) va acompañado de *PhysicalAI-Human-1M-100K* (movimiento humano a gran escala) y *USDCraft-10K* (manufactura), mientras el *rigging* de *Tencent* y la visión egocéntrica de *HubLabs* redondean el surtido.",
+            "Para la comunidad de autoalojadores la lectura es doble: por un lado, ya hay datos abiertos para entrenar y evaluar modelos de manipulación y simulación sin comprar nada; por otro, el tamaño de estos conjuntos recuerda que la IA física será, como la de lenguaje, un juego de quien tenga los datos y la GPU. El punto de partida, al menos, es libre."
+          ],
+          "tags": [
+            "datasets",
+            "ia-fisica",
+            "robotics",
+            "nvidia"
+          ],
+          "links": [
+            {
+              "label": "nvidia/simready-assets (Hugging Face)",
+              "url": "https://huggingface.co/datasets/nvidia/simready-assets"
+            },
+            {
+              "label": "nvidia/PhysicalAI-Human-1M-100K",
+              "url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Human-1M-100K"
+            },
+            {
+              "label": "nvidia/USDCraft-10K",
+              "url": "https://huggingface.co/datasets/nvidia/USDCraft-10K"
+            }
+          ]
+        },
+        {
+          "title": "La guía de *Hugging Face* para afinar modelos de generación 3D con *LoRA*",
+          "summary": "El equipo de *Hugging Face* ha publicado, con su correspondiente vídeo, la que titularon «la guía definitiva» para afinar modelos de generación 3D con *LoRA*: cómo preparar los propios objetos, configurar el ajuste fino, entrenar y evaluar, sin reentrenar el modelo base. El objetivo típico: adaptar un generador 3D a un estilo o a una familia de objetos propios, el tipo de trabajo que antes exigía meses y ahora cabe en una tarde de GPU.",
+          "body": [
+            "La publicación llega con demo y vídeo, y se ha repartido en *r/computervision* con el tono de «aquí tenéis el manual». El valor, como en las guías de afinación de imagen, está en el *how*: la receta de datos, los parámetros que de verdad importan y los errores típicos, aplicados al dominio 3D, el menos documentado de todos los generativos.",
+            "Es una de esas guías de plataforma que acortan la curva: quien quiera dar a su generador 3D el aspecto de sus propios objetos ya no tiene que recomponer la receta a partir de papers sueltos. *Hugging Face* vuelve a ocupar su papel de lugar donde la comunidad documenta lo que los laboratorios solo anuncian."
+          ],
+          "tags": [
+            "lora",
+            "generacion-3d",
+            "afinacion",
+            "hugging-face"
+          ],
+          "links": [
+            {
+              "label": "Guía (Hugging Face)",
+              "url": "https://huggingface.co/blog/3d-lora-finetuning"
+            },
+            {
+              "label": "Publicación (r/computervision)",
+              "url": "https://www.reddit.com/r/computervision/comments/1xvjsdh/the_definitive_finetuning_guide_for_3d_generation/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "aside": {
+    "trending": [
+      {
+        "name": "Ssbullock/pcb-layout-llm",
+        "stars": "★ 23",
+        "desc": "*Qwen2.5-Coder-32B* afinado para el layout de placas *KiCad*: trazas, vias y despejos, con banco de 23 placas.",
+        "meta": "Python · MIT",
+        "url": "https://github.com/Ssbullock/pcb-layout-llm"
+      },
+      {
+        "name": "Moloch-AI/llm-api-benchmark",
+        "stars": "★ 17",
+        "desc": "Benchmark de *endpoints* compatibles *OpenAI*: latencia, *TTFT*, tokens por segundo y coste, sin *API key*.",
+        "meta": "Python · Apache-2.0",
+        "url": "https://github.com/Moloch-AI/llm-api-benchmark"
+      },
+      {
+        "name": "drtikov/microbrainsforagents",
+        "stars": "★ 8",
+        "desc": "Guardián de seguridad de agentes en menos de 2 ms, solo *NumPy*: *AST*, secretos, *shell*; recorta 81 % de tokens de esquemas.",
+        "meta": "Python · MIT",
+        "url": "https://github.com/drtikov/microbrainsforagents"
+      },
+      {
+        "name": "ranajahanzaib/agent-egress-firewall",
+        "stars": "★ 3",
+        "desc": "Proxy de egreso local para agentes: detecta, enmascara y bloquea datos sensibles con *GLiNER* en *ONNX*.",
+        "meta": "Python · MIT",
+        "url": "https://github.com/ranajahanzaib/agent-egress-firewall"
+      },
+      {
+        "name": "IlkhamFY/sanity",
+        "stars": "★ 2",
+        "desc": "Pipeline multiagente que verifica errores matemáticos en cadenas largas de razonamiento con CAS y *Lean*.",
+        "meta": "Python · MIT",
+        "url": "https://github.com/IlkhamFY/sanity"
+      }
+    ],
+    "papers": [
+      {
+        "title": "TeleChat to Xing4: Advancing Frontier Agentic Models on Domestic Chips and Frameworks",
+        "authors": "131 upvotes",
+        "url": "https://arxiv.org/abs/2611.22115"
+      },
+      {
+        "title": "AscendGYM: A Cost-Aware Benchmark for Kernel Optimization on Ascend NPU",
+        "authors": "83 upvotes",
+        "url": "https://arxiv.org/abs/2611.17621"
+      },
+      {
+        "title": "TCP4D: A Unified Tool-Center-Point Tracking and Generation Model for Robot Manipulation",
+        "authors": "22 upvotes",
+        "url": "https://arxiv.org/abs/2611.23143"
+      },
+      {
+        "title": "FastFrames: Video Generation at Interactive Latency",
+        "authors": "17 upvotes",
+        "url": "https://arxiv.org/abs/2611.23226"
+      },
+      {
+        "title": "Heave-Ho: Decentralized Long-Horizon Multi-Humanoid Collaboration",
+        "authors": "12 upvotes",
+        "url": "https://arxiv.org/abs/2611.22275"
+      }
+    ],
+    "community": [
+      {
+        "src": "ente.com",
+        "title": "Ensu: el chat de IA local y privado de Ente",
+        "note": "Un chat que no saca tus datos del dispositivo, en móvil y escritorio.",
+        "url": "https://ente.com/blog/ensu"
+      },
+      {
+        "src": "Hugging Face",
+        "title": "La guía definitiva de afinación 3D con LoRA",
+        "note": "Adapta un generador 3D a tus propios objetos sin reentrenar el modelo.",
+        "url": "https://huggingface.co/blog/3d-lora-finetuning"
+      },
+      {
+        "src": "Hugging Face",
+        "title": "Los datasets abiertos de IA física inundan la tendencia",
+        "note": "Movimiento humano, manufactura, rigging: los cimientos del robotics y la simulación.",
+        "url": "https://huggingface.co/datasets/nvidia/simready-assets"
+      }
+    ]
+  },
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio",
+      "el skill moss-image-news-illustration (https://github.com/jgbarahbot/moss-image-news-illustration) — la ilustración de la portada"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

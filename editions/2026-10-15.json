@@ -1,0 +1,179 @@
+{
+  "date": "15 de octubre de 2026",
+  "weekday_long": "jueves",
+  "edition": "Edición nº 19",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "LiquidAI estrena LFM2.5-24B-A2B: un MoE de 24B con solo 2B activos para agentes locales y privados",
+    "summary": "LiquidAI ha publicado LFM2.5-24B-A2B, el modelo más grande de su familia LFM: un MoE de 24 parámetros totales con solo 2B activos por token, diseñado para agentes rápidos y privados que corren en el dispositivo. Al activar una pequeña fracción de los pesos por token, la inferencia es mucho más barata que en un denso de tamaño equivalente, mientras el modelo entero aporta el conocimiento. LiquidAI lo empuja como el modelo para agentes on-device: chat, uso de herramientas y razonamiento sin mandar nada a la nube, con pesos abiertos bajo licencia Apache 2.0 y en inglés, árabe y chino. Se complementa con su rama de «decision models» para el edge (d1) y refuerza la corriente de MoEs ligeros pensados para correr en laptops, móviles y SBCs.",
+    "tags": ["open-weights", "moe", "on-device", "agents", "apache-2.0"],
+    "links": [
+      {"label": "Hugging Face", "url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B"},
+      {"label": "Blog de LiquidAI", "url": "https://huggingface.co/blog/LiquidAI/lfm25-24b-a2b"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "HiRO-ACEv2: el AI2 emula clima extremo global a 3 km por una fracción del coste",
+          "summary": "El Allen Institute for AI ha publicado HiRO-ACEv2, un emulador climático que simula la atmósfera mundial a 100 km de resolución de forma autoregresiva y luego la desciende a 3 km con un nuevo modelo de downscaling (HiROv2). El resultado: simulaciones de eventos meteorológicos extremos a alta resolución con un coste unos 300 veces menor que las simulaciones numéricas clásicas, algo clave para estudiar huracanes e inundaciones sin supercomputadoras. El sistema se documenta en un paper y es de código abierto en el ecosistema de AI2.",
+          "tags": ["climate", "scientific-ml", "open-source", "research"],
+          "links": [
+            {"label": "Blog del AI2", "url": "https://huggingface.co/blog/allenai/hiro-acev2"},
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.17693"}
+          ]
+        },
+        {
+          "title": "JEV-35B: un decision model abierto para decisiones tipadas y calibradas",
+          "summary": "autotrust/JEV-35B es un modelo de decisión de 35B basado en Qwen3.5-MoE que se une a la corriente de «decision models»: no genera texto libre, devuelve decisiones tipadas con probabilidades calibradas sobre un esquema de opciones. Es compatible con los esquemas Jev y SystemOne, la misma familia que el Clef de Cloudflare y el d1 de LiquidAI, y apunta a decisiones automatizadas repetibles y auditables en producción.",
+          "tags": ["decision-models", "open-weights", "calibration", "moe"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/autotrust/JEV-35B"}
+          ]
+        },
+        {
+          "title": "drama-3 de Fish Audio: TTS multilingüe de varios hablantes y emoción",
+          "summary": "Fish Audio ha publicado drama-3, un modelo de text-to-speech con varios hablantes, edición de audio y generación de voz con emoción, en chino, inglés, japonés, coreano y español. Está en la familia fish_omni y se orienta a producción de contenido hablado (audiolibros, doblaje, podcasts) con control sobre quiénes hablan y cómo lo dicen. Una pieza más en la oferta de TTS de pesos abiertos.",
+          "tags": ["tts", "multilingual", "multi-speaker", "open-weights"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/fishaudio/drama-3"}
+          ]
+        },
+        {
+          "title": "Underdog-Saluki-27B: un Qwen3.8-27B a 2 bits para agentes con tool-calling",
+          "summary": "ConwayResearch ha publicado Underdog-Saluki-27B-1.0, un cuantizado a 2 bits (GSQ-RCO-GGUF) de Qwen3.8-27B optimizado para llamados de herramientas y agentes, ya con más de 300.000 descargas. Corre en llama.cpp en hardware modesto, lo que lo convierte en una vía práctica para montar agentes con razonamiento y tool-calling en equipos locales sin GPU de gama alta.",
+          "tags": ["gguf", "llama.cpp", "agents", "quantization", "local-llm"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/ConwayResearch/Underdog-Saluki-27B-1.0"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "Local_AI_esp32: un modelo entrenado desde cero que corre en un ESP32-S3",
+          "summary": "mmm1712/Local_AI_esp32 lleva el límite de «local» hasta el extremo: un lenguaje model entrenado desde cero y corriendo de forma totalmente offline en un ESP32-S3 con pantalla táctil e interfaz de chat. No es un LLM grande, pero demuestra que la inferencia local ya llega a la electrónica embarcada, con cero nube y cero coste de suscripción.",
+          "tags": ["edge", "embedded", "local-llm", "open-source"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/mmm1712/Local_AI_esp32"}
+          ]
+        },
+        {
+          "title": "open_rknpu2_lm_infer: inferencia de LLMs en el NPU del RK3588, todo abierto",
+          "summary": "happyme531/open_rknpu2_lm_infer es un motor de inferencia de LLMs de código completamente abierto para el NPU del RK3588, el SoC de los SBCs de Rockchip. Es una de las pocas opciones reales de correr modelos locales en el acelerador dedicado de estas placas, en lugar de exprimir la CPU, y está escrito en Rust.",
+          "tags": ["inference", "edge", "npu", "open-source", "rust"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/happyme531/open_rknpu2_lm_infer"}
+          ]
+        },
+        {
+          "title": "Omnicrab: un TUI para orquestar tus cuentas de IA y modelos locales",
+          "summary": "Omnicrab (xn0kkx) es una interfaz de terminal para chatear, comparar y orquestar muchas cuentas de IA y modelos locales a la vez, con almacenamiento cifrado en PostgreSQL. Pensado para quien maneja varios proveedores (APIs, Ollama, llama.cpp) y quiere un panel único, privado y local para elegir qué modelo responde a cada cosa.",
+          "tags": ["local-llm", "tui", "self-hosting", "orchestration"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/xn0kkx/Omnicrab"}
+          ]
+        },
+        {
+          "title": "Agentic-Soft-Token: compresión de contexto dentro del modelo, sin reentrenar",
+          "summary": "Agentic-Soft-Token (ASTC) propone una compresión de contexto «training-free» para agentes de largo horizonte: se comprime la memoria del agente dentro del propio modelo, en vez de sumar capas o reentrenar. Es una alternativa práctica al problema de los contextos que crecen sin límite en sesiones largas de agentes.",
+          "tags": ["agents", "context-compression", "long-horizon", "training-free"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/Hxnng/Agentic-Soft-Token"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "Cortex: consolidar el contexto en memoria paramétrica",
+          "summary": "Cortex aborda una limitación clásica: lo que un LLM aprende de su contexto se pierde cuando el contexto se retira. Inspirándose en la consolidación de la memoria biológica, formula la «Memory Consolidation» como el proceso de internalizar en los parámetros del modelo las ganancias que provienen del contexto, preservando al mismo tiempo el conocimiento previo. El paper fue uno de los más votados del día en Hugging Face Papers.",
+          "tags": ["memory", "context", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.20399"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.20399"}
+          ]
+        },
+        {
+          "title": "SWEeper-Bench: ¿pueden los agentes encontrar bugs en software interactivo?",
+          "summary": "SWEeper-Bench introduce un benchmark para medir si los agentes de código pueden descubrir bugs en software interactivo generado al vuelo. El problema: muchos fallos solo se manifiestan tras interacciones de varios pasos, y hoy el usuario es el que los descubre. El benchmark evalúa la capacidad del agente de encontrarlos él mismo, un paso más en la madurez de los agentes que construyen software.",
+          "tags": ["agents", "benchmark", "testing", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.14096"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.14096"}
+          ]
+        },
+        {
+          "title": "τ-Emotion-Bench: la fragilidad de los agentes ante emociones reales de usuario",
+          "summary": "τ-Emotion-Bench (publicado ayer) muestra que los agentes de LLMs no solo fallan por errores de uso de herramientas, sino por interacciones ineficaces con usuarios reales. Los benchmarks actuales asumen usuarios cooperativos y estables; este introduce emociones del mundo real en tareas largas de tool-calling y expone la fragilidad de los agentes cuando el usuario se frustra, cambia de opinión o se equivoca.",
+          "tags": ["agents", "benchmark", "evaluations", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.19560"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.19560"}
+          ]
+        },
+        {
+          "title": "SkillMarker: marcar la propiedad de las skills de agentes",
+          "summary": "SkillMarker propone un método de marca de agua basado en KGW (knowledge graph watermarking) para verificar la propiedad de las «skills» de los agentes: procedimientos operativos y conocimiento de dominio empaquetados como activos reutilizables. Al distribuirse en texto plano, son vulnerables a la copia; el paper propone un mecanismo práctico de verificación de propiedad para ese tipo de conocimiento.",
+          "tags": ["agents", "watermarking", "ip", "research"],
+          "links": [
+            {"label": "arXiv", "url": "https://arxiv.org/abs/2610.15725"},
+            {"label": "Hugging Face Papers", "url": "https://huggingface.co/papers/2610.15725"}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "AutoIllustrate de Sakana AI: figuras editables para papers, generadas por agentes",
+          "summary": "AutoIllustrate (SakanaAI) convierte la sección de métodos de un paper en figuras editables de draw.io listas para publicar, usando agentes de LLMs. Es una herramienta práctica para quien escribe artículos y quiere diagramas limpios y editables sin dibujarlos a mano, y un buen ejemplo de agentes aplicados al flujo de trabajo académico.",
+          "tags": ["agents", "research", "visualization", "open-source"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/SakanaAI/AutoIllustrate"}
+          ]
+        },
+        {
+          "title": "MiMo-V2.6-RL-oss: Xiaomi abre sus datos de RL del modelo MiMo",
+          "summary": "Xiaomi MiMo ha publicado MiMo-V2.6-RL-oss, un conjunto de datos de refuerzo (parquet, Apache 2.0) con documentos, imágenes y texto usados en el entrenamiento RL de MiMo V2.6. Abrir los datos de RL no es habitual: es material valioso para quien entrena o investiga en RL con modelos abiertos, y llega con más de 139.000 descargas.",
+          "tags": ["datasets", "reinforcement-learning", "open-source", "xiaomi"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/datasets/XiaomiMiMo/MiMo-V2.6-RL-oss"}
+          ]
+        },
+        {
+          "title": "tiktok-5.6B-videos: medio billón de vídeos de TikTok como dataset",
+          "summary": "datasocial/tiktok-5.6B-videos publica 5.600 millones de vídeos de TikTok en Parquet (licencia CC-BY-NC 4.0), entre uno y diez billones de registros, con metadatos y texto. Es uno de los datasets de vídeo más grandes del momento, útil para investigación de vídeo y recomendación, con la salvedad de la licencia no comercial.",
+          "tags": ["datasets", "video", "research", "cc-by-nc"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/datasets/datasocial/tiktok-5.6B-videos"}
+          ]
+        },
+        {
+          "title": "Yet-Another-Translator: traduce tu Discord con un LLM local",
+          "summary": "Yet-Another-Translator (vempx) es un bot de Discord que traduce mensajes automáticamente usando un LLM local: puede traducir por mensaje, todo el canal, o antes de enviar, con contexto y glosarios editables. Es una de las formas más sencillas de probar traducción privada en un grupo, sin pasar por servicios en la nube.",
+          "tags": ["local-llm", "translation", "self-hosting", "discord"],
+          "links": [
+            {"label": "GitHub", "url": "https://github.com/vempx/Yet-Another-Translator"}
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

@@ -1,0 +1,420 @@
+{
+  "date": "25 de octubre de 2026",
+  "weekday_long": "domingo",
+  "edition": "Edición nº 29",
+  "tagline": "pesos abiertos, software libre para IA y mucho más: resumen para quienes estamos obesionados con estos temas",
+  "lead": {
+    "title": "*Spark-X2.6-4B*: un millón de *tokens* de contexto y un presupuesto de razonamiento de tres niveles en un LLM de 4.000 millones de parámetros",
+    "summary": "*XHToken* (la familia *Tokenspark*) ha publicado *Spark-X2.6-4B*: 4.000 millones de parámetros con licencia *Apache 2.0*, bilingüe (inglés y chino), y una ficha orientada de cara a los agentes *on-device*: un millón de *tokens* de contexto, un presupuesto de razonamiento configurable en tres niveles, y cuantizaciones *GGUF* de la comunidad disponibles desde el primer día para *Ollama*.",
+    "body": [
+      "El salto de generación llega sin tocar la arquitectura: *Spark-X2.6-4B* conserva exactamente el mismo diseño que *Spark-X2.5-4B* y gana capacidad por post-entrenamiento sobre su modelo base (*Spark-X2.6-4B-Base*). La tarjeta lo presenta como la generación más reciente de la línea compacta de la familia, y el *README* resume la premisa: «un poco más de un mes» desde *X2.5*, «tiempo suficiente para repensar, refinar y empujar la frontera». Las mejoras se concentran justo donde un modelo de cuatro mil millones de parámetros más capaz resulta útil en local: *coding*, trabajo agéntico con *tools* complejas y planificación multietapa, contexto largo, multilingüe y razonamiento.",
+      "El dato que más resalta en la ficha es el contexto: un millón de *tokens* —concretamente 1.048.576, la ventana que la configuración de referencia de *SGLang* levanta como *context-length*. En *BenchLM*, donde la tarjeta se publicó, el modelo aparece con «1M context» y figura como el actual récord entre los modelos de pesos abiertos para razonamiento. No es un detalle menor: un millón de *tokens* permite cargar un repositorio entero, un manual de cientos de páginas o una conversación larguísima sin resumir antes, algo que hasta este año era el privilegio de modelos de decenas de miles de millones de parámetros. La tarjeta añade además que la eficiencia de inferencia *on-device* está a la altura o por encima de los comparables de su clase —cita *Qwen3.5-4B* y *Gemma-E4B* como referencia—, de modo que ese millón de *tokens* no tiene por qué costar en latencia lo que uno esperaría.",
+      "La segunda novedad es el presupuesto de razonamiento explícito: tres niveles configurables —ninguno, bajo y alto— que la aplicación elige en cada solicitud para equilibrar calidad, latencia y coste de inferencia. El razonamiento va activado por defecto, tanto por la plantilla de *chat* como por el *reasoning-parser* de *Qwen3*, y se puede apagar por consulta con una única bandera (*enable_thinking*) en los *kwargs* de la plantilla. En un equipo de consumo, esa palanca es lo que separa «responde en dos segundos sin pensar» de «gasta un minuto de cómputo en una tarea difícil»: decide la aplicación, no el modelo a ciegas.",
+      "Servirlo es igualmente directo para quien ya trabaja con *SGLang*: la imagen de referencia levanta un servidor *OpenAI*-compatible con el *tool-call-parser* propio de la familia y salida por defecto de hasta 131.072 *tokens* nuevos. La muestra del repo va al grano: una pregunta en chino («¿dónde está la capital de Anhui?») a la que el modelo responde en el mismo idioma —recordatorio de que la ficha declara bilingüe inglés y chino, y de que el bilingüismo de verdad importa para un modelo de bolsillo orientado al mercado chino, de donde sale la familia—. La cuantización *GGUF* de la comunidad (*abenzerps/Spark-X2.6-4B-Quantized*) apareció el primer día, con ya 1.317 descargas, y el hilo de *r/LocalLLaMA* recoge las primeras impresiones corriendo el modelo con *Ollama*.",
+      "En *benchmarks* el equipo lo sitúa como el mejor de su clase entre modelos de tamaño comparable, empatando o superando a modelos de 9.000 millones de parámetros en varias pruebas de *coding*, matemáticas y conocimiento; la comparativa completa va en la ficha, frente a los principales *on-device* de su tamaño. La recepción en *Hugging Face* fue inmediata: 467 *me gusta* y 3.488 descargas desde su publicación del 19 de octubre, apenas una semana antes. Con *Apache 2.0* no hay restricciones de uso comercial, y se repite el patrón de la familia: un modelo que cabe en una *GPU* de sobremesa, con el contexto de una frontera que hace poco solo se veía en modelos de otro tamaño.",
+      "La familia lleva tres versiones en menos de un año, y el ritmo sugiere que la siguiente no está lejos; el repositorio del checkpoint base y los canales oficiales de la familia (Slack, Discord, YouTube) dejan la puerta abierta a quien quiera seguir la línea. Si hay un candidato claro para «el *on-device* de pesos abiertos que mejor razona por parámetro» en esta edición, es este."
+    ],
+    "tags": [
+      "spark-x2-6-4b",
+      "xhtoken",
+      "tokenspark",
+      "4b",
+      "open-weights",
+      "apache-2-0",
+      "1m-context",
+      "reasoning",
+      "on-device",
+      "gguf"
+    ],
+    "links": [
+      {
+        "label": "Hugging Face — XHToken/Spark-X2.6-4B",
+        "url": "https://huggingface.co/XHToken/Spark-X2.6-4B"
+      },
+      {
+        "label": "Hugging Face — cuantización GGUF (abenzerps/Spark-X2.6-4B-Quantized)",
+        "url": "https://huggingface.co/abenzerps/Spark-X2.6-4B-Quantized"
+      },
+      {
+        "label": "BenchLM — Spark-X2.6-4B (benchmarks y contexto)",
+        "url": "https://benchlm.ai/models/spark-x2-6-4b"
+      },
+      {
+        "label": "Hilo en r/LocalLLaMA",
+        "url": "https://www.reddit.com/r/LocalLLaMA/comments/1xb0nr9/xhtokensparkx264b_hugging_face/"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "*DeepSeek-V4.1-Flash-1017*: más razonamiento y más *coding* con menos *tokens* de salida",
+          "summary": "*DeepSeek-AI* acaba de publicar *DeepSeek-V4.1-Flash-1017*, una actualización menor de *DeepSeek-V4.1-Flash* que mejora razonamiento, *coding*, tareas agénticas y visión, y que al mismo tiempo reduce el tiempo de ejecución y la longitud de la salida: menos coste por tarea, en la misma línea de pesos abiertos y licencia *MIT*, con contexto de un millón de *tokens*.",
+          "body": [
+            "La tabla del *README* lo cuenta mejor que el resumen: *Terminal-Bench* 4.0 pasa de 31,2 a 42,3; *DeepSWE* v1.1 de 74,2 a 77,0; *ProgramBench* de 20,3 a 29,1; *Automation-Bench* v1.0.6 de 54,8 a 60,5. En *HLE* sin *tools* sube de 36,8 a 42,6 (44,0 con *tools*), y en *Apex* v1.1 de 64,6 a 72,1. Frente a *GPT-5.6 Sol* y *Opus 5* sigue por detrás en *HLE*, pero la distancia se estrecha, y el *README* subraya el matiz que le interesa: a más rendimiento, el modelo tarda menos y genera menos, «avanzando la frontera de *Pareto* de rendimiento-coste en varios *harness* de agentes».",
+            "La publicación incluye además dos piezas de ingeniería que los equipos de *self-hosting* agradecen: una *encoding* de referencia en *Python* (con casos de prueba de *chat* multi-turno, llamadas a *tools*, modo de razonamiento y mensajes de sistema a mitad de conversación) y *deepseek-recipe*, un conjunto de librerías de *Rust* con *bindings* de *Python* que convierte *Messages*, *Chat Completions* y *Responses* al formato interno de *DeepSeek* y parsea la salida. Parámetros recomendados: *temperature* 1,0, *top_p* 1,0, ventana de un millón de *tokens* y salida de 256 mil *tokens* o más. El informe técnico completo viaja con el repo."
+          ],
+          "tags": [
+            "deepseek-v4-1-flash",
+            "mit",
+            "1m-context",
+            "agents",
+            "rust"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face — deepseek-ai/DeepSeek-V4.1-Flash-1017",
+              "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+            },
+            {
+              "label": "Informe técnico (PDF en el repo)",
+              "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/main/DeepSeek_V41_Tech_Report.pdf"
+            }
+          ]
+        },
+        {
+          "title": "*Kromoss*: el *fine-tune* completo de *MOSS-Image-Base* que baja la generación de 50 a 8 pasos",
+          "summary": "*lodestones/Kromoss* es un *fine-tune* completo (no un *LoRA*) de *MOSS-Image-Base* a 1024px: mismo modelo de difusión, mismo codificador de texto (*Qwen3.5-9B*) y mismo *VAE* que el *SFT* de la familia, de modo que es un reemplazo directo. Se entrega en *bf16* e *int8* (variante *ConvRot*), y trae dos *LoRA* turbo de 8 pasos destilados del modelo base (*DMD2* y *DMD*) que, con *CFG* en 1 y sin rama negativa, llevan la generación de 50 pasos a 8. Tiene 21.143 descargas y 256 *me gusta* en *Hugging Face*.",
+          "body": [
+            "El *fine-tune* completo es la clave: al ser un re-entrenamiento del modelo de difusión (no un *LoRA* encima), *Kromoss* conserva la misma interfaz y el mismo ecosistema *ComfyUI* de *MOSS-Image-Base*, con la diferencia de que la velocidad de generación se multiplica por más de seis. Dos *LoRA* turbo (*DMD2* y *DMD*) se incluyen, destilados ambos del modelo base, y permiten pasar de 50 pasos a 8, con *CFG* en 1 y sin rama negativa. Las variantes *bf16* e *int8* cubren la mayor parte del hardware de *GPU* de consumo, y en *ComfyUI* el cambio es de un fichero: sustituyes el modelo de difusión y añades el *LoRA*."
+          ],
+          "tags": [
+            "kromoss",
+            "moss-image",
+            "lodestones",
+            "finetune",
+            "comfyui",
+            "diffusion",
+            "turbo"
+          ],
+          "links": [
+            {
+              "label": "Hugging Face — lodestones/Kromoss",
+              "url": "https://huggingface.co/lodestones/Kromoss"
+            },
+            {
+              "label": "Hugging Face — Comfy-Org/MOSS-Image (el base)",
+              "url": "https://huggingface.co/Comfy-Org/MOSS-Image"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Agentes libres",
+      "notes": [
+        {
+          "title": "*checkmate*: el modo «la meta en el menor número de jugadas» para agentes de *coding*",
+          "summary": "*rover-001/checkmate* (JavaScript, licencia *MIT*) es un modo orientado a objetivos para agentes de *coding*: en lugar de generar conversación, el agente identifica en silencio la «condición de victoria» del usuario, toma el camino más corto que la satisface, gasta el menor número de *tokens* posible y verifica la solución contra los requisitos y los *tests* antes de declarar terminado. Sin preámbulos, sin resúmenes, sin ofertas de cierre no solicitadas.",
+          "body": [
+            "El *README* lo describe como «un modo que le da al agente de *coding* una personalidad obstinada y orientada a objetivos», y lo ilustra con el ejemplo típico: «añade una función *slugify*» —el agente estándar responde con un preámbulo conversacional y una batería de opciones; con *checkmate* el agente va directo a la solución mínima verificada. El enfoque «el camino más corto que completa la tarea» es el tipo de *mode* que los equipos de agentes de código van a querer inyectar en su pipeline, y encaja en cualquier *harness* que permita añadir *instructions* extra."
+          ],
+          "tags": [
+            "checkmate",
+            "rover-001",
+            "coding-agent",
+            "goal-driven",
+            "mit",
+            "fewest-moves"
+          ],
+          "links": [
+            {
+              "label": "GitHub — rover-001/checkmate",
+              "url": "https://github.com/rover-001/checkmate"
+            }
+          ]
+        },
+        {
+          "title": "*web3-agent-skills*: un *pack* de *skills* y *MCP* que convierte tu agente en billetera y cazador de *bounties*",
+          "summary": "*doomsday-network/web3-agent-skills* (Python) es un *pack* «drop-in» de *SKILL.md*, *.cursorrules*, *CLAUDE.md*, *AGENTS.md* y un *MCP* remoto (*.mcp.json*) para *Claude Code*, *Cursor*, *Windsurf*, *Cline* y compañía: se instalan los *skills* y tu agente ya puede manejar *USDC*, *wDOOM* y *ERC-20*. El proyecto hermano, *github-bounty-scanner* (MIT, 10 estrellas), es el agente que lo usa: escanea *GitHub* buscando *bounties* reales de *crypto/USDC/wDOOM*, con *escrow* *on-chain* y un filtro específico de trampas de *scrapers* falsos.",
+          "body": [
+            "El enfoque es el de «*skills* para agentes» que está ganando espacio: cada *skill* es un fichero de *markdown* con las instrucciones que el *LLM* carga cuando la tarea toca *Web3*, y el *MCP* remoto expone las *tools* de *wallet*, escaneo y *escrow*. La diferencia con un *tool* clásico de *Web3* —que te obliga a cambiar de *app*— es que el *pack* se integra en el agente que ya estás usando. El escáner de *bounties* (el que de verdad es un agente autónomo) se centra en un problema concreto de ese mercado: la gran mayoría de los *bounties* que un *scraper* encuentra son *traps*; aquí el *matching* de lo real y el verificado *on-chain* van separados de lo que el modelo puede alucinar."
+          ],
+          "tags": [
+            "web3-agent-skills",
+            "doomsday-network",
+            "claude-code",
+            "cursor",
+            "mcp",
+            "skills",
+            "bounty-scanner"
+          ],
+          "links": [
+            {
+              "label": "GitHub — doomsday-network/web3-agent-skills",
+              "url": "https://github.com/doomsday-network/web3-agent-skills"
+            },
+            {
+              "label": "GitHub — doomsday-network/github-bounty-scanner",
+              "url": "https://github.com/doomsday-network/github-bounty-scanner"
+            }
+          ]
+        },
+        {
+          "title": "*secbrief*: un *briefing* diario de vulnerabilidades donde la IA solo explica — el *matching* es determinista",
+          "summary": "*tenhkspark/secbrief* (Python, MIT) genera un *briefing* de vulnerabilidades cada pocas horas para máquinas gestionadas por agentes de IA: le dices a tu agente «vigila mis máquinas», el agente lo instala, y desde ahí un *briefing* generado por máquina te cuenta qué cambió y qué necesita atención. La clave de diseño: el *matching* contra *OSV* y *CISA KEV* es 100% determinista y auditable; el *LLM* no decide nada, solo explica.",
+          "body": [
+            "La configuración toma unos cinco minutos y no pide *API keys* ni cuentas: *secbrief.py init* crea un *config.json* con tus *hosts* *SSH* y tus entornos *Python*, y desde ahí un *cron* o *launchd* lo ejecuta cada seis horas. El *briefing* muestra la *diff* contra la *baseline*: nuevas vulnerabilidades en los paquetes que tienes instalados de verdad (*PyPI* vía *purl*, *Ubuntu/Debian* vía *pkg:*, a partir del índice *OSV.dev* y la lista de *CISA KEV*), con la explicación en lenguaje natural generada por el *LLM*. El comando *doctor* dice si el *scanner* está sano y cuándo tuvo éxito por última vez. El patrón «la máquina decide, la IA comunica» es el que va ganando terreno cuando se mete un *LLM* en un ciclo de parches: si el modelo se equivoca al explicar, el aviso subyacente sigue verificable por su identificador *CVE*."
+          ],
+          "tags": [
+            "secbrief",
+            "tenhkspark",
+            "osv",
+            "cisa-kev",
+            "vulnerabilities",
+            "deterministic",
+            "mit"
+          ],
+          "links": [
+            {
+              "label": "GitHub — tenhkspark/secbrief",
+              "url": "https://github.com/tenhkspark/secbrief"
+            }
+          ]
+        },
+        {
+          "title": "*agent-loop-visualizer*: cómo va por dentro el *loop* de un agente, paso a paso y en tu máquina",
+          "summary": "*cyyeh/agent-loop-visualizer* (Python, *Apache 2.0*) es un proyecto de aprendizaje que dibuja en una página cada paso del *loop* de un agente de IA: el modelo propone una *action*, el *harness* la ejecuta, se observa el resultado, y así hasta que el modelo decide parar — hasta el *token* que el modelo escribe. Corre en tu máquina con *transformers*, eligiendo entre *google/gemma-4-E2B-it* o *Qwen/Qwen3.5-0.8B*, con *decodificación especulativa MTP* para *Gemma 4 E2B*. Cada parte de la página se corresponde con una sección de la unidad 01 de *Agent Atlas*, el curso del que forma parte.",
+          "body": [
+            "Un *chatbot* solo muestra la pregunta y la respuesta; esto muestra el mecanismo completo, que es justo lo que falta para entender por qué un agente «se va» de contexto o se repite en *tools*. La sección «*Experiments to try*» convierte las ideas en cosas que puedes probar tú mismo en local. Con 14 estrellas, es el tipo de recurso didáctico de agentes que la comunidad estaba esperando, y una puerta de entrada amable a la serie *Agent Atlas*."
+          ],
+          "tags": [
+            "agent-loop-visualizer",
+            "cyyeh",
+            "gemma-4-e2b",
+            "qwen3-5-0-8b",
+            "mtp",
+            "agent-atlas",
+            "apache-2-0"
+          ],
+          "links": [
+            {
+              "label": "GitHub — cyyeh/agent-loop-visualizer",
+              "url": "https://github.com/cyyeh/agent-loop-visualizer"
+            },
+            {
+              "label": "Agent Atlas (el curso)",
+              "url": "https://cyyeh.github.io/agent-atlas-learning/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software libre para IA",
+      "notes": [
+        {
+          "title": "*arx* (*arxiv-cli*): un cliente de *arXiv* en *Rust* para agentes, en un solo binario y una línea por *paper*",
+          "summary": "*hieu-lee/arxiv-cli* (Rust, 14 estrellas) es un cliente de *arXiv* diseñado para agentes LLM que consultan *arXiv* repetidamente: un binario, salida densa, muchas *actions* por invocación, todo en paralelo. *arx -h* son unos 500 *tokens* (sin *schemas* de *tools* que cargar, sin sobre de *JSON-RPC*), y la salida por defecto es una línea por *paper* (*id*·*fecha*·*autores*·*categoría*·*título*), con columnas vacías descartadas y autores por iniciales. Un binario estático con *mimalloc* y *LTO*, *parsers* propios de *Atom*/*HTML*/*TeX*, *HTTP/2* con concurrencia acotada y caché en disco; las llamadas a la *API* se limitan a la política de *arXiv* de una petición cada tres segundos, con *retry/backoff* en 429/5xx.",
+          "body": [
+            "Para un agente que busca *papers* en cada turno, la diferencia entre 500 *tokens* de ayuda y los miles que lleva un *JSON-RPC* con *schemas* se nota en la cuenta. El diseño «pocas entradas, poca salida, rápido, educado» es el patrón de *CLI* que los agentes necesitan: *arx* «functional equation» -c *math.CA* --since 3y -n5 busca; *arx -a* «terence tao» --cat number-theory --published --q 1,2 filtra por autor difuso y cuartil de revista. Ojo: el repo aún no declara licencia, algo que la comunidad de *self-hosting* debería recordarle a su autor antes de integrarlo en nada."
+          ],
+          "tags": [
+            "arxiv-cli",
+            "arx",
+            "hieu-lee",
+            "rust",
+            "llm-agents",
+            "token-efficient"
+          ],
+          "links": [
+            {
+              "label": "GitHub — hieu-lee/arxiv-cli",
+              "url": "https://github.com/hieu-lee/arxiv-cli"
+            }
+          ]
+        },
+        {
+          "title": "*TokenBar*: todas tus cuotas de IA en una app — *Codex*, *Claude*, *Cursor* y 47 más, en cinco plataformas",
+          "summary": "*lwh0630/TokenBar* (Dart, MIT, 37 estrellas) es un monitor de cuotas de IA de código abierto y multiplataforma: *Windows*, *macOS*, *Linux*, *Android* e *iOS*. De un vistazo ves la cuota restante, el *balance*, la cuenta atrás del *reset* y si la estás quemando más rápido que el ritmo lineal, en unos 50 *services* (*Codex*, *Claude*, *Cursor*, *OpenRouter*, *DeepSeek*, *z.ai* y 44 más). Nada se queda en el medio: la app consulta el *endpoint* de cada *provider* directamente desde tu equipo, y el *sync* opcional solo recibe *snapshots* de uso, nunca credenciales.",
+          "body": [
+            "En escritorio reutiliza el *login* que tu *CLI* o *app* oficial ya guardó (solo lectura); en móvil pegas una *API key* por *provider*. El *README* dice que la inspiración fue *CodexBar* para *macOS* (*steipete*), y el objetivo es llevar esa idea a las otras plataformas, con la diferencia de cubrir medio centenar de *services* en vez de uno. Cubre ventanas de cuota de cinco horas, semanales, mensuales y por modelo, con el porcentaje restante, el *reset* proyectado y el ritmo de gasto; en el escritorio vive como icono en la bandeja y en el móvil como *widget*. Al ser de código abierto, añadir un *service* nuevo es un parche, no una suscripción."
+          ],
+          "tags": [
+            "tokenbar",
+            "lwh0630",
+            "quota-monitor",
+            "cross-platform",
+            "codex",
+            "claude",
+            "mit"
+          ],
+          "links": [
+            {
+              "label": "GitHub — lwh0630/TokenBar",
+              "url": "https://github.com/lwh0630/TokenBar"
+            },
+            {
+              "label": "CodexBar (la inspiración)",
+              "url": "https://github.com/steipete/CodexBar"
+            }
+          ]
+        },
+        {
+          "title": "*nanoserve*: un motor de inferencia *vLLM*-style en *PyTorch*, para entender cómo funciona un servidor de LLM",
+          "summary": "*cipheraxat/nanoserve* (Python, MIT) es un motor de inferencia de LLM escrito desde cero en *PyTorch*, con la misma interfaz *OpenAI*-compatible que *vLLM* pero en un solo repo: caché *KV* paginada, *continuous batching*, *chunked prefill* y caché de prefijo, más un kernel de *paged attention* en *Triton*. Su valor no es competir con *vLLM* —no va a hacerlo—, sino ser un punto de entrada legible para quien quiera entender un servidor de LLM moderno sin leer todo el código de *vLLM*.",
+          "body": [
+            "Cada una de las piezas que *vLLM* lleva por separado (*paged attention*, *continuous batching*, *chunked prefill*, *prefix caching*) está aquí en un único repo pequeño y legible, con el kernel de *paged attention* propio en *Triton* y un servidor *HTTP* *OpenAI*-compatible, de modo que cualquier cliente de la *API* de *OpenAI* puede apuntar a *nanoserve* sin cambios. Con dos estrellas es un proyecto incipiente, pero es el tipo de repo que funciona como material didáctico: si alguna vez te has preguntado por qué *vLLM* bate a *transformers* en *throughput* y no sabes dónde está el truco, aquí puedes verlo en un solo *file* de código."
+          ],
+          "tags": [
+            "nanoserve",
+            "cipheraxat",
+            "vllm-style",
+            "inference-engine",
+            "torch",
+            "triton",
+            "openai-compatible",
+            "mit"
+          ],
+          "links": [
+            {
+              "label": "GitHub — cipheraxat/nanoserve",
+              "url": "https://github.com/cipheraxat/nanoserve"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "*EvalResearchBench*: ¿puede un agente de IA construir el *feedback* que necesita para mejorar a sí mismo?",
+          "summary": "*EvalResearchBench* (Yaolun Zhang, Tianyi Xu, Yujie Zhao, Jishen Zhao, *arXiv* 2610.04184) parte de un problema práctico: la mejora recursiva de un agente (*RSI*) depende del *feedback* de evaluación, y correr *benchmarks* complejos una y otra vez es caro y ralentiza la iteración. Los expertos humanos abaratan esto eligiendo subconjuntos de *benchmarks* o diseñando *suites* compactas. El *paper* pregunta si un agente de IA puede automatizar ese diseño, e introduce *ERB*, un *benchmark* para investigación de evaluación autónoma: dado el material objetivo y las referencias de desarrollo, el agente tiene que diseñar la evaluación que va a usar.",
+          "body": [
+            "Si funciona, el *bottleneck* de la *RSI* deja de ser «correr el *benchmark* completo cada vez» y pasa a ser «el agente se hace su propio *feedback* más barato». Es un problema que los equipos que hacen *post-training* continuo llevan meses intentando resolver, y *ERB* lo convierte en una tarea medible con *data*."
+          ],
+          "tags": [
+            "evalresearchbench",
+            "rsi",
+            "recursive-self-improvement",
+            "agents",
+            "arxiv",
+            "2610-04184"
+          ],
+          "links": [
+            {
+              "label": "arXiv — 2610.04184 (EvalResearchBench)",
+              "url": "https://arxiv.org/abs/2610.04184"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2610.04184"
+            }
+          ]
+        },
+        {
+          "title": "Cuantizar un modelo de lenguaje por difusión: el grado de sensibilidad depende de la tarea y del *timestep*",
+          "summary": "*Different Tasks, Different Timesteps: Temporal Task-Aware Quantization for Diffusion Language Models* (Ofek Avivi, Eliron Rahimi, Avi Mendelson, Chaim Baskin, *arXiv* 2610.31198) estudia la cuantización de los modelos de lenguaje por difusión (DLM), cuya naturaleza iterativa de denoisado plantea retos que la cuantización de *transformers* autoregresivos no tiene. El hallazgo: la sensibilidad a la cuantización es tanto dependiente de la tarea como del *timestep* —diferentes tareas downstream muestran perfiles distintos, y dentro de una misma tarea el punto del denoisado importa—, lo que abre la puerta a esquemas de cuantización que ajusten la precisión temporalmente, en lugar de aplicar una cuantización fija a todo el modelo.",
+          "body": [
+            "El resultado importa para quien está empezando a desplegar DLM: la cuantización «a ciegas» (misma precisión en todas las capas y todos los pasos) no va a ser óptima cuando la sensibilidad varía con la tarea y con la posición del denoisado. Es el tipo de *paper* que suele preceder en unos meses a los esquemas de cuantización adaptativa que acaben llegando a las librerías de inferencia."
+          ],
+          "tags": [
+            "diffusion-language-models",
+            "quantization",
+            "dlm",
+            "arxiv",
+            "2610-31198"
+          ],
+          "links": [
+            {
+              "label": "arXiv — 2610.31198",
+              "url": "https://arxiv.org/abs/2610.31198"
+            },
+            {
+              "label": "Hugging Face Papers",
+              "url": "https://huggingface.co/papers/2610.31198"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "*APUS*: un *runtime* en *Rust* de *streaming* paginado para correr MoE de 700B+ en equipos de 24GB",
+          "summary": "*mjojo/APUS* (*Asynchronous Paged Ultra-Streaming*, licencia *Apache 2.0*) es un *runtime* de inferencia escrito en *Rust* para modelos MoE de 700B+ parámetros (*GLM-5.2* de 744B, *DeepSeek-V3*/*R1* de 671B) en equipos de consumo con 24GB de *RAM* y *GPU* modesta. En lugar de cargar el modelo entero, fija el *backbone* denso en *RAM*/*VRAM* y *streama* los expertos enrutados activos desde *NVMe* mediante bloques de 4KB alineados a página y *DMA* de *zero-copy*, que evita la caché de páginas del *SO*. Ofrece *APIs* compatibles con *OpenAI* y *Anthropic*.",
+          "body": [
+            "El argumento de fondo es la esparsidad estructural de los MoE modernos: *GLM-5.2* tiene 744B de parámetros en total (unos 346GB en *INT4*), pero por *token* se activan solo unos 40B. *APUS* explota exactamente eso: deja el *backbone* denso fijo en memoria y, para cada capa, un enrutador *Top-K* junto con un predictor «mira adelante» que emite *prefetch* asincrónicos de *NVMe* para la siguiente capa, de modo que la *I/O* va por delante del cómputo y no lo frena. Los 4KB de página alineada al *NVMe* y los *slots* de *DMA* de *zero-copy* evitan la lectura dispersa, la fragmentación del *heap* y la inanición de *I/O* del *SO*. Con una estrella todavía, es más bien una referencia de diseño: el patrón que empieza a ganar en MoE es que el cuello de botella se está moviendo de la memoria a la *I/O*, y ahí es donde una ingeniería de paginación bien hecha empieza a pagar."
+          ],
+          "tags": [
+            "apus",
+            "moe",
+            "paged-ultra-streaming",
+            "nvme",
+            "700b",
+            "self-hosting",
+            "rust",
+            "apache-2-0"
+          ],
+          "links": [
+            {
+              "label": "GitHub — mjojo/APUS",
+              "url": "https://github.com/mjojo/APUS"
+            }
+          ]
+        },
+        {
+          "title": "*survival-llm*: una biblioteca de supervivencia y un asistente de IA que funcionan sin internet",
+          "summary": "*anonnerdfrenzy/survival-llm* (7 estrellas, Python) es un asistente de IA gratuito y una biblioteca de supervivencia que corren enteramente en tu propio equipo, sin internet: preguntas cómo conservar comida en un apagón, tratar una quemadura o potabilizar agua, y responde buscando en una biblioteca *offline* de artículos de medicina, emergencias y «cómo hacer». Lo que lo diferencia es que muestra la fuente de cada respuesta —el párrafo exacto citado, con su licencia—, de modo que puedes verificar de dónde viene lo que te dice.",
+          "body": [
+            "El diseño se apoya en tres principios: *offline* y privado (el modelo y la biblioteca viven en tu equipo, las preguntas nunca salen, y una vez configurado funciona con internet cortado); trazabilidad (cada respuesta lista los artículos que leyó, con el párrafo citado resaltado y su licencia, y un botón «¿de dónde sacaste eso?» abre la fuente); y ajustable (un botón muestra todas las instrucciones que se le dicen al modelo, editables, y un límite de longitud controla la extensión). También acepta tus propios archivos —*PDF*, *Word*, *EPUB*, páginas web y texto— para que el modelo busque en el manual de tu generador, tu lista de medicamentos o tu plan familiar de emergencia. Es un ejemplo concreto de la categoría «IA local de confianza»: menos *hype*, más un caso de uso concreto resuelto con un modelo que no sube nada a la nube y te muestra el trabajo."
+          ],
+          "tags": [
+            "survival-llm",
+            "offline",
+            "rag",
+            "local-ai",
+            "traceability",
+            "python"
+          ],
+          "links": [
+            {
+              "label": "GitHub — anonnerdfrenzy/survival-llm",
+              "url": "https://github.com/anonnerdfrenzy/survival-llm"
+            }
+          ]
+        },
+        {
+          "title": "*Run-AI-Locally*: guía para principiantes más una herramienta *Windows* que elige el modelo según tu hardware",
+          "summary": "*cosmos-droid117/Run-AI-Locally* (10 estrellas, MIT) es una guía para principiantes para correr IA estilo *ChatGPT* gratis, *offline* y con privacidad en tu propio portátil, junto con una herramienta de *Windows* que inspecciona tu hardware y te da la exacta orden para ejecutar el modelo adecuado. Cubre *Windows*, *macOS* y *Linux*, y su punto de partida es *Ollama*: instala, descargas el repo, ejecutas el *script* y te sale una orden como «*ollama run qwen3:8b*».",
+          "body": [
+            "La premisa es desburocratizar el *self-hosting*: cinco minutos (instalar *Ollama*, bajar el repo, correr el *script*, charlar) y ya tienes un modelo local funcionando *offline*. La herramienta de *Windows* hace el paso que más cuesta a un principiante —¿qué modelo cabe en mi máquina?— inspeccionando la *RAM*/*VRAM* y dándote una tabla: para 8GB sugiere *Qwen3 8B* (justo) o *Gemma 3 4B*, para 16GB *Qwen3 14B*, con la regla práctica de que un modelo cuantizado *Q4* necesita su tamaño de descarga más 2-3GB de margen. No añade capacidades nuevas, pero resuelve el «no sé por dónde empezar» que es la barrera real para la mayoría de la audiencia de *self-hosting*."
+          ],
+          "tags": [
+            "run-ai-locally",
+            "ollama",
+            "beginner",
+            "self-hosting",
+            "hardware-matcher",
+            "mit"
+          ],
+          "links": [
+            {
+              "label": "GitHub — cosmos-droid117/Run-AI-Locally",
+              "url": "https://github.com/cosmos-droid117/Run-AI-Locally"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "about": "IA Abierta Hoy: el resumen diario de pesos abiertos, software libre para IA y mucho más, generado cada mañana a partir de fuentes públicas.",
+    "sources": [
+      "GitHub Trending",
+      "Hugging Face (modelos, papers, blog)",
+      "arXiv"
+    ],
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}

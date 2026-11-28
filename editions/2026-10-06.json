@@ -1,0 +1,145 @@
+{
+  "date": "6 de octubre de 2026",
+  "weekday_long": "martes",
+  "edition": "Edición nº 10",
+  "tagline": "IA de pesos abiertos y software libre, cada mañana",
+  "lead": {
+    "title": "Ai2 abre AstaBrief, el modelo de generación de informes citados de la plataforma Asta",
+    "summary": "Allen Institute for AI (Ai2) ha abierto AstaBrief, el modelo que genera informes dentro de su plataforma Asta. Se trata de un modelo de unos 8.000 millones de parámetros, abierto y descargable, pensado para un problema concreto y muy útil: a partir de una pregunta de investigación y de los fragmentos de los papers recuperados, escribe el informe completo con sus citas en una sola pasada. Es de esos modelos pequeños pero especializados que encajan perfecto en flujos de trabajo reales de investigación, donde un LLM generalista es lento o impreciso para citar fuentes. Ai2 lo acompaña con una entrada en el blog de Hugging Face explicando la decisión de abrirlo y los resultados. Para quien self-hosta, un 8B especializado en reportes citados es una pieza muy atractiva: cabe en una sola GPU decente y resuelve una tarea concreta sin depender de una API de análisis de literatura.",
+    "tags": ["modelo abierto", "informes", "investigación", "Ai2"],
+    "links": [
+      {"label": "Blog de Hugging Face (Ai2)", "url": "https://huggingface.co/blog/allenai/astabrief"},
+      {"label": "Hugging Face (perfil allenai)", "url": "https://huggingface.co/allenai"}
+    ]
+  },
+  "sections": [
+    {
+      "title": "Modelos",
+      "notes": [
+        {
+          "title": "Xing4.0-29B-A4B, el MoE agéntico que corre en una sola GPU",
+          "summary": "China Telecom AI (la serie Xing, antes TeleChat) ha publicado Xing4.0-29B-A4B, un modelo de pesos abiertos de arquitectura MoE con vocación agéntica. De sus 29.000 millones de parámetros totales solo unos 4.000 millones se activan por token, lo que le permite correr en una sola GPU manteniendo una capacidad razonable para agentes. En Hugging Face ya hay cuantizaciones GGUF de la comunidad para usarlo local. Es una muestra de lo que está llegando del este: MoE ligeros en parámetros activos, abiertos y orientados a agentes, que compiten directo por el hardware de sobremesa.",
+          "tags": ["MoE", "pesos abiertos", "agentes", "single-GPU"],
+          "links": [
+            {"label": "Hugging Face (ficha)", "url": "https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B"},
+            {"label": "GGUF (comunidad)", "url": "https://huggingface.co/Venastine-Research/Xing4.0-29B-A4B-GGUF"}
+          ]
+        },
+        {
+          "title": "Laya: clasificación multilingüe 'System 1' en CPU",
+          "summary": "Convai Innovations ha publicado Laya, un modelo de decisión que hace clasificación multilingüe en CPU con un solo paso de inferencia (single forward pass). Es un 'System 1': responde de forma inmediata, sin generar texto, sobre una base ModernBERT de unos 421 millones de parámetros y con licencia Apache 2.0. La idea es que las decisiones simples y repetitivas no necesiten un LLM grande: un cabezal de decisión rápido y barato, compatible con el formato Jev. Es de las piezas que encajan en pipelines donde el coste por inferencia y la latencia mandan, sin GPUs.",
+          "tags": ["clasificación", "CPU", "Apache 2.0", "eficiencia"],
+          "links": [
+            {"label": "Hugging Face", "url": "https://huggingface.co/convaiinnovations/laya"},
+            {"label": "GitHub (run Laya)", "url": "https://github.com/receptron/laya"}
+          ]
+        },
+        {
+          "title": "Phonon-2, el ASR abierto más preciso por debajo de 900 MB",
+          "summary": "Fermion Research ha publicado Phonon-2, un modelo abierto de reconocimiento de voz (ASR) que se presenta como el más preciso en inglés por debajo de 900 MB de tamaño. En los siete conjuntos en inglés del Open ASR Leaderboard promedia un 5,21% de error. Su tamaño lo hace ideal para correr en local o en hardware modesto, y ya hay cuantizaciones y versiones ONNX/CoreML de la comunidad. Para quien quiere una transcripción local sin subir audio a la nube, es de los candidatos más pequeños y con mejor ratio calidad/peso.",
+          "tags": ["ASR", "audio", "local", "eficiencia"],
+          "links": [{"label": "Hugging Face", "url": "https://huggingface.co/FermionResearch/Phonon-2"}]
+        },
+        {
+          "title": "Qwen-Image-2.1, generación de imágenes abierta",
+          "summary": "La familia de generación de imágenes Qwen-Image de Qwen sigue en tendencia, y Qwen-Image-2.1 acumula miles de likes en Hugging Face. Es un modelo abierto de generación de imágenes que la comunidad ya está cuantizando a GGUF para usarlo en local, sin depender de una API de pago. Encaja en la corriente de llevar la generación de imágenes de vuelta al hardware propio: se descarga, se cuantiza y se ejecuta en casa. Para quien hace prototipos de imagen o necesita una generación sin nube, es de las referencias abiertas a vigilar.",
+          "tags": ["imágenes", "generación", "Qwen", "open-weight"],
+          "links": [{"label": "Hugging Face", "url": "https://huggingface.co/Qwen/Qwen-Image-2.1"}]
+        }
+      ]
+    },
+    {
+      "title": "Agentes y software",
+      "notes": [
+        {
+          "title": "ThinkingBox: 'el agente dijo que estaba hecho. La base de datos, que no'",
+          "summary": "Microsoft y Hugging Face publican ThinkingBox, un enfoque para evaluar agentes empresariales sobre el estado real de la base de datos, no sobre la confidencia con la que el agente dice que ha terminado. El argumento central es que un agente 'confiado' puede afirmar que una tarea está hecha cuando el estado del sistema no lo respalda: hay que comprobar el estado, no el mensaje. Se acompaña del conjunto de datos ThinkingBox-Bench en Hugging Face. Es una pieza muy útil para quien despliega agentes en producción y quiere garantías reales, no solo buenas intenciones del modelo.",
+          "tags": ["agentes", "evaluación", "Microsoft", "Hugging Face"],
+          "links": [
+            {"label": "Blog (Microsoft/HF)", "url": "https://huggingface.co/blog/microsoft/thinkingbox"},
+            {"label": "ThinkingBox-Bench", "url": "https://huggingface.co/datasets/microsoft/ThinkingBox-Bench"}
+          ]
+        },
+        {
+          "title": "AutoSynthData: genera datos de entrenamiento a partir de los fallos",
+          "summary": "ServiceNow CoreAI publica AutoSynthData, un pipeline que convierte los huecos de capacidad de un agente empresarial en datos de entrenamiento sintéticos. La idea es detectar dónde falla un modelo objetivo y usar un modelo más fuerte como maestro para generar tareas sintéticas que ataquen justo esos fallos. Es una línea muy práctica de mejora continua de agentes: en vez de esperar a datos reales, se sintetizan los casos difíciles. Interesante para quien entrena agentes de empresa y quiere cerrar brechas específicas de forma dirigida.",
+          "tags": ["agentes", "datos sintéticos", "fine-tuning", "enterprise"],
+          "links": [{"label": "Blog de Hugging Face", "url": "https://huggingface.co/blog/ServiceNow-AI/autosynthdata"}]
+        },
+        {
+          "title": "Bienvenidos los entornos RL al hub de Hugging Face",
+          "summary": "Hugging Face incorpora los entornos de refuerzo (RL environments) como repos de datos con un filtro propio en el hub. Un entorno RL es, en la práctica, un repo de datos que aparece bajo el filtro de RL Environments, y el botón 'Use this dataset' lo convierte en un punto de partida directo para entrenar o evaluar agentes. Es un paso más para que entornos de agente y RL estén al alcance de la mano, descargables y reutilizables, igual que cualquier otro dataset del hub.",
+          "tags": ["refuerzo", "entornos", "Hugging Face", "agentes"],
+          "links": [{"label": "Blog de Hugging Face", "url": "https://huggingface.co/blog/rl-environments"}]
+        },
+        {
+          "title": "spoor: observabilidad de agentes LLM, en local",
+          "summary": "jhisse publica spoor, una herramienta de observabilidad LLM first-local: un único binario y un archivo SQLite para inspeccionar trazas de agentes, consumo de tokens, latencia y costes estimados. La idea es tener telemetría de los agentes sin mandarla a una SaaS, todo en el propio sistema. Encaja en la corriente de autohospedado: ver qué hace tu agente, cuánto cuesta y dónde se enreda, sin depender de un servicio externo de monitoring.",
+          "tags": ["observabilidad", "self-hosting", "agentes", "local-first"],
+          "links": [{"label": "GitHub", "url": "https://github.com/jhisse/spoor"}]
+        }
+      ]
+    },
+    {
+      "title": "Papers e investigación",
+      "notes": [
+        {
+          "title": "El primitivo que falta: diagnosticar y reparar el razonamiento matemático",
+          "summary": "Este trabajo se pregunta si los LLM tienen de verdad una comprensión matemática estructural detrás de sus soluciones, o solo imitan la superficie. Los autores diagnostican un 'primitivo' que falta en el razonamiento matemático y proponen cómo repararlo. Es una línea de investigación que va más allá de los benchmarks de matemáticas: intenta entender qué falta por dentro para que los modelos razonen con rigor, no solo suenen bien.",
+          "tags": ["razonamiento", "matemáticas", "evaluación"],
+          "links": [{"label": "arXiv", "url": "https://arxiv.org/abs/2610.02191"}]
+        },
+        {
+          "title": "Entrenar inteligencia numérica con autodiagnóstico y descubrimiento de habilidades",
+          "summary": "Generar código científico no es lo mismo que mejorar los algoritmos que hay detrás. Este paper trabaja sobre solvers numéricos: el feedback de ejecución puede mostrar un mal rendimiento, pero rara vez revela por qué. Los autores proponen autodiagnóstico y descubrimiento de habilidades para que los agentes mejoren los algoritmos numéricos, no solo escriban el código. Es un paso para agentes que realmente optimizan métodos numéricos, algo clave en simulaciones y computación científica.",
+          "tags": ["agentes", "números", "ciencia", "optimización"],
+          "links": [{"label": "arXiv", "url": "https://arxiv.org/abs/2610.03872"}]
+        },
+        {
+          "title": "Dynamic Harness Search: montar el sistema multi-agente a medida de la consulta",
+          "summary": "El 'harness' de un agente (roles, instrucciones, herramientas y estructura de comunicación) es el que resuelve la tarea, y el harness correcto depende de la consulta concreta. Este paper propone buscar dinámicamente el mejor harness por consulta mediante predicción, en vez de usar siempre el mismo diseño fijo. Es una línea prometedora para sistemas multi-agente que se reconfiguran sobre la marcha según lo que se les pide.",
+          "tags": ["multi-agente", "harness", "diseño", "optimización"],
+          "links": [{"label": "arXiv", "url": "https://arxiv.org/abs/2610.04137"}]
+        },
+        {
+          "title": "OmniConfess: hacer confesar al token para reducir alucinaciones",
+          "summary": "Los modelos omni-modales (texto, imagen, audio, vídeo) alucinan cuando la generación se apoya en la evidencia equivocada. OmniConfess extrae 'confesiones' de los tokens para revelar qué evidencia está sustentando la salida, y así mitigar la alucinación en modelos omni-modales. Es un enfoque de inferencia que no solo reduce alucinaciones, sino que explica de dónde sale el error. Útil para quien trabaja con modelos multimodales grandes y quiere control sobre su fiabilidad.",
+          "tags": ["alucinación", "multimodal", "omni", "interpretabilidad"],
+          "links": [{"label": "arXiv", "url": "https://arxiv.org/abs/2610.02999"}]
+        }
+      ]
+    },
+    {
+      "title": "Comunidad y self-hosting",
+      "notes": [
+        {
+          "title": "absent-author: detectar papers escritos por IA sin autor detrás",
+          "summary": "THUROI0787 publica absent-author, con el lema 'la investigación y la escritura se pueden automatizar; la autoría, no'. Ofrece una lista de evidencia más habilidades de agentes para detectar papers generados por IA que ningún humano respalda. Es una pieza muy de la actualidad: en un ecosistema inundado de texto generado, ayudar a distinguir lo que tiene autor humano detrás es una necesidad real. Encaja en la preocupación por la integridad de la investigación.",
+          "tags": ["integridad", "IA generativa", "comunidad", "agentes"],
+          "links": [{"label": "GitHub", "url": "https://github.com/THUROI0787/absent-author"}]
+        },
+        {
+          "title": "sciencemadereadable: papers reescritos en lenguaje llano con modelos abiertos",
+          "summary": "MaximeRivest publica sciencemadereadable: papers de investigación reales reescritos en palabras simples por pequeños modelos abiertos que entrenó. Va en vivo en sciencemadereadable.com. La idea es acercar la investigación a quien no es especialista, usando modelos pequeños y abiertos en vez de LLMs cerrados. Es un ejemplo bonito de aplicación práctica de pesos abiertos a la divulgación científica.",
+          "tags": ["divulgación", "modelos abiertos", "ciencia", "comunidad"],
+          "links": [{"label": "GitHub", "url": "https://github.com/MaximeRivest/sciencemadereadable"}]
+        },
+        {
+          "title": "edgedecision: control por voz local para Home Assistant en una Raspberry Pi 5",
+          "summary": "lucapgt publica edgedecision: control de Home Assistant por voz, todo en local sobre una Raspberry Pi 5. Combina reconocimiento de voz por streaming (EdgeSTT) con un pequeño motor de decisión no generativo (EdgeDecision), y soporta nueve idiomas. Es el ejemplo perfecto de la IA de agentes empujada al edge: un asistente por voz sin nube, en hardware casero y barato. Ideal para quien quiere automatizar la casa sin que las órdenes salgan a Internet.",
+          "tags": ["edge", "Home Assistant", "voz", "self-hosting"],
+          "links": [{"label": "GitHub", "url": "https://github.com/lucapgt/edgedecision"}]
+        }
+      ]
+    }
+  ],
+  "colophon": {
+    "title": "IA Abierta Hoy",
+    "short_title": "IA*A*Hoy",
+    "made_with": [
+      "el skill iaahoy-daily-edition (https://github.com/jgbarahbot/iaahoy-daily-edition) — recolección, curado y publicación",
+      "el skill espanish-podcast (https://github.com/jgbarahbot/espanish-podcast) — el podcast en audio"
+    ],
+    "fineprint": "Contenido generado automáticamente a partir de fuentes públicas por Hermes, usando Qwen3.8-27B, para que lo disfrutes y te sea útil."
+  }
+}
